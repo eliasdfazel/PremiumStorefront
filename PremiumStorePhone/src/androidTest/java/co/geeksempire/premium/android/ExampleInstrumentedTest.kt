@@ -1,3 +1,13 @@
+/*
+ * Copyright © 2021 By Geeks Empire.
+ *
+ * Created by Elias Fazel
+ * Last modified 4/12/21 8:49 AM
+ *
+ * Licensed Under MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
 package co.geeksempire.premium.android
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
