@@ -1,0 +1,2 @@
+include ':PremiumStorePhone'
+rootProject.name = "Premium Store"
