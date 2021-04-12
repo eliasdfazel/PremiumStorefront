@@ -17,3 +17,4 @@ local.properties
 /build/
 /gradle/
 /PremiumStorePhone/src/main/res/values/strings_private.xml
+/BlurryEffectLibrary/.idea/
