@@ -16,3 +16,4 @@ local.properties
 /.idea/
 /build/
 /gradle/
+/PremiumStorePhone/src/main/res/values/strings_private.xml
