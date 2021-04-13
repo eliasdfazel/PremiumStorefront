@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/12/21 8:52 AM
+  ~ Last modified 4/13/21 8:49 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -13,13 +13,5 @@
 
     <item
         android:drawable="@color/default_color" />
-
-    <item
-        android:gravity="center_horizontal"
-        android:height="255.38dp"
-        android:width="523.01824dp"
-        android:top="199dp"
-        android:drawable="@drawable/vector_motto_icon">
-    </item>
 
 </layer-list>
