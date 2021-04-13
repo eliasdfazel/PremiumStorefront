@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/13/21 12:42 PM
+  ~ Last modified 4/13/21 12:48 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -21,9 +21,9 @@
             android:shape="rectangle">
 
             <corners
-                android:topLeftRadius="19dp"
+                android:topLeftRadius="7dp"
                 android:topRightRadius="51dp"
-                android:bottomLeftRadius="19dp"
+                android:bottomLeftRadius="7dp"
                 android:bottomRightRadius="51dp"/>
 
             <gradient
