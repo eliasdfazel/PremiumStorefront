@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 4/12/21 8:52 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:drawable="@color/default_color" />
+
+    <item
+        android:gravity="center_horizontal"
+        android:height="255.38dp"
+        android:width="523.01824dp"
+        android:top="199dp"
+        android:drawable="@drawable/vector_motto_icon">
+    </item>
+
+</layer-list>
