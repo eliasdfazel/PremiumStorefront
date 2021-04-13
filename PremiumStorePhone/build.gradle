@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/13/21 10:00 AM
+ * Last modified 4/13/21 12:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -104,7 +104,7 @@ dependencies {
 
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
