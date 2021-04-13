@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/13/21 8:31 AM
+  ~ Last modified 4/13/21 8:35 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -21,6 +21,33 @@
         <item name="colorAccent">@color/default_color_light</item>
 
         <item name="android:windowBackground">@drawable/splash_screen_initial</item>
+
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+
+        <item name="android:windowContentTransitions">true</item>
+
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+
+        <item name="android:popupBackground">@color/default_color</item>
+
+    </style>
+
+    <style name="GeeksEmpire.Material.Storefront" parent="GeeksEmpire.Material">
+
+        <item name="android:colorPrimary">@color/default_color</item>
+        <item name="android:colorPrimaryDark">@color/default_color_dark</item>
+        <item name="android:colorAccent">@color/default_color_light</item>
+
+        <item name="colorPrimary">@color/default_color</item>
+        <item name="colorPrimaryDark">@color/default_color_dark</item>
+        <item name="colorAccent">@color/default_color_light</item>
+
+        <item name="android:windowBackground">@color/black</item>
 
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
