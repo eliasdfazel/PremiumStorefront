@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/13/21 10:07 AM
+  ~ Last modified 4/13/21 11:37 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -17,11 +17,9 @@
     tools:context=".StorefrontConfigurations.UserInterface.Storefront">
 
     <!--  Content  -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/contentWrapper"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/storefront_content_background_light"
+        android:layout_height="wrap_content"
 
         apps:layout_constraintWidth_percent="0.91"
 
@@ -29,31 +27,35 @@
         apps:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/contentTopSection"
+            android:id="@+id/contentWrapper"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/storefront_content_background_light">
 
-            apps:layout_constraintHeight_percent="0.37"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentTopSection"
+                android:layout_width="match_parent"
+                android:layout_height="333dp"
 
-            apps:layout_constraintTop_toTopOf="parent"
-            apps:layout_constraintStart_toStartOf="parent">
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentBottomSection"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                apps:layout_constraintTop_toBottomOf="@id/contentTopSection"
+                apps:layout_constraintBottom_toBottomOf="parent"
+                apps:layout_constraintStart_toStartOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/contentBottomSection"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-
-            apps:layout_constraintHeight_percent="0.63"
-
-            apps:layout_constraintTop_toBottomOf="@id/contentTopSection"
-            apps:layout_constraintBottom_toBottomOf="parent"
-            apps:layout_constraintStart_toStartOf="parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <!--  Side Panel  -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,10 +71,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/sidePanelTopSection"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="333dp"
             android:layout_marginStart="29dp"
-
-            apps:layout_constraintHeight_percent="0.37"
 
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintStart_toStartOf="parent">
@@ -85,9 +85,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="29dp"
 
-            apps:layout_constraintHeight_percent="0.63"
-
-            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintTop_toBottomOf="@id/sidePanelTopSection"
             apps:layout_constraintStart_toStartOf="parent">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
