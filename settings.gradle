@@ -2,12 +2,12 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/12/21 3:54 PM
+ * Last modified 4/15/21 4:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 include ':BlurryEffectLibrary'
 
-include ':PremiumStorePhone'
-rootProject.name = "Premium Store"
+include ':PremiumStorefrontPhone'
+rootProject.name = "Premium Storefront"
