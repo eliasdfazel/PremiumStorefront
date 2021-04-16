@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/15/21 4:32 PM
+ * Last modified 4/16/21 1:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,5 +23,7 @@ class GeneralEndpoint {
             "consumer_secret=${Security.ConsumerSecret}"
 
     fun getProductsSearchEndpoint(productSearchQuery: String): String = "$getAllProductsShowcaseEndpoint&search=$productSearchQuery"
+
+    fun getFeaturedProductsEndpoint(productSearchQuery: String): String = "$getAllProductsShowcaseEndpoint&featured=true"
 
 }
