@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/16/21 1:00 PM
+ * Last modified 4/17/21 1:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,13 +17,16 @@ class GeneralEndpoint {
         const val ConsumerSecret = "cs_ac53c1b36d1a85e36a362855d83af93f0d377686"
     }
 
-    val getAllProductsShowcaseEndpoint = "https://geeksempire.co/storefront/wp-json/wc/v3/products?" +
-            "consumer_key=${Security.ConsumerKey}" +
-            "&" +
-            "consumer_secret=${Security.ConsumerSecret}"
+    val generalStorefrontEndpoint = "https://geeksempire.co/wp-json/wc/v3/"
 
-    fun getProductsSearchEndpoint(productSearchQuery: String): String = "$getAllProductsShowcaseEndpoint&search=$productSearchQuery"
+    fun consumerKey(): String {
 
-    fun getFeaturedProductsEndpoint(productSearchQuery: String): String = "$getAllProductsShowcaseEndpoint&featured=true"
+        return Security.ConsumerKey
+    }
+
+    fun consumerSecret(): String {
+
+        return Security.ConsumerSecret
+    }
 
 }
