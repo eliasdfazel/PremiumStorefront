@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/13/21 12:50 PM
+ * Last modified 4/17/21 1:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -88,6 +88,8 @@ static def getDateDay() {
 
 dependencies {
     implementation project(path: ':BlurryEffectLibrary')
+    implementation project(path: ':CustomShapes')
+    implementation project(path: ':LoadingSpin')
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.4.32"

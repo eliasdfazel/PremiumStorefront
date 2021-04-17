@@ -2,11 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/15/21 4:45 PM
+ * Last modified 4/17/21 1:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
+include ':CustomShapes'
+include ':LoadingSpin'
 include ':BlurryEffectLibrary'
 
 include ':PremiumStorefrontPhone'
