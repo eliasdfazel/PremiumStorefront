@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 2:50 PM
+ * Last modified 4/18/21 3:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import org.json.JSONArray
+import org.json.JSONObject
 
 class StorefrontLiveData : ViewModel() {
 
@@ -28,9 +29,33 @@ class StorefrontLiveData : ViewModel() {
 
         val storefrontFeaturedContents = ArrayList<StorefrontFeaturedContentsData>()
 
-        for (i in 0 until featuredContentJsonArray.length()) {
+        for (indexFeaturedContent in 0 until featuredContentJsonArray.length()) {
 
-//            storefrontFeaturedContents.add(StorefrontFeaturedContentsData())
+            val featuredContentJsonObject: JSONObject = featuredContentJsonArray[indexFeaturedContent] as JSONObject
+
+            /* Start - Attributes */
+            val featuredContentImages: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.ImagesKey] as JSONArray
+
+            val applicationIcon = featuredContentImages[0].toString()
+            val applicationCover = featuredContentImages[1].toString()
+
+            /* Start - Attributes */
+
+            /* Start - Attributes */
+            val featuredContentAttributes: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.AttributesKey] as JSONArray
+
+            val attributesMap = HashMap<String, String>()
+
+            for (indexAttribute in 0 until featuredContentAttributes.length()) {
+
+                val attributesJsonObject: JSONObject = featuredContentAttributes[indexAttribute] as JSONObject
+
+                attributesMap[attributesJsonObject.getString(StorefrontFeaturedContentKey.NameKey)] = attributesJsonObject.getJSONArray(StorefrontFeaturedContentKey.AttributeOptionsKey)[0].toString()
+
+            }
+            /* End - Attributes */
+
+
 
         }
 

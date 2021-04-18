@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 2:50 PM
+ * Last modified 4/18/21 3:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,11 +11,18 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure
 
 object StorefrontFeaturedContentKey {
-    const val ApplicationName = "name"
-    const val ApplicationDescription = "description"
-    const val ApplicationSummary = "short_description"
+    const val NameKey = "name"
+    const val DescriptionKey = "description"
+    const val SummaryKey = "short_description"
 
-    const val ProductImages = "images"
+    const val CategoriesKey = "categories"
+    const val TagsKey = "tags"
+
+    const val ImagesKey = "images"
+    const val ImageSourceKey = "src"
+
+    const val AttributesKey = "attributes"
+    const val AttributeOptionsKey = "options"
 }
 
 /**
