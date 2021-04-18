@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 12:22 PM
+ * Last modified 4/18/21 2:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,7 +36,7 @@ fun Storefront.retrieveFeaturedContent() {
 
             if (response != null) {
 
-
+                storefrontLiveData.processFeaturedContent(response)
 
             }
 
