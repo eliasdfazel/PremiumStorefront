@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 4/18/21 12:46 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="333dp"
+    android:background="@android:color/transparent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/backgroundCoverImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
