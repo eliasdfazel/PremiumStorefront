@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 3:28 PM
+ * Last modified 4/18/21 3:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,13 +33,12 @@ class StorefrontLiveData : ViewModel() {
 
             val featuredContentJsonObject: JSONObject = featuredContentJsonArray[indexFeaturedContent] as JSONObject
 
-            /* Start - Attributes */
+            /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.ImagesKey] as JSONArray
 
-            val applicationIcon = featuredContentImages[0].toString()
-            val applicationCover = featuredContentImages[1].toString()
-
-            /* Start - Attributes */
+            val productIcon = featuredContentImages[0].toString()
+            val productCover = featuredContentImages[1].toString()
+            /* End - Images */
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.AttributesKey] as JSONArray
@@ -55,7 +54,16 @@ class StorefrontLiveData : ViewModel() {
             }
             /* End - Attributes */
 
-
+            storefrontFeaturedContents.add(StorefrontFeaturedContentsData(
+                    productName = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey),
+                    productDescription = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                    productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                    productPrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.RegularPriceKey),
+                    productSalePrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SalePriceKey),
+                    productIconLink = productIcon,
+                    productCoverLink = productCover,
+                    productAttributes = attributesMap
+            ))
 
         }
 

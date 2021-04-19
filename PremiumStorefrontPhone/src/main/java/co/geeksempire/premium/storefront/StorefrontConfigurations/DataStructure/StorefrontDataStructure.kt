@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 3:26 PM
+ * Last modified 4/18/21 3:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,9 @@ object StorefrontFeaturedContentKey {
     const val DescriptionKey = "description"
     const val SummaryKey = "short_description"
 
+    const val RegularPriceKey = "regular_price"
+    const val SalePriceKey = "sale_price"
+
     const val CategoriesKey = "categories"
     const val TagsKey = "tags"
 
@@ -23,23 +26,33 @@ object StorefrontFeaturedContentKey {
 
     const val AttributesKey = "attributes"
     const val AttributeOptionsKey = "options"
+
+    const val AttributesPackageNameKey = "Package Name"
+
+    const val AttributesAndroidCompatibiliesKey = "Android Compatibilies"
+    const val AttributesContentSafetyRatingKey = "Content Safety Rating"
+
+    const val AttributesDeveloperEmailKey = "Developer Email"
+    const val AttributesDeveloperCountryKey = "Developer Country"
+    const val AttributesDeveloperStateKey = "Developer State"
+
+    const val AttributesDeveloperCityKey = "Developer City"
+    const val AttributesDeveloperNameKey = "Developer Name"
+    const val AttributesDeveloperWebsiteKey = "Developer Website"
+
+    const val AttributesRatingKey = "Rating"
+    const val AttributesYoutubeIntroductionKey = "Youtube Introduction"
+
 }
 
 /**
  *
- * @param applicationIconLink : First Image Of Product Gallery from JsonArray "images"
- * @param applicationCoverLink : Second Image Of Product Gallery from JsonArray "images"
+ * @param productIconLink : First Image Of Product Gallery from JsonArray "images"
+ * @param productCoverLink : Second Image Of Product Gallery from JsonArray "images"
  *
- * @param applicationPrice : Html Price
  **/
-data class StorefrontFeaturedContentsData (var applicationName: String, var applicationDescription: String, var applicationSummary: String,
-
-                                           var applicationIconLink: String, var applicationCoverLink: String,
-
-                                           var applicationPackageName: String, var applicationAndroidCapabilities: String = "Unknown",
-                                           var applicationRating: String,
-                                           var applicationYoutubeIntroductionLink: String,
-                                           var applicationDeveloperWebsite: String, var applicationDeveloperEmail: String,
-                                           var applicationDeveloperName: String, var applicationDeveloperCountry: String, var applicationDeveloperState: String, var applicationDeveloperCity: String,
-                                           var applicationPrice: String,
-                                           var applicationContentSafetyRating: String)
+data class StorefrontFeaturedContentsData (var productName: String, var productDescription: String, var productSummary: String,
+                                           var productIconLink: String, var productCoverLink: String,
+                                           var productPrice: String,
+                                           var productSalePrice: String,
+                                           var productAttributes: HashMap<String, String>)
