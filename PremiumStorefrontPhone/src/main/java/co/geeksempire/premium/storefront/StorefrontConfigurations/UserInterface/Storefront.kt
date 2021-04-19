@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 4:03 PM
+ * Last modified 4/19/21 2:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,9 +14,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.Utils.NetworkConnection.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnection.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnection.NetworkConnectionListenerInterface
@@ -49,11 +52,20 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
         storefrontLayoutBinding.rootView.post {
 
+            val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
+
+            storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
+
+            storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
+
             storefrontLiveData.featuredContentItemData.observe(this@Storefront, Observer {
 
                 if (it.isNotEmpty()) {
 
+                    featuredContentAdapter.storefrontFeaturedContents.clear()
+                    featuredContentAdapter.storefrontFeaturedContents.addAll(it)
 
+                    featuredContentAdapter.notifyDataSetChanged()
 
                 } else {
 

@@ -3,22 +3,34 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/18/21 2:28 PM
+  ~ Last modified 4/19/21 2:43 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
     android:layout_width="match_parent"
     android:layout_height="303dp"
     android:background="@android:color/transparent">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <net.geekstools.imageview.customshapes.ShapesImage
         android:id="@+id/backgroundCoverImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
 
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productDescriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:textColor="@color/darker"
+
+        apps:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

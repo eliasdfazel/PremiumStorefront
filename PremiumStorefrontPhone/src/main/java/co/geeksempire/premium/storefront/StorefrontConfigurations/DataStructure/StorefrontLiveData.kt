@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 3:49 PM
+ * Last modified 4/19/21 1:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,8 +36,8 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.ImagesKey] as JSONArray
 
-            val productIcon = featuredContentImages[0].toString()
-            val productCover = featuredContentImages[1].toString()
+            val productIcon = (featuredContentImages[1] as JSONObject).getString(StorefrontFeaturedContentKey.ImageSourceKey)//.split("?")[0]
+            val productCover = (featuredContentImages[2] as JSONObject).getString(StorefrontFeaturedContentKey.ImageSourceKey)//.split("?")[0]
             /* End - Images */
 
             /* Start - Attributes */
