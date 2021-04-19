@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 4:00 PM
+ * Last modified 4/18/21 4:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
 import co.geeksempire.premium.storefront.Utils.NetworkConnection.NetworkCheckpoint
@@ -52,11 +51,13 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             storefrontLiveData.featuredContentItemData.observe(this@Storefront, Observer {
 
-                System.out.println(">>> >> > " + it)
+                if (it.isNotEmpty()) {
 
-                it.forEach { itt ->
 
-                    println(">>> >> > >> >>> " + itt.productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey])
+
+                } else {
+
+
 
                 }
 
