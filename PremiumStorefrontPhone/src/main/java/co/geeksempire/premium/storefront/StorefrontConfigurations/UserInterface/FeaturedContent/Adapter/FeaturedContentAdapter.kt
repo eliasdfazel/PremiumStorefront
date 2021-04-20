@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/19/21 2:53 PM
+ * Last modified 4/19/21 4:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -66,6 +66,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
                         resource?.let {
 
                             featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
+
 
                         }
 
