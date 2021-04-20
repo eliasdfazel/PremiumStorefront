@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/19/21 4:07 PM
+ * Last modified 4/19/21 4:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,7 +52,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
         featuredContentViewHolder.productDescriptionTextView.text = Html.fromHtml(storefrontFeaturedContents[position].productDescription, Html.FROM_HTML_MODE_COMPACT)
 
         featuredContentViewHolder.backgroundCoverImageView.layoutParams = featuredContentViewHolder.backgroundCoverImageView.layoutParams.apply {
-            height = 500//convertPixelToDp(context, 500.toFloat()).toInt()
+            height = 500//500 Pixel
         }
 
         Glide.with(context)
