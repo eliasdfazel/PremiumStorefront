@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/19/21 3:45 PM
+ * Last modified 4/19/21 4:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,7 @@ import android.util.TypedValue
 
 fun columnCount(context: Context, itemWidth: Int): Int {
 
-    var spanCount = (displayX(context) / DpToPixel(context, itemWidth.toFloat())).toInt()
+    var spanCount = (displayX(context) / convertDpToPixel(context, itemWidth.toFloat())).toInt()
 
     if (spanCount < 1) {
         spanCount = 1
@@ -26,19 +26,19 @@ fun columnCount(context: Context, itemWidth: Int): Int {
     return spanCount
 }
 
-fun DpToPixel(context: Context, dp: Float): Float {
+fun convertDpToPixel(context: Context, dp: Float): Float {
     val resources: Resources = context.resources
     val metrics = resources.displayMetrics
     return dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
 
-fun PixelToDp(context: Context, px: Float): Float {
+fun convertPixelToDp(context: Context, pixel: Float): Float {
     val resources: Resources = context.resources
     val metrics = resources.displayMetrics
-    return px / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    return pixel / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
 
-fun DpToInteger(context: Context, dp: Int): Int {
+fun convertDpToInteger(context: Context, dp: Int): Int {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         dp.toFloat(),

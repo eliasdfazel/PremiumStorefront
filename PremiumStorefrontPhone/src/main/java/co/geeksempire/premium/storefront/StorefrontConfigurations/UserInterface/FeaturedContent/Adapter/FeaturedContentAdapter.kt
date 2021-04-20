@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/19/21 4:02 PM
+ * Last modified 4/19/21 4:07 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,6 +50,10 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
     override fun onBindViewHolder(featuredContentViewHolder: FeaturedContentViewHolder, position: Int) {
 
         featuredContentViewHolder.productDescriptionTextView.text = Html.fromHtml(storefrontFeaturedContents[position].productDescription, Html.FROM_HTML_MODE_COMPACT)
+
+        featuredContentViewHolder.backgroundCoverImageView.layoutParams = featuredContentViewHolder.backgroundCoverImageView.layoutParams.apply {
+            height = 500//convertPixelToDp(context, 500.toFloat()).toInt()
+        }
 
         Glide.with(context)
                 .load(storefrontFeaturedContents[position].productCoverLink)
