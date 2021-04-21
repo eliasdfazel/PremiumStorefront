@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 2:24 PM
+ * Last modified 4/21/21 11:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.Utils.NetworkConnection
+package co.geeksempire.premium.storefront.Utils.NetworkConnections
 
 import android.content.Context
 import android.net.ConnectivityManager
