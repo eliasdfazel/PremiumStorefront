@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/19/21 1:44 PM
+ * Last modified 4/24/21 10:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +27,7 @@ class StorefrontLiveData : ViewModel() {
     }
 
     fun processFeaturedContent(featuredContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+        Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process Featured Content")
 
         val storefrontFeaturedContents = ArrayList<StorefrontFeaturedContentsData>()
 
@@ -65,7 +67,16 @@ class StorefrontLiveData : ViewModel() {
                     productAttributes = attributesMap
             ))
 
+            Log.d(this@StorefrontLiveData.javaClass.simpleName, "Product: ${featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey)}")
         }
+
+        val storefrontFeaturedContentsSorted = storefrontFeaturedContents.sortedBy {
+
+            it.productName
+        }
+
+        storefrontFeaturedContents.clear()
+        storefrontFeaturedContents.addAll(storefrontFeaturedContentsSorted)
 
         featuredContentItemData.postValue(storefrontFeaturedContents)
 
