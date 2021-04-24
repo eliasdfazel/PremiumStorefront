@@ -13,21 +13,13 @@
 
     <item>
 
-        <shape
-            android:shape="rectangle">
+        <shape android:shape="rectangle">
 
             <corners
                 android:topLeftRadius="0dp"
                 android:topRightRadius="19dp"
                 android:bottomLeftRadius="0dp"
                 android:bottomRightRadius="19dp"/>
-
-            <gradient
-                android:type="linear"
-                android:angle="180"
-                android:startColor="@color/dark"
-                android:centerColor="@color/dark"
-                android:endColor="@color/black" />
 
         </shape>
 

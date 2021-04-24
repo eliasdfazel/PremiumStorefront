@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/19/21 4:11 PM
+ * Last modified 4/24/21 9:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,7 +49,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
     override fun onBindViewHolder(featuredContentViewHolder: FeaturedContentViewHolder, position: Int) {
 
-        featuredContentViewHolder.productDescriptionTextView.text = Html.fromHtml(storefrontFeaturedContents[position].productDescription, Html.FROM_HTML_MODE_COMPACT)
+        featuredContentViewHolder.productNameTextView.text = Html.fromHtml(storefrontFeaturedContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
 
         featuredContentViewHolder.backgroundCoverImageView.layoutParams = featuredContentViewHolder.backgroundCoverImageView.layoutParams.apply {
             height = 500//500 Pixel
@@ -57,7 +57,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
         Glide.with(context)
                 .load(storefrontFeaturedContents[position].productCoverLink)
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(object : RequestListener<Drawable> {
 
                     override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
