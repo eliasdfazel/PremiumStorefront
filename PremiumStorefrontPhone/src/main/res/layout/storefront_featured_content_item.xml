@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/24/21 10:43 AM
+  ~ Last modified 4/24/21 12:04 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -31,11 +31,13 @@
         apps:layout_constraintEnd_toEndOf="parent"/>
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/productNameBlur"
         android:layout_width="match_parent"
         android:layout_height="31dp"
 
         apps:realtimeBlurRadius="19dp"
-        apps:realtimeOverlayColor="@color/light_transparent_high"
+        apps:realtimeOverlayColor="@color/light_transparent_higher"
+        apps:realtimeSecondOverlayColor="@color/light_transparent"
         apps:realtimeBlurBottomRight="19dp"
 
         apps:layout_constraintBottom_toBottomOf="parent"/>
@@ -51,5 +53,35 @@
         android:shadowRadius="17"
 
         apps:layout_constraintBottom_toBottomOf="parent"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/productIconBlur"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+
+        apps:realtimeBlurRadius="19dp"
+        apps:realtimeOverlayColor="@color/light_transparent_higher"
+        apps:realtimeSecondOverlayColor="@color/light_transparent"
+        apps:realtimeBlurTopLeft="51dp"
+        apps:realtimeBlurTopRight="51dp"
+        apps:realtimeBlurBottomLeft="51dp"
+        apps:realtimeBlurBottomRight="51dp"
+
+        apps:layout_constraintBottom_toTopOf="@id/productNameTextView"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/productIconImageView"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:scaleType="centerCrop"
+
+        apps:shape="circle"
+
+        apps:layout_constraintTop_toTopOf="@id/productIconBlur"
+        apps:layout_constraintBottom_toBottomOf="@id/productIconBlur"
+        apps:layout_constraintStart_toStartOf="@id/productIconBlur"
+        apps:layout_constraintEnd_toEndOf="@id/productIconBlur"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/12/21 3:40 PM
+ * Last modified 4/24/21 12:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,10 +16,12 @@ import android.content.ContextWrapper;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -38,7 +40,10 @@ import android.view.ViewTreeObserver;
 public class RealtimeBlurView extends View {
 
 	private float mDownsampleFactor; // default 4
+
 	private int mOverlayColor; // default #aaffffff
+	private int sOverlayColor; // default -666
+
 	private float mBlurRadius; // default 10dp (0 < r <= 25)
 
 	private final BlurImpl mBlurImpl;
@@ -46,7 +51,7 @@ public class RealtimeBlurView extends View {
 	private Bitmap mBitmapToBlur, mBlurredBitmap;
 	private Canvas mBlurringCanvas;
 	private boolean mIsRendering;
-	private Paint mPaint;
+	private Paint paintInstance;
 	private final Rect mRectSrc = new Rect();
 	private final RectF mRectDst = new RectF();
 
@@ -70,9 +75,12 @@ public class RealtimeBlurView extends View {
 
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RealtimeBlurView);
 
-		mBlurRadius = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurRadius, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, context.getResources().getDisplayMetrics()));
+		mBlurRadius = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurRadius,
+				TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, context.getResources().getDisplayMetrics()));
 		mDownsampleFactor = a.getFloat(R.styleable.RealtimeBlurView_realtimeDownSampleFactor, 4);
+
 		mOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeOverlayColor, 0xAAFFFFFF);
+		sOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeSecondOverlayColor, -666);
 
 		topLeftCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurTopLeft, 0f);
 		topRightCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurTopRight, 0f);
@@ -81,7 +89,7 @@ public class RealtimeBlurView extends View {
 
 		a.recycle();
 
-		mPaint = new Paint();
+		paintInstance = new Paint();
 	}
 
 	protected BlurImpl getBlurImpl() {
@@ -169,6 +177,13 @@ public class RealtimeBlurView extends View {
 	public void setOverlayColor(int color) {
 		if (mOverlayColor != color) {
 			mOverlayColor = color;
+			invalidate();
+		}
+	}
+
+	public void setSecondOverlayColor(int color) {
+		if (sOverlayColor != color) {
+			sOverlayColor = color;
 			invalidate();
 		}
 	}
@@ -274,7 +289,8 @@ public class RealtimeBlurView extends View {
 				y += locations[1];
 
 				// just erase transparent
-				mBitmapToBlur.eraseColor(mOverlayColor & 0xffffff);
+//				mBitmapToBlur.eraseColor(mOverlayColor & 0xffffff);
+//				mBitmapToBlur.eraseColor(sOverlayColor & 0xffffff);
 
 				int rc = mBlurringCanvas.save();
 				mIsRendering = true;
@@ -379,18 +395,14 @@ public class RealtimeBlurView extends View {
 
 		super.onDraw(canvas);
 
-		drawBlurredBitmap(canvas, mBlurredBitmap, mOverlayColor);
+		drawBlurredBitmap(canvas, mBlurredBitmap, mOverlayColor, sOverlayColor);
 
 	}
 
 	/**
 	 * Custom draw the blurred bitmap and color to define your own shape
-	 *
-	 * @param canvas
-	 * @param blurredBitmap
-	 * @param overlayColor
-	 */
-	protected void drawBlurredBitmap(Canvas canvas, Bitmap blurredBitmap, int overlayColor) {
+	 **/
+	protected void drawBlurredBitmap(Canvas canvas, Bitmap blurredBitmap, int mOverlayColor, int sOverlayColor) {
 
 		if (blurredBitmap != null) {
 
@@ -400,13 +412,29 @@ public class RealtimeBlurView extends View {
 			mRectDst.right = getWidth();
 			mRectDst.bottom = getHeight();
 
-			canvas.drawBitmap(blurredBitmap, mRectSrc, mRectDst, /*new Paint().set*/null);
+			canvas.drawBitmap(blurredBitmap, mRectSrc, mRectDst, null);
 
 		}
 
-		mPaint.setColor(overlayColor);
 
-		canvas.drawRect(mRectDst, mPaint);
+		System.out.println(" first " + mOverlayColor);
+		System.out.println(" second " + sOverlayColor);
+
+		if (sOverlayColor == -666) {
+
+			paintInstance.setColor(mOverlayColor);
+
+		} else  {
+
+			paintInstance.setShader(new LinearGradient(
+					0, 0,
+					0, getHeight(),
+					/* First Color */ mOverlayColor, /* Second Color */ sOverlayColor,
+					Shader.TileMode.CLAMP));
+
+		}
+
+		canvas.drawRect(mRectDst, paintInstance);
 
 	}
 

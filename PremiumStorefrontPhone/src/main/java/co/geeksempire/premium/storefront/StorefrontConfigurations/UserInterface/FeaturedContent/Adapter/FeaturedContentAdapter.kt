@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/24/21 10:26 AM
+ * Last modified 4/24/21 12:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,8 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -56,6 +58,35 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
         }
 
         Glide.with(context)
+                .load(storefrontFeaturedContents[position].productIconLink)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .listener(object : RequestListener<Drawable> {
+
+                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+
+                        return false
+                    }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                        resource?.let {
+
+                            val vibrantColor = extractVibrantColor(context, resource)
+
+                            featuredContentViewHolder.productIconBlur.setOverlayColor(setColorAlpha(vibrantColor, 157f))
+                            featuredContentViewHolder.productIconBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_higher))
+
+                            featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
+
+                        }
+
+                        return false
+                    }
+
+                })
+                .submit()
+
+        Glide.with(context)
                 .load(storefrontFeaturedContents[position].productCoverLink)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(object : RequestListener<Drawable> {
@@ -68,6 +99,11 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
                         resource?.let {
+
+                            val vibrantColor = extractVibrantColor(context, resource)
+
+                            featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_higher))
+                            featuredContentViewHolder.productNameBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 157f))
 
                             featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
 

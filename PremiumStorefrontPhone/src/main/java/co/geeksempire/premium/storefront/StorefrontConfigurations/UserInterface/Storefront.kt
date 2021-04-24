@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/21/21 11:57 AM
+ * Last modified 4/24/21 12:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,8 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -67,6 +69,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                     featuredContentAdapter.notifyDataSetChanged()
 
+                    storefrontLayoutBinding.featuredContentRecyclerView.scrollToPosition(0)
+
                 } else {
 
 
@@ -89,7 +93,10 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun onBackPressed() {
 
-
+        startActivity(Intent(Intent.ACTION_MAIN).apply {
+            this.addCategory(Intent.CATEGORY_HOME)
+            this.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
 
     }
 
