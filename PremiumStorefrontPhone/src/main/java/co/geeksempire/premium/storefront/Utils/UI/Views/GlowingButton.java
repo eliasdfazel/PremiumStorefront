@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/25/21 6:12 PM
+ * Last modified 4/25/21 6:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -239,8 +239,6 @@ public class GlowingButton extends AppCompatButton implements View.OnTouchListen
 
         Rect shapeDrawablePadding = new Rect();
 
-        shapeDrawablePadding.set(0, 23, 0, 0);
-
         ShapeDrawable shapeDrawable = new ShapeDrawable();
         shapeDrawable.setPadding(shapeDrawablePadding);
 
@@ -251,10 +249,9 @@ public class GlowingButton extends AppCompatButton implements View.OnTouchListen
 
         shapeDrawable.setShape(new RoundRectShape(outerRadius, null, null));
 
-        LayerDrawable drawable = new LayerDrawable(new Drawable[]{ shapeDrawable });
-        drawable.setLayerInset(0, unPressedGlowSize, unPressedGlowSize, unPressedGlowSize, unPressedGlowSize);
+        LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{ shapeDrawable });
+        layerDrawable.setLayerInset(0, unPressedGlowSize, unPressedGlowSize, unPressedGlowSize, unPressedGlowSize);
 
-        return drawable;
-
+        return layerDrawable;
     }
 }
