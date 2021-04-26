@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/24/21 12:25 PM
+ * Last modified 4/25/21 2:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -369,12 +369,12 @@ public class RealtimeBlurView extends View {
 	}
 
 	Path clipPath = new Path();
-	RectF rect = new RectF();
+	RectF rectF = new RectF();
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 
-		rect.set(0,0, this.getWidth(), this.getHeight());
+		rectF.set(0,0, this.getWidth(), this.getHeight());
 
 		float[] radii = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -390,7 +390,7 @@ public class RealtimeBlurView extends View {
 		radii[6] = bottomLeftCorner;
 		radii[7] = bottomLeftCorner;
 
-		clipPath.addRoundRect(rect, radii, Path.Direction.CW);
+		clipPath.addRoundRect(rectF, radii, Path.Direction.CW);
 		canvas.clipPath(clipPath);
 
 		super.onDraw(canvas);
@@ -415,10 +415,6 @@ public class RealtimeBlurView extends View {
 			canvas.drawBitmap(blurredBitmap, mRectSrc, mRectDst, null);
 
 		}
-
-
-		System.out.println(" first " + mOverlayColor);
-		System.out.println(" second " + sOverlayColor);
 
 		if (sOverlayColor == -666) {
 

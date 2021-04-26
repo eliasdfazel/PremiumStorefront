@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/24/21 5:08 PM
+  ~ Last modified 4/25/21 4:38 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DEEAFF"
     tools:context="co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront">
 
     <!--  Content  -->
@@ -107,7 +108,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/productFilterView"
+        android:id="@+id/actionView"
         android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_marginVertical="19dp"
@@ -126,7 +127,23 @@
         apps:rippleColor="@color/default_color"
         apps:backgroundTint="@color/dark"
 
+
         apps:layout_constraintWidth_percent="0.43"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <co.geeksempire.premium.storefront.Utils.UI.GlowingButton
+        android:layout_width="177dp"
+        android:layout_height="177dp"
+
+        apps:buttonColor="@color/default_color_game"
+        apps:unpressedGlowSize="20dp"
+        apps:pressedGlowSize="25dp"
+        apps:glowColor="@color/default_color_game_light"
+        apps:cornerRadius="5dp"
+
+        apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>

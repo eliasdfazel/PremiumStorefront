@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/24/21 11:37 AM
+ * Last modified 4/25/21 11:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.Utils.UI.Images
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
@@ -27,9 +28,9 @@ fun drawableToBitmap(drawable: Drawable): Bitmap {
             val vectorDrawable = drawable
 
             val bitmap = Bitmap.createBitmap(
-                vectorDrawable.intrinsicWidth,
-                vectorDrawable.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
+                    vectorDrawable.intrinsicWidth,
+                    vectorDrawable.intrinsicHeight,
+                    Bitmap.Config.ARGB_8888
             )
             val canvas = Canvas(bitmap)
             vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
@@ -49,9 +50,9 @@ fun drawableToBitmap(drawable: Drawable): Bitmap {
             val layerDrawable = drawable
 
             val bitmap = Bitmap.createBitmap(
-                layerDrawable.intrinsicWidth,
-                layerDrawable.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
+                    layerDrawable.intrinsicWidth,
+                    layerDrawable.intrinsicHeight,
+                    Bitmap.Config.ARGB_8888
             )
             val canvas = Canvas(bitmap)
             layerDrawable.setBounds(0, 0, canvas.width, canvas.height)
@@ -63,9 +64,9 @@ fun drawableToBitmap(drawable: Drawable): Bitmap {
         else -> {
 
             val bitmap = Bitmap.createBitmap(
-                drawable.intrinsicWidth,
-                drawable.intrinsicHeight,
-                Bitmap.Config.ARGB_8888
+                    drawable.intrinsicWidth,
+                    drawable.intrinsicHeight,
+                    Bitmap.Config.ARGB_8888
             )
             val canvas = Canvas(bitmap)
             drawable.setBounds(0, 0, canvas.width, canvas.height)
@@ -76,7 +77,7 @@ fun drawableToBitmap(drawable: Drawable): Bitmap {
     }
 }
 
-fun drawableToByteArray(drawable: Drawable) : ByteArray{
+fun drawableToByteArray(drawable: Drawable) : ByteArray {
 
     val byteArrayOutputStream = ByteArrayOutputStream()
 
@@ -84,4 +85,9 @@ fun drawableToByteArray(drawable: Drawable) : ByteArray{
     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
 
     return byteArrayOutputStream.toByteArray()
+}
+
+fun bitmapToDrawable(context: Context, bitmap: Bitmap): Drawable {
+
+    return BitmapDrawable(context.resources, bitmap)
 }

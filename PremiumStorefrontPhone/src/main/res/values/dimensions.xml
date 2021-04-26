@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 1/23/21 9:15 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+    <dimen name="default_corner_radius">50dp</dimen>
+    <dimen name="default_unpressed_glow_size">10dp</dimen>
+    <dimen name="default_pressed_glow_size">12dp</dimen>
+</resources>

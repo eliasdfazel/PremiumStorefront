@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/24/21 12:25 PM
+ * Last modified 4/25/21 4:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Extensions.setupUserInterface
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
@@ -53,6 +53,12 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
         networkConnectionListener.networkConnectionListenerInterface = this@Storefront
 
         storefrontLayoutBinding.rootView.post {
+
+
+
+            setupUserInterface()
+
+
 
             val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
 
@@ -102,7 +108,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun networkAvailable() {
 
-        retrieveFeaturedContent()
+//        retrieveFeaturedContent()
 
     }
 

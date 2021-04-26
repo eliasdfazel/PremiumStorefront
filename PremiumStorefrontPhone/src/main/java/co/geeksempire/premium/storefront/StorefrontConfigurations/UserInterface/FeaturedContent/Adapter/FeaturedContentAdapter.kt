@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/24/21 12:25 PM
+ * Last modified 4/25/21 9:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -71,12 +71,16 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                         resource?.let {
 
-                            val vibrantColor = extractVibrantColor(context, resource)
+                            context.runOnUiThread {
 
-                            featuredContentViewHolder.productIconBlur.setOverlayColor(setColorAlpha(vibrantColor, 157f))
-                            featuredContentViewHolder.productIconBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_higher))
+                                val vibrantColor = extractVibrantColor(context, resource)
 
-                            featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
+                                featuredContentViewHolder.productIconBlur.setOverlayColor(setColorAlpha(vibrantColor, 157f))
+                                featuredContentViewHolder.productIconBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_higher))
+
+                                featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
+
+                            }
 
                         }
 
@@ -100,12 +104,16 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                         resource?.let {
 
-                            val vibrantColor = extractVibrantColor(context, resource)
+                            context.runOnUiThread {
 
-                            featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_higher))
-                            featuredContentViewHolder.productNameBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 157f))
+                                val vibrantColor = extractVibrantColor(context, resource)
 
-                            featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
+                                featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_higher))
+                                featuredContentViewHolder.productNameBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 157f))
+
+                                featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
+
+                            }
 
                         }
 

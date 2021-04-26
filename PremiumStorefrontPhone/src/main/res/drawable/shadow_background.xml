@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 4/25/21 4:13 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:autoMirrored="true" >
+
+    <item
+        android:height="199dp"
+        android:width="170dp">
+
+        <color android:color="@color/transparent"/>
+
+    </item>
+
+    <item
+        android:height="199dp"
+        android:width="122dp"
+        android:gravity="top|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="51dp"
+                android:topRightRadius="51dp"
+                android:bottomLeftRadius="51dp"
+                android:bottomRightRadius="51dp"/>
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="107dp"
+                android:startColor="@color/black"
+                android:centerColor="#DEEAFF"
+                android:endColor="#DEEAFF"
+                android:centerX="0.7"
+                android:centerY="0.5"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="199dp"
+        android:width="122dp"
+        android:gravity="bottom|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="51dp"
+                android:topRightRadius="51dp"
+                android:bottomLeftRadius="51dp"
+                android:bottomRightRadius="51dp"/>
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="107dp"
+                android:startColor="@color/black"
+                android:centerColor="#DEEAFF"
+                android:endColor="#DEEAFF"
+                android:centerX="0.3"
+                android:centerY="0.5"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="59dp"
+        android:width="170dp"
+        android:start="37dp"
+        android:end="37dp"
+        android:top="17dp"
+        android:bottom="17dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="51dp"
+                android:topRightRadius="51dp"
+                android:bottomLeftRadius="51dp"
+                android:bottomRightRadius="51dp"/>
+
+            <solid android:color="#DEEAFF" />
+
+        </shape>
+
+    </item>
+
+</layer-list>
