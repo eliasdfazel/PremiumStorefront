@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/25/21 6:06 PM
+ * Last modified 4/25/21 6:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -220,10 +220,26 @@ public class GlowingButton extends AppCompatButton implements View.OnTouchListen
             int unPressedGlowSize,
             int pressedGlowSize) {
 
+//        float[] radii = {0, 0, 0, 0, 0, 0, 0, 0};
+//
+//        radii[0] = topLeftCorner;
+//        radii[1] = topLeftCorner;
+//
+//        radii[2] = topRightCorner;
+//        radii[3] = topRightCorner;
+//
+//        radii[4] = bottomRightCorner;
+//        radii[5] = bottomRightCorner;
+//
+//        radii[6] = bottomLeftCorner;
+//        radii[7] = bottomLeftCorner;
+
         float[] outerRadius = new float[8];
         Arrays.fill(outerRadius, cornerRadius);
 
         Rect shapeDrawablePadding = new Rect();
+
+        shapeDrawablePadding.set(0, 23, 0, 0);
 
         ShapeDrawable shapeDrawable = new ShapeDrawable();
         shapeDrawable.setPadding(shapeDrawablePadding);

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/25/21 6:06 PM
+  ~ Last modified 4/25/21 6:12 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -140,7 +140,7 @@
         apps:backgroundColor="@color/default_color_game"
         apps:unpressedGlowSize="7dp"
         apps:pressedGlowSize="11dp"
-        apps:glowColor="@color/default_color_game_transparent"
+        apps:glowColor="@color/default_color_game"
         apps:cornerRadius="51dp"
 
         apps:layout_constraintTop_toTopOf="parent"
