@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/25/21 4:13 PM
+  ~ Last modified 4/25/21 5:48 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,16 +12,16 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:autoMirrored="true" >
 
     <item
-        android:height="199dp"
-        android:width="170dp">
+        android:height="57dp"
+        android:width="151dp">
 
         <color android:color="@color/transparent"/>
 
     </item>
 
     <item
-        android:height="199dp"
-        android:width="122dp"
+        android:height="25dp"
+        android:width="149dp"
         android:gravity="top|start">
 
         <shape
@@ -30,16 +30,15 @@
             <corners
                 android:topLeftRadius="51dp"
                 android:topRightRadius="51dp"
-                android:bottomLeftRadius="51dp"
-                android:bottomRightRadius="51dp"/>
+                android:bottomLeftRadius="0dp"
+                android:bottomRightRadius="13dp"/>
 
             <gradient
-                android:type="radial"
-                android:gradientRadius="107dp"
-                android:startColor="@color/black"
+                android:angle="270"
+                android:startColor="#DEEAFF"
                 android:centerColor="#DEEAFF"
-                android:endColor="#DEEAFF"
-                android:centerX="0.7"
+                android:endColor="#ffffff"
+                android:centerX="0"
                 android:centerY="0.5"/>
 
         </shape>
@@ -47,26 +46,25 @@
     </item>
 
     <item
-        android:height="199dp"
-        android:width="122dp"
+        android:height="25dp"
+        android:width="149dp"
         android:gravity="bottom|end">
 
         <shape
             android:shape="rectangle">
 
             <corners
-                android:topLeftRadius="51dp"
-                android:topRightRadius="51dp"
+                android:topLeftRadius="13dp"
+                android:topRightRadius="1dp"
                 android:bottomLeftRadius="51dp"
                 android:bottomRightRadius="51dp"/>
 
             <gradient
-                android:type="radial"
-                android:gradientRadius="107dp"
-                android:startColor="@color/black"
+                android:angle="270"
+                android:startColor="#77000000"
                 android:centerColor="#DEEAFF"
                 android:endColor="#DEEAFF"
-                android:centerX="0.3"
+                android:centerX="1"
                 android:centerY="0.5"/>
 
         </shape>
@@ -74,12 +72,8 @@
     </item>
 
     <item
-        android:height="59dp"
-        android:width="170dp"
-        android:start="37dp"
-        android:end="37dp"
-        android:top="17dp"
-        android:bottom="17dp"
+        android:height="50dp"
+        android:width="151dp"
         android:gravity="center">
 
         <shape
