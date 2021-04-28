@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 12:11 AM
+ * Last modified 4/28/21 1:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,15 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 
 fun Storefront.setupUserInterface() {
 
-    PrepareActionCenterBackground(context = applicationContext, actionCenterView = storefrontLayoutBinding.actionCenterView,
-            actionLeftView = storefrontLayoutBinding.leftActionView, actionMiddleView = storefrontLayoutBinding.middleActionView, actionRightView = storefrontLayoutBinding.rightActionView).start()
+
+
+
+    PrepareActionCenterBackground(context = applicationContext, actionCenterView = storefrontLayoutBinding.actionCenterView, actionLeftView = storefrontLayoutBinding.leftActionView, actionMiddleView = storefrontLayoutBinding.middleActionView, actionRightView = storefrontLayoutBinding.rightActionView).let {
+
+        it.start()
+
+        it.setupIconsForStorefront()
+
+    }
 
 }

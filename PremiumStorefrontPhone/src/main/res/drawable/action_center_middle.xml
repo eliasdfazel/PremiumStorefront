@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/28/21 12:11 AM
+  ~ Last modified 4/28/21 1:16 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -39,5 +39,12 @@
         </ripple>
 
     </item>
+
+    <item
+        android:id="@+id/actionCenterMiddleIcon"
+        android:gravity="center"
+        android:width="29dp"
+        android:height="29dp"
+        android:drawable="@drawable/search_icon"/>
 
 </layer-list>

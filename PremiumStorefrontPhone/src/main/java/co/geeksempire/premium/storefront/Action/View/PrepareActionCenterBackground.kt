@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 12:09 AM
+ * Last modified 4/28/21 1:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -76,6 +76,22 @@ class PrepareActionCenterBackground(private val context: Context, private val ac
         shadowLayer.findDrawableByLayerId(R.id.foregroundLayer).setTint(context.getColor(R.color.premiumLight))
 
         actionCenterView.setImageDrawable(shadowLayer)
+
+    }
+
+    fun setupIconsForStorefront() {
+
+        val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
+        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon))
+        actionLeftView.setImageDrawable(actionCenterLeft)
+
+        val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.search_icon))
+        actionMiddleView.setImageDrawable(actionCenterMiddle)
+
+        val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
+        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.filter_icon))
+        actionRightView.setImageDrawable(actionCenterRight)
 
     }
 
