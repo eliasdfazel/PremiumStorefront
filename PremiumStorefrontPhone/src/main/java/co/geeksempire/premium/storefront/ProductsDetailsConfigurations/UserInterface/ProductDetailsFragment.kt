@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 3:38 PM
+ * Last modified 4/28/21 3:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,18 +15,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.databinding.ProductDetailsLayoutBinding
 
 class ProductDetailsFragment : Fragment() {
 
     var isShowing = false
 
-    lateinit var productDetailsLayoutBinding: ProductDetailsLayoutBinding
+    private lateinit var productDetailsLayoutBinding: ProductDetailsLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        (activity as Storefront).prepareActionCenterUserInterface.setupIconsForDetails()
 
     }
 

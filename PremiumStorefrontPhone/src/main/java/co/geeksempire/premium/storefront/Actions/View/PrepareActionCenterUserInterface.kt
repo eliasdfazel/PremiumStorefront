@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 2:51 PM
+ * Last modified 4/28/21 3:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.content.Context
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.R
@@ -85,22 +86,41 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
         actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon))
         actionLeftView.setImageDrawable(actionCenterLeft)
         actionLeftView.contentDescription = context.getString(R.string.sortActionDescription)
+        actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
         actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.search_icon))
         actionMiddleView.setImageDrawable(actionCenterMiddle)
         actionMiddleView.contentDescription = context.getString(R.string.searchActionDescription)
+        actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
 
         val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
         actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.filter_icon))
         actionRightView.setImageDrawable(actionCenterRight)
         actionRightView.contentDescription = context.getString(R.string.filterActionDescription)
+        actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
 
     }
 
     fun setupIconsForDetails() {
 
+        val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
+        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.share_icon))
+        actionLeftView.setImageDrawable(actionCenterLeft)
+        actionLeftView.contentDescription = context.getString(R.string.shareActionDescription)
+        actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
 
+        val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.install_icon))
+        actionMiddleView.setImageDrawable(actionCenterMiddle)
+        actionMiddleView.contentDescription = context.getString(R.string.installActionDescription)
+        actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+
+        val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
+        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.rate_icon))
+        actionRightView.setImageDrawable(actionCenterRight)
+        actionRightView.contentDescription = context.getString(R.string.rateActionDescription)
+        actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
 
     }
 

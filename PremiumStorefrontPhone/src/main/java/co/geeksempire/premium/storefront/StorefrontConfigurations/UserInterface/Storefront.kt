@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 3:36 PM
+ * Last modified 4/28/21 3:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -123,7 +123,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
 
-            productDetailsFragment.isShowing = false
+            prepareActionCenterUserInterface.setupIconsForStorefront()
 
         } else {
 
