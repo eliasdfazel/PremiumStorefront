@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/27/21 10:32 PM
+  ~ Last modified 4/27/21 10:52 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:width="233dp"
+        android:width="303dp"
         android:height="79dp">
 
         <color android:color="@color/transparent"/>
@@ -21,7 +21,7 @@
 
     <item
         android:id="@+id/lightShadow"
-        android:width="207dp"
+        android:width="277dp"
         android:height="37dp"
         android:top="5.5dp"
         android:start="1dp"
@@ -44,7 +44,7 @@
 
     <item
         android:id="@+id/darkShadow"
-        android:width="207dp"
+        android:width="277dp"
         android:height="37dp"
         android:bottom="5.5dp"
         android:end="1dp"
@@ -66,7 +66,8 @@
     </item>
 
     <item
-        android:width="233dp"
+        android:id="@+id/foregroundLayer"
+        android:width="303dp"
         android:height="70dp"
 
         android:gravity="center">
@@ -80,14 +81,15 @@
                 android:bottomLeftRadius="51dp"
                 android:bottomRightRadius="51dp"/>
 
-            <solid android:color="@color/default_color_light" />
+            <solid android:color="@color/premiumLight" />
 
         </shape>
 
     </item>
 
     <item
-        android:width="233dp"
+        android:id="@+id/rippleMask"
+        android:width="303dp"
         android:height="70dp"
         android:top="5dp">
         <ripple

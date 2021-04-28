@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/27/21 10:27 PM
+ * Last modified 4/27/21 10:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -38,9 +38,9 @@ class PrepareActionCenterBackground(private val context: Context, private val ac
 
         val shapeLightShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundLightShadowRadius, null, null))
         shapeLightShadow.paint.apply {
-            color = context.getColor(R.color.light)
+            color = context.getColor(R.color.white)
 
-            setShadowLayer(27f, 0f, 0f, context.getColor(R.color.light))
+            setShadowLayer(29f, 0f, 0f, context.getColor(R.color.white))
         }
 
         val backgroundDarkShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
@@ -71,6 +71,8 @@ class PrepareActionCenterBackground(private val context: Context, private val ac
 
         shadowLayer.setDrawableByLayerId(R.id.lightShadow, shapeLightShadow)
         shadowLayer.setDrawableByLayerId(R.id.darkShadow, shapeDarkShadow)
+
+        shadowLayer.findDrawableByLayerId(R.id.foregroundLayer).setTint(context.getColor(R.color.premiumLight))
 
         actionCenterView.setImageDrawable(shadowLayer)
 
