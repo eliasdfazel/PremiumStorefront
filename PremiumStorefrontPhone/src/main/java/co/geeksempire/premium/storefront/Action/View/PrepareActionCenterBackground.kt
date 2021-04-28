@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/27/21 10:53 PM
+ * Last modified 4/28/21 12:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,8 @@ import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.R
 
-class PrepareActionCenterBackground(private val context: Context, private val actionCenterView: ImageView) {
+class PrepareActionCenterBackground(private val context: Context, private val actionCenterView: ImageView,
+    private val actionLeftView: ImageView, private val actionMiddleView: ImageView, private val actionRightView: ImageView) {
 
     fun start() {
 

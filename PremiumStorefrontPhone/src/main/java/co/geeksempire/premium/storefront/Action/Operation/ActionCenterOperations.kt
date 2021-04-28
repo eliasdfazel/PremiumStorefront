@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/27/21 10:26 PM
+ * Last modified 4/27/21 11:22 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,19 @@ class ActionCenterOperations (val context: Storefront) {
 
     fun setupForStorefront() {
 
-        context.storefrontLayoutBinding.actionCenterView.setOnClickListener {
+        context.storefrontLayoutBinding.leftActionView.setOnClickListener {
+
+
+
+        }
+
+        context.storefrontLayoutBinding.middleActionView.setOnClickListener {
+
+
+
+        }
+
+        context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
 
 
