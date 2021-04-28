@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 1:35 AM
+ * Last modified 4/28/21 2:33 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ import co.geeksempire.premium.storefront.R
 class PrepareActionCenterUserInterface(private val context: Context, private val actionCenterView: ImageView,
                                        private val actionLeftView: ImageView, private val actionMiddleView: ImageView, private val actionRightView: ImageView) {
 
-    fun start() {
+    fun design() {
 
         val backgroundLightShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
 
