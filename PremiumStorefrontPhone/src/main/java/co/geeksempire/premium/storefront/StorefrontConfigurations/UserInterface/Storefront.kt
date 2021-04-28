@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/27/21 10:26 PM
+ * Last modified 4/28/21 12:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Action.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Extensions.setupUserInterface
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
@@ -111,7 +112,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun networkAvailable() {
 
-//        retrieveFeaturedContent()
+        retrieveFeaturedContent()
 
     }
 
