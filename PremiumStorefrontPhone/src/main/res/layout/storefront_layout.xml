@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/25/21 6:12 PM
+  ~ Last modified 4/27/21 5:39 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DEEAFF"
+    android:background="#C4D9FF"
     tools:context="co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront">
 
     <!--  Content  -->
@@ -133,28 +133,55 @@
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
-    <co.geeksempire.premium.storefront.Utils.UI.Views.GlowingButton
-        android:layout_width="177dp"
-        android:layout_height="51dp"
-
-        apps:backgroundColor="@color/default_color_game"
-        apps:unpressedGlowSize="7dp"
-        apps:pressedGlowSize="11dp"
-        apps:glowColor="@color/default_color_game"
-        apps:cornerRadius="51dp"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="91dp"
+        android:scaleType="fitCenter"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
-<!--    <ImageView-->
-<!--        android:layout_width="151dp"-->
-<!--        android:layout_height="57dp"-->
-<!--        android:background="@drawable/shadow_background"-->
+<!--    <co.geeksempire.premium.storefront.Utils.UI.Views.GlowingButtonXYZ-->
+<!--        android:id="@+id/glowingOne"-->
+<!--        android:layout_width="177dp"-->
+<!--        android:layout_height="51dp"-->
+
+<!--        apps:glowColor="@color/default_color_game"-->
+<!--        apps:unpressedGlowSize="7dp"-->
+<!--        apps:pressedGlowSize="7dp"-->
+<!--        apps:cornerRadiusTopLeft="51dp"-->
+<!--        apps:cornerRadiusTopRight="51dp"-->
+<!--        apps:cornerRadiusBottomLeft="51dp"-->
+<!--        apps:cornerRadiusBottomRight="51dp"-->
+<!--        apps:shadowX="0dp"-->
+<!--        apps:shadowY="0dp"-->
+<!--        apps:backgroundColor="@color/default_color_game"-->
 
 <!--        apps:layout_constraintTop_toTopOf="parent"-->
 <!--        apps:layout_constraintBottom_toBottomOf="parent"-->
+<!--        apps:layout_constraintStart_toStartOf="parent"-->
+<!--        apps:layout_constraintEnd_toEndOf="parent"/>-->
+<!--    -->
+<!--    <co.geeksempire.premium.storefront.Utils.UI.Views.GlowingButtonXXX-->
+<!--        android:layout_width="177dp"-->
+<!--        android:layout_height="51dp"-->
+
+<!--        apps:glowColor="@color/default_color_game"-->
+<!--        apps:unpressedGlowSize="7dp"-->
+<!--        apps:pressedGlowSize="7dp"-->
+<!--        apps:cornerRadiusTopLeft="51dp"-->
+<!--        apps:cornerRadiusTopRight="51dp"-->
+<!--        apps:cornerRadiusBottomLeft="51dp"-->
+<!--        apps:cornerRadiusBottomRight="51dp"-->
+<!--        apps:shadowX="0dp"-->
+<!--        apps:shadowY="0dp"-->
+<!--        apps:backgroundColor="@color/default_color_game"-->
+
+<!--        apps:layout_constraintTop_toBottomOf="@id/glowingOne"-->
+
 <!--        apps:layout_constraintStart_toStartOf="parent"-->
 <!--        apps:layout_constraintEnd_toEndOf="parent"/>-->
 

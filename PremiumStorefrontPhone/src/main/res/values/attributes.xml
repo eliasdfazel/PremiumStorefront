@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/25/21 6:00 PM
+  ~ Last modified 4/26/21 2:55 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,17 +12,29 @@
 <resources>
     <declare-styleable name="GlowButton">
 
+        <!--  -->
         <attr name="backgroundColor" format="color" />
 
+        <!--  -->
         <attr name="glowColor" format="color" />
 
+        <!--  -->
         <attr name="unpressedGlowSize" format="dimension" />
+        <!--  -->
         <attr name="pressedGlowSize" format="dimension" />
 
-        <attr name="cornerRadius" format="dimension" />
+        <!--  -->
+        <attr name="shadowX" format="dimension" />
+        <attr name="shadowY" format="dimension" />
 
-        <attr name="shadowDx" format="dimension" />
-        <attr name="shadowDy" format="dimension" />
+        <!--  -->
+        <attr name="cornerRadiusTopLeft" format="dimension"/>
+        <!--  -->
+        <attr name="cornerRadiusTopRight" format="dimension"/>
+        <!--  -->
+        <attr name="cornerRadiusBottomLeft" format="dimension"/>
+        <!--  -->
+        <attr name="cornerRadiusBottomRight" format="dimension"/>
 
     </declare-styleable>
 </resources>
