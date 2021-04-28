@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/19/21 2:47 PM
+  ~ Last modified 4/28/21 1:26 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:label="@string/app_name"
+        android:label="@string/applicationName"
         android:largeHeap="true"
         android:name=".PremiumStorefrontApplication"
         android:theme="@style/GeeksEmpire.Material">

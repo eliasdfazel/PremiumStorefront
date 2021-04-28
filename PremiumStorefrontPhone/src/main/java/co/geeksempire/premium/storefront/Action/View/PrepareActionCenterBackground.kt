@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 1:08 AM
+ * Last modified 4/28/21 1:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -84,14 +84,23 @@ class PrepareActionCenterBackground(private val context: Context, private val ac
         val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
         actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon))
         actionLeftView.setImageDrawable(actionCenterLeft)
+        actionLeftView.contentDescription = context.getString(R.string.sortActionDescription)
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
         actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.search_icon))
         actionMiddleView.setImageDrawable(actionCenterMiddle)
+        actionMiddleView.contentDescription = context.getString(R.string.searchActionDescription)
 
         val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
         actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.filter_icon))
         actionRightView.setImageDrawable(actionCenterRight)
+        actionRightView.contentDescription = context.getString(R.string.filterActionDescription)
+
+    }
+
+    fun setupIconsForDetails() {
+
+
 
     }
 
