@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/27/21 5:39 PM
+  ~ Last modified 4/27/21 10:30 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C4D9FF"
+    android:background="@color/default_color_light"
     tools:context="co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront">
 
     <!--  Content  -->
@@ -107,82 +107,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/actionView"
-        android:layout_width="0dp"
-        android:layout_height="37dp"
-        android:layout_marginVertical="19dp"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-
-        apps:icon="@drawable/filter_icon"
-        apps:iconTint="@color/light"
-        apps:iconSize="23dp"
-        apps:iconGravity="textStart"
-        apps:iconPadding="0dp"
-        apps:elevation="7dp"
-        apps:cornerRadius="51dp"
-        apps:rippleColor="@color/default_color"
-        apps:backgroundTint="@color/dark"
-
-
-        apps:layout_constraintWidth_percent="0.43"
-        apps:layout_constraintBottom_toBottomOf="parent"
-        apps:layout_constraintStart_toStartOf="parent"
-        apps:layout_constraintEnd_toEndOf="parent"/>
-
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/test"
+        android:id="@+id/actionCenterView"
         android:layout_width="wrap_content"
-        android:layout_height="91dp"
+        android:layout_height="wrap_content"
+        android:padding="13dp"
+        android:layout_marginVertical="13dp"
         android:scaleType="fitCenter"
 
-        apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
-
-<!--    <co.geeksempire.premium.storefront.Utils.UI.Views.GlowingButtonXYZ-->
-<!--        android:id="@+id/glowingOne"-->
-<!--        android:layout_width="177dp"-->
-<!--        android:layout_height="51dp"-->
-
-<!--        apps:glowColor="@color/default_color_game"-->
-<!--        apps:unpressedGlowSize="7dp"-->
-<!--        apps:pressedGlowSize="7dp"-->
-<!--        apps:cornerRadiusTopLeft="51dp"-->
-<!--        apps:cornerRadiusTopRight="51dp"-->
-<!--        apps:cornerRadiusBottomLeft="51dp"-->
-<!--        apps:cornerRadiusBottomRight="51dp"-->
-<!--        apps:shadowX="0dp"-->
-<!--        apps:shadowY="0dp"-->
-<!--        apps:backgroundColor="@color/default_color_game"-->
-
-<!--        apps:layout_constraintTop_toTopOf="parent"-->
-<!--        apps:layout_constraintBottom_toBottomOf="parent"-->
-<!--        apps:layout_constraintStart_toStartOf="parent"-->
-<!--        apps:layout_constraintEnd_toEndOf="parent"/>-->
-<!--    -->
-<!--    <co.geeksempire.premium.storefront.Utils.UI.Views.GlowingButtonXXX-->
-<!--        android:layout_width="177dp"-->
-<!--        android:layout_height="51dp"-->
-
-<!--        apps:glowColor="@color/default_color_game"-->
-<!--        apps:unpressedGlowSize="7dp"-->
-<!--        apps:pressedGlowSize="7dp"-->
-<!--        apps:cornerRadiusTopLeft="51dp"-->
-<!--        apps:cornerRadiusTopRight="51dp"-->
-<!--        apps:cornerRadiusBottomLeft="51dp"-->
-<!--        apps:cornerRadiusBottomRight="51dp"-->
-<!--        apps:shadowX="0dp"-->
-<!--        apps:shadowY="0dp"-->
-<!--        apps:backgroundColor="@color/default_color_game"-->
-
-<!--        apps:layout_constraintTop_toBottomOf="@id/glowingOne"-->
-
-<!--        apps:layout_constraintStart_toStartOf="parent"-->
-<!--        apps:layout_constraintEnd_toEndOf="parent"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

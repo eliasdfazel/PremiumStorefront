@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/25/21 4:39 PM
+ * Last modified 4/27/21 10:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Action.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
@@ -33,6 +34,10 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     val storefrontLiveData: StorefrontLiveData by lazy {
         ViewModelProvider(this@Storefront).get(StorefrontLiveData::class.java)
+    }
+
+    val actionCenterOperations: ActionCenterOperations by lazy {
+        ActionCenterOperations(this@Storefront)
     }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
@@ -54,11 +59,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
         storefrontLayoutBinding.rootView.post {
 
-
+            actionCenterOperations.setupForStorefront()
 
             setupUserInterface()
-
-
 
             val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
 

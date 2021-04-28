@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/27/21 5:13 PM
+ * Last modified 4/27/21 10:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.Utils.UI.Views
+package co.geeksempire.premium.storefront.Utils.UI.Views.Glowing
 
 import android.content.Context
 import android.content.res.TypedArray
@@ -24,7 +24,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.R
 
-class GlowingButtonXYZ(context: Context, attributesSet: AttributeSet) : AppCompatButton(context, attributesSet), View.OnTouchListener  {
+class GlowingButton(context: Context, attributesSet: AttributeSet) : AppCompatButton(context, attributesSet), View.OnTouchListener  {
 
     var attributeSet: TypedArray = context.obtainStyledAttributes(attributesSet, R.styleable.GlowButton)
 
@@ -46,7 +46,7 @@ class GlowingButtonXYZ(context: Context, attributesSet: AttributeSet) : AppCompa
 
     init {
 
-        setOnTouchListener(this@GlowingButtonXYZ)
+        setOnTouchListener(this@GlowingButton)
 
         val resources = resources
 
@@ -83,29 +83,17 @@ class GlowingButtonXYZ(context: Context, attributesSet: AttributeSet) : AppCompa
         when (motionEvent?.action) {
             MotionEvent.ACTION_DOWN -> {
 
-//                val valueAnimator = ValueAnimator.ofInt(unpressedGlowSize, pressedGlowSize)
-//                valueAnimator.duration = 1579
-//                valueAnimator.addUpdateListener { animator ->
-//
-//                    val animatorValue = animator.animatedValue as Int
-//
-//                    background = getBackgroundWithGlow(this@GlowingButton, aBackgroundColor, glowColor, unpressedGlowSize, animatorValue)
-//
-//                }
-//                valueAnimator.start()
-
-                background = getBackgroundWithGlow(this@GlowingButtonXYZ, aBackgroundColor, glowColor, unpressedGlowSize, pressedGlowSize)
-
+                background = getBackgroundWithGlow(this@GlowingButton, aBackgroundColor, glowColor, unpressedGlowSize, pressedGlowSize)
 
             }
             MotionEvent.ACTION_UP -> {
 
-                background = getBackgroundWithGlow(this@GlowingButtonXYZ, aBackgroundColor, glowColor, unpressedGlowSize, unpressedGlowSize)
+                background = getBackgroundWithGlow(this@GlowingButton, aBackgroundColor, glowColor, unpressedGlowSize, unpressedGlowSize)
 
             }
             MotionEvent.ACTION_CANCEL -> {
 
-                background = getBackgroundWithGlow(this@GlowingButtonXYZ, aBackgroundColor, glowColor, unpressedGlowSize, unpressedGlowSize)
+                background = getBackgroundWithGlow(this@GlowingButton, aBackgroundColor, glowColor, unpressedGlowSize, unpressedGlowSize)
 
             }
         }
