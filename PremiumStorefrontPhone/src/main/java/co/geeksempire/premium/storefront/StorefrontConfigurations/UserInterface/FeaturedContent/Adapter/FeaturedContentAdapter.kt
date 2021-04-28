@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/25/21 9:58 AM
+ * Last modified 4/28/21 3:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,8 +11,10 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter
 
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
@@ -122,6 +124,27 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                 })
                 .submit()
+
+        featuredContentViewHolder.rootView.setOnClickListener {
+
+            context.storefrontLayoutBinding.contentDetailsContainer.visibility = View.VISIBLE
+
+            context.productDetailsFragment.apply {
+                isShowing = true
+            }
+
+            context.productDetailsFragment.arguments = Bundle().apply {
+
+
+            }
+
+            context.supportFragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.slide_from_right, 0)
+                    .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontFeaturedContents[position].productName}")
+                    .commit()
+
+        }
 
     }
 

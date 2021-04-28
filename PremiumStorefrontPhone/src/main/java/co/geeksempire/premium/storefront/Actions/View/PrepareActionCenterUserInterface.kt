@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 2:33 PM
+ * Last modified 4/28/21 2:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.Action.View
+package co.geeksempire.premium.storefront.Actions.View
 
 import android.content.Context
 import android.graphics.drawable.LayerDrawable

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 2:32 PM
+ * Last modified 4/28/21 3:36 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,15 +13,19 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.geeksempire.premium.storefront.Action.Operation.ActionCenterOperations
-import co.geeksempire.premium.storefront.Action.View.PrepareActionCenterUserInterface
+import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
+import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Extensions.setupUserInterface
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
@@ -52,6 +56,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
     private val networkConnectionListener: NetworkConnectionListener by lazy {
         NetworkConnectionListener(this@Storefront, storefrontLayoutBinding.rootView, networkCheckpoint)
     }
+
+    val productDetailsFragment = ProductDetailsFragment()
 
     lateinit var storefrontLayoutBinding: StorefrontLayoutBinding
 
@@ -107,16 +113,32 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun onBackPressed() {
 
-        startActivity(Intent(Intent.ACTION_MAIN).apply {
-            this.addCategory(Intent.CATEGORY_HOME)
-            this.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
+        if (productDetailsFragment.isShowing) {
+
+            supportFragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.slide_to_right, 0)
+                    .remove(productDetailsFragment)
+                    .commit()
+
+            storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
+
+            productDetailsFragment.isShowing = false
+
+        } else {
+
+            startActivity(Intent(Intent.ACTION_MAIN).apply {
+                this.addCategory(Intent.CATEGORY_HOME)
+                this.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
+
+        }
 
     }
 
     override fun networkAvailable() {
 
-//        retrieveFeaturedContent()
+        retrieveFeaturedContent()
 
     }
 
