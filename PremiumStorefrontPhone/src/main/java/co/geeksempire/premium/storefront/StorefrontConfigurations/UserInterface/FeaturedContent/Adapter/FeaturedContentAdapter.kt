@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 5:47 PM
+ * Last modified 4/28/21 6:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
@@ -55,6 +56,8 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
         featuredContentViewHolder.productNameTextView.text = Html.fromHtml(storefrontFeaturedContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
 
+        featuredContentViewHolder.productCurrentRateView.text = storefrontFeaturedContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
+
         featuredContentViewHolder.backgroundCoverImageView.layoutParams = featuredContentViewHolder.backgroundCoverImageView.layoutParams.apply {
             height = 500//500 Pixel
         }
@@ -72,6 +75,9 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
                         resource?.let {
 
                             val vibrantColor = extractVibrantColor(context, resource)
+
+                            featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                            featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
                             context.runOnUiThread {
 

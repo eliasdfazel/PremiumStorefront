@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/24/21 12:05 PM
+ * Last modified 4/28/21 6:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,9 @@ class FeaturedContentViewHolder (rootItemView: View) : RecyclerView.ViewHolder(r
     val backgroundCoverImageView: ShapesImage = rootItemView.backgroundCoverImageView
     val productIconImageView: ShapesImage = rootItemView.productIconImageView
     val productNameTextView: TextView = rootItemView.productNameTextView
+    val productCurrentRateView: TextView = rootItemView.productCurrentRateView
 
     val productIconBlur: RealtimeBlurView = rootItemView.productIconBlur
     val productNameBlur: RealtimeBlurView = rootItemView.productNameBlur
+    val productRateBlur: RealtimeBlurView = rootItemView.productRateBlur
 }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 6:33 PM
+ * Last modified 4/28/21 6:37 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -41,8 +42,8 @@ public class RealtimeBlurView extends View {
 
 	private float mDownsampleFactor; // default 4
 
-	private int mOverlayColor; // default #aaffffff
-	private int sOverlayColor; // default -666
+	private int firstOverlayColor; // default #aaffffff
+	private int secondOvarlayColr; // default -666
 
 	private float mBlurRadius; // default 10dp (0 < r <= 25)
 
@@ -85,8 +86,8 @@ public class RealtimeBlurView extends View {
 				TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, context.getResources().getDisplayMetrics()));
 		mDownsampleFactor = a.getFloat(R.styleable.RealtimeBlurView_realtimeDownSampleFactor, 4);
 
-		mOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeFirstColor, 0xAAFFFFFF);
-		sOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeSecondColor, -666);
+		firstOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeFirstColor, 0xAAFFFFFF);
+		secondOvarlayColr = a.getColor(R.styleable.RealtimeBlurView_realtimeSecondColor, -666);
 
 		topLeftCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurTopLeft, 0f);
 		topRightCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurTopRight, 0f);
@@ -189,15 +190,15 @@ public class RealtimeBlurView extends View {
 	}
 
 	public void setOverlayColor(int color) {
-		if (mOverlayColor != color) {
-			mOverlayColor = color;
+		if (firstOverlayColor != color) {
+			firstOverlayColor = color;
 			invalidate();
 		}
 	}
 
 	public void setSecondOverlayColor(int color) {
-		if (sOverlayColor != color) {
-			sOverlayColor = color;
+		if (secondOvarlayColr != color) {
+			secondOvarlayColr = color;
 			invalidate();
 		}
 	}
@@ -307,8 +308,8 @@ public class RealtimeBlurView extends View {
 				y += locations[1];
 
 				// just erase transparent
-				mBitmapToBlur.eraseColor(mOverlayColor & 0xffffff);
-				mBitmapToBlur.eraseColor(sOverlayColor & 0xffffff);
+				mBitmapToBlur.eraseColor(firstOverlayColor & 0xffffff);
+				mBitmapToBlur.eraseColor(secondOvarlayColr & 0xffffff);
 
 				int rc = mBlurringCanvas.save();
 				mIsRendering = true;
@@ -413,7 +414,7 @@ public class RealtimeBlurView extends View {
 
 		super.onDraw(canvas);
 
-		drawBlurredBitmap(canvas, mBlurredBitmap, mOverlayColor, sOverlayColor);
+		drawBlurredBitmap(canvas, mBlurredBitmap, firstOverlayColor, secondOvarlayColr);
 
 	}
 
@@ -448,7 +449,12 @@ public class RealtimeBlurView extends View {
 
 		} else if (gradientType == GradientTypeRadial) {
 
-//			paintInstance.setShader(new RadialGradient();
+			paintInstance.setShader(new RadialGradient(getWidth() / 2f,
+					getHeight() / 2f,
+					Math.min(getWidth(), getHeight()) / 2f,
+					sOverlayColor,
+					mOverlayColor,
+					Shader.TileMode.CLAMP));
 
 		}
 

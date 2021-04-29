@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/28/21 6:33 PM
+  ~ Last modified 4/28/21 6:51 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -92,8 +92,8 @@
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:id="@+id/productRateBlur"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
         android:layout_marginTop="79dp"
 
         apps:realtimeBlurRadius="11dp"
@@ -108,5 +108,23 @@
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productCurrentRateView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/dark"
+        android:textSize="23sp"
+        android:fontFamily="@font/neon"
+        android:shadowRadius="7"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowColor="@color/dark"
+
+        apps:layout_constraintTop_toTopOf="@id/productRateBlur"
+        apps:layout_constraintBottom_toBottomOf="@id/productRateBlur"
+        apps:layout_constraintStart_toStartOf="@id/productRateBlur"
+        apps:layout_constraintEnd_toEndOf="@id/productRateBlur"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
