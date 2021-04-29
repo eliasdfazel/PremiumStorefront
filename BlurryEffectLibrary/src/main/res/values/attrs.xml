@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/24/21 11:14 AM
+  ~ Last modified 4/28/21 6:28 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,12 +14,18 @@
 		<attr name="realtimeBlurRadius" format="dimension"/>
 		<attr name="realtimeDownSampleFactor" format="float"/>
 
-		<attr name="realtimeOverlayColor" format="color"/>
-		<attr name="realtimeSecondOverlayColor" format="color"/>
+		<attr name="realtimeFirstColor" format="color"/>
+		<attr name="realtimeSecondColor" format="color"/>
 
 		<attr name="realtimeBlurTopLeft" format="dimension"/>
 		<attr name="realtimeBlurTopRight" format="dimension"/>
 		<attr name="realtimeBlurBottomLeft" format="dimension"/>
 		<attr name="realtimeBlurBottomRight" format="dimension"/>
+
+		<attr name="realtimeBlurGradientType" format="enum">
+			<enum name="none" value="0"/>
+			<enum name="linear" value="1"/>
+			<enum name="radial" value="2"/>
+		</attr>
 	</declare-styleable>
 </resources>

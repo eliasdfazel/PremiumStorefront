@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/25/21 2:10 PM
+ * Last modified 4/28/21 6:33 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -68,6 +68,12 @@ public class RealtimeBlurView extends View {
 	private static int RENDERING_COUNT;
 	private static int BLUR_IMPL;
 
+	int gradientType = 0;
+
+	public static int GradientTypeNone = 0;
+	public static int GradientTypeLinear = 1;
+	public static int GradientTypeRadial = 2;
+
 	public RealtimeBlurView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
@@ -79,13 +85,21 @@ public class RealtimeBlurView extends View {
 				TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, context.getResources().getDisplayMetrics()));
 		mDownsampleFactor = a.getFloat(R.styleable.RealtimeBlurView_realtimeDownSampleFactor, 4);
 
-		mOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeOverlayColor, 0xAAFFFFFF);
-		sOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeSecondOverlayColor, -666);
+		mOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeFirstColor, 0xAAFFFFFF);
+		sOverlayColor = a.getColor(R.styleable.RealtimeBlurView_realtimeSecondColor, -666);
 
 		topLeftCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurTopLeft, 0f);
 		topRightCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurTopRight, 0f);
 		bottomLeftCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurBottomLeft, 0f);
 		bottomRightCorner = a.getDimension(R.styleable.RealtimeBlurView_realtimeBlurBottomRight, 0f);
+
+		if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 0) {
+			gradientType = GradientTypeNone;
+		} else if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 1) {
+			gradientType = GradientTypeLinear;
+		} else if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 2) {
+			gradientType = GradientTypeRadial;
+		}
 
 		a.recycle();
 
@@ -272,11 +286,15 @@ public class RealtimeBlurView extends View {
 	}
 
 	private final ViewTreeObserver.OnPreDrawListener preDrawListener = new ViewTreeObserver.OnPreDrawListener() {
+
 		@Override
 		public boolean onPreDraw() {
+
 			final int[] locations = new int[2];
+
 			Bitmap oldBmp = mBlurredBitmap;
 			View decor = mDecorView;
+
 			if (decor != null && isShown() && prepare()) {
 				boolean redrawBitmap = mBlurredBitmap != oldBmp;
 				oldBmp = null;
@@ -289,8 +307,8 @@ public class RealtimeBlurView extends View {
 				y += locations[1];
 
 				// just erase transparent
-//				mBitmapToBlur.eraseColor(mOverlayColor & 0xffffff);
-//				mBitmapToBlur.eraseColor(sOverlayColor & 0xffffff);
+				mBitmapToBlur.eraseColor(mOverlayColor & 0xffffff);
+				mBitmapToBlur.eraseColor(sOverlayColor & 0xffffff);
 
 				int rc = mBlurringCanvas.save();
 				mIsRendering = true;
@@ -416,17 +434,21 @@ public class RealtimeBlurView extends View {
 
 		}
 
-		if (sOverlayColor == -666) {
+		if (gradientType == GradientTypeNone) {
 
 			paintInstance.setColor(mOverlayColor);
 
-		} else  {
+		} else if (gradientType == GradientTypeLinear) {
 
 			paintInstance.setShader(new LinearGradient(
 					0, 0,
 					0, getHeight(),
-					/* First Color */ mOverlayColor, /* Second Color */ sOverlayColor,
+					/* First Color */ sOverlayColor, /* Second Color */ mOverlayColor,
 					Shader.TileMode.CLAMP));
+
+		} else if (gradientType == GradientTypeRadial) {
+
+//			paintInstance.setShader(new RadialGradient();
 
 		}
 

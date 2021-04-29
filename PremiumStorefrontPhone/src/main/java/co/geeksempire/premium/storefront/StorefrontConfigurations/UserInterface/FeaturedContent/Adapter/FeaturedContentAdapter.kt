@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 3:38 PM
+ * Last modified 4/28/21 5:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,61 +59,55 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
             height = 500//500 Pixel
         }
 
+        //Product Icon Image
         Glide.with(context)
                 .load(storefrontFeaturedContents[position].productIconLink)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(object : RequestListener<Drawable> {
 
-                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-
-                        return false
-                    }
+                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
 
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
                         resource?.let {
 
+                            val vibrantColor = extractVibrantColor(context, resource)
+
                             context.runOnUiThread {
 
-                                val vibrantColor = extractVibrantColor(context, resource)
-
-                                featuredContentViewHolder.productIconBlur.setOverlayColor(setColorAlpha(vibrantColor, 157f))
-                                featuredContentViewHolder.productIconBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_higher))
+                                featuredContentViewHolder.productIconBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 151f))
+                                featuredContentViewHolder.productIconBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
                                 featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
 
-                            }
+                                //Product Cover Image
+                                Glide.with(context)
+                                        .load(storefrontFeaturedContents[position].productCoverLink)
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .listener(object : RequestListener<Drawable> {
 
-                        }
+                                            override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
 
-                        return false
-                    }
+                                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                })
-                .submit()
+                                                resource?.let {
 
-        Glide.with(context)
-                .load(storefrontFeaturedContents[position].productCoverLink)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .listener(object : RequestListener<Drawable> {
+                                                    context.runOnUiThread {
 
-                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                                                        featuredContentViewHolder.productNameBlur.setOverlayColor(setColorAlpha(vibrantColor, 131f))
+                                                        featuredContentViewHolder.productNameBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_high))
 
-                        return false
-                    }
+                                                        featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
 
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                                                    }
 
-                        resource?.let {
+                                                }
 
-                            context.runOnUiThread {
+                                                return false
+                                            }
 
-                                val vibrantColor = extractVibrantColor(context, resource)
-
-                                featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_higher))
-                                featuredContentViewHolder.productNameBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 157f))
-
-                                featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
+                                        })
+                                        .submit()
 
                             }
 

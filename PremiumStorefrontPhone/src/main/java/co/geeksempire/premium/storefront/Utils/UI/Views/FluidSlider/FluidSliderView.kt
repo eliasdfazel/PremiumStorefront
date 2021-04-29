@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/27/21 10:58 PM
+ * Last modified 4/28/21 6:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -318,7 +318,11 @@ class FluidSlider @JvmOverloads constructor(
                 a.getString(R.styleable.FluidSlider_start_text)?.also { startText = it }
                 a.getString(R.styleable.FluidSlider_end_text)?.also { endText = it }
 
-                val defaultBarHeight = if (a.getInteger(R.styleable.FluidSlider_size, 1) == 1) Size.NORMAL.value else Size.SMALL.value
+                val defaultBarHeight = if (a.getInteger(R.styleable.FluidSlider_size, 1) == 1) {
+                    Size.NORMAL.value
+                } else {
+                    Size.SMALL.value
+                }
                 barHeight = defaultBarHeight * density
             } finally {
                 a.recycle()
