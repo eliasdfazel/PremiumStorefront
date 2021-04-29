@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/21/21 12:08 PM
+ * Last modified 4/28/21 7:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests
 
 import android.content.Context
 import android.util.Log
+import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.EnqueueEndPointQuery
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
@@ -53,7 +54,7 @@ class GenericJsonRequest(private val context: Context, private val jsonRequestRe
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         )
 
-        jsonObjectRequest.setShouldCache(false)
+        jsonObjectRequest.setShouldCache(BuildConfig.DEBUG)
 
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(jsonObjectRequest)
