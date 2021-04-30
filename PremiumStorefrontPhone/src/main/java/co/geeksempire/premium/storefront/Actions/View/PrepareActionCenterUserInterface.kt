@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 4:13 PM
+ * Last modified 4/29/21 4:29 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -84,7 +84,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
     fun setupIconsForStorefront() {
 
         val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
-        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon))
+        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon)?.apply { setTint(context.getColor(R.color.dark)) })
         actionLeftView.setImageDrawable(actionCenterLeft)
         actionLeftView.contentDescription = context.getString(R.string.sortActionDescription)
         actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
@@ -96,7 +96,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
         }
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
-        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.search_icon))
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.search_icon)?.apply { setTint(context.getColor(R.color.dark)) })
         actionMiddleView.setImageDrawable(actionCenterMiddle)
         actionMiddleView.contentDescription = context.getString(R.string.searchActionDescription)
         actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
@@ -108,7 +108,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
         }
 
         val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
-        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.filter_icon))
+        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.filter_icon)?.apply { setTint(context.getColor(R.color.dark)) })
         actionRightView.setImageDrawable(actionCenterRight)
         actionRightView.contentDescription = context.getString(R.string.filterActionDescription)
         actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
@@ -124,7 +124,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
     fun setupIconsForDetails() {
 
         val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
-        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.share_icon))
+        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.share_icon)?.apply { setTint(context.getColor(R.color.dark)) })
         actionLeftView.setImageDrawable(actionCenterLeft)
         actionLeftView.contentDescription = context.getString(R.string.shareActionDescription)
         actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
@@ -136,7 +136,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
         }
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
-        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.install_icon))
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.install_icon)?.apply { setTint(context.getColor(R.color.dark)) })
         actionMiddleView.setImageDrawable(actionCenterMiddle)
         actionMiddleView.contentDescription = context.getString(R.string.installActionDescription)
         actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
@@ -148,7 +148,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
         }
 
         val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
-        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.rate_icon))
+        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.rate_icon)?.apply { setTint(context.getColor(R.color.dark)) })
         actionRightView.setImageDrawable(actionCenterRight)
         actionRightView.contentDescription = context.getString(R.string.rateActionDescription)
         actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
