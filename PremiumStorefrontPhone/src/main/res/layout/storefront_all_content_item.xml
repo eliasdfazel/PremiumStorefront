@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 4/29/21 6:06 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="13dp"
+    android:background="@android:color/transparent"
+
+    apps:layout_constraintDimensionRatio="1:1">
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/backgroundCoverImageView"
+        android:layout_width="307dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+
+        apps:shapeDrawable="@drawable/storefront_featured_product_image"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent" />
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/productNameBlur"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginTop="131dp"
+
+        apps:realtimeBlurRadius="13dp"
+        apps:realtimeBlurGradientType="linear"
+        apps:realtimeFirstColor="@color/light_transparent_high"
+        apps:realtimeSecondColor="@color/light_transparent"
+        apps:realtimeBlurTopLeft="11dp"
+        apps:realtimeBlurTopRight="11dp"
+        apps:realtimeBlurBottomLeft="11dp"
+        apps:realtimeBlurBottomRight="11dp"
+
+        apps:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/dark"
+        android:textSize="19sp"
+        android:shadowColor="@color/white"
+        android:shadowRadius="17"
+
+        apps:layout_constraintTop_toTopOf="@id/productNameBlur"
+        apps:layout_constraintBottom_toBottomOf="@id/productNameBlur"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/productIconBlur"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="13dp"
+
+        apps:realtimeBlurRadius="11dp"
+        apps:realtimeBlurGradientType="linear"
+        apps:realtimeFirstColor="@color/light_transparent_higher"
+        apps:realtimeSecondColor="@color/light_transparent"
+        apps:realtimeBlurTopLeft="51dp"
+        apps:realtimeBlurTopRight="51dp"
+        apps:realtimeBlurBottomLeft="51dp"
+        apps:realtimeBlurBottomRight="51dp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/productIconImageView"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:scaleType="centerCrop"
+
+        apps:shape="circle"
+
+        apps:layout_constraintTop_toTopOf="@id/productIconBlur"
+        apps:layout_constraintBottom_toBottomOf="@id/productIconBlur"
+        apps:layout_constraintStart_toStartOf="@id/productIconBlur"
+        apps:layout_constraintEnd_toEndOf="@id/productIconBlur"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/productRateBlur"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="79dp"
+
+        apps:realtimeBlurRadius="11dp"
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/light_transparent_higher"
+        apps:realtimeBlurTopLeft="51dp"
+        apps:realtimeBlurTopRight="51dp"
+        apps:realtimeBlurBottomLeft="51dp"
+        apps:realtimeBlurBottomRight="51dp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="7sp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/current_rate_icon"
+
+        apps:layout_constraintTop_toTopOf="@id/productRateBlur"
+        apps:layout_constraintBottom_toBottomOf="@id/productRateBlur"
+        apps:layout_constraintStart_toStartOf="@id/productRateBlur"
+        apps:layout_constraintEnd_toEndOf="@id/productRateBlur"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productCurrentRateView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/default_color_game_light"
+        android:textSize="29sp"
+        android:text="5.0"
+        android:fontFamily="@font/neon"
+        android:shadowRadius="5"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowColor="@color/default_color_game_light"
+
+        apps:layout_constraintTop_toTopOf="@id/productRateBlur"
+        apps:layout_constraintBottom_toBottomOf="@id/productRateBlur"
+        apps:layout_constraintStart_toStartOf="@id/productRateBlur"
+        apps:layout_constraintEnd_toEndOf="@id/productRateBlur"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

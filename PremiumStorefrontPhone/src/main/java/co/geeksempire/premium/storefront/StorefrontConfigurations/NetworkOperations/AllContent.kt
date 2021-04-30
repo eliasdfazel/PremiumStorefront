@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 5:26 PM
+ * Last modified 4/29/21 6:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.Gener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
 import org.json.JSONArray
 
-fun Storefront.retrieveFeaturedContent() {
+fun Storefront.retrieveAllContent() {
 
     val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
 
@@ -25,10 +25,10 @@ fun Storefront.retrieveFeaturedContent() {
         override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
             super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-            storefrontLiveData.processFeaturedContent(rawDataJsonArray)
+            storefrontLiveData.processAllContent(rawDataJsonArray)
 
         }
 
-    }).getMethod(productSearchEndpoint.getFeaturedProductsEndpoint())
+    }).getMethod(productSearchEndpoint.getAllProductsShowcaseEndpoint)
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 3:44 PM
+ * Last modified 4/29/21 7:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
@@ -25,12 +26,15 @@ import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Extensions.setupUserInterface
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
+import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
@@ -75,17 +79,38 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             setupUserInterface()
 
             val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
-
             storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
-
             storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
+
+            val allContentAdapter = AllContentAdapter(this@Storefront)
+            storefrontLayoutBinding.allContentRecyclerView.layoutManager = GridLayoutManager(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
+            storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
+
+            storefrontLiveData.allContentItemData.observe(this@Storefront, Observer {
+
+                if (it.isNotEmpty()) {
+
+                    allContentAdapter.storefrontContents.clear()
+                    allContentAdapter.storefrontContents.addAll(it)
+
+                    allContentAdapter.notifyDataSetChanged()
+
+                    storefrontLayoutBinding.allContentRecyclerView.scrollToPosition(0)
+
+                } else {
+
+
+
+                }
+
+            })
 
             storefrontLiveData.featuredContentItemData.observe(this@Storefront, Observer {
 
                 if (it.isNotEmpty()) {
 
-                    featuredContentAdapter.storefrontFeaturedContents.clear()
-                    featuredContentAdapter.storefrontFeaturedContents.addAll(it)
+                    featuredContentAdapter.storefrontContents.clear()
+                    featuredContentAdapter.storefrontContents.addAll(it)
 
                     featuredContentAdapter.notifyDataSetChanged()
 
@@ -137,6 +162,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
     }
 
     override fun networkAvailable() {
+
+        retrieveAllContent()
 
         retrieveFeaturedContent()
 

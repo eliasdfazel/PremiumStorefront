@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 7:02 PM
+ * Last modified 4/29/21 5:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,12 +13,15 @@ package co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests
 import android.content.Context
 import android.util.Log
 import co.geeksempire.premium.storefront.BuildConfig
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.EnqueueEndPointQuery
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 
+object EnqueueEndPointQuery {
+    const val JSON_REQUEST_TIMEOUT = (1000 * 3)
+    const val JSON_REQUEST_RETRIES = (3)
+}
 
 class GenericJsonRequest(private val context: Context, private val jsonRequestResponses: JsonRequestResponses) {
 

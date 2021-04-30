@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 3:48 PM
+ * Last modified 4/29/21 7:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,8 +51,8 @@ object StorefrontFeaturedContentKey {
  * @param productCoverLink : Second Image Of Product Gallery from JsonArray "images"
  *
  **/
-data class StorefrontFeaturedContentsData (var productName: String, var productDescription: String, var productSummary: String,
-                                           var productIconLink: String, var productCoverLink: String,
-                                           var productPrice: String,
-                                           var productSalePrice: String,
-                                           var productAttributes: HashMap<String, String>)
+data class StorefrontContentsData (var productName: String, var productDescription: String, var productSummary: String,
+                                   var productIconLink: String, var productCoverLink: String?,
+                                   var productPrice: String,
+                                   var productSalePrice: String,
+                                   var productAttributes: HashMap<String, String>)

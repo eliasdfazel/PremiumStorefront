@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 4:03 PM
+ * Last modified 4/29/21 7:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,8 +18,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
@@ -33,11 +33,11 @@ import com.bumptech.glide.request.target.Target
 
 class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Adapter<FeaturedContentViewHolder>() {
 
-    val storefrontFeaturedContents: ArrayList<StorefrontFeaturedContentsData> = ArrayList<StorefrontFeaturedContentsData>()
+    val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
     override fun getItemCount() : Int {
 
-        return storefrontFeaturedContents.size
+        return storefrontContents.size
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : FeaturedContentViewHolder {
@@ -54,13 +54,13 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
     override fun onBindViewHolder(featuredContentViewHolder: FeaturedContentViewHolder, position: Int) {
 
-        featuredContentViewHolder.productNameTextView.text = Html.fromHtml(storefrontFeaturedContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
+        featuredContentViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
 
-        featuredContentViewHolder.productCurrentRateView.text = storefrontFeaturedContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
+        featuredContentViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
 
         //Product Icon Image
         Glide.with(context)
-                .load(storefrontFeaturedContents[position].productIconLink)
+                .load(storefrontContents[position].productIconLink)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(object : RequestListener<Drawable> {
 
@@ -72,10 +72,10 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                             val vibrantColor = extractVibrantColor(context, resource)
 
-                            featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
-                            featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
-
                             context.runOnUiThread {
+
+                                featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                                featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
                                 featuredContentViewHolder.productIconBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 151f))
                                 featuredContentViewHolder.productIconBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
@@ -84,7 +84,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                                 //Product Cover Image
                                 Glide.with(context)
-                                        .load(storefrontFeaturedContents[position].productCoverLink)
+                                        .load(storefrontContents[position].productCoverLink)
                                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                                         .listener(object : RequestListener<Drawable> {
 
@@ -137,7 +137,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
             context.supportFragmentManager
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_from_right, 0)
-                    .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontFeaturedContents[position].productName}")
+                    .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontContents[position].productName}")
                     .commit()
 
         }
