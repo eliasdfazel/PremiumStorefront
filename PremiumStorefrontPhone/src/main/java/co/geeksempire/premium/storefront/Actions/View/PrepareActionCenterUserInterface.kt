@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 4:39 PM
+ * Last modified 4/29/21 7:29 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -75,9 +75,13 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
         shadowLayer.setDrawableByLayerId(R.id.lightShadow, shapeLightShadow)
         shadowLayer.setDrawableByLayerId(R.id.darkShadow, shapeDarkShadow)
 
-        shadowLayer.findDrawableByLayerId(R.id.foregroundLayer).setTint(context.getColor(R.color.premiumLight))
+        val foregroundLayer = shadowLayer.findDrawableByLayerId(R.id.foregroundLayer)
+        foregroundLayer.setTint(context.getColor(R.color.premiumLight))
+        foregroundLayer.alpha = 251
 
         actionCenterView.setImageDrawable(shadowLayer)
+
+        actionCenterView.bringToFront()
 
     }
 

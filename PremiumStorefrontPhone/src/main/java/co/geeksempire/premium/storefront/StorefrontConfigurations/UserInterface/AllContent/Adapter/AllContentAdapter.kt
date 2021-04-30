@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 7:04 PM
+ * Last modified 4/29/21 7:31 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.ViewHolder.AllContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
-import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -74,14 +73,9 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                             context.runOnUiThread {
 
-                                allContentViewHolder.productNameBlur.setOverlayColor(setColorAlpha(vibrantColor, 131f))
-                                allContentViewHolder.productNameBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_high))
 
                                 allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 allContentViewHolder.productCurrentRateView.setShadowLayer(allContentViewHolder.productCurrentRateView.shadowRadius, allContentViewHolder.productCurrentRateView.shadowDx, allContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
-
-                                allContentViewHolder.productIconBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 151f))
-                                allContentViewHolder.productIconBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
                                 allContentViewHolder.productIconImageView.setImageDrawable(resource)
 

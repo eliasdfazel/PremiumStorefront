@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 5:44 PM
+ * Last modified 4/29/21 7:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,12 +21,9 @@ import net.geekstools.imageview.customshapes.ShapesImage
 class AllContentViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
 
-    val backgroundCoverImageView: ShapesImage = rootItemView.backgroundCoverImageView
     val productIconImageView: ShapesImage = rootItemView.productIconImageView
     val productNameTextView: TextView = rootItemView.productNameTextView
     val productCurrentRateView: TextView = rootItemView.productCurrentRateView
 
-    val productIconBlur: RealtimeBlurView = rootItemView.productIconBlur
-    val productNameBlur: RealtimeBlurView = rootItemView.productNameBlur
     val productRateBlur: RealtimeBlurView = rootItemView.productRateBlur
 }
