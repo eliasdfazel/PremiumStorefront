@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 4:40 PM
+ * Last modified 4/29/21 4:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
         shapeDarkShadow.paint.apply {
             color = context.getColor(R.color.dark_transparent)
 
-            setShadowLayer(27f, 0f, 0f, context.getColor(R.color.dark_transparent))
+            setShadowLayer(29f, 0f, 0f, context.getColor(R.color.dark_transparent))
         }
 
         val shadowLayer = context.getDrawable(R.drawable.action_center_shadow_background) as LayerDrawable
