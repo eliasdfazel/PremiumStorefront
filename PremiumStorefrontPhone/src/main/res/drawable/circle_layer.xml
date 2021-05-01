@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 5/1/21 9:46 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/circleIconBackground">
+
+        <shape
+            android:shape="oval">
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="91dp"
+                android:centerY="0.5"
+                android:startColor="@color/dark"
+                android:centerColor="@color/transparent"
+                android:endColor="@color/transparent" />
+
+        </shape>
+
+    </item>
+
+</layer-list>

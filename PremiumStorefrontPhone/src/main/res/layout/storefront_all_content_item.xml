@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/1/21 8:48 AM
+  ~ Last modified 5/1/21 9:32 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -21,15 +21,15 @@
 
     apps:layout_constraintDimensionRatio="1:1">
 
-    <net.geekstools.imageview.customshapes.ShapesImage
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/productIconImageView"
         android:layout_width="91dp"
         android:layout_height="91dp"
         android:layout_marginTop="23dp"
+        android:padding="5dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
-
-        apps:shape="rounded"
+        android:background="@drawable/circle_layer"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
@@ -150,6 +150,7 @@
         apps:iconSize="29dp"
         apps:iconTint="@color/light"
         apps:iconGravity="textStart"
+        apps:rippleColor="@color/default_color_game_transparent"
         apps:backgroundTint="@color/dark"
 
         apps:layout_constraintTop_toTopOf="@id/productIconImageView"

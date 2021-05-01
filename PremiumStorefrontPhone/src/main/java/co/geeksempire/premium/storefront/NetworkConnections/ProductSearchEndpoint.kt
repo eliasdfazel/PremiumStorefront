@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 6:52 PM
+ * Last modified 5/1/21 8:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
     val getAllProductsShowcaseEndpoint = "https://geeksempire.co/wp-json/wc/v3/products?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
-            "consumer_secret=${generalEndpoint.consumerSecret()}&per_page=99"
+            "consumer_secret=${generalEndpoint.consumerSecret()}&per_page=99&exclude=2341"
 
     fun getProductByIdEndpoint(productId: String) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/${productId}" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
