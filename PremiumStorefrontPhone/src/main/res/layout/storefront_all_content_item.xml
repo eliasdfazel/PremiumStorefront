@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/1/21 5:50 AM
+  ~ Last modified 5/1/21 8:48 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,7 +14,8 @@
     android:id="@+id/rootViewItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="13dp"
+    android:layout_marginStart="17dp"
+    android:layout_marginEnd="0dp"
     android:layout_marginVertical="7dp"
     android:background="@android:color/transparent"
 
@@ -86,7 +87,7 @@
         android:id="@+id/productNameTextView"
         android:layout_width="0dp"
         android:layout_height="47dp"
-        android:paddingHorizontal="11dp"
+        android:paddingHorizontal="13dp"
         android:gravity="center_vertical"
         android:ellipsize="end"
         android:lines="1"
@@ -106,8 +107,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingVertical="7dp"
-        android:paddingHorizontal="3dp"
-        android:gravity="center_vertical"
+        android:paddingStart="3dp"
+        android:paddingEnd="13dp"
+        android:gravity="top|start"
+        android:maxLines="3"
         android:textColor="@color/dark"
         android:textSize="17sp"
         android:text="@string/applicationName"
@@ -116,11 +119,23 @@
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_marginVertical="3dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="11dp"
+        android:src="@drawable/diamond_icon"
+        android:background="@drawable/all_content_divider_light"
+
+        apps:layout_constraintTop_toBottomOf="@id/productDescriptionTextView"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/installView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
         android:textAllCaps="false"
         android:text="@string/installNowText"
         android:textSize="21sp"
