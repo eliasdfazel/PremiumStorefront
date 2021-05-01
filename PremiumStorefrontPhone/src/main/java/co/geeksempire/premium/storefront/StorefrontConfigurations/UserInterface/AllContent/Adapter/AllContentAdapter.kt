@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 7:31 PM
+ * Last modified 5/1/21 5:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,6 +54,7 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
     override fun onBindViewHolder(allContentViewHolder: AllContentViewHolder, position: Int) {
 
         allContentViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
+        allContentViewHolder.productDescriptionTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
 
         allContentViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
 
@@ -72,7 +73,6 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
                             val vibrantColor = extractVibrantColor(context, resource)
 
                             context.runOnUiThread {
-
 
                                 allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 allContentViewHolder.productCurrentRateView.setShadowLayer(allContentViewHolder.productCurrentRateView.shadowRadius, allContentViewHolder.productCurrentRateView.shadowDx, allContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)

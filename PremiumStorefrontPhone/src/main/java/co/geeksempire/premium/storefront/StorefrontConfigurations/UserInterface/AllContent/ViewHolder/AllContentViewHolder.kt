@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 7:06 PM
+ * Last modified 5/1/21 5:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,6 +23,7 @@ class AllContentViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootIt
 
     val productIconImageView: ShapesImage = rootItemView.productIconImageView
     val productNameTextView: TextView = rootItemView.productNameTextView
+    val productDescriptionTextView: TextView = rootItemView.productDescriptionTextView
     val productCurrentRateView: TextView = rootItemView.productCurrentRateView
 
     val productRateBlur: RealtimeBlurView = rootItemView.productRateBlur
