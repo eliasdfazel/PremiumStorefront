@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 7:04 PM
+ * Last modified 5/1/21 5:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,11 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter
 
+import android.app.ActivityOptions
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -22,6 +26,8 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import co.geeksempire.premium.storefront.Utils.Data.generateGooglePlayStoreDownloadLink
+import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import com.bumptech.glide.Glide
@@ -73,6 +79,8 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
                             val vibrantColor = extractVibrantColor(context, resource)
 
                             context.runOnUiThread {
+
+                                featuredContentViewHolder.installView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
                                 featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
@@ -139,6 +147,29 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
                     .setCustomAnimations(R.anim.slide_from_right, 0)
                     .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontContents[position].productName}")
                     .commit()
+
+        }
+
+        featuredContentViewHolder.rootView.setOnLongClickListener {
+
+            doVibrate(context, 159)
+
+            context.startActivity(Intent(Intent.ACTION_VIEW,
+                    Uri.parse(generateGooglePlayStoreDownloadLink(storefrontContents[position]
+                            .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
+            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out).toBundle())
+
+            false
+        }
+
+        featuredContentViewHolder.installView.setOnClickListener {
+
+            doVibrate(context, 159)
+
+            context.startActivity(Intent(Intent.ACTION_VIEW,
+                    Uri.parse(generateGooglePlayStoreDownloadLink(storefrontContents[position]
+                            .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
+            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out).toBundle())
 
         }
 
