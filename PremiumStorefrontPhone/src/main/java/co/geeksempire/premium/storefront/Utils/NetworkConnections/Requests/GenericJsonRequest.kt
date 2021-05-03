@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 5:27 PM
+ * Last modified 5/2/21 11:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,6 @@ package co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests
 
 import android.content.Context
 import android.util.Log
-import co.geeksempire.premium.storefront.BuildConfig
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonArrayRequest
@@ -45,6 +44,7 @@ class GenericJsonRequest(private val context: Context, private val jsonRequestRe
                     }
 
             }, {
+                Log.d("JsonObjectRequestError", "${it?.networkResponse}")
                 Log.d("JsonObjectRequestError", it?.networkResponse?.statusCode.toString())
 
                 jsonRequestResponses.jsonRequestResponseFailureHandler(it?.networkResponse?.statusCode.toString())
@@ -57,7 +57,7 @@ class GenericJsonRequest(private val context: Context, private val jsonRequestRe
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         )
 
-        jsonObjectRequest.setShouldCache(BuildConfig.DEBUG)
+        jsonObjectRequest.setShouldCache(true)
 
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(jsonObjectRequest)
