@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 7:52 AM
+ * Last modified 5/3/21 7:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,8 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +18,13 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontCategoriesData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.ViewHolder.CategoriesViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
-import com.caverock.androidsvg.SVG
-import java.net.URL
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestListener
 
 
 class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<CategoriesViewHolder>() {
@@ -46,45 +50,36 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(newContentViewHolder: CategoriesViewHolder, position: Int) {
 
-        val svg = SVG.getFromInputStream(URL(storefrontCategories[position].categoryIconLink).openStream())
+        Glide.with(context)
+                .asDrawable()
+                .load(storefrontCategories[position].categoryIconLink)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(CircleCrop())
+                .listener(object : RequestListener<Drawable> {
 
-        val newBM = Bitmap.createBitmap(Math.ceil(svg.documentWidth.toDouble()).toInt(), Math.ceil(svg.documentHeight.toDouble()).toInt(), Bitmap.Config.ARGB_8888)
-        val bmcanvas = Canvas(newBM)
+                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        return false
+                    }
 
-        bmcanvas.drawRGB(255, 255, 255)
-        svg.renderToCanvas(bmcanvas)
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-//        Glide.with(context)
-//                .asDrawable()
-//                .load(storefrontCategories[position].categoryIconLink)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .transform(CircleCrop())
-//                .listener(object : RequestListener<Drawable> {
-//
-//                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-//                        return false
-//                    }
-//
-//                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-//
-//                        resource?.let {
-//
-//                            val vibrantColor = extractVibrantColor(context, resource)
-//
-//                            context.runOnUiThread {
-//
-//                                newContentViewHolder.productIconImageView.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
-//                                newContentViewHolder.productIconImageView.setImageDrawable(resource)
-//
-//                            }
-//
-//                        }
-//
-//                        return false
-//                    }
-//
-//                })
-//                .submit()
+                        resource?.let {
+
+                            val vibrantColor = extractVibrantColor(context, resource)
+
+                            context.runOnUiThread {
+
+                                newContentViewHolder.productIconImageView.setImageDrawable(resource)
+
+                            }
+
+                        }
+
+                        return false
+                    }
+
+                })
+                .submit()
 
         newContentViewHolder.rootView.setOnClickListener {
 
