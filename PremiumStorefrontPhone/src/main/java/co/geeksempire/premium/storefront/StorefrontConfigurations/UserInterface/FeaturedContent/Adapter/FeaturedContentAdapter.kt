@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/1/21 5:00 AM
+ * Last modified 5/2/21 11:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,11 +10,8 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -27,7 +24,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.generateGooglePlayStoreDownloadLink
-import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import com.bumptech.glide.Glide
@@ -152,24 +149,16 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
         featuredContentViewHolder.rootView.setOnLongClickListener {
 
-            doVibrate(context, 159)
-
-            context.startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse(generateGooglePlayStoreDownloadLink(storefrontContents[position]
-                            .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
-            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out).toBundle())
+            openPlayStoreToInstall(context, generateGooglePlayStoreDownloadLink(storefrontContents[position]
+                    .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
 
             false
         }
 
         featuredContentViewHolder.installView.setOnClickListener {
 
-            doVibrate(context, 159)
-
-            context.startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse(generateGooglePlayStoreDownloadLink(storefrontContents[position]
-                            .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
-            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out).toBundle())
+            openPlayStoreToInstall(context, generateGooglePlayStoreDownloadLink(storefrontContents[position]
+                    .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
 
         }
 
