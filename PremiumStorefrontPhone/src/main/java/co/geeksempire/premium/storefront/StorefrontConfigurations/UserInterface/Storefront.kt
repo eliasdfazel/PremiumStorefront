@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 7:02 AM
+ * Last modified 5/3/21 7:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,7 +26,10 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInter
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveCategories
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveNewContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
@@ -209,12 +212,13 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun networkAvailable() {
 
-//        retrieveFeaturedContent()
+        retrieveFeaturedContent()
 
-//        retrieveAllContent()
+        retrieveAllContent()
 
         retrieveCategories()
 
+        retrieveNewContent()
 
     }
 
