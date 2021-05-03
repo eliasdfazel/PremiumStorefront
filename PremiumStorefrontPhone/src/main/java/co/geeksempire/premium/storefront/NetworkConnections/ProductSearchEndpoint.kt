@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 1:56 AM
+ * Last modified 5/3/21 6:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,19 +24,19 @@ class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
             "&" +
             "consumer_secret=${generalEndpoint.consumerSecret()}"
 
-    fun getProductsSearchEndpoint(productSearchQuery: String) : String = "${getAllProductsShowcaseEndpoint}" +
+    fun getProductsSearchEndpoint(productSearchQuery: String = "1") : String = "${getAllProductsShowcaseEndpoint}" +
             "&search=$productSearchQuery" +
             "&exclude=2341"
 
-    fun getNewProductsEndpoint(numberOfProducts: String) : String = "${getAllProductsShowcaseEndpoint}" +
+    fun getNewProductsEndpoint(numberOfProducts: Int = 3) : String = "${getAllProductsShowcaseEndpoint}" +
             "&per_page=${numberOfProducts}" +
             "&exclude=2341" +
             "&orderby=date" +
             "&order=desc"
 
-    fun getProductsCategoriesEndpoint() : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +
+    fun getProductsCategoriesEndpoint(numberOfProducts: Int = 99) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
-            "consumer_secret=${generalEndpoint.consumerSecret()}"
+            "consumer_secret=${generalEndpoint.consumerSecret()}" //+ "&per_page=${numberOfProducts}"
 
 }

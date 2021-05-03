@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 1:18 AM
+ * Last modified 5/3/21 6:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,6 +32,10 @@ class StorefrontLiveData : ViewModel() {
 
     val newContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
+    }
+
+    val categoriesItemData: MutableLiveData<ArrayList<StorefrontCategoriesData>> by lazy {
+        MutableLiveData<ArrayList<StorefrontCategoriesData>>()
     }
 
     fun processAllContent(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
@@ -199,6 +203,42 @@ class StorefrontLiveData : ViewModel() {
         storefrontAllContents.addAll(storefrontAllContentsSorted)
 
         newContentItemData.postValue(storefrontAllContents)
+
+    }
+
+    fun processCategoriesList(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        val storefrontCategoriesData = ArrayList<StorefrontCategoriesData>()
+
+        for (indexContent in 0 until allContentJsonArray.length()) {
+
+            val categoryJsonObject: JSONObject = allContentJsonArray[indexContent] as JSONObject
+
+            val categoryId = categoryJsonObject.getLong(StorefrontFeaturedContentKey.IdKey)
+            val categoryName = categoryJsonObject.getString(StorefrontFeaturedContentKey.NameKey)
+
+            val categoryImageData = categoryJsonObject[StorefrontFeaturedContentKey.ImageKey]
+
+            val categoryIconLink = (categoryImageData as JSONObject).getString(StorefrontFeaturedContentKey.ImageSourceKey)
+
+            storefrontCategoriesData.add(StorefrontCategoriesData(
+                    categoryId = categoryId,
+                    categoryName = categoryName,
+                    categoryIconLink = categoryIconLink
+            ))
+
+            Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Name: ${categoryName}")
+        }
+
+        val storefrontCategoriesDataSorted = storefrontCategoriesData.sortedByDescending {
+
+            it.categoryName
+        }
+
+        storefrontCategoriesData.clear()
+        storefrontCategoriesData.addAll(storefrontCategoriesDataSorted)
+
+        categoriesItemData.postValue(storefrontCategoriesData)
 
     }
 

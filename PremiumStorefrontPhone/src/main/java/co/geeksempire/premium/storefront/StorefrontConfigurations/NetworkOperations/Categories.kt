@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 4:23 AM
+ * Last modified 5/3/21 7:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,10 +14,9 @@ import co.geeksempire.premium.storefront.NetworkConnections.ProductSearchEndpoin
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
-import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import org.json.JSONArray
 
-fun Storefront.retrieveNewContent() {
+fun Storefront.retrieveCategories() {
 
     val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
 
@@ -26,10 +25,10 @@ fun Storefront.retrieveNewContent() {
         override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
             super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-            storefrontLiveData.processNewContent(rawDataJsonArray)
+            storefrontLiveData.processCategoriesList(rawDataJsonArray)
 
         }
 
-    }).getMethod(productSearchEndpoint.getNewProductsEndpoint((columnCount(applicationContext, 266) * 3)))
+    }).getMethod(productSearchEndpoint.getProductsCategoriesEndpoint())
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 1:56 AM
+ * Last modified 5/3/21 7:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,10 +26,9 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInter
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveAllContent
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveNewContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveCategories
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.NewContent.Adapter.NewContentAdapter
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
@@ -91,6 +90,10 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
 
+            val categoriesAdapter = CategoriesAdapter(this@Storefront)
+            storefrontLayoutBinding.categoriesRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+            storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
+
             storefrontLiveData.allContentItemData.observe(this@Storefront, {
 
                 if (it.isNotEmpty()) {
@@ -148,6 +151,25 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             })
 
+            storefrontLiveData.categoriesItemData.observe(this@Storefront, {
+
+                if (it.isNotEmpty()) {
+
+                    categoriesAdapter.storefrontCategories.clear()
+                    categoriesAdapter.storefrontCategories.addAll(it)
+
+                    categoriesAdapter.notifyDataSetChanged()
+
+                    storefrontLayoutBinding.newContentRecyclerView.scrollToPosition(0)
+
+                } else {
+
+
+
+                }
+
+            })
+
         }
 
     }
@@ -187,11 +209,12 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun networkAvailable() {
 
-        retrieveAllContent()
+//        retrieveFeaturedContent()
 
-        retrieveFeaturedContent()
+//        retrieveAllContent()
 
-        retrieveNewContent()
+        retrieveCategories()
+
 
     }
 

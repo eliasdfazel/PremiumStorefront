@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/2/21 11:41 PM
+ * Last modified 5/3/21 5:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley
 
 object EnqueueEndPointQuery {
     const val JSON_REQUEST_TIMEOUT = (1000 * 3)
-    const val JSON_REQUEST_RETRIES = (3)
+    const val JSON_REQUEST_RETRIES = (7)
 }
 
 class GenericJsonRequest(private val context: Context, private val jsonRequestResponses: JsonRequestResponses) {
