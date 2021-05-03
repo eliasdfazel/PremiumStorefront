@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/2/21 11:44 PM
+ * Last modified 5/3/21 12:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
 
 fun generateGooglePlayStoreDownloadLink(aPackageName: String) : String {
 
-    return "https://play.google.com/store/apps/details?id=${aPackageName}&rdid=${aPackageName}"
+    return "https://play.google.com/store/apps/details?id=${aPackageName}" + "&rdid=${aPackageName}"
 }
 
 fun openPlayStoreToInstall(context: Context, packageName: String) {

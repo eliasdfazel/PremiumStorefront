@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/2/21 11:47 PM
+ * Last modified 5/3/21 12:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.ViewHolder.AllContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
-import co.geeksempire.premium.storefront.Utils.Data.generateGooglePlayStoreDownloadLink
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
@@ -125,7 +124,7 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
         allContentViewHolder.installView.setOnClickListener {
 
-            openPlayStoreToInstall(context, generateGooglePlayStoreDownloadLink(storefrontContents[position]
+            openPlayStoreToInstall(context, (storefrontContents[position]
                     .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
 
         }
