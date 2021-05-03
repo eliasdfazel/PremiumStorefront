@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/1/21 9:32 AM
+  ~ Last modified 5/2/21 11:17 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -23,13 +23,13 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/productIconImageView"
-        android:layout_width="91dp"
-        android:layout_height="91dp"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
         android:layout_marginTop="23dp"
-        android:padding="5dp"
+        android:padding="7.9dp"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
-        android:background="@drawable/circle_layer"
+        android:background="@drawable/application_icon_glowing_frame"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
@@ -39,7 +39,7 @@
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginVertical="7dp"
-        android:layout_marginHorizontal="71dp"
+        android:layout_marginHorizontal="62dp"
 
         apps:realtimeBlurRadius="11dp"
         apps:realtimeBlurGradientType="none"
@@ -138,7 +138,7 @@
         android:layout_marginEnd="13dp"
         android:textAllCaps="false"
         android:text="@string/installNowText"
-        android:textSize="21sp"
+        android:textSize="29sp"
         android:fontFamily="@font/upcil"
         android:insetLeft="0dp"
         android:insetTop="0dp"
@@ -147,7 +147,7 @@
 
         apps:cornerRadius="51dp"
         apps:icon="@drawable/install_now_icon"
-        apps:iconSize="29dp"
+        apps:iconSize="37dp"
         apps:iconTint="@color/light"
         apps:iconGravity="textStart"
         apps:rippleColor="@color/default_color_game_transparent"

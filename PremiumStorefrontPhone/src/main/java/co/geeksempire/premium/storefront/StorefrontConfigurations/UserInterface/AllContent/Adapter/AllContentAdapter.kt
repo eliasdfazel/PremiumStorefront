@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/1/21 9:04 AM
+ * Last modified 5/2/21 10:15 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -76,8 +77,16 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                             context.runOnUiThread {
 
+
+
                                 allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 allContentViewHolder.productCurrentRateView.setShadowLayer(allContentViewHolder.productCurrentRateView.shadowRadius, allContentViewHolder.productCurrentRateView.shadowDx, allContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+
+                                val applicationGlowingFrame = context.getDrawable(R.drawable.application_icon_glowing_frame) as LayerDrawable
+                                applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
+                                applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconFrame).setTint(vibrantColor)
+
+                                allContentViewHolder.productIconImageView.background = applicationGlowingFrame
 
                                 allContentViewHolder.productIconImageView.setImageDrawable(resource)
 
