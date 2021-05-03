@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 7:04 PM
+ * Last modified 5/3/21 1:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,8 +28,10 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveNewContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.NewContent.Adapter.NewContentAdapter
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
@@ -86,7 +87,11 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             storefrontLayoutBinding.allContentRecyclerView.layoutManager = GridLayoutManager(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
 
-            storefrontLiveData.allContentItemData.observe(this@Storefront, Observer {
+            val newContentAdapter = NewContentAdapter(this@Storefront)
+            storefrontLayoutBinding.newContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
+            storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
+
+            storefrontLiveData.allContentItemData.observe(this@Storefront, {
 
                 if (it.isNotEmpty()) {
 
@@ -105,7 +110,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             })
 
-            storefrontLiveData.featuredContentItemData.observe(this@Storefront, Observer {
+            storefrontLiveData.featuredContentItemData.observe(this@Storefront, {
 
                 if (it.isNotEmpty()) {
 
@@ -115,6 +120,25 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     featuredContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.featuredContentRecyclerView.scrollToPosition(0)
+
+                } else {
+
+
+
+                }
+
+            })
+
+            storefrontLiveData.newContentItemData.observe(this@Storefront, {
+
+                if (it.isNotEmpty()) {
+
+                    newContentAdapter.storefrontContents.clear()
+                    newContentAdapter.storefrontContents.addAll(it)
+
+                    newContentAdapter.notifyDataSetChanged()
+
+                    storefrontLayoutBinding.newContentRecyclerView.scrollToPosition(0)
 
                 } else {
 
@@ -166,6 +190,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
         retrieveAllContent()
 
         retrieveFeaturedContent()
+
+        retrieveNewContent()
 
     }
 
