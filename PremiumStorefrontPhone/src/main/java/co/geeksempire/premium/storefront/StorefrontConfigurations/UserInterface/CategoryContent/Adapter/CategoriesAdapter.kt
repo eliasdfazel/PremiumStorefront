@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 8:02 AM
+ * Last modified 5/4/21 8:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,17 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
     override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int) {
 
-        if (storefrontCategories[position].selectedCategory) {
+        if (position == 0) {
+
+            val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
+
+            categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+
+            storefrontCategories[position].selectedCategory = true
+
+            lastPosition = position
+
+        } else if (storefrontCategories[position].selectedCategory) {
 
             val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
@@ -113,20 +123,40 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
         categoriesViewHolder.rootView.setOnClickListener {
 
-            if (context.storefrontAllUnfilteredContents.isNotEmpty() && position != 0) {
+            if (context.storefrontAllUnfilteredContents.isNotEmpty()) {
 
-                val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
+                if (position == 0) {
 
-                categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+                    val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
-                notifyItemChanged(lastPosition, null)
+                    categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
 
-                filterAllContent.filterAllContentByCategory(context.storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
+                    notifyItemChanged(lastPosition, null)
 
-                storefrontCategories[lastPosition].selectedCategory = false
-                storefrontCategories[position].selectedCategory = true
+                    context.storefrontLiveData.allFilteredContentItemData.postValue(context.storefrontAllUntouchedContents)
 
-                lastPosition = position
+                    storefrontCategories[lastPosition].selectedCategory = false
+                    storefrontCategories[position].selectedCategory = true
+
+                    lastPosition = position
+
+                } else {
+
+                    val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
+
+                    categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+
+                    notifyItemChanged(lastPosition, null)
+
+                    filterAllContent.filterAllContentByCategory(context.storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
+
+                    storefrontCategories[lastPosition].selectedCategory = false
+                    storefrontCategories[position].selectedCategory = true
+
+                    lastPosition = position
+
+
+                }
 
             }
 
