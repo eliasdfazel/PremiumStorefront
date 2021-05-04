@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 2/23/21 6:34 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="71dp" >
+
+    <HorizontalScrollView
+        android:id="@+id/menuScrollView"
+        android:layout_width="151dp"
+        android:layout_height="51dp"
+        android:scrollbarSize="0dp"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="3dp"
+        android:requiresFadingEdge="vertical"
+        android:background="@drawable/body_of_balloon"
+
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/allBalloonOptionsMenuItemsView"
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+
+    </HorizontalScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="151dp"
+        android:layout_height="20dp"
+        android:background="@drawable/pick_of_balloon"
+
+
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintBottom_toTopOf="@id/menuScrollView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

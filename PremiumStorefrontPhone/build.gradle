@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 11:20 PM
+ * Last modified 5/4/21 12:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -92,6 +92,7 @@ dependencies {
     implementation project(path: ':BlurryEffectLibrary')
     implementation project(path: ':CustomShapes')
     implementation project(path: ':LoadingSpin')
+    implementation project(path: ':BalloonOptionsMenuLibrary')
 
 
     implementation 'com.google.android.play:core-ktx:1.8.1'
