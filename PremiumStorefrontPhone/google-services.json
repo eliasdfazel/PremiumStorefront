@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "666238092273",
+    "project_id": "premium-storefront",
+    "storage_bucket": "premium-storefront.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666238092273:android:086dc583a5e97c35b57a50",
+        "android_client_info": {
+          "package_name": "co.geeksempire.premium.storefront.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666238092273-a4h9nefl24k6p1frnv8a86ntbaa9mvlk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.geeksempire.premium.storefront.android",
+            "certificate_hash": "1d15eb4e4e7fc488f568267af689e34209fc705f"
+          }
+        },
+        {
+          "client_id": "666238092273-o0a0u6cbumveira5sbn9679f4mhj7oeq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.geeksempire.premium.storefront.android",
+            "certificate_hash": "210aca358d46b782f8aece980aac2ca534c9035a"
+          }
+        },
+        {
+          "client_id": "666238092273-cqggauj6krqbfogu9fkf0pcem5sru9g9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-_ksDKktJV-XJfPPML7r_HkLYycTdkIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666238092273-cqggauj6krqbfogu9fkf0pcem5sru9g9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

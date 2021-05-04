@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 7:58 AM
+ * Last modified 5/4/21 12:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,21 +11,22 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontCategoriesData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.ViewHolder.CategoriesViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
-import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
-
+import com.bumptech.glide.request.target.Target
 
 class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<CategoriesViewHolder>() {
 
@@ -38,7 +39,7 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : CategoriesViewHolder {
 
-        return CategoriesViewHolder(LayoutInflater.from(context).inflate(R.layout.storefront_new_content_item, viewGroup, false))
+        return CategoriesViewHolder(LayoutInflater.from(context).inflate(R.layout.storefront_category_item, viewGroup, false))
     }
 
     override fun onBindViewHolder(newContentViewHolder: CategoriesViewHolder, position: Int, payloads: MutableList<Any>) {
@@ -65,9 +66,14 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                         resource?.let {
 
-                            val vibrantColor = extractVibrantColor(context, resource)
-
                             context.runOnUiThread {
+
+                                val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
+                                categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
+
+                                newContentViewHolder.productIconImageView.background = categoryBackgroundItem
+
+                                resource.setTint(context.getColor(R.color.light))
 
                                 newContentViewHolder.productIconImageView.setImageDrawable(resource)
 
@@ -85,6 +91,13 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
 
 
+        }
+
+        newContentViewHolder.rootView.setOnLongClickListener {
+
+            Toast.makeText(context, storefrontCategories[position].categoryName, Toast.LENGTH_LONG).show()
+
+            false
         }
 
     }

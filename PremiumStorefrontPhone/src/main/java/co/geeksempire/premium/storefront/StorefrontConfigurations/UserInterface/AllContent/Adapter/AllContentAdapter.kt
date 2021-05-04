@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 12:58 AM
+ * Last modified 5/4/21 12:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
@@ -78,7 +79,8 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                             context.runOnUiThread {
 
-
+                                allContentViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
+                                allContentViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
 
                                 allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 allContentViewHolder.productCurrentRateView.setShadowLayer(allContentViewHolder.productCurrentRateView.shadowRadius, allContentViewHolder.productCurrentRateView.shadowDx, allContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
