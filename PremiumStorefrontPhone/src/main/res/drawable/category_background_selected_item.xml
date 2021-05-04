@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/4/21 1:43 AM
+  ~ Last modified 5/4/21 3:45 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -13,8 +13,8 @@
 
     <item
         android:id="@+id/circleIconBackground"
-        android:height="59dp"
-        android:width="59dp"
+        android:height="49dp"
+        android:width="49dp"
         android:gravity="center">
 
         <shape
@@ -22,7 +22,7 @@
 
             <gradient
                 android:type="radial"
-                android:gradientRadius="31dp"
+                android:gradientRadius="25dp"
                 android:startColor="@color/dark"
                 android:centerColor="@color/dark"
                 android:endColor="@color/premiumLight" />
@@ -33,13 +33,13 @@
 
     <item
         android:id="@+id/circleIconFrame"
-        android:height="57dp"
-        android:width="57dp"
+        android:height="47dp"
+        android:width="47dp"
         android:gravity="center">
 
         <shape
             android:shape="ring"
-            android:innerRadius="28dp"
+            android:innerRadius="23dp"
             android:thickness="0.7dp"
             android:useLevel="false">
             <solid android:color="@color/dark" />

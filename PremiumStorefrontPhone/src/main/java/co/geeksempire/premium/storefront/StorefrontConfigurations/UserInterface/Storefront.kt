@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 7:03 AM
+ * Last modified 5/4/21 4:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,6 +24,7 @@ import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInt
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveAllContent
@@ -31,6 +32,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperati
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveNewContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.NewContent.Adapter.NewContentAdapter
@@ -66,6 +68,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     val productDetailsFragment = ProductDetailsFragment()
 
+    val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+
     lateinit var storefrontLayoutBinding: StorefrontLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +85,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             setupUserInterface()
 
+            val filterAllContent = FilterAllContent(storefrontLiveData)
+
             val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
             storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
@@ -93,11 +99,36 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
 
-            val categoriesAdapter = CategoriesAdapter(this@Storefront)
+            val categoriesAdapter = CategoriesAdapter(this@Storefront, filterAllContent)
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
             storefrontLiveData.allContentItemData.observe(this@Storefront, {
+
+                if (it.isNotEmpty()) {
+
+                    if (storefrontAllUnfilteredContents.isEmpty()) {
+
+                        storefrontAllUnfilteredContents.clear()
+                        storefrontAllUnfilteredContents.addAll(it)
+                    }
+
+                    allContentAdapter.storefrontContents.clear()
+                    allContentAdapter.storefrontContents.addAll(it)
+
+                    allContentAdapter.notifyDataSetChanged()
+
+                    storefrontLayoutBinding.allContentRecyclerView.scrollToPosition(0)
+
+                } else {
+
+
+
+                }
+
+            })
+
+            storefrontLiveData.allFilteredContentItemData.observe(this@Storefront, {
 
                 if (it.isNotEmpty()) {
 
