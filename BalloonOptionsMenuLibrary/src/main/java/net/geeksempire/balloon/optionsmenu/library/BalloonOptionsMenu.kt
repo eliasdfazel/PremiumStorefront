@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 2/23/21 6:58 AM
+ * Last modified 5/4/21 12:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package net.geeksempire.balloon.optionsmenu.library
 
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -79,7 +80,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
             val itemLayout = LayoutInflater.from(context).inflate(R.layout.balloon_option_item, null)
             val balloonOptionItemTextView = itemLayout.findViewById<TextView>(R.id.balloonOptionItemTextView)
 
-            balloonOptionItemTextView.text = it
+            balloonOptionItemTextView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
             balloonOptionItemTextView.tag = it
 
             itemLayout.setOnClickListener { view ->

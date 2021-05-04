@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 12:22 AM
+ * Last modified 5/4/21 1:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,9 +12,10 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontCategoriesData
@@ -27,6 +28,8 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction
+import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 
 class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<CategoriesViewHolder>() {
 
@@ -42,14 +45,17 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
         return CategoriesViewHolder(LayoutInflater.from(context).inflate(R.layout.storefront_category_item, viewGroup, false))
     }
 
-    override fun onBindViewHolder(newContentViewHolder: CategoriesViewHolder, position: Int, payloads: MutableList<Any>) {
-        super.onBindViewHolder(newContentViewHolder, position, payloads)
+    override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(categoriesViewHolder, position, payloads)
 
+        val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
+        categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
 
+        categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
 
     }
 
-    override fun onBindViewHolder(newContentViewHolder: CategoriesViewHolder, position: Int) {
+    override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int) {
 
         Glide.with(context)
                 .asDrawable()
@@ -71,11 +77,11 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
                                 val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
                                 categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
 
-                                newContentViewHolder.productIconImageView.background = categoryBackgroundItem
+                                categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
 
                                 resource.setTint(context.getColor(R.color.light))
 
-                                newContentViewHolder.productIconImageView.setImageDrawable(resource)
+                                categoriesViewHolder.productIconImageView.setImageDrawable(resource)
 
                             }
 
@@ -87,15 +93,41 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
                 })
                 .submit()
 
-        newContentViewHolder.rootView.setOnClickListener {
+        categoriesViewHolder.rootView.setOnClickListener {
 
+            val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
+            categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+
+            val currentPosition = position
+
+            storefrontCategories.forEachIndexed { index, storefrontCategoriesData ->
+
+                if (index != currentPosition) {
+
+                    notifyItemChanged(index, null)
+
+                }
+
+            }
 
         }
 
-        newContentViewHolder.rootView.setOnLongClickListener {
+        categoriesViewHolder.rootView.setOnLongClickListener { view ->
 
-            Toast.makeText(context, storefrontCategories[position].categoryName, Toast.LENGTH_LONG).show()
+            BalloonOptionsMenu(context = context,
+                rootView = context.storefrontLayoutBinding.rootView,
+                balloonItemsAction = object : BalloonItemsAction {
+
+                    override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View) {
+                        Log.d(this@CategoriesAdapter.javaClass.simpleName, itemView.tag.toString())
+
+                        balloonOptionsMenu.removeBalloonOption()
+
+                    }
+
+                }).initializeBalloonPosition(anchorView = view)
+                .setupOptionsItems(arrayListOf("<b>${storefrontCategories[position].categoryName}</b>", context.getString(R.string.categoryShowAllApplications)))
 
             false
         }

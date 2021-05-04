@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/1/21 5:35 AM
+  ~ Last modified 5/4/21 12:56 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -17,6 +17,8 @@
     <string name="sortActionDescription">Sort List Of Applications</string>
 
     <string name="installNowText">Install Now</string>
+
+    <string name="categoryShowAllApplications">Show Applications</string>
 
     <string name="installActionDescription">Install This Application From Google Play Store</string>
     <string name="shareActionDescription">Share This Application With Your Friends</string>
