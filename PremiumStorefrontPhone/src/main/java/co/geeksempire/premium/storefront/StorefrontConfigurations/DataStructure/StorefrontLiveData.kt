@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 12:14 AM
+ * Last modified 5/4/21 2:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,6 +53,8 @@ class StorefrontLiveData : ViewModel() {
             val productIcon = (featuredContentImages[0] as JSONObject).getString(StorefrontFeaturedContentKey.ImageSourceKey)//.split("?")[0]
             /* End - Images */
 
+            val productCategories = featuredContentJsonObject.getJSONArray(StorefrontFeaturedContentKey.CategoriesKey)
+            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(StorefrontFeaturedContentKey.NameKey)
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.AttributesKey] as JSONArray
@@ -72,6 +74,7 @@ class StorefrontLiveData : ViewModel() {
                 productName = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey),
                 productDescription = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
                 productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                productCategory = productCategory,
                 productPrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.RegularPriceKey),
                 productSalePrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SalePriceKey),
                 productIconLink = productIcon,
@@ -110,6 +113,9 @@ class StorefrontLiveData : ViewModel() {
             val productCover = (featuredContentImages[2] as JSONObject).getString(StorefrontFeaturedContentKey.ImageSourceKey)//.split("?")[0]
             /* End - Images */
 
+            val productCategories = featuredContentJsonObject.getJSONArray(StorefrontFeaturedContentKey.CategoriesKey)
+            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(StorefrontFeaturedContentKey.NameKey)
+
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.AttributesKey] as JSONArray
 
@@ -128,6 +134,7 @@ class StorefrontLiveData : ViewModel() {
                     productName = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey),
                     productDescription = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
                     productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                    productCategory = productCategory,
                     productPrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.RegularPriceKey),
                     productSalePrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SalePriceKey),
                     productIconLink = productIcon,
@@ -165,6 +172,8 @@ class StorefrontLiveData : ViewModel() {
             val productIcon = (featuredContentImages[0] as JSONObject).getString(StorefrontFeaturedContentKey.ImageSourceKey)//.split("?")[0]
             /* End - Images */
 
+            val productCategories = featuredContentJsonObject.getJSONArray(StorefrontFeaturedContentKey.CategoriesKey)
+            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(StorefrontFeaturedContentKey.NameKey)
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[StorefrontFeaturedContentKey.AttributesKey] as JSONArray
@@ -184,6 +193,7 @@ class StorefrontLiveData : ViewModel() {
                     productName = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey),
                     productDescription = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
                     productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                    productCategory = productCategory,
                     productPrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.RegularPriceKey),
                     productSalePrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SalePriceKey),
                     productIconLink = productIcon,

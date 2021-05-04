@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 1:09 AM
+ * Last modified 5/4/21 2:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,9 +12,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
@@ -28,8 +26,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction
-import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 
 class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<CategoriesViewHolder>() {
 
@@ -115,19 +111,19 @@ class CategoriesAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
         categoriesViewHolder.rootView.setOnLongClickListener { view ->
 
-            BalloonOptionsMenu(context = context,
-                rootView = context.storefrontLayoutBinding.rootView,
-                balloonItemsAction = object : BalloonItemsAction {
-
-                    override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View) {
-                        Log.d(this@CategoriesAdapter.javaClass.simpleName, itemView.tag.toString())
-
-                        balloonOptionsMenu.removeBalloonOption()
-
-                    }
-
-                }).initializeBalloonPosition(anchorView = view)
-                .setupOptionsItems(arrayListOf("<b>${storefrontCategories[position].categoryName}</b>", context.getString(R.string.categoryShowAllApplications)))
+//            BalloonOptionsMenu(context = context,
+//                rootView = context.storefrontLayoutBinding.rootView,
+//                balloonItemsAction = object : BalloonItemsAction {
+//
+//                    override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View) {
+//                        Log.d(this@CategoriesAdapter.javaClass.simpleName, itemView.tag.toString())
+//
+//                        balloonOptionsMenu.removeBalloonOption()
+//
+//                    }
+//
+//                }).initializeBalloonPosition(anchorView = view)
+//                .setupOptionsItems(arrayListOf("<b>${storefrontCategories[position].categoryName}</b>", context.getString(R.string.categoryShowAllApplications)))
 
             false
         }

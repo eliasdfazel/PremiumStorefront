@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 5:34 AM
+ * Last modified 5/4/21 2:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,6 +55,7 @@ object StorefrontFeaturedContentKey {
  *
  **/
 data class StorefrontContentsData (var productName: String, var productDescription: String, var productSummary: String,
+                                   var productCategory: String,
                                    var productIconLink: String, var productCoverLink: String?,
                                    var productPrice: String,
                                    var productSalePrice: String,
