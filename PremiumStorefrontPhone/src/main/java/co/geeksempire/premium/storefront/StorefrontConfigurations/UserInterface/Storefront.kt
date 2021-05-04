@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 4:14 AM
+ * Last modified 5/4/21 7:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -68,6 +68,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     val productDetailsFragment = ProductDetailsFragment()
 
+    val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
     lateinit var storefrontLayoutBinding: StorefrontLayoutBinding
@@ -107,10 +108,11 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                 if (it.isNotEmpty()) {
 
-                    if (storefrontAllUnfilteredContents.isEmpty()) {
-                        storefrontAllUnfilteredContents.clear()
-                        storefrontAllUnfilteredContents.addAll(it)
-                    }
+                    storefrontAllUntouchedContents.clear()
+                    storefrontAllUntouchedContents.addAll(it)
+
+                    storefrontAllUnfilteredContents.clear()
+                    storefrontAllUnfilteredContents.addAll(it)
 
                     allContentAdapter.storefrontContents.clear()
                     allContentAdapter.storefrontContents.addAll(it)
@@ -137,6 +139,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     allContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.allContentRecyclerView.scrollToPosition(0)
+
+                    storefrontAllUnfilteredContents.clear()
+                    storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
 
                 } else {
 

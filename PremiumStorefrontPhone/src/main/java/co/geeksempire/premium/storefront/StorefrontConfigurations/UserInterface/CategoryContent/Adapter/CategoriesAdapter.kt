@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 4:25 AM
+ * Last modified 5/4/21 8:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,14 +51,33 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
     override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(categoriesViewHolder, position, payloads)
 
-        val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
-        categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
+        if (!storefrontCategories[position].selectedCategory) {
 
-        categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
+            val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
+            categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
+
+            categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
+
+        }
 
     }
 
     override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int) {
+
+        if (storefrontCategories[position].selectedCategory) {
+
+            val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
+
+            categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+
+        } else {
+
+            val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
+            categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
+
+            categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
+
+        }
 
         Glide.with(context)
                 .asDrawable()
@@ -68,7 +87,8 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                 .listener(object : RequestListener<Drawable> {
 
                     override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                        return false
+
+                        return true
                     }
 
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
@@ -76,11 +96,6 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                         resource?.let {
 
                             context.runOnUiThread {
-
-                                val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
-                                categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
-
-                                categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
 
                                 resource.setTint(context.getColor(R.color.light))
 
@@ -90,7 +105,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                         }
 
-                        return false
+                        return true
                     }
 
                 })
@@ -107,6 +122,9 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                 notifyItemChanged(lastPosition, null)
 
                 filterAllContent.filterAllContentByCategory(context.storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
+
+                storefrontCategories[lastPosition].selectedCategory = false
+                storefrontCategories[position].selectedCategory = true
 
                 lastPosition = position
 
@@ -130,7 +148,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                     }).initializeBalloonPosition(anchorView = view)
                     .setupOptionsItems(arrayListOf("<b>${storefrontCategories[position].categoryName.replace(" Applications", "")}</b>", context.getString(R.string.categoryShowAllApplications)))
 
-            false
+            true
         }
 
     }
