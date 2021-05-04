@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 4:10 AM
+ * Last modified 5/4/21 4:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -108,7 +108,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                 if (it.isNotEmpty()) {
 
                     if (storefrontAllUnfilteredContents.isEmpty()) {
-
                         storefrontAllUnfilteredContents.clear()
                         storefrontAllUnfilteredContents.addAll(it)
                     }
