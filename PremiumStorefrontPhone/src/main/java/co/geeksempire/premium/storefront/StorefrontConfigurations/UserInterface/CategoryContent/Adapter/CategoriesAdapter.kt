@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 4:11 AM
+ * Last modified 5/4/21 4:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -98,7 +98,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
         categoriesViewHolder.rootView.setOnClickListener {
 
-       //     if (context.storefrontAllUnfilteredContents.isNotEmpty() && position != 0) {
+            if (context.storefrontAllUnfilteredContents.isNotEmpty() && position != 0) {
 
                 val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
@@ -110,7 +110,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                 lastPosition = position
 
-       //     }
+            }
 
         }
 

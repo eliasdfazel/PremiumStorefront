@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/4/21 12:20 AM
+  ~ Last modified 5/4/21 4:25 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -57,6 +57,12 @@
                     android:id="@+id/featuredContentRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:fadingEdge="horizontal"
+                    android:fadingEdgeLength="7dp"
+                    android:requiresFadingEdge="horizontal"
+                    android:scrollbars="none"
+                    android:smoothScrollbar="true"
 
                     apps:layout_constraintTop_toTopOf="parent"
                     apps:layout_constraintStart_toStartOf="parent"/>
@@ -159,7 +165,8 @@
                 android:smoothScrollbar="true"
 
                 apps:layout_constraintTop_toTopOf="parent"
-                apps:layout_constraintStart_toStartOf="parent"/>
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
