@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/2/21 11:05 PM
+  ~ Last modified 5/4/21 10:10 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -13,8 +13,8 @@
 
     <item
         android:id="@+id/circleIconBackground"
-        android:height="93dp"
-        android:width="93dp">
+        android:height="87dp"
+        android:width="87dp">
 
         <shape
             android:shape="oval">
@@ -32,8 +32,8 @@
 
     <item
         android:id="@+id/circleIconFrame"
-        android:height="93dp"
-        android:width="93dp">
+        android:height="87dp"
+        android:width="87dp">
 
         <shape
             android:shape="ring"

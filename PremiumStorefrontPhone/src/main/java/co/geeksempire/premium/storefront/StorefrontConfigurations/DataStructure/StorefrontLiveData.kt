@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 3:04 AM
+ * Last modified 5/4/21 10:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -77,7 +77,7 @@ class StorefrontLiveData : ViewModel() {
             storefrontAllContents.add(StorefrontContentsData(
                 productName = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey),
                 productDescription = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
-                productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SummaryKey),
                 productCategory = productCategory,
                 productPrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.RegularPriceKey),
                 productSalePrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SalePriceKey),
@@ -137,7 +137,7 @@ class StorefrontLiveData : ViewModel() {
             storefrontFeaturedContents.add(StorefrontContentsData(
                     productName = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey),
                     productDescription = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
-                    productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                    productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SummaryKey),
                     productCategory = productCategory,
                     productPrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.RegularPriceKey),
                     productSalePrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SalePriceKey),
@@ -196,7 +196,7 @@ class StorefrontLiveData : ViewModel() {
             storefrontAllContents.add(StorefrontContentsData(
                     productName = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey),
                     productDescription = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
-                    productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.DescriptionKey),
+                    productSummary = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SummaryKey),
                     productCategory = productCategory,
                     productPrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.RegularPriceKey),
                     productSalePrice = featuredContentJsonObject.getString(StorefrontFeaturedContentKey.SalePriceKey),

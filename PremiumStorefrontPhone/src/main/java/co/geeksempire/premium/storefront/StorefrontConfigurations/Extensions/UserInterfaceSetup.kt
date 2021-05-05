@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 9:04 AM
+ * Last modified 5/4/21 10:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -38,12 +38,10 @@ fun Storefront.setupUserInterface() {
     shapeDarkShadow.paint.apply {
         color = getColor(R.color.dark)
 
-        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_high))
+        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_higher))
     }
 
     val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
-
-//    storefrontLayoutBinding.contentWrapper.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeDarkShadow.paint)
 
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeDarkShadow)
 
