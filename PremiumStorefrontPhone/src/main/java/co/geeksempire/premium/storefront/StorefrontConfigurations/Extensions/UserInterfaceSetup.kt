@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/5/21 1:00 AM
+ * Last modified 5/5/21 1:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,8 +57,8 @@ fun Storefront.setupUserInterface() {
     backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
     backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
 
-    val shapShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
-    shapShadow.paint.apply {
+    val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
+    shapeShadow.paint.apply {
         color = getColor(R.color.dark)
 
         setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_higher))
@@ -66,9 +66,9 @@ fun Storefront.setupUserInterface() {
 
     val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
 
-    shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapShadow)
+    shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
-    storefrontLayoutBinding.contentWrapper.setLayerType(ImageView.LAYER_TYPE_NONE, shapShadow.paint)
+    storefrontLayoutBinding.contentWrapper.setLayerType(ImageView.LAYER_TYPE_NONE, shapeShadow.paint)
     storefrontLayoutBinding.contentWrapper.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
 
