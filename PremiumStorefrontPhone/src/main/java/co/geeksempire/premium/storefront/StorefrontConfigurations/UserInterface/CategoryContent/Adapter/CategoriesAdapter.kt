@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 8:21 AM
+ * Last modified 5/4/21 11:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.util.Log
@@ -57,6 +58,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
             categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
 
             categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
+            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
         }
 
@@ -69,6 +71,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
             val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
             categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
 
             storefrontCategories[position].selectedCategory = true
 
@@ -79,6 +82,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
             val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
             categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
 
         } else {
 
@@ -86,6 +90,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
             categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
 
             categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
+            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
         }
 
@@ -130,6 +135,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                     val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
                     categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+                    categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
 
                     notifyItemChanged(lastPosition, null)
 
@@ -145,6 +151,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                     val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
 
                     categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+                    categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
 
                     notifyItemChanged(lastPosition, null)
 
@@ -157,6 +164,10 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
 
                 }
+
+            } else {
+
+
 
             }
 

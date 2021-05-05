@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/4/21 8:52 AM
+  ~ Last modified 5/5/21 1:05 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,8 +14,8 @@
     <item
         android:id="@+id/temporaryBackground"
         android:end="21dp"
-        android:top="11dp"
-        android:bottom="11dp">
+        android:top="13dp"
+        android:bottom="13dp">
 
         <shape
             android:shape="rectangle">
@@ -38,7 +38,61 @@
     </item>
 
     <item
+        android:end="51dp"
+        android:bottom="51dp">
+
+        <rotate
+            android:fromDegrees="1"
+            android:pivotX="50%"
+            android:pivotY="0%">
+
+            <shape
+                android:shape="rectangle">
+
+                <gradient
+                    android:type="linear"
+                    android:angle="180"
+                    android:startColor="@color/transparent"
+                    android:centerColor="@color/premiumLight"
+                    android:endColor="@color/premiumLight" />
+
+            </shape>
+
+        </rotate>
+
+
+    </item>
+
+    <item
+        android:end="51dp"
+        android:top="51dp">
+
+        <rotate
+            android:fromDegrees="-1"
+            android:pivotX="50%"
+            android:pivotY="100%">
+
+            <shape
+                android:shape="rectangle">
+
+                <gradient
+                    android:type="linear"
+                    android:angle="180"
+                    android:startColor="@color/transparent"
+                    android:centerColor="@color/premiumLight"
+                    android:endColor="@color/premiumLight" />
+
+            </shape>
+
+        </rotate>
+
+
+    </item>
+
+    <item
         android:id="@+id/foregroundBackground"
+        android:top="3dp"
+        android:bottom="3dp"
         android:end="17dp">
 
         <shape
@@ -60,6 +114,5 @@
         </shape>
 
     </item>
-
 
 </layer-list>

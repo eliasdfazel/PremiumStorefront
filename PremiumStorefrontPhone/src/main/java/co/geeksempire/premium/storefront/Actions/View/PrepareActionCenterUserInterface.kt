@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 11:11 PM
+ * Last modified 5/5/21 12:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -77,7 +77,6 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
         val foregroundLayer = shadowLayer.findDrawableByLayerId(R.id.foregroundLayer)
         foregroundLayer.setTint(context.getColor(R.color.premiumLight))
-        foregroundLayer.alpha = 251
 
         actionCenterView.setImageDrawable(shadowLayer)
 
