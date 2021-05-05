@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 11:58 PM
+ * Last modified 5/5/21, 3:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,15 +52,11 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
     override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(categoriesViewHolder, position, payloads)
 
-        if (!storefrontCategories[position].selectedCategory) {
+        val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
+        categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
 
-            val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
-            categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
-
-            categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
-            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
-
-        }
+        categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
+        categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
     }
 
@@ -72,10 +68,6 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
             categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
             categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
-
-            storefrontCategories[position].selectedCategory = true
-
-            lastPosition = position
 
         } else if (storefrontCategories[position].selectedCategory) {
 
@@ -112,8 +104,6 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                             context.runOnUiThread {
 
-                                resource.setTint(context.getColor(R.color.light))
-
                                 categoriesViewHolder.productIconImageView.setImageDrawable(resource)
 
                             }
@@ -130,40 +120,27 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
             if (context.storefrontAllUnfilteredContents.isNotEmpty()) {
 
+                val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
+
+                categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
+                categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+
+                notifyItemChanged(lastPosition, null)
+
                 if (position == 0) {
-
-                    val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
-
-                    categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
-                    categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
-
-                    notifyItemChanged(lastPosition, null)
 
                     context.storefrontLiveData.allFilteredContentItemData.postValue(context.storefrontAllUntouchedContents)
 
-                    storefrontCategories[lastPosition].selectedCategory = false
-                    storefrontCategories[position].selectedCategory = true
-
-                    lastPosition = position
-
                 } else {
-
-                    val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
-
-                    categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
-                    categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
-
-                    notifyItemChanged(lastPosition, null)
 
                     filterAllContent.filterAllContentByCategory(context.storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
 
-                    storefrontCategories[lastPosition].selectedCategory = false
-                    storefrontCategories[position].selectedCategory = true
-
-                    lastPosition = position
-
-
                 }
+
+                storefrontCategories[lastPosition].selectedCategory = false
+                storefrontCategories[position].selectedCategory = true
+
+                lastPosition = position
 
             } else {
 
