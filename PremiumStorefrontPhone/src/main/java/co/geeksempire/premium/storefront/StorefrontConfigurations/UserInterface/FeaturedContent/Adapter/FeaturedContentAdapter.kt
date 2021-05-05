@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 12:58 AM
+ * Last modified 5/4/21 11:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -151,7 +151,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
             openPlayStoreToInstall(context, (storefrontContents[position]
                     .productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()))
 
-            false
+            true
         }
 
         featuredContentViewHolder.installView.setOnClickListener {

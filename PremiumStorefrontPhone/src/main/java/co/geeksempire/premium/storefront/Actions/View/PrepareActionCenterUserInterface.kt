@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/29/21 7:29 PM
+ * Last modified 5/4/21 11:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -96,7 +96,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
 
-            false
+            true
         }
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
@@ -108,7 +108,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
 
-            false
+            true
         }
 
         val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
@@ -120,7 +120,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
 
-            false
+            true
         }
 
     }
@@ -136,7 +136,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
 
-            false
+            true
         }
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
@@ -148,7 +148,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
 
-            false
+            true
         }
 
         val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
@@ -160,7 +160,7 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
 
-            false
+            true
         }
 
     }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 10:06 PM
+ * Last modified 5/4/21 11:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -122,6 +122,12 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
                     .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontContents[position].productName}")
                     .commit()
 
+        }
+
+        allContentViewHolder.rootView.setOnLongClickListener {
+
+
+            true
         }
 
         allContentViewHolder.installView.setOnClickListener {
