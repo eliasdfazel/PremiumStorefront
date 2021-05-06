@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 6:07 AM
+ * Last modified 5/6/21, 6:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,7 +30,7 @@ fun generateInstallDynamicLink(context: Context,
                                mediatingSolution: String = context.packageName,
                                campaignName: String = context.packageName) : Uri {
 
-    val dynamicLink = Firebase.dynamicLinks.dynamicLink { // or Firebase.dynamicLinks.shortLinkAsync
+    val dynamicLink = Firebase.dynamicLinks.dynamicLink {
         link = Uri.parse(playStoreLink)
         domainUriPrefix = "https://premiumstorefront.page.link"
         androidParameters(context.packageName) {
