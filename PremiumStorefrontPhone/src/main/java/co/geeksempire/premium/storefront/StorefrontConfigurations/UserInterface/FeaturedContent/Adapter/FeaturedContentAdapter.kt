@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 6:09 AM
+ * Last modified 5/6/21, 6:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -149,7 +149,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
         featuredContentViewHolder.rootView.setOnLongClickListener {
 
             openPlayStoreToInstall(context = context,
-                packageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
+                aPackageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
                 applicationName = storefrontContents[position].productName,
                 applicationSummary = storefrontContents[position].productSummary)
 
@@ -159,7 +159,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
         featuredContentViewHolder.installView.setOnClickListener {
 
             openPlayStoreToInstall(context = context,
-                packageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
+                aPackageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
                 applicationName = storefrontContents[position].productName,
                 applicationSummary = storefrontContents[position].productSummary)
 

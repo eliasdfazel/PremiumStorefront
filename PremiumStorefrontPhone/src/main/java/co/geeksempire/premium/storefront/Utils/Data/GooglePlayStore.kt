@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 6:11 AM
+ * Last modified 5/6/21, 6:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,15 +25,17 @@ fun generateGooglePlayStoreDownloadLink(aPackageName: String) : String {
 }
 
 fun generateInstallDynamicLink(context: Context,
-                               playStoreLink: String,
+                               aPackageName: String,
                                applicationName: String, applicationSummary: String,
                                mediatingSolution: String = context.packageName,
                                campaignName: String = context.packageName) : Uri {
 
+    val playStoreLink: String = generateGooglePlayStoreDownloadLink(aPackageName)
+
     val dynamicLink = Firebase.dynamicLinks.dynamicLink {
         link = Uri.parse(playStoreLink)
         domainUriPrefix = "https://premiumstorefront.page.link"
-        androidParameters(context.packageName) {
+        androidParameters(aPackageName) {
 
         }
         googleAnalyticsParameters {
@@ -50,12 +52,12 @@ fun generateInstallDynamicLink(context: Context,
     return dynamicLink.uri
 }
 
-fun openPlayStoreToInstall(context: Context, packageName: String, applicationName: String, applicationSummary: String) {
+fun openPlayStoreToInstall(context: Context, aPackageName: String, applicationName: String, applicationSummary: String) {
 
     doVibrate(context, 159)
 
     context.startActivity(Intent(Intent.ACTION_VIEW,
-        generateInstallDynamicLink(context, playStoreLink = generateGooglePlayStoreDownloadLink(packageName),
+        generateInstallDynamicLink(context = context, aPackageName = aPackageName,
             applicationName = applicationName, applicationSummary = applicationSummary)
     ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out).toBundle())
 
