@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/5/21 1:06 AM
+ * Last modified 5/6/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -71,7 +71,6 @@ fun Storefront.setupUserInterface() {
     storefrontLayoutBinding.contentWrapper.setLayerType(ImageView.LAYER_TYPE_NONE, shapeShadow.paint)
     storefrontLayoutBinding.contentWrapper.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
-
 
     prepareActionCenterUserInterface.let {
 
