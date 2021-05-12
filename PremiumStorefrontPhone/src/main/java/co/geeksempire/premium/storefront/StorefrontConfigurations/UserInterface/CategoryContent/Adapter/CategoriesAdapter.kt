@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/5/21, 3:00 AM
+ * Last modified 5/12/21, 8:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,9 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter
 
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.LayerDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -52,11 +50,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
     override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(categoriesViewHolder, position, payloads)
 
-        val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
-        categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
-
-        categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
-        categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+        categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item)
 
     }
 
@@ -64,25 +58,15 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
         if (position == 0) {
 
-            val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
-
-            categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
-            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+            categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
 
         } else if (storefrontCategories[position].selectedCategory) {
 
-            val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
-
-            categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
-            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+            categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
 
         } else {
 
-            val categoryBackgroundItem = context.getDrawable(R.drawable.category_background_item) as LayerDrawable
-            categoryBackgroundItem.findDrawableByLayerId(R.id.temporaryBackground).setTint(context.getColor(R.color.dark))
-
-            categoriesViewHolder.productIconImageView.background = categoryBackgroundItem
-            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+            categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item)
 
         }
 
@@ -120,10 +104,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
             if (context.storefrontAllUnfilteredContents.isNotEmpty()) {
 
-                val categoryBackgroundSelectedItem = context.getDrawable(R.drawable.category_background_selected_item) as LayerDrawable
-
-                categoriesViewHolder.productIconImageView.background = categoryBackgroundSelectedItem
-                categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
 
                 notifyItemChanged(lastPosition, null)
 

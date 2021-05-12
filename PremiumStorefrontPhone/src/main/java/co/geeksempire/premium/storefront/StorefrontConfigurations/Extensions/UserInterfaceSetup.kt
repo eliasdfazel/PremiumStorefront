@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 6:46 AM
+ * Last modified 5/12/21, 8:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import android.graphics.drawable.shapes.RoundRectShape
 import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
-import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 
@@ -68,7 +68,7 @@ fun Storefront.setupUserInterface() {
 
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
-    storefrontLayoutBinding.contentWrapper.setLayerType(ImageView.LAYER_TYPE_NONE, shapeShadow.paint)
+    storefrontLayoutBinding.contentWrapper.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
     storefrontLayoutBinding.contentWrapper.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
 

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/3/21 4:05 AM
+  ~ Last modified 5/12/21, 8:13 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -58,8 +58,7 @@
         android:padding="1dp"
         android:layout_marginVertical="3dp"
         android:layout_marginHorizontal="3dp"
-        android:src="@drawable/diamond_icon"
-        apps:tint="@color/white"
+        android:src="@drawable/diamond_gradient_icon"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
