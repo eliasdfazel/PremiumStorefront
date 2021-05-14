@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/12/21, 8:54 AM
+ * Last modified 5/14/21, 9:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -69,6 +69,9 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
             categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item)
 
         }
+
+        categoriesViewHolder.productIconImageView.tag = storefrontCategories[position].categoryId
+        categoriesViewHolder.productIconImageView.contentDescription = storefrontCategories[position].categoryName
 
         Glide.with(context)
                 .asDrawable()

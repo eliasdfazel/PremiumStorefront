@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/12/21, 8:54 AM
+ * Last modified 5/14/21, 9:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -69,6 +69,7 @@ fun Storefront.setupUserInterface() {
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
     storefrontLayoutBinding.contentWrapper.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+//    storefrontLayoutBinding.contentWrapper.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, shapeShadow.paint)
     storefrontLayoutBinding.contentWrapper.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
 

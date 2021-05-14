@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/5/21, 2:43 AM
+ * Last modified 5/14/21, 9:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,23 +12,23 @@ package co.geeksempire.premium.storefront.NetworkConnections
 
 class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
 
-    val getAllProductsShowcaseEndpoint = "https://geeksempire.co/wp-json/wc/v3/products?" +
+    fun getAllProductsShowcaseEndpoint(productPerPage: Int = 13) = "https://geeksempire.co/wp-json/wc/v3/products?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
-            "consumer_secret=${generalEndpoint.consumerSecret()}&per_page=99&exclude=2341"
+            "consumer_secret=${generalEndpoint.consumerSecret()}&per_page=${productPerPage}&exclude=2341"
 
-    fun getFeaturedProductsEndpoint() : String = "${getAllProductsShowcaseEndpoint}&featured=true"
+    fun getFeaturedProductsEndpoint() : String = "${getAllProductsShowcaseEndpoint()}&featured=true"
 
     fun getProductByIdEndpoint(productId: String) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/${productId}" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
             "consumer_secret=${generalEndpoint.consumerSecret()}"
 
-    fun getProductsSearchEndpoint(productSearchQuery: String = "1") : String = "${getAllProductsShowcaseEndpoint}" +
+    fun getProductsSearchEndpoint(productSearchQuery: String = "1") : String = "${getAllProductsShowcaseEndpoint()}" +
             "&search=$productSearchQuery" +
             "&exclude=2341"
 
-    fun getNewProductsEndpoint(numberOfProducts: Int = 3) : String = "${getAllProductsShowcaseEndpoint}" +
+    fun getNewProductsEndpoint(numberOfProducts: Int = 3) : String = "${getAllProductsShowcaseEndpoint()}" +
             "&per_page=${numberOfProducts}" +
             "&exclude=2341" +
             "&orderby=date" +
