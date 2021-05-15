@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/15/21, 6:59 AM
+ * Last modified 5/15/21, 10:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,6 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
@@ -42,6 +40,8 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScroll.RecycleViewSmoothLayoutGrid
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScroll.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
@@ -92,19 +92,19 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             val filterAllContent = FilterAllContent(storefrontLiveData)
 
             val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
-            storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
+            storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
 
             val allContentAdapter = AllContentAdapter(this@Storefront)
-            storefrontLayoutBinding.allContentRecyclerView.layoutManager = GridLayoutManager(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
+            storefrontLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
 
             val newContentAdapter = NewContentAdapter(this@Storefront)
-            storefrontLayoutBinding.newContentRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
+            storefrontLayoutBinding.newContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
 
             val categoriesAdapter = CategoriesAdapter(this@Storefront, filterAllContent)
-            storefrontLayoutBinding.categoriesRecyclerView.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+            storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
             storefrontLiveData.allContentItemData.observe(this@Storefront, {
@@ -123,7 +123,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     storefrontAllUnfilteredContents.addAll(it)
 
                     allContentAdapter.storefrontContents.clear()
-                    allContentAdapter.storefrontContents.addAll(it.subList(0, 4))
+                    allContentAdapter.storefrontContents.addAll(it)
 
                     allContentAdapter.notifyDataSetChanged()
 
