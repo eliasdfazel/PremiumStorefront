@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/12/21, 7:26 AM
+  ~ Last modified 5/15/21, 6:19 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -22,7 +22,7 @@
                 android:endX="0"
                 android:endY="0"
                 android:startColor="@color/premiumLight"
-                android:startX="313"
+                android:startX="454"
                 android:startY="0"
                 android:type="linear" />
         </aapt:attr>

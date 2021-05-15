@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/14/21, 9:49 AM
+ * Last modified 5/15/21, 6:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -51,6 +52,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
         super.onBindViewHolder(categoriesViewHolder, position, payloads)
 
         categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item)
+        categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
     }
 
@@ -59,14 +61,17 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
         if (position == 0) {
 
             categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
+            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
         } else if (storefrontCategories[position].selectedCategory) {
 
             categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
+            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
         } else {
 
             categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item)
+            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
         }
 
@@ -108,6 +113,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
             if (context.storefrontAllUnfilteredContents.isNotEmpty()) {
 
                 categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
+                categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
                 notifyItemChanged(lastPosition, null)
 
