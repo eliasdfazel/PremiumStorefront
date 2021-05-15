@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/14/21, 9:49 AM
+ * Last modified 5/15/21, 3:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -40,7 +41,9 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
+import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
@@ -108,6 +111,11 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                 if (it.isNotEmpty()) {
 
+                    val numberOfItemsToLoad = displayY(applicationContext) / (dpToInteger(applicationContext, 279)) * 3
+                    Log.d(this@Storefront.javaClass.simpleName, "Number Of Items To Load | All Content: ${numberOfItemsToLoad}")
+
+                    val dataToSetup = it.subList(0, numberOfItemsToLoad)
+
                     storefrontAllUntouchedContents.clear()
                     storefrontAllUntouchedContents.addAll(it)
 
@@ -154,6 +162,11 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             storefrontLiveData.featuredContentItemData.observe(this@Storefront, {
 
                 if (it.isNotEmpty()) {
+
+                    val numberOfItemsToLoad = displayY(applicationContext) / (dpToInteger(applicationContext, 307))
+                    Log.d(this@Storefront.javaClass.simpleName, "Number Of Items To Load | Featured Content: ${numberOfItemsToLoad}")
+
+                    val dataToSetup = it.subList(0, numberOfItemsToLoad)
 
                     featuredContentAdapter.storefrontContents.clear()
                     featuredContentAdapter.storefrontContents.addAll(it)

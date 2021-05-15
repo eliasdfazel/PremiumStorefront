@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 6:20 AM
+ * Last modified 5/15/21, 3:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -60,6 +60,8 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
         featuredContentViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
 
+        featuredContentViewHolder.productNameTextView.bringToFront()
+
         //Product Icon Image
         Glide.with(context)
                 .load(storefrontContents[position].productIconLink)
@@ -76,7 +78,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                             context.runOnUiThread {
 
-                                featuredContentViewHolder.installView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+                                featuredContentViewHolder.installView.rippleColor = ColorStateList.valueOf(vibrantColor)
 
                                 featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
@@ -162,6 +164,10 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
                 aPackageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
                 applicationName = storefrontContents[position].productName,
                 applicationSummary = storefrontContents[position].productSummary)
+
+        }
+
+        featuredContentViewHolder.productNameTextView.setOnClickListener {
 
         }
 
