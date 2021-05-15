@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/15/21, 5:59 AM
+ * Last modified 5/15/21, 6:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -63,47 +63,50 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
         //Product Icon Image
         Glide.with(context)
-                .load(storefrontContents[position].productIconLink)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .listener(object : RequestListener<Drawable> {
+            .asDrawable()
+            .load(storefrontContents[position].productIconLink)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .listener(object : RequestListener<Drawable> {
 
-                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
+                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
 
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                        resource?.let {
+                    resource?.let {
 
-                            val vibrantColor = extractVibrantColor(context, resource)
+                        val vibrantColor = extractVibrantColor(context, resource)
 
-                            context.runOnUiThread {
+                        context.runOnUiThread {
 
-                                featuredContentViewHolder.installView.setBackgroundColor(vibrantColor)
+                            featuredContentViewHolder.installView.setBackgroundColor(vibrantColor)
 
-                                featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
-                                featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+                            featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                            featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
-                                featuredContentViewHolder.productIconBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 151f))
-                                featuredContentViewHolder.productIconBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+                            featuredContentViewHolder.productIconBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 151f))
+                            featuredContentViewHolder.productIconBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
-                                featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
+                            featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
 
-                                featuredContentViewHolder.productNameBlur.setOverlayColor(setColorAlpha(vibrantColor, 131f))
-                                featuredContentViewHolder.productNameBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_high))
-
-                            }
+                            featuredContentViewHolder.productNameBlur.setOverlayColor(setColorAlpha(vibrantColor, 131f))
+                            featuredContentViewHolder.productNameBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_high))
 
                         }
 
-                        return false
                     }
 
-                })
-                .submit()
+                    return false
+                }
+
+            })
+            .submit()
 
         //Product Cover Image
         Glide.with(context)
+            .asDrawable()
             .load(storefrontContents[position].productCoverLink)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .thumbnail(0.5f)
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }

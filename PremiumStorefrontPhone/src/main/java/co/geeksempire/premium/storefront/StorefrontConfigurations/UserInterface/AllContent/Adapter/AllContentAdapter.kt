@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 6:20 AM
+ * Last modified 5/15/21, 6:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,44 +64,45 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
         //Product Icon Image
         Glide.with(context)
-                .load(storefrontContents[position].productIconLink)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(CircleCrop())
-                .listener(object : RequestListener<Drawable> {
+            .asDrawable()
+            .load(storefrontContents[position].productIconLink)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .transform(CircleCrop())
+            .listener(object : RequestListener<Drawable> {
 
-                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
+                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
 
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                        resource?.let {
+                    resource?.let {
 
-                            val vibrantColor = extractVibrantColor(context, resource)
+                        val vibrantColor = extractVibrantColor(context, resource)
 
-                            context.runOnUiThread {
+                        context.runOnUiThread {
 
-                                allContentViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
-                                allContentViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
+                            allContentViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
+                            allContentViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
 
-                                allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
-                                allContentViewHolder.productCurrentRateView.setShadowLayer(allContentViewHolder.productCurrentRateView.shadowRadius, allContentViewHolder.productCurrentRateView.shadowDx, allContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+                            allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                            allContentViewHolder.productCurrentRateView.setShadowLayer(allContentViewHolder.productCurrentRateView.shadowRadius, allContentViewHolder.productCurrentRateView.shadowDx, allContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
-                                val applicationGlowingFrame = context.getDrawable(R.drawable.application_icon_glowing_frame) as LayerDrawable
-                                applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
-                                applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconFrame).setTint(vibrantColor)
+                            val applicationGlowingFrame = context.getDrawable(R.drawable.application_icon_glowing_frame) as LayerDrawable
+                            applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
+                            applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconFrame).setTint(vibrantColor)
 
-                                allContentViewHolder.productIconImageView.background = applicationGlowingFrame
+                            allContentViewHolder.productIconImageView.background = applicationGlowingFrame
 
-                                allContentViewHolder.productIconImageView.setImageDrawable(resource)
-
-                            }
+                            allContentViewHolder.productIconImageView.setImageDrawable(resource)
 
                         }
 
-                        return false
                     }
 
-                })
-                .submit()
+                    return false
+                }
+
+            })
+            .submit()
 
         allContentViewHolder.rootView.setOnClickListener {
 
