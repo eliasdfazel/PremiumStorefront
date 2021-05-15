@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/28/21 4:53 PM
+  ~ Last modified 5/15/21, 5:42 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -20,7 +20,7 @@
             <corners
                 android:topLeftRadius="11dp"
                 android:topRightRadius="11dp"
-                android:bottomLeftRadius="11dp"
+                android:bottomLeftRadius="1dp"
                 android:bottomRightRadius="11dp"/>
 
         </shape>

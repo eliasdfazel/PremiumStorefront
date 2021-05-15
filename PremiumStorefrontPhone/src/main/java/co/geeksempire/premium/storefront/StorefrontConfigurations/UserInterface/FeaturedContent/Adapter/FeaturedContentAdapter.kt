@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/15/21, 3:31 AM
+ * Last modified 5/15/21, 5:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,6 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter
 
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Html
@@ -78,7 +77,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                             context.runOnUiThread {
 
-                                featuredContentViewHolder.installView.rippleColor = ColorStateList.valueOf(vibrantColor)
+                                featuredContentViewHolder.installView.setBackgroundColor(vibrantColor)
 
                                 featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
@@ -88,34 +87,8 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                                 featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
 
-                                //Product Cover Image
-                                Glide.with(context)
-                                        .load(storefrontContents[position].productCoverLink)
-                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                        .listener(object : RequestListener<Drawable> {
-
-                                            override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
-
-                                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-
-                                                resource?.let {
-
-                                                    context.runOnUiThread {
-
-                                                        featuredContentViewHolder.productNameBlur.setOverlayColor(setColorAlpha(vibrantColor, 131f))
-                                                        featuredContentViewHolder.productNameBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_high))
-
-                                                        featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
-
-                                                    }
-
-                                                }
-
-                                                return false
-                                            }
-
-                                        })
-                                        .submit()
+                                featuredContentViewHolder.productNameBlur.setOverlayColor(setColorAlpha(vibrantColor, 131f))
+                                featuredContentViewHolder.productNameBlur.setSecondOverlayColor(context.getColor(R.color.light_transparent_high))
 
                             }
 
@@ -126,6 +99,32 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
                 })
                 .submit()
+
+        //Product Cover Image
+        Glide.with(context)
+            .load(storefrontContents[position].productCoverLink)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .listener(object : RequestListener<Drawable> {
+
+                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
+
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                    resource?.let {
+
+                        context.runOnUiThread {
+
+                            featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
+
+                        }
+
+                    }
+
+                    return false
+                }
+
+            })
+            .submit()
 
         featuredContentViewHolder.rootView.setOnClickListener {
 
