@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/16/21, 3:08 AM
+ * Last modified 5/16/21, 4:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
-import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -84,8 +83,8 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
                             featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                             featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
-                            featuredContentViewHolder.productIconBlur.setSecondOverlayColor(setColorAlpha(vibrantColor, 151f))
-                            featuredContentViewHolder.productIconBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+                            featuredContentViewHolder.productIconBlur.setSecondOverlayColor(vibrantColor)
+                            featuredContentViewHolder.productIconBlur.setOverlayColor(context.getColor(R.color.light_transparent))
 
                             featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
 
