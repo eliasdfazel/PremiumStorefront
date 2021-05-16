@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 1:56 AM
+ * Last modified 5/16/21, 3:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,10 +57,11 @@ class NewContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
         //Product Icon Image
         Glide.with(context)
-                .load(storefrontContents[position].productIconLink)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(CircleCrop())
-                .listener(object : RequestListener<Drawable> {
+            .load(storefrontContents[position].productIconLink)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .transform(CircleCrop())
+            .override(256, 256)
+            .listener(object : RequestListener<Drawable> {
 
                     override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/16/21, 1:15 AM
+ * Last modified 5/16/21, 3:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,11 +48,12 @@ fun Storefront.setupUserInterface() {
     backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
     backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
 
-    backgroundShadowRadius[2] = (29).toFloat()//topRightCorner
-    backgroundShadowRadius[3] = (29).toFloat()//topRightCorner
+    backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
+    backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
 
-    backgroundShadowRadius[4] = (29).toFloat()//bottomRightCorner
-    backgroundShadowRadius[5] = (29).toFloat()//bottomRightCorner
+    backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
+    backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
+    backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
 
     backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
     backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
@@ -68,8 +69,8 @@ fun Storefront.setupUserInterface() {
 
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
-    storefrontLayoutBinding.nestedScrollView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
-    storefrontLayoutBinding.nestedScrollView.background = (shadowLayer)
+    storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+    storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
 
     prepareActionCenterUserInterface.let {

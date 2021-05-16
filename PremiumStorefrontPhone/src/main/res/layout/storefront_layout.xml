@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/16/21, 1:14 AM
+  ~ Last modified 5/16/21, 3:06 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,12 +19,27 @@
     tools:context="co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront">
 
     <!--  Content  -->
-    <co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/allContentBackground"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/storefront_content_background_light"
+
+        apps:layout_constraintWidth_percent="0.87"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
-        android:layout_height="700dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
         android:scrollbars="none"
-        android:background="@drawable/storefront_content_background_light"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="13dp"
+        android:cacheColorHint="@android:color/transparent"
 
         apps:layout_constraintWidth_percent="0.87"
 
@@ -55,7 +70,7 @@
                     android:layout_height="193dp"
                     android:cacheColorHint="@android:color/transparent"
                     android:fadingEdge="horizontal"
-                    android:fadingEdgeLength="7dp"
+                    android:fadingEdgeLength="9dp"
                     android:requiresFadingEdge="horizontal"
                     android:scrollbars="none"
                     android:smoothScrollbar="true"
@@ -128,7 +143,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <!--  Side Panel  -->
     <androidx.constraintlayout.widget.ConstraintLayout

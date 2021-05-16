@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 10:05 PM
+ * Last modified 5/16/21, 3:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -149,7 +149,7 @@ class StorefrontLiveData : ViewModel() {
             Log.d(this@StorefrontLiveData.javaClass.simpleName, "Featured Product: ${featuredContentJsonObject.getString(StorefrontFeaturedContentKey.NameKey)}")
         }
 
-        val storefrontFeaturedContentsSorted = storefrontFeaturedContents.sortedBy {
+        val storefrontFeaturedContentsSorted = storefrontFeaturedContents.sortedByDescending {
 
             it.productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
         }
