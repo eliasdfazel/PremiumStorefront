@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 4/28/21 5:59 PM
+  ~ Last modified 5/16/21, 12:23 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -51,5 +51,9 @@
             <enum name="small" value="0"/>
             <enum name="normal" value="1"/>
         </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NextedScrollView">
+
     </declare-styleable>
 </resources>

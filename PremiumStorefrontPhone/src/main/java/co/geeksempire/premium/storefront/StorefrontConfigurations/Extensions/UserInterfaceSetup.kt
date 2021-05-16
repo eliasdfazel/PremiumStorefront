@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/14/21, 10:12 AM
+ * Last modified 5/16/21, 1:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,15 +61,15 @@ fun Storefront.setupUserInterface() {
     shapeShadow.paint.apply {
         color = getColor(R.color.dark)
 
-        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_higher))
+        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_high))
     }
 
     val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
 
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
-    storefrontLayoutBinding.contentWrapper.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, shapeShadow.paint)
-    storefrontLayoutBinding.contentWrapper.background = (shadowLayer)
+    storefrontLayoutBinding.nestedScrollView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+    storefrontLayoutBinding.nestedScrollView.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
 
     prepareActionCenterUserInterface.let {

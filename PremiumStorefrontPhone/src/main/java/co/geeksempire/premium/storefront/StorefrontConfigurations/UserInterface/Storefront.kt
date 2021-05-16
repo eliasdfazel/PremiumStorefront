@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/15/21, 10:24 AM
+ * Last modified 5/16/21, 12:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,8 +40,8 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
-import co.geeksempire.premium.storefront.Utils.UI.SmoothScroll.RecycleViewSmoothLayoutGrid
-import co.geeksempire.premium.storefront.Utils.UI.SmoothScroll.RecycleViewSmoothLayoutList
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 

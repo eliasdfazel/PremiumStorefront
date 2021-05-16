@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/15/21, 9:40 AM
+  ~ Last modified 5/16/21, 1:14 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,11 +19,12 @@
     tools:context="co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront">
 
     <!--  Content  -->
-    <co.geeksempire.premium.storefront.Utils.UI.SmoothScroll.NextedScrollView
+    <co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="700dp"
         android:scrollbars="none"
+        android:background="@drawable/storefront_content_background_light"
 
         apps:layout_constraintWidth_percent="0.87"
 
@@ -33,17 +34,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentWrapper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="500dp"
             android:layout_marginVertical="7dp"
             android:paddingTop="19dp"
-            android:paddingBottom="119dp"
-            android:background="@drawable/storefront_content_background_light">
+            android:paddingBottom="119dp">
 
             <!-- Top Section -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/contentTopSection"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="197dp"
                 android:layout_marginEnd="16dp"
 
                 apps:layout_constraintTop_toTopOf="parent"
@@ -128,7 +128,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </co.geeksempire.premium.storefront.Utils.UI.SmoothScroll.NextedScrollView>
+    </co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView>
 
     <!--  Side Panel  -->
     <androidx.constraintlayout.widget.ConstraintLayout
