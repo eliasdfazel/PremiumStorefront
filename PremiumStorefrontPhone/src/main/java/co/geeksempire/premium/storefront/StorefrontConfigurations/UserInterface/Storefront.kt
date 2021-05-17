@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/16/21, 12:23 AM
+ * Last modified 5/17/21, 12:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -83,7 +83,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
         networkConnectionListener.networkConnectionListenerInterface = this@Storefront
 
-        storefrontLayoutBinding.rootView.post {
+        storefrontLayoutBinding.root.post {
 
             actionCenterOperations.setupForStorefront()
 
@@ -127,7 +127,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                     allContentAdapter.notifyDataSetChanged()
 
-                    storefrontLayoutBinding.allContentRecyclerView.scrollToPosition(0)
+                    storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
 
                 } else {
 
@@ -145,8 +145,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     allContentAdapter.storefrontContents.addAll(it)
 
                     allContentAdapter.notifyDataSetChanged()
-
-                    storefrontLayoutBinding.allContentRecyclerView.scrollToPosition(0)
 
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
@@ -173,7 +171,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                     featuredContentAdapter.notifyDataSetChanged()
 
-                    storefrontLayoutBinding.featuredContentRecyclerView.scrollToPosition(0)
+                    storefrontLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
 
                 } else {
 
@@ -194,6 +192,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                     storefrontLayoutBinding.newContentRecyclerView.scrollToPosition(0)
 
+                    storefrontLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
+
                 } else {
 
 
@@ -212,6 +212,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     categoriesAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.newContentRecyclerView.scrollToPosition(0)
+
+                    storefrontLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
 
                 } else {
 

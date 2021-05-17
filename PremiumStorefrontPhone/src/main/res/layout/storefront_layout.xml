@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/16/21, 4:06 AM
+  ~ Last modified 5/17/21, 12:36 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -49,7 +49,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentWrapper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="7dp"
             android:paddingTop="19dp"
             android:paddingBottom="119dp"
@@ -57,94 +57,60 @@
             android:nestedScrollingEnabled="false">
 
             <!-- Top Section -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/contentTopSection"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/featuredContentRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="197dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="17dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="9dp"
+                android:requiresFadingEdge="horizontal"
+                android:scrollbars="none"
+                android:smoothScrollbar="true"
+                android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
+                android:visibility="gone"
 
                 apps:layout_constraintTop_toTopOf="parent"
-                apps:layout_constraintStart_toStartOf="parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/featuredContentRecyclerView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="193dp"
-                    android:cacheColorHint="@android:color/transparent"
-                    android:fadingEdge="horizontal"
-                    android:fadingEdgeLength="9dp"
-                    android:requiresFadingEdge="horizontal"
-                    android:scrollbars="none"
-                    android:smoothScrollbar="true"
-                    android:alwaysDrawnWithCache="true"
-                    android:isScrollContainer="false"
-                    android:nestedScrollingEnabled="false"
-
-                    apps:layout_constraintTop_toTopOf="parent"
-                    apps:layout_constraintStart_toStartOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                apps:layout_constraintStart_toStartOf="parent"/>
 
             <!-- New Section -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/newSection"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/newContentRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="93dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="0dp"
-                android:layout_marginEnd="16dp"
+                android:layout_height="79dp"
+                android:layout_marginVertical="13dp"
+                android:layout_marginEnd="17dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="7dp"
+                android:requiresFadingEdge="horizontal"
+                android:scrollbars="none"
+                android:smoothScrollbar="true"
+                android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
+                android:visibility="gone"
 
-                apps:layout_constraintTop_toBottomOf="@id/contentTopSection">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/newContentRecyclerView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="79dp"
-                    android:cacheColorHint="@android:color/transparent"
-                    android:fadingEdge="horizontal"
-                    android:fadingEdgeLength="7dp"
-                    android:requiresFadingEdge="horizontal"
-                    android:scrollbars="none"
-                    android:smoothScrollbar="true"
-                    android:alwaysDrawnWithCache="true"
-                    android:isScrollContainer="false"
-                    android:nestedScrollingEnabled="false"
-
-                    apps:layout_constraintTop_toTopOf="parent"
-                    apps:layout_constraintBottom_toBottomOf="parent"
-                    apps:layout_constraintStart_toStartOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                apps:layout_constraintTop_toBottomOf="@id/featuredContentRecyclerView"
+                apps:layout_constraintStart_toStartOf="parent" />
 
             <!-- Bottom Section -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/contentBottomSection"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/allContentRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
+                android:layout_marginVertical="13dp"
+                android:layout_marginEnd="17dp"
+                android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
+                android:visibility="gone"
 
-                apps:layout_constraintTop_toBottomOf="@id/newSection"
-                apps:layout_constraintBottom_toBottomOf="parent"
-                apps:layout_constraintStart_toStartOf="parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/allContentRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alwaysDrawnWithCache="true"
-                    android:isScrollContainer="false"
-                    android:nestedScrollingEnabled="false"
-
-                    apps:layout_constraintTop_toTopOf="parent"
-                    apps:layout_constraintStart_toStartOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                apps:layout_constraintTop_toBottomOf="@id/newContentRecyclerView"
+                apps:layout_constraintStart_toStartOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -161,49 +127,24 @@
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/sidePanelTopSection"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoriesRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="11dp"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="11dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="7dp"
+            android:requiresFadingEdge="vertical"
+            android:scrollbars="none"
+            android:smoothScrollbar="true"
+            android:alwaysDrawnWithCache="true"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false"
 
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintStart_toStartOf="parent"
-            apps:layout_constraintEnd_toEndOf="parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/sidePanelBottomSection"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginVertical="11dp"
-
-            apps:layout_constraintTop_toBottomOf="@id/sidePanelTopSection"
-            apps:layout_constraintBottom_toBottomOf="parent"
-            apps:layout_constraintStart_toStartOf="parent"
-            apps:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/categoriesRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="11dp"
-                android:cacheColorHint="@android:color/transparent"
-                android:fadingEdge="vertical"
-                android:fadingEdgeLength="7dp"
-                android:requiresFadingEdge="vertical"
-                android:scrollbars="none"
-                android:smoothScrollbar="true"
-                android:alwaysDrawnWithCache="true"
-                android:isScrollContainer="false"
-                android:nestedScrollingEnabled="false"
-
-                apps:layout_constraintTop_toTopOf="parent"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            apps:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
