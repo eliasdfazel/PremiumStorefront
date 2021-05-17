@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 12:32 AM
+ * Last modified 5/17/21, 12:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -85,6 +85,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
         storefrontLayoutBinding.root.post {
 
+            storefrontLayoutBinding.loadingView.visibility = View.VISIBLE
+
             actionCenterOperations.setupForStorefront()
 
             setupUserInterface()
@@ -128,6 +130,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     allContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
+
+                    storefrontLayoutBinding.loadingView.visibility = View.GONE
 
                 } else {
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/16/21, 3:01 AM
+ * Last modified 5/17/21, 1:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,6 +61,16 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
         allContentViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
 
         allContentViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
+
+        if (position == storefrontContents.lastIndex) {
+
+            allContentViewHolder.productDividerView.visibility = View.GONE
+
+        } else {
+
+
+
+        }
 
         //Product Icon Image
         Glide.with(context)
