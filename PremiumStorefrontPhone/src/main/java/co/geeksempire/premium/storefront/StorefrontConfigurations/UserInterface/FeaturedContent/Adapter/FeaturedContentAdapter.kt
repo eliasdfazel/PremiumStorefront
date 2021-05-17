@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 4:08 AM
+ * Last modified 5/17/21, 4:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -102,7 +102,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
             .asDrawable()
             .load(storefrontContents[position].productCoverLink)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .override(337, 174)
+            .override(512, 250)
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }

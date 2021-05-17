@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 4:00 AM
+ * Last modified 5/17/21, 4:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -274,6 +274,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
     }
 
     override fun networkLost() {
+        Log.d(this@Storefront.javaClass.simpleName, "No Network @ ${this@Storefront.javaClass.simpleName}")
 
     }
 
