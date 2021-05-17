@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/17/21, 4:40 AM
+  ~ Last modified 5/17/21, 6:10 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -13,14 +13,56 @@
 
     <item
         android:id="@+id/circleIconBackground"
-        android:height="51dp"
-        android:width="51dp"
+        android:height="57dp"
+        android:width="57dp"
         android:gravity="center">
 
         <shape
             android:shape="oval">
 
-            <solid android:color="@color/white" />
+            <solid android:color="@color/premiumLight" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="57dp"
+        android:width="57dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="oval">
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="51dp"
+                android:startColor="@color/premiumLightTransparent"
+                android:centerColor="@color/premiumLightTransparent"
+                android:centerX="0.59"
+                android:centerY="0.59"
+                android:endColor="@color/black" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="57dp"
+        android:width="57dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="oval">
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="51dp"
+                android:startColor="@color/premiumLightTransparent"
+                android:centerColor="@color/premiumLightTransparent"
+                android:centerX="0.41"
+                android:centerY="0.41"
+                android:endColor="@color/white" />
 
         </shape>
 
@@ -28,21 +70,23 @@
 
     <item
         android:id="@+id/circleIconFrame"
-        android:height="51dp"
-        android:width="51dp"
+        android:height="57dp"
+        android:width="57dp"
         android:gravity="center">
 
         <shape
             android:shape="ring"
-            android:innerRadius="24dp"
+            android:innerRadius="26.9dp"
             android:thickness="1.7dp"
             android:useLevel="false">
 
             <gradient
                 android:type="linear"
                 android:angle="135"
-                android:startColor="@color/premiumLight"
-                android:endColor="@color/premiumDark" />
+                android:startColor="@color/dark_transparent"
+                android:centerColor="@color/white"
+                android:centerX="0.5"
+                android:endColor="@color/white" />
 
         </shape>
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 3:30 AM
+ * Last modified 5/17/21, 5:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -93,13 +93,12 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                         context.runOnUiThread {
 
+                            allContentViewHolder.productCurrentRateView.setShadowLayer(allContentViewHolder.productCurrentRateView.shadowRadius, allContentViewHolder.productCurrentRateView.shadowDx, allContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+
                             allContentViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
                             allContentViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
 
-                            val ratingGlowingFrame = context.getDrawable(R.drawable.application_rating_glowing_frame) as LayerDrawable
-                            ratingGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
-
-                            allContentViewHolder.productRatingStarsView.background = ratingGlowingFrame
+                            allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
 
                             val applicationGlowingFrame = context.getDrawable(R.drawable.application_icon_glowing_frame) as LayerDrawable
                             applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)

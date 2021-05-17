@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 4:52 AM
+ * Last modified 5/17/21, 5:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -113,6 +113,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                 if (it.isNotEmpty()) {
 
+                    storefrontLayoutBinding.loadingView.visibility = View.GONE
+
                     val numberOfItemsToLoad = displayY(applicationContext) / (dpToInteger(applicationContext, 279)) * 3
                     Log.d(this@Storefront.javaClass.simpleName, "Number Of Items To Load | All Content: ${numberOfItemsToLoad}")
 
@@ -130,8 +132,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     allContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
-
-                    storefrontLayoutBinding.loadingView.visibility = View.GONE
 
                 } else {
 
