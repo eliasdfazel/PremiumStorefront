@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/15/21, 6:12 AM
+ * Last modified 5/17/21, 4:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,7 +11,6 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter
 
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,12 +22,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.ViewHolder.CategoriesViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 
@@ -58,20 +52,23 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
     override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int) {
 
-        if (position == 0) {
+        categoriesViewHolder.productIconImageView.background = if (storefrontCategories[position].selectedCategory || position == 0) {
 
-            categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
-            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
-
-        } else if (storefrontCategories[position].selectedCategory) {
-
-            categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
-            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+            context.getDrawable(R.drawable.category_background_selected_item)
 
         } else {
 
-            categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item)
-            categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+            context.getDrawable(R.drawable.category_background_item)
+
+        }
+
+        categoriesViewHolder.productIconImageView.imageTintList = if (storefrontCategories[position].selectedCategory || position == 0) {
+
+            ColorStateList.valueOf(context.getColor(R.color.light))
+
+        } else {
+
+            ColorStateList.valueOf(context.getColor(R.color.dark))
 
         }
 
@@ -82,38 +79,11 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                 .asDrawable()
                 .load(storefrontCategories[position].categoryIconLink)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(CircleCrop())
-                .listener(object : RequestListener<Drawable> {
-
-                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-
-                        return true
-                    }
-
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-
-                        resource?.let {
-
-                            context.runOnUiThread {
-
-                                categoriesViewHolder.productIconImageView.setImageDrawable(resource)
-
-                            }
-
-                        }
-
-                        return true
-                    }
-
-                })
-                .submit()
+                .into(categoriesViewHolder.productIconImageView)
 
         categoriesViewHolder.rootView.setOnClickListener {
 
             if (context.storefrontAllUnfilteredContents.isNotEmpty()) {
-
-                categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
-                categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
                 notifyItemChanged(lastPosition, null)
 
@@ -131,6 +101,9 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                 storefrontCategories[position].selectedCategory = true
 
                 lastPosition = position
+
+                categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
+                categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             } else {
 

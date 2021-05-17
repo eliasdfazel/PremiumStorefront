@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 12:54 AM
+ * Last modified 5/17/21, 4:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -194,8 +194,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
                     newContentAdapter.notifyDataSetChanged()
 
-                    storefrontLayoutBinding.newContentRecyclerView.scrollToPosition(0)
-
                     storefrontLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
 
                 } else {
@@ -214,8 +212,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     categoriesAdapter.storefrontCategories.addAll(it)
 
                     categoriesAdapter.notifyDataSetChanged()
-
-                    storefrontLayoutBinding.newContentRecyclerView.scrollToPosition(0)
 
                     storefrontLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
 
@@ -265,14 +261,15 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
     }
 
     override fun networkAvailable() {
+        Log.d(this@Storefront.javaClass.simpleName, "Network Available @ ${this@Storefront.javaClass.simpleName}")
 
         retrieveFeaturedContent()
 
         retrieveAllContent()
 
-        retrieveCategories()
-
         retrieveNewContent()
+
+        retrieveCategories()
 
     }
 
