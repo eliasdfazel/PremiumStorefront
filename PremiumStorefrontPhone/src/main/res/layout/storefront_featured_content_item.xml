@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/17/21, 4:47 AM
+  ~ Last modified 5/18/21, 8:32 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -74,9 +74,10 @@
         android:id="@+id/productIconImageView"
         android:layout_width="77dp"
         android:layout_height="77dp"
+        android:padding="2.5dp"
         android:layout_marginTop="11dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/launcher_foreground_icon"
+        android:src="@drawable/premium_storefront_logo"
+        android:background="@drawable/featured_application_icon_background_frame"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
@@ -86,11 +87,11 @@
         android:id="@+id/productRateBlur"
         android:layout_width="51dp"
         android:layout_height="51dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="73dp"
 
         apps:realtimeBlurRadius="3dp"
         apps:realtimeBlurGradientType="none"
-        apps:realtimeFirstColor="@color/light_transparent"
+        apps:realtimeFirstColor="@color/light_transparent_half"
         apps:realtimeBlurTopLeft="51dp"
         apps:realtimeBlurTopRight="51dp"
         apps:realtimeBlurBottomLeft="51dp"
@@ -104,7 +105,7 @@
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:padding="7sp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="73dp"
         android:scaleType="fitCenter"
         android:src="@drawable/current_rate_icon"
 
@@ -116,7 +117,7 @@
         android:id="@+id/productCurrentRateView"
         android:layout_width="51dp"
         android:layout_height="51dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="73dp"
         android:gravity="center"
         android:textColor="@color/default_color_game_light"
         android:textSize="33sp"

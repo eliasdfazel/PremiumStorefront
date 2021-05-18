@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 4:51 AM
+ * Last modified 5/18/21, 8:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -103,27 +103,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
             .load(storefrontContents[position].productCoverLink)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .override(512, 250)
-            .listener(object : RequestListener<Drawable> {
-
-                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
-
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-
-                    resource?.let {
-
-                        context.runOnUiThread {
-
-                            featuredContentViewHolder.backgroundCoverImageView.setImageDrawable(resource)
-
-                        }
-
-                    }
-
-                    return false
-                }
-
-            })
-            .submit()
+            .into(featuredContentViewHolder.backgroundCoverImageView)
 
         featuredContentViewHolder.rootView.setOnClickListener {
 

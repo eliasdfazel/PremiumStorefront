@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/3/21 7:55 AM
+  ~ Last modified 5/18/21, 8:03 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,10 +15,10 @@
         android:drawable="@color/black" />
 
     <item
-        android:width="313dp"
-        android:height="313dp"
+        android:width="373dp"
+        android:height="373dp"
         android:gravity="center"
-        android:drawable="@drawable/launcher_foreground_icon">
+        android:drawable="@drawable/premium_storefront_logo">
 
     </item>
 

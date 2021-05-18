@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/17/21, 6:09 AM
+  ~ Last modified 5/18/21, 7:10 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -30,7 +30,7 @@
         android:padding="7.7dp"
         android:scaleType="centerCrop"
         android:src="@drawable/launcher_foreground_icon"
-        android:background="@drawable/application_icon_glowing_frame"
+        android:background="@drawable/all_application_icon_glowing_frame"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>

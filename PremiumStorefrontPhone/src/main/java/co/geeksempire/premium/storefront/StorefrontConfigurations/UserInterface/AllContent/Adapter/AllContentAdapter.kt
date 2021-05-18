@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 5:43 AM
+ * Last modified 5/18/21, 7:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -100,7 +100,7 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                             allContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
 
-                            val applicationGlowingFrame = context.getDrawable(R.drawable.application_icon_glowing_frame) as LayerDrawable
+                            val applicationGlowingFrame = context.getDrawable(R.drawable.all_application_icon_glowing_frame) as LayerDrawable
                             applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
                             applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconFrame).setTint(vibrantColor)
 
