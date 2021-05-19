@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 3:58 AM
+ * Last modified 5/19/21, 7:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -232,6 +232,22 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             })
 
             storefrontLayoutBinding.nestedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+                if (scrollY > oldScrollY) {
+                    Log.d(this@Storefront.javaClass.simpleName, "Scrolling Down")
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                } else if (scrollY < oldScrollY) {
+                    Log.d(this@Storefront.javaClass.simpleName, "Scrolling Up")
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                }
+
+            }
+
+            storefrontLayoutBinding.categoriesRecyclerView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 
                 if (scrollY > oldScrollY) {
                     Log.d(this@Storefront.javaClass.simpleName, "Scrolling Down")
