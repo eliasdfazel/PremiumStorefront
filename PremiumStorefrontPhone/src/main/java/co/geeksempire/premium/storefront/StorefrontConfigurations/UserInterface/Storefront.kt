@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/21, 8:29 AM
+ * Last modified 5/19/21, 3:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,6 +43,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
+import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
@@ -55,6 +56,11 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
         PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = storefrontLayoutBinding.actionCenterView, actionLeftView = storefrontLayoutBinding.leftActionView, actionMiddleView = storefrontLayoutBinding.middleActionView, actionRightView = storefrontLayoutBinding.rightActionView)
+    }
+
+    val balloonOptionsMenu: BalloonOptionsMenu by lazy {
+        BalloonOptionsMenu(context = this@Storefront,
+            rootView = storefrontLayoutBinding.rootView)
     }
 
     val actionCenterOperations: ActionCenterOperations by lazy {
@@ -224,6 +230,22 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                 }
 
             })
+
+            storefrontLayoutBinding.nestedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+                if (scrollY > oldScrollY) {
+                    Log.d(this@Storefront.javaClass.simpleName, "Scrolling Down")
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                } else if (scrollY < oldScrollY) {
+                    Log.d(this@Storefront.javaClass.simpleName, "Scrolling Up")
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                }
+
+            }
 
         }
 

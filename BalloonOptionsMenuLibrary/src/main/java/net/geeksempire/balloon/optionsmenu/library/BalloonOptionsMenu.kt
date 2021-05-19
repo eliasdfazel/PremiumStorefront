@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 12:59 AM
+ * Last modified 5/19/21, 3:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,8 +27,9 @@ interface BalloonItemsAction {
 }
 
 class BalloonOptionsMenu (private val context: AppCompatActivity,
-                          private val rootView: ViewGroup,
-                          private val balloonItemsAction: BalloonItemsAction) {
+                          private val rootView: ViewGroup) {
+
+    var balloonItemsAction: BalloonItemsAction? = null
 
     private val balloonOptionsMenuLayoutBinding = LayoutInflater.from(context).inflate(R.layout.balloon_options_menu_layout, null)
     private val allBalloonOptionsMenuItemsView = balloonOptionsMenuLayoutBinding.findViewById<LinearLayout>(R.id.allBalloonOptionsMenuItemsView)
@@ -42,6 +43,8 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
     fun initializeBalloonPosition(anchorView: View,
                                   startAnimationId: Int = android.R.anim.fade_in) : BalloonOptionsMenu {
+
+        removeBalloonOption()
 
         anchorView.getLocationInWindow(positionXY)
 
@@ -85,7 +88,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
             itemLayout.setOnClickListener { view ->
 
-                balloonItemsAction.onBalloonItemClickListener(this@BalloonOptionsMenu, balloonOptionsMenuLayoutBinding, view)
+                balloonItemsAction?.onBalloonItemClickListener(this@BalloonOptionsMenu, balloonOptionsMenuLayoutBinding, view)
 
             }
 
@@ -94,6 +97,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
                 allBalloonOptionsMenuItemsView.addView(itemLayout)
 
             } catch (e: Exception) {
+                e.printStackTrace()
 
             }
 
@@ -101,13 +105,24 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
     }
 
+    fun setupActionListener(balloonItemsAction: BalloonItemsAction) {
+
+        this@BalloonOptionsMenu.balloonItemsAction = balloonItemsAction
+
+    }
+
     fun removeBalloonOption() {
 
-        if (balloonOptionsAdded) {
+        try {
+            if (balloonOptionsAdded) {
 
-            balloonOptionsAdded = false
+                balloonOptionsAdded = false
 
-            rootView.removeView(balloonOptionsMenuLayoutBinding)
+                rootView.removeView(balloonOptionsMenuLayoutBinding)
+
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
 
         }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/17/21, 4:49 AM
+ * Last modified 5/19/21, 3:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -115,19 +115,24 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
         categoriesViewHolder.rootView.setOnLongClickListener { view ->
 
-            BalloonOptionsMenu(context = context,
-                    rootView = context.storefrontLayoutBinding.rootView,
-                    balloonItemsAction = object : BalloonItemsAction {
+            context.balloonOptionsMenu.also {
 
-                        override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View) {
-                            Log.d(this@CategoriesAdapter.javaClass.simpleName, itemView.tag.toString())
+                it.initializeBalloonPosition(anchorView = view)
+                it.setupOptionsItems(arrayListOf("<b>${storefrontCategories[position].categoryName.replace(" Applications", "")}</b>",
+                    context.getString(R.string.categoryShowAllApplications)))
 
-                            balloonOptionsMenu.removeBalloonOption()
+                it.setupActionListener(balloonItemsAction = object : BalloonItemsAction {
 
-                        }
+                    override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View) {
 
-                    }).initializeBalloonPosition(anchorView = view)
-                    .setupOptionsItems(arrayListOf("<b>${storefrontCategories[position].categoryName.replace(" Applications", "")}</b>", context.getString(R.string.categoryShowAllApplications)))
+                        balloonOptionsMenu.removeBalloonOption()
+
+                        Log.d(this@CategoriesAdapter.javaClass.simpleName, itemView.tag.toString())
+                    }
+
+                })
+
+            }
 
             true
         }
