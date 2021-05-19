@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 7:27 AM
+ * Last modified 5/19/21, 8:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetailsFragment
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
@@ -76,6 +77,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
     }
 
     val productDetailsFragment = ProductDetailsFragment()
+    val categoryDetailsFragment = CategoryDetailsFragment()
 
     val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()

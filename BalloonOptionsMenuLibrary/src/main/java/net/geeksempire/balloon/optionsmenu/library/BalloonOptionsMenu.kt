@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 7:42 AM
+ * Last modified 5/19/21, 8:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,8 +25,10 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import net.geeksempire.balloon.optionsmenu.library.databinding.BalloonOptionsMenuLayoutBinding
 
 interface BalloonItemsAction {
-    fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View, itemTextView: TextView)
+    fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View, itemTextView: TextView, itemData: OptionDataItems)
 }
+
+data class OptionDataItems(var itemId: String, var itemTitle: String, var itemDescription: String? = null)
 
 data class TitleTextViewCustomization(var textSize: Float, var textColor: Int, var textShadowColor: Int, var textFont: Typeface)
 data class ItemTextViewCustomization(var textSize: Float, var textColor: Int, var textShadowColor: Int, var textFont: Typeface)
@@ -83,19 +85,28 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
         return this@BalloonOptionsMenu
     }
 
-    fun setupOptionsItems(menuTitle: String?,
-                          titlesOfItems: ArrayList<String>,
+    fun setupOptionsItems(menuId: String, menuTitle: String? = null,
+                          titlesOfItems: ArrayList<OptionDataItems>,
                           titleTextViewCustomization: TitleTextViewCustomization? = null,
                           itemTextViewCustomization: ItemTextViewCustomization? = null) {
 
-        balloonOptionsMenuLayoutBinding.menuTitleTextView.text = menuTitle
 
-        titleTextViewCustomization?.let {
+        if (menuTitle.isNullOrBlank()) {
 
-            balloonOptionsMenuLayoutBinding.menuTitleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, it.textSize)
-            balloonOptionsMenuLayoutBinding.menuTitleTextView.setTextColor(it.textColor)
-            balloonOptionsMenuLayoutBinding.menuTitleTextView.setShadowLayer(balloonOptionsMenuLayoutBinding.menuTitleTextView.shadowRadius, balloonOptionsMenuLayoutBinding.menuTitleTextView.shadowDx, balloonOptionsMenuLayoutBinding.menuTitleTextView.shadowDy, it.textShadowColor)
-            balloonOptionsMenuLayoutBinding.menuTitleTextView.typeface = it.textFont
+            balloonOptionsMenuLayoutBinding.menuTitleTextView.visibility = View.GONE
+
+        } else {
+
+            balloonOptionsMenuLayoutBinding.menuTitleTextView.text = menuTitle
+
+            titleTextViewCustomization?.let {
+
+                balloonOptionsMenuLayoutBinding.menuTitleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, it.textSize)
+                balloonOptionsMenuLayoutBinding.menuTitleTextView.setTextColor(it.textColor)
+                balloonOptionsMenuLayoutBinding.menuTitleTextView.setShadowLayer(balloonOptionsMenuLayoutBinding.menuTitleTextView.shadowRadius, balloonOptionsMenuLayoutBinding.menuTitleTextView.shadowDx, balloonOptionsMenuLayoutBinding.menuTitleTextView.shadowDy, it.textShadowColor)
+                balloonOptionsMenuLayoutBinding.menuTitleTextView.typeface = it.textFont
+
+            }
 
         }
 
@@ -110,8 +121,8 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
             val itemLayout = LayoutInflater.from(context).inflate(R.layout.balloon_option_item, null)
             val balloonOptionItemTextView = itemLayout.findViewById<TextView>(R.id.balloonOptionItemTextView)
 
-            balloonOptionItemTextView.text = Html.fromHtml(content, Html.FROM_HTML_MODE_COMPACT)
-            balloonOptionItemTextView.tag = content
+            balloonOptionItemTextView.text = Html.fromHtml(content.itemTitle, Html.FROM_HTML_MODE_COMPACT)
+            balloonOptionItemTextView.tag = content.itemId
 
             itemTextViewCustomization?.let {
 
@@ -124,7 +135,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
             itemLayout.setOnClickListener { view ->
 
-                balloonItemsAction?.onBalloonItemClickListener(this@BalloonOptionsMenu, balloonOptionsMenuLayoutBinding.root, view, balloonOptionItemTextView)
+                balloonItemsAction?.onBalloonItemClickListener(this@BalloonOptionsMenu, balloonOptionsMenuLayoutBinding.root, view, balloonOptionItemTextView, itemData = OptionDataItems(menuId, menuTitle?:""))
 
             }
 

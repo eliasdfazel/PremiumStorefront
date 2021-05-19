@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 7:35 AM
+ * Last modified 5/19/21, 8:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 
 import android.content.res.ColorStateList
 import android.graphics.Typeface
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
+import net.geeksempire.balloon.optionsmenu.library.OptionDataItems
 import net.geeksempire.balloon.optionsmenu.library.TitleTextViewCustomization
 
 class CategoriesAdapter(private val context: Storefront, private val filterAllContent: FilterAllContent) : RecyclerView.Adapter<CategoriesViewHolder>() {
@@ -123,15 +125,33 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                 it.initializeBalloonPosition(anchorView = view, horizontalOffset = context.storefrontLayoutBinding.categoriesRecyclerView.width)
 
-                it.setupOptionsItems(storefrontCategories[position].categoryName.replace(" Applications", ""),
-                    arrayListOf(context.getString(R.string.categoryShowAllApplications)),
-                    titleTextViewCustomization = TitleTextViewCustomization(textSize = 37f, textColor = context.getColor(R.color.dark), textShadowColor = context.getColor(R.color.dark_transparent_high), textFont = ResourcesCompat.getFont(context, R.font.upcil)?: Typeface.DEFAULT))
+                it.setupOptionsItems(
+                    menuId = storefrontCategories[position].categoryId.toString(),
+                    menuTitle = storefrontCategories[position].categoryName.replace(" Applications", ""),
+                    titlesOfItems = arrayListOf<OptionDataItems>(OptionDataItems(storefrontCategories[position].categoryId.toString(), context.getString(R.string.categoryShowAllApplications))),
+                    titleTextViewCustomization = TitleTextViewCustomization(textSize = 37f, textColor = context.getColor(R.color.dark), textShadowColor = context.getColor(R.color.dark_transparent_high), textFont = ResourcesCompat.getFont(context, R.font.upcil)?: Typeface.DEFAULT)
+                )
 
                 it.setupActionListener(balloonItemsAction = object : BalloonItemsAction {
 
-                    override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View, itemTextView: TextView) {
+                    override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View, itemTextView: TextView, itemData: OptionDataItems) {
+
+                        context.storefrontLayoutBinding.contentDetailsContainer.visibility = View.VISIBLE
+
+                        context.productDetailsFragment.apply {
+                            isShowing = true
+                        }
+
+                        context.productDetailsFragment.arguments = Bundle().apply {
 
 
+                        }
+
+                        context.supportFragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.slide_from_right, 0)
+                            .replace(R.id.contentDetailsContainer, context.categoryDetailsFragment, "Category Details For ${storefrontCategories[position].categoryId}")
+                            .commit()
 
                         balloonOptionsMenu.removeBalloonOption()
 
