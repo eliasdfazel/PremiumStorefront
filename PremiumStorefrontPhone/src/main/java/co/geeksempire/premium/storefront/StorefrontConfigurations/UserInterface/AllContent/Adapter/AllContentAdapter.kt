@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/18/21, 7:10 AM
+ * Last modified 5/20/21, 5:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -127,8 +127,7 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
             }
 
             context.productDetailsFragment.arguments = Bundle().apply {
-
-
+                putString(StorefrontFeaturedContentKey.AttributesYoutubeIntroductionKey, storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesYoutubeIntroductionKey])
             }
 
             context.supportFragmentManager

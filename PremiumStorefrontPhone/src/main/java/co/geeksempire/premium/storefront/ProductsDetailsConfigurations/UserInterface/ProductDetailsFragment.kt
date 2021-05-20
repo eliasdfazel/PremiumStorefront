@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 3:41 PM
+ * Last modified 5/20/21, 5:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,10 +15,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.databinding.ProductDetailsLayoutBinding
 
 class ProductDetailsFragment : Fragment() {
+
+
 
     var isShowing = false
 
@@ -40,8 +44,12 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.getString(StorefrontFeaturedContentKey.AttributesYoutubeIntroductionKey)?.let { applicationYoutubeIntroduction ->
 
+            SetupYoutubePlayer(productDetailsLayoutBinding.applicationYoutubeView)
+                .initialize(applicationYoutubeIntroduction)
 
+        }
 
     }
 

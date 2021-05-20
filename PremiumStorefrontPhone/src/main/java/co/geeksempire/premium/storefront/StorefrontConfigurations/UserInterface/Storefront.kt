@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 8:06 AM
+ * Last modified 5/20/21, 4:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -286,6 +286,18 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     .setCustomAnimations(R.anim.slide_to_right, 0)
                     .remove(productDetailsFragment)
                     .commit()
+
+            storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
+
+            prepareActionCenterUserInterface.setupIconsForStorefront()
+
+        } else if (categoryDetailsFragment.isShowing) {
+
+            supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_to_right, 0)
+                .remove(categoryDetailsFragment)
+                .commit()
 
             storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
 

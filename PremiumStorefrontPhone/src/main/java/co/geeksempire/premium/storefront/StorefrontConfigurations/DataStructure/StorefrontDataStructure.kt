@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/4/21 7:45 AM
+ * Last modified 5/20/21, 5:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,7 +32,7 @@ object StorefrontFeaturedContentKey {
 
     const val AttributesPackageNameKey = "Package Name"
 
-    const val AttributesAndroidCompatibiliesKey = "Android Compatibilies"
+    const val AttributesAndroidCompatibilitiesKey = "Android Compatibilies"
     const val AttributesContentSafetyRatingKey = "Content Safety Rating"
 
     const val AttributesDeveloperEmailKey = "Developer Email"

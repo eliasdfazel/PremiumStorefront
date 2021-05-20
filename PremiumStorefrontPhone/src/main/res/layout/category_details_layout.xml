@@ -3,15 +3,18 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/20/21, 3:51 AM
+  ~ Last modified 5/20/21, 5:41 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootViewFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/premiumLight">
+    android:background="@color/premiumLight"
+    tools:context=".StorefrontConfigurations.UserInterface.Storefront">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
