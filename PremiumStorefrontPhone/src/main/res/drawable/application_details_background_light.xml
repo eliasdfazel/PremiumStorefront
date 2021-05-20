@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/20/21, 3:50 AM
+  ~ Last modified 5/20/21, 3:53 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:top="191dp"
+        android:top="199dp"
         android:id="@+id/temporaryBackground">
 
         <shape
@@ -36,7 +36,7 @@
     </item>
 
     <item
-        android:top="191dp"
+        android:top="199dp"
         android:id="@+id/foregroundBackground">
 
         <shape
