@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 9:44 AM
+ * Last modified 5/20/21, 10:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInte
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
+import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.R
 
 fun ProductDetailsFragment.applyEffects() {
@@ -43,8 +44,8 @@ fun ProductDetailsFragment.applyEffects() {
 
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
-//    productDetailsLayoutBinding.contentWrapper.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
-//    productDetailsLayoutBinding.contentWrapper.background = (shadowLayer)
+    productDetailsLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+    productDetailsLayoutBinding.allContentBackground.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
 
 }

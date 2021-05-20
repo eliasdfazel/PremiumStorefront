@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 9:44 AM
+ * Last modified 5/20/21, 10:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -141,6 +141,9 @@ class ProductDetailsFragment : Fragment() {
             }
 
             val applicationYoutubeIntroduction = getString(ProductDataKey.ProductYoutubeIntroduction)?.let { applicationYoutubeIntroduction ->
+
+                productDetailsLayoutBinding.applicationYoutubeView.visibility = View.VISIBLE
+                productDetailsLayoutBinding.playYoutubeView.visibility = View.VISIBLE
 
                 productDetailsLayoutBinding.playYoutubeView.setOnClickListener {
 
