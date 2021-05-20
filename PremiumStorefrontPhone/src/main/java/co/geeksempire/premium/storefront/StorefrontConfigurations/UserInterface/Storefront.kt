@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 4:54 AM
+ * Last modified 5/20/21, 8:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -94,8 +94,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
         storefrontLayoutBinding.root.post {
 
             storefrontLayoutBinding.loadingView.visibility = View.VISIBLE
-
-            actionCenterOperations.setupForStorefront()
 
             setupUserInterface()
 
@@ -271,6 +269,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun onResume() {
         super.onResume()
+
+        actionCenterOperations.setupForStorefront()
+
     }
 
     override fun onPause() {

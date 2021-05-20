@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 5:27 AM
+ * Last modified 5/20/21, 9:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.ViewHolder.FeaturedContentViewHolder
@@ -110,16 +111,25 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
             context.storefrontLayoutBinding.contentDetailsContainer.visibility = View.VISIBLE
 
             context.productDetailsFragment.apply {
+                storefrontInstance = this@FeaturedContentAdapter.context
                 isShowing = true
             }
 
             context.productDetailsFragment.arguments = Bundle().apply {
-                putString(StorefrontFeaturedContentKey.AttributesYoutubeIntroductionKey, storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesYoutubeIntroductionKey])
+                putString(ProductDataKey.ProductId, storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey])
+                putString(ProductDataKey.ProductPackageName, storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey])
+
+                putString(ProductDataKey.ProductName, storefrontContents[position].productName)
+                putString(ProductDataKey.ProductDescription, storefrontContents[position].productDescription)
+
+                putString(ProductDataKey.ProductIcon, storefrontContents[position].productIconLink)
+                putString(ProductDataKey.ProductCoverImage, storefrontContents[position].productCoverLink)
+                putString(ProductDataKey.ProductYoutubeIntroduction, storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesYoutubeIntroductionKey])
             }
 
             context.supportFragmentManager
                     .beginTransaction()
-                    .setCustomAnimations(R.anim.slide_from_right, 0)
+                    .setCustomAnimations(R.anim.slide_from_right, R.anim.fade_out)
                     .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontContents[position].productName}")
                     .commit()
 

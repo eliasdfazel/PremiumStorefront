@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/20/21, 3:53 AM
+  ~ Last modified 5/20/21, 8:33 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -13,6 +13,8 @@
 
     <item
         android:top="199dp"
+        android:start="3dp"
+        android:end="3dp"
         android:id="@+id/temporaryBackground">
 
         <shape

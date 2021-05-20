@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 5:05 AM
+ * Last modified 5/20/21, 9:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,6 +46,20 @@ object StorefrontFeaturedContentKey {
     const val AttributesRatingKey = "Rating"
     const val AttributesYoutubeIntroductionKey = "Youtube Introduction"
 
+}
+
+object ProductDataKey {
+    const val ProductId = "ProductId"
+    const val ProductPackageName = "ProductPackageName"
+
+    const val ProductCoverImage = "ProductCoverImage"
+    const val ProductIcon = "ProductIcon"
+
+    const val ProductName = "ProductName"
+    const val ProductSummary = "ProductSummary"
+    const val ProductDescription = "ProductDescription"
+
+    const val ProductYoutubeIntroduction = "YoutubeIntroduction"
 }
 
 /**
