@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/21/21, 7:32 AM
+  ~ Last modified 5/21/21, 8:12 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -150,8 +150,13 @@
     </co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="51dp"
-        android:layout_height="51dp"
+        android:id="@+id/goBackView"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="3dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         android:scaleType="fitCenter"
         android:layout_marginVertical="19dp"
         android:layout_marginHorizontal="19dp"

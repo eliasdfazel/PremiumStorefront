@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 8:50 AM
+ * Last modified 5/21/21, 8:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -284,7 +284,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             supportFragmentManager
                     .beginTransaction()
-                    .setCustomAnimations(R.anim.slide_to_right, 0)
+                    .setCustomAnimations(R.anim.fade_out, R.anim.fade_in, R.anim.fade_out, R.anim.fade_in)
                     .remove(productDetailsFragment)
                     .commit()
 
@@ -296,7 +296,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             supportFragmentManager
                 .beginTransaction()
-                .setCustomAnimations(R.anim.slide_to_right, 0)
+                .setCustomAnimations(R.anim.fade_out, R.anim.fade_in, R.anim.fade_out, R.anim.fade_in)
                 .remove(categoryDetailsFragment)
                 .commit()
 

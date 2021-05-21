@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 10:25 AM
+ * Last modified 5/21/21, 8:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -166,6 +166,24 @@ class ProductDetailsFragment : Fragment() {
                 applicationPackageName = applicationPackageName?:requireContext().packageName,
                 applicationName = productName?:requireContext().getString(R.string.applicationName),
                 applicationSummary = productSummary?:requireContext().getString(R.string.applicationSummary))
+
+            productDetailsLayoutBinding.goBackView.setOnClickListener {
+
+                storefrontInstance?.apply {
+
+                    supportFragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_out, R.anim.fade_in, R.anim.fade_out, R.anim.fade_in)
+                        .remove(productDetailsFragment)
+                        .commit()
+
+                    storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
+
+                    prepareActionCenterUserInterface.setupIconsForStorefront()
+
+                }
+
+            }
 
         }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 9:32 AM
+ * Last modified 5/21/21, 7:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -129,7 +129,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
             context.supportFragmentManager
                     .beginTransaction()
-                    .setCustomAnimations(R.anim.slide_from_right, R.anim.fade_out)
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                     .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontContents[position].productName}")
                     .commit()
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 8:06 AM
+ * Last modified 5/21/21, 7:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -149,7 +149,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                         context.supportFragmentManager
                             .beginTransaction()
-                            .setCustomAnimations(R.anim.slide_from_right, 0)
+                            .setCustomAnimations(R.anim.fade_in, 0)
                             .replace(R.id.contentDetailsContainer, context.categoryDetailsFragment, "Category Details For ${storefrontCategories[position].categoryId}")
                             .commit()
 
