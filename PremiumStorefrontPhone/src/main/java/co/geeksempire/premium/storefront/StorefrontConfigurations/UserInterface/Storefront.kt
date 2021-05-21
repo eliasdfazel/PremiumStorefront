@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 12:14 PM
+ * Last modified 5/21/21, 1:31 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -101,6 +101,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
             storefrontLayoutBinding.loadingView.visibility = View.VISIBLE
 
             setupUserInterface()
+
+            actionCenterOperations.setupForStorefront()
 
             val filterAllContent = FilterAllContent(storefrontLiveData)
 
@@ -275,8 +277,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
     override fun onResume() {
         super.onResume()
 
-        actionCenterOperations.setupForStorefront()
-
     }
 
     override fun onPause() {
@@ -289,25 +289,25 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
             supportFragmentManager
                 .beginTransaction()
-                .setCustomAnimations(R.anim.fade_out, R.anim.fade_in)
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .remove(productDetailsFragment)
-                .commit()
-
-            storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
+                .commitNow()
 
             prepareActionCenterUserInterface.setupIconsForStorefront()
+
+            actionCenterOperations.setupForStorefront()
 
         } else if (categoryDetailsFragment.isShowing) {
 
             supportFragmentManager
                 .beginTransaction()
-                .setCustomAnimations(R.anim.fade_out, R.anim.fade_in)
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .remove(categoryDetailsFragment)
-                .commit()
-
-            storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
+                .commitNow()
 
             prepareActionCenterUserInterface.setupIconsForStorefront()
+
+            actionCenterOperations.setupForStorefront()
 
         } else {
 
