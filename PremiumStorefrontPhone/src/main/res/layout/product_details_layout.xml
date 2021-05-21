@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/20/21, 10:25 AM
+  ~ Last modified 5/21/21, 7:32 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -148,5 +148,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:scaleType="fitCenter"
+        android:layout_marginVertical="19dp"
+        android:layout_marginHorizontal="19dp"
+        android:src="@drawable/go_back_layer"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
