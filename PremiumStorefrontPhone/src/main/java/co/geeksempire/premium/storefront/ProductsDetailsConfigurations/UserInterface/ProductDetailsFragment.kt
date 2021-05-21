@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 1:28 PM
+ * Last modified 5/21/21, 2:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.databinding.ProductDetailsLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -89,6 +90,9 @@ class ProductDetailsFragment : Fragment() {
                                 val vibrantColor = extractVibrantColor(requireContext(), resource)
 
                                 requireActivity().runOnUiThread {
+
+                                    productDetailsLayoutBinding.applicationIconBlurView.setOverlayColor(dominantColor)
+                                    productDetailsLayoutBinding.applicationIconBlurView.setSecondOverlayColor(setColorAlpha(requireContext().getColor(R.color.light_transparent_high), 123f))
 
                                     productDetailsLayoutBinding.applicationIconImageView.setImageDrawable(resource)
 
