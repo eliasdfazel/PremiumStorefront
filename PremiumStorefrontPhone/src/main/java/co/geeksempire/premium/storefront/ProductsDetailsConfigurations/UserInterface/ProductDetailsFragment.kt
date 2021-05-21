@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 2:32 PM
+ * Last modified 5/21/21, 2:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -91,8 +91,7 @@ class ProductDetailsFragment : Fragment() {
 
                                 requireActivity().runOnUiThread {
 
-                                    productDetailsLayoutBinding.applicationIconBlurView.setOverlayColor(dominantColor)
-                                    productDetailsLayoutBinding.applicationIconBlurView.setSecondOverlayColor(setColorAlpha(requireContext().getColor(R.color.light_transparent_high), 123f))
+                                    productDetailsLayoutBinding.applicationIconBlurView.setOverlayColor(setColorAlpha(dominantColor, 199f))
 
                                     productDetailsLayoutBinding.applicationIconImageView.setImageDrawable(resource)
 
