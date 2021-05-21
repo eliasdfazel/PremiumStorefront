@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 7:49 AM
+ * Last modified 5/21/21, 11:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -111,7 +111,7 @@ class NewContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
             context.supportFragmentManager
                     .beginTransaction()
                     .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                    .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontContents[position].productName}")
+                    .replace(R.id.contentDetailsContainer, context.productDetailsFragment, context.packageName)
                     .commit()
 
         }

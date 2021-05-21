@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 8:43 AM
+ * Last modified 5/21/21, 12:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -76,8 +76,13 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
         NetworkConnectionListener(this@Storefront, storefrontLayoutBinding.rootView, networkCheckpoint)
     }
 
-    val productDetailsFragment = ProductDetailsFragment()
-    val categoryDetailsFragment = CategoryDetailsFragment()
+    val productDetailsFragment: ProductDetailsFragment by lazy {
+        ProductDetailsFragment()
+    }
+
+    val categoryDetailsFragment: CategoryDetailsFragment by lazy {
+        CategoryDetailsFragment()
+    }
 
     val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
@@ -283,10 +288,10 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
         if (productDetailsFragment.isShowing) {
 
             supportFragmentManager
-                    .beginTransaction()
+                .beginTransaction()
                 .setCustomAnimations(R.anim.fade_out, R.anim.fade_in)
-                    .remove(productDetailsFragment)
-                    .commit()
+                .remove(productDetailsFragment)
+                .commit()
 
             storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
 
