@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/21/21, 8:41 AM
+  ~ Last modified 5/21/21, 8:48 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -22,11 +22,11 @@
             <gradient
                 android:type="radial"
                 android:gradientRadius="25dp"
-                android:startColor="@color/red"
-                android:centerColor="@color/red"
+                android:startColor="@color/default_color_light"
+                android:centerColor="@color/default_color_light"
                 android:centerX="0.5"
                 android:centerY="0.5"
-                android:endColor="#01000000"/>
+                android:endColor="#03008dda"/>
 
         </shape>
 
@@ -34,8 +34,8 @@
 
     <item
         android:gravity="top|start"
-        android:width="49dp"
-        android:height="49dp" >
+        android:width="47dp"
+        android:height="47dp" >
 
         <shape
             android:shape="oval">
@@ -48,13 +48,13 @@
     </item>
 
     <item
-        android:height="49dp"
-        android:width="49dp"
+        android:height="47dp"
+        android:width="47dp"
         android:gravity="top|start">
 
         <shape
             android:shape="ring"
-            android:innerRadius="23.4dp"
+            android:innerRadius="22.2dp"
             android:thickness="1dp"
             android:useLevel="false">
 
@@ -73,8 +73,8 @@
     <item
         android:width="29dp"
         android:height="29dp"
-        android:top="11dp"
-        android:start="7dp"
+        android:top="9dp"
+        android:start="6dp"
         android:drawable="@drawable/back_indicator_icon"/>
 
 </layer-list>
