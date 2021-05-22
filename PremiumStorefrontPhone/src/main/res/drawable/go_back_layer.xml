@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/21/21, 11:58 AM
+  ~ Last modified 5/22/21, 8:19 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:gravity="top|start"
+        android:gravity="top|center_horizontal"
         android:width="51dp"
         android:height="51dp" >
 
@@ -33,7 +33,7 @@
     </item>
 
     <item
-        android:gravity="top|start"
+        android:gravity="top|center_horizontal"
         android:width="47dp"
         android:height="47dp" >
 
@@ -50,7 +50,7 @@
     <item
         android:height="47dp"
         android:width="47dp"
-        android:gravity="top|start">
+        android:gravity="top|center_horizontal">
 
         <shape
             android:shape="ring"
@@ -60,7 +60,7 @@
 
             <gradient
                 android:type="linear"
-                android:angle="315"
+                android:angle="270"
                 android:startColor="@color/white"
                 android:centerColor="#03FFFFFF"
                 android:centerY="0.7"
@@ -71,10 +71,43 @@
     </item>
 
     <item
-        android:width="29dp"
-        android:height="29dp"
-        android:top="10dp"
-        android:start="6dp"
+        android:width="14dp"
+        android:height="4.9dp"
+        android:top="29dp"
+        android:start="20.8dp">
+
+        <rotate
+            android:toDegrees="0"
+            android:fromDegrees="45"
+            android:pivotX="50%"
+            android:pivotY="0%">
+
+            <shape
+                android:shape="rectangle">
+
+                <corners
+                    android:radius="51dp" />
+
+                <gradient
+                    android:type="linear"
+                    android:gradientRadius="25dp"
+                    android:startColor="@color/premiumLight"
+                    android:centerColor="@color/white"
+                    android:centerX="0.5"
+                    android:centerY="0.5"
+                    android:endColor="@color/white"/>
+
+            </shape>
+
+        </rotate>
+
+    </item>
+
+    <item
+        android:width="23dp"
+        android:height="23dp"
+        android:top="13dp"
+        android:start="13dp"
         android:drawable="@drawable/back_indicator_icon"/>
 
 </layer-list>
