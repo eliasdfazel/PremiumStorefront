@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/22/21, 9:33 AM
+ * Last modified 5/22/21, 1:59 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -98,15 +98,14 @@ fun shareApplication(context: Context, aPackageName: String, applicationName: St
         .addOnSuccessListener { shortDynamicLink ->
 
             val textToShare = Html.fromHtml(applicationName, Html.FROM_HTML_MODE_COMPACT).toString() + "\n" +
-                    Html.fromHtml(applicationSummary, Html.FROM_HTML_MODE_COMPACT).toString() + "\n\n" +
-                    shortDynamicLink.shortLink.toString() + "\n"
-                    generateHashTag(Html.fromHtml(applicationName, Html.FROM_HTML_MODE_COMPACT).toString()) + "\n" +
+                    Html.fromHtml(applicationSummary, Html.FROM_HTML_MODE_COMPACT).toString() + "\n" +
+                    shortDynamicLink.shortLink.toString() + " | " + generateHashTag(Html.fromHtml(applicationName, Html.FROM_HTML_MODE_COMPACT).toString()) +
                     generateHashTag(Html.fromHtml(applicationSummary, Html.FROM_HTML_MODE_COMPACT).toString())
 
             context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND, shortDynamicLink.shortLink).apply {
                 putExtra(Intent.EXTRA_TEXT, textToShare)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                type = "text/*"
+                type = "text/plain"
             }, "Share $applicationName"))
 
         }
