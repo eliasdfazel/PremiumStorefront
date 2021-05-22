@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/20/21, 9:39 AM
+  ~ Last modified 5/22/21, 9:20 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,13 +12,13 @@
 
     <style name="GeeksEmpire.Material" parent="Theme.MaterialComponents.Light.NoActionBar">
 
-        <item name="android:colorPrimary">@color/default_color</item>
-        <item name="android:colorPrimaryDark">@color/default_color_dark</item>
-        <item name="android:colorAccent">@color/default_color_light</item>
+        <item name="android:colorPrimary">@color/black</item>
+        <item name="android:colorPrimaryDark">@color/premiumDark</item>
+        <item name="android:colorAccent">@color/premiumLight</item>
 
-        <item name="colorPrimary">@color/default_color</item>
-        <item name="colorPrimaryDark">@color/default_color_dark</item>
-        <item name="colorAccent">@color/default_color_light</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/premiumDark</item>
+        <item name="colorAccent">@color/premiumLight</item>
 
         <item name="android:windowBackground">@drawable/splash_screen_initial</item>
 
@@ -39,13 +39,13 @@
 
     <style name="GeeksEmpire.Material.Storefront" parent="GeeksEmpire.Material">
 
-        <item name="android:colorPrimary">@color/default_color</item>
-        <item name="android:colorPrimaryDark">@color/default_color_dark</item>
-        <item name="android:colorAccent">@color/default_color_light</item>
+        <item name="android:colorPrimary">@color/black</item>
+        <item name="android:colorPrimaryDark">@color/premiumDark</item>
+        <item name="android:colorAccent">@color/premiumLight</item>
 
-        <item name="colorPrimary">@color/default_color</item>
-        <item name="colorPrimaryDark">@color/default_color_dark</item>
-        <item name="colorAccent">@color/default_color_light</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/premiumDark</item>
+        <item name="colorAccent">@color/premiumLight</item>
 
         <item name="android:windowBackground">@color/premiumDark</item>
 

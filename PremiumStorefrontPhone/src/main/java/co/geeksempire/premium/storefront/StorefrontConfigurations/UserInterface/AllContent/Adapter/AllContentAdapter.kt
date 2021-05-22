@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 7:48 AM
+ * Last modified 5/22/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -133,6 +133,7 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
                 putString(ProductDataKey.ProductPackageName, storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey])
 
                 putString(ProductDataKey.ProductName, storefrontContents[position].productName)
+                putString(ProductDataKey.ProductSummary, storefrontContents[position].productSummary)
                 putString(ProductDataKey.ProductDescription, storefrontContents[position].productDescription)
 
                 putString(ProductDataKey.ProductIcon, storefrontContents[position].productIconLink)
