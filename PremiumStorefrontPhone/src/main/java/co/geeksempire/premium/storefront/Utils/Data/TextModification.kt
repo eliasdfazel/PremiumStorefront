@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/22/21, 9:32 AM
+ * Last modified 5/22/21, 2:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,8 +19,6 @@ fun generateHashTag(inputText: String) : String {
         hashTagBuilder.append("#${text}" + " ")
 
     }
-
-    println(">>> " + hashTagBuilder.toString())
 
     return hashTagBuilder.toString()
 }
