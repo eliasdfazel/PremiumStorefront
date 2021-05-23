@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 5/23/21, 12:21 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/radialGradientBackground"
+        android:width="99dp"
+        android:height="99dp"
+        android:gravity="bottom|center_horizontal">
+
+        <shape
+            android:shape="oval">
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="47dp"
+                android:startColor="@color/default_color_game_light"
+                android:centerColor="@color/default_color_game_light"
+                android:centerX="0.5"
+                android:centerY="0.537"
+                android:endColor="#03FF005D"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/circleIconFrame"
+        android:width="91dp"
+        android:height="91dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="ring"
+            android:innerRadius="43dp"
+            android:thickness="1.3dp"
+            android:useLevel="false">
+
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="@color/premiumLight"
+                android:centerColor="@color/premiumLight"
+                android:centerY="0.3"
+                android:endColor="@color/default_color_game_light" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/clearLayer"
+        android:width="88.7dp"
+        android:height="91dp"
+        android:top="2.7dp"
+        android:gravity="top|center_horizontal">
+
+        <shape
+            android:shape="oval">
+
+            <solid
+                android:color="@color/light"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>

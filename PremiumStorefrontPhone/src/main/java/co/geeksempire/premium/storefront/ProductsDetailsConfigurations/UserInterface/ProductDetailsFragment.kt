@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/23/21, 7:16 AM
+ * Last modified 5/23/21, 12:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -60,7 +60,7 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        applyEffects()
+        applyShadowEffectsForContentBackground()
 
         arguments?.apply {
 
@@ -91,6 +91,11 @@ class ProductDetailsFragment : Fragment() {
                                 val vibrantColor = extractVibrantColor(requireContext(), resource)
 
                                 requireActivity().runOnUiThread {
+
+                                    applyGlowingEffectsForRatingBackground(vibrantColor)
+
+                                    productDetailsLayoutBinding.applicationRatingTextView.setTextColor(vibrantColor)
+                                    productDetailsLayoutBinding.applicationRatingTextView.setShadowLayer(productDetailsLayoutBinding.applicationRatingTextView.shadowRadius, productDetailsLayoutBinding.applicationRatingTextView.shadowDx, productDetailsLayoutBinding.applicationRatingTextView.shadowDy, vibrantColor)
 
                                     productDetailsLayoutBinding.applicationIconBlurView.setOverlayColor(setColorAlpha(dominantColor, 222f))
 

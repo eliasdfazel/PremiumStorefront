@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 8:43 AM
+ * Last modified 5/23/21, 12:36 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,13 +10,17 @@
 
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface
 
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.R
 
-fun ProductDetailsFragment.applyEffects() {
+fun ProductDetailsFragment.applyShadowEffectsForContentBackground() {
 
     /* Start - Add Shadow To Content Background */
     val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
@@ -33,19 +37,65 @@ fun ProductDetailsFragment.applyEffects() {
     backgroundShadowRadius[6] = (0).toFloat()//bottomLeftCorner
     backgroundShadowRadius[7] = (0).toFloat()//bottomLeftCorner
 
-    val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
+    val shapeShadow: ShapeDrawable =
+        ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
     shapeShadow.paint.apply {
         color = requireContext().getColor(R.color.dark)
 
         setShadowLayer(31f, 0f, 0f, requireContext().getColor(R.color.dark_transparent_high))
     }
 
-    val shadowLayer = requireContext().getDrawable(R.drawable.product_details_background_light) as LayerDrawable
+    val shadowLayer =
+        requireContext().getDrawable(R.drawable.product_details_background_light) as LayerDrawable
 
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
-    productDetailsLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+    productDetailsLayoutBinding.allContentBackground.setLayerType(
+        AppCompatButton.LAYER_TYPE_SOFTWARE,
+        shapeShadow.paint
+    )
     productDetailsLayoutBinding.allContentBackground.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
+
+}
+
+fun ProductDetailsFragment.applyGlowingEffectsForRatingBackground(glowingColor: Int) {
+
+    /* Start - Setup Negative Space Of Rating Element */
+    val negativeSpaceLayers = requireContext().getDrawable(R.drawable.application_rating_details_glowing_frame) as LayerDrawable
+
+    val negativeSpaceLayersShape = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+
+    negativeSpaceLayersShape[0] = (199).toFloat()//topLeftCorner
+    negativeSpaceLayersShape[1] = (199).toFloat()//topLeftCorner
+
+    negativeSpaceLayersShape[2] = (199).toFloat()//topRightCorner
+    negativeSpaceLayersShape[3] = (199).toFloat()//topRightCorner
+
+    negativeSpaceLayersShape[6] = (199).toFloat()//bottomLeftCorner
+    negativeSpaceLayersShape[7] = (199).toFloat()//bottomLeftCorner
+
+    negativeSpaceLayersShape[4] = (199).toFloat()//bottomRightCorner
+    negativeSpaceLayersShape[5] = (199).toFloat()//bottomRightCorner
+
+    val shapeShadowNegativeSpace: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLayersShape, null, null))
+    shapeShadowNegativeSpace.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    negativeSpaceLayers.findDrawableByLayerId(R.id.radialGradientBackground).setTint(glowingColor)
+    negativeSpaceLayers.findDrawableByLayerId(R.id.circleIconFrame).setTint(glowingColor)
+
+    negativeSpaceLayers.setDrawableByLayerId(R.id.clearLayer, shapeShadowNegativeSpace)
+
+    productDetailsLayoutBinding.applicationRatingTextView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadowNegativeSpace.paint)
+    productDetailsLayoutBinding.applicationRatingTextView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    productDetailsLayoutBinding.applicationRatingTextView.background = negativeSpaceLayers
+    /* End - Setup Negative Space Of Rating Element */
 
 }
