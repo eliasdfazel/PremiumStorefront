@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/18/21, 8:25 AM
+  ~ Last modified 5/23/21, 7:29 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -26,9 +26,9 @@
             <gradient
                 android:type="linear"
                 android:angle="135"
-                android:startColor="@color/dark_transparent"
+                android:startColor="@color/dark"
                 android:centerColor="@color/white"
-                android:centerX="0.73"
+                android:centerX="0.55"
                 android:endColor="@color/white" />
 
         </shape>
