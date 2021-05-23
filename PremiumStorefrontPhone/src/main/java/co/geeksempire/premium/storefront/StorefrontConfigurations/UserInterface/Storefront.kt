@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 1:31 PM
+ * Last modified 5/23/21, 12:54 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -229,6 +229,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
                     categoriesAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
+
+                    storefrontLayoutBinding.categoryIndicatorTextView.visibility = View.VISIBLE
 
                 } else {
 

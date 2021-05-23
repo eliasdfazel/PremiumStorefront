@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 8:43 AM
+ * Last modified 5/23/21, 12:59 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -110,6 +111,9 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                 categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
                 categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
+                context.storefrontLayoutBinding.categoryIndicatorTextView.text = storefrontCategories[position].categoryName
+                context.storefrontLayoutBinding.categoryIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
 
             } else {
 
