@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/22/21, 9:15 AM
+ * Last modified 5/23/21, 7:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -50,7 +51,7 @@ class ProductDetailsFragment : Fragment() {
 
     }
 
-    override fun onCreateView(layoutInflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(layoutInflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         productDetailsLayoutBinding = ProductDetailsLayoutBinding.inflate(layoutInflater)
 
         return productDetailsLayoutBinding.root
@@ -97,9 +98,16 @@ class ProductDetailsFragment : Fragment() {
 
                                     if (getString(ProductDataKey.ProductCoverImage) == null) {
 
+                                        productDetailsLayoutBinding.applicationFeaturedImageBlurView.visibility = View.VISIBLE
+
                                         val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
 
                                         productDetailsLayoutBinding.applicationFeaturedImageView.background = gradientFeaturedBackground
+
+                                        Glide.with(requireContext())
+                                            .load(resource)
+                                            .transform(CenterCrop())
+                                            .into(productDetailsLayoutBinding.applicationFeaturedImageView)
 
                                     } else {
 
