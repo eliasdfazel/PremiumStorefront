@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/23/21, 12:33 PM
+  ~ Last modified 5/23/21, 3:06 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -184,12 +184,12 @@
                 android:gravity="center"
                 android:text="5.0"
                 android:textSize="51sp"
-                android:textColor="@color/yellow"
+                android:textColor="@color/default_color_bright"
                 android:fontFamily="@font/neon"
                 android:shadowRadius="11"
                 android:shadowDx="0"
                 android:shadowDy="0"
-                android:shadowColor="@color/yellow"
+                android:shadowColor="@color/default_color_bright"
                 android:background="@drawable/application_rating_details_glowing_frame"
 
                 apps:layout_constraintTop_toTopOf="parent"
@@ -214,5 +214,19 @@
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bookmarkView"
+        android:layout_width="59dp"
+        android:layout_height="103dp"
+        android:padding="7dp"
+        android:scaleType="fitCenter"
+        android:layout_marginHorizontal="19dp"
+        android:tint="@color/default_color_light"
+        android:src="@drawable/favorite_icon"
+        android:background="@drawable/favorite_layer"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
