@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/28/21, 10:06 AM
+ * Last modified 5/28/21, 11:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,10 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.FavoritedProcess
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
@@ -184,6 +186,12 @@ class ProductDetailsFragment : Fragment() {
                 applicationPackageName = applicationPackageName?:requireContext().packageName,
                 applicationName = productName?:requireContext().getString(R.string.applicationName),
                 applicationSummary = productSummary?:requireContext().getString(R.string.applicationSummary))
+
+            productDetailsLayoutBinding.favoriteView.setOnClickListener {
+
+                FavoritedProcess(requireActivity() as AppCompatActivity).start()
+
+            }
 
             productDetailsLayoutBinding.goBackView.setOnClickListener {
 

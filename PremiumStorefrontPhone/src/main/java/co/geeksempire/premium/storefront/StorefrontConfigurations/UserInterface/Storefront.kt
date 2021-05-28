@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/23/21, 12:54 PM
+ * Last modified 5/28/21, 2:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
+import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetailsFragment
@@ -44,10 +46,15 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.firebase.auth.AuthResult
+import kotlinx.android.synthetic.main.storefront_layout.*
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
+
+class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
 
     val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
 
@@ -86,6 +93,17 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+
+    val accountSignIn: AccountSignIn by lazy {
+        AccountSignIn(this@Storefront, this@Storefront)
+    }
+
+    val accountSelector = registerForActivityResult(accountSignIn.createProcess()) {
+
+
+
+    }
+
 
     lateinit var storefrontLayoutBinding: StorefrontLayoutBinding
 
@@ -276,8 +294,28 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        storefrontLayoutBinding.profileView.setOnClickListener {
+
+            accountSelector.launch(AccountSignIn.GoogleSignInRequestCode)
+
+        }
+
+    }
+
     override fun onResume() {
         super.onResume()
+
+        accountSignIn.firebaseUser?.let {
+
+            Glide.with(applicationContext)
+                .load(it.photoUrl)
+                .transform(CircleCrop())
+                .into(storefrontLayoutBinding.profileView)
+
+        }
 
     }
 
@@ -335,6 +373,16 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface {
 
     override fun networkLost() {
         Log.d(this@Storefront.javaClass.simpleName, "No Network @ ${this@Storefront.javaClass.simpleName}")
+
+    }
+
+    override fun signInProcessSucceed(authenticationResult: AuthResult) {
+        super.signInProcessSucceed(authenticationResult)
+
+        Glide.with(applicationContext)
+            .load(authenticationResult.user?.photoUrl)
+            .transform(CircleCrop())
+            .into(storefrontLayoutBinding.profileView)
 
     }
 

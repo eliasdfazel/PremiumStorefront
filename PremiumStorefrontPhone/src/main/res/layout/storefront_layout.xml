@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/23/21, 12:59 PM
+  ~ Last modified 5/28/21, 2:48 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -138,12 +138,12 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/profileView"
         android:layout_width="53dp"
-        android:layout_height="67dp"
+        android:layout_height="53dp"
         android:layout_marginVertical="7dp"
         android:layout_marginEnd="11dp"
-        android:padding="3dp"
+        android:padding="5dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/profile_icon"
+        android:background="@drawable/profile_icon"
         android:contentDescription="@string/profileDescription"
 
         apps:layout_constraintTop_toTopOf="parent"
