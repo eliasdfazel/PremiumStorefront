@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/23/21, 12:36 PM
+ * Last modified 5/28/21, 10:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -97,5 +97,67 @@ fun ProductDetailsFragment.applyGlowingEffectsForRatingBackground(glowingColor: 
 
     productDetailsLayoutBinding.applicationRatingTextView.background = negativeSpaceLayers
     /* End - Setup Negative Space Of Rating Element */
+
+}
+
+fun ProductDetailsFragment.applyNegativeSpaceEffectsForFavorite() {
+
+    val favoriteLayer = requireContext().getDrawable(R.drawable.favorite_layer) as LayerDrawable
+
+    val negativeSpaceLeft = floatArrayOf(
+        0f,//topLeftCorner
+        0f,//topLeftCorner
+
+        51f,//topRightCorner
+        51f,//topRightCorner
+
+        0f,//bottomLeftCorner
+        0f,//bottomLeftCorner
+
+        0f,//bottomRightCorner
+        0f//bottomRightCorner
+    )
+
+    val shapeNegativeSpaceLeft: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
+
+    shapeNegativeSpaceLeft.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    val negativeSpaceRight = floatArrayOf(
+        51f,//topLeftCorner
+        51f,//topLeftCorner
+
+        0f,//topRightCorner
+        0f,//topRightCorner
+
+        0f,//bottomLeftCorner
+        0f,//bottomLeftCorner
+
+        0f,//bottomRightCorner
+        0f//bottomRightCorner
+    )
+
+    val shapeNegativeSpaceRight: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceRight, null, null))
+
+    shapeNegativeSpaceRight.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    favoriteLayer.setDrawableByLayerId(R.id.leftClearLayer, shapeNegativeSpaceLeft)
+    favoriteLayer.setDrawableByLayerId(R.id.rightClearLayer, shapeNegativeSpaceRight)
+
+    productDetailsLayoutBinding.favoriteView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeNegativeSpaceLeft.paint)
+    productDetailsLayoutBinding.favoriteView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    productDetailsLayoutBinding.favoriteView.background = (favoriteLayer)
 
 }
