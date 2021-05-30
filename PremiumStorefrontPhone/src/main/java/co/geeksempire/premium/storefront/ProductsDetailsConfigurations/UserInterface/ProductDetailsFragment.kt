@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 12:52 PM
+ * Last modified 5/30/21, 1:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,8 +23,8 @@ import androidx.fragment.app.Fragment
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.FavoriteProductQueryInterface
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.FavoritedProcess
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey

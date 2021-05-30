@@ -2,19 +2,19 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 12:49 PM
+ * Last modified 5/30/21, 1:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts
+package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO
 
 import androidx.appcompat.app.AppCompatActivity
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.Favorite
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.FavoriteDataStructure
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Endpoint.DatabaseDirectory
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.DataStructure.Favorite
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.DataStructure.FavoriteDataStructure
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.Endpoint.DatabaseDirectory
 
 interface FavoriteProductQueryInterface {
     fun favoriteProduct(isProductFavorited: Boolean)
