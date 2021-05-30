@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/28/21, 11:42 AM
+ * Last modified 5/30/21, 12:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,9 +17,13 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
+import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.FavoriteProducts.FavoritedProcess
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
 import co.geeksempire.premium.storefront.R
@@ -37,12 +41,29 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.firebase.auth.AuthResult
 
-class ProductDetailsFragment : Fragment() {
+class ProductDetailsFragment : Fragment(), SignInInterface {
 
     var storefrontInstance: Storefront? = null
 
+    val favoritedProcess: FavoritedProcess by lazy {
+        FavoritedProcess(requireActivity() as AppCompatActivity)
+    }
+
     var isShowing = false
+
+    /* Start - Sign In */
+    val accountSignIn: AccountSignIn by lazy {
+        AccountSignIn(requireActivity() as AppCompatActivity, this@ProductDetailsFragment)
+    }
+
+    val accountSelector: ActivityResultLauncher<Any?> = registerForActivityResult(accountSignIn.createProcess()) {
+
+
+
+    }
+    /* End - Sign In */
 
     lateinit var productDetailsLayoutBinding: ProductDetailsLayoutBinding
 
@@ -68,7 +89,7 @@ class ProductDetailsFragment : Fragment() {
 
         arguments?.apply {
 
-            val applicationId = getString(ProductDataKey.ProductId)
+            val productId = getString(ProductDataKey.ProductId)
             val applicationPackageName = getString(ProductDataKey.ProductPackageName)
 
             getString(ProductDataKey.ProductIcon)?.let { productIcon ->
@@ -189,7 +210,33 @@ class ProductDetailsFragment : Fragment() {
 
             productDetailsLayoutBinding.favoriteView.setOnClickListener {
 
-                FavoritedProcess(requireActivity() as AppCompatActivity).start()
+                if (accountSignIn.firebaseUser != null) {
+
+                    favoritedProcess.isProductFavorited(accountSignIn.firebaseUser!!.uid, productId!!,
+                        object : FavoriteProductQueryInterface {
+
+                            override fun favoriteProduct(isProductFavorited: Boolean) {
+
+                                if (isProductFavorited) {
+
+                                    favoritedProcess.remove(userUniqueIdentifier = accountSignIn.firebaseUser!!.uid, productId)
+
+                                } else {
+
+                                    favoritedProcess.add(userUniqueIdentifier = accountSignIn.firebaseUser!!.uid, productId)
+
+                                }
+
+                            }
+
+                        })
+
+
+                } else {
+
+                    accountSelector.launch(AccountSignIn.GoogleSignInRequestCode)
+
+                }
 
             }
 
@@ -219,6 +266,13 @@ class ProductDetailsFragment : Fragment() {
         super.onDestroyView()
 
         isShowing = false
+
+    }
+
+    override fun signInProcessSucceed(authenticationResult: AuthResult) {
+        super.signInProcessSucceed(authenticationResult)
+
+
 
     }
 

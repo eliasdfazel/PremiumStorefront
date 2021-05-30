@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/28/21, 2:46 PM
+ * Last modified 5/30/21, 11:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -52,7 +53,6 @@ import com.google.firebase.auth.AuthResult
 import kotlinx.android.synthetic.main.storefront_layout.*
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
-
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
 
@@ -94,16 +94,17 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
     val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
+    /* Start - Sign In */
     val accountSignIn: AccountSignIn by lazy {
         AccountSignIn(this@Storefront, this@Storefront)
     }
 
-    val accountSelector = registerForActivityResult(accountSignIn.createProcess()) {
+    val accountSelector: ActivityResultLauncher<Any?> = registerForActivityResult(accountSignIn.createProcess()) {
 
 
 
     }
-
+    /* End - Sign In */
 
     lateinit var storefrontLayoutBinding: StorefrontLayoutBinding
 

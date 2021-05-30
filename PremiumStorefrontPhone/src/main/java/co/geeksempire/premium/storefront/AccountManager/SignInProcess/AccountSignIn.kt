@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/28/21, 2:49 PM
+ * Last modified 5/30/21, 12:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,6 +35,8 @@ class AccountSignIn (val context: AppCompatActivity, val signInInterface: SignIn
 
         const val GoogleSignInRequestCode = 103
     }
+
+    fun
 
     fun createProcess() : ActivityResultContract<Any?, Intent?> {
 
