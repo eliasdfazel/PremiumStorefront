@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 11:48 AM
+ * Last modified 5/30/21, 1:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -24,6 +25,7 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInte
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetailsFragment
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
@@ -42,6 +44,8 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
@@ -49,6 +53,7 @@ import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmo
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import kotlinx.android.synthetic.main.storefront_layout.*
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
@@ -301,6 +306,37 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
         storefrontLayoutBinding.profileView.setOnClickListener {
 
             accountSelector.launch(AccountSignIn.GoogleSignInRequestCode)
+
+        }
+
+        storefrontLayoutBinding.preferencesView.setOnClickListener {
+
+            SnackbarBuilder(applicationContext).show (
+                rootView = storefrontLayoutBinding.rootView,
+                messageText= "Coming Soon... Follow Us To Get Notified",
+                messageDuration = Snackbar.LENGTH_INDEFINITE,
+                actionButtonText = R.string.retryText,
+                snackbarActionHandlerInterface = object : SnackbarActionHandlerInterface {
+
+                    override fun onActionButtonClicked(snackbar: Snackbar) {
+                        super.onActionButtonClicked(snackbar)
+
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookLink)))
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                        snackbar.dismiss()
+
+                    }
+
+                }
+            )
+
+        }
+
+        storefrontLayoutBinding.favoritesView.setOnClickListener {
+
+            startActivity(Intent(this@Storefront, FavoriteProducts::class.java),
+                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, R.anim.slide_out_left).toBundle())
 
         }
 

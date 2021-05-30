@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/28/21, 2:48 PM
+  ~ Last modified 5/30/21, 1:16 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -164,6 +164,24 @@
         apps:layout_constraintTop_toBottomOf="@id/profileView"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Favorite -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favoritesView"
+        android:layout_width="53dp"
+        android:layout_height="67dp"
+        android:layout_marginVertical="7dp"
+        android:layout_marginEnd="11dp"
+        android:paddingHorizontal="11dp"
+        android:paddingTop="1dp"
+        android:paddingBottom="13dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/favorite_heart_icon"
+        android:background="@drawable/squircle_background_dark"
+        android:contentDescription="@string/preferencesDescription"
+
+        apps:layout_constraintTop_toBottomOf="@id/preferencesView"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
     <!-- Side Panel -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoriesRecyclerView"
@@ -179,7 +197,7 @@
         android:smoothScrollbar="true"
         android:alwaysDrawnWithCache="true"
 
-        apps:layout_constraintTop_toBottomOf="@id/preferencesView"
+        apps:layout_constraintTop_toBottomOf="@id/favoritesView"
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
