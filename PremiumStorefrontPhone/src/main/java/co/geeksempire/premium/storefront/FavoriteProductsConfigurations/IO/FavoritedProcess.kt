@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 9:41 AM
+ * Last modified 5/31/21, 11:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,9 +49,17 @@ class FavoritedProcess (private val context: AppCompatActivity) {
             .document(DatabaseDirectory().favoriteProductEndpoint(userUniqueIdentifier, productIdToFavorite)).get()
             .addOnSuccessListener { documentSnapshot ->
 
-                documentSnapshot.getBoolean(Favorite.ProductFavorited)?.let { it ->
+                if (documentSnapshot.exists()) {
 
-                    favoriteProductQueryInterface.favoriteProduct(it)
+                    documentSnapshot.getBoolean(Favorite.ProductFavorited)?.let { it ->
+
+                        favoriteProductQueryInterface.favoriteProduct(it)
+
+                    }
+
+                } else {
+
+                    favoriteProductQueryInterface.favoriteProduct(false)
 
                 }
 
@@ -68,14 +76,10 @@ class FavoritedProcess (private val context: AppCompatActivity) {
 
         (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
-            .document(DatabaseDirectory().favoriteProductsCollectionEndpoint(userUniqueIdentifier)).get()
-            .addOnSuccessListener { documentSnapshot ->
+            .collection(DatabaseDirectory().favoriteProductsCollectionEndpoint(userUniqueIdentifier)).get()
+            .addOnSuccessListener { querySnapshot ->
 
-                documentSnapshot.getBoolean(Favorite.ProductFavorited)?.let { it ->
-
-                    favoriteProductQueryInterface.favoriteProductsExist(it)
-
-                }
+                favoriteProductQueryInterface.favoriteProductsExist(!querySnapshot.isEmpty)
 
             }.addOnFailureListener {
 

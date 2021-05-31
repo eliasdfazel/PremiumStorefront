@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 9:36 AM
+ * Last modified 5/31/21, 11:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,11 +17,9 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
-import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
@@ -29,6 +27,9 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeCo
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
@@ -41,29 +42,21 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.firebase.auth.AuthResult
+import com.google.android.material.snackbar.Snackbar
 
-class ProductDetailsFragment : Fragment(), SignInInterface {
+class ProductDetailsFragment : Fragment() {
 
     var storefrontInstance: Storefront? = null
+
+    val networkCheckpoint: NetworkCheckpoint by lazy {
+        NetworkCheckpoint(requireContext())
+    }
 
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(requireActivity() as AppCompatActivity)
     }
 
     var isShowing = false
-
-    /* Start - Sign In */
-    val accountSignIn: AccountSignIn by lazy {
-        AccountSignIn(requireActivity() as AppCompatActivity, this@ProductDetailsFragment)
-    }
-
-    val accountSelector: ActivityResultLauncher<Any?> = registerForActivityResult(accountSignIn.createProcess()) {
-
-
-
-    }
-    /* End - Sign In */
 
     lateinit var productDetailsLayoutBinding: ProductDetailsLayoutBinding
 
@@ -210,9 +203,9 @@ class ProductDetailsFragment : Fragment(), SignInInterface {
 
             productDetailsLayoutBinding.favoriteView.setOnClickListener {
 
-                if (accountSignIn.firebaseUser != null) {
+                if (storefrontInstance?.accountSignIn!!.firebaseUser != null) {
 
-                    favoritedProcess.isProductFavorited(accountSignIn.firebaseUser!!.uid, productId!!,
+                    favoritedProcess.isProductFavorited(storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId!!,
                         object : FavoriteProductQueryInterface {
 
                             override fun favoriteProduct(isProductFavorited: Boolean) {
@@ -220,11 +213,86 @@ class ProductDetailsFragment : Fragment(), SignInInterface {
 
                                 if (isProductFavorited) {
 
-                                    favoritedProcess.remove(userUniqueIdentifier = accountSignIn.firebaseUser!!.uid, productId)
+                                    if (networkCheckpoint.networkConnection()) {
+
+                                        favoritedProcess.remove(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+
+                                        productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(R.drawable.favorite_icon))
+
+                                    } else {
+
+                                        SnackbarBuilder(requireContext()).show (
+                                            rootView = productDetailsLayoutBinding.rootViewFragment,
+                                            messageText= getString(R.string.noNetworkConnection),
+                                            messageDuration = Snackbar.LENGTH_INDEFINITE,
+                                            actionButtonText = R.string.retryText,
+                                            snackbarActionHandlerInterface = object :
+                                                SnackbarActionHandlerInterface {
+
+                                                override fun onActionButtonClicked(snackbar: Snackbar) {
+                                                    super.onActionButtonClicked(snackbar)
+
+                                                    if (networkCheckpoint.networkConnection()) {
+
+                                                        favoritedProcess.remove(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+
+                                                        productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(R.drawable.favorite_icon))
+
+                                                        snackbar.dismiss()
+
+                                                    } else {
+
+
+
+                                                    }
+
+                                                }
+
+                                            }
+                                        )
+
+                                    }
 
                                 } else {
 
-                                    favoritedProcess.add(userUniqueIdentifier = accountSignIn.firebaseUser!!.uid, productId)
+                                    if (networkCheckpoint.networkConnection()) {
+
+                                        favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+
+                                        productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(R.drawable.favorited_icon))
+
+                                    } else {
+
+                                        SnackbarBuilder(requireContext()).show (
+                                            rootView = productDetailsLayoutBinding.rootViewFragment,
+                                            messageText= getString(R.string.noNetworkConnection),
+                                            messageDuration = Snackbar.LENGTH_INDEFINITE,
+                                            actionButtonText = R.string.retryText,
+                                            snackbarActionHandlerInterface = object : SnackbarActionHandlerInterface {
+
+                                                override fun onActionButtonClicked(snackbar: Snackbar) {
+                                                    super.onActionButtonClicked(snackbar)
+
+                                                    if (networkCheckpoint.networkConnection()) {
+
+                                                        favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+
+                                                        productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(R.drawable.favorited_icon))
+
+                                                        snackbar.dismiss()
+
+                                                    } else {
+
+
+
+                                                    }
+
+                                                }
+
+                                            }
+                                        )
+
+                                    }
 
                                 }
 
@@ -235,7 +303,7 @@ class ProductDetailsFragment : Fragment(), SignInInterface {
 
                 } else {
 
-                    accountSelector.launch(AccountSignIn.GoogleSignInRequestCode)
+                    storefrontInstance?.accountSelector!!.launch(AccountSignIn.GoogleSignInRequestCode)
 
                 }
 
@@ -267,13 +335,6 @@ class ProductDetailsFragment : Fragment(), SignInInterface {
         super.onDestroyView()
 
         isShowing = false
-
-    }
-
-    override fun signInProcessSucceed(authenticationResult: AuthResult) {
-        super.signInProcessSucceed(authenticationResult)
-
-
 
     }
 
