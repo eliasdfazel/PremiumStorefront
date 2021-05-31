@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 1:00 PM
+ * Last modified 5/31/21, 9:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,8 @@ package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Endpoin
 
 class DatabaseDirectory {
 
-    fun favoriteProductsEndpoint(userUniqueIdentifier: String, productId: String) = "/PremiumStorefront/${userUniqueIdentifier}/Favorite/${productId}"
+    fun favoriteProductsCollectionEndpoint(userUniqueIdentifier: String) = "/PremiumStorefront/${userUniqueIdentifier}/Favorite"
+
+    fun favoriteProductEndpoint(userUniqueIdentifier: String, productId: String) = "/PremiumStorefront/${userUniqueIdentifier}/Favorite/${productId}"
 
 }

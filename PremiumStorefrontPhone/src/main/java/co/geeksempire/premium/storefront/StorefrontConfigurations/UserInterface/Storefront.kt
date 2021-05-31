@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 1:52 PM
+ * Last modified 5/31/21, 9:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,6 +24,8 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInte
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetailsFragment
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
@@ -74,6 +76,10 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     val actionCenterOperations: ActionCenterOperations by lazy {
         ActionCenterOperations(this@Storefront)
+    }
+
+    val favoritedProcess: FavoritedProcess by lazy {
+        FavoritedProcess(this@Storefront)
     }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
@@ -311,6 +317,22 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                 .load(it.photoUrl)
                 .transform(CircleCrop())
                 .into(storefrontLayoutBinding.profileView)
+
+            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
+                object : FavoriteProductQueryInterface {
+
+                    override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                        super.favoriteProductsExist(isFavoriteProductsExist)
+
+                        storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                            View.VISIBLE
+                        } else {
+                            View.GONE
+                        }
+
+                    }
+
+                })
 
         }
 

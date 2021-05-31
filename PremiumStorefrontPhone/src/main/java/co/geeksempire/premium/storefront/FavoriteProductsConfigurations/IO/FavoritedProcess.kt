@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 1:03 PM
+ * Last modified 5/31/21, 9:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,22 +17,17 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Endpoint
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 
 interface FavoriteProductQueryInterface {
-    fun favoriteProduct(isProductFavorited: Boolean)
+    fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {}
+    fun favoriteProduct(isProductFavorited: Boolean) {}
 }
 
 class FavoritedProcess (private val context: AppCompatActivity) {
-
-    fun start() : FavoritedProcess {
-
-
-        return this@FavoritedProcess
-    }
 
     fun add(userUniqueIdentifier: String, productIdToFavorite: String) {
 
         (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
-            .document(DatabaseDirectory().favoriteProductsEndpoint(userUniqueIdentifier, productIdToFavorite))
+            .document(DatabaseDirectory().favoriteProductEndpoint(userUniqueIdentifier, productIdToFavorite))
             .set(FavoriteDataStructure(productId = productIdToFavorite, productFavorited = true))
 
     }
@@ -41,7 +36,7 @@ class FavoritedProcess (private val context: AppCompatActivity) {
 
         (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
-            .document(DatabaseDirectory().favoriteProductsEndpoint(userUniqueIdentifier, productIdToFavorite))
+            .document(DatabaseDirectory().favoriteProductEndpoint(userUniqueIdentifier, productIdToFavorite))
             .delete()
 
     }
@@ -51,7 +46,7 @@ class FavoritedProcess (private val context: AppCompatActivity) {
 
         (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
-            .document(DatabaseDirectory().favoriteProductsEndpoint(userUniqueIdentifier, productIdToFavorite)).get()
+            .document(DatabaseDirectory().favoriteProductEndpoint(userUniqueIdentifier, productIdToFavorite)).get()
             .addOnSuccessListener { documentSnapshot ->
 
                 documentSnapshot.getBoolean(Favorite.ProductFavorited)?.let { it ->
@@ -68,4 +63,25 @@ class FavoritedProcess (private val context: AppCompatActivity) {
 
     }
 
+    fun isFavoriteProductsExist(userUniqueIdentifier: String,
+                                favoriteProductQueryInterface: FavoriteProductQueryInterface) {
+
+        (context.application as PremiumStorefrontApplication)
+            .firestoreDatabase
+            .document(DatabaseDirectory().favoriteProductsCollectionEndpoint(userUniqueIdentifier)).get()
+            .addOnSuccessListener { documentSnapshot ->
+
+                documentSnapshot.getBoolean(Favorite.ProductFavorited)?.let { it ->
+
+                    favoriteProductQueryInterface.favoriteProductsExist(it)
+
+                }
+
+            }.addOnFailureListener {
+
+                favoriteProductQueryInterface.favoriteProductsExist(false)
+
+            }
+
+    }
 }

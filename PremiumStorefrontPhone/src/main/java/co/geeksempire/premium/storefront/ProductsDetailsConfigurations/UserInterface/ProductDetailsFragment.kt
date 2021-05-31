@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 1:01 PM
+ * Last modified 5/31/21, 9:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -216,6 +216,7 @@ class ProductDetailsFragment : Fragment(), SignInInterface {
                         object : FavoriteProductQueryInterface {
 
                             override fun favoriteProduct(isProductFavorited: Boolean) {
+                                super.favoriteProduct(isProductFavorited)
 
                                 if (isProductFavorited) {
 
