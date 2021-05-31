@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 12:38 PM
+ * Last modified 5/31/21, 12:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.Database.Preferences.Theme
 
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import co.geeksempire.premium.storefront.Database.Preferences.PreferencesIO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ class ThemePreferences (context: Context) {
      **/
     fun checkThemeLightDark() : Flow<Boolean?> {
 
-        return preferencesIO.readPreferences()
+        return preferencesIO.readPreferences(booleanPreferencesKey("ApplicationTheme"))
     }
 
     /**
@@ -39,7 +40,7 @@ class ThemePreferences (context: Context) {
      **/
     fun changeLightDarkTheme(themeValue: Boolean) = CoroutineScope(Dispatchers.IO).async {
 
-        preferencesIO.savePreferences(themeValue)
+        preferencesIO.savePreferences(booleanPreferencesKey("ApplicationTheme"),  themeValue)
     }
 
 }
