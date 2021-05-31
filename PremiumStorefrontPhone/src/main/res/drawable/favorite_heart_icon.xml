@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/31/21, 10:07 AM
+  ~ Last modified 5/31/21, 10:23 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,10 +14,10 @@
     android:viewportWidth="511.999"
     android:viewportHeight="511.999">
     <path
-        android:fillColor="@color/default_color_game_transparent"
+        android:fillColor="@color/default_color_game_light_transparent"
         android:pathData="M43.147,77.384L43.147,77.384c57.528,-58.657 150.798,-58.657 208.325,0l0,0c1.518,1.548 2.987,3.127 4.424,4.724l0.105,-0.107l0.104,0.106c1.438,-1.597 2.907,-3.176 4.424,-4.724l0,0c57.528,-58.656 150.797,-58.656 208.325,0l0,0c57.528,58.656 57.528,153.758 0,212.415l0,0c-1.518,1.548 -165.602,168.852 -165.602,168.852c-26.096,26.61 -68.409,26.61 -94.505,0c0,0 -164.084,-167.305 -165.602,-168.852l0,0C-14.381,231.142 -14.381,136.04 43.147,77.384z" />
     <path
-        android:fillColor="@color/default_color_game_light_transparent"
+        android:fillColor="@color/default_color_game_transparent"
         android:pathData="M303.268,333.183c34.168,34.838 34.161,90.622 -0.007,125.46c-0.006,0.006 -0.009,0.009 -0.009,0.009c-26.096,26.61 -68.409,26.61 -94.505,0c0,0 -164.084,-167.305 -165.602,-168.852l0,0c-57.528,-58.656 -57.528,-153.758 0,-212.415l0,0c57.528,-58.656 150.797,-58.656 208.325,0l0,0c1.518,1.548 2.987,3.127 4.424,4.724l0.106,-0.107l0.031,0.032c-52.961,58.936 -51.462,150.515 4.517,207.59l0,0C261.048,290.133 279.177,308.618 303.268,333.183z" />
     <path
         android:fillColor="@color/premiumLight"
