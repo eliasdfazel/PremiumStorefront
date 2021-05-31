@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 12:43 PM
+ * Last modified 5/31/21, 12:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,7 +32,7 @@ class ThemePreferences (context: Context) {
      **/
     fun checkThemeLightDark() : Flow<Boolean?> {
 
-        return preferencesIO.readPreferences(booleanPreferencesKey("ApplicationTheme"))
+        return preferencesIO.readPreferencesBoolean(booleanPreferencesKey("ApplicationTheme"))
     }
 
     /**
