@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/2/21, 2:31 PM
+ * Last modified 6/2/21, 2:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
+import co.geeksempire.premium.storefront.Utils.Data.generatePassword
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -119,7 +120,7 @@ class AccountSignIn (val context: AppCompatActivity, val signInInterface: SignIn
 
         val usernameId = firebaseUser.email!!.split("@").first()
         val userEmailAddress = firebaseUser.email
-        val userPassword = firebaseUser.uid
+        val userPassword = generatePassword(firebaseUser.uid)
 
         val inputData = JSONObject("{" +
                 "\"username\": \"${usernameId}\"," +

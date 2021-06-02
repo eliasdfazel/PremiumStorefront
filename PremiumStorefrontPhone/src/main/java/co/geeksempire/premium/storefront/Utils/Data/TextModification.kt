@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/22/21, 2:01 PM
+ * Last modified 6/2/21, 2:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,4 +21,19 @@ fun generateHashTag(inputText: String) : String {
     }
 
     return hashTagBuilder.toString()
+}
+
+fun generatePassword(inputText: String) : String {
+
+    val charList = inputText.reversed().toList().shuffled()
+
+    val passwordBuilder = StringBuilder()
+
+    charList.forEachIndexed { index, text ->
+
+        passwordBuilder.append("$text")
+
+    }
+
+    return passwordBuilder.toString()
 }
