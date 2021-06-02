@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/28/21, 2:44 PM
+ * Last modified 6/2/21, 2:30 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,11 @@ interface SignInInterface {
 
     fun signInProcessSucceed(authenticationResult: AuthResult) {
         Log.d(this@SignInInterface.javaClass.simpleName, "Sign In Process Succeed")
+    }
+
+    fun userCreated(accountData: AccountData) {
+        Log.d(this@SignInInterface.javaClass.simpleName, "User Created Successfully")
+
     }
 
     fun signInProcessFailed(error: String?) {

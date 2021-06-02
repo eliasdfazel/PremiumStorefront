@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 1:28 PM
+ * Last modified 6/2/21, 2:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,14 +11,19 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface
 
 import android.app.ActivityOptions
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
@@ -45,6 +50,8 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
@@ -52,10 +59,12 @@ import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmo
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import kotlinx.android.synthetic.main.storefront_layout.*
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
 
@@ -392,6 +401,39 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     override fun networkLost() {
         Log.d(this@Storefront.javaClass.simpleName, "No Network @ ${this@Storefront.javaClass.simpleName}")
+
+    }
+
+    override fun userCreated(accountData: AccountData) {
+        super.userCreated(accountData)
+
+        val messageText = "Your Details On www.GeeksEmpire.co \n" +
+                "Username: ${accountData.usernameId} | Password: ${accountData.userPassword}"
+
+        SnackbarBuilder(applicationContext).show (
+            rootView = storefrontLayoutBinding.rootView,
+            messageText = messageText,
+            messageDuration = Snackbar.LENGTH_INDEFINITE,
+            actionButtonText = R.string.copyText,
+            snackbarActionHandlerInterface = object : SnackbarActionHandlerInterface {
+
+                override fun onActionButtonClicked(snackbar: Snackbar) {
+                    super.onActionButtonClicked(snackbar)
+
+                    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+                    val clipData = ClipData.newPlainText("Geeks Empire Account Data", messageText)
+
+                    clipboardManager.setPrimaryClip(clipData)
+
+                    snackbar.dismiss()
+
+                    Toast.makeText(applicationContext, "Copied!", Toast.LENGTH_LONG).show()
+
+                }
+
+            }
+        )
 
     }
 
