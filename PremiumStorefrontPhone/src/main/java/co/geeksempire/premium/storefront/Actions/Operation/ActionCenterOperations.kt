@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 9:36 AM
+ * Last modified 6/4/21, 9:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.Actions.Operation
 
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter.SortingOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
@@ -36,7 +37,10 @@ class ActionCenterOperations (val context: Storefront) {
 
         context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
-            context.filterAllContent.filterAlContentByInput()
+            context.filterAllContent.filterAlContentByInput(context.storefrontAllUnfilteredContents, FilteringOptions.FilterByCountry, "Germany")
+                .invokeOnCompletion {
+
+                }
 
         }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 9:26 AM
+ * Last modified 6/4/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,9 +24,17 @@ object SortingOptions {
     const val SortByRating = "Rating"
 }
 
+object FilteringOptions {
+    const val FilterByCountry = "FilterByCountry"
+    const val FilterByAndroidCompatibilities = "FilterByAndroidCompatibilities"
+}
+
 class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
-    fun searchThroughAllContent() {
+    fun searchThroughAllContent(storefrontAllContents: ArrayList<StorefrontContentsData>,
+                                searchQuery: String) {
+
+        Log.d(this@FilterAllContent.javaClass.simpleName, "Search Query: ${searchQuery}")
 
 
 
@@ -53,16 +61,43 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
     }
 
-    fun filterAlContentByInput() {
+    fun filterAlContentByInput(storefrontAllContents: ArrayList<StorefrontContentsData>,
+                               filterType: String, filterInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
+        Log.d(this@FilterAllContent.javaClass.simpleName, "Filtering Input Data: ${filterInputParameter}")
 
+        if (storefrontAllContents.isNotEmpty()) {
+
+            val storefrontAllContentsFilter = storefrontAllContents.filter {
+
+                when (filterType) {
+                    FilteringOptions.FilterByCountry -> {
+
+                        it.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey] == filterInputParameter
+
+                    }
+                    FilteringOptions.FilterByAndroidCompatibilities -> {
+
+                        it.productAttributes[StorefrontFeaturedContentKey.AttributesAndroidCompatibilitiesKey] == filterInputParameter
+
+                    }
+                    else -> true //All Unfiltered Content
+                }
+            }
+
+            storefrontAllContents.clear()
+            storefrontAllContents.addAll(storefrontAllContentsFilter)
+
+            storefrontLiveData.allFilteredContentItemData.postValue(storefrontAllContents)
+
+        }
 
     }
 
     fun sortAllContentByInput(storefrontAllContents: ArrayList<StorefrontContentsData>,
                               sortInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        Log.d(this@FilterAllContent.javaClass.simpleName, "Input Data: ${sortInputParameter}")
+        Log.d(this@FilterAllContent.javaClass.simpleName, "Sorting Input Data: ${sortInputParameter}")
 
         if (storefrontAllContents.isNotEmpty()) {
 
