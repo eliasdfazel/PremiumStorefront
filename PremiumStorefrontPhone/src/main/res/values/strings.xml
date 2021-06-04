@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/2/21, 2:28 PM
+  ~ Last modified 6/4/21, 11:35 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -26,6 +26,9 @@
     <string name="categoryShowAllApplications">Show Applications</string>
 
     <string name="settingUpText">Setting Up…</string>
+
+    <string name="countryFilterText">Countries</string>
+    <string name="compatibilitiesFilterText">Android Version</string>
 
     <string name="retryText">Retry</string>
     <string name="copyText">Copy</string>

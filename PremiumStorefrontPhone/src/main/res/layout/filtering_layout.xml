@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/4/21, 10:14 AM
+  ~ Last modified 6/4/21, 12:03 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -25,6 +25,90 @@
         apps:realtimeFirstColor="@color/premiumLightTransparent"
         apps:realtimeSecondColor="@color/transparent"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/filtersContainerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/filtering_container_layer"
 
+        apps:layout_constraintWidth_percent="0.79"
+        apps:layout_constraintHeight_percent="0.5"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/filteringOptionsRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="13dp"
+            android:paddingVertical="7dp"
+            android:background="@drawable/filtering_options_container_layer"
+            android:visibility="gone"
+
+            apps:layout_constraintWidth_percent="0.7"
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/filterCountryView"
+            android:layout_width="0dp"
+            android:layout_height="97dp"
+            android:paddingHorizontal="11dp"
+            android:gravity="center_vertical"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="3"
+            android:lines="1"
+            android:textColor="@color/default_color_light"
+            android:textSize="37sp"
+            android:text="@string/countryFilterText"
+            android:fontFamily="@font/upcil"
+            android:shadowColor="@color/white"
+            android:shadowRadius="11"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            apps:autoSizeMaxTextSize="37dp"
+            apps:autoSizeMinTextSize="17sp"
+            apps:autoSizeStepGranularity="2sp"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintVertical_bias="0.35"
+            apps:layout_constraintStart_toStartOf="parent"
+            apps:layout_constraintEnd_toStartOf="@id/filteringOptionsRecyclerView"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/filterCompatibilitiesView"
+            android:layout_width="0dp"
+            android:layout_height="97dp"
+            android:paddingHorizontal="11dp"
+            android:gravity="center_vertical"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="3"
+            android:lines="1"
+            android:textColor="@color/default_color_light"
+            android:textSize="37sp"
+            android:text="@string/compatibilitiesFilterText"
+            android:fontFamily="@font/upcil"
+            android:shadowColor="@color/white"
+            android:shadowRadius="11"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            apps:autoSizeMaxTextSize="37dp"
+            apps:autoSizeMinTextSize="17sp"
+            apps:autoSizeStepGranularity="2sp"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintVertical_bias="0.65"
+            apps:layout_constraintStart_toStartOf="parent"
+            apps:layout_constraintEnd_toStartOf="@id/filteringOptionsRecyclerView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
