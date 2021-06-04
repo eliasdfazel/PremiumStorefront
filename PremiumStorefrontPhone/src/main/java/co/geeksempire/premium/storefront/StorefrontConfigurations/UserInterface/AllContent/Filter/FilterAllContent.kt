@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 9:45 AM
+ * Last modified 6/4/21, 10:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,11 +32,30 @@ object FilteringOptions {
 class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
     fun searchThroughAllContent(storefrontAllContents: ArrayList<StorefrontContentsData>,
-                                searchQuery: String) {
+                                searchQuery: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         Log.d(this@FilterAllContent.javaClass.simpleName, "Search Query: ${searchQuery}")
 
+        if (storefrontAllContents.isNotEmpty()) {
 
+            val storefrontAllContentsFilter = ArrayList<StorefrontContentsData>()
+
+            storefrontAllContents.forEachIndexed { index, storefrontContentsData ->
+
+                if (storefrontContentsData.productName.contains(searchQuery)
+                    || storefrontContentsData.productSummary.contains(searchQuery)
+                    || storefrontContentsData.productCategory.contains(searchQuery)
+                    || storefrontContentsData.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]?.contains(searchQuery)?:false) {
+
+                    storefrontAllContentsFilter.add(storefrontContentsData)
+
+                }
+
+            }
+
+            storefrontLiveData.allFilteredContentItemData.postValue(storefrontAllContentsFilter)
+
+        }
 
     }
 

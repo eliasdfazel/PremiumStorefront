@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 9:43 AM
+ * Last modified 6/4/21, 10:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,8 +10,7 @@
 
 package co.geeksempire.premium.storefront.Actions.Operation
 
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter.FilteringOptions
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter.SortingOptions
+import android.view.View
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.Data.shareApplication
@@ -22,25 +21,48 @@ class ActionCenterOperations (val context: Storefront) {
 
         context.storefrontLayoutBinding.leftActionView.setOnClickListener {
 
-            context.filterAllContent.sortAllContentByInput(context.storefrontAllUnfilteredContents, SortingOptions.SortByRating)
-                .invokeOnCompletion {
+            if (context.storefrontLayoutBinding.sortingInclude.root.isShown) {
+                context.storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+            }
 
-                }
+            context.storefrontLayoutBinding.filteringInclude.root.visibility = if (context.storefrontLayoutBinding.filteringInclude.root.isShown) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+//            context.filterAllContent.sortAllContentByInput(context.storefrontAllUnfilteredContents, SortingOptions.SortByRating)
+//                .invokeOnCompletion {
+//
+//                }
 
         }
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            context.filterAllContent.searchThroughAllContent()
+//            context.filterAllContent.searchThroughAllContent(context.storefrontAllUnfilteredContents, "Float It")
+//                .invokeOnCompletion {
+//
+//                }
 
         }
 
         context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
-            context.filterAllContent.filterAlContentByInput(context.storefrontAllUnfilteredContents, FilteringOptions.FilterByCountry, "Germany")
-                .invokeOnCompletion {
+            if (context.storefrontLayoutBinding.filteringInclude.root.isShown) {
+                context.storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
+            }
 
-                }
+            context.storefrontLayoutBinding.sortingInclude.root.visibility = if (context.storefrontLayoutBinding.sortingInclude.root.isShown) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+
+//            context.filterAllContent.filterAlContentByInput(context.storefrontAllUnfilteredContents, FilteringOptions.FilterByCountry, "Germany")
+//                .invokeOnCompletion {
+//
+//                }
 
         }
 
