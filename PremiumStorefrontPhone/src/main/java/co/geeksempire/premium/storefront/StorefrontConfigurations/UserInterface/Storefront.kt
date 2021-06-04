@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/2/21, 2:44 PM
+ * Last modified 6/4/21, 9:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,7 +65,6 @@ import kotlinx.android.synthetic.main.storefront_layout.*
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
 
     val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
@@ -85,6 +84,10 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     val actionCenterOperations: ActionCenterOperations by lazy {
         ActionCenterOperations(this@Storefront)
+    }
+
+    val filterAllContent: FilterAllContent by lazy {
+        FilterAllContent(storefrontLiveData)
     }
 
     val favoritedProcess: FavoritedProcess by lazy {
@@ -140,8 +143,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
             userInteractionSetup()
 
             actionCenterOperations.setupForStorefront()
-
-            val filterAllContent = FilterAllContent(storefrontLiveData)
 
             val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
             storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
