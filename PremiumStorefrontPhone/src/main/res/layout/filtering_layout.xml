@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/4/21, 12:03 PM
+  ~ Last modified 6/4/21, 1:32 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,11 +19,12 @@
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
 
         apps:realtimeBlurRadius="3dp"
-        apps:realtimeBlurGradientType="radial"
-        apps:realtimeFirstColor="@color/premiumLightTransparent"
-        apps:realtimeSecondColor="@color/transparent"/>
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/premiumLightTransparent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/filtersContainerView"
@@ -31,8 +32,8 @@
         android:layout_height="0dp"
         android:background="@drawable/filtering_container_layer"
 
-        apps:layout_constraintWidth_percent="0.79"
-        apps:layout_constraintHeight_percent="0.5"
+        apps:layout_constraintWidth_percent="0.91"
+        apps:layout_constraintHeight_percent="0.59"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
@@ -46,10 +47,35 @@
             android:paddingHorizontal="13dp"
             android:paddingVertical="7dp"
             android:background="@drawable/filtering_options_container_layer"
-            android:visibility="gone"
+            android:visibility="visible"
 
             apps:layout_constraintWidth_percent="0.7"
             apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <net.geeksempire.loadingspin.SpinKitView
+            android:id="@+id/filterOptionsLoadingView"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+
+            apps:SpinKit_Style="FoldingCube"
+            apps:SpinKit_Color="@color/premiumLightTransparent"
+
+            apps:layout_constraintTop_toTopOf="@id/filteringOptionsRecyclerView"
+            apps:layout_constraintBottom_toBottomOf="@id/filteringOptionsRecyclerView"
+            apps:layout_constraintStart_toStartOf="@id/filteringOptionsRecyclerView"
+            apps:layout_constraintEnd_toEndOf="@id/filteringOptionsRecyclerView"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/filterSelectedView"
+            android:layout_width="0dp"
+            android:layout_height="97dp"
+            android:background="@drawable/filtering_selected_container_layer"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintVertical_bias="0.37"
+            apps:layout_constraintStart_toStartOf="parent"
+            apps:layout_constraintEnd_toStartOf="@id/filteringOptionsRecyclerView"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/filterCountryView"
@@ -60,12 +86,15 @@
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="3"
             android:lines="1"
+            android:singleLine="true"
             android:textColor="@color/default_color_light"
             android:textSize="37sp"
             android:text="@string/countryFilterText"
             android:fontFamily="@font/upcil"
-            android:shadowColor="@color/white"
-            android:shadowRadius="11"
+            android:shadowColor="@color/default_color_light"
+            android:shadowRadius="13"
+            android:shadowDx="1"
+            android:shadowDy="3"
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -76,7 +105,7 @@
 
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintBottom_toBottomOf="parent"
-            apps:layout_constraintVertical_bias="0.35"
+            apps:layout_constraintVertical_bias="0.37"
             apps:layout_constraintStart_toStartOf="parent"
             apps:layout_constraintEnd_toStartOf="@id/filteringOptionsRecyclerView"/>
 
@@ -89,12 +118,15 @@
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="3"
             android:lines="1"
+            android:singleLine="true"
             android:textColor="@color/default_color_light"
             android:textSize="37sp"
             android:text="@string/compatibilitiesFilterText"
             android:fontFamily="@font/upcil"
-            android:shadowColor="@color/white"
-            android:shadowRadius="11"
+            android:shadowColor="@color/default_color_light"
+            android:shadowRadius="13"
+            android:shadowDx="1"
+            android:shadowDy="3"
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -105,7 +137,7 @@
 
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintBottom_toBottomOf="parent"
-            apps:layout_constraintVertical_bias="0.65"
+            apps:layout_constraintVertical_bias="0.63"
             apps:layout_constraintStart_toStartOf="parent"
             apps:layout_constraintEnd_toStartOf="@id/filteringOptionsRecyclerView"/>
 

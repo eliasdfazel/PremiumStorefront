@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 11:04 AM
+ * Last modified 6/4/21, 12:18 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,11 +15,11 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 
 fun Storefront.sortingSetup() {
 
-    if (storefrontLayoutBinding.sortingInclude.root.isShown) {
-        storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+    if (storefrontLayoutBinding.filteringInclude.root.isShown) {
+        storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
     }
 
-    storefrontLayoutBinding.filteringInclude.root.visibility = if (storefrontLayoutBinding.filteringInclude.root.isShown) {
+    storefrontLayoutBinding.sortingInclude.root.visibility = if (storefrontLayoutBinding.sortingInclude.root.isShown) {
         View.GONE
     } else {
         View.VISIBLE
