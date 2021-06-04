@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 9:27 AM
+ * Last modified 6/4/21, 9:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,9 +10,6 @@
 
 package co.geeksempire.premium.storefront.Actions.Operation
 
-import android.view.View
-import android.view.animation.AnimationUtils
-import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter.SortingOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
@@ -24,14 +21,8 @@ class ActionCenterOperations (val context: Storefront) {
 
         context.storefrontLayoutBinding.leftActionView.setOnClickListener {
 
-            context.storefrontLayoutBinding.loadingView.visibility = View.VISIBLE
-            context.storefrontLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
-
             context.filterAllContent.sortAllContentByInput(context.storefrontAllUnfilteredContents, SortingOptions.SortByRating)
                 .invokeOnCompletion {
-
-                    context.storefrontLayoutBinding.loadingView.visibility = View.INVISIBLE
-                    context.storefrontLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
 
                 }
 
