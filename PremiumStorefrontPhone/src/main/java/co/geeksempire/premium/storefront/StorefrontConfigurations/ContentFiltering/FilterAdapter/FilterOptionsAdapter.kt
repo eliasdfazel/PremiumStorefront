@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 5:21 AM
+ * Last modified 6/5/21, 5:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilter
 
 import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
@@ -49,6 +50,8 @@ class FilterOptionsAdapter (val context: Storefront) : RecyclerView.Adapter<Filt
             .into(filterOptionsViewHolder.filterOptionsIcon)
 
         filterOptionsViewHolder.rootViewItem.setOnClickListener {
+
+            context.storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
 
             context.filterAllContent.filterAlContentByInput(context.storefrontAllUnfilteredContents, FilteringOptions.FilterByCountry, filterOptionsData[position].filterOptionLabel)
                 .invokeOnCompletion {
