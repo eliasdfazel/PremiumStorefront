@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 5:50 AM
+ * Last modified 6/5/21, 7:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
-class FilterOptionsAdapter (val context: Storefront) : RecyclerView.Adapter<FilterOptionsViewHolder>() {
+class FilterOptionsAdapter (val context: Storefront, val filterOptionsType: String) : RecyclerView.Adapter<FilterOptionsViewHolder>() {
 
     val filterOptionsData: ArrayList<FilterOptionsItem> = ArrayList<FilterOptionsItem>()
 
@@ -53,10 +53,28 @@ class FilterOptionsAdapter (val context: Storefront) : RecyclerView.Adapter<Filt
 
             context.storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
 
-            context.filterAllContent.filterAlContentByInput(context.storefrontAllUnfilteredContents, FilteringOptions.FilterByCountry, filterOptionsData[position].filterOptionLabel)
-                .invokeOnCompletion {
+            when (filterOptionsType) {
+                FilteringOptions.FilterByCountry -> {
+
+                    context.filterAllContent.filterAlContentByInput(context.storefrontAllUnfilteredContents,
+                        FilteringOptions.FilterByCountry,
+                        filterOptionsData[position].filterOptionLabel)
+                        .invokeOnCompletion {
+
+                        }
 
                 }
+                FilteringOptions.FilterByAndroidCompatibilities -> {
+
+                    context.filterAllContent.filterAlContentByInput(context.storefrontAllUnfilteredContents,
+                        FilteringOptions.FilterByAndroidCompatibilities,
+                        filterOptionsData[position].filterOptionLabel)
+                        .invokeOnCompletion {
+
+                        }
+
+                }
+            }
 
         }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 5:46 AM
+ * Last modified 6/5/21, 7:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
@@ -72,7 +73,7 @@ fun Storefront.filterByCountriesDataProcess() {
 
     if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
-        val filterOptionsAdapter = FilterOptionsAdapter(this@filterByCountriesDataProcess)
+        val filterOptionsAdapter = FilterOptionsAdapter(this@filterByCountriesDataProcess, FilteringOptions.FilterByCountry)
 
         storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
         storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
@@ -113,8 +114,6 @@ fun Storefront.filterByCountriesDataProcess() {
 
                 }
 
-
-
             withContext(SupervisorJob() + Dispatchers.Main) {
 
                 filterOptionsAdapter.notifyDataSetChanged()
@@ -131,7 +130,54 @@ fun Storefront.filterByCompatibilitiesDataProcess() {
 
     if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
+        val filterOptionsAdapter = FilterOptionsAdapter(this@filterByCompatibilitiesDataProcess, FilteringOptions.FilterByAndroidCompatibilities)
 
+        storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
+        storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
+
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+            var lastLabel = "-666"
+
+            filterOptionsAdapter.filterOptionsData.clear()
+
+            storefrontAllUnfilteredContents.sortedBy {
+
+                it.productAttributes[StorefrontFeaturedContentKey.AttributesAndroidCompatibilitiesKey]
+
+            }.asFlow()
+                .map {
+
+                    it.productAttributes[StorefrontFeaturedContentKey.AttributesAndroidCompatibilitiesKey]
+                }
+                .flowOn(Dispatchers.IO)
+                .onCompletion {
+
+                }
+                .collect { countryName ->
+
+
+                    countryName?.let {
+
+                        if (countryName != lastLabel) {
+
+                            filterOptionsAdapter.filterOptionsData.add(FilterOptionsItem(it, null))
+
+                        }
+
+                        lastLabel = countryName
+
+                    }
+
+                }
+
+            withContext(SupervisorJob() + Dispatchers.Main) {
+
+                filterOptionsAdapter.notifyDataSetChanged()
+
+            }
+
+        }
 
     }
 
