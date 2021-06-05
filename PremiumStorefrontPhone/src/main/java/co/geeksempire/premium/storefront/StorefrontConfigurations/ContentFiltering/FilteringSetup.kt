@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 7:21 AM
+ * Last modified 6/5/21, 8:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,8 +14,6 @@ import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
-import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
-import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
@@ -39,31 +37,35 @@ fun Storefront.filteringSetup() {
 
     storefrontLayoutBinding.filteringInclude.root.post {
 
-        filterByCountriesDataProcess()
+        if (filterOptionsAdapter.filterOptionsData.isEmpty()) {
 
-    }
+            filterByCountriesDataProcess()
 
-    storefrontLayoutBinding.filteringInclude.filterCountryView.setOnClickListener {
+        }
 
-        filterByCountriesDataProcess()
+        storefrontLayoutBinding.filteringInclude.filterCountryView.setOnClickListener {
 
-        storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
-            .translationY(-viewTranslateY)
-            .apply {
-                interpolator = OvershootInterpolator()
-            }.start()
+            storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
+                .translationY(-viewTranslateY)
+                .apply {
+                    interpolator = OvershootInterpolator()
+                }.start()
 
-    }
+            filterByCountriesDataProcess()
 
-    storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setOnClickListener {
+        }
 
-        filterByCompatibilitiesDataProcess()
+        storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setOnClickListener {
 
-        storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
-            .translationY((storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue)
-            .apply {
-                interpolator = OvershootInterpolator()
-            }.start()
+            storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
+                .translationY((storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue)
+                .apply {
+                    interpolator = OvershootInterpolator()
+                }.start()
+
+            filterByCompatibilitiesDataProcess()
+
+        }
 
     }
 
@@ -72,8 +74,6 @@ fun Storefront.filteringSetup() {
 fun Storefront.filterByCountriesDataProcess() {
 
     if (storefrontAllUnfilteredContents.isNotEmpty()) {
-
-        val filterOptionsAdapter = FilterOptionsAdapter(this@filterByCountriesDataProcess, FilteringOptions.FilterByCountry)
 
         storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
         storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
@@ -129,8 +129,6 @@ fun Storefront.filterByCountriesDataProcess() {
 fun Storefront.filterByCompatibilitiesDataProcess() {
 
     if (storefrontAllUnfilteredContents.isNotEmpty()) {
-
-        val filterOptionsAdapter = FilterOptionsAdapter(this@filterByCompatibilitiesDataProcess, FilteringOptions.FilterByAndroidCompatibilities)
 
         storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
         storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
