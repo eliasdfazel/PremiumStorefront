@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 9:18 AM
+ * Last modified 6/5/21, 4:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,6 +34,7 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.Favor
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
@@ -43,7 +44,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperati
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveNewContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.NewContent.Adapter.NewContentAdapter

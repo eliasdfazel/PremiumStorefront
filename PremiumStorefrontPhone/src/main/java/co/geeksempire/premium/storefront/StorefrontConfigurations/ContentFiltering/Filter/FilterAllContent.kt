@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 10:02 AM
+ * Last modified 6/5/21, 4:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Filter
+package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter
 
 import android.util.Log
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
@@ -28,6 +28,8 @@ object FilteringOptions {
     const val FilterByCountry = "FilterByCountry"
     const val FilterByAndroidCompatibilities = "FilterByAndroidCompatibilities"
 }
+
+data class FilterOptionsItem(var filterOptionLabel: String, var filterOptionIconLink: String?)
 
 class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
