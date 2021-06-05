@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 4:57 AM
+ * Last modified 6/5/21, 5:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
 class FilterOptionsAdapter (val context: Storefront) : RecyclerView.Adapter<FilterOptionsViewHolder>() {
 
-    val filterOptionsData = ArrayList<FilterOptionsItem>()
+    val filterOptionsData: ArrayList<FilterOptionsItem> = ArrayList<FilterOptionsItem>()
 
     override fun getItemCount(): Int {
 

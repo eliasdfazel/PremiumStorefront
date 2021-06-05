@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 4:56 AM
+ * Last modified 6/5/21, 5:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,12 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.view.View
 import android.view.animation.OvershootInterpolator
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import kotlin.math.absoluteValue
 
 fun Storefront.filteringSetup() {
@@ -30,6 +35,54 @@ fun Storefront.filteringSetup() {
     val viewTranslateY = (storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue
 
     storefrontLayoutBinding.filteringInclude.filterCountryView.setOnClickListener {
+
+        val filterOptionsAdapter = FilterOptionsAdapter(this@filteringSetup)
+
+        storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
+
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+            var lastLabel = "-666"
+
+            filterOptionsAdapter.filterOptionsData.clear()
+
+            storefrontAllUnfilteredContents.sortedBy {
+
+                it.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]
+
+            }.asFlow()
+                .map {
+
+                    it.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]
+                }
+                .flowOn(Dispatchers.IO)
+                .onCompletion {
+
+                }
+                .collect { countryName ->
+
+                    countryName?.let {
+
+                        if (countryName != lastLabel) {
+
+                            filterOptionsAdapter.filterOptionsData.add(FilterOptionsItem(it, null))
+
+                        }
+
+                        lastLabel = countryName
+
+                    }
+
+                }
+
+
+
+            withContext(SupervisorJob() + Dispatchers.Main) {
+
+                filterOptionsAdapter.notifyDataSetChanged()
+
+            }
+        }
 
         storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
             .translationY(-viewTranslateY)
