@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/4/21, 10:14 AM
+  ~ Last modified 6/5/21, 11:51 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,10 +19,87 @@
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
 
-        apps:realtimeBlurRadius="3dp"
-        apps:realtimeBlurGradientType="radial"
-        apps:realtimeFirstColor="@color/premiumLightTransparent"
-        apps:realtimeSecondColor="@color/transparent"/>
+        apps:realtimeBlurRadius="11dp"
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/premiumLightTransparent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sortsContainerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/sorting_container_layer"
+
+        apps:layout_constraintWidth_percent="0.91"
+        apps:layout_constraintHeight_percent="0.59"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sortSelectedView"
+            android:layout_width="0dp"
+            android:layout_height="97dp"
+            android:background="@drawable/sorting_selected_container_layer"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintVertical_bias="0.37"
+            apps:layout_constraintStart_toStartOf="parent"
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sortPriceView"
+            android:layout_width="0dp"
+            android:layout_height="97dp"
+            android:paddingHorizontal="13dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/default_color_light"
+            android:textSize="37sp"
+            android:text="@string/priceSortText"
+            android:fontFamily="@font/upcil"
+            android:shadowColor="@color/default_color_light_transparent"
+            android:shadowRadius="13"
+            android:shadowDx="1"
+            android:shadowDy="3"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintVertical_bias="0.37"
+            apps:layout_constraintStart_toStartOf="parent"
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/sortRateView"
+            android:layout_width="0dp"
+            android:layout_height="97dp"
+            android:paddingHorizontal="13dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/default_color_light"
+            android:textSize="37sp"
+            android:text="@string/rateSortText"
+            android:fontFamily="@font/upcil"
+            android:shadowColor="@color/default_color_light_transparent"
+            android:shadowRadius="13"
+            android:shadowDx="1"
+            android:shadowDy="3"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintVertical_bias="0.63"
+            apps:layout_constraintStart_toStartOf="parent"
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
