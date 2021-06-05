@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 8:40 AM
+ * Last modified 6/5/21, 10:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -92,6 +92,19 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
         FilterAllContent(storefrontLiveData)
     }
 
+    val featuredContentAdapter: FeaturedContentAdapter by lazy {
+        FeaturedContentAdapter(this@Storefront)
+    }
+    val allContentAdapter: AllContentAdapter by lazy {
+        AllContentAdapter(this@Storefront)
+    }
+    val newContentAdapter: NewContentAdapter by lazy {
+        NewContentAdapter(this@Storefront)
+    }
+    val categoriesAdapter: CategoriesAdapter by lazy {
+        CategoriesAdapter(this@Storefront, filterAllContent)
+    }
+
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@Storefront)
     }
@@ -150,19 +163,15 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
             actionCenterOperations.setupForStorefront()
 
-            val featuredContentAdapter = FeaturedContentAdapter(this@Storefront)
             storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
 
-            val allContentAdapter = AllContentAdapter(this@Storefront)
             storefrontLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
 
-            val newContentAdapter = NewContentAdapter(this@Storefront)
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
 
-            val categoriesAdapter = CategoriesAdapter(this@Storefront, filterAllContent)
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 

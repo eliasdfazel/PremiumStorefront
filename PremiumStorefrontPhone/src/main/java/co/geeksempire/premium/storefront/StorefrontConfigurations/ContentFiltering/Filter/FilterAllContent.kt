@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 7:32 AM
+ * Last modified 6/5/21, 10:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -118,9 +118,11 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
     fun sortAllContentByInput(storefrontFilteredContents: ArrayList<StorefrontContentsData>,
                               sortInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        Log.d(this@FilterAllContent.javaClass.simpleName, "Sorting Input Data: ${sortInputParameter}")
+        Log.d(this@FilterAllContent.javaClass.simpleName, "Sorting Input Data | ${storefrontFilteredContents.size} Products: ${sortInputParameter}")
 
         if (storefrontFilteredContents.isNotEmpty()) {
+
+            val sortedStorefrontFilteredContents = ArrayList<StorefrontContentsData>()
 
             val storefrontAllContentsFilter = storefrontFilteredContents.sortedByDescending {
 
@@ -140,10 +142,10 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
             }
 
-            storefrontFilteredContents.clear()
-            storefrontFilteredContents.addAll(storefrontAllContentsFilter)
+            sortedStorefrontFilteredContents.clear()
+            sortedStorefrontFilteredContents.addAll(storefrontAllContentsFilter)
 
-            storefrontLiveData.allFilteredContentItemData.postValue(storefrontFilteredContents)
+            storefrontLiveData.allFilteredContentItemData.postValue(sortedStorefrontFilteredContents)
 
         }
 
