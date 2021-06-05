@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/14/21, 8:53 AM
+ * Last modified 6/5/21, 8:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,22 +17,22 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.1'
 
-        classpath "com.google.gms:google-services:4.3.5"
+        classpath "com.google.gms:google-services:4.3.8"
 
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10"
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
