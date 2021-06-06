@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/6/21, 5:58 AM
+ * Last modified 6/6/21, 6:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -60,8 +60,6 @@ fun Storefront.filteringSetup() {
 
     }
 
-    val viewTranslateY = (storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue
-
     storefrontLayoutBinding.filteringInclude.root.post {
 
         if (filterOptionsAdapter.filterOptionsData.isEmpty()) {
@@ -73,7 +71,7 @@ fun Storefront.filteringSetup() {
         storefrontLayoutBinding.filteringInclude.filterCountryView.setOnClickListener {
 
             storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
-                .translationY(-viewTranslateY)
+                .translationYBy(-(storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y - storefrontLayoutBinding.filteringInclude.filterCountryView.y))
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
@@ -93,12 +91,15 @@ fun Storefront.filteringSetup() {
 
                 }).start()
 
+            storefrontLayoutBinding.filteringInclude.filterCountryView.setTextColor(getColor(R.color.white))
+            storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setTextColor(getColor(R.color.default_color_bright))
+
         }
 
         storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setOnClickListener {
 
             storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
-                .translationY((storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue)
+                .translationYBy((storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue)
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
@@ -117,6 +118,9 @@ fun Storefront.filteringSetup() {
                     override fun onAnimationRepeat(animation: Animator?) {}
 
                 }).start()
+
+            storefrontLayoutBinding.filteringInclude.filterCountryView.setTextColor(getColor(R.color.default_color_bright))
+            storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setTextColor(getColor(R.color.white))
 
         }
 

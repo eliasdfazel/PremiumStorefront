@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/6/21, 5:59 AM
+ * Last modified 6/6/21, 6:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,14 +59,12 @@ fun Storefront.sortingSetup() {
 
     }
 
-    val viewTranslateY = (storefrontLayoutBinding.sortingInclude.sortPriceView.y - storefrontLayoutBinding.sortingInclude.sortRateView.y).absoluteValue
-
     storefrontLayoutBinding.sortingInclude.root.post {
 
         storefrontLayoutBinding.sortingInclude.sortPriceView.setOnClickListener {
 
             storefrontLayoutBinding.sortingInclude.sortSelectedView.animate()
-                .translationY(-viewTranslateY)
+                .translationY(-(storefrontLayoutBinding.sortingInclude.sortPriceView.y - storefrontLayoutBinding.sortingInclude.sortRateView.y))
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
