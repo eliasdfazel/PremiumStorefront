@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 12:18 PM
+ * Last modified 6/6/21, 5:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,16 +10,19 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
+import android.animation.Animator
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
+import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.SortingOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.UI.Animations.AnimationListener
 import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnimation
+import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
 fun Storefront.sortingSetup() {
@@ -66,19 +69,38 @@ fun Storefront.sortingSetup() {
                 .translationY(-viewTranslateY)
                 .apply {
                     interpolator = OvershootInterpolator()
-                }.start()
+                    duration = 531
+                }.setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
 
-            Handler(Looper.getMainLooper()).postDelayed({
+                    override fun onAnimationEnd(animation: Animator?) {
 
-                filterAllContent.sortAllContentByInput(allContentAdapter.storefrontContents, SortingOptions.SortByPrice)
-                    .invokeOnCompletion {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            filterAllContent.sortAllContentByInput(allContentAdapter.storefrontContents, SortingOptions.SortByPrice)
+                                .invokeOnCompletion {
+
+                                    lifecycleScope.launch {
+
+                                        storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                        storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+
+                                    }
+
+                                }
+
+                        }, 531)
 
                     }
 
-                storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
-                storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+                    override fun onAnimationCancel(animation: Animator?) {}
 
-            }, 975)
+                    override fun onAnimationRepeat(animation: Animator?) {}
+
+                }).start()
+
+            storefrontLayoutBinding.sortingInclude.sortPriceView.setTextColor(getColor(R.color.white))
+            storefrontLayoutBinding.sortingInclude.sortRateView.setTextColor(getColor(R.color.default_color_bright))
 
         }
 
@@ -88,19 +110,38 @@ fun Storefront.sortingSetup() {
                 .translationY((storefrontLayoutBinding.sortingInclude.sortPriceView.y - storefrontLayoutBinding.sortingInclude.sortRateView.y).absoluteValue)
                 .apply {
                     interpolator = OvershootInterpolator()
-                }.start()
+                    duration = 531
+                }.setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {}
 
-            Handler(Looper.getMainLooper()).postDelayed({
+                    override fun onAnimationEnd(animation: Animator?) {
 
-                filterAllContent.sortAllContentByInput(allContentAdapter.storefrontContents, SortingOptions.SortByRating)
-                    .invokeOnCompletion {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            filterAllContent.sortAllContentByInput(allContentAdapter.storefrontContents, SortingOptions.SortByRating)
+                                .invokeOnCompletion {
+
+                                    lifecycleScope.launch {
+
+                                        storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                        storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+
+                                    }
+
+                                }
+
+                        }, 531)
 
                     }
 
-                storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
-                storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+                    override fun onAnimationCancel(animation: Animator?) {}
 
-            }, 975)
+                    override fun onAnimationRepeat(animation: Animator?) {}
+
+                }).start()
+
+            storefrontLayoutBinding.sortingInclude.sortPriceView.setTextColor(getColor(R.color.default_color_bright))
+            storefrontLayoutBinding.sortingInclude.sortRateView.setTextColor(getColor(R.color.white))
 
         }
 

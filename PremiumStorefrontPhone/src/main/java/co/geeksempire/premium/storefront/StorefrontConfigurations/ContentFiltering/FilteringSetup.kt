@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 10:55 AM
+ * Last modified 6/6/21, 5:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
+import android.animation.Animator
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
@@ -75,9 +76,22 @@ fun Storefront.filteringSetup() {
                 .translationY(-viewTranslateY)
                 .apply {
                     interpolator = OvershootInterpolator()
-                }.start()
+                    duration = 531
+                }.setListener(object : Animator.AnimatorListener {
 
-            filterByCountriesDataProcess()
+                    override fun onAnimationStart(animation: Animator?) {}
+
+                    override fun onAnimationEnd(animation: Animator?) {
+
+                        filterByCountriesDataProcess()
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator?) {}
+
+                    override fun onAnimationRepeat(animation: Animator?) {}
+
+                }).start()
 
         }
 
@@ -87,9 +101,22 @@ fun Storefront.filteringSetup() {
                 .translationY((storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue)
                 .apply {
                     interpolator = OvershootInterpolator()
-                }.start()
+                    duration = 531
+                }.setListener(object : Animator.AnimatorListener {
 
-            filterByCompatibilitiesDataProcess()
+                    override fun onAnimationStart(animation: Animator?) {}
+
+                    override fun onAnimationEnd(animation: Animator?) {
+
+                        filterByCompatibilitiesDataProcess()
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator?) {}
+
+                    override fun onAnimationRepeat(animation: Animator?) {}
+
+                }).start()
 
         }
 

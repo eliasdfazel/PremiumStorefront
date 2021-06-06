@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 7:23 AM
+ * Last modified 6/6/21, 5:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,10 +10,13 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter
 
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
@@ -51,8 +54,6 @@ class FilterOptionsAdapter (val context: Storefront, val filterOptionsType: Stri
 
         filterOptionsViewHolder.rootViewItem.setOnClickListener {
 
-            context.storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
-
             when (filterOptionsType) {
                 FilteringOptions.FilterByCountry -> {
 
@@ -60,6 +61,13 @@ class FilterOptionsAdapter (val context: Storefront, val filterOptionsType: Stri
                         FilteringOptions.FilterByCountry,
                         filterOptionsData[position].filterOptionLabel)
                         .invokeOnCompletion {
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+
+                                context.storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                context.storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
+
+                            }, 531)
 
                         }
 
@@ -70,6 +78,13 @@ class FilterOptionsAdapter (val context: Storefront, val filterOptionsType: Stri
                         FilteringOptions.FilterByAndroidCompatibilities,
                         filterOptionsData[position].filterOptionLabel)
                         .invokeOnCompletion {
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+
+                                context.storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                context.storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
+
+                            }, 531)
 
                         }
 
