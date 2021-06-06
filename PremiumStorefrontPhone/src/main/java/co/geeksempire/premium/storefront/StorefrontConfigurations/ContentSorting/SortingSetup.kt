@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/6/21, 6:56 AM
+ * Last modified 6/6/21, 7:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.Utils.UI.Animations.AnimationListener
 import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnimation
 import kotlinx.coroutines.launch
-import kotlin.math.absoluteValue
 
 fun Storefront.sortingSetup() {
 
@@ -64,7 +63,7 @@ fun Storefront.sortingSetup() {
         storefrontLayoutBinding.sortingInclude.sortPriceView.setOnClickListener {
 
             storefrontLayoutBinding.sortingInclude.sortSelectedView.animate()
-                .translationY(-(storefrontLayoutBinding.sortingInclude.sortPriceView.y - storefrontLayoutBinding.sortingInclude.sortRateView.y))
+                .translationYBy(-(storefrontLayoutBinding.sortingInclude.sortRateView.y - storefrontLayoutBinding.sortingInclude.sortPriceView.y))
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
@@ -105,7 +104,7 @@ fun Storefront.sortingSetup() {
         storefrontLayoutBinding.sortingInclude.sortRateView.setOnClickListener {
 
             storefrontLayoutBinding.sortingInclude.sortSelectedView.animate()
-                .translationY((storefrontLayoutBinding.sortingInclude.sortPriceView.y - storefrontLayoutBinding.sortingInclude.sortRateView.y).absoluteValue)
+                .translationYBy((storefrontLayoutBinding.sortingInclude.sortPriceView.y - storefrontLayoutBinding.sortingInclude.sortRateView.y).absoluteValue)
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
