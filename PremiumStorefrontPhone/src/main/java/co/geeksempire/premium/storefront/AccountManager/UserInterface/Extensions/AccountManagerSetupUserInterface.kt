@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 1:10 PM
+ * Last modified 6/7/21, 1:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -290,17 +290,17 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
 
                 documentSnapshot?.let { documentData ->
 
-                    accountInformationLayoutBinding.socialMediaScrollView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-                    accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
+                    if (documentData.data?.get(AccountDataStructure.Attributes.instagramAccount) != null) {
+                        accountInformationLayoutBinding.instagramAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.instagramAccount).toString().lowercase(Locale.getDefault()))
+                    }
 
-                    accountInformationLayoutBinding.instagramAddressView.setText(documentData.data?.get(
-                        AccountDataStructure.Attributes.instagramAccount).toString().lowercase(Locale.getDefault()))
+                    if (documentData.data?.get(AccountDataStructure.Attributes.twitterAccount) != null) {
+                        accountInformationLayoutBinding.twitterAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.twitterAccount).toString())
+                    }
 
-                    accountInformationLayoutBinding.twitterAddressView.setText(documentData.data?.get(
-                        AccountDataStructure.Attributes.twitterAccount).toString())
-
-                    accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(
-                        AccountDataStructure.Attributes.phoneNumber).toString())
+                    if (documentData.data?.get(AccountDataStructure.Attributes.phoneNumber) != null) {
+                        accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.phoneNumber).toString())
+                    }
 
                     accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
                     accountInformationLayoutBinding.inviteFriendsView.setOnClickListener {

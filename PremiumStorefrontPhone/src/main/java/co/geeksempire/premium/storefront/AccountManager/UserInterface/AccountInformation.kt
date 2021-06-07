@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 12:44 PM
+ * Last modified 6/7/21, 1:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,6 @@ package co.geeksempire.premium.storefront.AccountManager.UserInterface
 
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.AccountManager.DataStructure.AccountDataStructure
@@ -97,17 +96,17 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
                     documentSnapshot?.let { documentData ->
 
-                        accountInformationLayoutBinding.socialMediaScrollView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-                        accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
+                        if (documentData.data?.get(AccountDataStructure.Attributes.instagramAccount) != null) {
+                            accountInformationLayoutBinding.instagramAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.instagramAccount).toString().lowercase(Locale.getDefault()))
+                        }
 
-                        accountInformationLayoutBinding.instagramAddressView.setText(documentData.data?.get(
-                            AccountDataStructure.Attributes.instagramAccount).toString().lowercase(Locale.getDefault()))
+                        if (documentData.data?.get(AccountDataStructure.Attributes.twitterAccount) != null) {
+                            accountInformationLayoutBinding.twitterAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.twitterAccount).toString())
+                        }
 
-                        accountInformationLayoutBinding.twitterAddressView.setText(documentData.data?.get(
-                            AccountDataStructure.Attributes.twitterAccount).toString())
-
-                        accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(
-                            AccountDataStructure.Attributes.phoneNumber).toString())
+                        if (documentData.data?.get(AccountDataStructure.Attributes.phoneNumber) != null) {
+                            accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.phoneNumber).toString())
+                        }
 
                         accountInformationLayoutBinding.inviteFriendsView.setOnClickListener {
 
