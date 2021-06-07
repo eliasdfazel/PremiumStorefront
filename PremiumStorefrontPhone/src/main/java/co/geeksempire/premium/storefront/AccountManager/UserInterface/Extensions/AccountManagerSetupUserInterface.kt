@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 9:21 AM
+ * Last modified 6/7/21, 12:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -180,7 +180,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
             )
 
         (application as PremiumStorefrontApplication).firestoreDatabase
-            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid))
+            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.uid))
             .set(userInformationProfileData)
             .addOnSuccessListener {
 
@@ -196,7 +196,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
                                 Log.d(this@createUserProfile.javaClass.simpleName, "Phone Number Verified")
 
                                 (application as PremiumStorefrontApplication).firestoreDatabase
-                                    .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid))
+                                    .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email))
                                     .update(
                                         "phoneNumberVerified", true,
                                     )
@@ -282,7 +282,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
             }
 
         (application as PremiumStorefrontApplication).firestoreDatabase
-            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid))
+            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email))
             .get()
             .addOnSuccessListener { documentSnapshot ->
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 10:25 AM
+ * Last modified 6/7/21, 12:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -63,6 +63,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.storefront_layout.*
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
@@ -143,6 +145,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     }
     /* End - Sign In */
+
+    val firebaseAuthentication = Firebase.auth
+    val firebaseUser = firebaseAuthentication.currentUser
 
     lateinit var storefrontLayoutBinding: StorefrontLayoutBinding
 

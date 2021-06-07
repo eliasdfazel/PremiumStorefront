@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 9:12 AM
+ * Last modified 6/7/21, 12:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -88,7 +88,7 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
         } else if (Firebase.auth.currentUser != null) {
 
             (application as PremiumStorefrontApplication).firestoreDatabase
-                .document(accountDataStructure.userProfileDatabasePath(Firebase.auth.currentUser!!.uid))
+                .document(accountDataStructure.userProfileDatabasePath(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email))
                 .get()
                 .addOnSuccessListener { documentSnapshot ->
 
@@ -144,7 +144,7 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
         }
 
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_out_right)
 
     }
 
@@ -156,8 +156,8 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
     }
 
-    override fun signInProcessSucceed() {
-        super.signInProcessSucceed()
+    override fun signInProcessSucceed(authenticationResult: AuthResult) {
+        super.signInProcessSucceed(authenticationResult)
 
     }
 

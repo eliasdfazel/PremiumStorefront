@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 1:23 PM
+ * Last modified 6/7/21, 12:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.net.Uri
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
+import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
@@ -25,7 +26,16 @@ fun Storefront.userInteractionSetup() {
 
     storefrontLayoutBinding.profileView.setOnClickListener {
 
-        accountSelector.launch(AccountSignIn.GoogleSignInRequestCode)
+        if (firebaseUser == null) {
+
+            accountSelector.launch(AccountSignIn.GoogleSignInRequestCode)
+
+        } else {
+
+            startActivity(Intent(applicationContext, AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
+
+        }
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 9:31 AM
+ * Last modified 6/7/21, 12:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,7 +39,7 @@ class AccountDataStructure {
         const val userJointDate = "userJointDate"
     }
 
-    fun userProfileDatabasePath(userUniqueIdentifier: String) : String = "PremiumStorefront/${userUniqueIdentifier}/Profile"
+    fun userProfileDatabasePath(userUniqueIdentifier: String, userEmailAddress: String) : String = "PremiumStorefront/${userUniqueIdentifier}/${userEmailAddress}/Profile"
 
     fun invitedSuccessDatabasePath(invitingFriendUniqueIdentifier: String, userUniqueIdentifier: String) : String = "PremiumStorefront/${invitingFriendUniqueIdentifier}/Profile/SuccessfulInvitations/Friends/${userUniqueIdentifier}"
 
