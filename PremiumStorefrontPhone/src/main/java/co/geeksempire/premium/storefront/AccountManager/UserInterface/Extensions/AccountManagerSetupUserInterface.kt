@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 8:12 AM
+ * Last modified 6/7/21, 9:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,8 +10,6 @@
 
 package co.geeksempire.premium.storefront.AccountManager.UserInterface.Extensions
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -47,6 +45,11 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.first
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -155,7 +158,7 @@ fun AccountInformation.clickSetup() {
 
 }
 
-fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false) {
+fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false) = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
 
     Firebase.auth.currentUser?.let { firebaseUser ->
 
@@ -165,7 +168,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
         accountInformationLayoutBinding.welcomeTextView.text = getString(R.string.welcomeText, Firebase.auth.currentUser?.displayName)
 
         val userInformationProfileData = UserInformationProfileData(
-                privacyAgreement = userInformationIO.readPrivacyAgreement(),
+                privacyAgreement = userInformationIO.readPrivacyAgreement().first(),
                 userIdentification = firebaseUser.uid,
                 userEmailAddress = firebaseUser.email.toString(),
                 userDisplayName = firebaseUser.displayName.toString(),
@@ -300,23 +303,8 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
                     accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
                     accountInformationLayoutBinding.inviteFriendsView.setOnClickListener {
 
-                        if (checkSelfPermission(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED) {
-
-                            SendInvitation(this@createUserProfile, accountInformationLayoutBinding.root)
-                                .invite(Firebase.auth.currentUser!!)
-
-                        } else {
-
-                            val permissionsList = arrayListOf(
-                                Manifest.permission.GET_ACCOUNTS
-                            )
-
-                            requestPermissions(
-                                permissionsList.toTypedArray(),
-                                EntryConfigurations.PermissionRequestCode
-                            )
-
-                        }
+                        SendInvitation(this@createUserProfile, accountInformationLayoutBinding.root)
+                            .invite(Firebase.auth.currentUser!!)
 
                     }
 
