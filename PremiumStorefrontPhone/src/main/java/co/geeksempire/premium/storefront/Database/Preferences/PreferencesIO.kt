@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 12:50 PM
+ * Last modified 6/7/21, 8:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,9 +18,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class PreferencesIO (private val context: Context) {
+class PreferencesIO (private val context: Context, val preferenceDatabaseName: String = "Preferences") {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "Preferences")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = preferenceDatabaseName)
 
     suspend fun savePreferences(preferenceKey: Preferences.Key<String>, inputValue: String) {
 

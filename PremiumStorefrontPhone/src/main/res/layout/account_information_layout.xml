@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/7/21, 7:28 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context=".AccountManager.UserInterface.AccountInformation">
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/profileBlurView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        apps:realtimeBlurRadius="19dp"
+        apps:realtimeOverlayColor="@color/light_blurry_color" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moreOptions"
+        android:layout_width="51dp"
+        android:layout_height="31dp"
+        android:paddingVertical="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/vector_menu_dots_icon"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/profileImageView"
+        android:layout_width="179dp"
+        android:layout_height="179dp"
+        android:layout_marginBottom="29dp"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/profileImageTransitionName"
+        android:src="@drawable/not_login_icon"
+
+        apps:layout_constraintEnd_toEndOf="parent"
+
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintTop_toBottomOf="@id/moreOptions"
+        apps:shape="circle" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/inviteFriendsView"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:layout_margin="3dp"
+        android:contentDescription="@string/inviteTitle"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        android:visibility="invisible"
+
+        apps:backgroundTint="@color/default_color_transparent"
+        apps:cornerRadius="51dp"
+        apps:elevation="13dp"
+        apps:icon="@drawable/share_icon"
+        apps:iconGravity="textStart"
+        apps:iconPadding="0dp"
+        apps:iconSize="79dp"
+        apps:iconTint="@android:color/transparent"
+        apps:iconTintMode="add"
+        apps:layout_constraintBottom_toBottomOf="@id/profileImageView"
+
+        apps:layout_constraintEnd_toStartOf="@id/profileImageView"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintTop_toTopOf="@id/profileImageView"
+        apps:rippleColor="@color/cyberGreen" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="19dp"
+        android:layout_marginVertical="23dp"
+        android:fontFamily="@font/houston_regular"
+        android:text="@string/welcomeText"
+        android:textColor="@color/dark"
+        android:textSize="43sp"
+
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintTop_toBottomOf="@id/profileImageView" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/signupLoadingView"
+        android:layout_width="173dp"
+        android:layout_height="173dp"
+        android:layout_marginVertical="17dp"
+        android:visibility="invisible"
+
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintTop_toBottomOf="@id/welcomeTextView"
+
+        apps:lottie_loop="true"
+        apps:lottie_rawRes="@raw/fluid_loading_animation"
+        apps:lottie_repeatMode="restart" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/socialMediaScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="7dp"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="7dp"
+        android:requiresFadingEdge="vertical"
+        android:visibility="invisible"
+
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintTop_toBottomOf="@id/welcomeTextView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/socialMediaContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="13dp">
+
+            <!-- Instagram -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/instagramAddressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:layout_marginTop="7dp"
+                android:hint="@string/typeInstagram"
+                android:textColorHint="@color/purple"
+
+                apps:boxBackgroundColor="@color/white"
+                apps:boxBackgroundMode="outline"
+                apps:boxCornerRadiusBottomEnd="13dp"
+                apps:boxCornerRadiusBottomStart="13dp"
+                apps:boxCornerRadiusTopEnd="13dp"
+                apps:boxCornerRadiusTopStart="13dp"
+                apps:boxStrokeColor="@color/default_color_game"
+                apps:boxStrokeWidth="1dp"
+                apps:errorEnabled="false"
+                apps:errorTextColor="@color/red"
+                apps:hintAnimationEnabled="true"
+                apps:hintEnabled="true"
+                apps:hintTextColor="@color/purple"
+
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/instagramAddressView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cursorVisible="true"
+                    android:ellipsize="start"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:paddingStart="17dp"
+                    android:paddingTop="11dp"
+                    android:paddingEnd="77dp"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textColorHint="@color/dark"
+                    android:textSize="19sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="77dp"
+                android:layout_height="0dp"
+                android:padding="19dp"
+                android:src="@drawable/instagram_logo"
+
+                apps:layout_constraintBottom_toBottomOf="@id/instagramAddressLayout"
+                apps:layout_constraintEnd_toEndOf="@id/instagramAddressLayout"
+                apps:layout_constraintTop_toTopOf="@id/instagramAddressLayout" />
+
+            <!-- Twitter -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/twitterAddressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:layout_marginTop="7dp"
+                android:hint="@string/typeTwitter"
+                android:textColorHint="@color/default_color_bright"
+
+                apps:boxBackgroundColor="@color/white"
+                apps:boxBackgroundMode="outline"
+                apps:boxCornerRadiusBottomEnd="13dp"
+                apps:boxCornerRadiusBottomStart="13dp"
+                apps:boxCornerRadiusTopEnd="13dp"
+                apps:boxCornerRadiusTopStart="13dp"
+                apps:boxStrokeColor="@color/default_color"
+                apps:boxStrokeWidth="1dp"
+                apps:errorEnabled="false"
+                apps:errorTextColor="@color/red"
+                apps:hintAnimationEnabled="true"
+                apps:hintEnabled="true"
+                apps:hintTextColor="@color/default_color_bright"
+
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintTop_toBottomOf="@id/instagramAddressLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/twitterAddressView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cursorVisible="true"
+                    android:ellipsize="start"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:paddingStart="17dp"
+                    android:paddingTop="11dp"
+                    android:paddingEnd="77dp"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textColorHint="@color/dark"
+                    android:textSize="19sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="77dp"
+                android:layout_height="0dp"
+                android:padding="15dp"
+                android:src="@drawable/twitter_bird"
+                android:tint="@color/blue"
+
+                apps:layout_constraintBottom_toBottomOf="@id/twitterAddressLayout"
+                apps:layout_constraintEnd_toEndOf="@id/twitterAddressLayout"
+                apps:layout_constraintTop_toTopOf="@id/twitterAddressLayout" />
+
+            <!-- Phone Number -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneNumberAddressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:layout_marginTop="7dp"
+                android:hint="@string/typePhoneNumber"
+                android:textColorHint="@color/green"
+
+                apps:boxBackgroundColor="@color/white"
+                apps:boxBackgroundMode="outline"
+                apps:boxCornerRadiusBottomEnd="13dp"
+                apps:boxCornerRadiusBottomStart="13dp"
+                apps:boxCornerRadiusTopEnd="13dp"
+                apps:boxCornerRadiusTopStart="13dp"
+                apps:boxStrokeColor="@color/cyberGreen"
+                apps:boxStrokeWidth="1dp"
+                apps:errorEnabled="false"
+                apps:errorTextColor="@color/red"
+                apps:hintAnimationEnabled="true"
+                apps:hintEnabled="true"
+                apps:hintTextColor="@color/green"
+
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintTop_toBottomOf="@id/twitterAddressLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneNumberAddressView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:cursorVisible="true"
+                    android:ellipsize="start"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone"
+                    android:paddingStart="17dp"
+                    android:paddingTop="11dp"
+                    android:paddingEnd="77dp"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textColorHint="@color/dark"
+                    android:textSize="19sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="77dp"
+                android:layout_height="0dp"
+                android:padding="15dp"
+                android:src="@drawable/phone_icon"
+
+                apps:layout_constraintBottom_toBottomOf="@id/phoneNumberAddressLayout"
+                apps:layout_constraintEnd_toEndOf="@id/phoneNumberAddressLayout"
+                apps:layout_constraintTop_toTopOf="@id/phoneNumberAddressLayout" />
+
+            <!-- Next & Submit -->
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/submitProfileView"
+                android:layout_width="113dp"
+                android:layout_height="113dp"
+                android:layout_marginVertical="7dp"
+
+                apps:layout_constraintEnd_toEndOf="parent"
+
+                apps:layout_constraintTop_toBottomOf="@id/phoneNumberAddressLayout"
+                apps:lottie_rawRes="@raw/next_submit_animation" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/updatingLoadingView"
+                android:layout_width="113dp"
+                android:layout_height="113dp"
+                android:layout_marginVertical="7dp"
+                android:visibility="invisible"
+
+                apps:layout_constraintEnd_toEndOf="parent"
+                apps:layout_constraintTop_toBottomOf="@id/phoneNumberAddressLayout"
+                apps:lottie_loop="true"
+
+                apps:lottie_rawRes="@raw/fluid_loading_animation"
+                apps:lottie_repeatMode="restart" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
