@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 8:02 AM
+ * Last modified 6/7/21, 9:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,22 +14,25 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import co.geeksempire.premium.storefront.AccountManager.DataStructure.AccountDataStructure
+import co.geeksempire.premium.storefront.EntryConfigurations
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
+import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.databinding.ReceiveInvitationLayoutBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
-import net.geeksempire.ready.keep.notes.AccountManager.SignInProcess.SetupAccount
-import net.geeksempire.ready.keep.notes.AccountManager.Utils.UserInformation
-import net.geeksempire.ready.keep.notes.EntryConfigurations
 import net.geeksempire.ready.keep.notes.Invitations.Utils.InvitationConstant
-import net.geeksempire.ready.keep.notes.KeepNoteApplication
-import net.geeksempire.ready.keep.notes.Overview.UserInterface.KeepNoteOverview
-import net.geeksempire.ready.keep.notes.R
-import net.geeksempire.ready.keep.notes.Utils.UI.NotifyUser.SnackbarActionHandlerInterface
-import net.geeksempire.ready.keep.notes.Utils.UI.NotifyUser.SnackbarBuilder
-import net.geeksempire.ready.keep.notes.databinding.ReceiveInvitationLayoutBinding
 
 class ReceiveInvitation : AppCompatActivity() {
+
+    val firebaseUser = Firebase.auth.currentUser
+
+    val accountDataStructure = AccountDataStructure()
 
     lateinit var receiveInvitationLayoutBinding: ReceiveInvitationLayoutBinding
 
@@ -48,7 +51,7 @@ class ReceiveInvitation : AppCompatActivity() {
 
                         if (Firebase.auth.currentUser != null) {
 
-                            startActivity(Intent(applicationContext, KeepNoteOverview::class.java).apply {
+                            startActivity(Intent(applicationContext, Storefront::class.java).apply {
 
                             }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
 
@@ -56,62 +59,57 @@ class ReceiveInvitation : AppCompatActivity() {
 
                         } else {
 
-                            SetupAccount()
-                                .signInAnonymously().addOnSuccessListener {
+                            firebaseUser?.let { firebaseUser ->
 
-                                    it.user?.let { firebaseUser ->
+                                //Data Of User Who Invited This User
+                                val uniqueUserId = dynamicLinkUri.getQueryParameter(InvitationConstant.UniqueUserId)!!
+                                val userDisplayName = dynamicLinkUri.getQueryParameter(InvitationConstant.UserDisplayName)!!
+                                val userProfileImage = dynamicLinkUri.getQueryParameter(InvitationConstant.UserProfileImage)!!
 
-                                        //Data Of User Who Invited This User
-                                        val uniqueUserId = dynamicLinkUri.getQueryParameter(InvitationConstant.UniqueUserId)!!
-                                        val userDisplayName = dynamicLinkUri.getQueryParameter(InvitationConstant.UserDisplayName)!!
-                                        val userProfileImage = dynamicLinkUri.getQueryParameter(InvitationConstant.UserProfileImage)!!
+                                val invitedFriend = LinkedHashMap<String, String>()
+                                invitedFriend[InvitationConstant.UniqueUserId] = firebaseUser.uid
+                                invitedFriend[InvitationConstant.UserEmailAddress] = firebaseUser.email.toString()
+                                invitedFriend[InvitationConstant.UserDisplayName] = firebaseUser.displayName.toString()
+                                invitedFriend[InvitationConstant.UserProfileImage] = firebaseUser.photoUrl.toString()
 
-                                        val invitedFriend = LinkedHashMap<String, String>()
-                                        invitedFriend[InvitationConstant.UniqueUserId] = firebaseUser.uid
-                                        invitedFriend[InvitationConstant.UserEmailAddress] = firebaseUser.email.toString()
-                                        invitedFriend[InvitationConstant.UserDisplayName] = firebaseUser.displayName.toString()
-                                        invitedFriend[InvitationConstant.UserProfileImage] = firebaseUser.photoUrl.toString()
+                                if (firebaseUser.uid != uniqueUserId) {
 
-                                        if (firebaseUser.uid != uniqueUserId) {
+                                    (application as PremiumStorefrontApplication).firestoreDatabase
+                                        .document(accountDataStructure.invitedSuccessDatabasePath(invitingFriendUniqueIdentifier = firebaseUser.uid, userUniqueIdentifier = uniqueUserId))
+                                        .set(invitedFriend)
+                                        .addOnSuccessListener {
 
-                                            (application as KeepNoteApplication).firestoreDatabase
-                                                .document(UserInformation.invitedSuccessDatabasePath(invitingFriendUniqueIdentifier = firebaseUser.uid, userUniqueIdentifier = uniqueUserId))
-                                                .set(invitedFriend)
-                                                .addOnSuccessListener {
+                                            SnackbarBuilder(applicationContext).show (
+                                                rootView = receiveInvitationLayoutBinding.rootView,
+                                                messageText= getString(R.string.receiveInvitationText),
+                                                messageDuration = Snackbar.LENGTH_INDEFINITE,
+                                                actionButtonText = R.string.proceedText,
+                                                snackbarActionHandlerInterface = object :
+                                                    SnackbarActionHandlerInterface {
 
-                                                    SnackbarBuilder(applicationContext).show (
-                                                        rootView = receiveInvitationLayoutBinding.rootView,
-                                                        messageText= getString(R.string.receiveInvitationText),
-                                                        messageDuration = Snackbar.LENGTH_INDEFINITE,
-                                                        actionButtonText = R.string.proceedText,
-                                                        snackbarActionHandlerInterface = object :
-                                                            SnackbarActionHandlerInterface {
+                                                    override fun onActionButtonClicked(snackbar: Snackbar) {
+                                                        super.onActionButtonClicked(snackbar)
 
-                                                            override fun onActionButtonClicked(snackbar: Snackbar) {
-                                                                super.onActionButtonClicked(snackbar)
+                                                        startActivity(Intent(applicationContext, EntryConfigurations::class.java).apply {
 
-                                                                startActivity(Intent(applicationContext, EntryConfigurations::class.java).apply {
+                                                        }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
 
-                                                                }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
+                                                        this@ReceiveInvitation.finish()
 
-                                                                this@ReceiveInvitation.finish()
-
-                                                            }
-
-                                                        }
-                                                    )
-
-                                                }.addOnFailureListener {
-
-
+                                                    }
 
                                                 }
+                                            )
+
+                                        }.addOnFailureListener {
+
+
 
                                         }
 
-                                    }
-
                                 }
+
+                            }
 
                         }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 7:59 AM
+ * Last modified 6/7/21, 9:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,5 +40,7 @@ class AccountDataStructure {
     }
 
     fun userProfileDatabasePath(userUniqueIdentifier: String) : String = "PremiumStorefront/${userUniqueIdentifier}/Profile"
+
+    fun invitedSuccessDatabasePath(invitingFriendUniqueIdentifier: String, userUniqueIdentifier: String) : String = "PremiumStorefront/${invitingFriendUniqueIdentifier}/Profile/SuccessfulInvitations/Friends/${userUniqueIdentifier}"
 
 }

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/7/21, 7:03 AM
+  ~ Last modified 6/7/21, 9:25 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -74,6 +74,23 @@
             android:theme="@style/GeeksEmpire.Material.WebView"
             android:screenOrientation="sensorPortrait"
             android:name=".BuiltInBrowserConfigurations.BuiltInBrowser" />
+
+        <activity
+            android:name=".Invitations.Receive.ReceiveInvitation"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/GeeksEmpire.Material.Transparent" >
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:scheme="https"
+                    android:host="www.geeksempire.co"
+                    android:pathPrefix="/PremiumStorefrontInvitation" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".Utils.Notifications.CloudNotifications">
