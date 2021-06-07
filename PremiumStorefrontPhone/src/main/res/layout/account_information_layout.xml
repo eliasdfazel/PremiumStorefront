@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/7/21, 8:33 AM
+  ~ Last modified 6/7/21, 12:58 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -18,12 +18,18 @@
     android:background="@android:color/transparent"
     tools:context=".AccountManager.UserInterface.AccountInformation">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/premium_storefront_logo"/>
+
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:id="@+id/profileBlurView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        apps:realtimeBlurRadius="19dp"
+        apps:realtimeBlurRadius="11dp"
         apps:realtimeFirstColor="@color/premiumLightTransparent" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -69,8 +75,7 @@
         apps:elevation="13dp"
         apps:icon="@drawable/share_icon"
         apps:iconGravity="textStart"
-        apps:iconPadding="0dp"
-        apps:iconSize="79dp"
+        apps:iconSize="37dp"
         apps:iconTint="@android:color/transparent"
         apps:iconTintMode="add"
         apps:layout_constraintBottom_toBottomOf="@id/profileImageView"
@@ -86,10 +91,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="19dp"
         android:layout_marginVertical="23dp"
-        android:fontFamily="@font/houston_regular"
+        android:fontFamily="@font/outline"
         android:text="@string/welcomeText"
-        android:textColor="@color/dark"
-        android:textSize="43sp"
+        android:textColor="@color/default_color_game"
+        android:textSize="29sp"
+        android:shadowColor="@color/default_color_game_light_transparent"
+        android:shadowRadius="3"
+        android:shadowDx="1"
+        android:shadowDy="5"
 
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
@@ -118,7 +127,6 @@
         android:fadingEdge="vertical"
         android:fadingEdgeLength="7dp"
         android:requiresFadingEdge="vertical"
-        android:visibility="invisible"
 
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintTop_toBottomOf="@id/welcomeTextView">
@@ -134,7 +142,7 @@
                 android:id="@+id/instagramAddressLayout"
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="11dp"
                 android:hint="@string/typeInstagram"
                 android:textColorHint="@color/purple"
 
@@ -189,7 +197,7 @@
                 android:id="@+id/twitterAddressLayout"
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="11dp"
                 android:hint="@string/typeTwitter"
                 android:textColorHint="@color/default_color_bright"
 
@@ -245,7 +253,7 @@
                 android:id="@+id/phoneNumberAddressLayout"
                 android:layout_width="match_parent"
                 android:layout_height="79dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="11dp"
                 android:hint="@string/typePhoneNumber"
                 android:textColorHint="@color/green"
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 12:25 PM
+ * Last modified 6/7/21, 12:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -87,6 +87,9 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
         } else if (Firebase.auth.currentUser != null) {
 
+            accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
+            accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
+
             (application as PremiumStorefrontApplication).firestoreDatabase
                 .document(accountDataStructure.userProfileDatabasePath(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email))
                 .get()
@@ -106,7 +109,6 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
                         accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(
                             AccountDataStructure.Attributes.phoneNumber).toString())
 
-                        accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
                         accountInformationLayoutBinding.inviteFriendsView.setOnClickListener {
 
                             SendInvitation(this@AccountInformation, accountInformationLayoutBinding.root)
@@ -163,6 +165,9 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
     override fun signInProcessFailed(error: String?) {
         super.signInProcessFailed(error)
+
+        this@AccountInformation.finish()
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_out_right)
 
     }
 

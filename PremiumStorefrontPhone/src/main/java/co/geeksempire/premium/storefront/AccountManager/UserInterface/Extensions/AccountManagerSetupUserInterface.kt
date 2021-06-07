@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 12:26 PM
+ * Last modified 6/7/21, 1:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.AccountManager.UserInterface.Extensions
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -57,8 +58,6 @@ fun AccountInformation.accountManagerSetupUserInterface() {
 
     accountInformationLayoutBinding.profileBlurView.setOverlayColor(getColor(R.color.light_blurry_color))
 
-    accountInformationLayoutBinding.welcomeTextView.setTextColor(getColor(R.color.dark))
-
     accountInformationLayoutBinding.instagramAddressView.setTextColor(getColor(R.color.dark))
     accountInformationLayoutBinding.instagramAddressLayout.boxBackgroundColor = (getColor(R.color.white))
 
@@ -77,7 +76,7 @@ fun AccountInformation.accountManagerSetupUserInterface() {
     var dominantColor = getColor(R.color.yellow)
     var vibrantColor = getColor(R.color.default_color_light)
 
-    window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, arrayOf(vibrantColor, dominantColor).toIntArray()))
+    window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
 
     val accountViewLayoutParameters: ConstraintLayout.LayoutParams = accountInformationLayoutBinding.profileImageView.layoutParams as ConstraintLayout.LayoutParams
     accountViewLayoutParameters.setMargins(accountViewLayoutParameters.topMargin, accountViewLayoutParameters.topMargin + statusBarHeight(applicationContext), accountViewLayoutParameters.topMargin, accountViewLayoutParameters.topMargin)
@@ -110,7 +109,10 @@ fun AccountInformation.accountManagerSetupUserInterface() {
                             dominantColor = extractDominantColor(applicationContext, it)
                             vibrantColor = extractVibrantColor(applicationContext, it)
 
-                            window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, arrayOf(vibrantColor, dominantColor).toIntArray()))
+                            window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
+
+                            accountInformationLayoutBinding.inviteFriendsView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
+                            accountInformationLayoutBinding.inviteFriendsView.rippleColor = ColorStateList.valueOf(dominantColor)
 
                             if (isColorDark(dominantColor) && isColorDark(vibrantColor)) {
                                 Log.d(this@accountManagerSetupUserInterface.javaClass.simpleName, "Dark Extracted Colors")
@@ -180,7 +182,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
             )
 
         (application as PremiumStorefrontApplication).firestoreDatabase
-            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.uid))
+            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email))
             .set(userInformationProfileData)
             .addOnSuccessListener {
 
@@ -334,10 +336,13 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
                             val dominantColor = extractDominantColor(applicationContext, it)
                             val vibrantColor = extractVibrantColor(applicationContext, it)
 
-                            window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, arrayOf(vibrantColor, dominantColor).toIntArray()))
+                            window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
 
                             accountInformationLayoutBinding.signupLoadingView.pauseAnimation()
                             accountInformationLayoutBinding.signupLoadingView.visibility = View.INVISIBLE
+
+                            accountInformationLayoutBinding.inviteFriendsView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
+                            accountInformationLayoutBinding.inviteFriendsView.rippleColor = ColorStateList.valueOf(dominantColor)
 
                             if (isColorDark(dominantColor) && isColorDark(vibrantColor)) {
                                 Log.d(this@createUserProfile.javaClass.simpleName, "Dark Extracted Colors")
