@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/7/21, 9:29 AM
+  ~ Last modified 6/8/21, 11:28 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -34,6 +34,8 @@
 
     <string name="priceSortText">Price: High To Low</string>
     <string name="rateSortText">Rate: High To Low</string>
+
+    <string name="typeToSearchText">Type To Search…</string>
 
     <string name="retryText">Retry</string>
     <string name="copyText">Copy</string>

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 4:19 AM
+ * Last modified 6/8/21, 11:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,9 +14,12 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 
 fun Storefront.searchingSetup() {
 
-    filterAllContent.searchThroughAllContent(storefrontAllUnfilteredContents, "Float It")
-        .invokeOnCompletion {
+    //Animation from bottom to position
+    //then expand it with value animation
 
-        }
+//    filterAllContent.searchThroughAllContent(storefrontAllUnfilteredContents, "Float It")
+//        .invokeOnCompletion {
+//
+//        }
 
 }
