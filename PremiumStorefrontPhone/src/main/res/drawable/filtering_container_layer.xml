@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/6/21, 7:17 AM
+  ~ Last modified 6/8/21, 10:35 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@
                 android:top="2dp" />
             <corners android:radius="19dp" />
             <gradient
-                android:angle="315"
+                android:angle="270"
                 android:startColor="#00ffffff"
                 android:centerColor="@color/transparent"
                 android:endColor="#0000A5FF"/>
@@ -34,7 +34,7 @@
                 android:top="2dp" />
             <corners android:radius="19dp" />
             <gradient
-                android:angle="315"
+                android:angle="270"
                 android:startColor="#10ffffff"
                 android:centerColor="@color/transparent"
                 android:endColor="#1000A5FF"/>
@@ -49,7 +49,7 @@
                 android:top="2dp" />
             <corners android:radius="19dp" />
             <gradient
-                android:angle="315"
+                android:angle="270"
                 android:startColor="#20ffffff"
                 android:centerColor="@color/transparent"
                 android:endColor="#2000A5FF"/>
@@ -64,7 +64,7 @@
                 android:top="2dp" />
             <corners android:radius="19dp" />
             <gradient
-                android:angle="315"
+                android:angle="270"
                 android:startColor="#30ffffff"
                 android:centerColor="@color/transparent"
                 android:endColor="#3000A5FF"/>
@@ -79,7 +79,7 @@
                 android:top="2dp" />
             <corners android:radius="19dp" />
             <gradient
-                android:angle="315"
+                android:angle="270"
                 android:startColor="#50ffffff"
                 android:centerColor="@color/transparent"
                 android:endColor="#5000A5FF"/>
@@ -90,7 +90,7 @@
         <shape android:shape="rectangle">
             <corners android:radius="19dp" />
             <gradient
-                android:angle="315"
+                android:angle="270"
                 android:startColor="#ffffff"
                 android:centerColor="@color/transparent"
                 android:endColor="#00A5FF"/>
