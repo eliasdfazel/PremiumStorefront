@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 12:10 PM
+ * Last modified 6/8/21, 9:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -147,7 +147,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
     /* End - Sign In */
 
     val firebaseAuthentication = Firebase.auth
-    val firebaseUser = firebaseAuthentication.currentUser
+    var firebaseUser = firebaseAuthentication.currentUser
 
     lateinit var storefrontLayoutBinding: StorefrontLayoutBinding
 
@@ -460,6 +460,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     override fun signInProcessSucceed(authenticationResult: AuthResult) {
         super.signInProcessSucceed(authenticationResult)
+
+        firebaseUser = authenticationResult.user
+        firebaseUser?.reload()
 
         Glide.with(applicationContext)
             .load(authenticationResult.user?.photoUrl)
