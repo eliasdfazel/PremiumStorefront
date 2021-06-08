@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/8/21, 11:35 AM
+  ~ Last modified 6/8/21, 11:55 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -214,53 +214,6 @@
         android:id="@+id/sortingInclude"
         android:visibility="gone"/>
 
-    <!-- Search View -->
-    <com.google.android.material.textfield.TextInputLayout xmlns:apps="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/textInputSearchView"
-        android:layout_width="313dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="1dp"
-        android:paddingHorizontal="7dp"
-        android:gravity="center_vertical"
-        android:imeOptions="actionSearch"
-        android:hint="@string/typeToSearchText"
-        android:textColorHint="@color/default_color_transparent"
-        android:visibility="gone"
-
-        apps:boxBackgroundMode="outline"
-        apps:boxBackgroundColor="@color/white_transparent"
-        apps:boxCornerRadiusTopStart="51dp"
-        apps:boxCornerRadiusTopEnd="51dp"
-        apps:boxCornerRadiusBottomStart="51dp"
-        apps:boxCornerRadiusBottomEnd="51dp"
-        apps:boxStrokeColor="@color/default_color_light"
-        apps:boxStrokeWidth="2dp"
-        apps:hintEnabled="true"
-        apps:hintAnimationEnabled="true"
-        apps:hintTextColor="@color/default_color_transparent"
-        apps:errorEnabled="true"
-        apps:errorTextColor="@color/yellow"
-
-        apps:layout_constraintBottom_toTopOf="@id/actionCenterView"
-        apps:layout_constraintStart_toStartOf="@id/actionCenterView"
-        apps:layout_constraintEnd_toEndOf="@id/actionCenterView">
-
-        <com.google.android.material.textfield.TextInputEditText xmlns:apps="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="19dp"
-            android:paddingHorizontal="29dp"
-            android:gravity="center_vertical"
-            android:imeOptions="actionSearch"
-            android:lines="1"
-            android:inputType="text|textAutoComplete"
-            android:textSize="21sp"
-            android:textColor="@color/dark"
-            android:textColorHint="@color/dark_transparent"
-            android:cursorVisible="true" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <!-- Content Details  -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contentDetailsContainer"
@@ -288,6 +241,52 @@
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Search View -->
+    <com.google.android.material.textfield.TextInputLayout xmlns:apps="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/textInputSearchView"
+        android:layout_width="313dp"
+        android:layout_height="77dp"
+        android:layout_marginHorizontal="1dp"
+        android:paddingHorizontal="7dp"
+        android:gravity="center_vertical"
+        android:imeOptions="actionSearch"
+        android:hint="@string/typeToSearchText"
+        android:textColorHint="@color/default_color_game"
+
+        apps:boxBackgroundMode="outline"
+        apps:boxBackgroundColor="@color/white_transparent"
+        apps:boxCornerRadiusTopStart="51dp"
+        apps:boxCornerRadiusTopEnd="51dp"
+        apps:boxCornerRadiusBottomStart="51dp"
+        apps:boxCornerRadiusBottomEnd="51dp"
+        apps:boxStrokeColor="@color/white"
+        apps:boxStrokeWidth="2dp"
+        apps:hintEnabled="true"
+        apps:hintAnimationEnabled="true"
+        apps:hintTextColor="@color/default_color_game"
+        apps:errorEnabled="true"
+        apps:errorTextColor="@color/yellow"
+
+        apps:layout_constraintBottom_toTopOf="@id/actionCenterView"
+        apps:layout_constraintStart_toStartOf="@id/actionCenterView"
+        apps:layout_constraintEnd_toEndOf="@id/actionCenterView">
+
+        <com.google.android.material.textfield.TextInputEditText xmlns:apps="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="19dp"
+            android:paddingHorizontal="29dp"
+            android:gravity="center_vertical"
+            android:imeOptions="actionSearch"
+            android:lines="1"
+            android:inputType="text|textAutoComplete"
+            android:textSize="23sp"
+            android:textColor="@color/dark"
+            android:textColorHint="@color/default_color_game"
+            android:cursorVisible="true" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:layout_width="0dp"

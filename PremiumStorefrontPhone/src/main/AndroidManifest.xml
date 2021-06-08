@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/7/21, 12:11 PM
+  ~ Last modified 6/8/21, 11:48 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -63,6 +63,7 @@
         <activity
             android:screenOrientation="sensorPortrait"
             android:name=".FavoriteProductsConfigurations.UserInterface.FavoriteProducts"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/GeeksEmpire.Material.Storefront">
         </activity>
 
