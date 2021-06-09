@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/8/21, 11:57 AM
+ * Last modified 6/9/21, 4:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,19 +12,16 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.animation.Animator
 import android.animation.ValueAnimator
-import android.content.Context
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import com.abanabsalan.aban.magazine.Utils.System.showKeyboard
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 fun Storefront.searchingSetup() {
-
-    val inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
     val valueAnimatorScalesUpWidth = ValueAnimator.ofInt(dpToInteger(applicationContext, 51), dpToInteger(applicationContext, 313))
     valueAnimatorScalesUpWidth.duration = 777
@@ -43,10 +40,7 @@ fun Storefront.searchingSetup() {
 
             storefrontLayoutBinding.searchView.requestFocus()
 
-            inputMethodManager.showSoftInput(
-                storefrontLayoutBinding.searchView,
-                InputMethodManager.SHOW_IMPLICIT
-            )
+            showKeyboard(applicationContext, storefrontLayoutBinding.searchView)
 
         }
 
@@ -59,21 +53,23 @@ fun Storefront.searchingSetup() {
         }
     })
 
-    val valueAnimatorScalesUpHeight = ValueAnimator.ofInt(dpToInteger(applicationContext, 51), dpToInteger(applicationContext, 77))
-    valueAnimatorScalesUpHeight.duration = 777
+    val valueAnimatorScalesUpHeight = ValueAnimator.ofInt(dpToInteger(applicationContext, 43), dpToInteger(applicationContext, 77))
+    valueAnimatorScalesUpHeight.duration = 333
     valueAnimatorScalesUpHeight.addUpdateListener { animator ->
         val animatorValue = animator.animatedValue as Int
 
-//        storefrontLayoutBinding.textInputSearchView.layoutParams.height =
-        storefrontLayoutBinding.textInputSearchView.layoutParams.width = animatorValue
+        storefrontLayoutBinding.textInputSearchView.layoutParams.height= animatorValue
         storefrontLayoutBinding.textInputSearchView.requestLayout()
     }
     valueAnimatorScalesUpHeight.addListener(object : Animator.AnimatorListener {
+
         override fun onAnimationStart(animation: Animator) {
 
         }
 
         override fun onAnimationEnd(animation: Animator) {
+
+            valueAnimatorScalesUpWidth.start()
 
         }
 
@@ -84,6 +80,7 @@ fun Storefront.searchingSetup() {
         override fun onAnimationRepeat(animation: Animator) {
 
         }
+
     })
 
     val slideUpAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_in_bottom)
@@ -95,7 +92,6 @@ fun Storefront.searchingSetup() {
 
         override fun onAnimationEnd(animation: Animation?) {
 
-            valueAnimatorScalesUpWidth.start()
             valueAnimatorScalesUpHeight.start()
 
         }

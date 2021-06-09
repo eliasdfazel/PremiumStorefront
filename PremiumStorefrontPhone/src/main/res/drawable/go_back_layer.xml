@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 5/23/21, 8:30 AM
+  ~ Last modified 6/9/21, 4:27 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -126,6 +126,30 @@
             </shape>
 
         </rotate>
+
+    </item>
+
+    <item
+        android:id="@+id/rippleMask"
+        android:height="44dp"
+        android:width="45dp"
+        android:top="4dp"
+        android:gravity="center_horizontal|top">
+
+        <ripple
+            android:color="@color/blue_transparent">
+
+            <item android:id="@android:id/mask">
+
+                <shape android:shape="oval">
+
+                    <solid android:color="@color/blue_transparent" />
+
+                </shape>
+
+            </item>
+
+        </ripple>
 
     </item>
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 11:40 AM
+ * Last modified 6/9/21, 4:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,8 @@ package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInte
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -207,15 +209,19 @@ class ProductDetailsFragment : Fragment() {
 
                 storefrontInstance?.apply {
 
-                    supportFragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                        .remove(productDetailsFragment)
-                        .commit()
+                    Handler(Looper.getMainLooper()).postDelayed({
 
-                    storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
+                        supportFragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                            .remove(productDetailsFragment)
+                            .commit()
 
-                    prepareActionCenterUserInterface.setupIconsForStorefront()
+                        storefrontLayoutBinding.contentDetailsContainer.visibility = View.GONE
+
+                        prepareActionCenterUserInterface.setupIconsForStorefront()
+
+                    }, 357)
 
                 }
 

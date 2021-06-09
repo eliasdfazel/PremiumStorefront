@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/8/21, 9:37 AM
+ * Last modified 6/9/21, 4:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,6 +59,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
+import com.abanabsalan.aban.magazine.Utils.System.hideKeyboard
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.snackbar.Snackbar
@@ -422,6 +423,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     override fun networkLost() {
         Log.d(this@Storefront.javaClass.simpleName, "No Network @ ${this@Storefront.javaClass.simpleName}")
+
+        hideKeyboard(applicationContext, storefrontLayoutBinding.searchView)
 
     }
 
