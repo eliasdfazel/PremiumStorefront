@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 4:28 AM
+ * Last modified 6/9/21, 7:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,6 +54,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
@@ -250,6 +251,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     featuredContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
+
+                    PopupShortcutsCreator(applicationContext)
+                        .configure(it.subList(0, 5).toList())
 
                 } else {
 
