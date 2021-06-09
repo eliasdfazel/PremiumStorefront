@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 4:43 AM
+ * Last modified 6/9/21, 5:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.content.res.ColorStateList
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -45,7 +46,11 @@ fun Storefront.searchingSetup() {
 
         })
 
+        storefrontLayoutBinding.middleActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
     } else {
+
+        storefrontLayoutBinding.middleActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_game_dark))
 
         val valueAnimatorScalesUpWidth = ValueAnimator.ofInt(dpToInteger(applicationContext, 51), dpToInteger(applicationContext, 313))
         valueAnimatorScalesUpWidth.duration = 777

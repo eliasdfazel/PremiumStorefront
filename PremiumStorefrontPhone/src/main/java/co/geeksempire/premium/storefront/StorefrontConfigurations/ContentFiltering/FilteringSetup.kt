@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/6/21, 6:34 AM
+ * Last modified 6/9/21, 5:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.animation.Animator
+import android.content.res.ColorStateList
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
@@ -40,7 +41,11 @@ fun Storefront.filteringSetup() {
         storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
 
+        storefrontLayoutBinding.rightActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
     } else {
+
+        storefrontLayoutBinding.rightActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_game_dark))
 
         val animationListener = object : AnimationListener {
 
