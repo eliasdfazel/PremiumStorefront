@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:42 AM
+ * Last modified 6/9/21, 5:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,8 +62,6 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
                 }
 
             }
-
-            println(">>> >> > search result > " + storefrontAllContentsFilter)
 
             storefrontLiveData.allFilteredContentItemData.postValue(storefrontAllContentsFilter)
 
