@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/7/21, 12:12 PM
+  ~ Last modified 6/9/21, 8:39 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -119,6 +119,16 @@
         <item name="android:windowTranslucentNavigation">false</item>
 
         <item name="android:windowBackground">@color/default_color</item>
+
+    </style>
+
+    <style name="GeeksEmpire.Material.Preferences" parent="GeeksEmpire.Material">
+
+        <item name="android:statusBarColor">@color/premiumLight</item>
+        <item name="android:navigationBarColor">@color/premiumLight</item>
+
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
 
     </style>
 

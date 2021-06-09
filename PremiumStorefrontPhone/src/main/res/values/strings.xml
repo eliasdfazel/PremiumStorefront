@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/8/21, 11:28 AM
+  ~ Last modified 6/9/21, 9:21 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -52,6 +52,8 @@
     <string name="proceedText">Proceed</string>
 
     <string name="followUsText">Follow Us</string>
+
+    <string name="notSignUp">You Are Not A Member</string>
 
     <string name="noNetworkConnection">No Network Connection</string>
 

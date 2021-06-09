@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/9/21, 9:21 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Preferences.UserInterface.PreferencesControl">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/profileImageView"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginStart="13dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+
+        apps:cornerRadius="51dp"
+        apps:icon="@drawable/not_login_icon"
+        apps:iconSize="66dp"
+        apps:iconPadding="0dp"
+        apps:iconGravity="textStart"
+        apps:iconTint="null"
+        apps:iconTintMode="add"
+        apps:backgroundTint="@color/premiumDark"
+        apps:rippleColor="@color/default_color_game"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/profileNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginStart="13dp"
+        android:paddingHorizontal="23dp"
+        android:gravity="center_vertical"
+        android:textAllCaps="false"
+        android:text="@string/notSignUp"
+        android:textSize="23sp"
+        android:fontFamily="@font/upcil"
+
+
+        apps:cornerRadius="51dp"
+        apps:iconTintMode="add"
+        apps:backgroundTint="@color/premiumDark"
+        apps:rippleColor="@color/default_color_game"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toEndOf="@id/profileImageView"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/themeToggleView"
+        android:layout_width="159dp"
+        android:layout_height="159dp"
+        android:layout_marginTop="119dp"
+
+        apps:lottie_rawRes="@raw/toggle_theme"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
