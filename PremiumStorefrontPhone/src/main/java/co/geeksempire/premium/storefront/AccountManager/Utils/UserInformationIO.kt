@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 8:11 AM
+ * Last modified 6/9/21, 11:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,9 +37,9 @@ class UserInformationIO(private val context: Context) {
 
     }
 
-    fun readPrivacyAgreement() : Flow<Boolean?> {
+    fun readPrivacyAgreement() : Flow<Boolean> {
 
-        return preferencesIO.readPreferencesBoolean(booleanPreferencesKey("PrivacyAgreement"))
+        return preferencesIO.readPreferencesBoolean(booleanPreferencesKey("PrivacyAgreement"), false)
     }
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 9:53 AM
+ * Last modified 6/9/21, 11:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,8 +11,10 @@
 package co.geeksempire.premium.storefront.Preferences.Extensions
 
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.text.Html
-import androidx.lifecycle.coroutineScope
+import android.view.View
+import android.view.WindowInsetsController
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.Preferences.UserInterface.ToggleTheme
@@ -23,7 +25,11 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 fun PreferencesControl.preferencesControlSetupUserInterface() {
 
@@ -67,19 +73,48 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
 
 fun PreferencesControl.toggleLightDark() {
 
-    lifecycle.coroutineScope.launchWhenResumed {
+    CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
 
-        when (themePreferences.checkThemeLightDark().first()) {
-            ThemeType.ThemeLight -> {
+        themePreferences.checkThemeLightDark().collect {
 
-                preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
+            when (it) {
+                ThemeType.ThemeLight -> {
 
+                    println(">>> LIGHT")
+
+                    window.statusBarColor = getColor(R.color.premiumLight)
+                    window.navigationBarColor = getColor(R.color.premiumLight)
+
+                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumLight))
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+                        window.insetsController?.setSystemBarsAppearance(
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+
+                    } else {
+
+                        @Suppress("DEPRECATION")
+                        window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                        } else {
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                        }
+
+                    }
+
+                }
+                ThemeType.ThemeDark -> {
+
+                    window.statusBarColor = getColor(R.color.premiumDark)
+                    window.navigationBarColor = getColor(R.color.premiumDark)
+
+                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDark))
+
+                }
             }
-            ThemeType.ThemeDark -> {
 
-                preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
-
-            }
         }
 
     }

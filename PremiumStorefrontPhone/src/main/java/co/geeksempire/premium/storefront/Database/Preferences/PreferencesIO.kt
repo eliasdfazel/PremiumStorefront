@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 8:07 AM
+ * Last modified 6/9/21, 11:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,9 +45,9 @@ class PreferencesIO (private val context: Context, val preferenceDatabaseName: S
         return context.dataStore.data.map { preferences -> preferences[preferenceKey] }
     }
 
-    fun readPreferencesBoolean(preferenceKey: Preferences.Key<Boolean>) : Flow<Boolean?> {
+    fun readPreferencesBoolean(preferenceKey: Preferences.Key<Boolean>, defaultValue: Boolean) : Flow<Boolean> {
 
-        return context.dataStore.data.map { preferences -> preferences[preferenceKey] }
+        return context.dataStore.data.map { preferences -> preferences[preferenceKey]?:defaultValue }
     }
 
 }
