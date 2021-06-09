@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 10:25 AM
+ * Last modified 6/9/21, 5:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,16 +44,26 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
             storefrontAllContents.forEachIndexed { index, storefrontContentsData ->
 
-                if (storefrontContentsData.productName.contains(searchQuery)
-                    || storefrontContentsData.productSummary.contains(searchQuery)
-                    || storefrontContentsData.productCategory.contains(searchQuery)
-                    || storefrontContentsData.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]?.contains(searchQuery)?:false) {
+                val inputSearchQuery = searchQuery.lowercase()
+
+                val productName = storefrontContentsData.productName.lowercase()
+                val productSummary = storefrontContentsData.productSummary.lowercase()
+                val productCategory = storefrontContentsData.productCategory.lowercase()
+
+                val countryOfDeveloper = storefrontContentsData.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]?:""
+
+                if (productName.contains(inputSearchQuery)
+                    || productSummary.contains(inputSearchQuery)
+                    || productCategory.contains(inputSearchQuery)
+                    || countryOfDeveloper.contains(inputSearchQuery)) {
 
                     storefrontAllContentsFilter.add(storefrontContentsData)
 
                 }
 
             }
+
+            println(">>> >> > search result > " + storefrontAllContentsFilter)
 
             storefrontLiveData.allFilteredContentItemData.postValue(storefrontAllContentsFilter)
 
