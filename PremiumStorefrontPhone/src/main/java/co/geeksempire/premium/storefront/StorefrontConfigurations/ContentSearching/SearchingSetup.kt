@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 4:28 AM
+ * Last modified 6/9/21, 4:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,97 +23,123 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 fun Storefront.searchingSetup() {
 
-    val valueAnimatorScalesUpWidth = ValueAnimator.ofInt(dpToInteger(applicationContext, 51), dpToInteger(applicationContext, 313))
-    valueAnimatorScalesUpWidth.duration = 777
-    valueAnimatorScalesUpWidth.addUpdateListener { animator ->
-        val animatorValue = animator.animatedValue as Int
+    if (storefrontLayoutBinding.textInputSearchView.isShown) {
 
-        storefrontLayoutBinding.textInputSearchView.layoutParams.width = animatorValue
-        storefrontLayoutBinding.textInputSearchView.requestLayout()
-    }
-    valueAnimatorScalesUpWidth.addListener(object : Animator.AnimatorListener {
-        override fun onAnimationStart(animation: Animator) {
+        val fadeOutAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out)
 
-        }
+        storefrontLayoutBinding.textInputSearchView.visibility = View.INVISIBLE
+        storefrontLayoutBinding.textInputSearchView.startAnimation(fadeOutAnimation)
 
-        override fun onAnimationEnd(animation: Animator) {
+        fadeOutAnimation.setAnimationListener(object : Animation.AnimationListener {
 
-            storefrontLayoutBinding.searchView.requestFocus()
+            override fun onAnimationStart(animation: Animation?) {}
 
-            showKeyboard(applicationContext, storefrontLayoutBinding.searchView)
+            override fun onAnimationEnd(animation: Animation?) {
 
-        }
-
-        override fun onAnimationCancel(animation: Animator) {
-
-        }
-
-        override fun onAnimationRepeat(animation: Animator) {
-
-        }
-    })
-
-    val valueAnimatorScalesUpHeight = ValueAnimator.ofInt(dpToInteger(applicationContext, 43), dpToInteger(applicationContext, 77))
-    valueAnimatorScalesUpHeight.duration = 333
-    valueAnimatorScalesUpHeight.addUpdateListener { animator ->
-        val animatorValue = animator.animatedValue as Int
-
-        storefrontLayoutBinding.textInputSearchView.layoutParams.height= animatorValue
-        storefrontLayoutBinding.textInputSearchView.requestLayout()
-    }
-    valueAnimatorScalesUpHeight.addListener(object : Animator.AnimatorListener {
-
-        override fun onAnimationStart(animation: Animator) {
-
-        }
-
-        override fun onAnimationEnd(animation: Animator) {
-
-            valueAnimatorScalesUpWidth.start()
-
-        }
-
-        override fun onAnimationCancel(animation: Animator) {
-
-        }
-
-        override fun onAnimationRepeat(animation: Animator) {
-
-        }
-
-    })
-
-    val slideUpAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_in_bottom)
-    storefrontLayoutBinding.textInputSearchView.visibility = View.VISIBLE
-    storefrontLayoutBinding.textInputSearchView.startAnimation(slideUpAnimation)
-
-    slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
-        override fun onAnimationStart(animation: Animation?) {}
-
-        override fun onAnimationEnd(animation: Animation?) {
-
-            valueAnimatorScalesUpHeight.start()
-
-        }
-
-        override fun onAnimationRepeat(animation: Animation?) {}
-
-    })
-
-    storefrontLayoutBinding.searchView.setOnEditorActionListener { textView, actionId, event ->
-
-        when (actionId) {
-            EditorInfo.IME_ACTION_SEARCH -> {
-
-                filterAllContent.searchThroughAllContent(storefrontAllUnfilteredContents, textView.text.toString())
-                    .invokeOnCompletion {
-
-                    }
+                storefrontLayoutBinding.textInputSearchView.layoutParams.width = dpToInteger(applicationContext, 51)
+                storefrontLayoutBinding.textInputSearchView.layoutParams.height = dpToInteger(applicationContext, 51)
 
             }
+
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+        })
+
+    } else {
+
+        val valueAnimatorScalesUpWidth = ValueAnimator.ofInt(dpToInteger(applicationContext, 51), dpToInteger(applicationContext, 313))
+        valueAnimatorScalesUpWidth.duration = 777
+        valueAnimatorScalesUpWidth.addUpdateListener { animator ->
+            val animatorValue = animator.animatedValue as Int
+
+            storefrontLayoutBinding.textInputSearchView.layoutParams.width = animatorValue
+            storefrontLayoutBinding.textInputSearchView.requestLayout()
+        }
+        valueAnimatorScalesUpWidth.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+
+                storefrontLayoutBinding.searchView.requestFocus()
+
+                showKeyboard(applicationContext, storefrontLayoutBinding.searchView)
+
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+
+            }
+        })
+
+        val valueAnimatorScalesUpHeight = ValueAnimator.ofInt(dpToInteger(applicationContext, 43), dpToInteger(applicationContext, 77))
+        valueAnimatorScalesUpHeight.duration = 333
+        valueAnimatorScalesUpHeight.addUpdateListener { animator ->
+            val animatorValue = animator.animatedValue as Int
+
+            storefrontLayoutBinding.textInputSearchView.layoutParams.height= animatorValue
+            storefrontLayoutBinding.textInputSearchView.requestLayout()
+        }
+        valueAnimatorScalesUpHeight.addListener(object : Animator.AnimatorListener {
+
+            override fun onAnimationStart(animation: Animator) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+
+                valueAnimatorScalesUpWidth.start()
+
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+
+            }
+
+        })
+
+        val slideUpAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_in_bottom)
+        storefrontLayoutBinding.textInputSearchView.visibility = View.VISIBLE
+        storefrontLayoutBinding.textInputSearchView.startAnimation(slideUpAnimation)
+
+        slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+
+                valueAnimatorScalesUpHeight.start()
+
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+        })
+
+        storefrontLayoutBinding.searchView.setOnEditorActionListener { textView, actionId, event ->
+
+            when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+
+                    filterAllContent.searchThroughAllContent(storefrontAllUnfilteredContents, textView.text.toString())
+                        .invokeOnCompletion {
+
+                        }
+
+                }
+            }
+
+            false
         }
 
-        false
     }
 
 }
