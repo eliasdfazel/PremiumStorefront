@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 8:07 AM
+ * Last modified 6/9/21, 9:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,7 @@ object ThemeType {
 
 class ThemePreferences (context: Context) {
 
-    private val preferencesIO: PreferencesIO = PreferencesIO(context, )
+    private val preferencesIO: PreferencesIO = PreferencesIO(context)
 
     /**
      * Light = True - Dark = False

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 8:48 AM
+ * Last modified 6/9/21, 9:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,9 +18,9 @@ import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBin
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class ToggleTheme (private val context: AppCompatActivity, private val preferencesControlViewBinding: PreferencesControlLayoutBinding) {
-
-    val themePreferences = ThemePreferences(context)
+class ToggleTheme (private val context: AppCompatActivity,
+                   private val themePreferences: ThemePreferences,
+                   private val preferencesControlViewBinding: PreferencesControlLayoutBinding) {
 
     fun initialThemeToggleAction() {
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 9:31 AM
+ * Last modified 6/9/21, 9:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,13 +20,14 @@ import co.geeksempire.premium.storefront.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.coroutines.flow.first
 
 fun PreferencesControl.preferencesControlSetupUserInterface() {
 
-    val toggleTheme = ToggleTheme(this@preferencesControlSetupUserInterface, preferencesControlLayoutBinding)
+    val toggleTheme = ToggleTheme(this@preferencesControlSetupUserInterface, themePreferences, preferencesControlLayoutBinding)
     toggleTheme.initialThemeToggleAction()
 
     firebaseUser?.let {
@@ -36,7 +37,9 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
         Glide.with(applicationContext)
             .asDrawable()
             .load(it.photoUrl)
+            .transform(CircleCrop())
             .listener(object : RequestListener<Drawable> {
+
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
 
                     return false
@@ -44,11 +47,14 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
 
                 override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                    preferencesControlLayoutBinding.profileImageView.icon = resource
+                    runOnUiThread {
+
+                        preferencesControlLayoutBinding.profileImageView.icon = resource
+
+                    }
 
                     return false
                 }
-
 
             })
             .submit()
@@ -67,8 +73,6 @@ fun PreferencesControl.toggleLightDark() {
             ThemeType.ThemeLight -> {
 
                 preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
-
-
 
             }
             ThemeType.ThemeDark -> {
