@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 7:07 AM
+ * Last modified 6/9/21, 7:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -96,7 +96,7 @@ class PopupShortcutsCreator (val context: Context) {
         Glide.with(context)
             .asBitmap()
             .load(popupShortcutsData.applicationIconLink)
-            .transform(RoundedCorners(dpToInteger(context, 29)))
+            .transform(RoundedCorners(dpToInteger(context, 37)))
             .listener(object : RequestListener<Bitmap> {
 
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
