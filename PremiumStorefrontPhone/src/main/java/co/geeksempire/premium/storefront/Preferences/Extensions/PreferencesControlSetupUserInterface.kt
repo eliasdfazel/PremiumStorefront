@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 10:32 AM
+ * Last modified 6/10/21, 11:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,12 +51,7 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
             .transform(CircleCrop())
             .listener(object : RequestListener<Drawable> {
 
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    isFirstResource: Boolean
-                ): Boolean {
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
 
                     return false
                 }
@@ -106,12 +101,6 @@ fun PreferencesControl.toggleLightDark() {
                     window.statusBarColor = getColor(R.color.premiumLight)
                     window.navigationBarColor = getColor(R.color.premiumLight)
 
-                    preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
-                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
-
-                    preferencesControlLayoutBinding.applicationLogo.imageTintList =
-                        ColorStateList.valueOf(getColor(R.color.dark))
-
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
                         window.insetsController?.setSystemBarsAppearance(
@@ -131,19 +120,28 @@ fun PreferencesControl.toggleLightDark() {
 
                     }
 
+                    preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
+
+                    preferencesControlLayoutBinding.applicationLogo.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
+
+                    preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
+                    preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
+                    preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
+
+                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+
+                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+
+                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+
                 }
                 ThemeType.ThemeDark -> {
 
                     window.statusBarColor = getColor(R.color.premiumDark)
                     window.navigationBarColor = getColor(R.color.premiumDark)
-
-                    preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
-                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
-
-                    preferencesControlLayoutBinding.applicationLogo.imageTintList =
-                        ColorStateList.valueOf(getColor(R.color.light))
-
-                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
@@ -154,8 +152,25 @@ fun PreferencesControl.toggleLightDark() {
                         @Suppress("DEPRECATION")
                         window.decorView.systemUiVisibility = 0
 
-
                     }
+
+                    preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
+
+                    preferencesControlLayoutBinding.applicationLogo.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
+
+                    preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
+                    preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
+                    preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
+
+                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+
+                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+
+                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+
                 }
 
             }

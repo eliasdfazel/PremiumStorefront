@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/10/21, 4:21 AM
+  ~ Last modified 6/10/21, 11:13 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@
         android:height="159dp"
         android:width="159dp"
         android:gravity="center"
-        android:drawable="@drawable/squircle_icon">
+        android:drawable="@drawable/squircle_icon_light">
 
     </item>
 
@@ -38,7 +38,7 @@
 
             <stroke
                 android:color="@color/white_transparent"
-                android:width="0.5dp"/>
+                android:width="0.7dp"/>
 
         </shape>
 

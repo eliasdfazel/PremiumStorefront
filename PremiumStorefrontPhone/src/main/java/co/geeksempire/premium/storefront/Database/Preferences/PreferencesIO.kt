@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 6:15 AM
+ * Last modified 6/10/21, 11:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,8 +22,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class PreferencesIO (private val context: Context,
-                     val preferenceDatabaseName: String = "Preferences",
-                     val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)) {
+                     private val preferenceDatabaseName: String = "Preferences",
+                     private val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)) {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = preferenceDatabaseName, scope = coroutineScope)
 

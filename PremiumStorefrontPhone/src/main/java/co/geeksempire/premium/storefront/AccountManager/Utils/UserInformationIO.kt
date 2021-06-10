@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 6:27 AM
+ * Last modified 6/10/21, 11:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,25 +12,12 @@ package co.geeksempire.premium.storefront.AccountManager.Utils
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.lifecycle.lifecycleScope
-import co.geeksempire.premium.storefront.Database.Preferences.PreferencesIO
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import kotlinx.coroutines.flow.Flow
 
-class UserInformationIO(private val context: AppCompatActivity) {
+class UserInformationIO(context: AppCompatActivity) {
 
-    private val preferencesIO = PreferencesIO(context = context, preferenceDatabaseName = "UserProfileInformation", coroutineScope = context.lifecycleScope)
-
-    suspend fun saveUserInformation(userEmailAddress: String) {
-
-        preferencesIO.savePreferences(stringPreferencesKey("Email"), userEmailAddress)
-
-    }
-
-    suspend fun getUserAccountName() : Flow<String?> {
-
-        return preferencesIO.readPreferencesString(stringPreferencesKey("Email"))
-    }
+    private val preferencesIO = (context.application as PremiumStorefrontApplication).preferencesIO
 
     suspend fun savePrivacyAgreement() {
 

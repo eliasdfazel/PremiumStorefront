@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/16/21, 3:11 AM
+ * Last modified 6/10/21, 10:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,27 +17,64 @@ import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
 import androidx.appcompat.widget.AppCompatButton
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-fun Storefront.setupUserInterface() {
+fun Storefront.setupUserInterface() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
 
-    window.statusBarColor = getColor(R.color.premiumLight)
-    window.navigationBarColor = getColor(R.color.premiumLight)
+    themePreferences.checkThemeLightDark().collect {
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        when (it) {
+            ThemeType.ThemeLight -> {
 
-        window.insetsController?.setSystemBarsAppearance(
-            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                window.statusBarColor = getColor(R.color.premiumLight)
+                window.navigationBarColor = getColor(R.color.premiumLight)
 
-    } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-        @Suppress("DEPRECATION")
-        window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-        } else {
-            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    window.insetsController?.setSystemBarsAppearance(
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+
+                } else {
+
+                    @Suppress("DEPRECATION")
+                    window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                    } else {
+                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    }
+
+                }
+
+                storefrontLayoutBinding.allContentBackground.setImageDrawable(getDrawable(R.drawable.storefront_content_background_light))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                window.statusBarColor = getColor(R.color.premiumDark)
+                window.navigationBarColor = getColor(R.color.premiumDark)
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+                    window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+
+                } else {
+
+                    @Suppress("DEPRECATION")
+                    window.decorView.systemUiVisibility = 0
+
+                }
+
+                storefrontLayoutBinding.allContentBackground.setImageDrawable(getDrawable(R.drawable.storefront_content_background_dark))
+
+            }
         }
 
     }

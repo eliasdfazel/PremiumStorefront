@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 7:03 AM
+ * Last modified 6/10/21, 10:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,6 +29,7 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInte
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetailsFragment
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
@@ -72,6 +73,10 @@ import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
+
+    val themePreferences: ThemePreferences by lazy {
+        ThemePreferences(this@Storefront)
+    }
 
     val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
 
