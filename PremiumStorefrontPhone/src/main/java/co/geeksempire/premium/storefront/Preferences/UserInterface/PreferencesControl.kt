@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 6:22 AM
+ * Last modified 6/10/21, 7:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import androidx.lifecycle.coroutineScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Preferences.DataStructure.PreferencesLiveData
+import co.geeksempire.premium.storefront.Preferences.Extensions.preferencesControlSetupUserInteractions
 import co.geeksempire.premium.storefront.Preferences.Extensions.preferencesControlSetupUserInterface
 import co.geeksempire.premium.storefront.Preferences.Extensions.toggleLightDark
 import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBinding
@@ -50,6 +51,8 @@ class PreferencesControl : AppCompatActivity() {
         preferencesControlLayoutBinding.root.post {
 
             preferencesControlSetupUserInterface()
+
+            preferencesControlSetupUserInteractions()
 
             preferencesLiveData.toggleTheme.observe(this@PreferencesControl, Observer {
 

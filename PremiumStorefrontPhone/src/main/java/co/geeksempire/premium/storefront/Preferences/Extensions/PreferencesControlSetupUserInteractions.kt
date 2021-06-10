@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 6:56 AM
+ * Last modified 6/10/21, 7:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,8 @@ package co.geeksempire.premium.storefront.Preferences.Extensions
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.net.Uri
+import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
+import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.R
 
@@ -20,37 +21,34 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
     preferencesControlLayoutBinding.profileImageView.setOnClickListener {
 
-        if (firebaseUser != null) {
-
-        } else {
-
-        }
+        startActivity(
+            Intent(applicationContext, AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
 
     }
 
     preferencesControlLayoutBinding.profileNameView.setOnClickListener {
 
-        if (firebaseUser != null) {
-
-        } else {
-
-        }
+        startActivity(Intent(applicationContext, AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
 
     }
 
     preferencesControlLayoutBinding.whatNewView.setOnClickListener {
 
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.premiumStorefrontWhatsNewLink))).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, R.anim.fade_out).toBundle())
+        BuiltInBrowser.show(context = applicationContext,
+            linkToLoad = getString(R.string.premiumStorefrontWhatsNewLink),
+            gradientColorOne = getColor(R.color.default_color_game),
+            gradientColorTwo = getColor(R.color.default_color_game_light))
 
     }
 
     preferencesControlLayoutBinding.supportView.setOnClickListener {
 
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.supportLink))).apply {
-           flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, R.anim.fade_out).toBundle())
+        BuiltInBrowser.show(context = applicationContext,
+            linkToLoad = getString(R.string.supportLink),
+            gradientColorOne = getColor(R.color.default_color_game),
+            gradientColorTwo = getColor(R.color.default_color_game_light))
 
     }
 
