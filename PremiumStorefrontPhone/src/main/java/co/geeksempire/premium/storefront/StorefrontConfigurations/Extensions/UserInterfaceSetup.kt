@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 10:45 AM
+ * Last modified 6/10/21, 11:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,7 +53,37 @@ fun Storefront.setupUserInterface() = CoroutineScope(SupervisorJob() + Dispatche
 
                 }
 
-                storefrontLayoutBinding.allContentBackground.setImageDrawable(getDrawable(R.drawable.storefront_content_background_light))
+                storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
+
+                /* Start - Add Shadow To Content Background */
+                val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+
+                backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
+                backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
+
+                backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
+                backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
+
+                backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
+                backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
+
+                backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
+                backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
+
+                val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
+                shapeShadow.paint.apply {
+                    color = getColor(R.color.dark)
+
+                    setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_high))
+                }
+
+                val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
+
+                shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
+
+                storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+                storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
+                /* End - Add Shadow To Content Background */
 
             }
             ThemeType.ThemeDark -> {
@@ -72,43 +102,42 @@ fun Storefront.setupUserInterface() = CoroutineScope(SupervisorJob() + Dispatche
 
                 }
 
-                storefrontLayoutBinding.allContentBackground.setImageDrawable(getDrawable(R.drawable.storefront_content_background_dark))
+                storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
+
+                /* Start - Add Shadow To Content Background */
+                val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+
+                backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
+                backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
+
+                backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
+                backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
+
+                backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
+                backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
+
+                backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
+                backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
+
+                val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
+                shapeShadow.paint.apply {
+                    color = getColor(R.color.light)
+
+                    setShadowLayer(31f, 0f, 0f, getColor(R.color.light_transparent_high))
+                }
+
+                val shadowLayer = getDrawable(R.drawable.storefront_content_background_dark) as LayerDrawable
+
+                shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
+
+                storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+                storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
+                /* End - Add Shadow To Content Background */
 
             }
         }
 
     }
-
-    /* Start - Add Shadow To Content Background */
-    val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
-
-    backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
-    backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
-
-    backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
-    backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
-
-    backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
-    backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
-    backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
-
-    backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
-    backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
-
-    val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
-    shapeShadow.paint.apply {
-        color = getColor(R.color.dark)
-
-        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_high))
-    }
-
-    val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
-
-    shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
-
-    storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
-    storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
-    /* End - Add Shadow To Content Background */
 
     prepareActionCenterUserInterface.let {
 
