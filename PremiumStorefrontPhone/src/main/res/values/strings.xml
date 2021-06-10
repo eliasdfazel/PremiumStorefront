@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/9/21, 9:21 AM
+  ~ Last modified 6/10/21, 9:25 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -22,6 +22,10 @@
     <string name="searchActionDescription">Search Applications In Premium Storefront</string>
     <string name="filterActionDescription">Filter To See Your Preferred Applications</string>
     <string name="sortActionDescription">Sort List Of Applications</string>
+
+    <string name="themeToggleDescription">Toggle Theme Of Application To Light Or Dark</string>
+    <string name="supportDescription">Contact Our Support Team</string>
+    <string name="changeLogDescription">See What Is New In Premium Storefront</string>
 
     <string name="installNowText">Install Now</string>
 
