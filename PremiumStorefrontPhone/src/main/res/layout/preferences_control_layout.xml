@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/10/21, 10:35 AM
+  ~ Last modified 6/10/21, 10:37 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -180,7 +180,8 @@
         android:layout_width="0dp"
         android:layout_height="71dp"
         android:layout_marginVertical="29dp"
-        android:layout_marginHorizontal="13dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="13dp"
         android:insetLeft="0dp"
         android:insetRight="0dp"
         android:insetTop="0dp"
@@ -192,7 +193,7 @@
         apps:iconTint="@color/premiumLight"
         apps:iconGravity="textStart"
         apps:iconPadding="1dp"
-        apps:cornerRadius="51dp"
+        apps:cornerRadius="23sp"
         apps:rippleColor="@color/default_color_light"
         apps:backgroundTint="@color/premiumDark"
 
@@ -206,7 +207,8 @@
         android:layout_width="0dp"
         android:layout_height="71dp"
         android:layout_marginVertical="29dp"
-        android:layout_marginHorizontal="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="19dp"
         android:insetLeft="0dp"
         android:insetRight="0dp"
         android:insetTop="0dp"
@@ -218,7 +220,7 @@
         apps:iconTint="@color/premiumLight"
         apps:iconGravity="textStart"
         apps:iconPadding="3dp"
-        apps:cornerRadius="51dp"
+        apps:cornerRadius="23sp"
         apps:rippleColor="@color/default_color_light"
         apps:backgroundTint="@color/premiumDark"
 
