@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 6:43 AM
+ * Last modified 6/10/21, 10:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.Preferences.UserInterface.ToggleTheme
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -81,6 +82,13 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
             .submit()
 
     }
+
+    ShadowAnimation()
+        .textShadowValueAnimatorLoop(view = preferencesControlLayoutBinding.rateItView,
+            startValue = 0f, endValue = preferencesControlLayoutBinding.rateItView.shadowRadius,
+            startDuration = 1357, endDuration = 579,
+            shadowColor = preferencesControlLayoutBinding.rateItView.shadowColor, shadowX = 0f, shadowY = 0f,
+            numberOfLoop = 13)
 
     toggleLightDark()
 
