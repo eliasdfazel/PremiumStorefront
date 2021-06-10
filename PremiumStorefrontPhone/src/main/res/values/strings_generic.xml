@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/7/21, 7:45 AM
+  ~ Last modified 6/10/21, 6:55 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,6 +14,8 @@
 
     <string name="premiumStorefrontPlayStoreLink">https://play.google.com/store/apps/details?id=co.geeksempire.premium.storefront.android</string>
 
+    <string name="premiumStorefrontWhatsNewLink">https://GeeksEmpire.co/PremiumStorefront</string>
+    <string name="supportLink">www.m.me/PremiumStorefront</string>
     <string name="facebookLink">https://www.facebook.com/PremiumStorefront</string>
 
     <string name="privacyAgreementLink">https://GeeksEmpire.co/PrivacyPolicy</string>

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 6:27 AM
+ * Last modified 6/10/21, 6:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.Preferences.Extensions
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Html
@@ -31,12 +32,17 @@ import kotlinx.coroutines.launch
 
 fun PreferencesControl.preferencesControlSetupUserInterface() {
 
-    val toggleTheme = ToggleTheme(this@preferencesControlSetupUserInterface, themePreferences, preferencesControlLayoutBinding)
+    val toggleTheme = ToggleTheme(
+        this@preferencesControlSetupUserInterface,
+        themePreferences,
+        preferencesControlLayoutBinding
+    )
     toggleTheme.initialThemeToggleAction()
 
     firebaseUser?.let {
 
-        preferencesControlLayoutBinding.profileNameView.text = Html.fromHtml(it.displayName, Html.FROM_HTML_MODE_COMPACT)
+        preferencesControlLayoutBinding.profileNameView.text =
+            Html.fromHtml(it.displayName, Html.FROM_HTML_MODE_COMPACT)
 
         Glide.with(applicationContext)
             .asDrawable()
@@ -44,12 +50,23 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
             .transform(CircleCrop())
             .listener(object : RequestListener<Drawable> {
 
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
 
                     return false
                 }
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
 
                     runOnUiThread {
 
@@ -81,22 +98,28 @@ fun PreferencesControl.toggleLightDark() {
                     window.statusBarColor = getColor(R.color.premiumLight)
                     window.navigationBarColor = getColor(R.color.premiumLight)
 
+                    preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
                     preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
+
+                    preferencesControlLayoutBinding.applicationLogo.imageTintList =
+                        ColorStateList.valueOf(getColor(R.color.dark))
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
                         window.insetsController?.setSystemBarsAppearance(
                             WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                        )
 
                     } else {
 
                         @Suppress("DEPRECATION")
-                        window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                        } else {
-                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                        }
+                        window.decorView.systemUiVisibility =
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                            } else {
+                                View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                            }
 
                     }
 
@@ -106,13 +129,30 @@ fun PreferencesControl.toggleLightDark() {
                     window.statusBarColor = getColor(R.color.premiumDark)
                     window.navigationBarColor = getColor(R.color.premiumDark)
 
+                    preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
                     preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
 
+                    preferencesControlLayoutBinding.applicationLogo.imageTintList =
+                        ColorStateList.valueOf(getColor(R.color.light))
+
+                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+                        window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+
+                    } else {
+
+                        @Suppress("DEPRECATION")
+                        window.decorView.systemUiVisibility = 0
+
+
+                    }
                 }
+
             }
 
         }
-
     }
 
 }
