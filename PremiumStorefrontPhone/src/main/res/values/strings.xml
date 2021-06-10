@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/10/21, 9:25 AM
+  ~ Last modified 6/10/21, 9:38 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -51,8 +51,11 @@
         ]]>
     </string>
 
-    <string name="doneText">Done.</string>
+    <string name="rateText">Rate</string>
+    <string name="updateText">Update</string>
+    <string name="shareText">Share</string>
 
+    <string name="doneText">Done.</string>
     <string name="proceedText">Proceed</string>
 
     <string name="followUsText">Follow Us</string>
@@ -75,7 +78,7 @@
 
     <string name="installActionDescription">Install This Application From Google Play Store</string>
     <string name="shareActionDescription">Share This Application With Your Friends</string>
-    <string name="rateActionDescription">Rate &amp; Write Review This Application</string>
+    <string name="rateActionDescription">Rate &amp; Write Review For This Application</string>
 
     <string name="proceedAgreement">Agreed &amp; Proceed</string>
     <string name="privacyAgreement">Privacy Policy &amp; User Agreement</string>

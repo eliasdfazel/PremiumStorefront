@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/10/21, 9:25 AM
+  ~ Last modified 6/10/21, 9:57 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -82,57 +82,148 @@
         apps:layout_constraintBottom_toBottomOf="@id/profileImageView"
         apps:layout_constraintStart_toEndOf="@id/profileImageView"/>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/themeToggleView"
-        android:layout_width="159dp"
-        android:layout_height="159dp"
-        android:layout_marginTop="151dp"
-        android:padding="29dp"
-        android:background="@drawable/preferences_theme_toggle_background"
-        android:contentDescription="@string/themeToggleDescription"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="129dp">
 
-        apps:lottie_rawRes="@raw/toggle_theme_animation"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="29dp">
 
-        apps:layout_constraintTop_toTopOf="parent"
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/themeToggleView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="29dp"
+                android:background="@drawable/preferences_theme_toggle_background"
+                android:contentDescription="@string/themeToggleDescription"
+
+                apps:lottie_rawRes="@raw/toggle_theme_animation"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/supportView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:layout_marginTop="29dp"
+                android:padding="23dp"
+                android:background="@drawable/preferences_theme_toggle_background"
+                android:contentDescription="@string/supportDescription"
+
+                apps:lottie_rawRes="@raw/support_animation"
+                apps:lottie_autoPlay="true"
+                apps:lottie_loop="true"
+
+                apps:layout_constraintHorizontal_bias="0.13"
+                apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/whatNewView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:layout_marginTop="29dp"
+                android:padding="23dp"
+                android:background="@drawable/preferences_theme_toggle_background"
+                android:contentDescription="@string/changeLogDescription"
+
+                apps:lottie_rawRes="@raw/what_s_new_animation"
+                apps:lottie_autoPlay="true"
+                apps:lottie_loop="true"
+
+                apps:layout_constraintHorizontal_bias="0.87"
+                apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rateItView"
+        android:layout_width="0dp"
+        android:layout_height="91dp"
+        android:layout_marginVertical="29dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAllCaps="false"
+        android:text="@string/rateText"
+        android:textSize="51sp"
+        android:textColor="@color/default_color_game_bright"
+        android:shadowColor="@color/default_color_game_light"
+        android:shadowRadius="13"
+        android:shadowDy="0"
+        android:shadowDx="0"
+        android:fontFamily="@font/neon"
+        android:contentDescription="@string/rateActionDescription"
+
+        apps:cornerRadius="51dp"
+        apps:rippleColor="@color/default_color_light"
+        apps:backgroundTint="@color/premiumDark"
+
+        apps:layout_constraintWidth_percent="0.53"
+        apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/supportView"
-        android:layout_width="159dp"
-        android:layout_height="159dp"
-        android:layout_marginTop="29dp"
-        android:padding="23dp"
-        android:background="@drawable/preferences_theme_toggle_background"
-        android:contentDescription="@string/supportDescription"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/updateItView"
+        android:layout_width="0dp"
+        android:layout_height="71dp"
+        android:layout_marginVertical="29dp"
+        android:layout_marginHorizontal="13dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:contentDescription="@string/rateActionDescription"
 
-        apps:lottie_rawRes="@raw/support_animation"
-        apps:lottie_autoPlay="true"
-        apps:lottie_loop="true"
+        apps:icon="@drawable/update_icon"
+        apps:iconSize="39dp"
+        apps:iconTint="@color/premiumLight"
+        apps:iconGravity="textStart"
+        apps:iconPadding="1dp"
+        apps:cornerRadius="51dp"
+        apps:rippleColor="@color/default_color_light"
+        apps:backgroundTint="@color/premiumDark"
 
-        apps:layout_constraintHorizontal_bias="0.19"
-        apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
+        apps:layout_constraintTop_toTopOf="@id/rateItView"
+        apps:layout_constraintBottom_toBottomOf="@id/rateItView"
         apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toStartOf="@id/rateItView"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shareItView"
+        android:layout_width="0dp"
+        android:layout_height="71dp"
+        android:layout_marginVertical="29dp"
+        android:layout_marginHorizontal="13dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:contentDescription="@string/rateActionDescription"
+
+        apps:icon="@drawable/share_icon"
+        apps:iconSize="39dp"
+        apps:iconTint="@color/premiumLight"
+        apps:iconGravity="textStart"
+        apps:iconPadding="3dp"
+        apps:cornerRadius="51dp"
+        apps:rippleColor="@color/default_color_light"
+        apps:backgroundTint="@color/premiumDark"
+
+        apps:layout_constraintTop_toTopOf="@id/rateItView"
+        apps:layout_constraintBottom_toBottomOf="@id/rateItView"
+        apps:layout_constraintStart_toEndOf="@id/rateItView"
         apps:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/whatNewView"
-        android:layout_width="159dp"
-        android:layout_height="159dp"
-        android:layout_marginTop="29dp"
-        android:padding="23dp"
-        android:background="@drawable/preferences_theme_toggle_background"
-        android:contentDescription="@string/changeLogDescription"
-
-        apps:lottie_rawRes="@raw/what_s_new_animation"
-        apps:lottie_autoPlay="true"
-        apps:lottie_loop="true"
-
-        apps:layout_constraintHorizontal_bias="0.81"
-        apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
-        apps:layout_constraintStart_toStartOf="parent"
-        apps:layout_constraintEnd_toEndOf="parent"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
