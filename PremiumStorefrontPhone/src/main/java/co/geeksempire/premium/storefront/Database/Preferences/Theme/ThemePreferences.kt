@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 11:02 AM
+ * Last modified 6/10/21, 6:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,8 +10,9 @@
 
 package co.geeksempire.premium.storefront.Database.Preferences.Theme
 
-import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Database.Preferences.PreferencesIO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,9 +24,9 @@ object ThemeType {
     const val ThemeDark = false
 }
 
-class ThemePreferences (context: Context) {
+class ThemePreferences (context: AppCompatActivity) {
 
-    private val preferencesIO: PreferencesIO = PreferencesIO(context)
+    private val preferencesIO: PreferencesIO = PreferencesIO(context = context, coroutineScope = context.lifecycleScope)
 
     /**
      * Light = True - Dark = False

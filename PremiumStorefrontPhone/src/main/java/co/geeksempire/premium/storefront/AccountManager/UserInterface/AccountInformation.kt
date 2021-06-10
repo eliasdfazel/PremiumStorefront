@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 1:34 PM
+ * Last modified 6/10/21, 6:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,7 +34,7 @@ import java.util.*
 class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
 
     val userInformationIO: UserInformationIO by lazy {
-        UserInformationIO(applicationContext)
+        UserInformationIO(this@AccountInformation)
     }
 
     val accountDataStructure = AccountDataStructure()

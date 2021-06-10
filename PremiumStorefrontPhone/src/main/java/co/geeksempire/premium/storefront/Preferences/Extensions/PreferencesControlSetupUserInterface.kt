@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 11:04 AM
+ * Last modified 6/10/21, 6:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.os.Build
 import android.text.Html
 import android.view.View
 import android.view.WindowInsetsController
+import androidx.lifecycle.coroutineScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.Preferences.UserInterface.ToggleTheme
@@ -25,9 +26,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -73,19 +71,17 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
 
 fun PreferencesControl.toggleLightDark() {
 
-    CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+    lifecycle.coroutineScope.launch {
 
         themePreferences.checkThemeLightDark().collect {
 
             when (it) {
                 ThemeType.ThemeLight -> {
 
-                    println(">>> LIGHT")
-
                     window.statusBarColor = getColor(R.color.premiumLight)
                     window.navigationBarColor = getColor(R.color.premiumLight)
 
-                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
@@ -110,7 +106,7 @@ fun PreferencesControl.toggleLightDark() {
                     window.statusBarColor = getColor(R.color.premiumDark)
                     window.navigationBarColor = getColor(R.color.premiumDark)
 
-                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
 
                 }
             }

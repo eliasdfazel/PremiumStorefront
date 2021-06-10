@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 9:31 AM
+ * Last modified 6/10/21, 6:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,8 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
@@ -38,8 +40,23 @@ fun Storefront.userInteractionSetup() {
 
     storefrontLayoutBinding.preferencesView.setOnClickListener {
 
-        startActivity(Intent(applicationContext, PreferencesControl::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-            ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
+        val rotateAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.rotate_bounce_interpolator)
+        storefrontLayoutBinding.preferencesView.startAnimation(rotateAnimation)
+
+        rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
+
+            override fun onAnimationStart(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+
+                startActivity(Intent(applicationContext, PreferencesControl::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                    ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
+
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {}
+
+        })
 
     }
 
