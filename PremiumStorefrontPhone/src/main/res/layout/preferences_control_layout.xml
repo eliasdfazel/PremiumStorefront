@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/10/21, 10:37 AM
+  ~ Last modified 6/10/21, 10:39 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -119,6 +119,7 @@
                 apps:lottie_rawRes="@raw/support_animation"
                 apps:lottie_autoPlay="true"
                 apps:lottie_loop="true"
+                apps:lottie_repeatCount="13"
 
                 apps:layout_constraintHorizontal_bias="0.13"
                 apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
@@ -137,6 +138,7 @@
                 apps:lottie_rawRes="@raw/what_s_new_animation"
                 apps:lottie_autoPlay="true"
                 apps:lottie_loop="true"
+                apps:lottie_repeatCount="13"
 
                 apps:layout_constraintHorizontal_bias="0.87"
                 apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
