@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/10/21, 11:13 AM
+  ~ Last modified 6/10/21, 11:31 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -54,7 +54,7 @@
         apps:iconPadding="0dp"
         apps:iconGravity="textStart"
         apps:iconTintMode="multiply"
-        apps:backgroundTint="@color/default_color_light"
+        apps:backgroundTint="@color/white"
         apps:rippleColor="@color/default_color_game"
 
         apps:layout_constraintTop_toTopOf="parent"
@@ -71,12 +71,13 @@
         android:text="@string/notSignUp"
         android:textSize="29sp"
         android:textStyle="bold"
+        android:textColor="@color/premiumDark"
         android:fontFamily="@font/upcil"
         android:contentDescription="@string/profileDescription"
 
         apps:cornerRadius="51dp"
         apps:iconTintMode="add"
-        apps:backgroundTint="@color/default_color_light"
+        apps:backgroundTint="@color/white"
         apps:rippleColor="@color/default_color_game"
 
         apps:layout_constraintTop_toTopOf="@id/profileImageView"
@@ -171,7 +172,7 @@
 
         apps:cornerRadius="51dp"
         apps:rippleColor="@color/default_color_light"
-        apps:backgroundTint="@color/premiumDark"
+        apps:backgroundTint="@color/premiumLight"
 
         apps:layout_constraintWidth_percent="0.53"
         apps:layout_constraintBottom_toBottomOf="parent"
@@ -193,12 +194,12 @@
 
         apps:icon="@drawable/update_icon"
         apps:iconSize="39dp"
-        apps:iconTint="@color/premiumLight"
+        apps:iconTint="@color/premiumDark"
         apps:iconGravity="textStart"
         apps:iconPadding="1dp"
         apps:cornerRadius="23sp"
         apps:rippleColor="@color/default_color_light"
-        apps:backgroundTint="@color/premiumDark"
+        apps:backgroundTint="@color/premiumLight"
 
         apps:layout_constraintTop_toTopOf="@id/rateItView"
         apps:layout_constraintBottom_toBottomOf="@id/rateItView"
@@ -220,12 +221,12 @@
 
         apps:icon="@drawable/share_icon"
         apps:iconSize="39dp"
-        apps:iconTint="@color/premiumLight"
+        apps:iconTint="@color/premiumDark"
         apps:iconGravity="textStart"
         apps:iconPadding="3dp"
         apps:cornerRadius="23sp"
         apps:rippleColor="@color/default_color_light"
-        apps:backgroundTint="@color/premiumDark"
+        apps:backgroundTint="@color/premiumLight"
 
         apps:layout_constraintTop_toTopOf="@id/rateItView"
         apps:layout_constraintBottom_toBottomOf="@id/rateItView"

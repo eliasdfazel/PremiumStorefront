@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 11:22 AM
+ * Last modified 6/10/21, 11:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -125,17 +125,22 @@ fun PreferencesControl.toggleLightDark() {
 
                     preferencesControlLayoutBinding.applicationLogo.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
+                    preferencesControlLayoutBinding.profileImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
+
+                    preferencesControlLayoutBinding.profileNameView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
+                    preferencesControlLayoutBinding.profileNameView.setTextColor(getColor(R.color.premiumDark))
+
                     preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
                     preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
                     preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
 
-                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
-                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
 
-                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
 
-                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
-                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
 
                 }
                 ThemeType.ThemeDark -> {
@@ -159,17 +164,22 @@ fun PreferencesControl.toggleLightDark() {
 
                     preferencesControlLayoutBinding.applicationLogo.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
+                    preferencesControlLayoutBinding.profileImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.black))
+
+                    preferencesControlLayoutBinding.profileNameView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.black))
+                    preferencesControlLayoutBinding.profileNameView.setTextColor(getColor(R.color.premiumLight))
+
                     preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
                     preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
                     preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
 
-                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
-                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
 
-                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
 
-                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
-                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
 
                 }
 
