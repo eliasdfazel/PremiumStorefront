@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 12:03 PM
+ * Last modified 6/10/21, 12:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,124 +17,126 @@ import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-fun Storefront.setupUserInterface() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+fun Storefront.setupUserInterface() {
 
-    themePreferences.checkThemeLightDark().collect {
+    lifecycleScope.launch {
 
-        when (it) {
-            ThemeType.ThemeLight -> {
+        themePreferences.checkThemeLightDark().collect {
 
-                window.statusBarColor = getColor(R.color.premiumLight)
-                window.navigationBarColor = getColor(R.color.premiumLight)
+            when (it) {
+                ThemeType.ThemeLight -> {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    window.statusBarColor = getColor(R.color.premiumLight)
+                    window.navigationBarColor = getColor(R.color.premiumLight)
 
-                    window.insetsController?.setSystemBarsAppearance(
-                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-                } else {
+                        window.insetsController?.setSystemBarsAppearance(
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
 
-                    @Suppress("DEPRECATION")
-                    window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
                     } else {
-                        View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+                        @Suppress("DEPRECATION")
+                        window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                        } else {
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                        }
+
                     }
 
+                    storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
+
+                    /* Start - Add Shadow To Content Background */
+                    val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+
+                    backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
+                    backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
+
+                    backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
+                    backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
+
+                    backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
+                    backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
+
+                    backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
+                    backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
+
+                    val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
+                    shapeShadow.paint.apply {
+                        color = getColor(R.color.black)
+
+                        setShadowLayer(31f, 0f, 0f, getColor(R.color.black_transparent))
+                    }
+
+                    val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
+
+                    shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
+
+                    storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+                    storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
+                    /* End - Add Shadow To Content Background */
+
                 }
+                ThemeType.ThemeDark -> {
 
-                storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
+                    window.statusBarColor = getColor(R.color.premiumDark)
+                    window.navigationBarColor = getColor(R.color.premiumDark)
 
-                /* Start - Add Shadow To Content Background */
-                val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-                backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
-                backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
+                        window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
 
-                backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
-                backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
+                    } else {
 
-                backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
-                backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
+                        @Suppress("DEPRECATION")
+                        window.decorView.systemUiVisibility = 0
 
-                backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
-                backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
+                    }
 
-                val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
-                shapeShadow.paint.apply {
-                    color = getColor(R.color.black)
+                    storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
 
-                    setShadowLayer(31f, 0f, 0f, getColor(R.color.black_transparent))
+                    /* Start - Add Shadow To Content Background */
+                    val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
+
+                    backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
+                    backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
+
+                    backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
+                    backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
+
+                    backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
+                    backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
+
+                    backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
+                    backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
+
+                    val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
+                    shapeShadow.paint.apply {
+                        color = getColor(R.color.white)
+
+                        setShadowLayer(31f, 0f, 0f, getColor(R.color.white_transparent))
+                    }
+
+                    val shadowLayer = getDrawable(R.drawable.storefront_content_background_dark) as LayerDrawable
+
+                    shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
+
+                    storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
+                    storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
+                    /* End - Add Shadow To Content Background */
+
                 }
-
-                val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
-
-                shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
-
-                storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
-                storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
-                /* End - Add Shadow To Content Background */
-
             }
-            ThemeType.ThemeDark -> {
 
-                window.statusBarColor = getColor(R.color.premiumDark)
-                window.navigationBarColor = getColor(R.color.premiumDark)
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
-                    window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-
-                } else {
-
-                    @Suppress("DEPRECATION")
-                    window.decorView.systemUiVisibility = 0
-
-                }
-
-                storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
-
-                /* Start - Add Shadow To Content Background */
-                val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
-
-                backgroundShadowRadius[0] = (29).toFloat()//topLeftCorner
-                backgroundShadowRadius[1] = (29).toFloat()//topLeftCorner
-
-                backgroundShadowRadius[2] = (13).toFloat()//topRightCorner
-                backgroundShadowRadius[3] = (13).toFloat()//topRightCorner
-
-                backgroundShadowRadius[4] = (13).toFloat()//bottomRightCorner
-                backgroundShadowRadius[5] = (13).toFloat()//bottomRightCorner
-
-                backgroundShadowRadius[6] = (29).toFloat()//bottomLeftCorner
-                backgroundShadowRadius[7] = (29).toFloat()//bottomLeftCorner
-
-                val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
-                shapeShadow.paint.apply {
-                    color = getColor(R.color.white)
-
-                    setShadowLayer(31f, 0f, 0f, getColor(R.color.white_transparent))
-                }
-
-                val shadowLayer = getDrawable(R.drawable.storefront_content_background_dark) as LayerDrawable
-
-                shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
-
-                storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
-                storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
-                /* End - Add Shadow To Content Background */
-
-            }
         }
 
     }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 11:56 AM
+ * Last modified 6/10/21, 12:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,8 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.R
 
-class PrepareActionCenterUserInterface(private val context: Context, private val actionCenterView: ImageView,
+class PrepareActionCenterUserInterface(private val context: Context,
+                                       private val actionCenterView: ImageView,
                                        private val actionLeftView: ImageView, private val actionMiddleView: ImageView, private val actionRightView: ImageView) {
 
     fun design() {
@@ -62,9 +63,9 @@ class PrepareActionCenterUserInterface(private val context: Context, private val
 
         val shapeDarkShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundDarkShadowRadius, null, null))
         shapeDarkShadow.paint.apply {
-            color = context.getColor(R.color.dark)
+            color = context.getColor(R.color.black)
 
-            setShadowLayer(29f, 0f, 0f, context.getColor(R.color.dark_transparent))
+            setShadowLayer(29f, 0f, 0f, context.getColor(R.color.black_transparent))
         }
 
         val shadowLayer = context.getDrawable(R.drawable.action_center_shadow_background_light) as LayerDrawable
