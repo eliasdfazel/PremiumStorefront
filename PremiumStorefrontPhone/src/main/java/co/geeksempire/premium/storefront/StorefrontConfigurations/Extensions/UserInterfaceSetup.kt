@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 8:22 AM
+ * Last modified 6/11/21, 9:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,14 +30,40 @@ fun Storefront.setupUserInterface() {
 
         themePreferences.checkThemeLightDark().collect {
 
-            categoriesAdapter.themeType = it
-            categoriesAdapter.notifyItemRangeChanged(0, categoriesAdapter.itemCount)
+            categoriesAdapter.apply {
 
-            newContentAdapter.themeType = it
-            newContentAdapter.notifyItemRangeChanged(0, newContentAdapter.itemCount)
+                themeType = it
 
-            allContentAdapter.themeType = it
-            allContentAdapter.notifyItemRangeChanged(0, allContentAdapter.itemCount)
+                if (storefrontCategories.isNotEmpty()) {
+
+                    notifyItemRangeChanged(0, categoriesAdapter.itemCount)
+
+                }
+
+            }
+
+            newContentAdapter.apply {
+
+                newContentAdapter.themeType = it
+
+                if (storefrontContents.isNotEmpty()) {
+
+                    newContentAdapter.notifyItemRangeChanged(0, newContentAdapter.itemCount)
+                }
+
+            }
+
+            allContentAdapter.apply {
+
+                themeType = it
+
+                if (storefrontContents.isNotEmpty()) {
+
+                    allContentAdapter.notifyItemRangeChanged(0, allContentAdapter.itemCount)
+
+                }
+
+            }
 
             when (it) {
 

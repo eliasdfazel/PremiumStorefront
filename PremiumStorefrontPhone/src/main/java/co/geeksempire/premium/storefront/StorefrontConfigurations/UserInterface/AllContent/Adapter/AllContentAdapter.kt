@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 8:19 AM
+ * Last modified 6/11/21, 9:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,7 +54,41 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
     override fun onBindViewHolder(allContentViewHolder: AllContentViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(allContentViewHolder, position, payloads)
 
+        when (themeType) {
+            ThemeType.ThemeLight -> {
 
+                allContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
+                allContentViewHolder.productNameTextView.setShadowLayer(allContentViewHolder.productNameTextView.shadowRadius, allContentViewHolder.productNameTextView.shadowDx, allContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
+
+                allContentViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
+
+                allContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
+                allContentViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_light)
+
+            }
+            ThemeType.ThemeDark -> {
+
+                allContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
+                allContentViewHolder.productNameTextView.setShadowLayer(allContentViewHolder.productNameTextView.shadowRadius, allContentViewHolder.productNameTextView.shadowDx, allContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.black))
+
+                allContentViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
+
+                allContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_dark))
+                allContentViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_dark)
+
+            }
+            else -> {
+
+                allContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
+                allContentViewHolder.productNameTextView.setShadowLayer(allContentViewHolder.productNameTextView.shadowRadius, allContentViewHolder.productNameTextView.shadowDx, allContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
+
+                allContentViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
+
+                allContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
+                allContentViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_light)
+
+            }
+        }
 
     }
 

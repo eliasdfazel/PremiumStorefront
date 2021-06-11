@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 8:19 AM
+ * Last modified 6/11/21, 9:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,7 +49,26 @@ class NewContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
     override fun onBindViewHolder(newContentViewHolder: NewContentViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(newContentViewHolder, position, payloads)
 
+        when (themeType) {
+            ThemeType.ThemeLight -> {
 
+                newContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
+                newContentViewHolder.productNameTextView.setShadowLayer(newContentViewHolder.productNameTextView.shadowRadius, newContentViewHolder.productNameTextView.shadowDx, newContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                newContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
+                newContentViewHolder.productNameTextView.setShadowLayer(newContentViewHolder.productNameTextView.shadowRadius, newContentViewHolder.productNameTextView.shadowDx, newContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.black))
+
+            }
+            else -> {
+
+                newContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
+                newContentViewHolder.productNameTextView.setShadowLayer(newContentViewHolder.productNameTextView.shadowRadius, newContentViewHolder.productNameTextView.shadowDx, newContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
+
+            }
+        }
 
     }
 
