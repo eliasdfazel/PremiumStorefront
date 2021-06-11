@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 10:29 AM
+ * Last modified 6/11/21, 10:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
@@ -50,6 +51,10 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
             productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
             productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
 
+            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.light))
+
+            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
+
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.dark)
 
@@ -68,6 +73,10 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
             productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.light))
             productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.light))
 
+            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.dark))
+
+            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_dark)
+
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.black)
 
@@ -85,6 +94,10 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
 
             productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
             productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
+
+            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.light))
+
+            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
 
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.dark)
