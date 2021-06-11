@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 8:03 AM
+ * Last modified 6/11/21, 7:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@ class CategoryDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (activity as Storefront).prepareActionCenterUserInterface.setupIconsForDetails()
+        (activity as Storefront).prepareActionCenterUserInterface.setupIconsForCategoryDetails()
 
     }
 

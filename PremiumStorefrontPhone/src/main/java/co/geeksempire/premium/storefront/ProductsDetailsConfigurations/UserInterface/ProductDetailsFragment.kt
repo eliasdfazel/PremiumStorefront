@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 4:27 AM
+ * Last modified 6/11/21, 7:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.startFavoriteProcess
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
@@ -41,6 +42,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ProductDetailsFragment : Fragment() {
 
@@ -61,7 +64,11 @@ class ProductDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (activity as Storefront).prepareActionCenterUserInterface.setupIconsForDetails()
+        lifecycleScope.launch {
+            storefrontInstance?.themePreferences?.checkThemeLightDark()?.collect {
+                (activity as Storefront).prepareActionCenterUserInterface.setupIconsForDetails(it)
+            }
+        }
 
     }
 
