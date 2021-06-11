@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 12:05 PM
+ * Last modified 6/11/21, 6:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,13 +18,14 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 
 class PrepareActionCenterUserInterface(private val context: Context,
                                        private val actionCenterView: ImageView,
                                        private val actionLeftView: ImageView, private val actionMiddleView: ImageView, private val actionRightView: ImageView) {
 
-    fun design() {
+    fun design(themeType: Boolean = ThemeType.ThemeLight) {
 
         val backgroundLightShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
 
@@ -76,7 +77,15 @@ class PrepareActionCenterUserInterface(private val context: Context,
         shadowLayer.setDrawableByLayerId(R.id.darkShadow, shapeDarkShadow)
 
         val foregroundLayer = shadowLayer.findDrawableByLayerId(R.id.foregroundLayer)
-        foregroundLayer.setTint(context.getColor(R.color.premiumLight))
+        foregroundLayer.setTint(when (themeType) {
+            ThemeType.ThemeLight -> {
+                context.getColor(R.color.premiumLight)
+            }
+            ThemeType.ThemeDark -> {
+                context.getColor(R.color.premiumDark)
+            }
+            else -> context.getColor(R.color.premiumLight)
+        })
 
         actionCenterView.setImageDrawable(shadowLayer)
 
@@ -84,7 +93,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
 
     }
 
-    fun setupIconsForStorefront() {
+    fun setupIconsForStorefront(themeType: Boolean = ThemeType.ThemeLight) {
 
         val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
         actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon)?.apply { setTint(context.getColor(R.color.default_color_dark)) })

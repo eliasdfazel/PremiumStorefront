@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 12:08 PM
+ * Last modified 6/11/21, 7:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -72,9 +72,9 @@ fun Storefront.setupUserInterface() {
 
                     val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
                     shapeShadow.paint.apply {
-                        color = getColor(R.color.black)
+                        color = getColor(R.color.dark_transparent)
 
-                        setShadowLayer(31f, 0f, 0f, getColor(R.color.black_transparent))
+                        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent))
                     }
 
                     val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
@@ -84,6 +84,14 @@ fun Storefront.setupUserInterface() {
                     storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
                     storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
                     /* End - Add Shadow To Content Background */
+
+                    prepareActionCenterUserInterface.let { centerUserInterface ->
+
+                        centerUserInterface.design(ThemeType.ThemeLight)
+
+                        centerUserInterface.setupIconsForStorefront(ThemeType.ThemeLight)
+
+                    }
 
                 }
                 ThemeType.ThemeDark -> {
@@ -121,9 +129,9 @@ fun Storefront.setupUserInterface() {
 
                     val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
                     shapeShadow.paint.apply {
-                        color = getColor(R.color.white)
+                        color = getColor(R.color.dark)
 
-                        setShadowLayer(31f, 0f, 0f, getColor(R.color.white_transparent))
+                        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent))
                     }
 
                     val shadowLayer = getDrawable(R.drawable.storefront_content_background_dark) as LayerDrawable
@@ -134,18 +142,18 @@ fun Storefront.setupUserInterface() {
                     storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
                     /* End - Add Shadow To Content Background */
 
+                    prepareActionCenterUserInterface.let { centerUserInterface ->
+
+                        centerUserInterface.design(ThemeType.ThemeDark)
+
+                        centerUserInterface.setupIconsForStorefront(ThemeType.ThemeDark)
+
+                    }
+
                 }
             }
 
         }
-
-    }
-
-    prepareActionCenterUserInterface.let {
-
-        it.design()
-
-        it.setupIconsForStorefront()
 
     }
 

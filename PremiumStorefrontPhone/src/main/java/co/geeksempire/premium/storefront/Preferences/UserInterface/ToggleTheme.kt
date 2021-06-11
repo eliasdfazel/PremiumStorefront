@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 9:46 AM
+ * Last modified 6/11/21, 7:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -66,6 +66,12 @@ class ToggleTheme (private val context: AppCompatActivity,
 
                             themePreferences.changeLightDarkTheme(ThemeType.ThemeDark)
 
+                            when(context) {
+                                is PreferencesControl -> {
+                                    (context as PreferencesControl).preferencesLiveData.toggleTheme.postValue(ThemeType.ThemeDark)
+                                }
+                            }
+
                         }
                         ThemeType.ThemeDark -> {
 
@@ -76,19 +82,19 @@ class ToggleTheme (private val context: AppCompatActivity,
                                 it.playAnimation()
                             }
 
-                            themePreferences.changeLightDarkTheme(ThemeType.ThemeLight)
+                            themePreferences.changeLightDarkTheme(ThemeType.ThemeLight).await()
+
+                            when(context) {
+                                is PreferencesControl -> {
+                                    (context as PreferencesControl).preferencesLiveData.toggleTheme.postValue(ThemeType.ThemeLight)
+                                }
+                            }
 
                         }
                     }
 
                 }
 
-            }
-
-            when(context) {
-                is PreferencesControl -> {
-                    (context as PreferencesControl).preferencesLiveData.toggleTheme.postValue(true)
-                }
             }
 
         }

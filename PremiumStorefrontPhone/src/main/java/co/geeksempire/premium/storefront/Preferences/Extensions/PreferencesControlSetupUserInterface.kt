@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 11:32 AM
+ * Last modified 6/11/21, 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,17 +33,12 @@ import kotlinx.coroutines.launch
 
 fun PreferencesControl.preferencesControlSetupUserInterface() {
 
-    val toggleTheme = ToggleTheme(
-        this@preferencesControlSetupUserInterface,
-        themePreferences,
-        preferencesControlLayoutBinding
-    )
+    val toggleTheme = ToggleTheme(this@preferencesControlSetupUserInterface, themePreferences, preferencesControlLayoutBinding)
     toggleTheme.initialThemeToggleAction()
 
     firebaseUser?.let {
 
-        preferencesControlLayoutBinding.profileNameView.text =
-            Html.fromHtml(it.displayName, Html.FROM_HTML_MODE_COMPACT)
+        preferencesControlLayoutBinding.profileNameView.text = Html.fromHtml(it.displayName, Html.FROM_HTML_MODE_COMPACT)
 
         Glide.with(applicationContext)
             .asDrawable()
@@ -56,13 +51,7 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
                     return false
                 }
 
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean
-                ): Boolean {
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
                     runOnUiThread {
 
@@ -78,12 +67,15 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
 
     }
 
-    ShadowAnimation()
-        .textShadowValueAnimatorLoop(view = preferencesControlLayoutBinding.rateItView,
+    ShadowAnimation().apply {
+
+        textShadowValueAnimatorLoop(view = preferencesControlLayoutBinding.rateItView,
             startValue = 0f, endValue = preferencesControlLayoutBinding.rateItView.shadowRadius,
             startDuration = 1357, endDuration = 579,
             shadowColor = preferencesControlLayoutBinding.rateItView.shadowColor, shadowX = 0f, shadowY = 0f,
             numberOfLoop = 13)
+
+    }
 
     toggleLightDark()
 
@@ -134,13 +126,22 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
                     preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
 
-                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
-                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.updateItView.apply {
+                        backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                        iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                        strokeColor = ColorStateList.valueOf(getColor(R.color.white_transparent))
+                    }
 
-                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.rateItView.apply {
+                        backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                        strokeColor = ColorStateList.valueOf(getColor(R.color.white_transparent))
+                    }
 
-                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
-                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.shareItView.apply {
+                        backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                        iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                        strokeColor = ColorStateList.valueOf(getColor(R.color.white_transparent))
+                    }
 
                 }
                 ThemeType.ThemeDark -> {
@@ -173,13 +174,22 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
                     preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
 
-                    preferencesControlLayoutBinding.updateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
-                    preferencesControlLayoutBinding.updateItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.updateItView.apply {
+                        backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                        iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                        strokeColor = ColorStateList.valueOf(getColor(R.color.black_transparent))
+                    }
 
-                    preferencesControlLayoutBinding.rateItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                    preferencesControlLayoutBinding.rateItView.apply {
+                        backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                        strokeColor = ColorStateList.valueOf(getColor(R.color.black_transparent))
+                    }
 
-                    preferencesControlLayoutBinding.shareItView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
-                    preferencesControlLayoutBinding.shareItView.iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                    preferencesControlLayoutBinding.shareItView.apply {
+                        backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
+                        iconTint = ColorStateList.valueOf(getColor(R.color.premiumLight))
+                        strokeColor = ColorStateList.valueOf(getColor(R.color.black_transparent))
+                    }
 
                 }
 

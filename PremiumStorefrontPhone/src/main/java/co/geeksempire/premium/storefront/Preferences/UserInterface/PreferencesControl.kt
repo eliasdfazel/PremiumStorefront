@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 7:05 AM
+ * Last modified 6/11/21, 7:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,6 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.coroutineScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Preferences.DataStructure.PreferencesLiveData
@@ -26,8 +25,6 @@ import co.geeksempire.premium.storefront.Preferences.Extensions.toggleLightDark
 import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class PreferencesControl : AppCompatActivity() {
 
@@ -54,40 +51,21 @@ class PreferencesControl : AppCompatActivity() {
 
             preferencesControlSetupUserInteractions()
 
-            preferencesLiveData.toggleTheme.observe(this@PreferencesControl, Observer {
+            preferencesLiveData.toggleTheme.observe(this@PreferencesControl, Observer { themeType ->
 
-                var delayTheme: Long = 3333
+                Handler(Looper.getMainLooper()).postDelayed({
 
-                lifecycle.coroutineScope.launch {
+                    toggleLightDark()
 
-                    themePreferences.checkThemeLightDark().collect {
-
-                        when (it) {
-                            ThemeType.ThemeLight -> {
-                                delayTheme = 3000
-                            }
-                            ThemeType.ThemeDark -> {
-                                delayTheme = 1133
-                            }
-                        }
-
-                        if (it) {
-
-                            Handler(Looper.getMainLooper()).postDelayed({
-
-                                toggleLightDark()
-
-                            }, delayTheme)
-
-                        } else {
-
-                            toggleLightDark()
-
-                        }
-
+                }, when (themeType) {
+                    ThemeType.ThemeLight -> {
+                        5000
                     }
-
-                }
+                    ThemeType.ThemeDark -> {
+                        5000
+                    }
+                    else -> 5000
+                })
 
             })
 
