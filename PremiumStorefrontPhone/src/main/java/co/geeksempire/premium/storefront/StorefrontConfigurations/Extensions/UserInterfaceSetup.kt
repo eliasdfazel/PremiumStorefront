@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 9:02 AM
+ * Last modified 6/11/21, 10:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -108,9 +108,9 @@ fun Storefront.setupUserInterface() {
 
                     val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
                     shapeShadow.paint.apply {
-                        color = getColor(R.color.dark_transparent)
+                        color = getColor(R.color.dark)
 
-                        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent))
+                        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_high))
                     }
 
                     val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/28/21, 10:21 AM
+ * Last modified 6/11/21, 10:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,9 +18,10 @@ import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import androidx.appcompat.widget.AppCompatButton
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 
-fun ProductDetailsFragment.applyShadowEffectsForContentBackground() {
+fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boolean = ThemeType.ThemeLight) {
 
     /* Start - Add Shadow To Content Background */
     val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
@@ -37,29 +38,73 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground() {
     backgroundShadowRadius[6] = (0).toFloat()//bottomLeftCorner
     backgroundShadowRadius[7] = (0).toFloat()//bottomLeftCorner
 
-    val shapeShadow: ShapeDrawable =
-        ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
-    shapeShadow.paint.apply {
-        color = requireContext().getColor(R.color.dark)
+    val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
 
-        setShadowLayer(31f, 0f, 0f, requireContext().getColor(R.color.dark_transparent_high))
+    val shadowLayer = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumLight))
+
+            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_light))
+
+            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
+            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
+
+            shapeShadow.paint.apply {
+                color = requireContext().getColor(R.color.dark)
+
+                setShadowLayer(31f, 0f, 0f, requireContext().getColor(R.color.dark_transparent_high))
+            }
+
+            requireContext().getDrawable(R.drawable.product_details_background_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumDark))
+
+            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_dark))
+
+            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.light))
+            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.light))
+
+            shapeShadow.paint.apply {
+                color = requireContext().getColor(R.color.black)
+
+                setShadowLayer(31f, 0f, 0f, requireContext().getColor(R.color.black_transparent))
+            }
+
+            requireContext().getDrawable(R.drawable.product_details_background_dark) as LayerDrawable
+
+        }
+        else -> {
+
+            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumLight))
+
+            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_light))
+
+            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
+            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
+
+            shapeShadow.paint.apply {
+                color = requireContext().getColor(R.color.dark)
+
+                setShadowLayer(31f, 0f, 0f, requireContext().getColor(R.color.dark_transparent_high))
+            }
+
+            requireContext().getDrawable(R.drawable.product_details_background_light) as LayerDrawable
+        }
     }
-
-    val shadowLayer =
-        requireContext().getDrawable(R.drawable.product_details_background_light) as LayerDrawable
 
     shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
-    productDetailsLayoutBinding.allContentBackground.setLayerType(
-        AppCompatButton.LAYER_TYPE_SOFTWARE,
-        shapeShadow.paint
-    )
+    productDetailsLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
     productDetailsLayoutBinding.allContentBackground.background = (shadowLayer)
     /* End - Add Shadow To Content Background */
 
 }
 
-fun ProductDetailsFragment.applyGlowingEffectsForRatingBackground(glowingColor: Int) {
+fun ProductDetailsFragment.applyGlowingEffectsForRatingBackground(themeType: Boolean = ThemeType.ThemeLight, glowingColor: Int) {
 
     /* Start - Setup Negative Space Of Rating Element */
     val negativeSpaceLayers = requireContext().getDrawable(R.drawable.application_rating_details_glowing_frame) as LayerDrawable
@@ -100,9 +145,21 @@ fun ProductDetailsFragment.applyGlowingEffectsForRatingBackground(glowingColor: 
 
 }
 
-fun ProductDetailsFragment.applyNegativeSpaceEffectsForFavorite() {
+fun ProductDetailsFragment.applyNegativeSpaceEffectsForFavorite(themeType: Boolean = ThemeType.ThemeLight) {
 
-    val favoriteLayer = requireContext().getDrawable(R.drawable.favorite_layer) as LayerDrawable
+    val favoriteLayer = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            requireContext().getDrawable(R.drawable.favorite_layer_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            requireContext().getDrawable(R.drawable.favorite_layer_dark) as LayerDrawable
+
+        }
+        else -> requireContext().getDrawable(R.drawable.favorite_layer_light) as LayerDrawable
+    }
 
     val negativeSpaceLeft = floatArrayOf(
         0f,//topLeftCorner

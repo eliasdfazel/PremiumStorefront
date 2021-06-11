@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 7:57 AM
+ * Last modified 6/11/21, 10:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.startFavoriteProcess
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
@@ -48,6 +50,10 @@ import kotlinx.coroutines.launch
 class ProductDetailsFragment : Fragment() {
 
     var storefrontInstance: Storefront? = null
+
+    val themePreferences: ThemePreferences by lazy {
+        ThemePreferences(requireActivity() as AppCompatActivity)
+    }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(requireContext())
@@ -81,9 +87,17 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        applyShadowEffectsForContentBackground()
+        lifecycleScope.launch {
 
-        applyNegativeSpaceEffectsForFavorite()
+            themePreferences.checkThemeLightDark().collect {
+
+                applyShadowEffectsForContentBackground(it)
+
+                applyNegativeSpaceEffectsForFavorite(it)
+
+            }
+
+        }
 
         arguments?.apply {
 
@@ -115,7 +129,62 @@ class ProductDetailsFragment : Fragment() {
 
                                 requireActivity().runOnUiThread {
 
-                                    applyGlowingEffectsForRatingBackground(vibrantColor)
+                                    lifecycleScope.launch {
+
+                                        themePreferences.checkThemeLightDark().collect {
+
+                                            applyGlowingEffectsForRatingBackground(themeType = it, glowingColor = vibrantColor)
+
+                                            if (getString(ProductDataKey.ProductCoverImage) == null) {
+
+                                                productDetailsLayoutBinding.applicationFeaturedImageBlurView.visibility = View.VISIBLE
+
+                                                productDetailsLayoutBinding.applicationFeaturedImageBlurView.setOverlayColor(when (it) {
+                                                    ThemeType.ThemeLight -> {
+                                                        requireContext().getColor(R.color.light_transparent)
+                                                    }
+                                                    ThemeType.ThemeDark -> {
+                                                        requireContext().getColor(R.color.dark_transparent)
+                                                    }
+                                                    else -> requireContext().getColor(R.color.light_transparent)
+                                                })
+
+                                                productDetailsLayoutBinding.applicationIconBlurView.setSecondOverlayColor(when (it) {
+                                                    ThemeType.ThemeLight -> {
+                                                        requireContext().getColor(R.color.light_transparent_high)
+                                                    }
+                                                    ThemeType.ThemeDark -> {
+                                                        requireContext().getColor(R.color.dark_transparent_high)
+                                                    }
+                                                    else -> requireContext().getColor(R.color.light_transparent_high)
+                                                })
+
+                                                val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
+
+                                                productDetailsLayoutBinding.applicationFeaturedImageView.background = gradientFeaturedBackground
+
+                                                Glide.with(requireContext())
+                                                    .load(resource)
+                                                    .transform(CenterCrop())
+                                                    .into(productDetailsLayoutBinding.applicationFeaturedImageView)
+
+                                            } else {
+
+                                                getString(ProductDataKey.ProductCoverImage)?.let { productCoverImage ->
+
+                                                    Glide.with(requireContext())
+                                                        .asDrawable()
+                                                        .load(productCoverImage)
+                                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                        .into(productDetailsLayoutBinding.applicationFeaturedImageView)
+
+                                                }
+
+                                            }
+
+                                        }
+
+                                    }
 
                                     productDetailsLayoutBinding.applicationRatingTextView.setTextColor(vibrantColor)
                                     productDetailsLayoutBinding.applicationRatingTextView.setShadowLayer(productDetailsLayoutBinding.applicationRatingTextView.shadowRadius, productDetailsLayoutBinding.applicationRatingTextView.shadowDx, productDetailsLayoutBinding.applicationRatingTextView.shadowDy, vibrantColor)
@@ -123,33 +192,6 @@ class ProductDetailsFragment : Fragment() {
                                     productDetailsLayoutBinding.applicationIconBlurView.setOverlayColor(setColorAlpha(dominantColor, 222f))
 
                                     productDetailsLayoutBinding.applicationIconImageView.setImageDrawable(resource)
-
-                                    if (getString(ProductDataKey.ProductCoverImage) == null) {
-
-                                        productDetailsLayoutBinding.applicationFeaturedImageBlurView.visibility = View.VISIBLE
-
-                                        val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
-
-                                        productDetailsLayoutBinding.applicationFeaturedImageView.background = gradientFeaturedBackground
-
-                                        Glide.with(requireContext())
-                                            .load(resource)
-                                            .transform(CenterCrop())
-                                            .into(productDetailsLayoutBinding.applicationFeaturedImageView)
-
-                                    } else {
-
-                                        getString(ProductDataKey.ProductCoverImage)?.let { productCoverImage ->
-
-                                            Glide.with(requireContext())
-                                                .asDrawable()
-                                                .load(productCoverImage)
-                                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                                .into(productDetailsLayoutBinding.applicationFeaturedImageView)
-
-                                        }
-
-                                    }
 
                                 }
 
