@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 7:38 AM
+ * Last modified 6/11/21, 7:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -144,8 +144,6 @@ fun Storefront.setupUserInterface() {
                     storefrontLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
                     storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
                     /* End - Add Shadow To Content Background */
-
-                    println(">>>>>>>>>>>>>>>> DARK THEME")
 
                     prepareActionCenterUserInterface.let { centerUserInterface ->
 
