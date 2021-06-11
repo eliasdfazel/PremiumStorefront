@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:29 AM
+ * Last modified 6/11/21, 8:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
@@ -35,6 +36,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
 class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<AllContentViewHolder>() {
+
+    var themeType: Boolean = ThemeType.ThemeLight
 
     val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 

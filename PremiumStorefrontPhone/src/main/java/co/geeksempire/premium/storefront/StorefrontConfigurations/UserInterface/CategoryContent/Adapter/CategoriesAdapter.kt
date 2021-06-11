@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/5/21, 4:57 AM
+ * Last modified 6/11/21, 8:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontCategoriesData
@@ -35,9 +36,11 @@ import net.geeksempire.balloon.optionsmenu.library.TitleTextViewCustomization
 
 class CategoriesAdapter(private val context: Storefront, private val filterAllContent: FilterAllContent) : RecyclerView.Adapter<CategoriesViewHolder>() {
 
+    var themeType: Boolean = ThemeType.ThemeLight
+
     val storefrontCategories: ArrayList<StorefrontCategoriesData> = ArrayList<StorefrontCategoriesData>()
 
-    var lastPosition: Int = 0
+    private var lastPosition: Int = 0
 
     override fun getItemCount(): Int {
 
@@ -52,8 +55,20 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
     override fun onBindViewHolder(categoriesViewHolder: CategoriesViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(categoriesViewHolder, position, payloads)
 
-        categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item)
-        categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+        when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item_light)
+                categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
+            }
+        }
 
     }
 
@@ -61,11 +76,27 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
         categoriesViewHolder.productIconImageView.background = if (storefrontCategories[position].selectedCategory || position == 0) {
 
-            context.getDrawable(R.drawable.category_background_selected_item)
+            context.getDrawable(when (themeType) {
+                ThemeType.ThemeLight -> {
+                    R.drawable.category_background_item_dark
+                }
+                ThemeType.ThemeDark -> {
+                    R.drawable.category_background_item_light
+                }
+                else -> R.drawable.category_background_item_dark
+            })
 
         } else {
 
-            context.getDrawable(R.drawable.category_background_item)
+            context.getDrawable(when (themeType) {
+                ThemeType.ThemeLight -> {
+                    R.drawable.category_background_item_light
+                }
+                ThemeType.ThemeDark -> {
+                    R.drawable.category_background_item_dark
+                }
+                else -> R.drawable.category_background_item_light
+            })
 
         }
 
@@ -109,7 +140,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                 lastPosition = position
 
-                categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_selected_item)
+                categoriesViewHolder.productIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
                 categoriesViewHolder.productIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
                 context.storefrontLayoutBinding.categoryIndicatorTextView.text = storefrontCategories[position].categoryName

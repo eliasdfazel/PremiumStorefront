@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 7:41 AM
+ * Last modified 6/11/21, 8:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,6 +29,9 @@ fun Storefront.setupUserInterface() {
     lifecycleScope.launch {
 
         themePreferences.checkThemeLightDark().collect {
+
+            categoriesAdapter.themeType = it
+            categoriesAdapter.notifyItemRangeChanged(0, categoriesAdapter.itemCount)
 
             when (it) {
 
@@ -98,6 +101,8 @@ fun Storefront.setupUserInterface() {
                     storefrontLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_light))
                     storefrontLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_light)
 
+                    storefrontLayoutBinding.categoryIndicatorTextView.setTextColor(getColor(R.color.dark))
+
                 }
                 ThemeType.ThemeDark -> {
 
@@ -158,6 +163,8 @@ fun Storefront.setupUserInterface() {
                     storefrontLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_dark)
                     storefrontLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_dark))
                     storefrontLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_dark)
+
+                    storefrontLayoutBinding.categoryIndicatorTextView.setTextColor(getColor(R.color.light))
 
                 }
 
