@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 1:42 AM
+ * Last modified 6/11/21, 9:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,4 +22,6 @@ class NewContentViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootIt
 
     val productIconImageView: AppCompatImageView = rootItemView.productIconImageView
     val productNameTextView: TextView = rootItemView.productNameTextView
+
+    val productDividerView: AppCompatImageView = rootItemView.productDividerView
 }

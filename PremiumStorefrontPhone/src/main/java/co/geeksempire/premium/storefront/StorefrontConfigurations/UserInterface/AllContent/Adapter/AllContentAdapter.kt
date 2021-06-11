@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 9:13 AM
+ * Last modified 6/11/21, 9:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,6 +65,9 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
                 allContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
                 allContentViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_light)
 
+                allContentViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
+                allContentViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+
             }
             ThemeType.ThemeDark -> {
 
@@ -76,6 +79,8 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
                 allContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_dark))
                 allContentViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_dark)
 
+                allContentViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_dark)
+                allContentViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
             }
             else -> {
 
@@ -86,6 +91,9 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                 allContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
                 allContentViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_light)
+
+                allContentViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
+                allContentViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
             }
         }

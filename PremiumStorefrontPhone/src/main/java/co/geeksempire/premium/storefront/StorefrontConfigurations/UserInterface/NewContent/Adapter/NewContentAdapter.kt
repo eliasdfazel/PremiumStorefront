@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 9:05 AM
+ * Last modified 6/11/21, 9:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,17 +55,23 @@ class NewContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
                 newContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 newContentViewHolder.productNameTextView.setShadowLayer(newContentViewHolder.productNameTextView.shadowRadius, newContentViewHolder.productNameTextView.shadowDx, newContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
 
+                newContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_gradient_icon_light))
+
             }
             ThemeType.ThemeDark -> {
 
                 newContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
                 newContentViewHolder.productNameTextView.setShadowLayer(newContentViewHolder.productNameTextView.shadowRadius, newContentViewHolder.productNameTextView.shadowDx, newContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.black))
 
+                newContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_gradient_icon_dark))
+
             }
             else -> {
 
                 newContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 newContentViewHolder.productNameTextView.setShadowLayer(newContentViewHolder.productNameTextView.shadowRadius, newContentViewHolder.productNameTextView.shadowDx, newContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
+
+                newContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_gradient_icon_light))
 
             }
         }

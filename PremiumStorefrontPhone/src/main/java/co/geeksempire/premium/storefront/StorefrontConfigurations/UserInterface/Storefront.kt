@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 10:42 AM
+ * Last modified 6/11/21, 9:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
@@ -69,6 +70,8 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.storefront_layout.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
@@ -392,9 +395,17 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                 .remove(productDetailsFragment)
                 .commitNow()
 
-            prepareActionCenterUserInterface.setupIconsForStorefront()
+            lifecycleScope.launch {
 
-            actionCenterOperations.setupForStorefront()
+                themePreferences.checkThemeLightDark().collect {
+
+                    prepareActionCenterUserInterface.setupIconsForStorefront(it)
+
+                    actionCenterOperations.setupForStorefront(it)
+
+                }
+
+            }
 
         } else if (categoryDetailsFragment.isShowing) {
 
@@ -404,9 +415,17 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                 .remove(categoryDetailsFragment)
                 .commitNow()
 
-            prepareActionCenterUserInterface.setupIconsForStorefront()
+            lifecycleScope.launch {
 
-            actionCenterOperations.setupForStorefront()
+                themePreferences.checkThemeLightDark().collect {
+
+                    prepareActionCenterUserInterface.setupIconsForStorefront(it)
+
+                    actionCenterOperations.setupForStorefront(it)
+
+                }
+
+            }
 
         } else {
 

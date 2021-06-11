@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/4/21, 11:06 AM
+ * Last modified 6/11/21, 9:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.Actions.Operation
 
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.filteringSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.searchingSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.sortingSetup
@@ -19,7 +20,7 @@ import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 
 class ActionCenterOperations (val context: Storefront) {
 
-    fun setupForStorefront() {
+    fun setupForStorefront(themeType: Boolean = ThemeType.ThemeLight) {
 
         context.storefrontLayoutBinding.leftActionView.setOnClickListener {
 
