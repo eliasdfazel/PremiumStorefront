@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 7:09 AM
+ * Last modified 6/11/21, 7:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -93,6 +93,9 @@ fun Storefront.setupUserInterface() {
 
                     }
 
+                    storefrontLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_light)
+                    storefrontLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_light))
+
                 }
                 ThemeType.ThemeDark -> {
 
@@ -129,9 +132,9 @@ fun Storefront.setupUserInterface() {
 
                     val shapeShadow: ShapeDrawable = ShapeDrawable(RoundRectShape(backgroundShadowRadius, null, null))
                     shapeShadow.paint.apply {
-                        color = getColor(R.color.dark)
+                        color = getColor(R.color.black)
 
-                        setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent))
+                        setShadowLayer(31f, 0f, 0f, getColor(R.color.black_transparent))
                     }
 
                     val shadowLayer = getDrawable(R.drawable.storefront_content_background_dark) as LayerDrawable
@@ -142,6 +145,8 @@ fun Storefront.setupUserInterface() {
                     storefrontLayoutBinding.allContentBackground.background = (shadowLayer)
                     /* End - Add Shadow To Content Background */
 
+                    println(">>>>>>>>>>>>>>>> DARK THEME")
+
                     prepareActionCenterUserInterface.let { centerUserInterface ->
 
                         centerUserInterface.design(ThemeType.ThemeDark)
@@ -149,6 +154,9 @@ fun Storefront.setupUserInterface() {
                         centerUserInterface.setupIconsForStorefront(ThemeType.ThemeDark)
 
                     }
+
+                    storefrontLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_dark)
+                    storefrontLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_dark))
 
                 }
             }
