@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/12/21, 8:54 AM
+ * Last modified 6/11/21, 8:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,5 +19,5 @@ import kotlinx.android.synthetic.main.storefront_category_item.view.*
 class CategoriesViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
 
-    val productIconImageView: ImageView = rootItemView.productIconImageView
+    val categoryIconImageView: ImageView = rootItemView.categoryIconImageView
 }
