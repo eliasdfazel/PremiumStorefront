@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 8:25 AM
+ * Last modified 6/11/21, 8:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -158,6 +158,21 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                 categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
                 categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
+                when (themeType) {
+                    ThemeType.ThemeLight -> {
+
+                        categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                        categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
+                    }
+                    ThemeType.ThemeDark -> {
+
+                        categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_light)
+                        categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
+                    }
+                }
 
                 context.storefrontLayoutBinding.categoryIndicatorTextView.text = storefrontCategories[position].categoryName
                 context.storefrontLayoutBinding.categoryIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
