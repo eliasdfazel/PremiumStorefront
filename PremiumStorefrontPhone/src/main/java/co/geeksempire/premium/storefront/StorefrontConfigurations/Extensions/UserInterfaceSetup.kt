@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 8:20 AM
+ * Last modified 6/11/21, 8:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,6 +32,12 @@ fun Storefront.setupUserInterface() {
 
             categoriesAdapter.themeType = it
             categoriesAdapter.notifyItemRangeChanged(0, categoriesAdapter.itemCount)
+
+            newContentAdapter.themeType = it
+            newContentAdapter.notifyItemRangeChanged(0, newContentAdapter.itemCount)
+
+            allContentAdapter.themeType = it
+            allContentAdapter.notifyItemRangeChanged(0, allContentAdapter.itemCount)
 
             when (it) {
 
