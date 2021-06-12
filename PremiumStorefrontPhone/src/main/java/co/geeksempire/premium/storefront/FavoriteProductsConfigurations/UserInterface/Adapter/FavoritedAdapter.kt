@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 1:08 PM
+ * Last modified 6/12/21, 1:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,8 @@ package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInt
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -122,12 +124,17 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
         favoritedViewHolder.removeView.setOnClickListener {
 
-            val selectedPosition = position
+            favoritedContentItems.removeAt(position)
 
             context.favoritedProcess.remove(context.firebaseUser!!.uid, favoritedContentItems[position].productId).addOnSuccessListener {
 
-                favoritedContentItems.removeAt(selectedPosition)
-                notifyItemRemoved(selectedPosition)
+                notifyItemRemoved(position)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+
+                    notifyDataSetChanged()
+
+                }, 321)
 
             }
 
