@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 12:41 PM
+ * Last modified 6/12/21, 1:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePrefere
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.FavoriteProductsLiveData
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Endpoint.FavoritedDatabaseDirectory
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.setupFavoritedUserInterface
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.Adapter.FavoritedAdapter
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
@@ -31,6 +33,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class FavoriteProducts : AppCompatActivity() {
+
+    val favoritedProcess: FavoritedProcess by lazy {
+        FavoritedProcess(this@FavoriteProducts)
+    }
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@FavoriteProducts)
@@ -72,6 +78,8 @@ class FavoriteProducts : AppCompatActivity() {
         if (firebaseUser != null) {
 
             favoriteProductsLiveData.favoritedContentItemData.observe(this@FavoriteProducts, {
+
+                favoriteProductsLayoutBinding.loadingView.visibility = View.GONE
 
                 favoritedAdapter.favoritedContentItems.clear()
                 favoritedAdapter.favoritedContentItems.addAll(it)

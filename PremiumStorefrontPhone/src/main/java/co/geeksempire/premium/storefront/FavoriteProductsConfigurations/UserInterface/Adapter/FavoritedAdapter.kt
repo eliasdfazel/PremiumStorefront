@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 12:46 PM
+ * Last modified 6/12/21, 1:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,8 @@
 
 package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.Adapter
 
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -20,9 +22,14 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInte
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.ViewHolder.FavoritedViewHolder
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 
 class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<FavoritedViewHolder>() {
 
@@ -43,7 +50,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent))
+                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
@@ -51,14 +58,14 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
             }
             ThemeType.ThemeDark -> {
 
-                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.dark_blurry_color))
+                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.dark_transparent_high))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
             }
             else -> {
 
-                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent))
+                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
@@ -74,7 +81,35 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
             .load(favoritedContentItems[position].productIcon)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .transform(CircleCrop())
-            .into(favoritedViewHolder.productIconImageView)
+            .listener(object : RequestListener<Drawable> {
+
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+
+                    return false
+                }
+
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                    resource?.let {
+
+                        context.runOnUiThread {
+
+                            favoritedViewHolder.productIconImageView.setImageDrawable(resource)
+
+                            val dominantColor = extractDominantColor(context, resource)
+
+                            favoritedViewHolder.installView.backgroundTintList = ColorStateList.valueOf(dominantColor)
+
+                        }
+
+                    }
+
+                    return false
+                }
+
+
+            })
+            .submit()
 
         favoritedViewHolder.installView.setOnClickListener {
 
@@ -87,7 +122,14 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
         favoritedViewHolder.removeView.setOnClickListener {
 
+            val selectedPosition = position
 
+            context.favoritedProcess.remove(context.firebaseUser!!.uid, favoritedContentItems[position].productId).addOnSuccessListener {
+
+                favoritedContentItems.removeAt(selectedPosition)
+                notifyItemRemoved(selectedPosition)
+
+            }
 
         }
 

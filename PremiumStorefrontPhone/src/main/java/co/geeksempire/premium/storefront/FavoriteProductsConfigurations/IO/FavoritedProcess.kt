@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 11:42 AM
+ * Last modified 6/12/21, 1:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStru
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.FavoriteDataStructure
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Endpoint.FavoritedDatabaseDirectory
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
+import com.google.android.gms.tasks.Task
 
 interface FavoriteProductQueryInterface {
     fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {}
@@ -38,13 +39,12 @@ class FavoritedProcess (private val context: AppCompatActivity) {
 
     }
 
-    fun remove(userUniqueIdentifier: String, productIdToFavorite: String) {
+    fun remove(userUniqueIdentifier: String, productIdToFavorite: String) : Task<Void> {
 
-        (context.application as PremiumStorefrontApplication)
+        return (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
             .document(FavoritedDatabaseDirectory().favoriteProductEndpoint(userUniqueIdentifier, productIdToFavorite))
             .delete()
-
     }
 
     fun isProductFavorited(userUniqueIdentifier: String, productIdToFavorite: String,
