@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:24 AM
+ * Last modified 6/12/21, 8:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,7 +52,7 @@ fun openProductsDetails(context: Storefront, storefrontContents: ArrayList<Store
     context.supportFragmentManager
         .beginTransaction()
         .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-        .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details For ${storefrontContents[position].productName}")
+        .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details")
         .commit()
 
 }
