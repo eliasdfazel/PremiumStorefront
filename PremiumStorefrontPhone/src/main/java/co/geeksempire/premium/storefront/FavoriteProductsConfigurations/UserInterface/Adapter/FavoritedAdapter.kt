@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 1:03 PM
+ * Last modified 6/12/21, 1:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,7 +22,7 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInte
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.ViewHolder.FavoritedViewHolder
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
-import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -96,7 +96,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
                             favoritedViewHolder.productIconImageView.setImageDrawable(resource)
 
-                            val dominantColor = extractDominantColor(context, resource)
+                            val dominantColor = extractVibrantColor(context, resource)
 
                             favoritedViewHolder.installView.backgroundTintList = ColorStateList.valueOf(dominantColor)
 
