@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/12/21, 11:55 AM
+  ~ Last modified 6/12/21, 12:34 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -13,13 +13,24 @@
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootViewItem"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="187dp"
     android:layout_marginHorizontal="19dp"
-    android:layout_marginTop="7dp"
-    android:layout_marginBottom="11dp"
+    android:layout_marginVertical="11dp"
     android:background="@color/transparent"
 
     apps:layout_constraintDimensionRatio="1:1">
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/blurryBackgroundItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        apps:realtimeBlurRadius="19dp"
+        apps:realtimeFirstColor="@color/premiumLightTransparent"
+        apps:realtimeBlurTopLeft="19dp"
+        apps:realtimeBlurTopRight="19dp"
+        apps:realtimeBlurBottomLeft="19dp"
+        apps:realtimeBlurBottomRight="19dp"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/productIconImageView"

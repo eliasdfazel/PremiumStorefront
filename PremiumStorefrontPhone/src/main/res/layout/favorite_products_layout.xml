@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/12/21, 7:53 AM
+  ~ Last modified 6/12/21, 12:34 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,6 +19,14 @@
     android:background="@color/premiumLight"
     tools:context=".FavoriteProductsConfigurations.UserInterface.FavoriteProducts">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:rotation="180"
+        android:scaleType="centerCrop"
+        android:tint="@color/default_color_game_bright"
+        android:src="@drawable/heart_background"/>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -26,7 +34,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="19dp"
             android:paddingTop="91dp"
             android:paddingBottom="19dp">
 

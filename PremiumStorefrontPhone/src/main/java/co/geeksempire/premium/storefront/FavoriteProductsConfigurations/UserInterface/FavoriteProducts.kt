@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 11:24 AM
+ * Last modified 6/12/21, 12:37 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,14 +13,22 @@ package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInt
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.FavoriteProductsLiveData
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Endpoint.FavoritedDatabaseDirectory
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.setupFavoritedUserInterface
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.Adapter.FavoritedAdapter
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.databinding.FavoriteProductsLayoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class FavoriteProducts : AppCompatActivity() {
 
@@ -43,11 +51,32 @@ class FavoriteProducts : AppCompatActivity() {
         favoriteProductsLayoutBinding = FavoriteProductsLayoutBinding.inflate(layoutInflater)
         setContentView(favoriteProductsLayoutBinding.root)
 
+        val favoritedAdapter = FavoritedAdapter(applicationContext)
+
+        lifecycleScope.launch {
+
+            themePreferences.checkThemeLightDark().collect {
+
+                setupFavoritedUserInterface(it)
+
+                favoritedAdapter.themeType = it
+
+            }
+
+        }
+
+        favoriteProductsLayoutBinding.favoritedRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
+
+        favoriteProductsLayoutBinding.favoritedRecyclerView.adapter = favoritedAdapter
+
         if (firebaseUser != null) {
 
             favoriteProductsLiveData.favoritedContentItemData.observe(this@FavoriteProducts, {
 
+                favoritedAdapter.favoritedContentItems.clear()
+                favoritedAdapter.favoritedContentItems.addAll(it)
 
+                favoritedAdapter.notifyDataSetChanged()
 
             })
 

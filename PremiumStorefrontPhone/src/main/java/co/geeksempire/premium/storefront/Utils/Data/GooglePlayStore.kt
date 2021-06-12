@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/22/21, 1:59 PM
+ * Last modified 6/12/21, 12:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,12 +22,12 @@ import com.google.firebase.dynamiclinks.ShortDynamicLink
 import com.google.firebase.dynamiclinks.ktx.*
 import com.google.firebase.ktx.Firebase
 
-fun generateGooglePlayStoreDownloadLink(aPackageName: String) : String {
+private fun generateGooglePlayStoreDownloadLink(aPackageName: String) : String {
 
     return "https://play.google.com/store/apps/details?id=${aPackageName}" + "&rdid=${aPackageName}"
 }
 
-fun generateInstallDynamicLink(context: Context,
+private fun generateInstallDynamicLink(context: Context,
                                aPackageName: String,
                                applicationName: String, applicationSummary: String,
                                mediatingSolution: String = context.packageName,
