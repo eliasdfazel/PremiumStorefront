@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/12/21, 10:30 AM
+  ~ Last modified 6/12/21, 10:54 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -31,7 +31,7 @@
         android:id="@+id/profileImageColorView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:backgroundTint="@color/blue_transparent"
+        android:backgroundTint="@color/black_transparent"
         android:background="@drawable/preferences_glowing_background"
 
         apps:layout_constraintHeight_percent="0.5"

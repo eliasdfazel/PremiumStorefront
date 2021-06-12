@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 8:04 AM
+ * Last modified 6/12/21, 10:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -277,22 +277,28 @@ class ProductDetailsFragment : Fragment() {
 
             }
 
-            productId?.let {
-                favoritedProcess.isProductFavorited(storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, it,
-                    object : FavoriteProductQueryInterface {
+            storefrontInstance?.accountSignIn!!.firebaseUser?.let { firebaseUser ->
 
-                        override fun favoriteProduct(isProductFavorited: Boolean) {
-                            super.favoriteProduct(isProductFavorited)
+                productId?.let {
 
-                            if (isProductFavorited) {
+                    favoritedProcess.isProductFavorited(firebaseUser.uid, it,
+                        object : FavoriteProductQueryInterface {
 
-                                productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(R.drawable.favorited_icon))
+                            override fun favoriteProduct(isProductFavorited: Boolean) {
+                                super.favoriteProduct(isProductFavorited)
+
+                                if (isProductFavorited) {
+
+                                    productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(R.drawable.favorited_icon))
+
+                                }
 
                             }
 
-                        }
+                        })
 
-                    })
+                }
+
             }
 
         }
