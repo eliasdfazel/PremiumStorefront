@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/12/21, 10:58 AM
+  ~ Last modified 6/12/21, 11:14 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -30,44 +30,9 @@
         android:padding="7.7dp"
         android:scaleType="centerCrop"
         android:src="@drawable/launcher_foreground_icon"
-        android:background="@drawable/all_application_icon_glowing_frame"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/productRatingStarsView"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-        android:layout_marginVertical="11dp"
-        android:layout_marginHorizontal="43dp"
-        android:padding="11dp"
-        android:scaleType="fitCenter"
-        android:tint="@color/white"
-        android:src="@drawable/current_rate_icon"
-        android:background="@drawable/application_rating_glowing_frame_light"
-
-        apps:layout_constraintTop_toTopOf="parent"
-        apps:layout_constraintStart_toStartOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/productCurrentRateView"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-        android:gravity="center"
-        android:textColor="@color/red"
-        android:textSize="31sp"
-        android:text="5.0"
-        android:fontFamily="@font/neon"
-        android:shadowRadius="7"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowColor="@color/red"
-
-        apps:layout_constraintTop_toTopOf="@id/productRatingStarsView"
-        apps:layout_constraintBottom_toBottomOf="@id/productRatingStarsView"
-        apps:layout_constraintStart_toStartOf="@id/productRatingStarsView"
-        apps:layout_constraintEnd_toEndOf="@id/productRatingStarsView"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/productNameTextView"
@@ -105,17 +70,6 @@
         apps:layout_constraintTop_toBottomOf="@id/productNameTextView"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/productDividerView"
-        android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:layout_marginVertical="3dp"
-        android:paddingTop="1dp"
-        android:paddingBottom="11dp"
-        android:src="@drawable/diamond_solid_icon_light"
-
-        apps:layout_constraintTop_toBottomOf="@id/productSummaryTextView" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/installView"
