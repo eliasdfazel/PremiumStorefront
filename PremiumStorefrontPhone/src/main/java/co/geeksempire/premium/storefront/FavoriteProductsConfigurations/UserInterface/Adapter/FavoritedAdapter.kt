@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 12:43 PM
+ * Last modified 6/12/21, 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,7 +43,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
+                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
@@ -51,14 +51,14 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
             }
             ThemeType.ThemeDark -> {
 
-                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
+                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.dark_blurry_color))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
             }
             else -> {
 
-                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
+                favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
@@ -76,12 +76,18 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
             .transform(CircleCrop())
             .into(favoritedViewHolder.productIconImageView)
 
-        favoritedViewHolder.rootViewItem.setOnClickListener {
+        favoritedViewHolder.installView.setOnClickListener {
 
             openPlayStoreToInstall(context,
                 favoritedContentItems[position].productId,
                 favoritedContentItems[position].productName,
                 favoritedContentItems[position].productDescription)
+
+        }
+
+        favoritedViewHolder.removeView.setOnClickListener {
+
+
 
         }
 
