@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:55 AM
+ * Last modified 6/12/21, 7:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,12 +17,37 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import com.abanabsalan.aban.magazine.Utils.System.hideKeyboard
 import com.abanabsalan.aban.magazine.Utils.System.showKeyboard
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-fun Storefront.searchingSetup() {
+fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
+
+    when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.white_transparent)
+
+            storefrontLayoutBinding.textInputSearchView.boxStrokeColor = getColor(R.color.white)
+
+            storefrontLayoutBinding.searchView.setTextColor(getColor(R.color.default_color_dark))
+            storefrontLayoutBinding.searchView.setHintTextColor(getColor(R.color.default_color_game_dark))
+
+        }
+        ThemeType.ThemeDark -> {
+
+            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.black_transparent)
+
+            storefrontLayoutBinding.textInputSearchView.boxStrokeColor = getColor(R.color.black)
+
+            storefrontLayoutBinding.searchView.setTextColor(getColor(R.color.default_color_light))
+            storefrontLayoutBinding.searchView.setHintTextColor(getColor(R.color.default_color_game_light))
+
+        }
+    }
 
     if (storefrontLayoutBinding.textInputSearchView.isShown) {
 
@@ -46,7 +71,20 @@ fun Storefront.searchingSetup() {
 
         })
 
-        storefrontLayoutBinding.middleActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+            } else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        }
+
+        hideKeyboard(applicationContext, storefrontLayoutBinding.searchView)
 
     } else {
 
@@ -87,7 +125,7 @@ fun Storefront.searchingSetup() {
         valueAnimatorScalesUpHeight.addUpdateListener { animator ->
             val animatorValue = animator.animatedValue as Int
 
-            storefrontLayoutBinding.textInputSearchView.layoutParams.height= animatorValue
+            storefrontLayoutBinding.textInputSearchView.layoutParams.height = animatorValue
             storefrontLayoutBinding.textInputSearchView.requestLayout()
         }
         valueAnimatorScalesUpHeight.addListener(object : Animator.AnimatorListener {

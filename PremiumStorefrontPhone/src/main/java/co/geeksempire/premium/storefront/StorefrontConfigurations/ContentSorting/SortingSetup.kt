@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:53 AM
+ * Last modified 6/12/21, 7:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
 import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.SortingOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
@@ -26,12 +27,61 @@ import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnima
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
-fun Storefront.sortingSetup() {
+fun Storefront.sortingSetup(themeType: Boolean = ThemeType.ThemeLight) {
+
+    when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            storefrontLayoutBinding.sortingInclude.popupBlurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
+
+            storefrontLayoutBinding.sortingInclude.sortsContainerView.background = getDrawable(R.drawable.sorting_container_layer_light)
+
+            storefrontLayoutBinding.sortingInclude.sortSelectedView.background = getDrawable(R.drawable.sorting_selected_container_layer_light)
+
+        }
+        ThemeType.ThemeDark -> {
+
+            storefrontLayoutBinding.sortingInclude.popupBlurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
+
+            storefrontLayoutBinding.sortingInclude.sortsContainerView.background = getDrawable(R.drawable.sorting_container_layer_dark)
+
+            storefrontLayoutBinding.sortingInclude.sortSelectedView.background = getDrawable(R.drawable.sorting_selected_container_layer_dark)
+
+        }
+    }
 
     if (storefrontLayoutBinding.filteringInclude.root.isShown) {
 
         storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
+
+        storefrontLayoutBinding.rightActionView.imageTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+            }
+            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        }
+
+        storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+            }
+            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        }
 
     }
 
@@ -40,7 +90,19 @@ fun Storefront.sortingSetup() {
         storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
 
-        storefrontLayoutBinding.leftActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        storefrontLayoutBinding.leftActionView.imageTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+            }
+            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        }
 
     } else {
 

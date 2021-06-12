@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/8/21, 10:33 AM
+  ~ Last modified 6/12/21, 7:03 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -103,7 +103,7 @@
         android:top="2dp"
         android:bottom="2dp">
         <shape android:shape="rectangle">
-            <solid android:color="#FFF" />
+            <solid android:color="#000000" />
             <corners android:radius="19dp" />
         </shape>
     </item>

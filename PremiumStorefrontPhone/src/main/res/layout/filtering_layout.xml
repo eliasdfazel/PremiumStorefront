@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/6/21, 6:40 AM
+  ~ Last modified 6/12/21, 7:08 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@
     tools:context=".StorefrontConfigurations.UserInterface.Storefront">
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/popupBlurryBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
@@ -30,10 +31,10 @@
         android:id="@+id/filtersContainerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/filtering_container_layer"
+        android:background="@drawable/filtering_container_layer_light"
 
         apps:layout_constraintWidth_percent="0.91"
-        apps:layout_constraintHeight_percent="0.59"
+        apps:layout_constraintHeight_percent="0.66"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +58,7 @@
             android:id="@+id/filterSelectedView"
             android:layout_width="0dp"
             android:layout_height="97dp"
-            android:background="@drawable/filtering_selected_container_layer"
+            android:background="@drawable/filtering_selected_container_layer_light"
 
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintBottom_toBottomOf="parent"

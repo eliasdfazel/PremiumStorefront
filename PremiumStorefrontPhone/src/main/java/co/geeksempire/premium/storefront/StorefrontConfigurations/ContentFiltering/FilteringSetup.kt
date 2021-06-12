@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:51 AM
+ * Last modified 6/12/21, 7:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
@@ -27,12 +28,61 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlin.math.absoluteValue
 
-fun Storefront.filteringSetup() {
+fun Storefront.filteringSetup(themeType: Boolean = ThemeType.ThemeLight) {
+
+    when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            storefrontLayoutBinding.filteringInclude.popupBlurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
+
+            storefrontLayoutBinding.filteringInclude.filtersContainerView.background = getDrawable(R.drawable.filtering_container_layer_light)
+
+            storefrontLayoutBinding.filteringInclude.filterSelectedView.background = getDrawable(R.drawable.filtering_selected_container_layer_light)
+
+        }
+        ThemeType.ThemeDark -> {
+
+            storefrontLayoutBinding.filteringInclude.popupBlurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
+
+            storefrontLayoutBinding.filteringInclude.filtersContainerView.background = getDrawable(R.drawable.filtering_container_layer_dark)
+
+            storefrontLayoutBinding.filteringInclude.filterSelectedView.background = getDrawable(R.drawable.filtering_selected_container_layer_dark)
+
+        }
+    }
 
     if (storefrontLayoutBinding.sortingInclude.root.isShown) {
 
         storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+
+        storefrontLayoutBinding.leftActionView.imageTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+            }
+            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        }
+
+        storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+            }
+            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        }
 
     }
 
@@ -41,7 +91,19 @@ fun Storefront.filteringSetup() {
         storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
 
-        storefrontLayoutBinding.rightActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        storefrontLayoutBinding.rightActionView.imageTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+            }
+            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        }
 
     } else {
 

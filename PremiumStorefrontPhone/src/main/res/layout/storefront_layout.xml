@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/11/21, 10:30 AM
+  ~ Last modified 6/12/21, 7:42 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -259,7 +259,7 @@
             android:inputType="text|textAutoComplete"
             android:textSize="29sp"
             android:textColor="@color/default_color_dark"
-            android:textColorHint="@color/default_color_game"
+            android:textColorHint="@color/default_color_game_dark"
             android:fontFamily="@font/upcil"
             android:cursorVisible="true" />
     </com.google.android.material.textfield.TextInputLayout>

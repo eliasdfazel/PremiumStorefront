@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 9:19 AM
+ * Last modified 6/12/21, 7:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -176,7 +176,15 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
             userInteractionSetup()
 
-            actionCenterOperations.setupForStorefront()
+            lifecycleScope.launch {
+
+                themePreferences.checkThemeLightDark().collect {
+
+                    actionCenterOperations.setupForStorefront(it)
+
+                }
+
+            }
 
             storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
