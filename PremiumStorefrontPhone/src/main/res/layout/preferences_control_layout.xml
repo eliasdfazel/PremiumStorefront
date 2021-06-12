@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/11/21, 7:25 AM
+  ~ Last modified 6/12/21, 10:30 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -26,6 +26,17 @@
         android:scaleType="fitCenter"
         android:tint="@color/dark"
         android:src="@drawable/premium_storefront_icon"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/profileImageColorView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/blue_transparent"
+        android:background="@drawable/preferences_glowing_background"
+
+        apps:layout_constraintHeight_percent="0.5"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:id="@+id/blurryBackground"
@@ -50,7 +61,7 @@
 
         apps:cornerRadius="51dp"
         apps:icon="@drawable/not_login_icon"
-        apps:iconSize="63dp"
+        apps:iconSize="67dp"
         apps:iconPadding="0dp"
         apps:iconGravity="textStart"
         apps:iconTintMode="multiply"
@@ -87,7 +98,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="129dp">
+        android:layout_marginTop="159dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

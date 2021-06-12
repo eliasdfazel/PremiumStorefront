@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 7:28 AM
+ * Last modified 6/12/21, 10:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,8 @@ import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesCo
 import co.geeksempire.premium.storefront.Preferences.UserInterface.ToggleTheme
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -53,9 +55,17 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
 
                 override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                    runOnUiThread {
+                    resource?.let {
 
-                        preferencesControlLayoutBinding.profileImageView.icon = resource
+                        runOnUiThread {
+
+                            preferencesControlLayoutBinding.profileImageView.icon = resource
+
+                            val dominantColor = extractVibrantColor(applicationContext, resource)
+
+                            preferencesControlLayoutBinding.profileImageColorView.backgroundTintList = ColorStateList.valueOf(setColorAlpha(dominantColor, 111f))
+
+                        }
 
                     }
 
