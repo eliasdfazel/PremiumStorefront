@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 11:10 AM
+ * Last modified 6/12/21, 11:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -105,7 +105,8 @@ class ProductDetailsFragment : Fragment() {
             val productId = getString(ProductDataKey.ProductId)
             val applicationPackageName = getString(ProductDataKey.ProductPackageName)
 
-            getString(ProductDataKey.ProductIcon)?.let { productIcon ->
+            val productIconLink = getString(ProductDataKey.ProductIcon)
+            productIconLink?.let { productIcon ->
 
                 Glide.with(requireContext())
                     .asDrawable()
@@ -251,7 +252,7 @@ class ProductDetailsFragment : Fragment() {
 
             productDetailsLayoutBinding.favoriteView.setOnClickListener {
 
-                startFavoriteProcess(productId!!, productName!!, productDescription!!)
+                startFavoriteProcess(productId!!, productName!!, productDescription!!, productIconLink!!)
 
             }
 

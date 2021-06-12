@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 11:32 AM
+ * Last modified 6/12/21, 11:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,6 +46,7 @@ class FavoriteProductsLiveData : ViewModel() {
                 favoritedContentItems.add(FavoriteDataStructure(productId = it.getString(Favorite.ProductId)?:"net.geekstools.floatshort.PRO",
                     productName = it.getString(Favorite.ProductName)?:"Float It",
                     productDescription = it.getString(Favorite.ProductDescription)?:"Float It To Become Master Of Multitasking ⚡",
+                    productIcon = it.getString(Favorite.ProductIcon)?:"https://geeksempire.co/wp-content/uploads/2021/04/Float-It.jpg",
                     productFavorited = it.getBoolean(Favorite.ProductFavorited)?:true
                 ))
 

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/12/21, 11:14 AM
+  ~ Last modified 6/12/21, 11:55 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,19 +14,18 @@
     android:id="@+id/rootViewItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="17dp"
-    android:layout_marginEnd="0dp"
+    android:layout_marginHorizontal="19dp"
     android:layout_marginTop="7dp"
     android:layout_marginBottom="11dp"
-    android:background="@android:color/transparent"
+    android:background="@color/transparent"
 
     apps:layout_constraintDimensionRatio="1:1">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/productIconImageView"
-        android:layout_width="87dp"
-        android:layout_height="87dp"
-        android:layout_marginTop="23dp"
+        android:layout_width="89dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="13dp"
         android:padding="7.7dp"
         android:scaleType="centerCrop"
         android:src="@drawable/launcher_foreground_icon"
@@ -72,17 +71,30 @@
         apps:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/removeView"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+
+        apps:cornerRadius="51dp"
+        apps:icon="@drawable/delete"
+        apps:iconSize="29dp"
+        apps:iconPadding="0dp"
+        apps:iconTint="@color/light"
+        apps:iconGravity="textEnd"
+        apps:rippleColor="@color/white"
+
+        apps:layout_constraintBottom_toTopOf="@id/productNameTextView"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/installView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginEnd="13dp"
-        android:lines="1"
-        android:ellipsize="end"
-        android:textAllCaps="false"
-        android:text="@string/installNowText"
-        android:textSize="23sp"
-        android:fontFamily="@font/upcil"
+        android:layout_height="51dp"
+        android:layout_marginHorizontal="3dp"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
@@ -90,14 +102,14 @@
 
         apps:cornerRadius="51dp"
         apps:icon="@drawable/install_now_icon"
-        apps:iconSize="31dp"
+        apps:iconSize="39dp"
+        apps:iconPadding="0dp"
         apps:iconTint="@color/light"
         apps:iconGravity="textEnd"
         apps:rippleColor="@color/white"
 
-        apps:layout_constraintTop_toTopOf="@id/productIconImageView"
         apps:layout_constraintBottom_toTopOf="@id/productNameTextView"
         apps:layout_constraintStart_toEndOf="@id/productIconImageView"
-        apps:layout_constraintEnd_toEndOf="parent"/>
+        apps:layout_constraintEnd_toStartOf="@id/removeView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
