@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 7:15 AM
+ * Last modified 6/12/21, 7:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -410,6 +410,35 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     prepareActionCenterUserInterface.setupIconsForStorefront(it)
 
                     actionCenterOperations.setupForStorefront(it)
+
+                }
+
+            }
+
+            if (!storefrontLayoutBinding.favoritesView.isShown) {
+
+                accountSignIn.firebaseUser?.let {
+
+                    Glide.with(applicationContext)
+                        .load(it.photoUrl)
+                        .transform(CircleCrop())
+                        .into(storefrontLayoutBinding.profileView)
+
+                    favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
+                        object : FavoriteProductQueryInterface {
+
+                            override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                                super.favoriteProductsExist(isFavoriteProductsExist)
+
+                                storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                                    View.VISIBLE
+                                } else {
+                                    View.GONE
+                                }
+
+                            }
+
+                        })
 
                 }
 
