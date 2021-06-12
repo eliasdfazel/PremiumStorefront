@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 12:37 PM
+ * Last modified 6/12/21, 12:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,7 +51,7 @@ class FavoriteProducts : AppCompatActivity() {
         favoriteProductsLayoutBinding = FavoriteProductsLayoutBinding.inflate(layoutInflater)
         setContentView(favoriteProductsLayoutBinding.root)
 
-        val favoritedAdapter = FavoritedAdapter(applicationContext)
+        val favoritedAdapter = FavoritedAdapter(this@FavoriteProducts)
 
         lifecycleScope.launch {
 

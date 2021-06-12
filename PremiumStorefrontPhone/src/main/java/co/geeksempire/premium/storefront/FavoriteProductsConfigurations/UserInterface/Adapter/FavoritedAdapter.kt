@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 12:25 PM
+ * Last modified 6/12/21, 12:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,13 +10,13 @@
 
 package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.Adapter
 
-import android.content.Context
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.FavoriteDataStructure
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.ViewHolder.FavoritedViewHolder
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
-class FavoritedAdapter (val context: Context, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<FavoritedViewHolder>() {
+class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<FavoritedViewHolder>() {
 
     val favoritedContentItems: ArrayList<FavoriteDataStructure> = ArrayList<FavoriteDataStructure>()
 
@@ -71,6 +71,7 @@ class FavoritedAdapter (val context: Context, var themeType: Boolean = ThemeType
 
         Glide.with(context)
             .asDrawable()
+            .load(favoritedContentItems[position].productIcon)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .transform(CircleCrop())
             .into(favoritedViewHolder.productIconImageView)
