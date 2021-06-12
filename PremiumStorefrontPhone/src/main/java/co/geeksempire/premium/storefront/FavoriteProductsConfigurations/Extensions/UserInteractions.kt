@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 7:57 AM
+ * Last modified 6/12/21, 11:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandl
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import com.google.android.material.snackbar.Snackbar
 
-fun ProductDetailsFragment.startFavoriteProcess(productId: String) {
+fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: String, productDescription: String) {
 
     if (storefrontInstance?.accountSignIn!!.firebaseUser != null) {
 
@@ -76,7 +76,8 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String) {
 
                         if (networkCheckpoint.networkConnection()) {
 
-                            favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+                            favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid,
+                                productId, productName, productDescription)
 
                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
                                 R.drawable.favorited_icon))
@@ -96,7 +97,8 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String) {
 
                                         if (networkCheckpoint.networkConnection()) {
 
-                                            favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+                                            favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid,
+                                                productId, productName, productDescription)
 
                                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
                                                 R.drawable.favorited_icon))

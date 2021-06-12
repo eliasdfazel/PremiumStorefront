@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 10:52 AM
+ * Last modified 6/12/21, 11:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -251,7 +251,7 @@ class ProductDetailsFragment : Fragment() {
 
             productDetailsLayoutBinding.favoriteView.setOnClickListener {
 
-                productId?.let { idOfProduct -> startFavoriteProcess(idOfProduct) }
+                startFavoriteProcess(productId!!, productName!!, productDescription!!)
 
             }
 

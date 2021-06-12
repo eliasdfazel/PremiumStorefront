@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/31/21, 11:31 AM
+ * Last modified 6/12/21, 11:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,12 +23,17 @@ interface FavoriteProductQueryInterface {
 
 class FavoritedProcess (private val context: AppCompatActivity) {
 
-    fun add(userUniqueIdentifier: String, productIdToFavorite: String) {
+    fun add(userUniqueIdentifier: String,
+            productIdToFavorite: String, productName: String, productDescription: String) {
 
         (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
             .document(DatabaseDirectory().favoriteProductEndpoint(userUniqueIdentifier, productIdToFavorite))
-            .set(FavoriteDataStructure(productId = productIdToFavorite, productFavorited = true))
+            .set(FavoriteDataStructure(
+                productId = productIdToFavorite,
+                productName = productName,
+                productDescription = productDescription,
+                productFavorited = true))
 
     }
 

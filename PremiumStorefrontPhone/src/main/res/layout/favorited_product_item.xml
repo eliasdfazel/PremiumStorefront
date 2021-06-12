@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/11/21, 9:29 AM
+  ~ Last modified 6/12/21, 10:58 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -114,7 +114,6 @@
         android:paddingTop="1dp"
         android:paddingBottom="11dp"
         android:src="@drawable/diamond_solid_icon_light"
-        android:background="@drawable/all_content_divider_light"
 
         apps:layout_constraintTop_toBottomOf="@id/productSummaryTextView" />
 
