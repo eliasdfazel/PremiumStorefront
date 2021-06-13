@@ -90,14 +90,15 @@
         android:insetBottom="0dp"
         android:insetRight="0dp"
         android:insetLeft="0dp"
+        android:background="@drawable/delete"
 
         apps:cornerRadius="51dp"
         apps:icon="@drawable/delete"
-        apps:iconSize="29dp"
+        apps:iconSize="19dp"
         apps:iconPadding="0dp"
-        apps:iconTint="@color/light"
+        apps:iconTint="@color/red"
         apps:iconGravity="textEnd"
-        apps:backgroundTint="@color/red"
+        apps:backgroundTint="@color/light_transparent"
         apps:rippleColor="@color/white"
 
         apps:layout_constraintBottom_toTopOf="@id/productNameTextView"
