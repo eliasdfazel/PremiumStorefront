@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/16/21, 3:16 AM
+ * Last modified 6/14/21, 1:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,13 +10,15 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
+import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
+import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -253,6 +255,34 @@ class StorefrontLiveData : ViewModel() {
         storefrontCategoriesData.addAll(storefrontCategoriesDataSorted)
 
         categoriesItemData.postValue(storefrontCategoriesData)
+
+    }
+
+    fun checkInstalledApplications(context: Context,
+                                   allContentAdapter: AllContentAdapter,
+                                   allApplications: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        val installedApplications = InstalledApplications(context)
+
+        allApplications.forEachIndexed { index, storefrontContentsData ->
+
+            if ((installedApplications.appIsInstalled(storefrontContentsData.productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey]))) {
+
+                allContentAdapter.storefrontContents[index].installViewText = "${context.getString(R.string.rateText)} & ${context.getString(R.string.shareText)}"
+
+                allContentAdapter.storefrontContents[index] = storefrontContentsData
+
+                delay(159)
+
+                withContext(Dispatchers.Main) {
+
+                    allContentAdapter.notifyItemChanged(index)
+
+                }
+
+            }
+
+        }
 
     }
 

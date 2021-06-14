@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 7:48 AM
+ * Last modified 6/14/21, 1:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -204,11 +204,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
                     storefrontLayoutBinding.loadingView.visibility = View.GONE
 
-                    val numberOfItemsToLoad = displayY(applicationContext) / (dpToInteger(applicationContext, 279)) * 3
-                    Log.d(this@Storefront.javaClass.simpleName, "Number Of Items To Load | All Content: ${numberOfItemsToLoad}")
-
-                    val dataToSetup = it.subList(0, numberOfItemsToLoad)
-
                     storefrontAllUntouchedContents.clear()
                     storefrontAllUntouchedContents.addAll(it)
 
@@ -223,6 +218,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
 
                     retrieveCategories()
+
+                    storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
 
                 } else {
 

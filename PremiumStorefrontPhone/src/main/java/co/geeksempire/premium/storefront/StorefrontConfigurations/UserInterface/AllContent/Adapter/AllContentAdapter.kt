@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 9:24 AM
+ * Last modified 6/14/21, 1:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,6 +26,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.ViewHolder.AllContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -34,6 +35,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<AllContentViewHolder>() {
 
@@ -53,6 +55,15 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
     override fun onBindViewHolder(allContentViewHolder: AllContentViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(allContentViewHolder, position, payloads)
+
+        if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
+
+            allContentViewHolder.installView.icon = context.getDrawable(R.drawable.share_icon)
+            allContentViewHolder.installView.iconSize = dpToInteger(context, 23)
+
+        }
+
+        allContentViewHolder.installView.text = storefrontContents[position].installViewText
 
         when (themeType) {
             ThemeType.ThemeLight -> {
@@ -81,6 +92,7 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
                 allContentViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_dark)
                 allContentViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
+
             }
             else -> {
 
@@ -177,10 +189,21 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
         allContentViewHolder.installView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
-                aPackageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
-                applicationName = storefrontContents[position].productName,
-                applicationSummary = storefrontContents[position].productSummary)
+            if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
+
+                shareApplication(context,
+                    storefrontContents[position].productName,
+                    storefrontContents[position].productName,
+                    storefrontContents[position].productSummary)
+
+            } else {
+
+                openPlayStoreToInstall(context = context,
+                    aPackageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
+                    applicationName = storefrontContents[position].productName,
+                    applicationSummary = storefrontContents[position].productSummary)
+
+            }
 
         }
 
