@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/14/21, 12:18 PM
+  ~ Last modified 6/14/21, 12:23 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -71,19 +71,6 @@
                 apps:layout_constraintTop_toTopOf="parent"
                 apps:layout_constraintBottom_toBottomOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/applicationIconImageView"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:padding="19dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/premium_storefront_logo"
-                android:background="@drawable/product_icon_dimension_effect_light"
-
-                apps:layout_constraintTop_toTopOf="parent"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
             <net.geeksempire.blurry.effect.view.RealtimeBlurView
                 android:id="@+id/applicationIconBlurView"
                 android:layout_width="159dp"
@@ -97,6 +84,19 @@
                 apps:realtimeBlurTopRight="43dp"
                 apps:realtimeBlurBottomLeft="43dp"
                 apps:realtimeBlurBottomRight="43dp"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/applicationIconImageView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="19dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/premium_storefront_logo"
+                android:background="@drawable/product_icon_dimension_effect_light"
 
                 apps:layout_constraintTop_toTopOf="parent"
                 apps:layout_constraintStart_toStartOf="parent"
