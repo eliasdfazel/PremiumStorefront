@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 1:01 PM
+ * Last modified 6/14/21, 12:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,8 +29,8 @@ import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmo
 import co.geeksempire.premium.storefront.databinding.FavoriteProductsLayoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class FavoriteProducts : AppCompatActivity() {
 
@@ -79,17 +79,27 @@ class FavoriteProducts : AppCompatActivity() {
 
             favoriteProductsLiveData.favoritedContentItemData.observe(this@FavoriteProducts, {
 
-                favoriteProductsLayoutBinding.loadingView.visibility = View.GONE
-
                 favoritedAdapter.favoritedContentItems.clear()
-                favoritedAdapter.favoritedContentItems.addAll(it)
 
-                favoritedAdapter.notifyDataSetChanged()
+                CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+
+                    it.forEachIndexed { index, favoriteDataStructure ->
+
+                        favoritedAdapter.favoritedContentItems.add(index, favoriteDataStructure)
+                        favoritedAdapter.notifyItemInserted(index)
+
+                        delay(179)
+
+                    }
+
+                    favoriteProductsLayoutBinding.loadingView.visibility = View.GONE
+
+                }
 
             })
 
             (application as PremiumStorefrontApplication).firestoreDatabase
-                .collection(favoritedDatabaseDirectory.favoriteProductsCollectionEndpoint(firebaseUser!!.uid))
+                .collection(favoritedDatabaseDirectory.favoriteProductsCollectionEndpoint(firebaseUser.uid))
                 .get().addOnSuccessListener { querySnapshot ->
 
                     favoriteProductsLiveData.prepareFavoritedProductsData(querySnapshot)
@@ -101,6 +111,14 @@ class FavoriteProducts : AppCompatActivity() {
                     overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_left)
 
                 }
+
+            favoriteProductsLayoutBinding.goBackView.setOnClickListener {
+
+                this@FavoriteProducts.finish()
+
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_left)
+
+            }
 
         } else {
 

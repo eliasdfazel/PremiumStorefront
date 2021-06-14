@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 1:12 PM
+ * Last modified 6/14/21, 12:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,8 @@ import android.os.Looper
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.FavoriteDataStructure
@@ -52,25 +54,39 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
         when (themeType) {
             ThemeType.ThemeLight -> {
 
+                favoritedViewHolder.rootViewItem.background = context.getDrawable(R.drawable.favorited_background_light)
+
                 favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
+                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.light_transparent_high))
+
             }
             ThemeType.ThemeDark -> {
+
+                favoritedViewHolder.rootViewItem.background = context.getDrawable(R.drawable.favorited_background_dark)
+
 
                 favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.dark_transparent_high))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
+
+                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_high))
+
             }
             else -> {
+
+                favoritedViewHolder.rootViewItem.background = context.getDrawable(R.drawable.favorited_background_light)
 
                 favoritedViewHolder.blurryBackgroundItem.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
+
+                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.light_transparent_high))
 
             }
         }
@@ -124,19 +140,32 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
         favoritedViewHolder.removeView.setOnClickListener {
 
+            context.favoritedProcess.remove(context.firebaseUser!!.uid, favoritedContentItems[position].productId)
+
             favoritedContentItems.removeAt(position)
 
-            context.favoritedProcess.remove(context.firebaseUser!!.uid, favoritedContentItems[position].productId).addOnSuccessListener {
+            val scaleDownAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_down_zero_to_top_end)
+            favoritedViewHolder.rootViewItem.startAnimation(scaleDownAnimation)
 
-                notifyItemRemoved(position)
+            scaleDownAnimation.setAnimationListener(object : Animation.AnimationListener {
 
-                Handler(Looper.getMainLooper()).postDelayed({
+                override fun onAnimationStart(animation: Animation?) {}
 
-                    notifyDataSetChanged()
+                override fun onAnimationEnd(animation: Animation?) {
 
-                }, 321)
+                    notifyItemRemoved(position)
 
-            }
+                    Handler(Looper.getMainLooper()).postDelayed({
+
+                        notifyDataSetChanged()
+
+                    }, 301)
+
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+
+            })
 
         }
 

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/12/21, 1:05 PM
+  ~ Last modified 6/14/21, 12:11 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@
     android:layout_height="197dp"
     android:layout_marginHorizontal="19dp"
     android:layout_marginVertical="11dp"
-    android:background="@color/transparent"
+    android:background="@drawable/favorited_background_light"
 
     apps:layout_constraintDimensionRatio="1:1">
 
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        apps:realtimeBlurRadius="13dp"
+        apps:realtimeBlurRadius="17dp"
         apps:realtimeFirstColor="@color/light_transparent_high"
         apps:realtimeBlurTopLeft="19dp"
         apps:realtimeBlurTopRight="19dp"
@@ -86,19 +86,18 @@
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginEnd="13dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:insetRight="0dp"
-        android:insetLeft="0dp"
-        android:background="@drawable/delete"
+        android:insetTop="3dp"
+        android:insetBottom="3dp"
+        android:insetRight="3dp"
+        android:insetLeft="3dp"
 
         apps:cornerRadius="51dp"
         apps:icon="@drawable/delete"
-        apps:iconSize="19dp"
+        apps:iconSize="29dp"
         apps:iconPadding="0dp"
         apps:iconTint="@color/red"
         apps:iconGravity="textEnd"
-        apps:backgroundTint="@color/light_transparent"
+        apps:backgroundTint="@color/light_transparent_high"
         apps:rippleColor="@color/white"
 
         apps:layout_constraintBottom_toTopOf="@id/productNameTextView"
@@ -108,7 +107,8 @@
         android:id="@+id/installView"
         android:layout_width="0dp"
         android:layout_height="51dp"
-        android:layout_marginHorizontal="3dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="7dp"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
