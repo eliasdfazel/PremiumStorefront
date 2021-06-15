@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 10:36 AM
+ * Last modified 6/15/21, 7:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -125,7 +125,7 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
                     preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
 
-                    preferencesControlLayoutBinding.applicationLogo.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
+                    preferencesControlLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
                     preferencesControlLayoutBinding.profileImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
 
@@ -173,7 +173,7 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
                     preferencesControlLayoutBinding.blurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
 
-                    preferencesControlLayoutBinding.applicationLogo.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
+                    preferencesControlLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
                     preferencesControlLayoutBinding.profileImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.black))
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 10:06 AM
+ * Last modified 6/15/21, 7:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
@@ -91,6 +92,8 @@ fun Storefront.setupUserInterface() {
 
                     storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
 
+                    storefrontLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
+
                     /* Start - Add Shadow To Content Background */
                     val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
 
@@ -153,6 +156,8 @@ fun Storefront.setupUserInterface() {
                     }
 
                     storefrontLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
+
+                    storefrontLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
                     /* Start - Add Shadow To Content Background */
                     val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
