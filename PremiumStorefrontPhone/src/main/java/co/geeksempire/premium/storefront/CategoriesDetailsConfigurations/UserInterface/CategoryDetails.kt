@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:48 AM
+ * Last modified 6/15/21, 11:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -91,6 +91,14 @@ class CategoryDetails : AppCompatActivity(), FragmentInterface {
 
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
     }
 
     override fun onBackPressed() {

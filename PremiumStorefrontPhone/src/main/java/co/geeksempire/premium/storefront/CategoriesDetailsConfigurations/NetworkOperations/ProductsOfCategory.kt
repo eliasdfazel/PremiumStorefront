@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:46 AM
+ * Last modified 6/15/21, 11:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -95,7 +95,10 @@ fun CategoryDetails.processAllContentOfCategories(allContentJsonArray: JSONArray
 
     }
 
-    categoryDetailsLayoutBinding.loadingView.visibility = View.GONE
-    productsOfCategoryAdapter.notifyDataSetChanged()
+    withContext(Dispatchers.Main) {
+
+        categoryDetailsLayoutBinding.loadingView.visibility = View.GONE
+
+    }
 
 }
