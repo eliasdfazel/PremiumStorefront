@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:18 AM
+ * Last modified 6/15/21, 10:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.products_of_category_item.view.*
+import net.geeksempire.blurry.effect.view.RealtimeBlurView
 
 class ProductsOfCategoryViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
@@ -32,4 +33,6 @@ class ProductsOfCategoryViewHolder (rootItemView: View) : RecyclerView.ViewHolde
 
     val productRatingStarsView: ImageView = rootItemView.productRatingStarsView
     val productDividerView: ImageView = rootItemView.productDividerView
+
+    val blurryBackground: RealtimeBlurView = rootItemView.blurryBackground
 }

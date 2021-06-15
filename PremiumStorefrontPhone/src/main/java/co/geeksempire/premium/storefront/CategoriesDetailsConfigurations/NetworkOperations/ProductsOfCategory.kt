@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:10 AM
+ * Last modified 6/15/21, 10:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,7 +11,8 @@
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations
 
 import android.util.Log
-import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetailsFragment
+import android.view.View
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.NetworkConnections.ProductSearchEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
@@ -21,12 +22,11 @@ import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
 
-
-fun CategoryDetailsFragment.retrieveProductsOfCategory(categoryId: Long) {
+fun CategoryDetails.retrieveProductsOfCategory(categoryId: Long) {
 
     val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
 
-    GenericJsonRequest(requireContext(), object : JsonRequestResponses {
+    GenericJsonRequest(applicationContext, object : JsonRequestResponses {
 
         override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
             super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
@@ -39,7 +39,7 @@ fun CategoryDetailsFragment.retrieveProductsOfCategory(categoryId: Long) {
 
 }
 
-fun CategoryDetailsFragment.processAllContentOfCategories(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+fun CategoryDetails.processAllContentOfCategories(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
     Log.d(this@processAllContentOfCategories.javaClass.simpleName, "Process All Content Of Categories")
 
     for (indexContent in 0 until allContentJsonArray.length()) {
@@ -53,8 +53,7 @@ fun CategoryDetailsFragment.processAllContentOfCategories(allContentJsonArray: J
         /* End - Images */
 
         val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
-        val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
-            ProductsContentKey.NameKey)
+        val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
 
         /* Start - Attributes */
         val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
@@ -84,13 +83,18 @@ fun CategoryDetailsFragment.processAllContentOfCategories(allContentJsonArray: J
                 productAttributes = attributesMap)
         )
 
-        productsOfCategoryAdapter.notifyItemInserted(indexContent)
+        withContext(Dispatchers.Main) {
 
-        Log.d(this@processAllContentOfCategories.javaClass.simpleName, "All Products Of Category: ${featuredContentJsonObject.getString(
-            ProductsContentKey.NameKey)}")
+            productsOfCategoryAdapter.notifyItemInserted(indexContent)
+
+        }
+
+        Log.d(this@processAllContentOfCategories.javaClass.simpleName, "All Products Of Category: ${featuredContentJsonObject.getString(ProductsContentKey.NameKey)}")
 
         delay(159)
 
     }
+
+    categoryDetailsLayoutBinding.loadingView.visibility = View.GONE
 
 }

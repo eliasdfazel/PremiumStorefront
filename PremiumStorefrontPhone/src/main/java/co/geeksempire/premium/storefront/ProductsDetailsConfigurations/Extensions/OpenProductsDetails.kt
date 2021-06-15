@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:18 AM
+ * Last modified 6/15/21, 10:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,31 +12,37 @@ package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensio
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
-import com.abanabsalan.aban.magazine.Utils.System.hideKeyboard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-fun openProductsDetails(context: Storefront, storefrontContents: ArrayList<StorefrontContentsData>, position: Int) = CoroutineScope(Dispatchers.Main).launch {
-
-    hideKeyboard(context, context.storefrontLayoutBinding.searchView)
+fun openProductsDetails(context: AppCompatActivity,
+                        contentDetailsContainer: FragmentContainerView, productDetailsFragment: ProductDetailsFragment,
+                        storefrontContents: ArrayList<StorefrontContentsData>, position: Int) = CoroutineScope(Dispatchers.Main).launch {
 
     delay(333)
 
-    context.storefrontLayoutBinding.contentDetailsContainer.visibility = View.VISIBLE
+    contentDetailsContainer.visibility = View.VISIBLE
 
-    context.productDetailsFragment.apply {
-        storefrontInstance = context
+    productDetailsFragment.apply {
+        storefrontInstance = if (context is Storefront) {
+            context as Storefront
+        } else {
+            null
+        }
         isShowing = true
     }
 
-    context.productDetailsFragment.arguments = Bundle().apply {
+    productDetailsFragment.arguments = Bundle().apply {
         putString(ProductDataKey.ProductId, storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey])
         putString(ProductDataKey.ProductPackageName, storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey])
 
@@ -52,7 +58,7 @@ fun openProductsDetails(context: Storefront, storefrontContents: ArrayList<Store
     context.supportFragmentManager
         .beginTransaction()
         .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-        .replace(R.id.contentDetailsContainer, context.productDetailsFragment, "Product Details")
+        .replace(R.id.contentDetailsContainer, productDetailsFragment, "Product Details")
         .commit()
 
 }

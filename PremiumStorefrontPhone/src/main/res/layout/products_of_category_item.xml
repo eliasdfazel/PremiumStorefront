@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/15/21, 8:40 AM
+  ~ Last modified 6/15/21, 10:46 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,18 +15,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="17dp"
-    android:layout_marginEnd="0dp"
+    android:layout_marginEnd="17dp"
     android:layout_marginTop="7dp"
     android:layout_marginBottom="11dp"
     android:background="@android:color/transparent"
 
     apps:layout_constraintDimensionRatio="1:1">
 
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/blurryBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        apps:realtimeBlurRadius="19dp"
+        apps:realtimeBlurGradientType="linear"
+        apps:realtimeFirstColor="@color/white"
+        apps:realtimeSecondColor="@color/premiumLight"
+        apps:realtimeBlurTopLeft="19dp"
+        apps:realtimeBlurTopRight="19dp"
+        apps:realtimeBlurBottomLeft="19dp"
+        apps:realtimeBlurBottomRight="19dp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/productIconImageView"
         android:layout_width="87dp"
         android:layout_height="87dp"
         android:layout_marginTop="23dp"
+        android:layout_marginHorizontal="7dp"
         android:padding="7.7dp"
         android:scaleType="centerCrop"
         android:src="@drawable/launcher_foreground_icon"
@@ -73,7 +93,7 @@
         android:id="@+id/productNameTextView"
         android:layout_width="0dp"
         android:layout_height="47dp"
-        android:paddingHorizontal="13dp"
+        android:paddingHorizontal="19dp"
         android:gravity="center_vertical"
         android:ellipsize="end"
         android:lines="1"
@@ -92,9 +112,9 @@
         android:id="@+id/productSummaryTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingVertical="7dp"
-        android:paddingStart="3dp"
-        android:paddingEnd="13dp"
+        android:paddingVertical="13dp"
+        android:paddingStart="11dp"
+        android:paddingEnd="19dp"
         android:gravity="top|start"
         android:maxLines="3"
         android:textColor="@color/dark"
@@ -109,12 +129,9 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/productDividerView"
         android:layout_width="match_parent"
-        android:layout_height="31dp"
-        android:layout_marginVertical="3dp"
-        android:paddingTop="1dp"
-        android:paddingBottom="11dp"
+        android:layout_height="41dp"
+        android:paddingVertical="7dp"
         android:src="@drawable/diamond_solid_icon_light"
-        android:background="@drawable/all_content_divider_light"
 
         apps:layout_constraintTop_toBottomOf="@id/productSummaryTextView" />
 
@@ -123,7 +140,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="19dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginEnd="19dp"
         android:lines="1"
         android:ellipsize="end"
         android:textAllCaps="false"

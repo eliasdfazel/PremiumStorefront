@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:18 AM
+ * Last modified 6/15/21, 9:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -177,7 +177,9 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
         allContentViewHolder.rootView.setOnClickListener {
 
-            openProductsDetails(context, storefrontContents, position)
+            openProductsDetails(context = context,
+                contentDetailsContainer= context.storefrontLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
+                storefrontContents = storefrontContents, position = position)
 
         }
 

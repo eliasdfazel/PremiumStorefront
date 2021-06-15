@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:09 AM
+ * Last modified 6/15/21, 10:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,9 +10,10 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Typeface
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
@@ -203,23 +205,11 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                     override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View, itemTextView: TextView, itemData: OptionDataItems) {
 
-                        context.storefrontLayoutBinding.contentDetailsContainer.visibility = View.VISIBLE
-
-                        context.productDetailsFragment.apply {
-                            isShowing = true
-                        }
-
-                        context.productDetailsFragment.arguments = Bundle().apply {
-                            putLong(CategoriesDataKeys.CategoryId, storefrontCategories[position].categoryId)
-                            putString(CategoriesDataKeys.CategoryName, storefrontCategories[position].categoryName)
-                            putString(CategoriesDataKeys.CategoryIcon, storefrontCategories[position].categoryIconLink)
-                        }
-
-                        context.supportFragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.slide_from_right, R.anim.fade_out)
-                            .replace(R.id.contentDetailsContainer, context.categoryDetailsFragment, "Category Details For ${storefrontCategories[position].categoryId}")
-                            .commit()
+                        context.startActivity(Intent(context, CategoryDetails::class.java).apply {
+                            putExtra(CategoriesDataKeys.CategoryId, storefrontCategories[position].categoryId)
+                            putExtra(CategoriesDataKeys.CategoryName, storefrontCategories[position].categoryName)
+                            putExtra(CategoriesDataKeys.CategoryIcon, storefrontCategories[position].categoryIconLink)
+                        }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
 
                         balloonOptionsMenu.removeBalloonOption()
 

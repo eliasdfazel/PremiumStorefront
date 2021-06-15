@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:16 AM
+ * Last modified 6/15/21, 10:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,16 +15,15 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Html
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.ViewHolder.ProductsOfCategoryViewHolder
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
@@ -37,7 +36,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-class ProductsOfCategoryAdapter (val context: Storefront, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<ProductsOfCategoryViewHolder>() {
+class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<ProductsOfCategoryViewHolder>() {
 
     val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
@@ -72,10 +71,12 @@ class ProductsOfCategoryAdapter (val context: Storefront, var themeType: Boolean
                 productsOfCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
                 productsOfCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
-                productsOfCategoryViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_light)
 
                 productsOfCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
                 productsOfCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+
+                productsOfCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.light_transparent))
+                productsOfCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
 
             }
             ThemeType.ThemeDark -> {
@@ -86,10 +87,12 @@ class ProductsOfCategoryAdapter (val context: Storefront, var themeType: Boolean
                 productsOfCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
 
                 productsOfCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_dark))
-                productsOfCategoryViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_dark)
 
                 productsOfCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_dark)
                 productsOfCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
+
+                productsOfCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.dark_transparent))
+                productsOfCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
 
             }
             else -> {
@@ -100,17 +103,15 @@ class ProductsOfCategoryAdapter (val context: Storefront, var themeType: Boolean
                 productsOfCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
                 productsOfCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
-                productsOfCategoryViewHolder.productDividerView.background = context.getDrawable(R.drawable.all_content_divider_light)
 
                 productsOfCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
                 productsOfCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
+                productsOfCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.light_transparent))
+                productsOfCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
+
             }
         }
-
-    }
-
-    override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int) {
 
         productsOfCategoryViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
         productsOfCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
@@ -118,16 +119,6 @@ class ProductsOfCategoryAdapter (val context: Storefront, var themeType: Boolean
         productsOfCategoryViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
 
         productsOfCategoryViewHolder.productCurrentRateView.setTextColor(context.getColor(R.color.white))
-
-        if (position == storefrontContents.lastIndex) {
-
-            productsOfCategoryViewHolder.productDividerView.visibility = View.GONE
-
-        } else {
-
-
-
-        }
 
         //Product Icon Image
         Glide.with(context)
@@ -175,7 +166,9 @@ class ProductsOfCategoryAdapter (val context: Storefront, var themeType: Boolean
 
         productsOfCategoryViewHolder.rootView.setOnClickListener {
 
-            openProductsDetails(context, storefrontContents, position)
+            openProductsDetails(context = context,
+                contentDetailsContainer= context.categoryDetailsLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
+                storefrontContents = storefrontContents, position = position)
 
         }
 
@@ -204,6 +197,12 @@ class ProductsOfCategoryAdapter (val context: Storefront, var themeType: Boolean
             }
 
         }
+
+    }
+
+    override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int) {
+
+
 
     }
 

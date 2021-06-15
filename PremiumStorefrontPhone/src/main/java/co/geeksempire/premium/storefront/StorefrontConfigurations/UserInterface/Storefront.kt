@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/14/21, 1:00 PM
+ * Last modified 6/15/21, 9:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,6 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSig
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
-import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetailsFragment
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
@@ -131,10 +130,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     val productDetailsFragment: ProductDetailsFragment by lazy {
         ProductDetailsFragment()
-    }
-
-    val categoryDetailsFragment: CategoryDetailsFragment by lazy {
-        CategoryDetailsFragment()
     }
 
     val filterOptionsAdapter: FilterOptionsAdapter by lazy {
@@ -436,26 +431,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                             }
 
                         })
-
-                }
-
-            }
-
-        } else if (categoryDetailsFragment.isShowing) {
-
-            supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .remove(categoryDetailsFragment)
-                .commitNow()
-
-            lifecycleScope.launch {
-
-                themePreferences.checkThemeLightDark().collect {
-
-                    prepareActionCenterUserInterface.setupIconsForStorefront(it)
-
-                    actionCenterOperations.setupForStorefront(it)
 
                 }
 
