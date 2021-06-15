@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/14/21, 12:19 PM
+ * Last modified 6/15/21, 12:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -153,8 +153,6 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
                 override fun onAnimationEnd(animation: Animation?) {
 
-                    notifyItemRemoved(position)
-
                     Handler(Looper.getMainLooper()).postDelayed({
 
                         notifyDataSetChanged()
@@ -166,6 +164,12 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
                 override fun onAnimationRepeat(animation: Animation?) {}
 
             })
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                notifyItemRemoved(position)
+
+            }, 357)
 
         }
 
