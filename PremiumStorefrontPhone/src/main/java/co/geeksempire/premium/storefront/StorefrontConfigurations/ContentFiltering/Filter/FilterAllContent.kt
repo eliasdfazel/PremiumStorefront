@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:43 AM
+ * Last modified 6/15/21, 9:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,8 +11,8 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter
 
 import android.util.Log
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,7 +50,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
                 val productSummary = storefrontContentsData.productSummary.lowercase()
                 val productCategory = storefrontContentsData.productCategory.lowercase()
 
-                val countryOfDeveloper = storefrontContentsData.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]?:""
+                val countryOfDeveloper = storefrontContentsData.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]?:""
 
                 if (productName.contains(inputSearchQuery)
                     || productSummary.contains(inputSearchQuery)
@@ -102,12 +102,12 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
                 when (filterType) {
                     FilteringOptions.FilterByCountry -> {
 
-                        it.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey] == filterInputParameter
+                        it.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey] == filterInputParameter
 
                     }
                     FilteringOptions.FilterByAndroidCompatibilities -> {
 
-                        it.productAttributes[StorefrontFeaturedContentKey.AttributesAndroidCompatibilitiesKey] == filterInputParameter
+                        it.productAttributes[ProductsContentKey.AttributesAndroidCompatibilitiesKey] == filterInputParameter
 
                     }
                     else -> true //All Unfiltered Content
@@ -137,7 +137,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
                 when (sortInputParameter) {
                     SortingOptions.SortByRating -> {
 
-                        it.productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
+                        it.productAttributes[ProductsContentKey.AttributesRatingKey]
 
                     }
                     SortingOptions.SortByPrice -> {

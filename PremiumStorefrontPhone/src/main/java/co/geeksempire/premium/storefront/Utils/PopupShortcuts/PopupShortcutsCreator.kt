@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 7:12 AM
+ * Last modified 6/15/21, 9:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,8 +18,8 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.annotation.RequiresApi
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -67,7 +67,7 @@ class PopupShortcutsCreator (val context: Context) {
 
             addShortcutKeyboardTyping(
                 PopupShortcutsData(
-                    applicationPackageName = shortcutsDataList[shortcutSetupCounter].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString(),
+                    applicationPackageName = shortcutsDataList[shortcutSetupCounter].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString(),
                     applicationName = shortcutsDataList[shortcutSetupCounter].productName,
                     applicationSummary = shortcutsDataList[shortcutSetupCounter].productSummary,
                     applicationIconLink = shortcutsDataList[shortcutSetupCounter].productIconLink
@@ -124,7 +124,7 @@ class PopupShortcutsCreator (val context: Context) {
                             shortcutSetupCounter++
 
                             addShortcutKeyboardTyping(PopupShortcutsData(
-                                applicationPackageName = shortcutsDataList[shortcutSetupCounter].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString(),
+                                applicationPackageName = shortcutsDataList[shortcutSetupCounter].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString(),
                                 applicationName = shortcutsDataList[shortcutSetupCounter].productName,
                                 applicationSummary = shortcutsDataList[shortcutSetupCounter].productSummary,
                                 applicationIconLink = shortcutsDataList[shortcutSetupCounter].productIconLink

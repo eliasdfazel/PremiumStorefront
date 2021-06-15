@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 7:31 AM
+ * Last modified 6/15/21, 8:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.UI.Animations.AnimationListener
 import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnimation
@@ -210,12 +210,12 @@ fun Storefront.filterByCountriesDataProcess() {
 
             storefrontAllUnfilteredContents.sortedBy {
 
-                it.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]
+                it.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]
 
             }.asFlow()
                 .map {
 
-                    it.productAttributes[StorefrontFeaturedContentKey.AttributesDeveloperCountryKey]
+                    it.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]
                 }
                 .flowOn(Dispatchers.IO)
                 .onCompletion {
@@ -265,12 +265,12 @@ fun Storefront.filterByCompatibilitiesDataProcess() {
 
             storefrontAllUnfilteredContents.sortedBy {
 
-                it.productAttributes[StorefrontFeaturedContentKey.AttributesAndroidCompatibilitiesKey]
+                it.productAttributes[ProductsContentKey.AttributesAndroidCompatibilitiesKey]
 
             }.asFlow()
                 .map {
 
-                    it.productAttributes[StorefrontFeaturedContentKey.AttributesAndroidCompatibilitiesKey]
+                    it.productAttributes[ProductsContentKey.AttributesAndroidCompatibilitiesKey]
                 }
                 .flowOn(Dispatchers.IO)
                 .onCompletion {

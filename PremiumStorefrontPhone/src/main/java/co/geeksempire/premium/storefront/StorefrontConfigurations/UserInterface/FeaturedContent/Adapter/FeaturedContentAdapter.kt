@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/9/21, 5:29 AM
+ * Last modified 6/15/21, 9:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontFeaturedContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
@@ -56,7 +56,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
         featuredContentViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
 
-        featuredContentViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesRatingKey]
+        featuredContentViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
 
         featuredContentViewHolder.productNameTextView.bringToFront()
 
@@ -113,7 +113,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
         featuredContentViewHolder.rootView.setOnLongClickListener {
 
             openPlayStoreToInstall(context = context,
-                aPackageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
+                aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
                 applicationName = storefrontContents[position].productName,
                 applicationSummary = storefrontContents[position].productSummary)
 
@@ -123,7 +123,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
         featuredContentViewHolder.installView.setOnClickListener {
 
             openPlayStoreToInstall(context = context,
-                aPackageName = (storefrontContents[position].productAttributes[StorefrontFeaturedContentKey.AttributesPackageNameKey].toString()),
+                aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
                 applicationName = storefrontContents[position].productName,
                 applicationSummary = storefrontContents[position].productSummary)
 

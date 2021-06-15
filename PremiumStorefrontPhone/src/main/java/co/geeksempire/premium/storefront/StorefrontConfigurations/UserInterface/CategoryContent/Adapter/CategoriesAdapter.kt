@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 8:27 AM
+ * Last modified 6/15/21, 9:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
@@ -209,8 +210,9 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                         }
 
                         context.productDetailsFragment.arguments = Bundle().apply {
-
-
+                            putLong(CategoriesDataKeys.CategoryId, storefrontCategories[position].categoryId)
+                            putString(CategoriesDataKeys.CategoryName, storefrontCategories[position].categoryName)
+                            putString(CategoriesDataKeys.CategoryIcon, storefrontCategories[position].categoryIconLink)
                         }
 
                         context.supportFragmentManager

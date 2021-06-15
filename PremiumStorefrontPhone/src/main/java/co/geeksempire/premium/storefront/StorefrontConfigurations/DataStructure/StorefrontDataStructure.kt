@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/14/21, 12:40 PM
+ * Last modified 6/15/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,7 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure
 
-object StorefrontFeaturedContentKey {
+object ProductsContentKey {
     const val IdKey = "id"
 
     const val NameKey = "name"
