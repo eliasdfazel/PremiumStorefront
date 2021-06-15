@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 10:32 AM
+ * Last modified 6/15/21, 11:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,10 +49,11 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
 
             categoryDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light))
 
-            categoryDetailsLayoutBinding.categoryNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
+            categoryDetailsLayoutBinding.categoryNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             categoryDetailsLayoutBinding.categoryNameTextView.setTextColor(getColor(R.color.dark))
 
             categoryDetailsLayoutBinding.categoryIconImageView.background = getDrawable(R.drawable.squircle_icon_light)
+            categoryDetailsLayoutBinding.categoryIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             categoryDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
         }
@@ -78,10 +79,11 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
 
             categoryDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_dark))
 
-            categoryDetailsLayoutBinding.categoryNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.black))
+            categoryDetailsLayoutBinding.categoryNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.dark))
             categoryDetailsLayoutBinding.categoryNameTextView.setTextColor(getColor(R.color.light))
 
             categoryDetailsLayoutBinding.categoryIconImageView.background = getDrawable(R.drawable.squircle_icon_dark)
+            categoryDetailsLayoutBinding.categoryIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.dark))
             categoryDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
         }
@@ -113,10 +115,11 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
 
             categoryDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light))
 
-            categoryDetailsLayoutBinding.categoryNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
+            categoryDetailsLayoutBinding.categoryNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             categoryDetailsLayoutBinding.categoryNameTextView.setTextColor(getColor(R.color.dark))
 
             categoryDetailsLayoutBinding.categoryIconImageView.background = getDrawable(R.drawable.squircle_icon_light)
+            categoryDetailsLayoutBinding.categoryIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             categoryDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
         }

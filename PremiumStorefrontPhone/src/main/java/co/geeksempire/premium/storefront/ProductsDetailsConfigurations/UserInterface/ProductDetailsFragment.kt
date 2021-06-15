@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/14/21, 12:36 PM
+ * Last modified 6/15/21, 11:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,11 +29,11 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.Favor
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
+import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.ProductDetailsLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -43,12 +43,16 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ProductDetailsFragment : Fragment() {
 
-    var storefrontInstance: Storefront? = null
+    var instanceOfProductDetailsFragment: ProductDetailsFragment? = null
+
+    var instanceOfFragmentInterface: FragmentInterface? = null
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(requireActivity() as AppCompatActivity)
@@ -68,12 +72,6 @@ class ProductDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        lifecycleScope.launch {
-            storefrontInstance?.themePreferences?.checkThemeLightDark()?.collect {
-                (activity as Storefront).prepareActionCenterUserInterface.setupIconsForDetails(it)
-            }
-        }
 
     }
 
@@ -243,10 +241,7 @@ class ProductDetailsFragment : Fragment() {
                 applicationYoutubeIntroduction
             }
 
-            storefrontInstance?.actionCenterOperations?.setupForProductDetails(
-                applicationPackageName = applicationPackageName?:requireContext().packageName,
-                applicationName = productName?:requireContext().getString(R.string.applicationName),
-                applicationSummary = productSummary?:requireContext().getString(R.string.applicationSummary))
+            instanceOfFragmentInterface?.fragmentCreated(productId.orEmpty(), productName.orEmpty(), productSummary.orEmpty())
 
             productDetailsLayoutBinding.favoriteView.setOnClickListener {
 
@@ -256,21 +251,17 @@ class ProductDetailsFragment : Fragment() {
 
             productDetailsLayoutBinding.goBackView.setOnClickListener {
 
-                storefrontInstance?.apply {
-
-                    supportFragmentManager
+                instanceOfProductDetailsFragment?.let { detailsFragment ->
+                    (requireActivity()).supportFragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                        .remove(productDetailsFragment)
+                        .remove(detailsFragment)
                         .commitNow()
-
-                    prepareActionCenterUserInterface.setupIconsForStorefront()
-
                 }
 
             }
 
-            storefrontInstance?.accountSignIn!!.firebaseUser?.let { firebaseUser ->
+            Firebase.auth.currentUser?.let { firebaseUser ->
 
                 productId?.let {
 
@@ -300,6 +291,8 @@ class ProductDetailsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        instanceOfFragmentInterface?.fragmentDestroyed()
 
         isShowing = false
 

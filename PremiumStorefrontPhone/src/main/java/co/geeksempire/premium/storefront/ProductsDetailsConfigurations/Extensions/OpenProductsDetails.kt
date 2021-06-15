@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 10:49 AM
+ * Last modified 6/15/21, 11:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,26 +19,24 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-fun openProductsDetails(context: AppCompatActivity,
+fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentInterface,
                         contentDetailsContainer: FragmentContainerView, productDetailsFragment: ProductDetailsFragment,
                         storefrontContents: ArrayList<StorefrontContentsData>, position: Int) = CoroutineScope(Dispatchers.Main).launch {
 
     delay(333)
 
     contentDetailsContainer.visibility = View.VISIBLE
+    contentDetailsContainer.bringToFront()
 
     productDetailsFragment.apply {
-        storefrontInstance = if (context is Storefront) {
-            context as Storefront
-        } else {
-            null
-        }
+        this@apply.instanceOfProductDetailsFragment = productDetailsFragment
+        instanceOfFragmentInterface = fragmentInterface
         isShowing = true
     }
 

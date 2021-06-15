@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 11:41 AM
+ * Last modified 6/15/21, 11:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,19 +10,23 @@
 
 package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions
 
-import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
+import android.app.ActivityOptions
+import android.content.Intent
+import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: String, productDescription: String, productIcon: String) {
 
-    if (storefrontInstance?.accountSignIn!!.firebaseUser != null) {
+    if (Firebase.auth.currentUser != null) {
 
-        favoritedProcess.isProductFavorited(storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId,
+        favoritedProcess.isProductFavorited(Firebase.auth.currentUser!!.uid, productId,
             object : FavoriteProductQueryInterface {
 
                 override fun favoriteProduct(isProductFavorited: Boolean) {
@@ -32,7 +36,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                         if (networkCheckpoint.networkConnection()) {
 
-                            favoritedProcess.remove(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+                            favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, productId)
 
                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
                                 R.drawable.favorite_icon))
@@ -52,7 +56,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                                         if (networkCheckpoint.networkConnection()) {
 
-                                            favoritedProcess.remove(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid, productId)
+                                            favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, productId)
 
                                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
                                                 R.drawable.favorite_icon))
@@ -76,7 +80,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                         if (networkCheckpoint.networkConnection()) {
 
-                            favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid,
+                            favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
                                 productId, productName, productDescription, productIcon)
 
                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
@@ -97,7 +101,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                                         if (networkCheckpoint.networkConnection()) {
 
-                                            favoritedProcess.add(userUniqueIdentifier = storefrontInstance?.accountSignIn!!.firebaseUser!!.uid,
+                                            favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
                                                 productId, productName, productDescription, productIcon)
 
                                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
@@ -127,7 +131,8 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
     } else {
 
-        storefrontInstance?.accountSelector!!.launch(AccountSignIn.GoogleSignInRequestCode)
+        startActivity(Intent(requireContext(), AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            ActivityOptions.makeCustomAnimation(requireContext(), R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
 
     }
 

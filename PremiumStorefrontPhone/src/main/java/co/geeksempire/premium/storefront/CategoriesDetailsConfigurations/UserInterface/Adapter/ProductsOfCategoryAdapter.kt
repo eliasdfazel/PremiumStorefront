@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 10:49 AM
+ * Last modified 6/15/21, 11:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -113,6 +113,10 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
             }
         }
 
+    }
+
+    override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int) {
+
         productsOfCategoryViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
         productsOfCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
 
@@ -166,7 +170,7 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
         productsOfCategoryViewHolder.rootView.setOnClickListener {
 
-            openProductsDetails(context = context,
+            openProductsDetails(context = context, fragmentInterface = context,
                 contentDetailsContainer= context.categoryDetailsLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
                 storefrontContents = storefrontContents, position = position)
 
@@ -197,12 +201,6 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
             }
 
         }
-
-    }
-
-    override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int) {
-
-
 
     }
 

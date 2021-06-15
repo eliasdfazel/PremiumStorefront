@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:37 AM
+ * Last modified 6/15/21, 11:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -60,6 +60,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
+import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
 import com.abanabsalan.aban.magazine.Utils.System.hideKeyboard
 import com.bumptech.glide.Glide
@@ -74,7 +75,7 @@ import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
+class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface, FragmentInterface {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@Storefront)
@@ -395,47 +396,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                 .remove(productDetailsFragment)
                 .commitNow()
 
-            lifecycleScope.launch {
-
-                themePreferences.checkThemeLightDark().collect {
-
-                    prepareActionCenterUserInterface.setupIconsForStorefront(it)
-
-                    actionCenterOperations.setupForStorefront(it)
-
-                }
-
-            }
-
-            if (!storefrontLayoutBinding.favoritesView.isShown) {
-
-                accountSignIn.firebaseUser?.let {
-
-                    Glide.with(applicationContext)
-                        .load(it.photoUrl)
-                        .transform(CircleCrop())
-                        .into(storefrontLayoutBinding.profileView)
-
-                    favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
-                        object : FavoriteProductQueryInterface {
-
-                            override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
-                                super.favoriteProductsExist(isFavoriteProductsExist)
-
-                                storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
-                                    View.VISIBLE
-                                } else {
-                                    View.GONE
-                                }
-
-                            }
-
-                        })
-
-                }
-
-            }
-
         } else {
 
             startActivity(Intent(Intent.ACTION_MAIN).apply {
@@ -524,6 +484,68 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                 }
 
             })
+
+    }
+
+    override fun fragmentCreated(applicationPackageName: String, applicationName: String, applicationSummary: String) {
+        super.fragmentCreated(applicationPackageName, applicationName, applicationSummary)
+
+        actionCenterOperations.setupForProductDetails(
+            applicationPackageName = applicationPackageName?:packageName,
+            applicationName = applicationName?:getString(R.string.applicationName),
+            applicationSummary = applicationSummary?:getString(R.string.applicationSummary))
+
+        lifecycleScope.launch {
+            themePreferences.checkThemeLightDark().collect {
+                prepareActionCenterUserInterface.setupIconsForDetails(it)
+            }
+        }
+
+    }
+
+    override fun fragmentDestroyed() {
+        super.fragmentDestroyed()
+
+        lifecycleScope.launch {
+
+            themePreferences.checkThemeLightDark().collect {
+
+                prepareActionCenterUserInterface.setupIconsForStorefront(it)
+
+                actionCenterOperations.setupForStorefront(it)
+
+            }
+
+        }
+
+        if (!storefrontLayoutBinding.favoritesView.isShown) {
+
+            accountSignIn.firebaseUser?.let {
+
+                Glide.with(applicationContext)
+                    .load(it.photoUrl)
+                    .transform(CircleCrop())
+                    .into(storefrontLayoutBinding.profileView)
+
+                favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
+                    object : FavoriteProductQueryInterface {
+
+                        override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                            super.favoriteProductsExist(isFavoriteProductsExist)
+
+                            storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                                View.VISIBLE
+                            } else {
+                                View.GONE
+                            }
+
+                        }
+
+                    })
+
+            }
+
+        }
 
     }
 

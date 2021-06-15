@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:37 AM
+ * Last modified 6/15/21, 11:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -106,7 +106,7 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
 
         featuredContentViewHolder.rootView.setOnClickListener {
 
-            openProductsDetails(context = context,
+            openProductsDetails(context = context, fragmentInterface = context,
                 contentDetailsContainer= context.storefrontLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
                 storefrontContents = storefrontContents, position = position)
 
