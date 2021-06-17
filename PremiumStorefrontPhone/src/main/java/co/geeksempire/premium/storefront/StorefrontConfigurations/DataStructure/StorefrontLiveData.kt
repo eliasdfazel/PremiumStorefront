@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 9:56 AM
+ * Last modified 6/17/21, 11:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,6 +34,10 @@ class StorefrontLiveData : ViewModel() {
 
     val allContentMoreItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
+    }
+
+    val presentMoreItemData: MutableLiveData<StorefrontContentsData> by lazy {
+        MutableLiveData<StorefrontContentsData>()
     }
 
     val allFilteredContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
@@ -163,6 +167,35 @@ class StorefrontLiveData : ViewModel() {
         storefrontAllContents.addAll(storefrontAllContentsSorted)
 
         allContentMoreItemData.postValue(storefrontAllContents)
+
+    }
+
+    fun loadMoreDataIntoPresenter(allData: ArrayList<StorefrontContentsData>, currentAvailableData: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        println(">>> 1")
+
+        val moreProducts: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+
+        val startIndex = currentAvailableData.size
+        val endIndex = if (allData.size < (currentAvailableData.size + 19)) {
+            allData.size - currentAvailableData.size
+        } else {
+            currentAvailableData.size + 19
+        }
+
+        println(">>> size ::: " + endIndex)
+
+        allData.subList(startIndex, endIndex).forEach {
+
+            moreProducts.add(it)
+
+            println(">>> 2")
+
+            presentMoreItemData.postValue(it)
+
+            delay(555)
+
+        }
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 10:11 AM
+ * Last modified 6/17/21, 11:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
@@ -233,6 +234,34 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
                 storefrontAllUnfilteredContents.addAll(it)
 
+                if (allContent.allLoadingFinished) {
+
+                    storefrontLayoutBinding.loadMoreView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    storefrontLayoutBinding.loadMoreView.visibility = View.VISIBLE
+
+                }
+
+            })
+
+            storefrontLiveData.presentMoreItemData.observe(this@Storefront, {
+
+                println(">>> " + it.productName)
+
+                allContentAdapter.storefrontContents.add(it)
+
+                allContentAdapter.notifyItemInserted(allContentAdapter.storefrontContents.size - 1)
+
+                storefrontLayoutBinding.loadMoreView.apply {
+
+                    speed = 1f
+                    setMinAndMaxFrame(130, 165)
+
+                    if (!isAnimating) {
+                        playAnimation()
+                    }
+
+                }
+
             })
 
             storefrontLiveData.allFilteredContentItemData.observe(this@Storefront, {
@@ -349,6 +378,25 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     Log.d(this@Storefront.javaClass.simpleName, "Scrolling Up")
 
                     balloonOptionsMenu.removeBalloonOption()
+
+                }
+
+            }
+
+            storefrontLayoutBinding.loadMoreView.setOnClickListener {
+
+                println(">>> " + allContentAdapter.storefrontContents.size)
+
+                storefrontLiveData.loadMoreDataIntoPresenter(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
+
+                storefrontLayoutBinding.loadMoreView.apply {
+
+                    speed = 1f
+                    setMinAndMaxFrame(1, 130)
+
+                    if (!isAnimating) {
+                        playAnimation()
+                    }
 
                 }
 

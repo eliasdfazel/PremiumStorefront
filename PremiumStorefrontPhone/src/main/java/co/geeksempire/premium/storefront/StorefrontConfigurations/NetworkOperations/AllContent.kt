@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 10:11 AM
+ * Last modified 6/17/21, 10:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,9 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
     private val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
 
-    var numberOfPageToRetrieve: Int = 1
+    private var numberOfPageToRetrieve: Int = 1
+
+    var allLoadingFinished: Boolean = false
 
     fun retrieveAllContent() {
 
@@ -42,6 +44,10 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
                     numberOfPageToRetrieve++
 
                     retrieveAllContentMore()
+
+                } else {
+
+                    allLoadingFinished = true
 
                 }
 
@@ -66,6 +72,10 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
                     numberOfPageToRetrieve++
 
                     retrieveAllContentMore()
+
+                } else {
+
+                    allLoadingFinished = true
 
                 }
 
