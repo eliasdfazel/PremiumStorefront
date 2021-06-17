@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 7:45 AM
+ * Last modified 6/17/21, 2:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,7 +45,7 @@ fun Storefront.setupUserInterface() {
 
             newContentAdapter.apply {
 
-                newContentAdapter.themeType = it
+                themeType = it
 
                 if (storefrontContents.isNotEmpty()) {
 
@@ -61,6 +61,18 @@ fun Storefront.setupUserInterface() {
                 if (storefrontContents.isNotEmpty()) {
 
                     allContentAdapter.notifyItemRangeChanged(0, allContentAdapter.itemCount)
+
+                }
+
+            }
+
+            featuredContentAdapter.apply {
+
+                themeType = it
+
+                if (storefrontContents.isNotEmpty()) {
+
+                    featuredContentAdapter.notifyItemRangeChanged(0, featuredContentAdapter.itemCount)
 
                 }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 1:28 PM
+ * Last modified 6/17/21, 2:18 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
@@ -33,6 +34,8 @@ import com.bumptech.glide.request.target.Target
 
 class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Adapter<FeaturedContentViewHolder>() {
 
+    var themeType: Boolean = ThemeType.ThemeLight
+
     val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
     override fun getItemCount() : Int {
@@ -48,7 +51,23 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
     override fun onBindViewHolder(featuredContentViewHolder: FeaturedContentViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(featuredContentViewHolder, position, payloads)
 
+        when (themeType) {
+            ThemeType.ThemeLight -> {
 
+                featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
+
+            }
+            else -> {
+
+                featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+
+            }
+        }
 
     }
 
