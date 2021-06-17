@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:10 AM
+ * Last modified 6/17/21, 8:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,12 +12,21 @@ package co.geeksempire.premium.storefront.NetworkConnections
 
 class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
 
-    fun getAllProductsShowcaseEndpoint(productPerPage: Int = 51, numberOfPage: Int = 1) = "https://geeksempire.co/wp-json/wc/v3/products?" +
+    val defaultProductsPerPage = 51
+    val defaultNumberOfPage = 1
+
+    fun getAllProductsShowcaseEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) = "https://geeksempire.co/wp-json/wc/v3/products?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
-            "consumer_secret=${generalEndpoint.consumerSecret()}&per_page=${productPerPage}&page=${numberOfPage}&exclude=2341"
+            "consumer_secret=${generalEndpoint.consumerSecret()}" +
+            "&" +
+            "per_page=${productPerPage}" +
+            "&" +
+            "page=${numberOfPage}" +
+            "&" +
+            "exclude=2341"
 
-    fun getFeaturedProductsEndpoint(productPerPage: Int = 99, numberOfPage: Int = 1) : String = "${getAllProductsShowcaseEndpoint(productPerPage, numberOfPage)}&featured=true"
+    fun getFeaturedProductsEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String = "${getAllProductsShowcaseEndpoint(productPerPage, numberOfPage)}&featured=true"
 
     fun getProductByIdEndpoint(productId: String) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/${productId}" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
