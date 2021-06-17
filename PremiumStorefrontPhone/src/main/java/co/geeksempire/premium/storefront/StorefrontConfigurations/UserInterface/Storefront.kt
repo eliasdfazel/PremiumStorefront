@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:42 AM
+ * Last modified 6/17/21, 9:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -42,10 +42,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.userInteractionSetup
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveAllContent
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveCategories
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveNewContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
@@ -85,6 +82,10 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     val storefrontLiveData: StorefrontLiveData by lazy {
         ViewModelProvider(this@Storefront).get(StorefrontLiveData::class.java)
+    }
+
+    val allContent: AllContent by lazy {
+        AllContent(applicationContext, storefrontLiveData)
     }
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
@@ -222,6 +223,19 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
 
                 }
+
+            })
+
+            storefrontLiveData.allContentMoreItemData.observe(this@Storefront, {
+                Log.d(this@Storefront.javaClass.simpleName, "More Products Data Loaded")
+
+                println(">>> 1 ::: " + it.size)
+
+                storefrontAllUntouchedContents.addAll(it)
+
+                storefrontAllUnfilteredContents.addAll(it)
+
+                println(">>> 2 ::: " + storefrontAllUntouchedContents.size)
 
             })
 
@@ -412,7 +426,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
         retrieveFeaturedContent()
 
-        retrieveAllContent()
+        allContent.retrieveAllContent()
 
         retrieveNewContent()
 

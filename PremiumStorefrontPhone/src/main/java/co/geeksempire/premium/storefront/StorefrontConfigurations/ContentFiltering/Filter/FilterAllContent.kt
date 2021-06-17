@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 9:18 AM
+ * Last modified 6/17/21, 9:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,16 +33,16 @@ data class FilterOptionsItem(var filterOptionLabel: String, var filterOptionIcon
 
 class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
-    fun searchThroughAllContent(storefrontAllContents: ArrayList<StorefrontContentsData>,
+    fun searchThroughAllContent(storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
                                 searchQuery: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         Log.d(this@FilterAllContent.javaClass.simpleName, "Search Query: ${searchQuery}")
 
-        if (storefrontAllContents.isNotEmpty()) {
+        if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
             val storefrontAllContentsFilter = ArrayList<StorefrontContentsData>()
 
-            storefrontAllContents.forEachIndexed { index, storefrontContentsData ->
+            storefrontAllUnfilteredContents.forEachIndexed { index, storefrontContentsData ->
 
                 val inputSearchQuery = searchQuery.lowercase()
 
