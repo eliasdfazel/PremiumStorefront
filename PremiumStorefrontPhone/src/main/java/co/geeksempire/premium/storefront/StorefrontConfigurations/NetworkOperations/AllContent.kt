@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 10:10 AM
+ * Last modified 6/17/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,8 +52,6 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
     }
 
     fun retrieveAllContentMore() {
-
-        println(">>> Page ::: " + numberOfPageToRetrieve)
 
         GenericJsonRequest(context, object : JsonRequestResponses {
 

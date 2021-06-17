@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 9:53 AM
+ * Last modified 6/17/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -229,13 +229,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
             storefrontLiveData.allContentMoreItemData.observe(this@Storefront, {
                 Log.d(this@Storefront.javaClass.simpleName, "More Products Data Loaded")
 
-                println(">>> 1 ::: " + it.size)
-
                 storefrontAllUntouchedContents.addAll(it)
 
                 storefrontAllUnfilteredContents.addAll(it)
-
-                println(">>> 2 ::: " + storefrontAllUntouchedContents.size)
 
             })
 
