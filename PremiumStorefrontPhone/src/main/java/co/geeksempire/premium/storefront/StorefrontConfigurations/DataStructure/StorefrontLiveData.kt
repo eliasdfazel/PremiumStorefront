@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 11:14 AM
+ * Last modified 6/17/21, 1:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -172,28 +172,22 @@ class StorefrontLiveData : ViewModel() {
 
     fun loadMoreDataIntoPresenter(allData: ArrayList<StorefrontContentsData>, currentAvailableData: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        println(">>> 1")
-
         val moreProducts: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
         val startIndex = currentAvailableData.size
         val endIndex = if (allData.size < (currentAvailableData.size + 19)) {
-            allData.size - currentAvailableData.size
+            currentAvailableData.size + (allData.size - currentAvailableData.size)
         } else {
             currentAvailableData.size + 19
         }
-
-        println(">>> size ::: " + endIndex)
 
         allData.subList(startIndex, endIndex).forEach {
 
             moreProducts.add(it)
 
-            println(">>> 2")
-
             presentMoreItemData.postValue(it)
 
-            delay(555)
+            delay(531)
 
         }
 

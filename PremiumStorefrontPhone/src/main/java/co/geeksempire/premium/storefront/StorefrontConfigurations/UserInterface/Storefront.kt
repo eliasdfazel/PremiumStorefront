@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 11:04 AM
+ * Last modified 6/17/21, 1:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -245,8 +245,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
             storefrontLiveData.presentMoreItemData.observe(this@Storefront, {
 
-                println(">>> " + it.productName)
-
                 allContentAdapter.storefrontContents.add(it)
 
                 allContentAdapter.notifyItemInserted(allContentAdapter.storefrontContents.size - 1)
@@ -259,6 +257,12 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     if (!isAnimating) {
                         playAnimation()
                     }
+
+                }
+
+                if (allContentAdapter.storefrontContents.size == storefrontAllUntouchedContents.size) {
+
+                    storefrontLayoutBinding.loadMoreView.visibility = View.GONE
 
                 }
 
@@ -384,8 +388,6 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
             }
 
             storefrontLayoutBinding.loadMoreView.setOnClickListener {
-
-                println(">>> " + allContentAdapter.storefrontContents.size)
 
                 storefrontLiveData.loadMoreDataIntoPresenter(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
 
