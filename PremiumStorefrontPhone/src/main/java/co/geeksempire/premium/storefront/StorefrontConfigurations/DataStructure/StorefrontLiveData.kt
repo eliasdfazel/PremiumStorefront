@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 1:10 PM
+ * Last modified 6/17/21, 2:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,12 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
-            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)//.split("?")[0]
+            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            val productCover: String? = try {
+                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            } catch (e: Exception) {
+                null
+            }
             /* End - Images */
 
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
@@ -92,7 +97,7 @@ class StorefrontLiveData : ViewModel() {
                 productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
                 productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                 productIconLink = productIcon,
-                productCoverLink = null,
+                productCoverLink = productCover,
                 productAttributes = attributesMap
             ))
 
@@ -123,7 +128,12 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
-            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)//.split("?")[0]
+            val productIcon = (featuredContentImages[1] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            val productCover = try {
+                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            } catch (e: Exception) {
+                null
+            }
             /* End - Images */
 
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
@@ -151,7 +161,7 @@ class StorefrontLiveData : ViewModel() {
                 productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
                 productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                 productIconLink = productIcon,
-                productCoverLink = null,
+                productCoverLink = productCover,
                 productAttributes = attributesMap
             ))
 
@@ -205,8 +215,12 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
-            val productIcon = (featuredContentImages[1] as JSONObject).getString(ProductsContentKey.ImageSourceKey)//.split("?")[0]
-            val productCover = (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)//.split("?")[0]
+            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            val productCover: String? = try {
+                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            } catch (e: Exception) {
+                null
+            }
             /* End - Images */
 
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
@@ -265,7 +279,12 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
-            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)//.split("?")[0]
+            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            val productCover: String? = try {
+                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            } catch (e: Exception) {
+                null
+            }
             /* End - Images */
 
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
@@ -293,7 +312,7 @@ class StorefrontLiveData : ViewModel() {
                     productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
                     productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                     productIconLink = productIcon,
-                    productCoverLink = null,
+                    productCoverLink = productCover,
                     productAttributes = attributesMap
             ))
 

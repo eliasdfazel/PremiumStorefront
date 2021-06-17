@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 1:13 PM
+ * Last modified 6/17/21, 1:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -234,7 +234,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
                 storefrontAllUnfilteredContents.addAll(it)
 
-                if (allContent.allLoadingFinished) {
+                if (allContent.allLoadingFinished && allContentAdapter.storefrontContents.isNotEmpty()) {
 
                     storefrontLayoutBinding.loadMoreView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
                     storefrontLayoutBinding.loadMoreView.visibility = View.VISIBLE

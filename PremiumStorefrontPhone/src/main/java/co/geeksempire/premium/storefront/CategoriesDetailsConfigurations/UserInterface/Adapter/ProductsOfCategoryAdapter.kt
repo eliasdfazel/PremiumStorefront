@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:48 AM
+ * Last modified 6/17/21, 1:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -172,7 +172,7 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
             openProductsDetails(context = context, fragmentInterface = context,
                 contentDetailsContainer= context.categoryDetailsLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
-                storefrontContents = storefrontContents, position = position)
+                storefrontContents = storefrontContents[position])
 
         }
 

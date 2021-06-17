@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:19 AM
+ * Last modified 6/17/21, 1:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -179,7 +179,7 @@ class AllContentAdapter(private val context: Storefront) : RecyclerView.Adapter<
 
             openProductsDetails(context = context, fragmentInterface = context,
                 contentDetailsContainer= context.storefrontLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
-                storefrontContents = storefrontContents, position = position)
+                storefrontContents = storefrontContents[position])
 
         }
 

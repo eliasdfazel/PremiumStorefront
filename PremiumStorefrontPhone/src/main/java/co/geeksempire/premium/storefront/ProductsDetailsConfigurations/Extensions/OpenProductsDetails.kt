@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:48 AM
+ * Last modified 6/17/21, 1:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 
 fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentInterface,
                         contentDetailsContainer: FragmentContainerView, productDetailsFragment: ProductDetailsFragment,
-                        storefrontContents: ArrayList<StorefrontContentsData>, position: Int) = CoroutineScope(Dispatchers.Main).launch {
+                        storefrontContents: StorefrontContentsData) = CoroutineScope(Dispatchers.Main).launch {
 
     delay(333)
 
@@ -41,16 +41,16 @@ fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentI
     }
 
     productDetailsFragment.arguments = Bundle().apply {
-        putString(ProductDataKey.ProductId, storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey])
-        putString(ProductDataKey.ProductPackageName, storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey])
+        putString(ProductDataKey.ProductId, storefrontContents.productAttributes[ProductsContentKey.AttributesPackageNameKey])
+        putString(ProductDataKey.ProductPackageName, storefrontContents.productAttributes[ProductsContentKey.AttributesPackageNameKey])
 
-        putString(ProductDataKey.ProductName, storefrontContents[position].productName)
-        putString(ProductDataKey.ProductSummary, storefrontContents[position].productSummary)
-        putString(ProductDataKey.ProductDescription, storefrontContents[position].productDescription)
+        putString(ProductDataKey.ProductName, storefrontContents.productName)
+        putString(ProductDataKey.ProductSummary, storefrontContents.productSummary)
+        putString(ProductDataKey.ProductDescription, storefrontContents.productDescription)
 
-        putString(ProductDataKey.ProductIcon, storefrontContents[position].productIconLink)
-        putString(ProductDataKey.ProductCoverImage, storefrontContents[position].productCoverLink)
-        putString(ProductDataKey.ProductYoutubeIntroduction, storefrontContents[position].productAttributes[ProductsContentKey.AttributesYoutubeIntroductionKey])
+        putString(ProductDataKey.ProductIcon, storefrontContents.productIconLink)
+        putString(ProductDataKey.ProductCoverImage, storefrontContents.productCoverLink)
+        putString(ProductDataKey.ProductYoutubeIntroduction, storefrontContents.productAttributes[ProductsContentKey.AttributesYoutubeIntroductionKey])
     }
 
     context.supportFragmentManager
