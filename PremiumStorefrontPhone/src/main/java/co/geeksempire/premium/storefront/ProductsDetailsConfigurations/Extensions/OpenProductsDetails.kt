@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 1:26 PM
+ * Last modified 6/17/21, 2:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,6 +41,8 @@ fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentI
     }
 
     productDetailsFragment.arguments = Bundle().apply {
+        putString(ProductDataKey.ProductDeveloper, storefrontContents.productAttributes[ProductsContentKey.AttributesDeveloperNameKey])
+
         putString(ProductDataKey.ProductId, storefrontContents.productAttributes[ProductsContentKey.AttributesPackageNameKey])
         putString(ProductDataKey.ProductPackageName, storefrontContents.productAttributes[ProductsContentKey.AttributesPackageNameKey])
 

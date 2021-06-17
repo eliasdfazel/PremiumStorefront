@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:48 AM
+ * Last modified 6/17/21, 2:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -202,6 +202,9 @@ class ProductDetailsFragment : Fragment() {
                     .submit()
 
             }
+
+            val productDeveloper = getString(ProductDataKey.ProductDeveloper)?:"Unknown"
+            productDetailsLayoutBinding.applicationDeveloper.text = Html.fromHtml(productDeveloper, Html.FROM_HTML_MODE_COMPACT)
 
             val productName = getString(ProductDataKey.ProductName)?.let { productName ->
 
