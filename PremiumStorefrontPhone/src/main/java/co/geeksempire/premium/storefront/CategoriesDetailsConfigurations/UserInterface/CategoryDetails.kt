@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 4:37 AM
+ * Last modified 6/18/21, 4:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.Extensions.setupCategoryDetailsUserInterface
-import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations.retrieveProductsOfCategory
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations.ProductsOfCategory
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
@@ -39,6 +39,10 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@CategoryDetails)
+    }
+
+    val productsOfCategory: ProductsOfCategory by lazy {
+        ProductsOfCategory(applicationContext)
     }
 
     val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
@@ -138,7 +142,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
         intent?.let { inputData ->
 
-            retrieveProductsOfCategory(inputData.getLongExtra(CategoriesDataKeys.CategoryId, 67))
+            productsOfCategory.retrieveProductsOfCategory(inputData.getLongExtra(CategoriesDataKeys.CategoryId, 67), productsOfCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
 
         }
 
