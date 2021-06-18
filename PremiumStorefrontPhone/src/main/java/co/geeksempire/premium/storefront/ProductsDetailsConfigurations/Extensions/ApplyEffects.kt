@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 11:22 AM
+ * Last modified 6/18/21, 11:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,8 @@ import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 
@@ -252,9 +254,9 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryIcon() {
         19f//bottomRightCorner
     )
 
-    val shapeNegativeSpaceLeft: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
+    val shapeNegativeSpace: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
 
-    shapeNegativeSpaceLeft.paint.apply {
+    shapeNegativeSpace.paint.apply {
         style = Paint.Style.FILL
         color = Color.TRANSPARENT
         isAntiAlias = true
@@ -262,10 +264,10 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryIcon() {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
-    categoryIconLayer.setDrawableByLayerId(R.id.clearLayer, shapeNegativeSpaceLeft)
+    categoryIconLayer.setDrawableByLayerId(R.id.clearLayer, shapeNegativeSpace)
 
-    productDetailsLayoutBinding.categoryIconImageView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeNegativeSpaceLeft.paint)
-    productDetailsLayoutBinding.categoryIconImageView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+    productDetailsLayoutBinding.categoryIconImageView.setLayerType(AppCompatImageView.LAYER_TYPE_SOFTWARE, shapeNegativeSpace.paint)
+    productDetailsLayoutBinding.categoryIconImageView.setLayerType(AppCompatImageView.LAYER_TYPE_HARDWARE, null)
 
     productDetailsLayoutBinding.categoryIconImageView.background = (categoryIconLayer)
 
@@ -289,9 +291,9 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryName() {
         51f//bottomRightCorner
     )
 
-    val shapeNegativeSpaceLeft: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
+    val shapeNegativeSpace: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
 
-    shapeNegativeSpaceLeft.paint.apply {
+    shapeNegativeSpace.paint.apply {
         style = Paint.Style.FILL
         color = Color.TRANSPARENT
         isAntiAlias = true
@@ -299,10 +301,10 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryName() {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
-    categoryNameLayer.setDrawableByLayerId(R.id.clearLayer, shapeNegativeSpaceLeft)
+    categoryNameLayer.setDrawableByLayerId(R.id.clearLayer, shapeNegativeSpace)
 
-    productDetailsLayoutBinding.categoryNameTextView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeNegativeSpaceLeft.paint)
-    productDetailsLayoutBinding.categoryNameTextView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+    productDetailsLayoutBinding.categoryNameTextView.setLayerType(AppCompatTextView.LAYER_TYPE_SOFTWARE, shapeNegativeSpace.paint)
+    productDetailsLayoutBinding.categoryNameTextView.setLayerType(AppCompatTextView.LAYER_TYPE_HARDWARE, null)
 
     productDetailsLayoutBinding.categoryNameTextView.background = (categoryNameLayer)
 
