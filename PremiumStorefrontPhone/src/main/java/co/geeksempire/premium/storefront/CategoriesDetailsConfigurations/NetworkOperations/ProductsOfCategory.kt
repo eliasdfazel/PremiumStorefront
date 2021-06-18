@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 5:45 AM
+ * Last modified 6/18/21, 5:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,8 +39,6 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
 
     fun retrieveProductsOfCategory(categoryId: Long) {
 
-        println(">>> 1")
-
         GenericJsonRequest(context, object : JsonRequestResponses {
 
             override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
@@ -58,8 +56,6 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
                     numberOfPageToRetrieve++
 
                     Handler(Looper.getMainLooper()).postDelayed({
-
-                        println(">>> 2")
 
                         retrieveProductsOfCategory(categoryId)
 
