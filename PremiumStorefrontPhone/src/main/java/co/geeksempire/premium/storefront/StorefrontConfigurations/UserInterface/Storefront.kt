@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 8:21 AM
+ * Last modified 6/18/21, 10:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,6 +34,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePrefere
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
@@ -346,6 +347,9 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     storefrontLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
 
                     storefrontLayoutBinding.categoryIndicatorTextView.visibility = View.VISIBLE
+
+                    (application as PremiumStorefrontApplication).categoryData.clearData()
+                    (application as PremiumStorefrontApplication).categoryData.prepareAllCategoriesData(it)
 
                 } else {
 

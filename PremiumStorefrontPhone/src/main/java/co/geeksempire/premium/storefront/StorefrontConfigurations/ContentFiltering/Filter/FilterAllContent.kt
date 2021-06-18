@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 9:11 AM
+ * Last modified 6/18/21, 10:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,7 +48,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
                 val productName = storefrontContentsData.productName.lowercase()
                 val productSummary = storefrontContentsData.productSummary.lowercase()
-                val productCategory = storefrontContentsData.productCategory.lowercase()
+                val productCategory = storefrontContentsData.productCategoryName.lowercase()
 
                 val countryOfDeveloper = storefrontContentsData.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]?:""
 
@@ -78,7 +78,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
             val storefrontAllContentsFilter = storefrontAllContents.filter {
 
-                (it.productCategory == selectedCategory)
+                (it.productCategoryName == selectedCategory)
             }
 
             storefrontAllContents.clear()

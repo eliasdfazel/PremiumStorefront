@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 5:46 AM
+ * Last modified 6/18/21, 10:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -122,7 +122,7 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
                     productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
                     productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                     productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                    productCategory = productCategory,
+                    productCategoryName = productCategory,
                     productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
                     productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                     productIconLink = productIcon,

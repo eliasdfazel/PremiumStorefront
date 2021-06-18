@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 2:34 PM
+ * Last modified 6/18/21, 10:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,6 +26,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.startFavoriteProcess
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
@@ -205,6 +206,17 @@ class ProductDetailsFragment : Fragment() {
 
             val productDeveloper = getString(ProductDataKey.ProductDeveloper)?:"Unknown"
             productDetailsLayoutBinding.applicationDeveloper.text = Html.fromHtml(productDeveloper, Html.FROM_HTML_MODE_COMPACT)
+
+            val productCategoryName = getString(ProductDataKey.ProductCategory)?.let {
+
+                productDetailsLayoutBinding.categoryNameTextView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
+
+                Glide.with(requireContext())
+                    .asDrawable()
+                    .load((requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(it))
+                    .into(productDetailsLayoutBinding.categoryIconImageView)
+
+            }
 
             val productName = getString(ProductDataKey.ProductName)?.let { productName ->
 

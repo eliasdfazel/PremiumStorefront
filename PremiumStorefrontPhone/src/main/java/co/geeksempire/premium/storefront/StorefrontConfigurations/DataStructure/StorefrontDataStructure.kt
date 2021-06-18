@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 2:23 PM
+ * Last modified 6/18/21, 10:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,6 +53,7 @@ object ProductDataKey {
 
     const val ProductId = "ProductId"
     const val ProductPackageName = "ProductPackageName"
+    const val ProductCategory = "ProductCategory"
 
     const val ProductCoverImage = "ProductCoverImage"
     const val ProductIcon = "ProductIcon"
@@ -71,7 +72,7 @@ object ProductDataKey {
  *
  **/
 data class StorefrontContentsData (var productName: String, var productDescription: String, var productSummary: String,
-                                   var productCategory: String,
+                                   var productCategoryName: String,
                                    var productIconLink: String, var productCoverLink: String?,
                                    var productPrice: String,
                                    var productSalePrice: String,
