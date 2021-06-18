@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 5:09 AM
+ * Last modified 6/18/21, 5:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,8 @@
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
@@ -55,7 +57,11 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
                     numberOfPageToRetrieve++
                     startIndex++
 
-                    retrieveProductsOfCategory(categoryId)
+                    Handler(Looper.getMainLooper()).postDelayed({
+
+                        retrieveProductsOfCategory(categoryId)
+
+                    }, 1579)
 
                 } else {
 
