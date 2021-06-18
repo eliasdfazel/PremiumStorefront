@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 11:49 AM
+ * Last modified 6/18/21, 2:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,6 +58,8 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
 
             productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
 
+            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumDark))
+
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.dark)
 
@@ -79,6 +81,8 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
             productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.black))
 
             productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_dark)
+
+            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumLight))
 
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.black)
@@ -102,6 +106,8 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
             productDetailsLayoutBinding.applicationRatingImageView.alpha = 1f
 
             productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
+
+            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumDark))
 
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.dark)
@@ -247,11 +253,11 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryIcon() {
         19f,//topRightCorner
         19f,//topRightCorner
 
-        51f,//bottomLeftCorner
-        51f,//bottomLeftCorner
+        19f,//bottomLeftCorner
+        19f,//bottomLeftCorner
 
-        19f,//bottomRightCorner
-        19f//bottomRightCorner
+        51f,//bottomRightCorner
+        51f//bottomRightCorner
     )
 
     val shapeNegativeSpace: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
@@ -284,11 +290,11 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryName() {
         51f,//topRightCorner
         51f,//topRightCorner
 
-        19f,//bottomLeftCorner
-        19f,//bottomLeftCorner
+        51f,//bottomLeftCorner
+        51f,//bottomLeftCorner
 
-        51f,//bottomRightCorner
-        51f//bottomRightCorner
+        19f,//bottomRightCorner
+        19f//bottomRightCorner
     )
 
     val shapeNegativeSpace: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))

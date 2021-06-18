@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/18/21, 11:44 AM
+  ~ Last modified 6/18/21, 2:40 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -160,12 +160,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/categoryIconImageView"
-                android:layout_width="41dp"
-                android:layout_height="41dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
                 android:padding="7dp"
                 android:layout_marginVertical="99dp"
                 android:scaleType="fitCenter"
-                android:tint="@color/dark"
+                android:tint="@color/premiumDark"
                 android:src="@drawable/premium_storefront_icon"
                 android:background="@drawable/product_details_category_icon"
 
@@ -174,10 +174,10 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/categoryNameTextView"
-                android:layout_width="0dp"
-                android:layout_height="41dp"
-                android:layout_marginHorizontal="59dp"
-                android:paddingHorizontal="3dp"
+                android:layout_width="239dp"
+                android:layout_height="43dp"
+                android:layout_marginHorizontal="61.9dp"
+                android:paddingHorizontal="7dp"
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:singleLine="true"
@@ -197,8 +197,6 @@
                 android:focusableInTouchMode="true"
                 android:background="@drawable/product_details_category_name"
 
-
-                apps:layout_constraintWidth_percent="0.5"
                 apps:layout_constraintTop_toTopOf="@id/categoryIconImageView"
                 apps:layout_constraintBottom_toBottomOf="@id/categoryIconImageView"
                 apps:layout_constraintStart_toStartOf="parent"/>
