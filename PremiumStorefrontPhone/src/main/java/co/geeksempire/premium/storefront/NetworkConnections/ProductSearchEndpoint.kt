@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 9:51 AM
+ * Last modified 6/18/21, 4:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,24 +41,37 @@ class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
             "&exclude=2341"
 
     fun getNewProductsEndpoint(numberOfProducts: Int = 3, productPerPage: Int = 99, numberOfPage: Int = 1) : String = "${getAllProductsShowcaseEndpoint()}" +
-            "&per_page=${numberOfProducts}" +
-            "&exclude=2341" +
-            "&orderby=date" +
-            "&order=desc"
+            "&" +
+            "per_page=${numberOfProducts}" +
+            "&" +
+            "exclude=2341" +
+            "&" +
+            "orderby=date" +
+            "&" +
+            "order=desc"
 
     fun getProductsCategoriesEndpoint(numberOfProducts: Int = 99) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
             "consumer_secret=${generalEndpoint.consumerSecret()}" +
-            "&exclude=80,66,57" +
-            "&per_page=${numberOfProducts}"
+            "&" +
+            "exclude=80,66,57" +
+            "&" +
+            "per_page=${numberOfProducts}"
 
-    fun getProductsSpecificCategoriesEndpoint(productCategoryId: Long = 67) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products" + "?" +
+    fun getProductsSpecificCategoriesEndpoint(productCategoryId: Long = 67, productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
             "consumer_secret=${generalEndpoint.consumerSecret()}" +
-            "&category=${productCategoryId}" +
-            "&orderby=price" +
-            "&order=desc"
+            "&" +
+            "category=${productCategoryId}" +
+            "&" +
+            "per_page=${productPerPage}" +
+            "&" +
+            "page=${numberOfPage}" +
+            "&" +
+            "orderby=price" +
+            "&" +
+            "order=desc"
 
 }

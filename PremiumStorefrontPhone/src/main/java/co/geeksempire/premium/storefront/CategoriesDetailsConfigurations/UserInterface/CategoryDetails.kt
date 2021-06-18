@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:49 AM
+ * Last modified 6/18/21, 4:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +24,9 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePrefere
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
@@ -31,7 +35,7 @@ import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class CategoryDetails : AppCompatActivity(), FragmentInterface {
+class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface, FragmentInterface {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@CategoryDetails)
@@ -47,6 +51,14 @@ class CategoryDetails : AppCompatActivity(), FragmentInterface {
         ProductsOfCategoryAdapter(this@CategoryDetails)
     }
 
+    val networkCheckpoint: NetworkCheckpoint by lazy {
+        NetworkCheckpoint(applicationContext)
+    }
+
+    private val networkConnectionListener: NetworkConnectionListener by lazy {
+        NetworkConnectionListener(this@CategoryDetails, categoryDetailsLayoutBinding.rootView, networkCheckpoint)
+    }
+
     var isShowing = false
 
     lateinit var categoryDetailsLayoutBinding: CategoryDetailsLayoutBinding
@@ -55,6 +67,8 @@ class CategoryDetails : AppCompatActivity(), FragmentInterface {
         super.onCreate(savedInstanceState)
         categoryDetailsLayoutBinding = CategoryDetailsLayoutBinding.inflate(layoutInflater)
         setContentView(categoryDetailsLayoutBinding.root)
+
+        networkConnectionListener.networkConnectionListenerInterface = this@CategoryDetails
 
         intent?.let { inputData ->
 
@@ -72,8 +86,6 @@ class CategoryDetails : AppCompatActivity(), FragmentInterface {
                 }
 
             }
-
-            retrieveProductsOfCategory(inputData.getLongExtra(CategoriesDataKeys.CategoryId, 67))
 
             categoryDetailsLayoutBinding.categoryNameTextView.text = inputData.getStringExtra(CategoriesDataKeys.CategoryName)
 
@@ -118,6 +130,22 @@ class CategoryDetails : AppCompatActivity(), FragmentInterface {
             overridePendingTransition(R.anim.slide_from_left, R.anim.slide_out_right)
 
         }
+
+    }
+
+    override fun networkAvailable() {
+        Log.d(this@CategoryDetails.javaClass.simpleName, "Network Available @ ${this@CategoryDetails.javaClass.simpleName}")
+
+        intent?.let { inputData ->
+
+            retrieveProductsOfCategory(inputData.getLongExtra(CategoriesDataKeys.CategoryId, 67))
+
+        }
+
+    }
+
+    override fun networkLost() {
+        Log.d(this@CategoryDetails.javaClass.simpleName, "No Network @ ${this@CategoryDetails.javaClass.simpleName}")
 
     }
 
