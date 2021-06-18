@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 4:25 AM
+ * Last modified 6/18/21, 11:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -231,5 +231,79 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForFavorite(themeType: Boole
     productDetailsLayoutBinding.favoriteView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
 
     productDetailsLayoutBinding.favoriteView.background = (favoriteLayer)
+
+}
+
+fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryIcon() {
+
+    val categoryIconLayer = requireContext().getDrawable(R.drawable.product_details_category_icon) as LayerDrawable
+
+    val negativeSpaceLeft = floatArrayOf(
+        51f,//topLeftCorner
+        51f,//topLeftCorner
+
+        19f,//topRightCorner
+        19f,//topRightCorner
+
+        51f,//bottomLeftCorner
+        51f,//bottomLeftCorner
+
+        19f,//bottomRightCorner
+        19f//bottomRightCorner
+    )
+
+    val shapeNegativeSpaceLeft: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
+
+    shapeNegativeSpaceLeft.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    categoryIconLayer.setDrawableByLayerId(R.id.clearLayer, shapeNegativeSpaceLeft)
+
+    productDetailsLayoutBinding.categoryIconImageView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeNegativeSpaceLeft.paint)
+    productDetailsLayoutBinding.categoryIconImageView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    productDetailsLayoutBinding.categoryIconImageView.background = (categoryIconLayer)
+
+}
+
+fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryName() {
+
+    val categoryNameLayer = requireContext().getDrawable(R.drawable.product_details_category_name) as LayerDrawable
+
+    val negativeSpaceLeft = floatArrayOf(
+        19f,//topLeftCorner
+        19f,//topLeftCorner
+
+        51f,//topRightCorner
+        51f,//topRightCorner
+
+        19f,//bottomLeftCorner
+        19f,//bottomLeftCorner
+
+        51f,//bottomRightCorner
+        51f//bottomRightCorner
+    )
+
+    val shapeNegativeSpaceLeft: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceLeft, null, null))
+
+    shapeNegativeSpaceLeft.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    categoryNameLayer.setDrawableByLayerId(R.id.clearLayer, shapeNegativeSpaceLeft)
+
+    productDetailsLayoutBinding.categoryNameTextView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeNegativeSpaceLeft.paint)
+    productDetailsLayoutBinding.categoryNameTextView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    productDetailsLayoutBinding.categoryNameTextView.background = (categoryNameLayer)
 
 }

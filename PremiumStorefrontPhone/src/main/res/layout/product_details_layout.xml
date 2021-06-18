@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/18/21, 10:18 AM
+  ~ Last modified 6/18/21, 11:25 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -162,10 +162,12 @@
                 android:id="@+id/categoryIconImageView"
                 android:layout_width="41dp"
                 android:layout_height="41dp"
+                android:padding="7dp"
                 android:layout_marginVertical="99dp"
                 android:scaleType="fitCenter"
                 android:tint="@color/dark"
                 android:src="@drawable/premium_storefront_icon"
+                android:background="@drawable/product_details_category_icon"
 
                 apps:layout_constraintStart_toStartOf="@id/applicationNameTextView"
                 apps:layout_constraintTop_toBottomOf="@id/applicationIconImageView"/>
@@ -174,11 +176,12 @@
                 android:id="@+id/categoryNameTextView"
                 android:layout_width="0dp"
                 android:layout_height="41dp"
+                android:paddingHorizontal="3dp"
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:singleLine="true"
                 android:ellipsize="marquee"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="@color/default_color_game"
                 android:text="Shopping"
                 android:textAllCaps="true"
@@ -191,6 +194,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:background="@drawable/product_details_category_name"
+
 
                 apps:layout_constraintWidth_percent="0.5"
                 apps:layout_constraintTop_toTopOf="@id/categoryIconImageView"
@@ -226,14 +231,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="19dp"
-                android:paddingTop="29dp"
+                android:paddingTop="37dp"
                 android:paddingBottom="13dp"
                 android:text="@string/applicationSummary"
                 android:textSize="15sp"
                 android:textColor="@color/dark"
                 android:fontFamily="@font/play"
 
-                apps:layout_constraintTop_toBottomOf="@id/categoryIconImageView" />
+                apps:layout_constraintTop_toBottomOf="@id/playYoutubeView" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/applicationRatingImageView"
