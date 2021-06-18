@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 4:50 AM
+ * Last modified 6/18/21, 5:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -42,7 +42,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
     }
 
     val productsOfCategory: ProductsOfCategory by lazy {
-        ProductsOfCategory(applicationContext)
+        ProductsOfCategory(applicationContext, productsOfCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
     }
 
     val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
@@ -142,7 +142,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
         intent?.let { inputData ->
 
-            productsOfCategory.retrieveProductsOfCategory(inputData.getLongExtra(CategoriesDataKeys.CategoryId, 67), productsOfCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
+            productsOfCategory.retrieveProductsOfCategory(inputData.getLongExtra(CategoriesDataKeys.CategoryId, 67))
 
         }
 

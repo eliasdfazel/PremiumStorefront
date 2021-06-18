@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 5:04 AM
+ * Last modified 6/18/21, 5:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,25 +25,18 @@ import net.geeksempire.loadingspin.SpinKitView
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ProductsOfCategory(val context: Context) {
+class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: ProductsOfCategoryAdapter, val loadingView: SpinKitView) {
 
     private val generalEndpoint = GeneralEndpoint()
 
-    private val productSearchEndpoint: ProductSearchEndpoint =
-        ProductSearchEndpoint(generalEndpoint)
+    private val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
 
     private var startIndex = 0
     private var numberOfPageToRetrieve: Int = 1
 
     var allLoadingFinished: Boolean = false
 
-    fun retrieveProductsOfCategory(
-        categoryId: Long,
-        productsOfCategoryAdapter: ProductsOfCategoryAdapter,
-        loadingView: SpinKitView
-    ) {
-
-        val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
+    fun retrieveProductsOfCategory(categoryId: Long) {
 
         GenericJsonRequest(context, object : JsonRequestResponses {
 
@@ -62,7 +55,7 @@ class ProductsOfCategory(val context: Context) {
                     numberOfPageToRetrieve++
                     startIndex++
 
-                    retrieveProductsOfCategory(categoryId, productsOfCategoryAdapter, loadingView)
+                    retrieveProductsOfCategory(categoryId)
 
                 } else {
 
@@ -78,8 +71,7 @@ class ProductsOfCategory(val context: Context) {
 
     fun processAllContentOfCategories(
         allContentJsonArray: JSONArray, startIndex: Int = 0,
-        productsOfCategoryAdapter: ProductsOfCategoryAdapter, loadingView: SpinKitView
-    ) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+        productsOfCategoryAdapter: ProductsOfCategoryAdapter, loadingView: SpinKitView) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@ProductsOfCategory.javaClass.simpleName, "Process All Content Of Categories")
 
         for (indexContent in 0 until (startIndex + allContentJsonArray.length())) {
@@ -87,8 +79,7 @@ class ProductsOfCategory(val context: Context) {
             val featuredContentJsonObject: JSONObject = allContentJsonArray[indexContent] as JSONObject
 
             /* Start - Images */
-            val featuredContentImages: JSONArray =
-                featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+            val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
             val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
             val productCover: String? = try {
@@ -102,8 +93,7 @@ class ProductsOfCategory(val context: Context) {
             val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
 
             /* Start - Attributes */
-            val featuredContentAttributes: JSONArray =
-                featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+            val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
             val attributesMap = HashMap<String, String>()
 
@@ -120,7 +110,7 @@ class ProductsOfCategory(val context: Context) {
             }
             /* End - Attributes */
 
-            val adapterIndex = startIndex * (indexContent + allContentJsonArray.length())
+            val adapterIndex = startIndex + indexContent
 
             productsOfCategoryAdapter.storefrontContents.add(
                 adapterIndex,
