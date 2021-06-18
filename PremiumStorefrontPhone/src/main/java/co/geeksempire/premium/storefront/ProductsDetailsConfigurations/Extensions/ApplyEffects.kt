@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 2:38 PM
+ * Last modified 6/18/21, 2:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -250,11 +250,11 @@ fun ProductDetailsFragment.applyNegativeSpaceEffectsForCategoryIcon() {
         51f,//topLeftCorner
         51f,//topLeftCorner
 
-        19f,//topRightCorner
-        19f,//topRightCorner
+        23f,//topRightCorner
+        23f,//topRightCorner
 
-        19f,//bottomLeftCorner
-        19f,//bottomLeftCorner
+        23f,//bottomLeftCorner
+        23f,//bottomLeftCorner
 
         51f,//bottomRightCorner
         51f//bottomRightCorner
