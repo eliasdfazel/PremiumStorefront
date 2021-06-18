@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 1:50 PM
+ * Last modified 6/18/21, 8:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -166,11 +166,11 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
         networkConnectionListener.networkConnectionListenerInterface = this@Storefront
 
+        setupUserInterface()
+
         storefrontLayoutBinding.root.post {
 
             storefrontLayoutBinding.loadingView.visibility = View.VISIBLE
-
-            setupUserInterface()
 
             userInteractionSetup()
 
