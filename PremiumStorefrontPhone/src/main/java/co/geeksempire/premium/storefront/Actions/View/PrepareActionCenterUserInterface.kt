@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 7:57 AM
+ * Last modified 6/20/21, 8:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -230,10 +230,6 @@ class PrepareActionCenterUserInterface(private val context: Context,
 
             true
         }
-
-    }
-
-    fun setupIconsForCategoryDetails() {
 
     }
 

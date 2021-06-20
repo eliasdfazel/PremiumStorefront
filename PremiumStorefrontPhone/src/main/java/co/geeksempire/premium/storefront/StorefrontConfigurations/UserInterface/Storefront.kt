@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/20/21, 8:11 AM
+ * Last modified 6/20/21, 8:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,6 +49,8 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.NewContent.Adapter.NewContentAdapter
+import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
+import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
@@ -414,6 +416,26 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     override fun onStart() {
         super.onStart()
+
+        InApplicationUpdateProcess(this@Storefront, storefrontLayoutBinding.rootView)
+            .initialize(object : UpdateResponse {
+
+                override fun newUpdateAvailable() {
+                    super.newUpdateAvailable()
+
+
+
+                }
+
+                override fun latestVersionAlreadyInstalled() {
+                    super.latestVersionAlreadyInstalled()
+
+
+
+                }
+
+            })
+
     }
 
     override fun onResume() {
