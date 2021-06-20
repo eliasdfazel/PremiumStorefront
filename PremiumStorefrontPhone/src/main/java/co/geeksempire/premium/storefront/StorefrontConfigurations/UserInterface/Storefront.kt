@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 10:44 AM
+ * Last modified 6/20/21, 8:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -42,7 +42,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupUserInterface
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.userInteractionSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.AllContent.Adapter.AllContentAdapter
@@ -167,7 +167,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
         networkConnectionListener.networkConnectionListenerInterface = this@Storefront
 
-        setupUserInterface()
+        setupStorefrontUserInterface()
 
         storefrontLayoutBinding.root.post {
 

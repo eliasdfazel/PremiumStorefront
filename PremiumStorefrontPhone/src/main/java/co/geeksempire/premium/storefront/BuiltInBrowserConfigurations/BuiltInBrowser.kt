@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 9:28 AM
+ * Last modified 6/20/21, 8:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.R
@@ -61,6 +62,7 @@ class BuiltInBrowser : AppCompatActivity() {
         val vibrantColor = intent.getIntExtra("GradientColorTwo", getColor(R.color.default_color_game))
 
         window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, arrayOf(vibrantColor, dominantColor).toIntArray()))
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
 
         val linkToLoad = intent.getStringExtra(Intent.EXTRA_TEXT)
 

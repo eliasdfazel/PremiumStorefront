@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:47 AM
+ * Last modified 6/20/21, 8:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,11 +14,14 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
+import android.view.WindowManager
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 
 fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = ThemeType.ThemeLight) {
+
+    window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
 
     when (themeType) {
         ThemeType.ThemeLight -> {

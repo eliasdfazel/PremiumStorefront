@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/14/21, 12:06 PM
+ * Last modified 6/20/21, 8:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,11 +13,14 @@ package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensi
 import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
+import android.view.WindowManager
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.R
 
 fun FavoriteProducts.setupFavoritedUserInterface(themeType: Boolean = ThemeType.ThemeLight) {
+
+    window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
 
     when (themeType) {
         ThemeType.ThemeLight -> {
