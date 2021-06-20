@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/20/21, 8:34 AM
+ * Last modified 6/20/21, 8:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,6 +30,7 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSig
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
+import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
@@ -54,8 +55,10 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateRespons
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.RemoteSubscriptions
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.Notifications.SubscriptionInterface
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
@@ -75,6 +78,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface, FragmentInterface {
 
@@ -416,6 +421,40 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     override fun onStart() {
         super.onStart()
+
+        Firebase.auth.currentUser?.let {
+
+            RemoteSubscriptions()
+                .subscribe(it.uid, object : SubscriptionInterface {
+
+                    override fun subscriptionSucceed() {
+                        super.subscriptionSucceed()
+                    }
+
+                    override fun subscriptionFailed() {
+                        super.subscriptionFailed()
+                    }
+
+                })
+
+        }
+
+        if (BuildConfig.VERSION_NAME.uppercase(Locale.getDefault()).contains("Beta".uppercase(Locale.getDefault()))) {
+
+            RemoteSubscriptions()
+                .subscribe("Beta", object : SubscriptionInterface {
+
+                    override fun subscriptionSucceed() {
+                        super.subscriptionSucceed()
+                    }
+
+                    override fun subscriptionFailed() {
+                        super.subscriptionFailed()
+                    }
+
+                })
+
+        }
 
         InApplicationUpdateProcess(this@Storefront, storefrontLayoutBinding.rootView)
             .initialize(object : UpdateResponse {
