@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/21/21, 6:09 AM
+  ~ Last modified 6/21/21, 9:44 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -68,14 +68,18 @@
             <include
                 layout="@layout/section_switcher_layout"
 
-                android:id="@+id/sectionSwitcherContainer"/>
+                android:id="@+id/sectionSwitcherContainer"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginStart="19dp"
+                android:layout_marginEnd="21dp"/>
 
             <!-- Top Section -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/featuredContentRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="197dp"
-                android:layout_marginTop="19dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginEnd="17dp"
                 android:cacheColorHint="@android:color/transparent"
                 android:fadingEdge="horizontal"
