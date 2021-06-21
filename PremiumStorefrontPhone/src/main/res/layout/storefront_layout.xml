@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/21/21, 3:47 AM
+  ~ Last modified 6/21/21, 4:40 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -206,24 +206,43 @@
         apps:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Side Panel -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categoriesRecyclerView"
+    <co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView
         android:layout_width="79dp"
         android:layout_height="0dp"
-        android:layout_marginTop="7dp"
-        android:paddingHorizontal="11dp"
-        android:cacheColorHint="@android:color/transparent"
-        android:fadingEdge="vertical"
-        android:fadingEdgeLength="7dp"
-        android:requiresFadingEdge="vertical"
-        android:scrollbars="none"
-        android:smoothScrollbar="true"
-        android:alwaysDrawnWithCache="true"
-        android:layoutAnimation="@anim/fade_in_layout_animation"
 
         apps:layout_constraintTop_toBottomOf="@id/favoritesView"
         apps:layout_constraintBottom_toBottomOf="parent"
-        apps:layout_constraintEnd_toEndOf="parent"/>
+        apps:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="1dp"
+            android:paddingBottom="119dp"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoriesRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:paddingHorizontal="11dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:fadingEdge="vertical"
+                android:fadingEdgeLength="7dp"
+                android:requiresFadingEdge="vertical"
+                android:scrollbars="none"
+                android:smoothScrollbar="true"
+                android:alwaysDrawnWithCache="true"
+                android:layoutAnimation="@anim/fade_in_layout_animation"
+
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView>
 
     <!-- Filter View -->
     <include
@@ -259,7 +278,7 @@
         apps:boxCornerRadiusTopEnd="51dp"
         apps:boxCornerRadiusBottomStart="51dp"
         apps:boxCornerRadiusBottomEnd="51dp"
-        apps:boxStrokeColor="@color/white"
+        apps:boxStrokeColor="#8000A5FF"
         apps:boxStrokeWidth="2dp"
         apps:hintEnabled="true"
         apps:hintAnimationEnabled="true"
@@ -310,7 +329,7 @@
         android:layout_marginVertical="13dp"
         android:scaleType="fitCenter"
         android:elevation="13dp"
-        android:alpha="0.777"
+        android:alpha="0.731"
         android:src="@drawable/action_center_shadow_background_light"
 
         apps:layout_constraintBottom_toBottomOf="parent"

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 8:50 AM
+ * Last modified 6/21/21, 4:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,6 +56,8 @@ fun Storefront.filteringSetup(themeType: Boolean = ThemeType.ThemeLight) {
         storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
 
+        storefrontLayoutBinding.leftActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
+
         storefrontLayoutBinding.leftActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
 
@@ -69,6 +71,8 @@ fun Storefront.filteringSetup(themeType: Boolean = ThemeType.ThemeLight) {
             }
             else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
         }
+
+        storefrontLayoutBinding.middleActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
 
         storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
@@ -88,6 +92,8 @@ fun Storefront.filteringSetup(themeType: Boolean = ThemeType.ThemeLight) {
 
     if (storefrontLayoutBinding.filteringInclude.root.isShown) {
 
+        storefrontLayoutBinding.rightActionView.background = null
+
         storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
 
@@ -106,6 +112,8 @@ fun Storefront.filteringSetup(themeType: Boolean = ThemeType.ThemeLight) {
         }
 
     } else {
+
+        storefrontLayoutBinding.rightActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
 
         storefrontLayoutBinding.rightActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_game_dark))
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 7:31 AM
+ * Last modified 6/21/21, 4:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,6 +55,8 @@ fun Storefront.sortingSetup(themeType: Boolean = ThemeType.ThemeLight) {
         storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
 
+        storefrontLayoutBinding.rightActionView.background = null
+
         storefrontLayoutBinding.rightActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
 
@@ -68,6 +70,8 @@ fun Storefront.sortingSetup(themeType: Boolean = ThemeType.ThemeLight) {
             }
             else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
         }
+
+        storefrontLayoutBinding.middleActionView.background = null
 
         storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
@@ -87,6 +91,8 @@ fun Storefront.sortingSetup(themeType: Boolean = ThemeType.ThemeLight) {
 
     if (storefrontLayoutBinding.sortingInclude.root.isShown) {
 
+        storefrontLayoutBinding.leftActionView.background = null
+
         storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
 
@@ -105,6 +111,8 @@ fun Storefront.sortingSetup(themeType: Boolean = ThemeType.ThemeLight) {
         }
 
     } else {
+
+        storefrontLayoutBinding.leftActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
 
         storefrontLayoutBinding.leftActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_game_dark))
 
