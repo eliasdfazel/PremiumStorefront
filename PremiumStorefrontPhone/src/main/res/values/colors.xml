@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/11/21, 10:23 AM
+  ~ Last modified 6/21/21, 3:28 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -24,12 +24,13 @@
     <color name="default_color_transparent_twice">#80237dae</color>
 
     <color name="default_color_game">#ae2357</color>
+    <color name="default_color_game_transparent">#80ae2357</color>
     <color name="default_color_game_light">#FF005D</color>
+    <color name="default_color_game_light_transparent">#80FF005D</color>
+    <color name="default_color_game_light_transparent_high">#12FF005D</color>
     <color name="default_color_game_bright">#FF166D</color>
     <color name="default_color_game_dark">#760F35</color>
     <color name="default_color_game_dark_transparent">#80760F35</color>
-    <color name="default_color_game_light_transparent">#80FF005D</color>
-    <color name="default_color_game_transparent">#80ae2357</color>
 
     <color name="white">#ffffff</color>
     <color name="white_transparent">#80FFFFFF</color>
