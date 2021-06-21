@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 10:21 AM
+ * Last modified 6/21/21, 9:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,7 +53,7 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
             }
 
-        }).getMethod(productSearchEndpoint.getAllProductsShowcaseEndpoint())
+        }).getMethod(productSearchEndpoint.getAllAndroidApplicationsEndpoint())
 
     }
 
@@ -91,7 +91,7 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
             }
 
-        }).getMethod(productSearchEndpoint.getAllProductsShowcaseEndpoint(numberOfPage = numberOfPageToRetrieve))
+        }).getMethod(productSearchEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve))
 
     }
 

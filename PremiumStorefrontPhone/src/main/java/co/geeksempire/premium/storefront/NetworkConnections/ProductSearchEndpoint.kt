@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 4:33 AM
+ * Last modified 6/21/21, 9:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,8 @@ class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
     val defaultProductsPerPage = 19
     val defaultNumberOfPage = 1
 
-    fun getAllProductsShowcaseEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) = "https://geeksempire.co/wp-json/wc/v3/products?" +
+    fun getAllAndroidApplicationsEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) =
+        "https://geeksempire.co/wp-json/wc/v3/products?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
             "consumer_secret=${generalEndpoint.consumerSecret()}" +
@@ -24,23 +25,22 @@ class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
             "&" +
             "page=${numberOfPage}" +
             "&" +
+            "category=80" +
+            "&" +
             "exclude=2341"
 
-    fun getFeaturedProductsEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String =
-        getAllProductsShowcaseEndpoint(productPerPage, numberOfPage) +
+    fun getFeaturedApplicationsEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String =
+        getAllAndroidApplicationsEndpoint(productPerPage, numberOfPage) +
             "&" +
             "featured=true"
 
-    fun getProductByIdEndpoint(productId: String) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/${productId}" + "?" +
-            "consumer_key=${generalEndpoint.consumerKey()}" +
-            "&" +
-            "consumer_secret=${generalEndpoint.consumerSecret()}"
-
-    fun getProductsSearchEndpoint(productSearchQuery: String = "1", productPerPage: Int = 99, numberOfPage: Int = 1) : String = "${getAllProductsShowcaseEndpoint()}" +
+    fun getApplicationsSearchEndpoint(productSearchQuery: String = "1", productPerPage: Int = 99, numberOfPage: Int = 1) : String =
+        "${getAllAndroidApplicationsEndpoint()}" +
             "&search=$productSearchQuery" +
             "&exclude=2341"
 
-    fun getNewProductsEndpoint(numberOfProducts: Int = 3, productPerPage: Int = 99, numberOfPage: Int = 1) : String = "${getAllProductsShowcaseEndpoint()}" +
+    fun getNewApplicationsEndpoint(numberOfProducts: Int = 3, productPerPage: Int = 99, numberOfPage: Int = 1) : String =
+        "${getAllAndroidApplicationsEndpoint()}" +
             "&" +
             "per_page=${numberOfProducts}" +
             "&" +
@@ -50,28 +50,14 @@ class ProductSearchEndpoint (private val generalEndpoint: GeneralEndpoint) {
             "&" +
             "order=desc"
 
-    fun getProductsCategoriesEndpoint(numberOfProducts: Int = 99) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +
+    fun getApplicationsCategoriesEndpoint(numberOfProducts: Int = 99) : String =
+        "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
             "consumer_secret=${generalEndpoint.consumerSecret()}" +
             "&" +
-            "exclude=80,66,57" +
+            "exclude=80,66,57" + //Add Exclusion of All Other Categories
             "&" +
             "per_page=${numberOfProducts}"
-
-    fun getProductsSpecificCategoriesEndpoint(productCategoryId: Long = 67, productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String = "${generalEndpoint.generalStorefrontEndpoint}" + "products" + "?" +
-            "consumer_key=${generalEndpoint.consumerKey()}" +
-            "&" +
-            "consumer_secret=${generalEndpoint.consumerSecret()}" +
-            "&" +
-            "category=${productCategoryId}" +
-            "&" +
-            "per_page=${productPerPage}" +
-            "&" +
-            "page=${numberOfPage}" +
-            "&" +
-            "orderby=price" +
-            "&" +
-            "order=desc"
 
 }

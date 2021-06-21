@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 10:28 AM
+ * Last modified 6/21/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,6 @@ import android.util.Log
 import android.view.View
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
-import co.geeksempire.premium.storefront.NetworkConnections.ProductSearchEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
@@ -30,8 +29,6 @@ import org.json.JSONObject
 class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: ProductsOfCategoryAdapter, val loadingView: SpinKitView) {
 
     private val generalEndpoint = GeneralEndpoint()
-
-    private val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
 
     private var numberOfPageToRetrieve: Int = 1
 
@@ -51,7 +48,7 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
                     loadingView = loadingView
                 )
 
-                if (rawDataJsonArray.length() == productSearchEndpoint.defaultProductsPerPage) {
+                if (rawDataJsonArray.length() == generalEndpoint.defaultProductsPerPage) {
 
                     numberOfPageToRetrieve++
 
@@ -69,7 +66,7 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
 
             }
 
-        }).getMethod(productSearchEndpoint.getProductsSpecificCategoriesEndpoint(productCategoryId = categoryId, numberOfPage = numberOfPageToRetrieve))
+        }).getMethod(generalEndpoint.getProductsSpecificCategoriesEndpoint(productCategoryId = categoryId, numberOfPage = numberOfPageToRetrieve))
 
     }
 

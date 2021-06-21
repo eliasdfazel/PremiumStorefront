@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/18/21 11:16 AM
+ * Last modified 6/21/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,9 @@ class GeneralEndpoint {
 
     val generalStorefrontEndpoint = "https://geeksempire.co/wp-json/wc/v3/"
 
+    val defaultProductsPerPage = 19
+    val defaultNumberOfPage = 1
+
     fun consumerKey(): String {
 
         return Security.ConsumerKey
@@ -28,5 +31,26 @@ class GeneralEndpoint {
 
         return Security.ConsumerSecret
     }
+
+    fun getProductByIdEndpoint(productId: String) : String = "${generalStorefrontEndpoint}" + "products/${productId}" + "?" +
+            "consumer_key=${consumerKey()}" +
+            "&" +
+            "consumer_secret=${consumerSecret()}"
+
+    fun getProductsSpecificCategoriesEndpoint(productCategoryId: Long = 67, productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String =
+        "${generalStorefrontEndpoint}" + "products" + "?" +
+                "consumer_key=${consumerKey()}" +
+                "&" +
+                "consumer_secret=${consumerSecret()}" +
+                "&" +
+                "category=${productCategoryId}" +
+                "&" +
+                "per_page=${productPerPage}" +
+                "&" +
+                "page=${numberOfPage}" +
+                "&" +
+                "orderby=price" +
+                "&" +
+                "order=desc"
 
 }
