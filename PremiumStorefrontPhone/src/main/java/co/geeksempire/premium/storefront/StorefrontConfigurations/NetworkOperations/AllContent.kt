@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/21/21, 9:00 AM
+ * Last modified 6/21/21, 9:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,8 +12,8 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperat
 
 import android.content.Context
 import android.util.Log
+import co.geeksempire.premium.storefront.NetworkConnections.ApplicationsQueryEndpoint
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
-import co.geeksempire.premium.storefront.NetworkConnections.ProductSearchEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
@@ -23,7 +23,7 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
     private val generalEndpoint = GeneralEndpoint()
 
-    private val productSearchEndpoint: ProductSearchEndpoint = ProductSearchEndpoint(generalEndpoint)
+    private val applicationsQueryEndpoint: ApplicationsQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
 
     private var numberOfPageToRetrieve: Int = 1
 
@@ -38,7 +38,7 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
                 storefrontLiveData.processAllContent(rawDataJsonArray)
 
-                if (rawDataJsonArray.length() == productSearchEndpoint.defaultProductsPerPage) {
+                if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
                     Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
 
                     numberOfPageToRetrieve++
@@ -53,7 +53,7 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
             }
 
-        }).getMethod(productSearchEndpoint.getAllAndroidApplicationsEndpoint())
+        }).getMethod(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint())
 
     }
 
@@ -66,7 +66,7 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
                 storefrontLiveData.processAllContentMore(rawDataJsonArray)
 
-                if (rawDataJsonArray.length() == productSearchEndpoint.defaultProductsPerPage) {
+                if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
                     Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
 
                     numberOfPageToRetrieve++
@@ -91,7 +91,7 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
             }
 
-        }).getMethod(productSearchEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve))
+        }).getMethod(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve))
 
     }
 
