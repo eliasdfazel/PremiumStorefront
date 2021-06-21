@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/21/21, 4:50 AM
+ * Last modified 6/21/21, 4:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,7 +32,7 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
     when (themeType) {
         ThemeType.ThemeLight -> {
 
-            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.white_transparent)
+            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.premiumLight)
 
             storefrontLayoutBinding.searchView.setTextColor(getColor(R.color.default_color_dark))
             storefrontLayoutBinding.searchView.setHintTextColor(getColor(R.color.default_color_game_dark))
@@ -40,7 +40,7 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
         }
         ThemeType.ThemeDark -> {
 
-            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.black_transparent)
+            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.premiumDark)
 
             storefrontLayoutBinding.searchView.setTextColor(getColor(R.color.default_color_light))
             storefrontLayoutBinding.searchView.setHintTextColor(getColor(R.color.default_color_game_light))
