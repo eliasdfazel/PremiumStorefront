@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 4:23 AM
+ * Last modified 6/21/21, 6:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,6 +30,8 @@ fun Storefront.retrieveNewContent() {
 
         }
 
-    }).getMethod(productSearchEndpoint.getNewProductsEndpoint((columnCount(applicationContext, 266) * 3)))
+    }).getMethod(productSearchEndpoint.getNewProductsEndpoint((
+            columnCount(applicationContext, 271) * 3)
+    ))
 
 }
