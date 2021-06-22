@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 6:47 AM
+ * Last modified 6/22/21, 2:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -162,6 +162,58 @@ fun AccountInformation.clickSetup() {
 
     }
 
+    accountInformationLayoutBinding.developerCheckbox.setOnClickListener {
+
+        accountInformationLayoutBinding.developerCheckbox.apply {
+
+            if (developerChecked) {
+
+                speed = -1f
+                setMinAndMaxFrame(1, 31)
+
+                playAnimation()
+
+            } else {
+
+                speed = 1f
+                setMinAndMaxFrame(1, 31)
+
+                playAnimation()
+
+            }
+
+            developerChecked = !developerChecked
+
+        }
+
+    }
+
+    accountInformationLayoutBinding.developerTextNotice.setOnClickListener {
+
+        accountInformationLayoutBinding.developerCheckbox.apply {
+
+            if (developerChecked) {
+
+                speed = -1f
+                setMinAndMaxFrame(1, 31)
+
+                playAnimation()
+
+            } else {
+
+                speed = 1f
+                setMinAndMaxFrame(1, 31)
+
+                playAnimation()
+
+            }
+
+            developerChecked = !developerChecked
+
+        }
+
+    }
+
 }
 
 fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false) = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
@@ -174,16 +226,17 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
         accountInformationLayoutBinding.welcomeTextView.text = getString(R.string.welcomeText, Firebase.auth.currentUser?.displayName)
 
         val userInformationProfileData = UserInformationProfileData(
-                privacyAgreement = userInformationIO.readPrivacyAgreement().first(),
-                userIdentification = firebaseUser.uid,
-                userEmailAddress = firebaseUser.email.toString(),
-                userDisplayName = firebaseUser.displayName.toString(),
-                userProfileImage = firebaseUser.photoUrl.toString(),
-                instagramAccount = accountInformationLayoutBinding.instagramAddressView.text.toString().lowercase(),
-                twitterAccount = accountInformationLayoutBinding.twitterAddressView.text.toString(),
-                phoneNumber = accountInformationLayoutBinding.phoneNumberAddressView.text.toString(),
-                isBetaUser = BuildConfig.VERSION_NAME.uppercase(Locale.getDefault()).contains("Beta".uppercase())
-            )
+            privacyAgreement = userInformationIO.readPrivacyAgreement().first(),
+            userIdentification = firebaseUser.uid,
+            userEmailAddress = firebaseUser.email.toString(),
+            userDisplayName = firebaseUser.displayName.toString(),
+            userProfileImage = firebaseUser.photoUrl.toString(),
+            instagramAccount = accountInformationLayoutBinding.instagramAddressView.text.toString().lowercase(),
+            twitterAccount = accountInformationLayoutBinding.twitterAddressView.text.toString(),
+            phoneNumber = accountInformationLayoutBinding.phoneNumberAddressView.text.toString(),
+            isBetaUser = BuildConfig.VERSION_NAME.uppercase(Locale.getDefault()).contains("Beta".uppercase()),
+            isUserDeveloper = developerChecked
+        )
 
         (application as PremiumStorefrontApplication).firestoreDatabase
             .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email))

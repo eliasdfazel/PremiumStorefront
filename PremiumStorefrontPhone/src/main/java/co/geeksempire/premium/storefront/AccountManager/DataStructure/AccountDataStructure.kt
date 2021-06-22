@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 12:25 PM
+ * Last modified 6/22/21, 2:18 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,8 @@ data class UserInformationProfileData (var privacyAgreement: Boolean? = false,
                                        var phoneNumber: String?,
                                        var phoneNumberVerified: Boolean? = false,
                                        var userJointDate: FieldValue = FieldValue.serverTimestamp(),
-                                       var isBetaUser: Boolean = false)
+                                       var isBetaUser: Boolean = false,
+                                       var isUserDeveloper: Boolean = false)
 
 class AccountDataStructure {
 
@@ -32,11 +33,8 @@ class AccountDataStructure {
         const val twitterAccount = "twitterAccount"
         const val phoneNumber = "phoneNumber"
         const val phoneNumberVerified = "phoneNumberVerified"
-        const val userLatitude = "userLatitude"
-        const val userLongitude = "userLongitude"
-        const val userState = "userState"
-        const val userLastSignIn = "userLastSignIn"
         const val userJointDate = "userJointDate"
+        const val userDeveloper = "userDeveloper"
     }
 
     fun userProfileDatabasePath(userUniqueIdentifier: String, userEmailAddress: String) : String = "PremiumStorefront/${userUniqueIdentifier}/${userEmailAddress}/Profile"

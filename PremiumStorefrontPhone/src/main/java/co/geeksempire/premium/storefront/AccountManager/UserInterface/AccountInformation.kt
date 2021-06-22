@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 6:24 AM
+ * Last modified 6/22/21, 2:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,6 +46,8 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
     private val networkConnectionListener: NetworkConnectionListener by lazy {
         NetworkConnectionListener(this@AccountInformation, accountInformationLayoutBinding.rootView, networkCheckpoint)
     }
+
+    var developerChecked: Boolean = false
 
     var profileUpdating: Boolean = false
 
@@ -106,6 +108,12 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
                         if (documentData.data?.get(AccountDataStructure.Attributes.phoneNumber) != null) {
                             accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.phoneNumber).toString())
+                        }
+
+                        documentData.data?.get(AccountDataStructure.Attributes.userDeveloper)?.let {
+
+                            developerChecked = it.toString().toBoolean()
+
                         }
 
                         accountInformationLayoutBinding.inviteFriendsView.setOnClickListener {

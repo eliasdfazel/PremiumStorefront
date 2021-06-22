@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/22/21, 2:15 PM
+  ~ Last modified 6/22/21, 3:09 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -94,84 +94,6 @@
         apps:layout_constraintBottom_toBottomOf="@id/profileImageView"
         apps:layout_constraintStart_toEndOf="@id/profileImageView"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="159dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="29dp">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/themeToggleView"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:padding="29dp"
-                android:background="@drawable/preferences_item_background_light"
-                android:contentDescription="@string/themeToggleDescription"
-
-                apps:lottie_rawRes="@raw/toggle_theme_animation"
-
-                apps:layout_constraintTop_toTopOf="parent"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/supportView"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:layout_marginTop="29dp"
-                android:padding="23dp"
-                android:background="@drawable/preferences_item_background_light"
-                android:contentDescription="@string/supportDescription"
-
-                apps:lottie_rawRes="@raw/support_animation"
-                apps:lottie_autoPlay="true"
-                apps:lottie_loop="true"
-
-                apps:layout_constraintHorizontal_bias="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/whatNewView"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:layout_marginTop="29dp"
-                android:padding="23dp"
-                android:background="@drawable/preferences_item_background_light"
-                android:contentDescription="@string/changeLogDescription"
-
-                apps:lottie_rawRes="@raw/what_s_new_animation"
-                apps:lottie_autoPlay="true"
-                apps:lottie_loop="true"
-
-                apps:layout_constraintHorizontal_bias="0.87"
-                apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/submissionRequestView"
-                android:layout_width="93dp"
-                android:layout_height="93dp"
-                android:layout_marginTop="29dp"
-                android:padding="19dp"
-                android:scaleType="fitCenter"
-                android:background="@drawable/preferences_item_small_background_light"
-                android:src="@drawable/developer_submission_icon_light"
-                android:contentDescription="@string/submissionRequestDescription"
-
-                apps:layout_constraintTop_toBottomOf="@id/supportView"
-                apps:layout_constraintStart_toStartOf="@id/supportView" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rateItView"
         android:layout_width="0dp"
@@ -259,5 +181,93 @@
         apps:layout_constraintBottom_toBottomOf="@id/rateItView"
         apps:layout_constraintStart_toEndOf="@id/rateItView"
         apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="159dp"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="13dp"
+        android:cacheColorHint="@android:color/transparent"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="29dp"
+            android:paddingBottom="151dp">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/themeToggleView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="29dp"
+                android:background="@drawable/preferences_item_background_light"
+                android:contentDescription="@string/themeToggleDescription"
+
+                apps:lottie_rawRes="@raw/toggle_theme_animation"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/supportView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:layout_marginTop="29dp"
+                android:padding="23dp"
+                android:background="@drawable/preferences_item_background_light"
+                android:contentDescription="@string/supportDescription"
+
+                apps:lottie_rawRes="@raw/support_animation"
+                apps:lottie_autoPlay="true"
+                apps:lottie_loop="true"
+
+                apps:layout_constraintHorizontal_bias="0.13"
+                apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/whatNewView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:layout_marginTop="29dp"
+                android:padding="23dp"
+                android:background="@drawable/preferences_item_background_light"
+                android:contentDescription="@string/changeLogDescription"
+
+                apps:lottie_rawRes="@raw/what_s_new_animation"
+                apps:lottie_autoPlay="true"
+                apps:lottie_loop="true"
+
+                apps:layout_constraintHorizontal_bias="0.87"
+                apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/submissionRequestView"
+                android:layout_width="93dp"
+                android:layout_height="93dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginStart="5dp"
+                android:padding="19dp"
+                android:scaleType="fitCenter"
+                android:background="@drawable/preferences_item_small_background_light"
+                android:src="@drawable/developer_submission_icon_light"
+                android:contentDescription="@string/submissionRequestDescription"
+
+                apps:layout_constraintTop_toBottomOf="@id/supportView"
+                apps:layout_constraintStart_toStartOf="@id/supportView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
