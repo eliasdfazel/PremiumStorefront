@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 6:47 AM
+ * Last modified 6/22/21, 1:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.BuiltInBrowserConfigurations
+package co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface
 
 import android.app.ActivityOptions
 import android.content.Context
@@ -23,6 +23,7 @@ import android.view.WindowManager
 import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.BuildConfig
+import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.Interface.WebInterface
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Display.navigationBarHeight
 import co.geeksempire.premium.storefront.Utils.UI.Display.statusBarHeight

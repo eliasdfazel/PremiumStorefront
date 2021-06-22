@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 6:47 AM
+ * Last modified 6/22/21, 1:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -138,9 +138,9 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.profileNameView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
                     preferencesControlLayoutBinding.profileNameView.setTextColor(getColor(R.color.premiumDark))
 
-                    preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
-                    preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
-                    preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_light)
+                    preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_item_background_light)
+                    preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_item_background_light)
+                    preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_item_background_light)
 
                     preferencesControlLayoutBinding.updateItView.apply {
                         backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
@@ -186,9 +186,9 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.profileNameView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.black))
                     preferencesControlLayoutBinding.profileNameView.setTextColor(getColor(R.color.premiumLight))
 
-                    preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
-                    preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
-                    preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_theme_toggle_background_dark)
+                    preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_item_background_dark)
+                    preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_item_background_dark)
+                    preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_item_background_dark)
 
                     preferencesControlLayoutBinding.updateItView.apply {
                         backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 7:51 AM
+ * Last modified 6/22/21, 1:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import android.view.Gravity
 import android.view.Menu
 import androidx.appcompat.widget.PopupMenu
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
-import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
+import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.resizeDrawable
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 10:05 AM
+ * Last modified 6/22/21, 2:09 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.ColorStateList
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
-import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.BuiltInBrowser
+import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser
 import co.geeksempire.premium.storefront.Invitations.Send.SendInvitation
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.R
@@ -24,6 +24,10 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplication
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 
 fun PreferencesControl.preferencesControlSetupUserInteractions() {
+
+    /*
+     * Top Section
+     */
 
     preferencesControlLayoutBinding.profileImageView.setOnClickListener {
 
@@ -39,6 +43,10 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
             ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
 
     }
+
+    /*
+     * Middle Section
+     */
 
     preferencesControlLayoutBinding.whatNewView.setOnClickListener {
 
@@ -57,6 +65,19 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
             gradientColorTwo = getColor(R.color.default_color_game_light))
 
     }
+
+    preferencesControlLayoutBinding.submissionRequestView.setOnClickListener {
+
+        BuiltInBrowser.show(context = applicationContext,
+            linkToLoad = getString(R.string.developersSubmissionRequest),
+            gradientColorOne = getColor(R.color.default_color),
+            gradientColorTwo = getColor(R.color.default_color_bright))
+
+    }
+
+    /*
+     * Bottom Section
+     */
 
     preferencesControlLayoutBinding.updateItView.setOnClickListener {
 

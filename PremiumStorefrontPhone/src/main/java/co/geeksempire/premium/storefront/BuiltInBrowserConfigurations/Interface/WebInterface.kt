@@ -2,15 +2,16 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/20/21, 9:34 AM
+ * Last modified 6/22/21, 1:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.BuiltInBrowserConfigurations
+package co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.Interface
 
 import android.webkit.JavascriptInterface
+import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser
 import co.geeksempire.premium.storefront.R
 
 /**

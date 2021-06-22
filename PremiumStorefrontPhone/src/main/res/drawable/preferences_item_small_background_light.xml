@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/10/21, 11:13 AM
+  ~ Last modified 6/22/21, 2:09 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,16 +12,16 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:height="159dp"
-        android:width="159dp"
+        android:height="93dp"
+        android:width="93dp"
         android:gravity="center"
-        android:drawable="@drawable/squircle_icon_dark">
+        android:drawable="@drawable/squircle_icon_light">
 
     </item>
 
     <item
-        android:height="123dp"
-        android:width="123dp"
+        android:height="79dp"
+        android:width="79dp"
         android:gravity="center" >
 
         <shape>
@@ -33,11 +33,11 @@
                 android:gradientRadius="79dp"
                 android:type="linear"
                 android:angle="90"
-                android:startColor="@color/premiumDark"
-                android:endColor="@color/black"/>
+                android:startColor="@color/premiumLight"
+                android:endColor="@color/white"/>
 
             <stroke
-                android:color="@color/black_transparent"
+                android:color="@color/white_transparent"
                 android:width="0.7dp"/>
 
         </shape>

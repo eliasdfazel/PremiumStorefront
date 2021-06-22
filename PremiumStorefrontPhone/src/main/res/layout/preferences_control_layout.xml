@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/15/21, 7:55 AM
+  ~ Last modified 6/22/21, 2:13 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -109,7 +109,7 @@
                 android:layout_width="159dp"
                 android:layout_height="159dp"
                 android:padding="29dp"
-                android:background="@drawable/preferences_theme_toggle_background_light"
+                android:background="@drawable/preferences_item_background_light"
                 android:contentDescription="@string/themeToggleDescription"
 
                 apps:lottie_rawRes="@raw/toggle_theme_animation"
@@ -124,7 +124,7 @@
                 android:layout_height="159dp"
                 android:layout_marginTop="29dp"
                 android:padding="23dp"
-                android:background="@drawable/preferences_theme_toggle_background_light"
+                android:background="@drawable/preferences_item_background_light"
                 android:contentDescription="@string/supportDescription"
 
                 apps:lottie_rawRes="@raw/support_animation"
@@ -142,7 +142,7 @@
                 android:layout_height="159dp"
                 android:layout_marginTop="29dp"
                 android:padding="23dp"
-                android:background="@drawable/preferences_theme_toggle_background_light"
+                android:background="@drawable/preferences_item_background_light"
                 android:contentDescription="@string/changeLogDescription"
 
                 apps:lottie_rawRes="@raw/what_s_new_animation"
@@ -151,6 +151,22 @@
 
                 apps:layout_constraintHorizontal_bias="0.87"
                 apps:layout_constraintTop_toBottomOf="@id/themeToggleView"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/submissionRequestView"
+                android:layout_width="93dp"
+                android:layout_height="93dp"
+                android:layout_marginTop="29dp"
+                android:padding="19dp"
+                android:scaleType="fitCenter"
+                android:background="@drawable/preferences_item_small_background_light"
+                android:src="@drawable/developer_submission_icon_light"
+                android:contentDescription="@string/submissionRequestDescription"
+
+                apps:layout_constraintHorizontal_bias="0.13"
+                apps:layout_constraintTop_toBottomOf="@id/supportView"
                 apps:layout_constraintStart_toStartOf="parent"
                 apps:layout_constraintEnd_toEndOf="parent"/>
 
