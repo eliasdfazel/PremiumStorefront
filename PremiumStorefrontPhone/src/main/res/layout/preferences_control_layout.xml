@@ -189,7 +189,7 @@
         android:scrollbars="none"
         android:fadingEdge="vertical"
         android:requiresFadingEdge="vertical"
-        android:fadingEdgeLength="13dp"
+        android:fadingEdgeLength="23dp"
         android:cacheColorHint="@android:color/transparent"
 
         apps:layout_constraintTop_toTopOf="parent"
