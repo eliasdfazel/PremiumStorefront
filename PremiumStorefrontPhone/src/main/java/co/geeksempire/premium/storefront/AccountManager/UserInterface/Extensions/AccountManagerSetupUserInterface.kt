@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/20/21, 8:10 AM
+ * Last modified 6/22/21, 6:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,7 +56,9 @@ import java.util.concurrent.TimeUnit
 
 fun AccountInformation.accountManagerSetupUserInterface() {
 
-    window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    if (!BuildConfig.DEBUG) {
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    }
 
     accountInformationLayoutBinding.profileBlurView.setOverlayColor(getColor(R.color.light_blurry_color))
 

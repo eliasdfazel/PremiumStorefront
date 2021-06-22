@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/20/21, 8:09 AM
+ * Last modified 6/22/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
@@ -28,7 +29,9 @@ import kotlinx.coroutines.launch
 
 fun Storefront.setupStorefrontUserInterface() {
 
-    window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    if (!BuildConfig.DEBUG) {
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    }
 
     lifecycleScope.launch {
 

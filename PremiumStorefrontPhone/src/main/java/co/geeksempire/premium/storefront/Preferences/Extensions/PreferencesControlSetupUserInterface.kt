@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/20/21, 8:09 AM
+ * Last modified 6/22/21, 6:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.view.View
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import androidx.lifecycle.coroutineScope
+import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.Preferences.UserInterface.ToggleTheme
@@ -36,7 +37,9 @@ import kotlinx.coroutines.launch
 
 fun PreferencesControl.preferencesControlSetupUserInterface() {
 
-    window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    if (!BuildConfig.DEBUG) {
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    }
 
     val toggleTheme = ToggleTheme(this@preferencesControlSetupUserInterface, themePreferences, preferencesControlLayoutBinding)
     toggleTheme.initialThemeToggleAction()

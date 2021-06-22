@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/19/21, 8:00 AM
+ * Last modified 6/22/21, 6:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -72,7 +72,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
         rootView.addView(balloonOptionsMenuLayoutBinding.root)
         balloonOptionsMenuLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, startAnimationId))
 
-        balloonOptionsMenuLayoutBinding.root.x = (displayX(context)).toFloat() - dpToInteger(context, 151) - horizontalOffset
+        balloonOptionsMenuLayoutBinding.root.x = (displayX(context)).toFloat() - dpToInteger(context, 171) - horizontalOffset
         balloonOptionsMenuLayoutBinding.root.y = viewY.toFloat() - dpToInteger(context, 23) - verticalOffset
 
         balloonOptionsAdded = true
