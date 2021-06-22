@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/22/21, 2:13 PM
+  ~ Last modified 6/22/21, 2:15 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -165,10 +165,8 @@
                 android:src="@drawable/developer_submission_icon_light"
                 android:contentDescription="@string/submissionRequestDescription"
 
-                apps:layout_constraintHorizontal_bias="0.13"
                 apps:layout_constraintTop_toBottomOf="@id/supportView"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
+                apps:layout_constraintStart_toStartOf="@id/supportView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
