@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 1:53 PM
+ * Last modified 6/22/21, 2:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -142,6 +142,11 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_item_background_light)
                     preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_item_background_light)
 
+                    preferencesControlLayoutBinding.submissionRequestView.apply {
+                        background = getDrawable(R.drawable.preferences_item_small_background_light)
+                        setImageDrawable(getDrawable(R.drawable.developer_submission_icon_light))
+                    }
+
                     preferencesControlLayoutBinding.updateItView.apply {
                         backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumLight))
                         iconTint = ColorStateList.valueOf(getColor(R.color.premiumDark))
@@ -189,6 +194,11 @@ fun PreferencesControl.toggleLightDark() {
                     preferencesControlLayoutBinding.themeToggleView.background = getDrawable(R.drawable.preferences_item_background_dark)
                     preferencesControlLayoutBinding.supportView.background = getDrawable(R.drawable.preferences_item_background_dark)
                     preferencesControlLayoutBinding.whatNewView.background = getDrawable(R.drawable.preferences_item_background_dark)
+
+                    preferencesControlLayoutBinding.submissionRequestView.apply {
+                        background = getDrawable(R.drawable.preferences_item_small_background_dark)
+                        setImageDrawable(getDrawable(R.drawable.developer_submission_icon_dark))
+                    }
 
                     preferencesControlLayoutBinding.updateItView.apply {
                         backgroundTintList = ColorStateList.valueOf(getColor(R.color.premiumDark))
