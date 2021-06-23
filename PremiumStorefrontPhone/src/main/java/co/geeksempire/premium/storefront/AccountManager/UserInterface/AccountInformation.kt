@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 2:38 PM
+ * Last modified 6/23/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -74,8 +74,7 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
         networkConnectionListener.networkConnectionListenerInterface = this@AccountInformation
 
-        if (Firebase.auth.currentUser != null
-            && Firebase.auth.currentUser!!.isAnonymous) {
+        if (Firebase.auth.currentUser == null) {
 
             accountInformationLayoutBinding.signupLoadingView.visibility = View.VISIBLE
             accountInformationLayoutBinding.signupLoadingView.playAnimation()
