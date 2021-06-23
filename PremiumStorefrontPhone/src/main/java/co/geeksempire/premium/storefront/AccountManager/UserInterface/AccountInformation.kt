@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/23/21, 6:46 AM
+ * Last modified 6/23/21, 7:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.AccountManager.UserInterface
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.AccountManager.DataStructure.AccountDataStructure
@@ -70,8 +71,6 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
         accountInformationLayoutBinding = AccountInformationLayoutBinding.inflate(layoutInflater)
         setContentView(accountInformationLayoutBinding.root)
 
-        accountManagerSetupUserInterface()
-
         networkConnectionListener.networkConnectionListenerInterface = this@AccountInformation
 
         if (Firebase.auth.currentUser == null) {
@@ -86,6 +85,8 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
             }
 
         } else if (Firebase.auth.currentUser != null) {
+
+            accountManagerSetupUserInterface()
 
             accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
             accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
@@ -166,6 +167,14 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
     override fun signInProcessSucceed(authenticationResult: AuthResult) {
         super.signInProcessSucceed(authenticationResult)
+
+        accountInformationLayoutBinding.signupLoadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+        accountInformationLayoutBinding.signupLoadingView.visibility = View.GONE
+
+        accountInformationLayoutBinding.socialMediaScrollView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+        accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
+
+        accountManagerSetupUserInterface()
 
     }
 

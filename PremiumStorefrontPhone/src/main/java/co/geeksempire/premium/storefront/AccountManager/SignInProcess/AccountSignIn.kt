@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/2/21, 2:49 PM
+ * Last modified 6/23/21, 7:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -77,12 +77,14 @@ class AccountSignIn (val context: AppCompatActivity, val signInInterface: SignIn
                     firebaseAuth.signInWithCredential(authenticationCredential)
                         .addOnSuccessListener {
 
-                            firebaseUser = it.user
+                            it.user?.let { currentUser ->
 
-                            signInInterface.signInProcessSucceed(it)
+                                firebaseUser = it.user
 
-                            it.user?.let { firebaseUser ->
-                                createGeeksEmpireUser(firebaseUser)
+                                signInInterface.signInProcessSucceed(it)
+
+                                createGeeksEmpireUser(currentUser)
+
                             }
 
                         }.addOnFailureListener {
@@ -90,6 +92,10 @@ class AccountSignIn (val context: AppCompatActivity, val signInInterface: SignIn
                             signInInterface.signInProcessFailed(it.cause?.message)
 
                         }
+
+                }.addOnFailureListener {
+
+                    signInInterface.signInProcessFailed(it.cause?.message)
 
                 }
 

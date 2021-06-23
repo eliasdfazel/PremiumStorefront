@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/23/21, 6:40 AM
+  ~ Last modified 6/23/21, 7:02 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -127,6 +127,7 @@
         android:fadingEdge="vertical"
         android:fadingEdgeLength="7dp"
         android:requiresFadingEdge="vertical"
+        android:visibility="invisible"
 
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintTop_toBottomOf="@id/welcomeTextView">
@@ -338,22 +339,22 @@
                 android:id="@+id/submitProfileView"
                 android:layout_width="113dp"
                 android:layout_height="113dp"
-                android:layout_marginVertical="7dp"
+                android:layout_marginVertical="1dp"
 
                 apps:layout_constraintEnd_toEndOf="parent"
 
-                apps:layout_constraintTop_toBottomOf="@id/developerCheckbox"
+                apps:layout_constraintTop_toBottomOf="@id/developerTextNotice"
                 apps:lottie_rawRes="@raw/next_submit_animation" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/updatingLoadingView"
                 android:layout_width="113dp"
                 android:layout_height="113dp"
-                android:layout_marginVertical="7dp"
+                android:layout_marginVertical="1dp"
                 android:visibility="invisible"
 
                 apps:layout_constraintEnd_toEndOf="parent"
-                apps:layout_constraintTop_toBottomOf="@id/developerCheckbox"
+                apps:layout_constraintTop_toBottomOf="@id/developerTextNotice"
                 apps:lottie_loop="true"
 
                 apps:lottie_rawRes="@raw/fluid_loading_animation"
