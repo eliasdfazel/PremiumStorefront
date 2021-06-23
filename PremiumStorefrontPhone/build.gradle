@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/23/21, 8:30 AM
+ * Last modified 6/23/21, 8:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -141,6 +141,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-inappmessaging-display-ktx'
 
     implementation 'com.google.firebase:firebase-appindexing'
+
+    implementation 'com.google.firebase:firebase-config-ktx'
 
     implementation 'com.google.firebase:firebase-dynamic-links-ktx'
 

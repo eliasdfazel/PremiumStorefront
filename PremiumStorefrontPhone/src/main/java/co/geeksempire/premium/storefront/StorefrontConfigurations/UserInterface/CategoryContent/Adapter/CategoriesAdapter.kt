@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 10:49 AM
+ * Last modified 6/23/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -196,7 +196,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
 
                 it.setupOptionsItems(
                     menuId = storefrontCategories[position].categoryId.toString(),
-                    menuTitle = storefrontCategories[position].categoryName.replace(" Applications", ""),
+                    menuTitle = storefrontCategories[position].categoryName.split(" ").first(),
                     titlesOfItems = arrayListOf<OptionDataItems>(OptionDataItems(storefrontCategories[position].categoryId.toString(), context.getString(R.string.categoryShowAllApplications))),
                     titleTextViewCustomization = TitleTextViewCustomization(textSize = 37f, textColor = context.getColor(R.color.dark), textShadowColor = context.getColor(R.color.dark_transparent_high), textFont = ResourcesCompat.getFont(context, R.font.upcil)?: Typeface.DEFAULT)
                 )

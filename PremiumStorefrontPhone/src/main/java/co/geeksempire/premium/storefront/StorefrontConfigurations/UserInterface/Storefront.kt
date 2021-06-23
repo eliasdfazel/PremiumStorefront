@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/20/21, 8:46 AM
+ * Last modified 6/23/21, 9:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,10 +55,7 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateRespons
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
-import co.geeksempire.premium.storefront.Utils.Notifications.RemoteSubscriptions
-import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
-import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
-import co.geeksempire.premium.storefront.Utils.Notifications.SubscriptionInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
@@ -73,6 +70,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.android.synthetic.main.storefront_layout.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -149,6 +147,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+
+    val firebaseRemoteConfiguration = Firebase.remoteConfig
 
     /* Start - Sign In */
     val accountSignIn: AccountSignIn by lazy {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 3:02 PM
+ * Last modified 6/23/21, 8:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,13 +50,13 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
             "&" +
             "order=desc"
 
-    fun getApplicationsCategoriesEndpoint(numberOfProducts: Int = 99) : String =
+    fun getApplicationsCategoriesEndpoint(numberOfProducts: Int = 99, csvExclusions: String = "80,66,57,546,547") : String =
         "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +
             "consumer_key=${generalEndpoint.consumerKey()}" +
             "&" +
             "consumer_secret=${generalEndpoint.consumerSecret()}" +
             "&" +
-            "exclude=80,66,57,546,547" + //Add Exclusion of All Other Categories
+            "exclude=${csvExclusions}" + //Add Exclusion of All Other Categories
             "&" +
             "per_page=${numberOfProducts}"
 
