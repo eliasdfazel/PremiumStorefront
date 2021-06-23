@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "666238092273-3sssm3arc4oi34k4v87fh0a159tijkbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.geeksempire.premium.storefront.android",
+            "certificate_hash": "2f2ce1ef5da015c10e5a394e7ecd9d021a1942fc"
+          }
+        },
+        {
           "client_id": "666238092273-a4h9nefl24k6p1frnv8a86ntbaa9mvlk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
