@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/21/21, 4:54 AM
+ * Last modified 6/24/21, 9:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,43 +50,7 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
 
     if (storefrontLayoutBinding.textInputSearchView.isShown) {
 
-        storefrontLayoutBinding.middleActionView.background = null
-
-        val fadeOutAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out)
-
-        storefrontLayoutBinding.textInputSearchView.visibility = View.INVISIBLE
-        storefrontLayoutBinding.textInputSearchView.startAnimation(fadeOutAnimation)
-
-        fadeOutAnimation.setAnimationListener(object : Animation.AnimationListener {
-
-            override fun onAnimationStart(animation: Animation?) {}
-
-            override fun onAnimationEnd(animation: Animation?) {
-
-                storefrontLayoutBinding.textInputSearchView.layoutParams.width = dpToInteger(applicationContext, 51)
-                storefrontLayoutBinding.textInputSearchView.layoutParams.height = dpToInteger(applicationContext, 51)
-                storefrontLayoutBinding.textInputSearchView.requestLayout()
-
-            }
-
-            override fun onAnimationRepeat(animation: Animation?) {}
-
-        })
-
-        storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
-            ThemeType.ThemeLight -> {
-
-                ColorStateList.valueOf(getColor(R.color.default_color_dark))
-
-            }
-            ThemeType.ThemeDark -> {
-
-                ColorStateList.valueOf(getColor(R.color.default_color_bright))
-
-            } else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
-        }
-
-        hideKeyboard(applicationContext, storefrontLayoutBinding.searchView)
+        hideSearchView(themeType)
 
     } else {
 
@@ -140,8 +104,6 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
 
             override fun onAnimationEnd(animation: Animator) {
 
-                valueAnimatorScalesUpWidth.start()
-
             }
 
             override fun onAnimationCancel(animation: Animator) {
@@ -164,6 +126,7 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
             override fun onAnimationEnd(animation: Animation?) {
 
                 valueAnimatorScalesUpHeight.start()
+                valueAnimatorScalesUpWidth.start()
 
             }
 
@@ -179,6 +142,8 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
                     filterAllContent.searchThroughAllContent(storefrontAllUnfilteredContents, textView.text.toString())
                         .invokeOnCompletion {
 
+                            hideSearchView(themeType)
+
                         }
 
                 }
@@ -188,5 +153,47 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
         }
 
     }
+
+}
+
+fun Storefront.hideSearchView(themeType: Boolean) {
+
+    storefrontLayoutBinding.middleActionView.background = null
+
+    val fadeOutAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out)
+
+    storefrontLayoutBinding.textInputSearchView.visibility = View.INVISIBLE
+    storefrontLayoutBinding.textInputSearchView.startAnimation(fadeOutAnimation)
+
+    fadeOutAnimation.setAnimationListener(object : Animation.AnimationListener {
+
+        override fun onAnimationStart(animation: Animation?) {}
+
+        override fun onAnimationEnd(animation: Animation?) {
+
+            storefrontLayoutBinding.textInputSearchView.layoutParams.width = dpToInteger(applicationContext, 51)
+            storefrontLayoutBinding.textInputSearchView.layoutParams.height = dpToInteger(applicationContext, 51)
+            storefrontLayoutBinding.textInputSearchView.requestLayout()
+
+        }
+
+        override fun onAnimationRepeat(animation: Animation?) {}
+
+    })
+
+    storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            ColorStateList.valueOf(getColor(R.color.default_color_dark))
+
+        }
+        ThemeType.ThemeDark -> {
+
+            ColorStateList.valueOf(getColor(R.color.default_color_bright))
+
+        } else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+    }
+
+    hideKeyboard(applicationContext, storefrontLayoutBinding.searchView)
 
 }

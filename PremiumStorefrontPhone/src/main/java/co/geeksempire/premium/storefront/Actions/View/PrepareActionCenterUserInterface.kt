@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/21/21, 3:47 AM
+ * Last modified 6/24/21, 9:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.Actions.View
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
@@ -229,6 +230,37 @@ class PrepareActionCenterUserInterface(private val context: Context,
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
 
             true
+        }
+
+    }
+
+    fun resetActionCenterIcon(themeType: Boolean = ThemeType.ThemeLight) {
+
+        when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                actionLeftView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
+                actionLeftView.background = null
+
+                actionMiddleView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
+                actionMiddleView.background = null
+
+                actionRightView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
+                actionRightView.background = null
+
+            }
+            ThemeType.ThemeDark -> {
+
+                actionLeftView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_bright))
+                actionLeftView.background = null
+
+                actionMiddleView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_bright))
+                actionMiddleView.background = null
+
+                actionRightView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_bright))
+                actionRightView.background = null
+
+            }
         }
 
     }

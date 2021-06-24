@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/24/21, 9:01 AM
+ * Last modified 6/24/21, 9:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -156,10 +156,6 @@ fun Storefront.setupStorefrontUserInterface() {
 
                     storefrontLayoutBinding.categoryIndicatorTextView.setTextColor(getColor(R.color.dark))
 
-                    storefrontLayoutBinding.leftActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
-                    storefrontLayoutBinding.middleActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
-                    storefrontLayoutBinding.rightActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_dark))
-
                 }
                 ThemeType.ThemeDark -> {
 
@@ -224,10 +220,6 @@ fun Storefront.setupStorefrontUserInterface() {
                     storefrontLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_dark)
 
                     storefrontLayoutBinding.categoryIndicatorTextView.setTextColor(getColor(R.color.light))
-
-                    storefrontLayoutBinding.leftActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_bright))
-                    storefrontLayoutBinding.middleActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_bright))
-                    storefrontLayoutBinding.rightActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_bright))
 
                 }
 
