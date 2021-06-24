@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/24/21, 9:21 AM
+ * Last modified 6/24/21, 9:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,10 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
 import com.abanabsalan.aban.magazine.Utils.System.hideKeyboard
 import com.abanabsalan.aban.magazine.Utils.System.showKeyboard
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
@@ -156,7 +160,7 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
 
 }
 
-fun Storefront.hideSearchView(themeType: Boolean) {
+fun Storefront.hideSearchView(themeType: Boolean) = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
 
     storefrontLayoutBinding.middleActionView.background = null
 
