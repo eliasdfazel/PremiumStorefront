@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 1:38 PM
+ * Last modified 6/24/21, 12:54 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -266,6 +267,17 @@ class ProductDetailsFragment : Fragment() {
 
                 startFavoriteProcess(productId!!, productName!!, productDescription!!, productIconLink!!)
 
+            }
+
+            productDetailsLayoutBinding.informationDetails.setOnClickListener {
+
+                val developerCountry = requireArguments().getString(ProductDataKey.ProductDeveloperCountry)
+                val developerCity = requireArguments().getString(ProductDataKey.ProductDeveloperCity)
+
+                productDetailsLayoutBinding.moreProductDetails.text = Html.fromHtml("${developerCity}, ${developerCountry}", Html.FROM_HTML_MODE_COMPACT)
+
+                productDetailsLayoutBinding.moreProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                productDetailsLayoutBinding.moreProductDetails.visibility = View.VISIBLE
             }
 
             productDetailsLayoutBinding.goBackView.setOnClickListener {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/24/21, 9:33 AM
+ * Last modified 6/24/21, 12:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -120,7 +120,7 @@ fun Storefront.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
 
         })
 
-        val slideUpAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_in_bottom)
+        val slideUpAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_up_from_bottom_bounce)
         storefrontLayoutBinding.textInputSearchView.visibility = View.VISIBLE
         storefrontLayoutBinding.textInputSearchView.startAnimation(slideUpAnimation)
 

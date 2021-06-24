@@ -1,0 +1,43 @@
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/24/21, 12:40 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+
+    <path
+        android:pathData="M256,512C114.507,512 0,397.503 0,256C0,114.507 114.497,0 256,0c141.492,0 256,114.497 256,256C512,397.493 397.503,512 256,512zM256,40C136.615,40 40,136.607 40,256c0,119.385 96.607,216 216,216c119.384,0 216,-96.607 216,-216C472,136.615 375.393,40 256,40zM276,363.123V234.33c0,-11.046 -8.954,-20 -20,-20s-20,8.954 -20,20v128.792c0,11.046 8.954,20 20,20C267.046,383.122 276,374.168 276,363.123zM256,135.841c-14.912,0 -27,12.088 -27,27s12.088,27 27,27c14.912,0 27,-12.088 27,-27S270.912,135.841 256,135.841z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="512"
+                android:endY="256"
+                android:startX="0"
+                android:startY="256"
+                android:type="linear">
+                <item
+                    android:color="#237DAE"
+                    android:offset="0" />
+                <item
+                    android:color="#237DAE"
+                    android:offset="0.17" />
+                <item
+                    android:color="#ae2357"
+                    android:offset="0.799" />
+                <item
+                    android:color="#ae2357"
+                    android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+</vector>

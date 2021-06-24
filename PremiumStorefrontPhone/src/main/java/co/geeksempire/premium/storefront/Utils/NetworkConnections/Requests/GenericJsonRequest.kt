@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/24/21, 10:32 AM
+ * Last modified 6/24/21, 12:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,7 +58,6 @@ class GenericJsonRequest(private val context: Context, private val jsonRequestRe
         )
 
         jsonArrayRequest.setShouldCache(true)
-        jsonArrayRequest.cacheEntry?.ttl = System.currentTimeMillis() + ((1000 * 60 * 60 * 24/* One Day */) * 3)
 
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(jsonArrayRequest)
