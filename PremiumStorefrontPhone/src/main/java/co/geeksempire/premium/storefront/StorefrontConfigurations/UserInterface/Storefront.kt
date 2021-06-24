@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/24/21, 9:14 AM
+ * Last modified 6/24/21, 11:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
@@ -290,7 +291,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
                 } else {
 
-
+                    showToast(applicationContext, getString(R.string.nothingFoundText), Gravity.TOP)
 
                 }
 
