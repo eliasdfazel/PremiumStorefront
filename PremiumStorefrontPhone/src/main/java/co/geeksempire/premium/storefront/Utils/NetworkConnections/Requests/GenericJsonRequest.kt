@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/24/21, 9:53 AM
+ * Last modified 6/24/21, 10:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,10 +12,10 @@ package co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests
 
 import android.content.Context
 import android.util.Log
-import com.android.volley.DefaultRetryPolicy
-import com.android.volley.Request
+import com.android.volley.*
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+
 
 object EnqueueEndPointQuery {
     const val JSON_REQUEST_TIMEOUT = (1000 * 3)
@@ -26,7 +26,7 @@ class GenericJsonRequest(private val context: Context, private val jsonRequestRe
 
     fun getMethod(endpointAddress: String) {
 
-        val jsonObjectRequest = JsonArrayRequest(
+        val jsonArrayRequest = JsonArrayRequest(
             Request.Method.GET,
             endpointAddress,
             null,
@@ -51,16 +51,17 @@ class GenericJsonRequest(private val context: Context, private val jsonRequestRe
 
             })
 
-        jsonObjectRequest.retryPolicy = DefaultRetryPolicy(
+        jsonArrayRequest.retryPolicy = DefaultRetryPolicy(
                 EnqueueEndPointQuery.JSON_REQUEST_TIMEOUT,
                 EnqueueEndPointQuery.JSON_REQUEST_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         )
 
-        jsonObjectRequest.setShouldCache(true)
+        jsonArrayRequest.setShouldCache(true)
+        jsonArrayRequest.cacheEntry?.ttl = System.currentTimeMillis() + ((1000 * 60 * 60 * 24/* One Day */) * 3)
 
         val requestQueue = Volley.newRequestQueue(context)
-        requestQueue.add(jsonObjectRequest)
+        requestQueue.add(jsonArrayRequest)
 
     }
 
