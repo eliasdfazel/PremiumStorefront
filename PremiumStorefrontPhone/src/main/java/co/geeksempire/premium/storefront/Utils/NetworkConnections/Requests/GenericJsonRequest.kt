@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/3/21 5:14 AM
+ * Last modified 6/24/21, 9:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,7 +57,7 @@ class GenericJsonRequest(private val context: Context, private val jsonRequestRe
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         )
 
-        jsonObjectRequest.setShouldCache(true)
+        jsonObjectRequest.setShouldCache(false)
 
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(jsonObjectRequest)

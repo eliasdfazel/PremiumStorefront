@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 10:28 AM
+ * Last modified 6/24/21, 9:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,12 +50,14 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
                 val productSummary = storefrontContentsData.productSummary.lowercase()
                 val productCategory = storefrontContentsData.productCategoryName.lowercase()
 
-                val countryOfDeveloper = storefrontContentsData.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]?:""
+                val countryOfDeveloper = (storefrontContentsData.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]?:"").lowercase()
+                val cityOfDeveloper = (storefrontContentsData.productAttributes[ProductsContentKey.AttributesDeveloperCityKey]?:"").lowercase()
 
                 if (productName.contains(inputSearchQuery)
                     || productSummary.contains(inputSearchQuery)
                     || productCategory.contains(inputSearchQuery)
-                    || countryOfDeveloper.contains(inputSearchQuery)) {
+                    || countryOfDeveloper.contains(inputSearchQuery)
+                    || cityOfDeveloper.contains(inputSearchQuery)) {
 
                     storefrontAllContentsFilter.add(storefrontContentsData)
 
