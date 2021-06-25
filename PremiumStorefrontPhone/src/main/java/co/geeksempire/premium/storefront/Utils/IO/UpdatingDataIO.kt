@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 5:07 AM
+ * Last modified 6/25/21, 5:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,8 @@ import java.nio.charset.Charset
 class UpdatingDataIO (private val context: Context) {
 
     fun startUpdatingApplicationsData() {
+
+        println(">>> 2")
 
         val workRequest = OneTimeWorkRequestBuilder<DataUpdatingWork>()
             .setInputData(

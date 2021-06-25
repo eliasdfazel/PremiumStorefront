@@ -14,36 +14,22 @@ const runtimeOptions = {
 
 exports.triggerBackgroundUpdatingProcessApplications = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
 
-
-    var jsonParserResponseText = JSON.parse(xmlHttpRequest.responseText);
-
-    var newestPostJson = jsonParserResponseText[0];
-
-    var postTitle = newestPostJson['title'].rendered;
-    var postSummary = newestPostJson['excerpt'].rendered.replace(/(<([^>]+)>)/ig, '');
-    var postFeaturedImage = newestPostJson['jetpack_featured_media_url'];
-
     var message = {
-        notification: {
-            title: postTitle,
-            body: postSummary
-        },
+
         android: {
-            notification: {
-                image: '' + postFeaturedImage,
-                color: '#' + postColor
-            }
+            ttl: (3600 * 1000) * (24), // 1 Hour in Milliseconds
+
+            priority: 'high',
         },
+
         data: {
-            title: postTitle,
-            summary: postSummary,
-            color: '#' + postColor,
-            image: '' + postFeaturedImage
+            UpdateDataKey: "ApplicationsData",
         },
-        topic: 'NewestPosts'
     };
 
-    admin.messaging().send(message)
+    res.send(message);
+
+    /*admin.messaging().send(message)
         .then((response) => {
 
             res.status(200).send('Done!');
@@ -53,6 +39,6 @@ exports.triggerBackgroundUpdatingProcessApplications = functions.runWith(runtime
 
             res.status(200).send('Error: ' + error);
 
-        });
+        });*/
 
 });

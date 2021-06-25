@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 5:32 AM
+ * Last modified 6/25/21, 6:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,11 +23,15 @@ class CloudNotifications : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
+        println(">>> 0 " + remoteMessage.data)
+
         remoteMessage.data.let { linkedHashMapData ->
 
             linkedHashMapData[IO.UpdateDataKey]?.let { updateDataKey ->
                 when (updateDataKey) {
                     IO.UpdateApplicationsDataKey -> {
+
+                        println(">>> 1")
 
                         updatingDataIO.startUpdatingApplicationsData()
 

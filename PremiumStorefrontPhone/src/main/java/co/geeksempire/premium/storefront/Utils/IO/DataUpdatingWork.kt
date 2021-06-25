@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 5:35 AM
+ * Last modified 6/25/21, 5:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,6 +44,8 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
     var stringBuilder = StringBuilder()
 
     override suspend fun doWork(): Result {
+
+        println(">>> 3")
 
         val updateDataKey = workerParams.inputData.getByteArray(IO.UpdateDataKey)?.let { String(it) }
 
@@ -105,9 +107,13 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                 } else {
                     Log.d(this@DataUpdatingWork.javaClass.simpleName, "No More Content")
 
+                    println(">>> 4")
+
                     stringBuilder.append(rawDataJsonArray.toString())
 
                     inputProcess.writeDataToFile(updateDataKey, stringBuilder.toString())
+
+                    println(">>> " + stringBuilder.toString())
 
                 }
 
