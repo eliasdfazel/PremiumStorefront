@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 8:13 AM
+ * Last modified 6/25/21, 9:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,12 +36,15 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
         val allContentFile = context.getFileStreamPath(IO.UpdateApplicationsDataKey)
 
         if (allContentFile.exists()) {
+            Log.d(this@AllContent.javaClass.simpleName, "Offline Data Available")
 
             val offlineData = JSONArray(allContentFile.readText(Charset.defaultCharset()))
 
-            println(">>> " + offlineData.length())
+            storefrontLiveData.processAllContentOffline(offlineData).invokeOnCompletion {
 
-            storefrontLiveData.processAllContent(offlineData)
+                allLoadingFinished = true
+
+            }
 
         } else {
 

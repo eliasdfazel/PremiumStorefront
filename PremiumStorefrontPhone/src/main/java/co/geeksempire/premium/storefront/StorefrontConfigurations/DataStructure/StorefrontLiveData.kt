@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 10:28 AM
+ * Last modified 6/25/21, 9:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -117,7 +117,7 @@ class StorefrontLiveData : ViewModel() {
     }
 
     fun processAllContentMore(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
-        Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content")
+        Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content And Add Them To Memory")
 
         val storefrontAllContents = ArrayList<StorefrontContentsData>()
 
@@ -128,7 +128,7 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
-            val productIcon = (featuredContentImages[1] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
             val productCover = try {
                 (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
             } catch (e: Exception) {
@@ -177,6 +177,35 @@ class StorefrontLiveData : ViewModel() {
         storefrontAllContents.addAll(storefrontAllContentsSorted)
 
         allContentMoreItemData.postValue(storefrontAllContents)
+
+    }
+
+    fun processAllContentOffline(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+        Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content")
+
+        val initialJsonArray = JSONArray()
+
+        val targetIndex = if (allContentJsonArray.length() >= 11) {
+
+            11
+
+        } else {
+
+            allContentJsonArray.length()
+
+        }
+
+        for (indexContent in 0 until targetIndex) {
+
+            initialJsonArray.put(allContentJsonArray[indexContent])
+
+            allContentJsonArray.remove(indexContent)
+
+        }
+
+        processAllContent(initialJsonArray)
+
+        processAllContentMore(allContentJsonArray)
 
     }
 
