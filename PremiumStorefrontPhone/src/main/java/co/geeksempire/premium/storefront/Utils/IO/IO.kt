@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 4:51 AM
+ * Last modified 6/25/21, 5:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,10 +15,10 @@ class IO {
     companion object {
         const val UpdateDataKey = "UpdateDataKey"
 
-        const val UpdateApplicationsDataKey = "UpdateApplicationsDataKey"
-        const val UpdateGamesDataKey = "UpdateGamesDataKey"
-        const val UpdateBooksDataKey = "UpdateBooksDataKey"
-        const val UpdateMoviesDataKey = "UpdateMoviesDataKey"
+        const val UpdateApplicationsDataKey = "ApplicationsData"
+        const val UpdateGamesDataKey = "GamesData"
+        const val UpdateBooksDataKey = "BooksData"
+        const val UpdateMoviesDataKey = "MoviesData"
     }
 
 }

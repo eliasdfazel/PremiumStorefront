@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 5:22 AM
+ * Last modified 6/25/21, 5:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
+import co.geeksempire.premium.storefront.Database.Write.InputProcess
 import co.geeksempire.premium.storefront.NetworkConnections.ApplicationsQueryEndpoint
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.R
@@ -38,6 +39,10 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
 
     private val applicationsQueryEndpoint: ApplicationsQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
 
+    private val inputProcess = InputProcess()
+
+    var stringBuilder = StringBuilder()
+
     override suspend fun doWork(): Result {
 
         val updateDataKey = workerParams.inputData.getByteArray(IO.UpdateDataKey)?.let { String(it) }
@@ -54,7 +59,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
         when (updateDataKey) {
             IO.UpdateApplicationsDataKey -> {
 
-                startContentRetrieval(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint())
+                startContentRetrieval(IO.UpdateApplicationsDataKey, applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint())
 
             }
             IO.UpdateGamesDataKey -> {
@@ -83,23 +88,26 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
         return Result.success()
     }
 
-    private fun startContentRetrieval(endpointAddress: String) {
+    private fun startContentRetrieval(updateDataKey: String, endpointAddress: String) {
 
         GenericJsonRequest(applicationContext, object : JsonRequestResponses {
 
             override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
                 super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-
-
                 if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
                     Log.d(this@DataUpdatingWork.javaClass.simpleName, "There Might Be More Data To Retrieve")
 
-                    startContentRetrieval(endpointAddress)
+                    stringBuilder.append(rawDataJsonArray.toString())
+
+                    startContentRetrieval(endpointAddress, updateDataKey)
 
                 } else {
+                    Log.d(this@DataUpdatingWork.javaClass.simpleName, "No More Content")
 
+                    stringBuilder.append(rawDataJsonArray.toString())
 
+                    inputProcess.writeDataToFile(updateDataKey, stringBuilder.toString())
 
                 }
 
