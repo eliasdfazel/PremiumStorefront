@@ -12,49 +12,47 @@ const runtimeOptions = {
     timeoutSeconds: 313,
 }
 
-exports.sendNewestPostNotification = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+exports.triggerBackgroundUpdatingProcessApplications = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
 
-    //237DAE
-    var postColor = req.query.postColor;
 
-      var jsonParserResponseText = JSON.parse(xmlHttpRequest.responseText);
+    var jsonParserResponseText = JSON.parse(xmlHttpRequest.responseText);
 
-            var newestPostJson = jsonParserResponseText[0];
+    var newestPostJson = jsonParserResponseText[0];
 
-            var postTitle = newestPostJson['title'].rendered;
-            var postSummary = newestPostJson['excerpt'].rendered.replace( /(<([^>]+)>)/ig, '');
-            var postFeaturedImage = newestPostJson['jetpack_featured_media_url'];
+    var postTitle = newestPostJson['title'].rendered;
+    var postSummary = newestPostJson['excerpt'].rendered.replace(/(<([^>]+)>)/ig, '');
+    var postFeaturedImage = newestPostJson['jetpack_featured_media_url'];
 
-            var message = {
-                notification: {
-                    title: postTitle,
-                    body: postSummary
-                },
-                android: {
-                    notification: {
-                        image: '' + postFeaturedImage,
-                        color: '#' + postColor
-                    }
-                },
-                data: {
-                    title: postTitle,
-                    summary: postSummary,
-                    color: '#' + postColor,
-                    image: '' + postFeaturedImage
-                },
-                topic: 'NewestPosts'
-            };
+    var message = {
+        notification: {
+            title: postTitle,
+            body: postSummary
+        },
+        android: {
+            notification: {
+                image: '' + postFeaturedImage,
+                color: '#' + postColor
+            }
+        },
+        data: {
+            title: postTitle,
+            summary: postSummary,
+            color: '#' + postColor,
+            image: '' + postFeaturedImage
+        },
+        topic: 'NewestPosts'
+    };
 
-            admin.messaging().send(message)
-                .then((response) => {
+    admin.messaging().send(message)
+        .then((response) => {
 
-                    res.status(200).send('Title: ' + postTitle + '<br/>' + 'Summary: ' + postSummary + '<br/>' + 'Color: ' + '#' + postColor + '<br/>' + 'Featured Image: ' + postFeaturedImage);
+            res.status(200).send('Done!');
 
-                })
-                .catch((error) => {
+        })
+        .catch((error) => {
 
-                    res.status(200).send('Error: ' + error);
+            res.status(200).send('Error: ' + error);
 
-                });
+        });
 
 });
