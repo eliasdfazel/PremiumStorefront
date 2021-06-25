@@ -41,3 +41,93 @@ exports.triggerBackgroundUpdatingProcessApplications = functions.runWith(runtime
         });
 
 });
+
+exports.triggerBackgroundUpdatingProcessGames = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var message = {
+
+        android: {
+            ttl: (3600 * 1000) * (24), // 1 Hour in Milliseconds
+
+            priority: 'high',
+        },
+
+        data: {
+            UpdateDataKey: 'GamesData',
+        },
+        topic: 'PremiumStorefront'
+    };
+
+    admin.messaging().send(message)
+        .then((response) => {
+
+            res.status(200).send('Done!');
+
+        })
+        .catch((error) => {
+
+            res.status(200).send('Error: ' + error);
+
+        });
+
+});
+
+exports.triggerBackgroundUpdatingProcessBooks = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var message = {
+
+        android: {
+            ttl: (3600 * 1000) * (24), // 1 Hour in Milliseconds
+
+            priority: 'high',
+        },
+
+        data: {
+            UpdateDataKey: 'BooksData',
+        },
+        topic: 'PremiumStorefront'
+    };
+
+    admin.messaging().send(message)
+        .then((response) => {
+
+            res.status(200).send('Done!');
+
+        })
+        .catch((error) => {
+
+            res.status(200).send('Error: ' + error);
+
+        });
+
+});
+
+exports.triggerBackgroundUpdatingProcessMovies = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var message = {
+
+        android: {
+            ttl: (3600 * 1000) * (24), // 1 Hour in Milliseconds
+
+            priority: 'high',
+        },
+
+        data: {
+            UpdateDataKey: 'MoviesData',
+        },
+        topic: 'PremiumStorefront'
+    };
+
+    admin.messaging().send(message)
+        .then((response) => {
+
+            res.status(200).send('Done!');
+
+        })
+        .catch((error) => {
+
+            res.status(200).send('Error: ' + error);
+
+        });
+
+});
