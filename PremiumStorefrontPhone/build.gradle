@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/23/21, 9:14 AM
+ * Last modified 6/25/21, 3:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -149,6 +149,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-config-ktx'
 
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    implementation 'com.google.firebase:firebase-functions-ktx'
 
 
     implementation 'com.airbnb.android:lottie:3.7.0'

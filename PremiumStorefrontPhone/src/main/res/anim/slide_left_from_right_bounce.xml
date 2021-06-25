@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/24/21, 12:55 PM
+  ~ Last modified 6/25/21, 3:52 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,13 +14,12 @@
 	android:shareInterpolator="true">
 
 	<translate
-		android:fromXDelta="+19%p"
+		android:fromXDelta="+13%p"
 		android:toXDelta="0"
-		android:duration="977"/>
+		android:duration="753"/>
 
 	<alpha
 		android:fromAlpha="0.0"
-		android:toAlpha="1.0"
-		android:duration="@android:integer/config_mediumAnimTime" />
+		android:toAlpha="1.0" />
 
 </set>

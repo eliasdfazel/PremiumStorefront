@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/30/21, 12:36 PM
+ * Last modified 6/25/21, 4:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,8 +21,11 @@ class NotificationBuilder (private val context: Context) {
 
     private val notificationManager = context.getSystemService(Service.NOTIFICATION_SERVICE) as NotificationManager
 
-    fun create(notificationChannelId: String = this@NotificationBuilder.javaClass.simpleName, notificationId: Int = 666,
-               notificationTitle: String?, notificationContent: String?, notificationContentDone: String? = null,
+    fun create(notificationChannelId: String = this@NotificationBuilder.javaClass.simpleName,
+               notificationId: Int = 666,
+               notificationTitle: String = context.getString(R.string.applicationName),
+               notificationContent: String = context.getString(R.string.settingUpText),
+               notificationContentDone: String = context.getString(R.string.doneText),
                notificationColor: Int = context.getColor(R.color.default_color),
                notificationIntent: Intent? = null,
                notificationSilent: Boolean = false,
@@ -30,20 +33,18 @@ class NotificationBuilder (private val context: Context) {
 
         val notificationBuilder = NotificationCompat.Builder(context, notificationChannelId)
         notificationBuilder.setTicker(notificationTitle)
-        notificationBuilder.setContentTitle(notificationTitle?:context.getString(R.string.applicationName))
-        notificationBuilder.setContentText(notificationContent?:context.getString(R.string.settingUpText))
+        notificationBuilder.setContentTitle(notificationTitle)
+        notificationBuilder.setContentText(notificationContent)
         notificationBuilder.setSmallIcon(R.drawable.notification_icon)
         notificationBuilder.color = notificationColor
         notificationBuilder.setStyle(NotificationCompat.BigTextStyle()
             .bigText(notificationContent))
 
-        if (notificationSilent) {
-            notificationBuilder.setNotificationSilent()
-        }
+        notificationBuilder.setSilent(notificationSilent)
 
         if (notificationDone) {
 
-            notificationBuilder.setContentText(notificationContentDone?:context.getString(R.string.doneText))
+            notificationBuilder.setContentText(notificationContentDone)
             notificationBuilder.setAutoCancel(true)
             notificationBuilder.setOngoing(false)
 
