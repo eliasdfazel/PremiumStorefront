@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 5:18 AM
+ * Last modified 6/25/21, 5:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,7 +30,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
         const val NotificationId = 123
     }
 
-    val notificationBuilder: NotificationBuilder by lazy {
+    private val notificationBuilder: NotificationBuilder by lazy {
         NotificationBuilder(applicationContext)
     }
 
