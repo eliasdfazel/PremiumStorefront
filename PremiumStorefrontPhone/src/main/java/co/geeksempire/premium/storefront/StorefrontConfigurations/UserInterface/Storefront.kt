@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/24/21, 11:35 AM
+ * Last modified 6/25/21, 7:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -432,6 +432,19 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
     override fun onStart() {
         super.onStart()
+
+        RemoteSubscriptions()
+            .subscribe("PremiumStorefront", object : SubscriptionInterface {
+
+                override fun subscriptionSucceed() {
+                    super.subscriptionSucceed()
+                }
+
+                override fun subscriptionFailed() {
+                    super.subscriptionFailed()
+                }
+
+            })
 
         Firebase.auth.currentUser?.let {
 

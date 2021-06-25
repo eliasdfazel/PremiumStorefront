@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 4:44 AM
+ * Last modified 6/25/21, 8:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,6 @@ package co.geeksempire.premium.storefront.Utils.Notifications
 
 import android.app.*
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import co.geeksempire.premium.storefront.R
@@ -27,7 +26,7 @@ class NotificationBuilder (private val context: Context) {
                notificationContent: String = context.getString(R.string.settingUpText),
                notificationContentDone: String = context.getString(R.string.doneText),
                notificationColor: Int = context.getColor(R.color.default_color),
-               notificationIntent: Intent? = null,
+               notificationIntent: PendingIntent? = null,
                notificationSilent: Boolean = false,
                notificationDone: Boolean = false) : Notification {
 
@@ -65,9 +64,9 @@ class NotificationBuilder (private val context: Context) {
 
         }
 
-        notificationBuilder.setContentIntent(
-            PendingIntent.getActivity(context, 111, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-        )
+        notificationIntent?.let {
+            notificationBuilder.setContentIntent(notificationIntent)
+        }
 
         notificationManager.notify(notificationId, notificationBuilder.build())
 

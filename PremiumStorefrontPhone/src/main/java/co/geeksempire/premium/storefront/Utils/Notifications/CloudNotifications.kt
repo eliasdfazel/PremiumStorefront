@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 6:26 AM
+ * Last modified 6/25/21, 8:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.Utils.Notifications
 
+import co.geeksempire.premium.storefront.Database.Json.JsonIO
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -17,21 +18,19 @@ import com.google.firebase.messaging.RemoteMessage
 
 class CloudNotifications : FirebaseMessagingService() {
 
+    private val jsonIO = JsonIO()
+
     private val updatingDataIO: UpdatingDataIO by lazy {
         UpdatingDataIO(applicationContext)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
-        println(">>> 0 " + remoteMessage.data)
-
         remoteMessage.data.let { linkedHashMapData ->
 
             linkedHashMapData[IO.UpdateDataKey]?.let { updateDataKey ->
                 when (updateDataKey) {
                     IO.UpdateApplicationsDataKey -> {
-
-                        println(">>> 1")
 
                         updatingDataIO.startUpdatingApplicationsData()
 

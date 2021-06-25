@@ -23,13 +23,12 @@ exports.triggerBackgroundUpdatingProcessApplications = functions.runWith(runtime
         },
 
         data: {
-            UpdateDataKey: "ApplicationsData",
+            UpdateDataKey: 'ApplicationsData',
         },
+        topic: 'PremiumStorefront'
     };
 
-    res.send(message);
-
-    /*admin.messaging().send(message)
+    admin.messaging().send(message)
         .then((response) => {
 
             res.status(200).send('Done!');
@@ -39,6 +38,6 @@ exports.triggerBackgroundUpdatingProcessApplications = functions.runWith(runtime
 
             res.status(200).send('Error: ' + error);
 
-        });*/
+        });
 
 });
