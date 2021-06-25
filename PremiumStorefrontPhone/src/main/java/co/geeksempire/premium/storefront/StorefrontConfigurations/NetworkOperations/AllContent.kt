@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/21/21, 9:09 AM
+ * Last modified 6/25/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,9 +15,11 @@ import android.util.Log
 import co.geeksempire.premium.storefront.NetworkConnections.ApplicationsQueryEndpoint
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
+import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
 import org.json.JSONArray
+import java.nio.charset.Charset
 
 class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveData) {
 
@@ -31,29 +33,43 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
     fun retrieveAllContent() {
 
-        GenericJsonRequest(context, object : JsonRequestResponses {
+        val allContentFile = context.getFileStreamPath(IO.UpdateApplicationsDataKey)
 
-            override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
-                super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
+        if (allContentFile.exists()) {
 
-                storefrontLiveData.processAllContent(rawDataJsonArray)
+            val offlineData = JSONArray(allContentFile.readText(Charset.defaultCharset()))
 
-                if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
-                    Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
+            println(">>> " + offlineData.length())
 
-                    numberOfPageToRetrieve++
+            storefrontLiveData.processAllContent(offlineData)
 
-                    retrieveAllContentMore()
+        } else {
 
-                } else {
+            GenericJsonRequest(context, object : JsonRequestResponses {
 
-                    allLoadingFinished = true
+                override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
+                    super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
+
+                    storefrontLiveData.processAllContent(rawDataJsonArray)
+
+                    if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
+                        Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
+
+                        numberOfPageToRetrieve++
+
+                        retrieveAllContentMore()
+
+                    } else {
+
+                        allLoadingFinished = true
+
+                    }
 
                 }
 
-            }
+            }).getMethod(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint())
 
-        }).getMethod(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint())
+        }
 
     }
 
