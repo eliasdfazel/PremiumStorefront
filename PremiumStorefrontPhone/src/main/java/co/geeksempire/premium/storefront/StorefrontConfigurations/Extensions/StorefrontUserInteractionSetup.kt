@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 10:54 AM
+ * Last modified 6/26/21, 5:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,7 +32,7 @@ fun Storefront.userInteractionSetup() {
         } else {
 
             startActivity(Intent(applicationContext, AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
+                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, 0).toBundle())
 
         }
 
@@ -50,7 +50,7 @@ fun Storefront.userInteractionSetup() {
             override fun onAnimationEnd(animation: Animation?) {
 
                 startActivity(Intent(applicationContext, PreferencesControl::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                    ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
+                    ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, 0).toBundle())
 
             }
 
@@ -64,7 +64,7 @@ fun Storefront.userInteractionSetup() {
 
         startActivity(
             Intent(this@userInteractionSetup, FavoriteProducts::class.java),
-            ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, R.anim.slide_out_left).toBundle())
+            ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())
 
     }
 

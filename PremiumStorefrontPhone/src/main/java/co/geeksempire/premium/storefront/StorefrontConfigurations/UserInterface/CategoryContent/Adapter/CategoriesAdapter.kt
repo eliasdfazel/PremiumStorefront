@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/23/21, 9:08 AM
+ * Last modified 6/26/21, 5:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -209,7 +209,7 @@ class CategoriesAdapter(private val context: Storefront, private val filterAllCo
                             putExtra(CategoriesDataKeys.CategoryId, storefrontCategories[position].categoryId)
                             putExtra(CategoriesDataKeys.CategoryName, storefrontCategories[position].categoryName)
                             putExtra(CategoriesDataKeys.CategoryIcon, storefrontCategories[position].categoryIconLink)
-                        }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
+                        }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
                         balloonOptionsMenu.removeBalloonOption()
 

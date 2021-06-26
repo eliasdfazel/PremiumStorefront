@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 1:38 PM
+ * Last modified 6/26/21, 5:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,7 +46,7 @@ class BuiltInBrowser : AppCompatActivity() {
                 putExtra("GradientColorOne", gradientColorOne)
                 putExtra("GradientColorTwo", gradientColorTwo)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(this@apply, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, R.anim.fade_out).toBundle())
+                context.startActivity(this@apply, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
             }
 
         }

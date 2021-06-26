@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/11/21, 7:30 AM
+ * Last modified 6/26/21, 6:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,17 +11,15 @@
 package co.geeksempire.premium.storefront.Preferences.UserInterface
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
-import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Preferences.DataStructure.PreferencesLiveData
 import co.geeksempire.premium.storefront.Preferences.Extensions.preferencesControlSetupUserInteractions
 import co.geeksempire.premium.storefront.Preferences.Extensions.preferencesControlSetupUserInterface
 import co.geeksempire.premium.storefront.Preferences.Extensions.toggleLightDark
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -53,23 +51,18 @@ class PreferencesControl : AppCompatActivity() {
 
             preferencesLiveData.toggleTheme.observe(this@PreferencesControl, Observer { themeType ->
 
-                Handler(Looper.getMainLooper()).postDelayed({
-
-                    toggleLightDark()
-
-                }, when (themeType) {
-                    ThemeType.ThemeLight -> {
-                        5000
-                    }
-                    ThemeType.ThemeDark -> {
-                        5000
-                    }
-                    else -> 5000
-                })
+                toggleLightDark()
 
             })
 
         }
+
+    }
+
+    override fun onBackPressed() {
+
+        this@PreferencesControl.finish()
+        overridePendingTransition(0, R.anim.slide_out_right)
 
     }
 

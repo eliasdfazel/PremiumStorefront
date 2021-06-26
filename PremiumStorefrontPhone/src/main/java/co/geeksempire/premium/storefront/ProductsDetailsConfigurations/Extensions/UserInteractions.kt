@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 11:48 AM
+ * Last modified 6/26/21, 5:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -132,7 +132,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
     } else {
 
         startActivity(Intent(requireContext(), AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-            ActivityOptions.makeCustomAnimation(requireContext(), R.anim.slide_in_right, R.anim.slide_out_left).toBundle())
+            ActivityOptions.makeCustomAnimation(requireContext(), R.anim.slide_in_right, 0).toBundle())
 
     }
 

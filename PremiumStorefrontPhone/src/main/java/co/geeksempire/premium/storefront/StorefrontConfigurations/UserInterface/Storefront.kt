@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 9:45 AM
+ * Last modified 6/26/21, 5:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -323,6 +323,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     featuredContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
+                    storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
 
                     PopupShortcutsCreator(applicationContext)
                         .configure(it.subList(0, 5).toList())
@@ -345,6 +346,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
                     newContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
+                    storefrontLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
 
                 } else {
 
@@ -551,7 +553,7 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
             startActivity(Intent(Intent.ACTION_MAIN).apply {
                 this.addCategory(Intent.CATEGORY_HOME)
                 this.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
+            }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, 0).toBundle())
 
         }
 

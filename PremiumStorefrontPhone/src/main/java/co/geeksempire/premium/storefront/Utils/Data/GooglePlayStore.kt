@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 12:00 PM
+ * Last modified 6/26/21, 5:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -86,7 +86,7 @@ fun openPlayStoreToInstall(context: Context, aPackageName: String, applicationNa
     context.startActivity(Intent(Intent.ACTION_VIEW,
         generateInstallDynamicLink(context = context, aPackageName = aPackageName,
             applicationName = applicationName, applicationSummary = applicationSummary)
-    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, R.anim.fade_out).toBundle())
+    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0).toBundle())
 
 }
 
