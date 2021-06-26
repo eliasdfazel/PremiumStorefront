@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 5:41 AM
+ * Last modified 6/26/21, 7:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,6 +51,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.NewContent.Adapter.NewContentAdapter
+import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
@@ -81,6 +82,10 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface, FragmentInterface {
+
+    val updatingDataIO: UpdatingDataIO by lazy {
+        UpdatingDataIO(applicationContext)
+    }
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@Storefront)
@@ -377,6 +382,8 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
 
                 }
+
+                updatingDataIO.startUpdatingApplicationsDataPeriodic()
 
             })
 

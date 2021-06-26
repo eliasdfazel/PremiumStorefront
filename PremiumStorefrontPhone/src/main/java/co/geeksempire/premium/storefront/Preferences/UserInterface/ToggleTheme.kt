@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 6:11 AM
+ * Last modified 6/26/21, 6:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,7 +57,7 @@ class ToggleTheme (private val context: AppCompatActivity,
                     when (themePreferences.checkThemeLightDark().first()) {
                         ThemeType.ThemeLight -> {
 
-                            it.speed = 2.0f
+                            it.speed = 3f
                             it.setMinAndMaxFrame(1, 251)
 
                             if (!it.isAnimating) {
@@ -77,7 +77,7 @@ class ToggleTheme (private val context: AppCompatActivity,
                         }
                         ThemeType.ThemeDark -> {
 
-                            it.speed = -2.0f
+                            it.speed = -3f
                             it.setMinAndMaxFrame(1, 251)
 
                             if (!it.isAnimating) {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/17/21, 2:18 PM
+ * Last modified 6/26/21, 6:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,16 +54,19 @@ class FeaturedContentAdapter(private val context: Storefront) : RecyclerView.Ada
         when (themeType) {
             ThemeType.ThemeLight -> {
 
+                featuredContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.black))
                 featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
             }
             ThemeType.ThemeDark -> {
 
+                featuredContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.white))
                 featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
 
             }
             else -> {
 
+                featuredContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.black))
                 featuredContentViewHolder.productNameBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
             }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 5:41 AM
+ * Last modified 6/26/21, 7:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,9 @@ package co.geeksempire.premium.storefront.Preferences.Extensions
 import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.net.Uri
+import android.util.TypedValue
+import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser
 import co.geeksempire.premium.storefront.Invitations.Send.SendInvitation
@@ -20,8 +23,12 @@ import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesCo
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 import co.geeksempire.premium.storefront.Utils.InApplicationReview.InApplicationReviewProcess
+import co.geeksempire.premium.storefront.Utils.InApplicationReview.ReviewInterface
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
+import com.google.android.play.core.review.ReviewInfo
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
@@ -79,6 +86,21 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
      * Bottom Section
      */
 
+    lifecycleScope.launch {
+
+        reviewUtils.reviewSubmitted().collect {
+
+            if (it) {
+
+                preferencesControlLayoutBinding.rateItView.text = getString(R.string.followUsText)
+                preferencesControlLayoutBinding.rateItView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 33f)
+
+            }
+
+        }
+
+    }
+
     preferencesControlLayoutBinding.updateItView.setOnClickListener {
 
         InApplicationUpdateProcess(this@preferencesControlSetupUserInteractions, preferencesControlLayoutBinding.rootView)
@@ -104,8 +126,36 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
     preferencesControlLayoutBinding.rateItView.setOnClickListener {
 
-        InApplicationReviewProcess(this@preferencesControlSetupUserInteractions)
-            .start()
+        lifecycleScope.launch {
+
+            reviewUtils.reviewSubmitted().collect {
+
+                if (it) {
+
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookLink)))
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                        ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
+
+                } else {
+
+                    InApplicationReviewProcess(this@preferencesControlSetupUserInteractions)
+                        .start(object : ReviewInterface {
+
+                            override fun reviewSubmitted(reviewInfo: ReviewInfo) {
+                                super.reviewSubmitted(reviewInfo)
+
+                                preferencesControlLayoutBinding.rateItView.text = getString(R.string.followUsText)
+                                preferencesControlLayoutBinding.rateItView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 33f)
+
+                            }
+
+                        })
+
+                }
+
+            }
+
+        }
 
     }
 

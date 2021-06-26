@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 6:11 AM
+ * Last modified 6/26/21, 6:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,9 @@ import co.geeksempire.premium.storefront.Preferences.DataStructure.PreferencesLi
 import co.geeksempire.premium.storefront.Preferences.Extensions.preferencesControlSetupUserInteractions
 import co.geeksempire.premium.storefront.Preferences.Extensions.preferencesControlSetupUserInterface
 import co.geeksempire.premium.storefront.Preferences.Extensions.toggleLightDark
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.InApplicationReview.ReviewUtils
 import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -32,6 +34,10 @@ class PreferencesControl : AppCompatActivity() {
 
     val preferencesLiveData: PreferencesLiveData by lazy {
         ViewModelProvider(this@PreferencesControl).get(PreferencesLiveData::class.java)
+    }
+
+    val reviewUtils: ReviewUtils by lazy {
+        ReviewUtils((application as PremiumStorefrontApplication).preferencesIO)
     }
 
     val firebaseUser = Firebase.auth.currentUser
