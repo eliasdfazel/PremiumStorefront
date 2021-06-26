@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 7:27 AM
+ * Last modified 6/26/21, 7:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,6 +51,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.NewContent.Adapter.NewContentAdapter
+import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
@@ -383,7 +384,15 @@ class Storefront : AppCompatActivity(), NetworkConnectionListenerInterface, Sign
 
                 }
 
-                updatingDataIO.startUpdatingApplicationsDataPeriodic()
+                if (getFileStreamPath(IO.UpdateApplicationsDataKey).exists()) {
+
+                    updatingDataIO.startUpdatingApplicationsDataPeriodic()
+
+                } else {
+
+                    updatingDataIO.startUpdatingApplicationsData()
+
+                }
 
             })
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 7:35 AM
+ * Last modified 6/26/21, 7:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,9 +29,9 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
             "&" +
             "exclude=2341" +
             "&" +
-            "orderby=price" +
+            "orderby=date" +
             "&" +
-            "order=asc"
+            "order=desc"
 
     fun getFeaturedApplicationsEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String =
         getAllAndroidApplicationsEndpoint(productPerPage, numberOfPage) +

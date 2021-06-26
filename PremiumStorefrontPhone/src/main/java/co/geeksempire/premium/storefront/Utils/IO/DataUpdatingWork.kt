@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 8:03 AM
+ * Last modified 6/26/21, 7:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,9 +53,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
         val updateDataKey = workerParams.inputData.getByteArray(IO.UpdateDataKey)?.let { String(it) }
 
 
-        setForegroundAsync(ForegroundInfo(
-            Foreground.NotificationId,
-            notificationBuilder.create(
+        setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
                 notificationTitle = applicationContext.getString(R.string.applicationName),
                 notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
                 notificationDone = false)

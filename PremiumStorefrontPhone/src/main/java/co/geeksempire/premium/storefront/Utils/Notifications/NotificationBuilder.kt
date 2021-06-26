@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 8:04 AM
+ * Last modified 6/26/21, 7:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,16 +41,6 @@ class NotificationBuilder (private val context: Context) {
 
         notificationBuilder.setSilent(notificationSilent)
 
-        if (notificationDone) {
-
-            notificationBuilder.setContentText(notificationContentDone)
-            notificationBuilder.setAutoCancel(true)
-            notificationBuilder.setOngoing(false)
-
-            notificationManager.notify(notificationId, notificationBuilder.build())
-
-        }
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             notificationBuilder.setChannelId(notificationChannelId)
@@ -68,7 +58,19 @@ class NotificationBuilder (private val context: Context) {
             notificationBuilder.setContentIntent(notificationIntent)
         }
 
-        notificationManager.notify(notificationId, notificationBuilder.build())
+        if (notificationDone) {
+
+            notificationBuilder.setContentText(notificationContentDone)
+            notificationBuilder.setAutoCancel(true)
+            notificationBuilder.setOngoing(false)
+
+            notificationManager.notify(notificationId, notificationBuilder.build())
+
+        } else {
+
+            notificationManager.notify(notificationId, notificationBuilder.build())
+
+        }
 
         return notificationBuilder.build()
 
