@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/21/21, 9:08 AM
+ * Last modified 6/27/21, 11:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,11 @@
 package co.geeksempire.premium.storefront.NetworkConnections
 
 class GeneralEndpoint {
+
+    object QueryType {
+        const val ApplicationsQuery = "80"
+        const val GamesQuery = "546"
+    }
 
     private object Security {
         const val ConsumerKey = "ck_e469d717bd778da4fb9ec24881ee589d9b202662"

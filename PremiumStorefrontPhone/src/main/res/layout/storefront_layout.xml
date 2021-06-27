@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/26/21, 5:25 AM
+  ~ Last modified 6/27/21, 11:02 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/premiumLight"
-    tools:context="co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront">
+    tools:context=".StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications">
 
     <!--  Content  -->
     <androidx.appcompat.widget.AppCompatImageView

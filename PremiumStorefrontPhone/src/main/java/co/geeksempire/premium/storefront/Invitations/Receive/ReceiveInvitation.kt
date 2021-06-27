@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 9:31 AM
+ * Last modified 6/27/21, 11:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import co.geeksempire.premium.storefront.AccountManager.DataStructure.AccountDat
 import co.geeksempire.premium.storefront.EntryConfigurations
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.UserInterface.Storefront
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.databinding.ReceiveInvitationLayoutBinding
@@ -51,7 +51,7 @@ class ReceiveInvitation : AppCompatActivity() {
 
                         if (Firebase.auth.currentUser != null) {
 
-                            startActivity(Intent(applicationContext, Storefront::class.java).apply {
+                            startActivity(Intent(applicationContext, StorefrontApplications::class.java).apply {
 
                             }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
 
