@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 3:52 AM
+ * Last modified 6/27/21, 5:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -42,7 +42,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
@@ -142,18 +141,6 @@ class ProductDetailsFragment : Fragment() {
 
                                             if (getString(ProductDataKey.ProductCoverImage) == null) {
 
-                                                productDetailsLayoutBinding.applicationFeaturedImageBlurView.visibility = View.VISIBLE
-
-                                                productDetailsLayoutBinding.applicationFeaturedImageBlurView.setOverlayColor(when (it) {
-                                                    ThemeType.ThemeLight -> {
-                                                        requireContext().getColor(R.color.light_transparent)
-                                                    }
-                                                    ThemeType.ThemeDark -> {
-                                                        requireContext().getColor(R.color.dark_transparent)
-                                                    }
-                                                    else -> requireContext().getColor(R.color.light_transparent)
-                                                })
-
                                                 productDetailsLayoutBinding.applicationIconBlurView.setSecondOverlayColor(when (it) {
                                                     ThemeType.ThemeLight -> {
                                                         requireContext().getColor(R.color.light_transparent_high)
@@ -169,21 +156,16 @@ class ProductDetailsFragment : Fragment() {
                                                 productDetailsLayoutBinding.applicationFeaturedImageView.background = gradientFeaturedBackground
 
                                                 Glide.with(requireContext())
-                                                    .load(resource)
-                                                    .transform(CenterCrop())
+                                                    .load(requireContext().getString(R.string.choicePremiumStorefront))
                                                     .into(productDetailsLayoutBinding.applicationFeaturedImageView)
 
                                             } else {
 
-                                                getString(ProductDataKey.ProductCoverImage)?.let { productCoverImage ->
-
-                                                    Glide.with(requireContext())
-                                                        .asDrawable()
-                                                        .load(productCoverImage)
-                                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                                        .into(productDetailsLayoutBinding.applicationFeaturedImageView)
-
-                                                }
+                                                Glide.with(requireContext())
+                                                    .asDrawable()
+                                                    .load(getString(ProductDataKey.ProductCoverImage))
+                                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                    .into(productDetailsLayoutBinding.applicationFeaturedImageView)
 
                                             }
 
