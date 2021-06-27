@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:02 AM
+ * Last modified 6/27/21, 11:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,19 +13,25 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontFor
 import android.content.Context
 import android.util.Log
 import co.geeksempire.premium.storefront.NetworkConnections.ApplicationsQueryEndpoint
+import co.geeksempire.premium.storefront.NetworkConnections.GamesQueryEndpoint
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
 import org.json.JSONArray
+import java.io.File
 import java.nio.charset.Charset
 
-class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveData) {
+class AllContent (val context: Context,
+                  val storefrontLiveData: StorefrontLiveData,
+                  val queryType: String = GeneralEndpoint.QueryType.ApplicationsQuery) {
 
     private val generalEndpoint = GeneralEndpoint()
 
     private val applicationsQueryEndpoint: ApplicationsQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
+
+    private val gamesQueryEndpoint: GamesQueryEndpoint = GamesQueryEndpoint(generalEndpoint)
 
     private var numberOfPageToRetrieve: Int = 1
 
@@ -33,7 +39,19 @@ class AllContent (val context: Context, val storefrontLiveData: StorefrontLiveDa
 
     fun retrieveAllContent() {
 
-        val allContentFile = context.getFileStreamPath(IO.UpdateApplicationsDataKey)
+        val allContentFile: File = when (queryType) {
+            GeneralEndpoint.QueryType.ApplicationsQuery -> {
+
+                context.getFileStreamPath(IO.UpdateApplicationsDataKey)
+
+            }
+            GeneralEndpoint.QueryType.GamesQuery -> {
+
+                context.getFileStreamPath(IO.UpdateGamesDataKey)
+
+            }
+            else -> context.getFileStreamPath(IO.UpdateApplicationsDataKey)
+        }
 
         if (allContentFile.exists()) {
             Log.d(this@AllContent.javaClass.simpleName, "Offline Data Available")

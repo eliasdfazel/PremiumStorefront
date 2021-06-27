@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:26 AM
+ * Last modified 6/27/21, 11:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -98,7 +98,7 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
     }
 
     val allContent: AllContent by lazy {
-        AllContent(applicationContext, storefrontLiveData)
+        AllContent(applicationContext, storefrontLiveData, GeneralEndpoint.QueryType.GamesQuery)
     }
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
@@ -261,7 +261,7 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
 
                     retrieveCategories(this@StorefrontGames,
-                        generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration)
+                        generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.GamesQuery)
 
                     storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
 
@@ -415,13 +415,13 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
 
                 }
 
-                if (getFileStreamPath(IO.UpdateApplicationsDataKey).exists()) {
+                if (getFileStreamPath(IO.UpdateGamesDataKey).exists()) {
 
-                    updatingDataIO.startUpdatingApplicationsDataPeriodic()
+                    updatingDataIO.startUpdatingGamesDataPeriodic()
 
                 } else {
 
-                    updatingDataIO.startUpdatingApplicationsData()
+                    updatingDataIO.startUpdatingGamesData()
 
                 }
 
@@ -610,12 +610,12 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
         Log.d(this@StorefrontGames.javaClass.simpleName, "Network Available @ ${this@StorefrontGames.javaClass.simpleName}")
 
         retrieveFeaturedContent(this@StorefrontGames,
-            storefrontLiveData, generalEndpoint)
+            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.GamesQuery)
 
         allContent.retrieveAllContent()
 
         retrieveNewContent(this@StorefrontGames,
-            storefrontLiveData, generalEndpoint)
+            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.GamesQuery)
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:36 AM
+ * Last modified 6/27/21, 11:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontFor
 
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.NetworkConnections.ApplicationsQueryEndpoint
+import co.geeksempire.premium.storefront.NetworkConnections.GamesQueryEndpoint
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
@@ -20,9 +21,24 @@ import org.json.JSONArray
 
 fun retrieveFeaturedContent(context: AppCompatActivity,
                             storefrontLiveData: StorefrontLiveData,
-                            generalEndpoint: GeneralEndpoint) {
+                            generalEndpoint: GeneralEndpoint,
+                            queryType: String = GeneralEndpoint.QueryType.ApplicationsQuery) {
 
     val applicationsQueryEndpoint: ApplicationsQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
+
+    val gamesQueryEndpoint: GamesQueryEndpoint = GamesQueryEndpoint(generalEndpoint)
+
+    val queryEndpoint = when (queryType) {
+        GeneralEndpoint.QueryType.ApplicationsQuery -> {
+
+            applicationsQueryEndpoint.getFeaturedApplicationsEndpoint()
+        }
+        GeneralEndpoint.QueryType.GamesQuery -> {
+
+            gamesQueryEndpoint.getFeaturedGamesEndpoint()
+        }
+        else -> applicationsQueryEndpoint.getFeaturedApplicationsEndpoint()
+    }
 
     GenericJsonRequest(context, object : JsonRequestResponses {
 
@@ -33,6 +49,6 @@ fun retrieveFeaturedContent(context: AppCompatActivity,
 
         }
 
-    }).getMethod(applicationsQueryEndpoint.getFeaturedApplicationsEndpoint())
+    }).getMethod(queryEndpoint)
 
 }

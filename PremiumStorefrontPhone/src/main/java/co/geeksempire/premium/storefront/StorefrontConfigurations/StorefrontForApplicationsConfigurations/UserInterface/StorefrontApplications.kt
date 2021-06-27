@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:26 AM
+ * Last modified 6/27/21, 11:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -98,7 +98,7 @@ class StorefrontApplications : AppCompatActivity(), NetworkConnectionListenerInt
     }
 
     val allContent: AllContent by lazy {
-        AllContent(applicationContext, storefrontLiveData)
+        AllContent(applicationContext, storefrontLiveData, GeneralEndpoint.QueryType.ApplicationsQuery)
     }
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
@@ -261,7 +261,7 @@ class StorefrontApplications : AppCompatActivity(), NetworkConnectionListenerInt
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
 
                     retrieveCategories(this@StorefrontApplications,
-                        generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration)
+                        generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.ApplicationsQuery)
 
                     storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
 
@@ -610,12 +610,12 @@ class StorefrontApplications : AppCompatActivity(), NetworkConnectionListenerInt
         Log.d(this@StorefrontApplications.javaClass.simpleName, "Network Available @ ${this@StorefrontApplications.javaClass.simpleName}")
 
         retrieveFeaturedContent(this@StorefrontApplications,
-            storefrontLiveData, generalEndpoint)
+            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
 
         allContent.retrieveAllContent()
 
         retrieveNewContent(this@StorefrontApplications,
-            storefrontLiveData, generalEndpoint)
+            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
 
     }
 
