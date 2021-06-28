@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/10/21, 11:06 AM
+ * Last modified 6/28/21, 7:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,9 +45,18 @@ class PreferencesIO (private val context: Context,
         }
     }
 
-    fun readPreferencesString(preferenceKey: Preferences.Key<String>) : Flow<String?> {
+    suspend fun savePreferences(preferenceKey: Preferences.Key<Int>, inputValue: Int) {
 
-        return context.dataStore.data.map { preferences -> preferences[preferenceKey] }
+        context.dataStore.edit { settings ->
+
+            settings[preferenceKey] = inputValue
+
+        }
+    }
+
+    fun readPreferencesString(preferenceKey: Preferences.Key<String>, defaultValue: String) : Flow<String> {
+
+        return context.dataStore.data.map { preferences -> preferences[preferenceKey]?:defaultValue }
     }
 
     fun readPreferencesBoolean(preferenceKey: Preferences.Key<Boolean>, defaultValue: Boolean) : Flow<Boolean> {

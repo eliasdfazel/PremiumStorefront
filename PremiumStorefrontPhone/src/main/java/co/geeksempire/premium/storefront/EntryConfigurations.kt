@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:02 AM
+ * Last modified 6/28/21, 7:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,12 +15,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.databinding.EntryConfigurationsLayoutBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class EntryConfigurations : AppCompatActivity() {
 
@@ -37,11 +42,40 @@ class EntryConfigurations : AppCompatActivity() {
 
         if (networkCheckpoint.networkConnection()) {
 
-            startActivity(Intent().apply {
-                setClass(applicationContext, StorefrontApplications::class.java)
-            }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
+            lifecycleScope.launch {
 
-            this@EntryConfigurations.finish()
+                (application as PremiumStorefrontApplication).entryPreferences.entryType().collect {
+                    when (it) {
+                        EntryPreferences.EntryStorefrontApplications -> {
+
+                            startActivity(Intent().apply {
+                                setClass(applicationContext, StorefrontApplications::class.java)
+                            }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
+
+                            this@EntryConfigurations.finish()
+
+                        }
+                        EntryPreferences.EntryStorefrontGames -> {
+
+                            startActivity(Intent().apply {
+                                setClass(applicationContext, StorefrontGames::class.java)
+                            }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
+
+                            this@EntryConfigurations.finish()
+
+                        } else -> {
+
+                            startActivity(Intent().apply {
+                                setClass(applicationContext, StorefrontApplications::class.java)
+                            }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
+
+                            this@EntryConfigurations.finish()
+
+                        }
+                    }
+                }
+
+            }
 
         } else {
 

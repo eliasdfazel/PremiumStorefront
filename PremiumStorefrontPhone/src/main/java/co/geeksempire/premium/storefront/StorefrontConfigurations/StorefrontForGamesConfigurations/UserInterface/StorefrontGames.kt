@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 5:23 AM
+ * Last modified 6/28/21, 7:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,6 +36,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePrefere
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
@@ -580,6 +581,13 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
 
     override fun onPause() {
         super.onPause()
+
+        lifecycleScope.launch {
+
+            (this@StorefrontGames.application as PremiumStorefrontApplication).entryPreferences.entryType(EntryPreferences.EntryStorefrontGames)
+
+        }
+
     }
 
     override fun onBackPressed() {
