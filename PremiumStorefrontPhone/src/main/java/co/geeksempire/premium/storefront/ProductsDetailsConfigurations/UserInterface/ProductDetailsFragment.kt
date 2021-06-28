@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 8:22 AM
+ * Last modified 6/28/21, 8:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -293,7 +293,6 @@ class ProductDetailsFragment : Fragment() {
                                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             }
                             requireContext().startActivity(emailIntent)
-
 
                         }
 
