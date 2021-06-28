@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 5:23 AM
+ * Last modified 6/28/21, 6:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.FeaturedContent.Adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.Featu
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import com.bumptech.glide.Glide
@@ -34,6 +36,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class FeaturedContentAdapter(private val context: AppCompatActivity,
                              private val contentDetailsContainer: FragmentContainerView, private val productDetailsFragment: ProductDetailsFragment,
@@ -96,15 +99,16 @@ class FeaturedContentAdapter(private val context: AppCompatActivity,
             .transform(CircleCrop())
             .listener(object : RequestListener<Drawable> {
 
-                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
+                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
 
                 override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
                     resource?.let {
 
-                        val vibrantColor = extractVibrantColor(context, resource)
-
                         context.runOnUiThread {
+
+                            val vibrantColor = extractVibrantColor(context, resource)
+                            val dominantColor = extractDominantColor(context, resource)
 
                             featuredContentViewHolder.installView.setBackgroundColor(vibrantColor)
 
@@ -113,11 +117,16 @@ class FeaturedContentAdapter(private val context: AppCompatActivity,
 
                             featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
 
+                            val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(vibrantColor, dominantColor))
+                            gradientFeaturedBackground.cornerRadius = dpToInteger(context, 11).toFloat()
+
+                            featuredContentViewHolder.backgroundCoverImageView.background = gradientFeaturedBackground
+
                         }
 
                     }
 
-                    return false
+                    return true
                 }
 
             })

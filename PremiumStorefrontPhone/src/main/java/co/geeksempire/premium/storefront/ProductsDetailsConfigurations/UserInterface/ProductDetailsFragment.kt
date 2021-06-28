@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 6/28/21, 6:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -128,10 +128,10 @@ class ProductDetailsFragment : Fragment() {
 
                             resource?.let {
 
-                                val dominantColor = extractDominantColor(requireContext(), resource)
-                                val vibrantColor = extractVibrantColor(requireContext(), resource)
-
                                 requireActivity().runOnUiThread {
+
+                                    val dominantColor = extractDominantColor(requireContext(), resource)
+                                    val vibrantColor = extractVibrantColor(requireContext(), resource)
 
                                     lifecycleScope.launch {
 
@@ -195,7 +195,7 @@ class ProductDetailsFragment : Fragment() {
             val productDeveloper = getString(ProductDataKey.ProductDeveloper)?:"Unknown"
             productDetailsLayoutBinding.applicationDeveloper.text = Html.fromHtml(productDeveloper, Html.FROM_HTML_MODE_COMPACT)
 
-            val productCategoryName = getString(ProductDataKey.ProductCategory)?.let {
+            getString(ProductDataKey.ProductCategory)?.let {
 
                 productDetailsLayoutBinding.categoryNameTextView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
 
@@ -222,7 +222,7 @@ class ProductDetailsFragment : Fragment() {
                 productDescription
             }
 
-            val applicationYoutubeIntroduction = getString(ProductDataKey.ProductYoutubeIntroduction)?.let { applicationYoutubeIntroduction ->
+            getString(ProductDataKey.ProductYoutubeIntroduction)?.let { applicationYoutubeIntroduction ->
 
                 productDetailsLayoutBinding.applicationYoutubeView.visibility = View.VISIBLE
                 productDetailsLayoutBinding.playYoutubeView.visibility = View.VISIBLE
