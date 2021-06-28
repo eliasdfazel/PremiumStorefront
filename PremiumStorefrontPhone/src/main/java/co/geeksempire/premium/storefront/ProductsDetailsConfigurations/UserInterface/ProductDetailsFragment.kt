@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 7:45 AM
+ * Last modified 6/28/21, 8:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -271,12 +272,32 @@ class ProductDetailsFragment : Fragment() {
                     productDetailsLayoutBinding.locationProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
                     productDetailsLayoutBinding.locationProductDetails.visibility = View.VISIBLE
 
-                    val developerEmail = requireArguments().getString(ProductDataKey.ProductDeveloperEmail)
+                    requireArguments().getString(ProductDataKey.ProductDeveloperEmail)?.let { developerEmail ->
 
-                    productDetailsLayoutBinding.emailProductDetails.text = Html.fromHtml("${developerEmail}", Html.FROM_HTML_MODE_COMPACT)
+                        productDetailsLayoutBinding.emailProductDetails.text = Html.fromHtml("${developerEmail}", Html.FROM_HTML_MODE_COMPACT)
 
-                    productDetailsLayoutBinding.emailProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
-                    productDetailsLayoutBinding.emailProductDetails.visibility = View.VISIBLE
+                        productDetailsLayoutBinding.emailProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                        productDetailsLayoutBinding.emailProductDetails.visibility = View.VISIBLE
+
+                        productDetailsLayoutBinding.emailProductDetails.setOnClickListener {
+
+                            val messageToSupport = "" +
+                                    "\n\n\n" +
+                                    "[Contacted From <b>${requireContext().getString(R.string.applicationName)}</b>]"
+
+                            val emailIntent = Intent(Intent.ACTION_SEND).apply {
+                                putExtra(Intent.EXTRA_EMAIL, arrayOf(developerEmail))
+                                putExtra(Intent.EXTRA_SUBJECT,  "Feedback On ${productName}")
+                                putExtra(Intent.EXTRA_TEXT, messageToSupport)
+                                type = "text/*"
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
+                            requireContext().startActivity(emailIntent)
+
+
+                        }
+
+                    }
 
                 }
 

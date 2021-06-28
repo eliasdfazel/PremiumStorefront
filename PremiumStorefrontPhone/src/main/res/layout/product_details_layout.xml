@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/28/21, 7:44 AM
+  ~ Last modified 6/28/21, 8:04 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -241,10 +241,10 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/locationProductDetails"
                 android:layout_width="0dp"
-                android:layout_height="51dp"
+                android:layout_height="43dp"
                 android:layout_marginStart="19dp"
                 android:paddingHorizontal="11dp"
-                android:gravity="center_vertical|end"
+                android:gravity="center_vertical|start"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="3"
                 android:lines="1"
@@ -259,7 +259,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:visibility="invisible"
+                android:visibility="visible"
 
                 apps:layout_constraintTop_toTopOf="@id/informationDetails"
                 apps:layout_constraintBottom_toBottomOf="@id/informationDetails"
@@ -269,22 +269,22 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/emailProductDetails"
                 android:layout_width="0dp"
-                android:layout_height="51dp"
+                android:layout_height="43dp"
                 android:layout_marginStart="19dp"
                 android:paddingHorizontal="11dp"
-                android:gravity="center_vertical|end"
+                android:gravity="top|start"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="3"
                 android:lines="1"
                 android:singleLine="true"
                 android:textSize="17sp"
                 android:textColor="@color/default_color_dark"
-                android:text="Nashville, United States Of America"
+                android:text="Support@GeeksEmpire.net"
                 android:fontFamily="monospace"
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:visibility="invisible"
+                android:visibility="visible"
 
                 apps:layout_constraintTop_toBottomOf="@id/locationProductDetails"
                 apps:layout_constraintEnd_toStartOf="@id/informationDetails"
