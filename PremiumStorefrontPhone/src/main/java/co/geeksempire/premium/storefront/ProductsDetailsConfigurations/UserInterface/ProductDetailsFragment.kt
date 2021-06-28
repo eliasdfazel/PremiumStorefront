@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 6:46 AM
+ * Last modified 6/28/21, 7:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -253,20 +253,30 @@ class ProductDetailsFragment : Fragment() {
 
             productDetailsLayoutBinding.informationDetails.setOnClickListener {
 
-                if (productDetailsLayoutBinding.moreProductDetails.isVisible) {
+                if (productDetailsLayoutBinding.locationProductDetails.isVisible) {
 
-                    productDetailsLayoutBinding.moreProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out))
-                    productDetailsLayoutBinding.moreProductDetails.visibility = View.INVISIBLE
+                    productDetailsLayoutBinding.locationProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out))
+                    productDetailsLayoutBinding.locationProductDetails.visibility = View.INVISIBLE
+
+                    productDetailsLayoutBinding.emailProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out))
+                    productDetailsLayoutBinding.emailProductDetails.visibility = View.INVISIBLE
 
                 } else {
 
                     val developerCountry = requireArguments().getString(ProductDataKey.ProductDeveloperCountry)
                     val developerCity = requireArguments().getString(ProductDataKey.ProductDeveloperCity)
 
-                    productDetailsLayoutBinding.moreProductDetails.text = Html.fromHtml("${developerCity}, ${developerCountry}", Html.FROM_HTML_MODE_COMPACT)
+                    productDetailsLayoutBinding.locationProductDetails.text = Html.fromHtml("${developerCity}, ${developerCountry}", Html.FROM_HTML_MODE_COMPACT)
 
-                    productDetailsLayoutBinding.moreProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
-                    productDetailsLayoutBinding.moreProductDetails.visibility = View.VISIBLE
+                    productDetailsLayoutBinding.locationProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                    productDetailsLayoutBinding.locationProductDetails.visibility = View.VISIBLE
+
+                    val developerEmail = requireArguments().getString(ProductDataKey.ProductDeveloperEmail)
+
+                    productDetailsLayoutBinding.emailProductDetails.text = Html.fromHtml("${developerEmail}", Html.FROM_HTML_MODE_COMPACT)
+
+                    productDetailsLayoutBinding.emailProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                    productDetailsLayoutBinding.emailProductDetails.visibility = View.VISIBLE
 
                 }
 

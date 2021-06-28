@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:34 AM
+ * Last modified 6/28/21, 7:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,7 +53,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                     override fun onAnimationEnd(animation: Animator) {
 
-                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
+                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, android.R.anim.fade_out)
 
                         val switchIntent = Intent(context, StorefrontGames::class.java).apply {
 
@@ -118,41 +118,6 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
             sectionSwitcherLayoutBinding.applicationsSectionView.setOnClickListener {
 
-                val valueAnimatorApplications = ValueAnimator.ofInt(sectionSwitcherLayoutBinding.gamesSectionView.width, dpToInteger(context, 57))
-                valueAnimatorApplications.duration = 333
-                valueAnimatorApplications.startDelay = 333
-                valueAnimatorApplications.addUpdateListener { animator ->
-
-                    val animatorValue = animator.animatedValue as Int
-
-                    sectionSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
-                    sectionSwitcherLayoutBinding.gamesSectionView.requestLayout()
-
-                }
-                valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
-
-                    override fun onAnimationStart(animation: Animator) {
-
-                    }
-
-                    override fun onAnimationEnd(animation: Animator) {
-
-                        sectionSwitcherLayoutBinding.gamesSectionView.text = ""
-
-                        valueAnimatorApplications.start()
-
-                    }
-
-                    override fun onAnimationCancel(animation: Animator) {
-
-                    }
-
-                    override fun onAnimationRepeat(animation: Animator) {
-
-                    }
-
-                })
-
                 val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(context, 57), sectionSwitcherLayoutBinding.gamesSectionView.width)
                 valueAnimatorGames.duration = 333
                 valueAnimatorGames.startDelay = 333
@@ -174,7 +139,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                     override fun onAnimationEnd(animation: Animator) {
 
-                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
+                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, android.R.anim.fade_out)
 
                         val switchIntent = Intent(context, StorefrontApplications::class.java).apply {
 
@@ -193,7 +158,42 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
                     }
 
                 })
-                valueAnimatorGames.start()
+
+                val valueAnimatorApplications = ValueAnimator.ofInt(sectionSwitcherLayoutBinding.gamesSectionView.width, dpToInteger(context, 57))
+                valueAnimatorApplications.duration = 333
+                valueAnimatorApplications.startDelay = 333
+                valueAnimatorApplications.addUpdateListener { animator ->
+
+                    val animatorValue = animator.animatedValue as Int
+
+                    sectionSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
+                    sectionSwitcherLayoutBinding.gamesSectionView.requestLayout()
+
+                }
+                valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
+
+                    override fun onAnimationStart(animation: Animator) {
+
+                    }
+
+                    override fun onAnimationEnd(animation: Animator) {
+
+                        sectionSwitcherLayoutBinding.gamesSectionView.text = ""
+
+                        valueAnimatorGames.start()
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator) {
+
+                    }
+
+                    override fun onAnimationRepeat(animation: Animator) {
+
+                    }
+
+                })
+                valueAnimatorApplications.start()
 
             }
 

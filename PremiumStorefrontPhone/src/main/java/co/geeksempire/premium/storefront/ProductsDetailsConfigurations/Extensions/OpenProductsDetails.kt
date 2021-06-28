@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 6/28/21, 7:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,6 +58,8 @@ fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentI
 
         putString(ProductDataKey.ProductDeveloperCountry, storefrontContents.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey])
         putString(ProductDataKey.ProductDeveloperCity, storefrontContents.productAttributes[ProductsContentKey.AttributesDeveloperCityKey])
+
+        putString(ProductDataKey.ProductDeveloperEmail, storefrontContents.productAttributes[ProductsContentKey.AttributesDeveloperEmailKey])
     }
 
     context.supportFragmentManager
