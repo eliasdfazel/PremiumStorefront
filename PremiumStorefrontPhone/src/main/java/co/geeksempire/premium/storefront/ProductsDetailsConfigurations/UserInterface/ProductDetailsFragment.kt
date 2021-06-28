@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 6:22 AM
+ * Last modified 6/28/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -152,7 +152,6 @@ class ProductDetailsFragment : Fragment() {
                                                 })
 
                                                 val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
-
                                                 productDetailsLayoutBinding.applicationFeaturedImageView.background = gradientFeaturedBackground
 
                                                 Glide.with(requireContext())

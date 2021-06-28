@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 6:18 AM
+ * Last modified 6/28/21, 6:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -110,17 +110,17 @@ class FeaturedContentAdapter(private val context: AppCompatActivity,
                             val vibrantColor = extractVibrantColor(context, resource)
                             val dominantColor = extractDominantColor(context, resource)
 
+                            val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
+                            gradientFeaturedBackground.cornerRadius = dpToInteger(context, 11).toFloat()
+
+                            featuredContentViewHolder.backgroundCoverImageView.background = gradientFeaturedBackground
+
                             featuredContentViewHolder.installView.setBackgroundColor(vibrantColor)
 
                             featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                             featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
                             featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
-
-                            val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(vibrantColor, dominantColor))
-                            gradientFeaturedBackground.cornerRadius = dpToInteger(context, 11).toFloat()
-
-                            featuredContentViewHolder.backgroundCoverImageView.background = gradientFeaturedBackground
 
                         }
 
