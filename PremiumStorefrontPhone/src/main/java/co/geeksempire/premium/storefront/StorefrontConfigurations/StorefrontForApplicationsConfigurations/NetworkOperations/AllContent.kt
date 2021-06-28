@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:47 AM
+ * Last modified 6/28/21, 2:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -66,6 +66,20 @@ class AllContent (val context: Context,
 
         } else {
 
+            val endpoint = when (queryType) {
+                GeneralEndpoint.QueryType.ApplicationsQuery -> {
+
+                    applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint()
+
+                }
+                GeneralEndpoint.QueryType.GamesQuery -> {
+
+                    gamesQueryEndpoint.getAllAndroidGamesEndpoint()
+
+                }
+                else -> applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint()
+            }
+
             GenericJsonRequest(context, object : JsonRequestResponses {
 
                 override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
@@ -88,7 +102,7 @@ class AllContent (val context: Context,
 
                 }
 
-            }).getMethod(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint())
+            }).getMethod(endpoint)
 
         }
 
@@ -128,7 +142,19 @@ class AllContent (val context: Context,
 
             }
 
-        }).getMethod(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve))
+        }).getMethod( when (queryType) {
+            GeneralEndpoint.QueryType.ApplicationsQuery -> {
+
+                applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve)
+
+            }
+            GeneralEndpoint.QueryType.GamesQuery -> {
+
+                gamesQueryEndpoint.getAllAndroidGamesEndpoint(numberOfPage = numberOfPageToRetrieve)
+
+            }
+            else -> applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve)
+        })
 
     }
 

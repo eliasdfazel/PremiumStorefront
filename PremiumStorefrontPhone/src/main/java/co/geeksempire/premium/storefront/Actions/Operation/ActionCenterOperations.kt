@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:02 AM
+ * Last modified 6/28/21, 2:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,9 +11,9 @@
 package co.geeksempire.premium.storefront.Actions.Operation
 
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.Extensions.filteringSetup
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.Extensions.searchingSetup
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.Extensions.sortingSetup
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.filteringSetup
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.searchingSetup
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.sortingSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall

@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:36 AM
+ * Last modified 6/28/21, 4:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.Extensions
+package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -22,10 +22,14 @@ import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInf
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.databinding.SectionSwitcherLayoutBinding
 import com.google.firebase.auth.FirebaseUser
 
 fun storefrontUserInteractionSetup(context: AppCompatActivity, firebaseUser: FirebaseUser?, accountSelector: ActivityResultLauncher<Any?>,
-                                   profileView: ImageView, preferencesView: ImageView, favoritesView: ImageView) {
+                                   profileView: ImageView, preferencesView: ImageView, favoritesView: ImageView,
+                                   sectionSwitcherLayoutBinding: SectionSwitcherLayoutBinding) {
+
+    storefrontSectionSwitcher(context, sectionSwitcherLayoutBinding)
 
     profileView.setOnClickListener {
 

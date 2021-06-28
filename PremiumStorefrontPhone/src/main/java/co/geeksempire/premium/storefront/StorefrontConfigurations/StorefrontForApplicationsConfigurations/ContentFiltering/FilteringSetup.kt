@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:28 AM
+ * Last modified 6/28/21, 2:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.Extensions
+package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.animation.Animator
 import android.content.res.ColorStateList

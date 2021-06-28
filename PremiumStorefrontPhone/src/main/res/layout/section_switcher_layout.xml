@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/21/21, 9:43 AM
+  ~ Last modified 6/28/21, 4:27 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="57dp"
             android:paddingVertical="3dp"
-            android:ellipsize="marquee"
+            android:ellipsize="end"
             android:lines="1"
             android:singleLine="true"
             android:textAllCaps="false"
@@ -47,9 +47,6 @@
             android:insetBottom="0dp"
             android:insetLeft="0dp"
             android:insetRight="0dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:elevation="23dp"
             android:contentDescription="@string/applicationsSectionText"
 
@@ -72,7 +69,7 @@
             android:layout_width="57dp"
             android:layout_height="57dp"
             android:layout_marginStart="7dp"
-            android:ellipsize="marquee"
+            android:ellipsize="end"
             android:lines="1"
             android:singleLine="true"
             android:textAllCaps="false"
@@ -105,7 +102,7 @@
             android:layout_width="57dp"
             android:layout_height="57dp"
             android:layout_marginStart="7dp"
-            android:ellipsize="marquee"
+            android:ellipsize="end"
             android:lines="1"
             android:singleLine="true"
             android:textAllCaps="false"
@@ -118,6 +115,7 @@
             android:insetRight="0dp"
             android:elevation="13dp"
             android:contentDescription="@string/booksSectionText"
+            android:visibility="invisible"
 
             apps:icon="@drawable/books_icon"
             apps:iconSize="25dp"
@@ -138,7 +136,7 @@
             android:layout_width="57dp"
             android:layout_height="57dp"
             android:layout_marginStart="7dp"
-            android:ellipsize="marquee"
+            android:ellipsize="end"
             android:lines="1"
             android:singleLine="true"
             android:textAllCaps="false"
@@ -151,6 +149,7 @@
             android:insetRight="0dp"
             android:elevation="13dp"
             android:contentDescription="@string/moviesSectionText"
+            android:visibility="invisible"
 
             apps:icon="@drawable/movies_icon"
             apps:iconSize="25dp"
