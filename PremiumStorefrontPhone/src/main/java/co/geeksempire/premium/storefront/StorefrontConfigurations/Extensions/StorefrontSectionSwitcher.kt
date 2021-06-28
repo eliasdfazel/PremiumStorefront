@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:32 AM
+ * Last modified 6/28/21, 4:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -278,8 +278,6 @@ fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionSwitcherLayout
         backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
 
         (layoutParams as ConstraintLayout.LayoutParams).matchConstraintPercentWidth = 0.51f
-
-        println(">>> " + (layoutParams as ConstraintLayout.LayoutParams).width)
 
         requestLayout()
 

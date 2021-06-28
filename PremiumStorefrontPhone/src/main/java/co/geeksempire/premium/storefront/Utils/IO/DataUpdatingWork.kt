@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 7:46 AM
+ * Last modified 6/28/21, 5:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import co.geeksempire.premium.storefront.Database.Write.InputProcess
 import co.geeksempire.premium.storefront.NetworkConnections.ApplicationsQueryEndpoint
+import co.geeksempire.premium.storefront.NetworkConnections.GamesQueryEndpoint
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
@@ -38,6 +39,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
     private val generalEndpoint = GeneralEndpoint()
 
     private val applicationsQueryEndpoint: ApplicationsQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
+    private val gamesQueryEndpoint: GamesQueryEndpoint = GamesQueryEndpoint(generalEndpoint)
 
     private val inputProcess: InputProcess by lazy {
         InputProcess(applicationContext)
@@ -51,7 +53,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
 
 
         val updateDataKey = workerParams.inputData.getByteArray(IO.UpdateDataKey)?.let { String(it) }
-
+        Log.d(this@DataUpdatingWork.javaClass.simpleName, updateDataKey.toString())
 
         setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
                 notificationTitle = applicationContext.getString(R.string.applicationName),
@@ -68,7 +70,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
             }
             IO.UpdateGamesDataKey -> {
 
-
+                startGamesContentRetrieval(IO.UpdateGamesDataKey)
 
             }
             IO.UpdateBooksDataKey -> {
@@ -123,6 +125,42 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
             }
 
         }).getMethod(applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint(productPerPage = 99, numberOfPage = numberOfPageToRetrieve))
+
+    }
+
+    private fun startGamesContentRetrieval(updateDataKey: String) {
+
+        GenericJsonRequest(applicationContext, object : JsonRequestResponses {
+
+            override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
+                super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
+
+                if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
+                    Log.d(this@DataUpdatingWork.javaClass.simpleName, "There Might Be More Data To Retrieve")
+
+                    stringBuilder.append(rawDataJsonArray.toString())
+
+                    numberOfPageToRetrieve++
+
+                    startApplicationsContentRetrieval(updateDataKey)
+
+                } else {
+                    Log.d(this@DataUpdatingWork.javaClass.simpleName, "No More Content")
+
+                    setForegroundAsync(ForegroundInfo(Foreground.NotificationId,  notificationBuilder.create(
+                        notificationTitle = applicationContext.getString(R.string.applicationName),
+                        notificationContent = applicationContext.getString(R.string.doneText),
+                        notificationDone = true)))
+
+                    stringBuilder.append(rawDataJsonArray.toString())
+
+                    inputProcess.writeDataToFile(updateDataKey, stringBuilder.toString())
+
+                }
+
+            }
+
+        }).getMethod(gamesQueryEndpoint.getAllAndroidGamesEndpoint(productPerPage = 99, numberOfPage = numberOfPageToRetrieve))
 
     }
 

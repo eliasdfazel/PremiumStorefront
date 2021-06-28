@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:01 AM
+ * Last modified 6/28/21, 4:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@ import android.app.Application
 import android.os.Bundle
 import co.geeksempire.premium.storefront.Database.GeneralConfigurations.FirestoreConfiguration
 import co.geeksempire.premium.storefront.Database.Preferences.PreferencesIO
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.CategoryContent.CategoryData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.CategoryContent.CategoryData
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.firestore.FirebaseFirestore
