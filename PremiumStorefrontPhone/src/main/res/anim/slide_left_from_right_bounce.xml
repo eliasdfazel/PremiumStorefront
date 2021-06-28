@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/25/21, 3:52 AM
+  ~ Last modified 6/28/21, 7:00 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,9 +14,9 @@
 	android:shareInterpolator="true">
 
 	<translate
-		android:fromXDelta="+13%p"
+		android:fromXDelta="+1%p"
 		android:toXDelta="0"
-		android:duration="753"/>
+		android:duration="777"/>
 
 	<alpha
 		android:fromAlpha="0.0"
