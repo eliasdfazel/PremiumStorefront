@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/29/21, 7:24 AM
+ * Last modified 6/29/21, 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -316,7 +316,7 @@ class ProductDetailsFragment : Fragment() {
                                 startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
                                 visibility = View.VISIBLE
 
-                            }, 333)
+                            }, 151)
 
                         }.setOnClickListener {
 
