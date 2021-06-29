@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 8:23 AM
+ * Last modified 6/29/21, 7:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,9 +11,12 @@
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -34,9 +37,7 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeCo
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
-import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
-import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
-import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
+import co.geeksempire.premium.storefront.Utils.UI.Colors.*
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.ProductDetailsLayoutBinding
 import com.bumptech.glide.Glide
@@ -50,6 +51,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+
 
 class ProductDetailsFragment : Fragment() {
 
@@ -70,6 +72,9 @@ class ProductDetailsFragment : Fragment() {
     }
 
     var isShowing = false
+
+    var dominantColor = Color.GRAY
+    var vibrantColor = Color.GRAY
 
     lateinit var productDetailsLayoutBinding: ProductDetailsLayoutBinding
 
@@ -131,8 +136,8 @@ class ProductDetailsFragment : Fragment() {
 
                                 requireActivity().runOnUiThread {
 
-                                    val dominantColor = extractDominantColor(requireContext(), resource)
-                                    val vibrantColor = extractVibrantColor(requireContext(), resource)
+                                    dominantColor = extractDominantColor(requireContext(), resource)
+                                    vibrantColor = extractVibrantColor(requireContext(), resource)
 
                                     lifecycleScope.launch {
 
@@ -194,6 +199,9 @@ class ProductDetailsFragment : Fragment() {
 
             val productDeveloper = getString(ProductDataKey.ProductDeveloper)?:"Unknown"
             productDetailsLayoutBinding.applicationDeveloper.text = Html.fromHtml(productDeveloper, Html.FROM_HTML_MODE_COMPACT)
+
+            val developerCountry = requireArguments().getString(ProductDataKey.ProductDeveloperCountry)
+            val developerCity = requireArguments().getString(ProductDataKey.ProductDeveloperCity)
 
             getString(ProductDataKey.ProductCategory)?.let {
 
@@ -264,22 +272,43 @@ class ProductDetailsFragment : Fragment() {
 
                 } else {
 
-                    val developerCountry = requireArguments().getString(ProductDataKey.ProductDeveloperCountry)
-                    val developerCity = requireArguments().getString(ProductDataKey.ProductDeveloperCity)
+                    productDetailsLayoutBinding.locationProductDetails.apply {
 
-                    productDetailsLayoutBinding.locationProductDetails.text = Html.fromHtml("${developerCity}, ${developerCountry}", Html.FROM_HTML_MODE_COMPACT)
+                        text = Html.fromHtml("${developerCity}, ${developerCountry}", Html.FROM_HTML_MODE_COMPACT)
 
-                    productDetailsLayoutBinding.locationProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
-                    productDetailsLayoutBinding.locationProductDetails.visibility = View.VISIBLE
+                        gradientText(textView = this@apply,
+                            gradientColors = intArrayOf(dominantColor, vibrantColor),
+                            gradientColorsPositions = floatArrayOf(0f, 1f),
+                            gradientType = Gradient.HorizontalGradient)
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                            visibility = View.VISIBLE
+
+                        }, 51)
+
+                    }
 
                     requireArguments().getString(ProductDataKey.ProductDeveloperEmail)?.let { developerEmail ->
 
-                        productDetailsLayoutBinding.emailProductDetails.text = Html.fromHtml("${developerEmail}", Html.FROM_HTML_MODE_COMPACT)
+                        productDetailsLayoutBinding.emailProductDetails.apply {
 
-                        productDetailsLayoutBinding.emailProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
-                        productDetailsLayoutBinding.emailProductDetails.visibility = View.VISIBLE
+                            text = Html.fromHtml("${developerEmail}", Html.FROM_HTML_MODE_COMPACT)
 
-                        productDetailsLayoutBinding.emailProductDetails.setOnClickListener {
+                            gradientText(textView = this@apply,
+                                gradientColors = intArrayOf(dominantColor, vibrantColor),
+                                gradientColorsPositions = floatArrayOf(0f, 1f),
+                                gradientType = Gradient.HorizontalGradient)
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+
+                                startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                                visibility = View.VISIBLE
+
+                            }, 333)
+
+                        }.setOnClickListener {
 
                             val messageToSupport = "" +
                                     "\n\n\n" +
