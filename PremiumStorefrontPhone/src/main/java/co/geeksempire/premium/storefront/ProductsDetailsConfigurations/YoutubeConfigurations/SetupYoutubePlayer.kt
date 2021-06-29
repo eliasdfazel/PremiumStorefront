@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 6:25 AM
+ * Last modified 6/29/21, 7:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,16 +10,20 @@
 
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubeThumbnailLoader
 import com.google.android.youtube.player.YouTubeThumbnailLoader.OnThumbnailLoadedListener
 import com.google.android.youtube.player.YouTubeThumbnailView
 
+interface YouTubeInterface {
+    fun youtubeThumbnail(thumbnailImage: Drawable) {}
+}
 
 class SetupYoutubePlayer(private val youTubePlayerView: YouTubeThumbnailView) {
 
-    fun initialize(youtubeAddress: String) {
+    fun initialize(youtubeAddress: String, youtubeInterface: YouTubeInterface) {
 
         val initializedListener = object : YouTubeThumbnailView.OnInitializedListener {
 
@@ -30,6 +34,8 @@ class SetupYoutubePlayer(private val youTubePlayerView: YouTubeThumbnailView) {
                 youTubeThumbnailLoader?.setOnThumbnailLoadedListener(object: OnThumbnailLoadedListener {
 
                         override fun onThumbnailLoaded(youTubeThumbnailView: YouTubeThumbnailView, aString: String) {
+
+                            youtubeInterface.youtubeThumbnail(youTubeThumbnailView.drawable)
 
                             youTubeThumbnailLoader.release()
 
