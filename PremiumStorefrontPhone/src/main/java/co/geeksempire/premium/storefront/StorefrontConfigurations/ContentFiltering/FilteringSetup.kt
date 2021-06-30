@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 6/30/21, 9:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,111 +11,125 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
 
 import android.animation.Animator
+import android.content.Context
 import android.content.res.ColorStateList
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.Utils.UI.Animations.AnimationListener
 import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnimation
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
+import co.geeksempire.premium.storefront.databinding.FilteringLayoutBinding
+import co.geeksempire.premium.storefront.databinding.SortingLayoutBinding
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlin.math.absoluteValue
 
-fun StorefrontApplications.filteringSetup(themeType: Boolean = ThemeType.ThemeLight) {
+fun filteringSetup(context: AppCompatActivity,
+                   sortingInclude: SortingLayoutBinding,
+                   filteringInclude: FilteringLayoutBinding,
+                   rightActionView: ImageView,
+                   middleActionView: ImageView,
+                   leftActionView: ImageView,
+                   filterOptionsAdapter: FilterOptionsAdapter,
+                   storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                   themeType: Boolean = ThemeType.ThemeLight) {
 
     when (themeType) {
         ThemeType.ThemeLight -> {
 
-            storefrontLayoutBinding.filteringInclude.popupBlurryBackground.setOverlayColor(getColor(R.color.premiumLightTransparent))
+            filteringInclude.popupBlurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
 
-            storefrontLayoutBinding.filteringInclude.filtersContainerView.background = getDrawable(R.drawable.filtering_container_layer_light)
+            filteringInclude.filtersContainerView.background = context.getDrawable(R.drawable.filtering_container_layer_light)
 
-            storefrontLayoutBinding.filteringInclude.filterSelectedView.background = getDrawable(R.drawable.filtering_selected_container_layer_light)
+            filteringInclude.filterSelectedView.background = context.getDrawable(R.drawable.filtering_selected_container_layer_light)
 
         }
         ThemeType.ThemeDark -> {
 
-            storefrontLayoutBinding.filteringInclude.popupBlurryBackground.setOverlayColor(getColor(R.color.premiumDarkTransparent))
+            filteringInclude.popupBlurryBackground.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
 
-            storefrontLayoutBinding.filteringInclude.filtersContainerView.background = getDrawable(R.drawable.filtering_container_layer_dark)
+            filteringInclude.filtersContainerView.background = context.getDrawable(R.drawable.filtering_container_layer_dark)
 
-            storefrontLayoutBinding.filteringInclude.filterSelectedView.background = getDrawable(R.drawable.filtering_selected_container_layer_dark)
+            filteringInclude.filterSelectedView.background = context.getDrawable(R.drawable.filtering_selected_container_layer_dark)
 
         }
     }
 
-    if (storefrontLayoutBinding.sortingInclude.root.isShown) {
+    if (sortingInclude.root.isShown) {
 
-        storefrontLayoutBinding.sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
-        storefrontLayoutBinding.sortingInclude.root.visibility = View.GONE
+        sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+        sortingInclude.root.visibility = View.GONE
 
-        storefrontLayoutBinding.leftActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
+        leftActionView.background = context.getDrawable(R.drawable.action_center_glowing)
 
-        storefrontLayoutBinding.leftActionView.imageTintList = when (themeType) {
+        leftActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
 
-                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+                ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
 
             }
             ThemeType.ThemeDark -> {
 
-                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+                ColorStateList.valueOf(context.getColor(R.color.default_color_bright))
 
             }
-            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+            else -> ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
         }
 
-        storefrontLayoutBinding.middleActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
+        middleActionView.background = context.getDrawable(R.drawable.action_center_glowing)
 
-        storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
+        middleActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
 
-                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+                ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
 
             }
             ThemeType.ThemeDark -> {
 
-                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+                ColorStateList.valueOf(context.getColor(R.color.default_color_bright))
 
             }
-            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+            else -> ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
         }
 
     }
 
-    if (storefrontLayoutBinding.filteringInclude.root.isShown) {
+    if (filteringInclude.root.isShown) {
 
-        storefrontLayoutBinding.rightActionView.background = null
+        rightActionView.background = null
 
-        storefrontLayoutBinding.filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
-        storefrontLayoutBinding.filteringInclude.root.visibility = View.GONE
+        filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+        filteringInclude.root.visibility = View.GONE
 
-        storefrontLayoutBinding.rightActionView.imageTintList = when (themeType) {
+        rightActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
 
-                ColorStateList.valueOf(getColor(R.color.default_color_dark))
+                ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
 
             }
             ThemeType.ThemeDark -> {
 
-                ColorStateList.valueOf(getColor(R.color.default_color_bright))
+                ColorStateList.valueOf(context.getColor(R.color.default_color_bright))
 
             }
-            else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+            else -> ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
         }
 
     } else {
 
-        storefrontLayoutBinding.rightActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
+        rightActionView.background = context.getDrawable(R.drawable.action_center_glowing)
 
-        storefrontLayoutBinding.rightActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_game_dark))
+        rightActionView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_game_dark))
 
         val animationListener = object : AnimationListener {
 
@@ -129,24 +143,27 @@ fun StorefrontApplications.filteringSetup(themeType: Boolean = ThemeType.ThemeLi
         }
 
         val circularRevealAnimation = CircularRevealAnimation (animationListener)
-        circularRevealAnimation.startForView(context = applicationContext, rootView = storefrontLayoutBinding.filteringInclude.root,
-            xPosition = ((storefrontLayoutBinding.rightActionView.x) + (storefrontLayoutBinding.rightActionView.width/2)).toInt(),
-            yPosition = ((storefrontLayoutBinding.rightActionView.y) + (storefrontLayoutBinding.rightActionView.height/2)).toInt())
+        circularRevealAnimation.startForView(context = context, rootView = filteringInclude.root,
+            xPosition = ((rightActionView.x) + (rightActionView.width/2)).toInt(),
+            yPosition = ((rightActionView.y) + (rightActionView.height/2)).toInt())
 
     }
 
-    storefrontLayoutBinding.filteringInclude.root.post {
+    filteringInclude.root.post {
 
         if (filterOptionsAdapter.filterOptionsData.isEmpty()) {
 
-            filterByCountriesDataProcess()
+            filterByCountriesDataProcess(context,
+                storefrontAllUnfilteredContents,
+                filteringInclude,
+                filterOptionsAdapter)
 
         }
 
-        storefrontLayoutBinding.filteringInclude.filterCountryView.setOnClickListener {
+        filteringInclude.filterCountryView.setOnClickListener {
 
-            storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
-                .translationYBy(-(storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y - storefrontLayoutBinding.filteringInclude.filterCountryView.y))
+            filteringInclude.filterSelectedView.animate()
+                .translationYBy(-(filteringInclude.filterCompatibilitiesView.y - filteringInclude.filterCountryView.y))
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
@@ -156,7 +173,10 @@ fun StorefrontApplications.filteringSetup(themeType: Boolean = ThemeType.ThemeLi
 
                     override fun onAnimationEnd(animation: Animator?) {
 
-                        filterByCountriesDataProcess()
+                        filterByCountriesDataProcess(context,
+                            storefrontAllUnfilteredContents,
+                            filteringInclude,
+                            filterOptionsAdapter)
 
                     }
 
@@ -166,15 +186,15 @@ fun StorefrontApplications.filteringSetup(themeType: Boolean = ThemeType.ThemeLi
 
                 }).start()
 
-            storefrontLayoutBinding.filteringInclude.filterCountryView.setTextColor(getColor(R.color.white))
-            storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setTextColor(getColor(R.color.default_color_bright))
+            filteringInclude.filterCountryView.setTextColor(context.getColor(R.color.white))
+            filteringInclude.filterCompatibilitiesView.setTextColor(context.getColor(R.color.default_color_bright))
 
         }
 
-        storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setOnClickListener {
+        filteringInclude.filterCompatibilitiesView.setOnClickListener {
 
-            storefrontLayoutBinding.filteringInclude.filterSelectedView.animate()
-                .translationYBy((storefrontLayoutBinding.filteringInclude.filterCountryView.y - storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.y).absoluteValue)
+            filteringInclude.filterSelectedView.animate()
+                .translationYBy((filteringInclude.filterCountryView.y - filteringInclude.filterCompatibilitiesView.y).absoluteValue)
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
@@ -184,7 +204,10 @@ fun StorefrontApplications.filteringSetup(themeType: Boolean = ThemeType.ThemeLi
 
                     override fun onAnimationEnd(animation: Animator?) {
 
-                        filterByCompatibilitiesDataProcess()
+                        filterByCompatibilitiesDataProcess(context,
+                            storefrontAllUnfilteredContents,
+                            filteringInclude,
+                            filterOptionsAdapter)
 
                     }
 
@@ -194,8 +217,8 @@ fun StorefrontApplications.filteringSetup(themeType: Boolean = ThemeType.ThemeLi
 
                 }).start()
 
-            storefrontLayoutBinding.filteringInclude.filterCountryView.setTextColor(getColor(R.color.default_color_bright))
-            storefrontLayoutBinding.filteringInclude.filterCompatibilitiesView.setTextColor(getColor(R.color.white))
+            filteringInclude.filterCountryView.setTextColor(context.getColor(R.color.default_color_bright))
+            filteringInclude.filterCompatibilitiesView.setTextColor(context.getColor(R.color.white))
 
         }
 
@@ -203,12 +226,15 @@ fun StorefrontApplications.filteringSetup(themeType: Boolean = ThemeType.ThemeLi
 
 }
 
-fun StorefrontApplications.filterByCountriesDataProcess() {
+fun filterByCountriesDataProcess(context: Context,
+                                 storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                                 filteringInclude: FilteringLayoutBinding,
+                                 filterOptionsAdapter: FilterOptionsAdapter) {
 
     if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
-        storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
-        storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
+        filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
+        filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
 
         CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
@@ -258,12 +284,15 @@ fun StorefrontApplications.filterByCountriesDataProcess() {
 
 }
 
-fun StorefrontApplications.filterByCompatibilitiesDataProcess() {
+fun filterByCompatibilitiesDataProcess(context: Context,
+                                       storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                                       filteringInclude: FilteringLayoutBinding,
+                                       filterOptionsAdapter: FilterOptionsAdapter) {
 
     if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
-        storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
-        storefrontLayoutBinding.filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
+        filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
+        filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
 
         CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:31 AM
+ * Last modified 6/30/21, 9:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,58 +17,74 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import com.abanabsalan.aban.magazine.Utils.System.hideKeyboard
 import com.abanabsalan.aban.magazine.Utils.System.showKeyboard
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-fun StorefrontApplications.searchingSetup(themeType: Boolean = ThemeType.ThemeLight) {
+fun searchingSetup(context: AppCompatActivity, filterAllContent: FilterAllContent,
+                   textInputSearchView: TextInputLayout,
+                   searchView: TextInputEditText,
+                   rightActionView: ImageView,
+                   middleActionView: ImageView,
+                   leftActionView: ImageView,
+                   storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                   themeType: Boolean = ThemeType.ThemeLight) {
 
-    storefrontLayoutBinding.leftActionView.background = null
-    storefrontLayoutBinding.rightActionView.background = null
+    leftActionView.background = null
+    rightActionView.background = null
 
     when (themeType) {
         ThemeType.ThemeLight -> {
 
-            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.premiumLight)
+            textInputSearchView.boxBackgroundColor = context.getColor(R.color.premiumLight)
 
-            storefrontLayoutBinding.searchView.setTextColor(getColor(R.color.default_color_dark))
-            storefrontLayoutBinding.searchView.setHintTextColor(getColor(R.color.default_color_game_dark))
+            searchView.setTextColor(context.getColor(R.color.default_color_dark))
+            searchView.setHintTextColor(context.getColor(R.color.default_color_game_dark))
 
         }
         ThemeType.ThemeDark -> {
 
-            storefrontLayoutBinding.textInputSearchView.boxBackgroundColor = getColor(R.color.premiumDark)
+            textInputSearchView.boxBackgroundColor = context.getColor(R.color.premiumDark)
 
-            storefrontLayoutBinding.searchView.setTextColor(getColor(R.color.default_color_light))
-            storefrontLayoutBinding.searchView.setHintTextColor(getColor(R.color.default_color_game_light))
+            searchView.setTextColor(context.getColor(R.color.default_color_light))
+            searchView.setHintTextColor(context.getColor(R.color.default_color_game_light))
 
         }
     }
 
-    if (storefrontLayoutBinding.textInputSearchView.isShown) {
+    if (textInputSearchView.isShown) {
 
-        hideSearchView(themeType)
+        hideSearchView(context,
+            textInputSearchView,
+            searchView,
+            middleActionView,
+            themeType)
 
     } else {
 
-        storefrontLayoutBinding.middleActionView.background = applicationContext.getDrawable(R.drawable.action_center_glowing)
+        middleActionView.background = context.getDrawable(R.drawable.action_center_glowing)
 
-        storefrontLayoutBinding.middleActionView.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_game_dark))
+        middleActionView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_game_dark))
 
-        val valueAnimatorScalesUpWidth = ValueAnimator.ofInt(dpToInteger(applicationContext, 51), dpToInteger(applicationContext, 313))
+        val valueAnimatorScalesUpWidth = ValueAnimator.ofInt(dpToInteger(context, 51), dpToInteger(context, 313))
         valueAnimatorScalesUpWidth.duration = 777
         valueAnimatorScalesUpWidth.addUpdateListener { animator ->
             val animatorValue = animator.animatedValue as Int
 
-            storefrontLayoutBinding.textInputSearchView.layoutParams.width = animatorValue
-            storefrontLayoutBinding.textInputSearchView.requestLayout()
+            textInputSearchView.layoutParams.width = animatorValue
+            textInputSearchView.requestLayout()
         }
         valueAnimatorScalesUpWidth.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
@@ -77,9 +93,9 @@ fun StorefrontApplications.searchingSetup(themeType: Boolean = ThemeType.ThemeLi
 
             override fun onAnimationEnd(animation: Animator) {
 
-                storefrontLayoutBinding.searchView.requestFocus()
+                searchView.requestFocus()
 
-                showKeyboard(applicationContext, storefrontLayoutBinding.searchView)
+                showKeyboard(context, searchView)
 
             }
 
@@ -92,13 +108,13 @@ fun StorefrontApplications.searchingSetup(themeType: Boolean = ThemeType.ThemeLi
             }
         })
 
-        val valueAnimatorScalesUpHeight = ValueAnimator.ofInt(dpToInteger(applicationContext, 43), dpToInteger(applicationContext, 77))
+        val valueAnimatorScalesUpHeight = ValueAnimator.ofInt(dpToInteger(context, 43), dpToInteger(context, 77))
         valueAnimatorScalesUpHeight.duration = 333
         valueAnimatorScalesUpHeight.addUpdateListener { animator ->
             val animatorValue = animator.animatedValue as Int
 
-            storefrontLayoutBinding.textInputSearchView.layoutParams.height = animatorValue
-            storefrontLayoutBinding.textInputSearchView.requestLayout()
+            textInputSearchView.layoutParams.height = animatorValue
+            textInputSearchView.requestLayout()
         }
         valueAnimatorScalesUpHeight.addListener(object : Animator.AnimatorListener {
 
@@ -120,9 +136,9 @@ fun StorefrontApplications.searchingSetup(themeType: Boolean = ThemeType.ThemeLi
 
         })
 
-        val slideUpAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.slide_up_from_bottom_bounce)
-        storefrontLayoutBinding.textInputSearchView.visibility = View.VISIBLE
-        storefrontLayoutBinding.textInputSearchView.startAnimation(slideUpAnimation)
+        val slideUpAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_up_from_bottom_bounce)
+        textInputSearchView.visibility = View.VISIBLE
+        textInputSearchView.startAnimation(slideUpAnimation)
 
         slideUpAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {}
@@ -138,7 +154,7 @@ fun StorefrontApplications.searchingSetup(themeType: Boolean = ThemeType.ThemeLi
 
         })
 
-        storefrontLayoutBinding.searchView.setOnEditorActionListener { textView, actionId, event ->
+        searchView.setOnEditorActionListener { textView, actionId, event ->
 
             when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
@@ -146,7 +162,11 @@ fun StorefrontApplications.searchingSetup(themeType: Boolean = ThemeType.ThemeLi
                     filterAllContent.searchThroughAllContent(storefrontAllUnfilteredContents, textView.text.toString())
                         .invokeOnCompletion {
 
-                            hideSearchView(themeType)
+                            hideSearchView(context,
+                                textInputSearchView,
+                                searchView,
+                                middleActionView,
+                                themeType)
 
                         }
 
@@ -160,14 +180,18 @@ fun StorefrontApplications.searchingSetup(themeType: Boolean = ThemeType.ThemeLi
 
 }
 
-fun StorefrontApplications.hideSearchView(themeType: Boolean) = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+fun hideSearchView(context: AppCompatActivity,
+                   textInputSearchView: TextInputLayout,
+                   searchView: TextInputEditText,
+                   middleActionView: ImageView,
+                   themeType: Boolean) = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
 
-    storefrontLayoutBinding.middleActionView.background = null
+    middleActionView.background = null
 
-    val fadeOutAnimation = AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out)
+    val fadeOutAnimation = AnimationUtils.loadAnimation(context, R.anim.fade_out)
 
-    storefrontLayoutBinding.textInputSearchView.visibility = View.INVISIBLE
-    storefrontLayoutBinding.textInputSearchView.startAnimation(fadeOutAnimation)
+    textInputSearchView.visibility = View.INVISIBLE
+    textInputSearchView.startAnimation(fadeOutAnimation)
 
     fadeOutAnimation.setAnimationListener(object : Animation.AnimationListener {
 
@@ -175,9 +199,9 @@ fun StorefrontApplications.hideSearchView(themeType: Boolean) = CoroutineScope(S
 
         override fun onAnimationEnd(animation: Animation?) {
 
-            storefrontLayoutBinding.textInputSearchView.layoutParams.width = dpToInteger(applicationContext, 51)
-            storefrontLayoutBinding.textInputSearchView.layoutParams.height = dpToInteger(applicationContext, 51)
-            storefrontLayoutBinding.textInputSearchView.requestLayout()
+            textInputSearchView.layoutParams.width = dpToInteger(context, 51)
+            textInputSearchView.layoutParams.height = dpToInteger(context, 51)
+            textInputSearchView.requestLayout()
 
         }
 
@@ -185,19 +209,19 @@ fun StorefrontApplications.hideSearchView(themeType: Boolean) = CoroutineScope(S
 
     })
 
-    storefrontLayoutBinding.middleActionView.imageTintList = when (themeType) {
+    middleActionView.imageTintList = when (themeType) {
         ThemeType.ThemeLight -> {
 
-            ColorStateList.valueOf(getColor(R.color.default_color_dark))
+            ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
 
         }
         ThemeType.ThemeDark -> {
 
-            ColorStateList.valueOf(getColor(R.color.default_color_bright))
+            ColorStateList.valueOf(context.getColor(R.color.default_color_bright))
 
-        } else -> ColorStateList.valueOf(getColor(R.color.default_color_dark))
+        } else -> ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
     }
 
-    hideKeyboard(applicationContext, storefrontLayoutBinding.searchView)
+    hideKeyboard(context, searchView)
 
 }

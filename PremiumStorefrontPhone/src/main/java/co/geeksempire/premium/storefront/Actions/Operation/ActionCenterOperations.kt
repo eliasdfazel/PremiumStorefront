@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 8:58 AM
+ * Last modified 6/30/21, 9:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,7 @@ class ActionCenterOperations {
         context.storefrontLayoutBinding.leftActionView.setOnClickListener {
 
             sortingSetup(context = context, filterAllContent = context.filterAllContent,
-                context.storefrontLayoutBinding.sortingInclude, filteringInclude = context.storefrontLayoutBinding.filteringInclude,
+                sortingInclude = context.storefrontLayoutBinding.sortingInclude, filteringInclude = context.storefrontLayoutBinding.filteringInclude,
                 rightActionView = context.storefrontLayoutBinding.rightActionView, middleActionView =  context.storefrontLayoutBinding.middleActionView, leftActionView = context.storefrontLayoutBinding.leftActionView, context.allContentAdapter,
                 themeType = themeType)
 
@@ -37,13 +37,24 @@ class ActionCenterOperations {
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            context.searchingSetup(themeType)
+            searchingSetup(context, context.filterAllContent,
+                context.storefrontLayoutBinding.textInputSearchView,
+                context.storefrontLayoutBinding.searchView,
+                context.storefrontLayoutBinding.rightActionView,
+                context.storefrontLayoutBinding.middleActionView,
+                context.storefrontLayoutBinding.leftActionView,
+                context.storefrontAllUnfilteredContents,
+                themeType)
 
         }
 
         context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
-            context.filteringSetup(themeType)
+            filteringSetup(context = context,
+                sortingInclude = context.storefrontLayoutBinding.sortingInclude, filteringInclude = context.storefrontLayoutBinding.filteringInclude,
+                rightActionView = context.storefrontLayoutBinding.rightActionView, middleActionView =  context.storefrontLayoutBinding.middleActionView, leftActionView = context.storefrontLayoutBinding.leftActionView, filterOptionsAdapter = context.filterOptionsAdapter,
+                storefrontAllUnfilteredContents = context.storefrontAllUnfilteredContents,
+                themeType = themeType)
 
         }
 
@@ -99,13 +110,24 @@ class ActionCenterOperations {
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-//            context.searchingSetup(themeType)
+            searchingSetup(context, context.filterAllContent,
+                context.storefrontLayoutBinding.textInputSearchView,
+                context.storefrontLayoutBinding.searchView,
+                context.storefrontLayoutBinding.rightActionView,
+                context.storefrontLayoutBinding.middleActionView,
+                context.storefrontLayoutBinding.leftActionView,
+                context.storefrontAllUnfilteredContents,
+                themeType)
 
         }
 
         context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
-//            context.filteringSetup(themeType)
+            filteringSetup(context = context,
+                sortingInclude = context.storefrontLayoutBinding.sortingInclude, filteringInclude = context.storefrontLayoutBinding.filteringInclude,
+                rightActionView = context.storefrontLayoutBinding.rightActionView, middleActionView =  context.storefrontLayoutBinding.middleActionView, leftActionView = context.storefrontLayoutBinding.leftActionView, filterOptionsAdapter = context.filterOptionsAdapter,
+                storefrontAllUnfilteredContents = context.storefrontAllUnfilteredContents,
+                themeType = themeType)
 
         }
 
