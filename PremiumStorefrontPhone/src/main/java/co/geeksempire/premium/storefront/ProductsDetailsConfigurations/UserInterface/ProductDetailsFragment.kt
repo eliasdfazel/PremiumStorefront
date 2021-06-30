@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 9:12 AM
+ * Last modified 6/30/21, 10:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -387,7 +387,7 @@ class ProductDetailsFragment : Fragment() {
                 instanceOfProductDetailsFragment?.let { detailsFragment ->
                     (requireActivity()).supportFragmentManager
                         .beginTransaction()
-                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                        .setCustomAnimations(0, R.anim.fade_out)
                         .remove(detailsFragment)
                         .commitNow()
                 }

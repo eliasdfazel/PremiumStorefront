@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 7:21 AM
+ * Last modified 6/30/21, 10:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -600,7 +600,7 @@ class StorefrontApplications : AppCompatActivity(), NetworkConnectionListenerInt
 
             supportFragmentManager
                 .beginTransaction()
-                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .setCustomAnimations(0, R.anim.fade_out)
                 .remove(productDetailsFragment)
                 .commitNow()
 
