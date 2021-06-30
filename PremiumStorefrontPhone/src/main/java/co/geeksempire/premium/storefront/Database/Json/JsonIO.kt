@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/25/21, 7:30 AM
+ * Last modified 6/30/21, 10:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,8 +10,9 @@
 
 package co.geeksempire.premium.storefront.Database.Json
 
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import com.google.gson.Gson
-import org.json.JSONObject
+import org.json.JSONArray
 
 class JsonIO {
 
@@ -20,9 +21,14 @@ class JsonIO {
     /**
      * Json Object
      **/
-    fun writeMapToJson(inputData: Map<String, Any>) : JSONObject {
+    fun writeMapToJson(inputData: Map<String, Any>) : JSONArray {
 
-        return JSONObject(jsonDatabase.toJson(inputData))
+        return JSONArray(jsonDatabase.toJson(inputData))
+    }
+
+    fun writeArrayListToJson(inputData: ArrayList<StorefrontContentsData>) : JSONArray {
+
+        return JSONArray(jsonDatabase.toJson(inputData))
     }
 
 }

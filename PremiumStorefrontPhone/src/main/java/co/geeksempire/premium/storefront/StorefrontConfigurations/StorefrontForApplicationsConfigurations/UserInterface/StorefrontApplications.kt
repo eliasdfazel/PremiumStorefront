@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:20 AM
+ * Last modified 6/30/21, 10:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,6 +46,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.Featu
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.Adapter.NewContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
@@ -60,6 +61,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
+import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
@@ -287,12 +289,19 @@ class StorefrontApplications : AppCompatActivity(), NetworkConnectionListenerInt
                     storefrontLayoutBinding.loadMoreView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
                     storefrontLayoutBinding.loadMoreView.visibility = View.VISIBLE
 
-
                 }
 
             })
 
             storefrontLiveData.presentMoreItemData.observe(this@StorefrontApplications, {
+
+                val installedApplications = InstalledApplications(applicationContext)
+
+                if (installedApplications.appIsInstalled(it.productAttributes[ProductsContentKey.AttributesPackageNameKey])) {
+
+                    it.installViewText = "${getString(R.string.rateText)} & ${getString(R.string.shareText)}"
+
+                }
 
                 allContentAdapter.storefrontContents.add(it)
 

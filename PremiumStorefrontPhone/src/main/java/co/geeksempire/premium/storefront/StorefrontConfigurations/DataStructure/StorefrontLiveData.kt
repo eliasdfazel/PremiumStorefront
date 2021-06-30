@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:17 AM
+ * Last modified 6/30/21, 10:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,8 +14,11 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import co.geeksempire.premium.storefront.Database.Json.JsonIO
+import co.geeksempire.premium.storefront.Database.Write.InputProcess
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.AllContent.Adapter.AllContentAdapter
+import co.geeksempire.premium.storefront.Utils.System.Installed
 import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -453,6 +456,8 @@ class StorefrontLiveData : ViewModel() {
                                    allContentAdapter: AllContentAdapter,
                                    allApplications: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
+        val installedApplicationsList: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+
         val installedApplications = InstalledApplications(context)
 
         allApplications.forEachIndexed { index, storefrontContentsData ->
@@ -463,6 +468,8 @@ class StorefrontLiveData : ViewModel() {
 
                 allContentAdapter.storefrontContents[index] = storefrontContentsData
 
+                installedApplicationsList.add(storefrontContentsData)
+
                 delay(159)
 
                 withContext(Dispatchers.Main) {
@@ -472,6 +479,18 @@ class StorefrontLiveData : ViewModel() {
                 }
 
             }
+
+        }
+
+        if (installedApplicationsList.isNotEmpty()) {
+
+            val inputProcess = InputProcess(context)
+
+            val jsonIO = JsonIO()
+
+            val jsonData = jsonIO.writeArrayListToJson(installedApplicationsList)
+
+            inputProcess.writeDataToFile(Installed.InstalledApplicationsFile, jsonData.toString())
 
         }
 
