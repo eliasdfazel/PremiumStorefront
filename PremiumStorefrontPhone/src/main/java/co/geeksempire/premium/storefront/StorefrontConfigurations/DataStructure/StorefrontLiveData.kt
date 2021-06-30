@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:10 AM
+ * Last modified 6/30/21, 10:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -72,8 +72,23 @@ class StorefrontLiveData : ViewModel() {
             }
             /* End - Images */
 
+            /* Start - Primary Category */
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
-            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            for (indexCategory in 0 until productCategories.length()) {
+
+                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
+
+                if (allTextCheckpoint != "All") {
+
+                    productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
+
+                }
+
+            }
+            /* End - Primary Category */
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
@@ -136,8 +151,23 @@ class StorefrontLiveData : ViewModel() {
             }
             /* End - Images */
 
+            /* Start - Primary Category */
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
-            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            for (indexCategory in 0 until productCategories.length()) {
+
+                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
+
+                if (allTextCheckpoint != "All") {
+
+                    productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
+
+                }
+
+            }
+            /* End - Primary Category */
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
@@ -252,8 +282,23 @@ class StorefrontLiveData : ViewModel() {
             }
             /* End - Images */
 
+            /* Start - Primary Category */
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
-            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            for (indexCategory in 0 until productCategories.length()) {
+
+                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
+
+                if (allTextCheckpoint != "All") {
+
+                    productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
+
+                }
+
+            }
+            /* End - Primary Category */
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
@@ -316,8 +361,23 @@ class StorefrontLiveData : ViewModel() {
             }
             /* End - Images */
 
+            /* Start - Primary Category */
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
-            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            for (indexCategory in 0 until productCategories.length()) {
+
+                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
+
+                if (allTextCheckpoint != "All") {
+
+                    productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
+
+                }
+
+            }
+            /* End - Primary Category */
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
