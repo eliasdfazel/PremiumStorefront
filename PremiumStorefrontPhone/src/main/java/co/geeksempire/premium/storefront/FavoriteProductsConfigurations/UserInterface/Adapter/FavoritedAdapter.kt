@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/15/21, 12:00 PM
+ * Last modified 6/30/21, 8:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,7 +61,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
-                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.light_transparent_high))
+                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             }
             ThemeType.ThemeDark -> {
@@ -74,7 +74,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
 
-                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_high))
+                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
             }
             else -> {
@@ -86,7 +86,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
                 favoritedViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 favoritedViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
-                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.light_transparent_high))
+                favoritedViewHolder.removeView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             }
         }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/29/21, 7:00 AM
+ * Last modified 6/30/21, 8:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,10 @@ import android.widget.TextView
 fun gradientText(textView: TextView,
                  gradientType: Int = Gradient.HorizontalGradient,
                  gradientColors: IntArray = intArrayOf(Color.RED, Color.MAGENTA),
-                 gradientColorsPositions: FloatArray = floatArrayOf(0f, 1f)) {
+                 gradientColorsPositions: FloatArray = floatArrayOf(0f, 1f),
+                 gradientHorizontalEnd: Float = textView.width.toFloat(),
+                 gradientVerticalEnd: Float = textView.height.toFloat(),
+                 gradientRadialRadius: Float = textView.width.toFloat()) {
 
     when (gradientType) {
         Gradient.HorizontalGradient -> {
@@ -28,7 +31,7 @@ fun gradientText(textView: TextView,
 
                 paint.shader = LinearGradient(
                     0f, 0f,
-                    width.toFloat(), 0f,
+                    gradientHorizontalEnd, 0f,
                     gradientColors,
                     gradientColorsPositions,
                     Shader.TileMode.REPEAT
@@ -43,7 +46,7 @@ fun gradientText(textView: TextView,
 
                 paint.shader = LinearGradient(
                     0f, 0f,
-                    0f, width.toFloat(),
+                    0f, gradientVerticalEnd,
                     gradientColors,
                     gradientColorsPositions,
                     Shader.TileMode.REPEAT
@@ -58,7 +61,7 @@ fun gradientText(textView: TextView,
 
                 paint.shader = RadialGradient(
                     0f, 0f,
-                    width.toFloat(),
+                    gradientRadialRadius,
                     gradientColors,
                     gradientColorsPositions,
                     Shader.TileMode.REPEAT)

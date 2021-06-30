@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/29/21, 7:28 AM
+ * Last modified 6/30/21, 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,6 +52,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import net.geeksempire.balloon.optionsmenu.library.Utils.calculatePercentage
 
 
 class ProductDetailsFragment : Fragment() {
@@ -96,6 +97,8 @@ class ProductDetailsFragment : Fragment() {
         lifecycleScope.launch {
 
             themePreferences.checkThemeLightDark().collect {
+
+                applyColors(it)
 
                 applyShadowEffectsForContentBackground(it)
 
@@ -201,12 +204,35 @@ class ProductDetailsFragment : Fragment() {
             val productDeveloper = getString(ProductDataKey.ProductDeveloper)?:"Unknown"
             productDetailsLayoutBinding.applicationDeveloper.text = Html.fromHtml(productDeveloper, Html.FROM_HTML_MODE_COMPACT)
 
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                gradientText(textView = productDetailsLayoutBinding.applicationDeveloper,
+                    gradientColors = intArrayOf(requireContext().getColor(R.color.default_color), requireContext().getColor(R.color.default_color_light)),
+                    gradientColorsPositions = floatArrayOf(0f, 0.51f),
+                    gradientVerticalEnd = productDetailsLayoutBinding.applicationDeveloper.height.toFloat(),
+                    gradientType = Gradient.VerticalGradient)
+
+                productDetailsLayoutBinding.applicationDeveloper.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in))
+                productDetailsLayoutBinding.applicationDeveloper.visibility = View.VISIBLE
+
+            }, 500)
+
             val developerCountry = requireArguments().getString(ProductDataKey.ProductDeveloperCountry)
             val developerCity = requireArguments().getString(ProductDataKey.ProductDeveloperCity)
 
             getString(ProductDataKey.ProductCategory)?.let {
 
                 productDetailsLayoutBinding.categoryNameTextView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+
+                    gradientText(textView = productDetailsLayoutBinding.categoryNameTextView,
+                        gradientColors = intArrayOf(requireContext().getColor(R.color.default_color_game), requireContext().getColor(R.color.default_color_game_bright)),
+                        gradientColorsPositions = floatArrayOf(0f, 1f),
+                        gradientHorizontalEnd = productDetailsLayoutBinding.categoryNameTextView.width.toFloat().calculatePercentage(29f),
+                        gradientType = Gradient.HorizontalGradient)
+
+                }, 500)
 
                 Glide.with(requireContext())
                     .asDrawable()
@@ -277,21 +303,32 @@ class ProductDetailsFragment : Fragment() {
                     productDetailsLayoutBinding.locationProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out))
                     productDetailsLayoutBinding.locationProductDetails.visibility = View.INVISIBLE
 
+                    productDetailsLayoutBinding.locationProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out))
+                    productDetailsLayoutBinding.locationProductDetailsIcon.visibility = View.INVISIBLE
+
                     productDetailsLayoutBinding.emailProductDetails.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out))
                     productDetailsLayoutBinding.emailProductDetails.visibility = View.INVISIBLE
 
+                    productDetailsLayoutBinding.emailProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out))
+                    productDetailsLayoutBinding.emailProductDetailsIcon.visibility = View.INVISIBLE
+
                 } else {
+
 
                     productDetailsLayoutBinding.locationProductDetails.apply {
 
                         text = Html.fromHtml("${developerCity}, ${developerCountry}", Html.FROM_HTML_MODE_COMPACT)
 
-                        gradientText(textView = this@apply,
-                            gradientColors = intArrayOf(dominantColor, vibrantColor),
+                        gradientText(textView = productDetailsLayoutBinding.locationProductDetails,
+                            gradientColors = intArrayOf(requireContext().getColor(R.color.default_color), requireContext().getColor(R.color.default_color_light)),
                             gradientColorsPositions = floatArrayOf(0f, 1f),
+                            gradientHorizontalEnd = productDetailsLayoutBinding.locationProductDetails.width.toFloat().calculatePercentage(19f),
                             gradientType = Gradient.HorizontalGradient)
 
                         Handler(Looper.getMainLooper()).postDelayed({
+
+                            productDetailsLayoutBinding.locationProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                            productDetailsLayoutBinding.locationProductDetailsIcon.visibility = View.VISIBLE
 
                             startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
                             visibility = View.VISIBLE
@@ -306,12 +343,16 @@ class ProductDetailsFragment : Fragment() {
 
                             text = Html.fromHtml("${developerEmail}", Html.FROM_HTML_MODE_COMPACT)
 
-                            gradientText(textView = this@apply,
-                                gradientColors = intArrayOf(dominantColor, vibrantColor),
+                            gradientText(textView = productDetailsLayoutBinding.emailProductDetails,
+                                gradientColors = intArrayOf(requireContext().getColor(R.color.default_color), requireContext().getColor(R.color.default_color_light)),
                                 gradientColorsPositions = floatArrayOf(0f, 1f),
+                                gradientHorizontalEnd = productDetailsLayoutBinding.emailProductDetails.width.toFloat().calculatePercentage(19f),
                                 gradientType = Gradient.HorizontalGradient)
 
                             Handler(Looper.getMainLooper()).postDelayed({
+
+                                productDetailsLayoutBinding.emailProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                                productDetailsLayoutBinding.emailProductDetailsIcon.visibility = View.VISIBLE
 
                                 startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
                                 visibility = View.VISIBLE

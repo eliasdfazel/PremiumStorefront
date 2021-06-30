@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 2:42 PM
+ * Last modified 6/30/21, 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,6 +23,63 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
+
+fun ProductDetailsFragment.applyColors(themeType: Boolean) {
+
+    when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumLight))
+
+            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_light))
+
+            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
+            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
+
+            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.white))
+            productDetailsLayoutBinding.applicationRatingImageView.alpha = 1f
+
+            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
+
+            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumDark))
+
+        }
+        ThemeType.ThemeDark -> {
+
+            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumDark))
+
+            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_dark))
+
+            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.light))
+            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.light))
+
+            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.black))
+
+            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_dark)
+
+            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumLight))
+
+        }
+        else -> {
+
+            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumLight))
+
+            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_light))
+
+            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
+            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
+
+            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.white))
+            productDetailsLayoutBinding.applicationRatingImageView.alpha = 1f
+
+            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
+
+            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumDark))
+
+        }
+    }
+
+}
 
 fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boolean = ThemeType.ThemeLight) {
 
@@ -46,20 +103,6 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
     val shadowLayer = when (themeType) {
         ThemeType.ThemeLight -> {
 
-            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumLight))
-
-            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_light))
-
-            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
-            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
-
-            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.white))
-            productDetailsLayoutBinding.applicationRatingImageView.alpha = 1f
-
-            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
-
-            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumDark))
-
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.dark)
 
@@ -70,19 +113,6 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
 
         }
         ThemeType.ThemeDark -> {
-
-            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumDark))
-
-            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_dark))
-
-            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.light))
-            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.light))
-
-            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.black))
-
-            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_dark)
-
-            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumLight))
 
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.black)
@@ -95,20 +125,6 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
         }
         else -> {
 
-            productDetailsLayoutBinding.rootViewFragment.setBackgroundColor(requireContext().getColor(R.color.premiumLight))
-
-            productDetailsLayoutBinding.goBackView.setImageDrawable(requireContext().getDrawable(R.drawable.go_back_layer_light))
-
-            productDetailsLayoutBinding.applicationNameTextView.setTextColor(requireContext().getColor(R.color.dark))
-            productDetailsLayoutBinding.applicationDescriptionTextView.setTextColor(requireContext().getColor(R.color.dark))
-
-            productDetailsLayoutBinding.applicationRatingImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.white))
-            productDetailsLayoutBinding.applicationRatingImageView.alpha = 1f
-
-            productDetailsLayoutBinding.applicationIconImageView.background = requireContext().getDrawable(R.drawable.product_icon_dimension_effect_light)
-
-            productDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(requireContext().getColor(R.color.premiumDark))
-
             shapeShadow.paint.apply {
                 color = requireContext().getColor(R.color.dark)
 
@@ -116,6 +132,7 @@ fun ProductDetailsFragment.applyShadowEffectsForContentBackground(themeType: Boo
             }
 
             requireContext().getDrawable(R.drawable.product_details_background_light) as LayerDrawable
+
         }
     }
 

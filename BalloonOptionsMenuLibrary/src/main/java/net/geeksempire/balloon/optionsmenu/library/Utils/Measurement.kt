@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 2/23/21 5:54 AM
+ * Last modified 6/30/21, 8:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -135,4 +135,9 @@ fun navigationBarHeight(context: Context): Int {
     }
 
     return navigationBarHeight
+}
+
+fun Float.calculatePercentage(percentageAmount: Float) : Float {
+
+    return ((this@calculatePercentage * percentageAmount) / 100).toFloat()
 }

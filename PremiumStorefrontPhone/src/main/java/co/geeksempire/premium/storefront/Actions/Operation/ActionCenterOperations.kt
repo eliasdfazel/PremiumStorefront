@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 2:10 AM
+ * Last modified 6/30/21, 8:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -90,7 +90,10 @@ class ActionCenterOperations {
 
         context.storefrontLayoutBinding.leftActionView.setOnClickListener {
 
-//            context.sortingSetup(themeType)
+            sortingSetup(context = context, filterAllContent = context.filterAllContent,
+                context.storefrontLayoutBinding.sortingInclude, filteringInclude = context.storefrontLayoutBinding.filteringInclude,
+                rightActionView = context.storefrontLayoutBinding.rightActionView, middleActionView =  context.storefrontLayoutBinding.middleActionView, leftActionView = context.storefrontLayoutBinding.leftActionView, context.allContentAdapter,
+                themeType = themeType)
 
         }
 
