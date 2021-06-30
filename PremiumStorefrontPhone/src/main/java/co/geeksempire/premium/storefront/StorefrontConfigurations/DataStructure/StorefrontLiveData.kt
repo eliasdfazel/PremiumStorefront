@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 6/30/21, 10:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -384,14 +384,6 @@ class StorefrontLiveData : ViewModel() {
 
             Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Name: ${categoryName}")
         }
-
-        val storefrontCategoriesDataSorted = storefrontCategoriesData.sortedBy {
-
-            it.categoryName
-        }
-
-        storefrontCategoriesData.clear()
-        storefrontCategoriesData.addAll(storefrontCategoriesDataSorted)
 
         categoriesItemData.postValue(storefrontCategoriesData)
 

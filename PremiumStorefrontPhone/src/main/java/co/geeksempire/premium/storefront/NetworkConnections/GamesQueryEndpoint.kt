@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:35 AM
+ * Last modified 6/30/21, 10:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,12 +41,21 @@ class GamesQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
     fun getGamesSearchEndpoint(productSearchQuery: String = "1", productPerPage: Int = 99, numberOfPage: Int = 1) : String =
         "${getAllAndroidGamesEndpoint()}" +
                 "&search=$productSearchQuery" +
-                "&exclude=2341"
+                "&" +
+                "per_page=${productPerPage}" +
+                "&" +
+                "page=${numberOfPage}" +
+                "&" +
+                "exclude=2341"
 
     fun getNewGamesEndpoint(numberOfProducts: Int = 3, productPerPage: Int = 99, numberOfPage: Int = 1) : String =
         "${getAllAndroidGamesEndpoint()}" +
                 "&" +
                 "per_page=${numberOfProducts}" +
+                "&" +
+                "per_page=${productPerPage}" +
+                "&" +
+                "page=${numberOfPage}" +
                 "&" +
                 "exclude=2341" +
                 "&" +
@@ -62,6 +71,10 @@ class GamesQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "&" +
                 "exclude=${csvExclusions}" + //Add Exclusion of All Other Categories
                 "&" +
-                "per_page=${numberOfProducts}"
+                "per_page=${numberOfProducts}" +
+                "&" +
+                "orderby=count" +
+                "&" +
+                "order=desc"
 
 }
