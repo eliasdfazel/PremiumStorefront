@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:39 AM
+ * Last modified 7/1/21, 5:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -374,7 +374,7 @@ class StorefrontApplications : AppCompatActivity(), NetworkConnectionListenerInt
                     storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
 
                     PopupShortcutsCreator(applicationContext)
-                        .configure(it.subList(0, 5).toList())
+                        .configure()
 
                 } else {
 

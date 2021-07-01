@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 7/1/21, 5:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -90,8 +90,23 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
             }
             /* End - Images */
 
+            /* Start - Primary Category */
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
-            val productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+
+            for (indexCategory in 0 until productCategories.length()) {
+
+                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
+
+                if (allTextCheckpoint != "All") {
+
+                    productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
+
+                }
+
+            }
+            /* End - Primary Category */
 
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray

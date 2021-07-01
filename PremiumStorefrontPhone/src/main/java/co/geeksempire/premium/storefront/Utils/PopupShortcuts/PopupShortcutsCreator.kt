@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 7/1/21, 6:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,8 +18,10 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.annotation.RequiresApi
+import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -31,6 +33,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+import org.json.JSONArray
+import org.json.JSONObject
 
 object PopupShortcutsItems {
     const val ShortcutId = "ShortcutId"
@@ -52,29 +56,69 @@ class PopupShortcutsCreator (val context: Context) {
 
     private val shortcutManager: ShortcutManager = context.getSystemService(ShortcutManager::class.java) as ShortcutManager
 
-    private val shortcutsDataList = ArrayList<StorefrontContentsData>(5)
+    private val categoryId: Long = 836
 
-    private var shortcutSetupCounter = 0
+    fun configure() = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-    fun configure(initialShortcutsDataList: List<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+        val generalEndpoint = GeneralEndpoint()
 
-        shortcutsDataList.clear()
-        shortcutsDataList.addAll(initialShortcutsDataList)
+        GenericJsonRequest(context, object : JsonRequestResponses {
 
-        if (initialShortcutsDataList.isNotEmpty()) {
+            override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
+                super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-            shortcutManager.removeAllDynamicShortcuts()
+                shortcutManager.removeAllDynamicShortcuts()
 
-            addShortcutKeyboardTyping(
-                PopupShortcutsData(
-                    applicationPackageName = shortcutsDataList[shortcutSetupCounter].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString(),
-                    applicationName = shortcutsDataList[shortcutSetupCounter].productName,
-                    applicationSummary = shortcutsDataList[shortcutSetupCounter].productSummary,
-                    applicationIconLink = shortcutsDataList[shortcutSetupCounter].productIconLink
-                )
-            )
+                for (indexContent in 0 until rawDataJsonArray.length()) {
 
-        }
+                    val featuredContentJsonObject: JSONObject = rawDataJsonArray[indexContent] as JSONObject
+
+                    /* Start - Images */
+                    val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+
+                    val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+                    /* End - Images */
+
+                    /* Start - Attributes */
+                    val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+
+                    val attributesMap = HashMap<String, String>()
+
+                    for (indexAttribute in 0 until featuredContentAttributes.length()) {
+
+                        val attributesJsonObject: JSONObject =
+                            featuredContentAttributes[indexAttribute] as JSONObject
+
+                        attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] =
+                            attributesJsonObject.getJSONArray(
+                                ProductsContentKey.AttributeOptionsKey
+                            )[0].toString()
+
+                    }
+                    /* End - Attributes */
+
+                    addShortcutKeyboardTyping(PopupShortcutsData(
+                        applicationPackageName = attributesMap[ProductsContentKey.AttributesPackageNameKey].toString(),
+                        applicationName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
+                        applicationSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                        applicationIconLink = productIcon
+                    ))
+
+                }
+
+                if (rawDataJsonArray.length() == generalEndpoint.defaultProductsPerPage) {
+
+
+
+                } else {
+
+
+
+                }
+
+            }
+
+        }).getMethod(generalEndpoint.getProductsSpecificCategoriesEndpoint(productCategoryId = categoryId))
 
     }
 
@@ -118,21 +162,6 @@ class PopupShortcutsCreator (val context: Context) {
                                 .setCategories(shortcutsHomeLauncherCategories)
                                 .build()
                         ))
-
-                        try {
-
-                            shortcutSetupCounter++
-
-                            addShortcutKeyboardTyping(PopupShortcutsData(
-                                applicationPackageName = shortcutsDataList[shortcutSetupCounter].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString(),
-                                applicationName = shortcutsDataList[shortcutSetupCounter].productName,
-                                applicationSummary = shortcutsDataList[shortcutSetupCounter].productSummary,
-                                applicationIconLink = shortcutsDataList[shortcutSetupCounter].productIconLink
-                            ))
-
-                        } catch (e: IndexOutOfBoundsException) {
-                            e.printStackTrace()
-                        }
 
                     }
 
