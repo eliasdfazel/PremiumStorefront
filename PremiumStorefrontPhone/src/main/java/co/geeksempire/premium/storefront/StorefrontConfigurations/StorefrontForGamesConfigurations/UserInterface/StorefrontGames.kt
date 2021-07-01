@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:21 AM
+ * Last modified 7/1/21, 6:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -552,28 +552,32 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
     override fun onResume() {
         super.onResume()
 
-        accountSignIn.firebaseUser?.let {
+        accountSignIn.firebaseUser?.reload()?.addOnSuccessListener {
 
-            Glide.with(applicationContext)
-                .load(it.photoUrl)
-                .transform(CircleCrop())
-                .into(storefrontLayoutBinding.profileView)
+            accountSignIn.firebaseUser?.let {
 
-            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
-                object : FavoriteProductQueryInterface {
+                Glide.with(applicationContext)
+                    .load(it.photoUrl)
+                    .transform(CircleCrop())
+                    .into(storefrontLayoutBinding.profileView)
 
-                    override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
-                        super.favoriteProductsExist(isFavoriteProductsExist)
+                favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
+                    object : FavoriteProductQueryInterface {
 
-                        storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
-                            View.VISIBLE
-                        } else {
-                            View.GONE
+                        override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                            super.favoriteProductsExist(isFavoriteProductsExist)
+
+                            storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                                View.VISIBLE
+                            } else {
+                                View.GONE
+                            }
+
                         }
 
-                    }
+                    })
 
-                })
+            }
 
         }
 
@@ -581,6 +585,8 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
 
     override fun onPause() {
         super.onPause()
+
+        accountSignIn.firebaseUser?.reload()
 
         lifecycleScope.launch {
 
