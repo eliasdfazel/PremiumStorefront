@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 6:33 AM
+ * Last modified 7/1/21, 6:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -565,32 +565,30 @@ class StorefrontApplications : AppCompatActivity(), NetworkConnectionListenerInt
     override fun onResume() {
         super.onResume()
 
-        accountSignIn.firebaseUser?.reload()?.addOnSuccessListener {
+        accountSignIn.firebaseUser = Firebase.auth.currentUser
 
-            accountSignIn.firebaseUser?.let {
+        accountSignIn.firebaseUser?.let {
 
-                Glide.with(applicationContext)
-                    .load(it.photoUrl)
-                    .transform(CircleCrop())
-                    .into(storefrontLayoutBinding.profileView)
+            Glide.with(applicationContext)
+                .load(it.photoUrl)
+                .transform(CircleCrop())
+                .into(storefrontLayoutBinding.profileView)
 
-                favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
-                    object : FavoriteProductQueryInterface {
+            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
+                object : FavoriteProductQueryInterface {
 
-                        override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
-                            super.favoriteProductsExist(isFavoriteProductsExist)
+                    override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                        super.favoriteProductsExist(isFavoriteProductsExist)
 
-                            storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
-                                View.VISIBLE
-                            } else {
-                                View.GONE
-                            }
-
+                        storefrontLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                            View.VISIBLE
+                        } else {
+                            View.GONE
                         }
 
-                    })
+                    }
 
-            }
+                })
 
         }
 

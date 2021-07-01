@@ -2,18 +2,19 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 6:31 AM
+ * Last modified 7/1/21, 6:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.Preferences.UserInterface
+package co.geeksempire.premium.storefront.Preferences.Operations
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBinding
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

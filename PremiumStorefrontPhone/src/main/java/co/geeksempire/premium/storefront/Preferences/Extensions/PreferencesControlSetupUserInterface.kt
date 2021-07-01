@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 6:20 AM
+ * Last modified 7/1/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,8 +20,8 @@ import android.view.WindowManager
 import androidx.lifecycle.coroutineScope
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.Preferences.Operations.ToggleTheme
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
-import co.geeksempire.premium.storefront.Preferences.UserInterface.ToggleTheme
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
