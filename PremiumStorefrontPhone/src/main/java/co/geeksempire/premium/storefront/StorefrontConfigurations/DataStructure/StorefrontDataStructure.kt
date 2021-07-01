@@ -2,13 +2,15 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 7:43 AM
+ * Last modified 7/1/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure
+
+import androidx.annotation.Keep
 
 object ProductsContentKey {
     const val IdKey = "id"
@@ -76,6 +78,7 @@ object ProductDataKey {
  * @param productCoverLink : Second Image Of Product Gallery from JsonArray "images"
  *
  **/
+@Keep
 data class StorefrontContentsData (var productName: String, var productDescription: String, var productSummary: String,
                                    var productCategoryName: String,
                                    var productIconLink: String, var productCoverLink: String?,
@@ -84,4 +87,5 @@ data class StorefrontContentsData (var productName: String, var productDescripti
                                    var productAttributes: HashMap<String, String>,
                                    var installViewText: String = "Install Now")
 
+@Keep
 data class StorefrontCategoriesData(var categoryId: Long, var categoryName: String, var categoryIconLink: String, var selectedCategory: Boolean = false)

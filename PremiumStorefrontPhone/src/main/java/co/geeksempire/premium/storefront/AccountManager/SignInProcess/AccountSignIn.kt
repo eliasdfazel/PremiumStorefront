@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/23/21, 7:08 AM
+ * Last modified 7/1/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
+import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.Utils.Data.generatePassword
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -35,6 +36,7 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 import javax.net.ssl.HttpsURLConnection
 
+@Keep
 data class AccountData(var usernameId: String, var userEmailAddress: String, var userPassword: String)
 
 class AccountSignIn (val context: AppCompatActivity, val signInInterface: SignInInterface) {

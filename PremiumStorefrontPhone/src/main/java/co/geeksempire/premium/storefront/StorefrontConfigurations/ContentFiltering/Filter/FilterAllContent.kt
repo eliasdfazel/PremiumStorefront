@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 7/1/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter
 
 import android.util.Log
+import androidx.annotation.Keep
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
@@ -29,6 +30,7 @@ object FilteringOptions {
     const val FilterByAndroidCompatibilities = "FilterByAndroidCompatibilities"
 }
 
+@Keep
 data class FilterOptionsItem(var filterOptionLabel: String, var filterOptionIconLink: String?)
 
 class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {

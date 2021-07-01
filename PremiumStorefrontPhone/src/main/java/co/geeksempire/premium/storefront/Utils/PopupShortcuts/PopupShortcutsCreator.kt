@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 6:05 AM
+ * Last modified 7/1/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Icon
 import android.os.Build
+import androidx.annotation.Keep
 import androidx.annotation.RequiresApi
 import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
@@ -46,6 +47,7 @@ object PopupShortcutsActions {
     const val OpenPlayStoreAction = "POPUP_SHORTCUTS_OPEN_PLAY_STORE"
 }
 
+@Keep
 data class PopupShortcutsData(var applicationPackageName: String,
                               var applicationName: String, var applicationSummary: String, var applicationIconLink: String)
 

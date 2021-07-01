@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 2:18 PM
+ * Last modified 7/1/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,8 +10,10 @@
 
 package co.geeksempire.premium.storefront.AccountManager.DataStructure
 
+import androidx.annotation.Keep
 import com.google.firebase.firestore.FieldValue
 
+@Keep
 data class UserInformationProfileData (var privacyAgreement: Boolean? = false,
                                        var userIdentification: String, var userEmailAddress: String, var userDisplayName: String, var userProfileImage: String,
                                        var instagramAccount: String?,
