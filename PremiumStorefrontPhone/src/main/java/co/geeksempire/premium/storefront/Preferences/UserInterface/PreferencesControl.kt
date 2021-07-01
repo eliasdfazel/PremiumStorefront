@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 6:48 AM
+ * Last modified 7/1/21, 6:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,10 @@
 
 package co.geeksempire.premium.storefront.Preferences.UserInterface
 
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +25,15 @@ import co.geeksempire.premium.storefront.Preferences.Extensions.toggleLightDark
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.InApplicationReview.ReviewUtils
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -39,8 +50,6 @@ class PreferencesControl : AppCompatActivity() {
     val reviewUtils: ReviewUtils by lazy {
         ReviewUtils((application as PremiumStorefrontApplication).preferencesIO)
     }
-
-    val firebaseUser = Firebase.auth.currentUser
 
     lateinit var preferencesControlLayoutBinding: PreferencesControlLayoutBinding
 
@@ -60,6 +69,46 @@ class PreferencesControl : AppCompatActivity() {
                 toggleLightDark()
 
             })
+
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Firebase.auth.currentUser?.let {
+
+            Glide.with(applicationContext)
+                .asDrawable()
+                .load(it.photoUrl)
+                .transform(CircleCrop())
+                .listener(object : RequestListener<Drawable> {
+
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+
+                        return false
+                    }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                        resource?.let {
+
+                            preferencesControlLayoutBinding.profileImageView.icon = resource
+
+                            val dominantColor = extractVibrantColor(applicationContext, resource)
+
+                            preferencesControlLayoutBinding.profileImageColorView.backgroundTintList = ColorStateList.valueOf(setColorAlpha(dominantColor, 111f))
+
+                        }
+
+                        return false
+                    }
+
+                })
+                .submit()
+
+            preferencesControlLayoutBinding.profileNameView.text = Html.fromHtml(it.displayName, Html.FROM_HTML_MODE_COMPACT)
 
         }
 

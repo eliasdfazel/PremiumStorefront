@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 7:06 AM
+ * Last modified 7/1/21, 6:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,6 +27,8 @@ import co.geeksempire.premium.storefront.Utils.InApplicationReview.ReviewInterfa
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import com.google.android.play.core.review.ReviewInfo
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -161,10 +163,10 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
     preferencesControlLayoutBinding.shareItView.setOnClickListener {
 
-        if (firebaseUser != null) {
+        if (Firebase.auth.currentUser != null) {
 
             SendInvitation(this@preferencesControlSetupUserInteractions, preferencesControlLayoutBinding.rootView)
-                .invite(firebaseUser)
+                .invite(Firebase.auth.currentUser)
 
         } else {
 
