@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 2:48 PM
+ * Last modified 7/1/21, 6:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -135,6 +135,50 @@ fun AccountInformation.accountManagerSetupUserInterface() {
 
             })
             .submit()
+
+        accountInformationLayoutBinding.socialMediaScrollView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+        accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
+
+        accountInformationLayoutBinding.inviteFriendsView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+        accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
+
+        (application as PremiumStorefrontApplication).firestoreDatabase
+            .document(accountDataStructure.userProfileDatabasePath(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email))
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+
+                documentSnapshot?.let { documentData ->
+
+                    if (documentData.data?.get(AccountDataStructure.Attributes.instagramAccount) != null) {
+                        accountInformationLayoutBinding.instagramAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.instagramAccount).toString().lowercase(Locale.getDefault()))
+                    }
+
+                    if (documentData.data?.get(AccountDataStructure.Attributes.twitterAccount) != null) {
+                        accountInformationLayoutBinding.twitterAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.twitterAccount).toString())
+                    }
+
+                    if (documentData.data?.get(AccountDataStructure.Attributes.phoneNumber) != null) {
+                        accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.phoneNumber).toString())
+                    }
+
+                    documentData.data?.get(AccountDataStructure.Attributes.userDeveloper)?.let {
+
+                        developerChecked = it.toString().toBoolean()
+
+                        accountInformationLayoutBinding.developerCheckbox.playAnimation()
+
+                    }
+
+                    accountInformationLayoutBinding.inviteFriendsView.setOnClickListener {
+
+                        SendInvitation(this@accountManagerSetupUserInterface, accountInformationLayoutBinding.root)
+                            .invite(Firebase.auth.currentUser!!)
+
+                    }
+
+                }
+
+            }
 
         clickSetup()
 

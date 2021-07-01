@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/23/21, 7:04 AM
+ * Last modified 7/1/21, 6:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,8 +20,6 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSig
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.Extensions.accountManagerSetupUserInterface
 import co.geeksempire.premium.storefront.AccountManager.Utils.UserInformationIO
-import co.geeksempire.premium.storefront.Invitations.Send.SendInvitation
-import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
@@ -88,45 +86,6 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
             accountManagerSetupUserInterface()
 
-            accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
-            accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
-
-            (application as PremiumStorefrontApplication).firestoreDatabase
-                .document(accountDataStructure.userProfileDatabasePath(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email))
-                .get()
-                .addOnSuccessListener { documentSnapshot ->
-
-                    documentSnapshot?.let { documentData ->
-
-                        if (documentData.data?.get(AccountDataStructure.Attributes.instagramAccount) != null) {
-                            accountInformationLayoutBinding.instagramAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.instagramAccount).toString().lowercase(Locale.getDefault()))
-                        }
-
-                        if (documentData.data?.get(AccountDataStructure.Attributes.twitterAccount) != null) {
-                            accountInformationLayoutBinding.twitterAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.twitterAccount).toString())
-                        }
-
-                        if (documentData.data?.get(AccountDataStructure.Attributes.phoneNumber) != null) {
-                            accountInformationLayoutBinding.phoneNumberAddressView.setText(documentData.data?.get(AccountDataStructure.Attributes.phoneNumber).toString())
-                        }
-
-                        documentData.data?.get(AccountDataStructure.Attributes.userDeveloper)?.let {
-
-                            developerChecked = it.toString().toBoolean()
-
-                        }
-
-                        accountInformationLayoutBinding.inviteFriendsView.setOnClickListener {
-
-                            SendInvitation(this@AccountInformation, accountInformationLayoutBinding.root)
-                                .invite(Firebase.auth.currentUser!!)
-
-                        }
-
-                    }
-
-                }
-
         }
 
     }
@@ -170,9 +129,6 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
         accountInformationLayoutBinding.signupLoadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
         accountInformationLayoutBinding.signupLoadingView.visibility = View.GONE
-
-        accountInformationLayoutBinding.socialMediaScrollView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-        accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
 
         accountManagerSetupUserInterface()
 
