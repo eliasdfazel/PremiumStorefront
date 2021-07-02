@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 6:41 AM
+ * Last modified 7/2/21, 9:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,11 +46,13 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.Featu
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.Adapter.NewContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.storefrontUserInteractionSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
@@ -71,6 +73,8 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.inappmessaging.model.Action
+import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.android.synthetic.main.storefront_layout.*
@@ -749,6 +753,29 @@ class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface,
                     })
 
             }
+
+        }
+
+    }
+
+    override fun messageClicked(inAppMessage: InAppMessage, action: Action) {
+
+        val actionUrl = action.actionUrl
+
+        val dataMessage: HashMap<String, String> = inAppMessage.data as HashMap<String, String>
+
+        if (dataMessage[ProductDataKey.ProductPackageName] != null &&
+            dataMessage[ProductDataKey.ProductName] != null &&
+            dataMessage[ProductDataKey.ProductSummary] != null) {
+
+            val applicationPackageName = dataMessage[ProductDataKey.ProductPackageName]!!
+            val applicationName = dataMessage[ProductDataKey.ProductName]!!
+            val applicationSummary = dataMessage[ProductDataKey.ProductSummary]!!
+
+            openPlayStoreToInstall(context = applicationContext,
+                aPackageName = applicationPackageName,
+                applicationName = applicationName,
+                applicationSummary = applicationSummary)
 
         }
 
