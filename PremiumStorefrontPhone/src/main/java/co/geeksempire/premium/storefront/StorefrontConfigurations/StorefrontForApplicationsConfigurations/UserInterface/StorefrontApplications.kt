@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/2/21, 9:48 AM
+ * Last modified 7/2/21, 10:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,13 +22,11 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
-import co.geeksempire.premium.storefront.AccountManager.SignInProcess.SignInInterface
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.BuildConfig
@@ -53,6 +51,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.storefrontUserInteractionSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
@@ -60,7 +59,6 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplication
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
-import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
@@ -68,7 +66,6 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
-import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
 import com.abanabsalan.aban.magazine.Utils.System.hideKeyboard
 import com.bumptech.glide.Glide
@@ -76,7 +73,6 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.inappmessaging.FirebaseInAppMessagingClickListener
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
@@ -89,11 +85,7 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import java.util.*
 import kotlin.collections.ArrayList
 
-class StorefrontApplications : AppCompatActivity(),
-    NetworkConnectionListenerInterface,
-    SignInInterface,
-    FragmentInterface,
-    FirebaseInAppMessagingClickListener {
+class StorefrontApplications : StorefrontActivity() {
 
     val updatingDataIO: UpdatingDataIO by lazy {
         UpdatingDataIO(applicationContext)
