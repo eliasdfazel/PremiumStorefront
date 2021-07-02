@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 6:10 AM
+ * Last modified 7/2/21, 9:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,6 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
-import androidx.constraintlayout.widget.ConstraintLayout
 import co.geeksempire.premium.storefront.AccountManager.DataStructure.AccountDataStructure
 import co.geeksempire.premium.storefront.AccountManager.DataStructure.UserInformationProfileData
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
@@ -31,7 +30,6 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorDark
-import co.geeksempire.premium.storefront.Utils.UI.Display.statusBarHeight
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -82,10 +80,6 @@ fun AccountInformation.accountManagerSetupUserInterface() {
 
     window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
 
-    val accountViewLayoutParameters: ConstraintLayout.LayoutParams = accountInformationLayoutBinding.profileImageView.layoutParams as ConstraintLayout.LayoutParams
-    accountViewLayoutParameters.setMargins(accountViewLayoutParameters.topMargin, accountViewLayoutParameters.topMargin + statusBarHeight(applicationContext), accountViewLayoutParameters.topMargin, accountViewLayoutParameters.topMargin)
-    accountInformationLayoutBinding.profileImageView.layoutParams = accountViewLayoutParameters
-
     MoreOptions(this@accountManagerSetupUserInterface)
         .setup()
 
@@ -114,6 +108,9 @@ fun AccountInformation.accountManagerSetupUserInterface() {
                             vibrantColor = extractVibrantColor(applicationContext, it)
 
                             window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
+
+                            window.navigationBarColor = vibrantColor
+                            window.statusBarColor = dominantColor
 
                             accountInformationLayoutBinding.inviteFriendsView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
                             accountInformationLayoutBinding.inviteFriendsView.rippleColor = ColorStateList.valueOf(dominantColor)
