@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/2/21, 9:49 AM
+ * Last modified 7/2/21, 10:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -73,6 +73,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.inappmessaging.FirebaseInAppMessagingClickListener
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
@@ -85,7 +86,11 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import java.util.*
 import kotlin.collections.ArrayList
 
-class StorefrontGames : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface, FragmentInterface {
+class StorefrontGames : AppCompatActivity(),
+    NetworkConnectionListenerInterface,
+    SignInInterface,
+    FragmentInterface,
+    FirebaseInAppMessagingClickListener {
 
     val updatingDataIO: UpdatingDataIO by lazy {
         UpdatingDataIO(applicationContext)
