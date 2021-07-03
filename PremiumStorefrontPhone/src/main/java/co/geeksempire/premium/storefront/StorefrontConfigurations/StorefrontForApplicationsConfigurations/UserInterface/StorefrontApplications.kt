@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/2/21, 10:25 AM
+ * Last modified 7/3/21, 10:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
@@ -42,6 +43,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.AllCo
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.Adapter.NewContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.Adapter.OldContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
@@ -131,6 +133,20 @@ class StorefrontApplications : StorefrontActivity() {
 
     val allContentAdapter: AllContentAdapter by lazy {
         AllContentAdapter(context = this@StorefrontApplications,
+            contentDetailsContainer = storefrontLayoutBinding.contentDetailsContainer,
+            productDetailsFragment = productDetailsFragment,
+            fragmentInterface = this@StorefrontApplications)
+    }
+
+    val allMoreContentAdapter: AllContentAdapter by lazy {
+        AllContentAdapter(context = this@StorefrontApplications,
+            contentDetailsContainer = storefrontLayoutBinding.contentDetailsContainer,
+            productDetailsFragment = productDetailsFragment,
+            fragmentInterface = this@StorefrontApplications)
+    }
+
+    val oldMoreContentAdapter: OldContentAdapter by lazy {
+        OldContentAdapter(context = this@StorefrontApplications,
             contentDetailsContainer = storefrontLayoutBinding.contentDetailsContainer,
             productDetailsFragment = productDetailsFragment,
             fragmentInterface = this@StorefrontApplications)
@@ -240,6 +256,15 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
 
+            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, 307), RecyclerView.VERTICAL)
+            storefrontLayoutBinding.oldContentRecyclerView.adapter = oldMoreContentAdapter
+
+            storefrontLayoutBinding.allMoreContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
+            storefrontLayoutBinding.allMoreContentRecyclerView.adapter = allMoreContentAdapter
+
+            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
+            storefrontLayoutBinding.oldContentRecyclerView.adapter = newContentAdapter
+
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
 
@@ -296,6 +321,10 @@ class StorefrontApplications : StorefrontActivity() {
 
             storefrontLiveData.presentMoreItemData.observe(this@StorefrontApplications, {
 
+                if (!storefrontLayoutBinding.allMoreContentRecyclerView.isShown) {
+                    storefrontLayoutBinding.allMoreContentRecyclerView.visibility = View.VISIBLE
+                }
+
                 val installedApplications = InstalledApplications(applicationContext)
 
                 if (installedApplications.appIsInstalled(it.productAttributes[ProductsContentKey.AttributesPackageNameKey])) {
@@ -304,9 +333,13 @@ class StorefrontApplications : StorefrontActivity() {
 
                 }
 
-                allContentAdapter.storefrontContents.add(it)
+                allMoreContentAdapter.storefrontContents.add(it)
 
-                allContentAdapter.notifyItemInserted(allContentAdapter.storefrontContents.size - 1)
+                allMoreContentAdapter.notifyItemInserted(if (allMoreContentAdapter.storefrontContents.isEmpty()) {
+                    0
+                } else {
+                    allMoreContentAdapter.storefrontContents.size - 1
+                })
 
                 storefrontLayoutBinding.loadMoreView.apply {
 
@@ -319,7 +352,7 @@ class StorefrontApplications : StorefrontActivity() {
 
                 }
 
-                if (allContentAdapter.storefrontContents.size == storefrontAllUntouchedContents.size) {
+                if ((allContentAdapter.storefrontContents.size + allMoreContentAdapter.storefrontContents.size) == storefrontAllUntouchedContents.size) {
 
                     storefrontLayoutBinding.loadMoreView.visibility = View.GONE
 
@@ -329,12 +362,24 @@ class StorefrontApplications : StorefrontActivity() {
 
             storefrontLiveData.allFilteredContentItemData.observe(this@StorefrontApplications, {
 
-                if (it.isNotEmpty()) {
+                if (it.first.isNotEmpty()) {
+
+                    val initialData = if (it.second) {
+                        if (it.first.size > 19) {
+                            it.first.subList(0, 19)
+                        } else {
+                            it.first
+                        }
+                    } else {
+                        it.first
+                    }
 
                     allContentAdapter.storefrontContents.clear()
-                    allContentAdapter.storefrontContents.addAll(it)
+                    allContentAdapter.storefrontContents.addAll(initialData)
 
                     allContentAdapter.notifyDataSetChanged()
+
+
 
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)

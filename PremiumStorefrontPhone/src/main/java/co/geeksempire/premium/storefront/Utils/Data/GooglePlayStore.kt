@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 5:41 AM
+ * Last modified 7/3/21, 10:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,10 +14,14 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.text.Html
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
 import com.google.android.gms.tasks.Task
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.dynamiclinks.ShortDynamicLink
 import com.google.firebase.dynamiclinks.ktx.*
 import com.google.firebase.ktx.Firebase
@@ -55,7 +59,7 @@ private fun generateInstallDynamicLink(context: Context,
     return dynamicLink.uri
 }
 
-fun prepareInstallShortDynamicLink(context: Context,
+private fun prepareInstallShortDynamicLink(context: Context,
                                     aPackageName: String,
                                     applicationName: String, applicationSummary: String,
                                     mediatingSolution: String = context.packageName,
@@ -80,6 +84,10 @@ fun prepareInstallShortDynamicLink(context: Context,
 }
 
 fun openPlayStoreToInstall(context: Context, aPackageName: String, applicationName: String, applicationSummary: String) {
+    Firebase.analytics.logEvent(Firebase.auth.currentUser?.displayName?:"Unknown", Bundle().apply {
+        putString(ProductDataKey.ProductPackageName, aPackageName)
+        putString(ProductDataKey.ProductName, applicationName)
+    })
 
     doVibrate(context, 159)
 
@@ -91,6 +99,10 @@ fun openPlayStoreToInstall(context: Context, aPackageName: String, applicationNa
 }
 
 fun shareApplication(context: Context, aPackageName: String, applicationName: String, applicationSummary: String) {
+    Firebase.analytics.logEvent(Firebase.auth.currentUser?.displayName?:"Unknown", Bundle().apply {
+        putString(ProductDataKey.ProductPackageName, aPackageName)
+        putString(ProductDataKey.ProductName, applicationName)
+    })
 
     doVibrate(context, 159)
 

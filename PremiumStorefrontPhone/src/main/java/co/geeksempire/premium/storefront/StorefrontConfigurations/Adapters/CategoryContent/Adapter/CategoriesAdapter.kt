@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 5:23 AM
+ * Last modified 7/3/21, 10:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,7 +41,7 @@ import net.geeksempire.balloon.optionsmenu.library.TitleTextViewCustomization
 
 class CategoriesAdapter(private val context: AppCompatActivity,
                         private val filterAllContent: FilterAllContent,
-                        private val allFilteredContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>>,
+                        private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>,
                         private val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
                         private val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData>,
                         private val categoryIndicatorTextView: TextView,
@@ -155,7 +155,7 @@ class CategoriesAdapter(private val context: AppCompatActivity,
 
                 if (position == 0) {
 
-                    allFilteredContentItemData.postValue(storefrontAllUntouchedContents)
+                    allFilteredContentItemData.postValue(Pair(storefrontAllUntouchedContents, true))
 
                 } else {
 

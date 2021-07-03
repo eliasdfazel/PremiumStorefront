@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:31 AM
+ * Last modified 7/3/21, 10:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,8 +43,8 @@ class StorefrontLiveData : ViewModel() {
         MutableLiveData<StorefrontContentsData>()
     }
 
-    val allFilteredContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontContentsData>>()
+    val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>> by lazy {
+        MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>()
     }
 
     val newContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
@@ -218,9 +218,9 @@ class StorefrontLiveData : ViewModel() {
 
         val initialJsonArray = JSONArray()
 
-        val targetIndex = if (allContentJsonArray.length() >= 11) {
+        val targetIndex = if (allContentJsonArray.length() >= 19) {
 
-            11
+            19
 
         } else {
 

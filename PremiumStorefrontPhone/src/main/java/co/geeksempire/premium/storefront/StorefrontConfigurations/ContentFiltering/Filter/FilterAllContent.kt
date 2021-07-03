@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 10:11 AM
+ * Last modified 7/3/21, 10:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -67,7 +67,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
             }
 
-            storefrontLiveData.allFilteredContentItemData.postValue(storefrontAllContentsFilter)
+            storefrontLiveData.allFilteredContentItemData.postValue(Pair(storefrontAllContentsFilter, false))
 
         }
 
@@ -88,7 +88,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
             storefrontAllContents.clear()
             storefrontAllContents.addAll(storefrontAllContentsFilter)
 
-            storefrontLiveData.allFilteredContentItemData.postValue(storefrontAllContents)
+            storefrontLiveData.allFilteredContentItemData.postValue(Pair(storefrontAllContents, false))
 
         }
 
@@ -121,7 +121,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
             storefrontAllContents.clear()
             storefrontAllContents.addAll(storefrontAllContentsFilter)
 
-            storefrontLiveData.allFilteredContentItemData.postValue(storefrontAllContents)
+            storefrontLiveData.allFilteredContentItemData.postValue(Pair(storefrontAllContents, false))
 
         }
 
@@ -157,7 +157,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
             sortedStorefrontFilteredContents.clear()
             sortedStorefrontFilteredContents.addAll(storefrontAllContentsFilter)
 
-            storefrontLiveData.allFilteredContentItemData.postValue(sortedStorefrontFilteredContents)
+            storefrontLiveData.allFilteredContentItemData.postValue(Pair(sortedStorefrontFilteredContents, false))
 
         }
 
