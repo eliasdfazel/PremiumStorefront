@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/7/21, 8:52 AM
+ * Last modified 7/7/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonR
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import org.json.JSONArray
 
-fun retrieveNewContent(context: AppCompatActivity,
+fun retrieveOldContent(context: AppCompatActivity,
                        storefrontLiveData: StorefrontLiveData,
                        generalEndpoint: GeneralEndpoint,
                        queryType: String = GeneralEndpoint.QueryType.ApplicationsQuery) {
@@ -32,13 +32,13 @@ fun retrieveNewContent(context: AppCompatActivity,
     val queryEndpoint = when (queryType) {
         GeneralEndpoint.QueryType.ApplicationsQuery -> {
 
-            applicationsQueryEndpoint.getNewApplicationsEndpoint(numberOfProducts = (columnCount(context, 271) * 3) + 3)
+            applicationsQueryEndpoint.getOldApplicationsEndpoint(numberOfProducts = (columnCount(context, 113) * 5))
         }
         GeneralEndpoint.QueryType.GamesQuery -> {
 
-            gamesQueryEndpoint.getNewGamesEndpoint(numberOfProducts = (columnCount(context, 271) * 3) + 3)
+            gamesQueryEndpoint.getOldGamesEndpoint(numberOfProducts = (columnCount(context, 113) * 5))
         }
-        else -> applicationsQueryEndpoint.getNewApplicationsEndpoint(numberOfProducts = (columnCount(context, 271) * 3) + 3)
+        else -> applicationsQueryEndpoint.getOldApplicationsEndpoint(numberOfProducts = (columnCount(context, 113) * 5))
     }
 
     GenericJsonRequest(context, object : JsonRequestResponses {
@@ -46,7 +46,7 @@ fun retrieveNewContent(context: AppCompatActivity,
         override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
             super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-            storefrontLiveData.processNewContent(rawDataJsonArray)
+            storefrontLiveData.processOldContent(rawDataJsonArray)
 
         }
 

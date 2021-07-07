@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:09 AM
+ * Last modified 7/7/21, 8:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,12 +48,10 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "&" +
                 "exclude=2341"
 
-    fun getNewApplicationsEndpoint(numberOfProducts: Int = 3, productPerPage: Int = 99, numberOfPage: Int = 1) : String =
+    fun getNewApplicationsEndpoint(numberOfProducts: Int = 3, numberOfPage: Int = 1) : String =
         "${getAllAndroidApplicationsEndpoint()}" +
                 "&" +
                 "per_page=${numberOfProducts}" +
-                "&" +
-                "per_page=${productPerPage}" +
                 "&" +
                 "page=${numberOfPage}" +
                 "&" +
@@ -62,6 +60,19 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "orderby=date" +
                 "&" +
                 "order=desc"
+
+    fun getOldApplicationsEndpoint(numberOfProducts: Int = 3, numberOfPage: Int = 1) : String =
+        "${getAllAndroidApplicationsEndpoint()}" +
+                "&" +
+                "per_page=${numberOfProducts}" +
+                "&" +
+                "page=${numberOfPage}" +
+                "&" +
+                "exclude=2341" +
+                "&" +
+                "orderby=date" +
+                "&" +
+                "order=asc"
 
     fun getApplicationsCategoriesEndpoint(numberOfProducts: Int = 99, csvExclusions: String = "80,66,57,546") : String =
         "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +

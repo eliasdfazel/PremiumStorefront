@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/3/21, 10:57 AM
+ * Last modified 7/7/21, 8:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -145,7 +145,7 @@ class StorefrontApplications : StorefrontActivity() {
             fragmentInterface = this@StorefrontApplications)
     }
 
-    val oldMoreContentAdapter: OldContentAdapter by lazy {
+    val oldContentAdapter: OldContentAdapter by lazy {
         OldContentAdapter(context = this@StorefrontApplications,
             contentDetailsContainer = storefrontLayoutBinding.contentDetailsContainer,
             productDetailsFragment = productDetailsFragment,
@@ -256,14 +256,11 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
 
-            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, 307), RecyclerView.VERTICAL)
-            storefrontLayoutBinding.oldContentRecyclerView.adapter = oldMoreContentAdapter
+            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, 113), RecyclerView.VERTICAL)
+            storefrontLayoutBinding.oldContentRecyclerView.adapter = oldContentAdapter
 
             storefrontLayoutBinding.allMoreContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allMoreContentRecyclerView.adapter = allMoreContentAdapter
-
-            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
-            storefrontLayoutBinding.oldContentRecyclerView.adapter = newContentAdapter
 
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
@@ -292,6 +289,9 @@ class StorefrontApplications : StorefrontActivity() {
 
                     retrieveCategories(this@StorefrontApplications,
                         generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.ApplicationsQuery)
+
+                    retrieveOldContent(this@StorefrontApplications,
+                        storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
 
                     storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
 
@@ -441,6 +441,26 @@ class StorefrontApplications : StorefrontActivity() {
 
                     storefrontLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
                     storefrontLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+
+                } else {
+
+
+
+                }
+
+            })
+
+            storefrontLiveData.oldContentItemData.observe(this@StorefrontApplications, {
+
+                if (it.isNotEmpty()) {
+
+                    oldContentAdapter.storefrontContents.clear()
+                    oldContentAdapter.storefrontContents.addAll(it)
+
+                    oldContentAdapter.notifyDataSetChanged()
+
+                    storefrontLayoutBinding.oldContentRecyclerView.visibility = View.VISIBLE
+                    storefrontLayoutBinding.oldContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
 
                 } else {
 

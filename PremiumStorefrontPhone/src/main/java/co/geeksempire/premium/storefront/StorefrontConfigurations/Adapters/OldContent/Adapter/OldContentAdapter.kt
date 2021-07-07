@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/3/21, 9:41 AM
+ * Last modified 7/7/21, 9:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.Adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,13 +24,13 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInter
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.ViewHolder.OldContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 
@@ -48,7 +49,7 @@ class OldContentAdapter(private val context: AppCompatActivity,
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : OldContentViewHolder {
 
-        return OldContentViewHolder(LayoutInflater.from(context).inflate(R.layout.storefront_new_content_item, viewGroup, false))
+        return OldContentViewHolder(LayoutInflater.from(context).inflate(R.layout.storefront_old_content_item, viewGroup, false))
     }
 
     override fun onBindViewHolder(oldContentViewHolder: OldContentViewHolder, position: Int, payloads: MutableList<Any>) {
@@ -60,23 +61,17 @@ class OldContentAdapter(private val context: AppCompatActivity,
                 oldContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 oldContentViewHolder.productNameTextView.setShadowLayer(oldContentViewHolder.productNameTextView.shadowRadius, oldContentViewHolder.productNameTextView.shadowDx, oldContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
 
-                oldContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_gradient_icon_light))
-
             }
             ThemeType.ThemeDark -> {
 
                 oldContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
                 oldContentViewHolder.productNameTextView.setShadowLayer(oldContentViewHolder.productNameTextView.shadowRadius, oldContentViewHolder.productNameTextView.shadowDx, oldContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.black))
 
-                oldContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_gradient_icon_dark))
-
             }
             else -> {
 
                 oldContentViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
                 oldContentViewHolder.productNameTextView.setShadowLayer(oldContentViewHolder.productNameTextView.shadowRadius, oldContentViewHolder.productNameTextView.shadowDx, oldContentViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
-
-                oldContentViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_gradient_icon_light))
 
             }
         }
@@ -91,7 +86,7 @@ class OldContentAdapter(private val context: AppCompatActivity,
         Glide.with(context)
             .load(storefrontContents[position].productIconLink)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(CircleCrop())
+            .transform(CenterCrop())
             .override(256, 256)
             .listener(object : RequestListener<Drawable> {
 
@@ -101,11 +96,17 @@ class OldContentAdapter(private val context: AppCompatActivity,
 
                         resource?.let {
 
-                            val vibrantColor = extractVibrantColor(context, resource)
+                            val dominantColor = extractDominantColor(context, resource)
 
                             context.runOnUiThread {
 
-                                oldContentViewHolder.productIconImageView.setImageDrawable(resource)
+                                val squircleDrawableBackground = context.getDrawable(R.drawable.squircle_icon_light)!!.mutate()
+                                squircleDrawableBackground.setTint(dominantColor)
+
+                                val layers = arrayOf<Drawable>(squircleDrawableBackground, resource)
+                                val layerDrawable = LayerDrawable(layers)
+
+                                oldContentViewHolder.productIconImageView.setImageDrawable(layerDrawable)
 
                             }
 

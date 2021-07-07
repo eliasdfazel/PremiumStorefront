@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/7/21, 8:34 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_width="113dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="7dp"
+    android:layout_marginVertical="7dp"
+    android:background="@android:color/transparent">
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/productIconImageView"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/premium_storefront_logo"
+
+        apps:shapeDrawable="@drawable/squircle_icon_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="113dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="13dp"
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:textColor="@color/dark"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:text="@string/applicationName"
+        android:fontFamily="@font/upcil"
+        android:shadowColor="@color/white"
+        android:shadowRadius="11"
+
+        apps:layout_constraintTop_toBottomOf="@id/productIconImageView"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

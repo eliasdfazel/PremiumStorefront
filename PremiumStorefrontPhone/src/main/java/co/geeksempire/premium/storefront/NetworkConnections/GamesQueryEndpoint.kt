@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:09 AM
+ * Last modified 7/7/21, 8:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,12 +48,23 @@ class GamesQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "&" +
                 "exclude=2341"
 
-    fun getNewGamesEndpoint(numberOfProducts: Int = 3, productPerPage: Int = 99, numberOfPage: Int = 1) : String =
+    fun getNewGamesEndpoint(numberOfProducts: Int = 3, numberOfPage: Int = 1) : String =
         "${getAllAndroidGamesEndpoint()}" +
                 "&" +
                 "per_page=${numberOfProducts}" +
                 "&" +
-                "per_page=${productPerPage}" +
+                "page=${numberOfPage}" +
+                "&" +
+                "exclude=2341" +
+                "&" +
+                "orderby=date" +
+                "&" +
+                "order=desc"
+
+    fun getOldGamesEndpoint(numberOfProducts: Int = 3, numberOfPage: Int = 1) : String =
+        "${getAllAndroidGamesEndpoint()}" +
+                "&" +
+                "per_page=${numberOfProducts}" +
                 "&" +
                 "page=${numberOfPage}" +
                 "&" +
