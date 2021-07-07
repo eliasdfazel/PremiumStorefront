@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/7/21, 8:35 AM
+ * Last modified 7/7/21, 11:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,7 +65,6 @@ import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
-import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.StorefrontLayoutBinding
@@ -83,7 +82,6 @@ import kotlinx.android.synthetic.main.storefront_layout.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
-import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -405,11 +403,6 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLiveData.featuredContentItemData.observe(this@StorefrontApplications, {
 
                 if (it.isNotEmpty()) {
-
-                    val numberOfItemsToLoad = displayY(applicationContext) / (dpToInteger(applicationContext, 307))
-                    Log.d(this@StorefrontApplications.javaClass.simpleName, "Number Of Items To Load | Featured Content: ${numberOfItemsToLoad}")
-
-                    val dataToSetup = it.subList(0, numberOfItemsToLoad)
 
                     featuredContentAdapter.storefrontContents.clear()
                     featuredContentAdapter.storefrontContents.addAll(it)

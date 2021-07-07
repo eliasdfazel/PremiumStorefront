@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/7/21, 9:40 AM
+ * Last modified 7/7/21, 11:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,21 +10,29 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.Adapter
 
+import android.app.ActivityOptions
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.ViewHolder.OldContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorLightDark
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -90,35 +98,64 @@ class OldContentAdapter(private val context: AppCompatActivity,
             .override(256, 256)
             .listener(object : RequestListener<Drawable> {
 
-                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
+                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
 
-                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                override fun onResourceReady(productIcon: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                        resource?.let {
+                    productIcon?.let {
 
-                            val dominantColor = extractDominantColor(context, resource)
+                        val dominantColor = extractDominantColor(context, productIcon)
 
-                            context.runOnUiThread {
+                        context.runOnUiThread {
 
-                                val squircleDrawableBackground = context.getDrawable(R.drawable.squircle_icon_light)!!.mutate()
-                                squircleDrawableBackground.setTint(dominantColor)
+                            val squircleDrawableBackground = context.getDrawable(R.drawable.squircle_icon_light)!!.mutate()
+                            squircleDrawableBackground.setTint(dominantColor)
 
-                                val layers = arrayOf<Drawable>(squircleDrawableBackground, resource)
-                                val layerDrawable = LayerDrawable(layers)
+                            val backgroundLayer = arrayOf<Drawable>(squircleDrawableBackground, productIcon)
+                            val backgroundLayerDrawables = LayerDrawable(backgroundLayer)
 
-                                oldContentViewHolder.productIconImageView.setImageDrawable(layerDrawable)
+                            oldContentViewHolder.productIconImageView.setImageDrawable(backgroundLayerDrawables)
+
+                            oldContentViewHolder.productCategoryImageView.backgroundTintList = ColorStateList.valueOf(dominantColor)
+
+                            if (isColorLightDark(dominantColor)) {
+
+                                oldContentViewHolder.productCategoryImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
+                            } else {
+
+                                oldContentViewHolder.productCategoryImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
                             }
 
                         }
 
-                        return false
                     }
 
-                })
-                .submit()
+                    return false
+                }
+
+            })
+            .submit()
+
+        Glide.with(context)
+            .asDrawable()
+            .load((context.application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(storefrontContents[position].productCategoryName))
+            .into(oldContentViewHolder.productCategoryImageView)
+
+        oldContentViewHolder.productCategoryImageView.setOnClickListener {
+
+            context.startActivity(Intent(context, CategoryDetails::class.java).apply {
+                putExtra(CategoriesDataKeys.CategoryId, storefrontContents[position].productCategoryId)
+                putExtra(CategoriesDataKeys.CategoryName, storefrontContents[position].productCategoryName)
+                putExtra(CategoriesDataKeys.CategoryIcon, (context.application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(storefrontContents[position].productCategoryName))
+            }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+
+        }
 
         oldContentViewHolder.rootView.setOnClickListener {
+
+            oldContentViewHolder.rootView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_up_bounce_interpolator))
 
             openProductsDetails(context = context, fragmentInterface = fragmentInterface,
                 contentDetailsContainer = contentDetailsContainer, productDetailsFragment = productDetailsFragment,

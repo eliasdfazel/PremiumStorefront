@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/15/21, 9:52 AM
+ * Last modified 7/7/21, 11:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -111,11 +111,27 @@ fun isColorDark(color: Int): Boolean {
 
     return (darkness >= 0.50)
 }
+
 fun isDrawableLightDark(context: Context, drawable: Drawable): Boolean {
 
     var isLightDark = false
 
     val calculateLuminance = ColorUtils.calculateLuminance(extractDominantColor(context, drawable))
+
+    if (calculateLuminance > 0.50) { //light
+        isLightDark = true
+    } else if (calculateLuminance <= 0.50) { //dark
+        isLightDark = false
+    }
+
+    return isLightDark
+}
+
+fun isColorLightDark(inputColor: Int): Boolean {
+
+    var isLightDark = false
+
+    val calculateLuminance = ColorUtils.calculateLuminance(inputColor)
 
     if (calculateLuminance > 0.50) { //light
         isLightDark = true

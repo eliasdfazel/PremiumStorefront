@@ -14,7 +14,6 @@
     android:duration="777">
 
     <scale
-        android:interpolator="@android:anim/bounce_interpolator"
         android:duration="1777"
         android:fromXScale="0.3"
         android:toXScale="1.0"
@@ -23,4 +22,10 @@
         android:pivotX="50%"
         android:pivotY="50%" />
 
+    <rotate
+        android:duration="1777"
+        android:interpolator="@android:anim/bounce_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toDegrees="360" />
 </set>

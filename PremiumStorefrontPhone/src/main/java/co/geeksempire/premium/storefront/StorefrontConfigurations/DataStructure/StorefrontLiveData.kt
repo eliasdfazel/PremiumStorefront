@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/7/21, 8:42 AM
+ * Last modified 7/7/21, 10:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -88,7 +88,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (allTextCheckpoint != "All") {
+                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
 
@@ -167,7 +167,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (allTextCheckpoint != "All") {
+                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
 
@@ -298,7 +298,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (allTextCheckpoint != "All") {
+                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
 
@@ -377,7 +377,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (allTextCheckpoint != "All") {
+                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
 
@@ -451,14 +451,25 @@ class StorefrontLiveData : ViewModel() {
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
 
             var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(ProductsContentKey.NameKey)
+            var productCategoryId = 15
 
             for (indexCategory in 0 until productCategories.length()) {
 
                 val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (allTextCheckpoint != "All") {
+                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
+
+                    productCategoryId = try {
+
+                            (productCategories[indexCategory] as JSONObject).getInt(ProductsContentKey.IdKey)
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+
+                        15
+                    }
 
                 }
 
@@ -484,6 +495,7 @@ class StorefrontLiveData : ViewModel() {
                 productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                 productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
                 productCategoryName = productCategory,
+                productCategoryId = productCategoryId,
                 productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
                 productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                 productIconLink = productIcon,
