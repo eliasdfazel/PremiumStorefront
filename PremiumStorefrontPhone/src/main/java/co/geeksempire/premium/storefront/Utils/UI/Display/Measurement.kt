@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/19/21 4:05 PM
+ * Last modified 7/9/21, 6:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,17 @@ import android.util.TypedValue
 fun columnCount(context: Context, itemWidth: Int): Int {
 
     var spanCount = (displayX(context) / convertDpToPixel(context, itemWidth.toFloat())).toInt()
+
+    if (spanCount < 1) {
+        spanCount = 1
+    }
+
+    return spanCount
+}
+
+fun columnCount(context: Context, widthOfRootView: Float, itemWidth: Int): Int {
+
+    var spanCount = (widthOfRootView / convertDpToPixel(context, itemWidth.toFloat())).toInt()
 
     if (spanCount < 1) {
         spanCount = 1

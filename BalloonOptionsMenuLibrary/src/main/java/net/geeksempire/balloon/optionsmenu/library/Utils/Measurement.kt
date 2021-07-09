@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 8:30 AM
+ * Last modified 7/9/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -74,9 +74,14 @@ fun Float.spToInteger(context: Context) : Float {
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this@spToInteger, context.resources.displayMetrics)
 }
 
-fun percentageOfDisplay(context: Context, percentageAmount: Float) : Float {
+fun percentageOfDisplayDiagonal(context: Context, percentageAmount: Float) : Float {
 
     return ((displayDiagonal(context) * percentageAmount) / 100).toFloat()
+}
+
+fun percentageOfDisplayX(context: Context, percentageAmount: Float) : Float {
+
+    return ((displayX(context) * percentageAmount) / 100).toFloat()
 }
 
 /**
