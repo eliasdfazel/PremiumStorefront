@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 5:18 AM
+ * Last modified 7/9/21, 10:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,7 +50,6 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
     private var numberOfPageToRetrieve: Int = 1
 
     override suspend fun doWork(): Result {
-
 
         val updateDataKey = workerParams.inputData.getByteArray(IO.UpdateDataKey)?.let { String(it) }
         Log.d(this@DataUpdatingWork.javaClass.simpleName, updateDataKey.toString())
