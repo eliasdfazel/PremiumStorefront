@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 7:31 AM
+ * Last modified 7/9/21, 8:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,7 +43,7 @@ class UpdatingDataIO (private val context: Context) {
             .setRequiresDeviceIdle(true)
             .build()
 
-        val workRequest = PeriodicWorkRequestBuilder<DataUpdatingWork>(3, TimeUnit.DAYS)
+        val workRequest = PeriodicWorkRequestBuilder<DataUpdatingWork>(13, TimeUnit.DAYS)
             .setInputData(
                 workDataOf(
                     IO.UpdateDataKey to IO.UpdateApplicationsDataKey.toByteArray(Charset.defaultCharset()),
@@ -84,7 +84,7 @@ class UpdatingDataIO (private val context: Context) {
             .setRequiresDeviceIdle(true)
             .build()
 
-        val workRequest = PeriodicWorkRequestBuilder<DataUpdatingWork>(3, TimeUnit.DAYS)
+        val workRequest = PeriodicWorkRequestBuilder<DataUpdatingWork>(13, TimeUnit.DAYS)
             .setInputData(
                 workDataOf(
                     IO.UpdateDataKey to IO.UpdateGamesDataKey.toByteArray(Charset.defaultCharset()),
