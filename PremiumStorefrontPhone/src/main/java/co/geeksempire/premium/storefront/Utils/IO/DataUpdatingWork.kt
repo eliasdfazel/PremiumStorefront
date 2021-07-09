@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/9/21, 10:01 AM
+ * Last modified 7/9/21, 10:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,10 +55,11 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
         Log.d(this@DataUpdatingWork.javaClass.simpleName, updateDataKey.toString())
 
         setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
-                notificationTitle = applicationContext.getString(R.string.applicationName),
-                notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
-                notificationDone = false)
-        ))
+            notificationId = Foreground.NotificationId,
+            notificationTitle = applicationContext.getString(R.string.applicationName),
+            notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
+            notificationDone = false)
+        )).get()
 
         /* Start - Applications Data Updating */
         when (updateDataKey) {
@@ -111,9 +112,10 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                     Log.d(this@DataUpdatingWork.javaClass.simpleName, "No More Content")
 
                     setForegroundAsync(ForegroundInfo(Foreground.NotificationId,  notificationBuilder.create(
+                        notificationId = Foreground.NotificationId,
                         notificationTitle = applicationContext.getString(R.string.applicationName),
                         notificationContent = applicationContext.getString(R.string.doneText),
-                        notificationDone = true)))
+                        notificationDone = false)))
 
                     stringBuilder.append(rawDataJsonArray.toString())
 
@@ -147,6 +149,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                     Log.d(this@DataUpdatingWork.javaClass.simpleName, "No More Content")
 
                     setForegroundAsync(ForegroundInfo(Foreground.NotificationId,  notificationBuilder.create(
+                        notificationId = Foreground.NotificationId,
                         notificationTitle = applicationContext.getString(R.string.applicationName),
                         notificationContent = applicationContext.getString(R.string.doneText),
                         notificationDone = true)))

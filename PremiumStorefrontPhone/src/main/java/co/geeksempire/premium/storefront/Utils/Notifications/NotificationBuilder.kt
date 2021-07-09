@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/9/21, 10:00 AM
+ * Last modified 7/9/21, 10:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,7 +48,7 @@ class NotificationBuilder (private val context: Context) {
             val notificationChannel = NotificationChannel(
                 notificationChannelId,
                 context.getString(R.string.applicationName),
-                NotificationManager.IMPORTANCE_HIGH)
+                NotificationManager.IMPORTANCE_MIN)
 
             notificationManager.createNotificationChannel(notificationChannel)
 
@@ -61,6 +61,7 @@ class NotificationBuilder (private val context: Context) {
         if (notificationDone) {
 
             notificationBuilder.setContentText(notificationContentDone)
+
             notificationBuilder.setAutoCancel(true)
             notificationBuilder.setOngoing(false)
 
