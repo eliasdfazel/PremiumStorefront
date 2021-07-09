@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/9/21, 10:15 AM
+ * Last modified 7/9/21, 10:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,7 +59,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
             notificationTitle = applicationContext.getString(R.string.applicationName),
             notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
             notificationDone = false)
-        )).get()
+        ))
 
         /* Start - Applications Data Updating */
         when (updateDataKey) {
