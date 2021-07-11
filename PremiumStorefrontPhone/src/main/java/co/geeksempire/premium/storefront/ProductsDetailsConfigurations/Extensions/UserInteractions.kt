@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 5:41 AM
+ * Last modified 7/11/21, 11:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,7 +26,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
     if (Firebase.auth.currentUser != null) {
 
-        favoritedProcess.isProductFavorited(Firebase.auth.currentUser!!.uid, productId,
+        favoritedProcess.isProductFavorited(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email!!, productId,
             object : FavoriteProductQueryInterface {
 
                 override fun favoriteProduct(isProductFavorited: Boolean) {
@@ -36,7 +36,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                         if (networkCheckpoint.networkConnection()) {
 
-                            favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, productId)
+                            favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser!!.uid , productId)
 
                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
                                 R.drawable.favorite_icon))
@@ -56,7 +56,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                                         if (networkCheckpoint.networkConnection()) {
 
-                                            favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, productId)
+                                            favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser!!.uid, productId)
 
                                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
                                                 R.drawable.favorite_icon))
@@ -80,7 +80,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                         if (networkCheckpoint.networkConnection()) {
 
-                            favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
+                            favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser.email!!,
                                 productId, productName, productDescription, productIcon)
 
                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(
@@ -101,7 +101,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
 
                                         if (networkCheckpoint.networkConnection()) {
 
-                                            favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
+                                            favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser.email!!,
                                                 productId, productName, productDescription, productIcon)
 
                                             productDetailsLayoutBinding.favoriteView.setImageDrawable(requireContext().getDrawable(

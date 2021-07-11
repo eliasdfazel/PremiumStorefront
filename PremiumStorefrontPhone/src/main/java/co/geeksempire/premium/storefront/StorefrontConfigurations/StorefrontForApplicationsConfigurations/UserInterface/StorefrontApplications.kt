@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 9:39 AM
+ * Last modified 7/11/21, 11:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -630,7 +630,7 @@ class StorefrontApplications : StorefrontActivity() {
                 .transform(CircleCrop())
                 .into(storefrontLayoutBinding.profileView)
 
-            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
+            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid, it.email,
                 object : FavoriteProductQueryInterface {
 
                     override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
@@ -751,7 +751,7 @@ class StorefrontApplications : StorefrontActivity() {
             .transform(CircleCrop())
             .into(storefrontLayoutBinding.profileView)
 
-        favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid,
+        favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid, accountSignIn.firebaseUser!!.email!!,
             object : FavoriteProductQueryInterface {
 
                 override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
@@ -804,7 +804,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             accountSignIn.firebaseUser?.let {
 
-                favoritedProcess.isFavoriteProductsExist(it.uid,
+                favoritedProcess.isFavoriteProductsExist(it.uid, it.email,
                     object : FavoriteProductQueryInterface {
 
                         override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {

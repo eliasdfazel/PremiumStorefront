@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 11:15 AM
+ * Last modified 7/11/21, 12:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,9 +45,9 @@ class AccountDataStructure {
         "/" +
         "UsersInformation" +
         "/" +
-        "PrivateInformation" +
-        "/" +
         "${userUniqueIdentifier}" +
+        "/" +
+        "PrivateInformation" +
         "/" +
         "${userEmailAddress}" +
         "/" +
@@ -59,9 +59,9 @@ class AccountDataStructure {
         "/" +
         "UsersInformation" +
         "/" +
-        "PrivateInformation" +
-        "/" +
         "${invitingFriendUniqueIdentifier}" +
+        "/" +
+        "PrivateInformation" +
         "/" +
         "Profile" +
         "/" +

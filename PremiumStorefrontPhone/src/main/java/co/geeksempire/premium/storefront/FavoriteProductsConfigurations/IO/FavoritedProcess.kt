@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 1:02 PM
+ * Last modified 7/11/21, 12:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ interface FavoriteProductQueryInterface {
 
 class FavoritedProcess (private val context: AppCompatActivity) {
 
-    fun add(userUniqueIdentifier: String,
+    fun add(userUniqueIdentifier: String, userEmailAddress: String,
             productIdToFavorite: String, productName: String, productDescription: String, productIcon: String) {
 
         (context.application as PremiumStorefrontApplication)
@@ -39,7 +39,7 @@ class FavoritedProcess (private val context: AppCompatActivity) {
 
     }
 
-    fun remove(userUniqueIdentifier: String, productIdToFavorite: String) : Task<Void> {
+    fun remove(userUniqueIdentifier: String, userEmailAddress: String, productIdToFavorite: String) : Task<Void> {
 
         return (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
@@ -47,7 +47,7 @@ class FavoritedProcess (private val context: AppCompatActivity) {
             .delete()
     }
 
-    fun isProductFavorited(userUniqueIdentifier: String, productIdToFavorite: String,
+    fun isProductFavorited(userUniqueIdentifier: String, userEmailAddress: String, productIdToFavorite: String,
                            favoriteProductQueryInterface: FavoriteProductQueryInterface) {
 
         (context.application as PremiumStorefrontApplication)
@@ -77,7 +77,7 @@ class FavoritedProcess (private val context: AppCompatActivity) {
 
     }
 
-    fun isFavoriteProductsExist(userUniqueIdentifier: String,
+    fun isFavoriteProductsExist(userUniqueIdentifier: String, userEmailAddress: String,
                                 favoriteProductQueryInterface: FavoriteProductQueryInterface) {
 
         (context.application as PremiumStorefrontApplication)

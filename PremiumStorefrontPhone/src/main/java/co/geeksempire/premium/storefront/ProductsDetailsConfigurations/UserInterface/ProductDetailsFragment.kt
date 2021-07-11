@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 9:24 AM
+ * Last modified 7/11/21, 11:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -421,7 +421,7 @@ class ProductDetailsFragment : Fragment() {
 
                 productId?.let {
 
-                    favoritedProcess.isProductFavorited(firebaseUser.uid, it,
+                    favoritedProcess.isProductFavorited(firebaseUser.uid, firebaseUser.email!!, it,
                         object : FavoriteProductQueryInterface {
 
                             override fun favoriteProduct(isProductFavorited: Boolean) {

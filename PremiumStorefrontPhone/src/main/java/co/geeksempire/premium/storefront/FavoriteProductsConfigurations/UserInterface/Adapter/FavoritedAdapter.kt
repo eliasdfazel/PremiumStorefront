@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 8:54 AM
+ * Last modified 7/11/21, 11:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -140,7 +140,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
         favoritedViewHolder.removeView.setOnClickListener {
 
-            context.favoritedProcess.remove(context.firebaseUser!!.uid, favoritedContentItems[position].productId)
+            context.favoritedProcess.remove(context.firebaseUser!!.uid, context.firebaseUser.email!!, favoritedContentItems[position].productId)
 
             favoritedContentItems.removeAt(position)
 

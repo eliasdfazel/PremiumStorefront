@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 11:17 AM
+ * Last modified 7/11/21, 12:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,8 @@ class FavoritedDatabaseDirectory {
         "/" +
         "${userUniqueIdentifier}" +
         "/" +
+        "PrivateInformation" +
+        "/" +
         "Favorite"
 
     fun favoriteProductEndpoint(userUniqueIdentifier: String, productId: String) =
@@ -29,6 +31,8 @@ class FavoritedDatabaseDirectory {
         "UsersInformation" +
         "/" +
         "${userUniqueIdentifier}" +
+        "/" +
+        "PrivateInformation" +
         "/" +
         "Favorite" +
         "/" +
