@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/7/21, 11:10 AM
+ * Last modified 7/11/21, 9:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.graphics.drawable.LayerDrawable
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
@@ -155,11 +156,29 @@ class OldContentAdapter(private val context: AppCompatActivity,
 
         oldContentViewHolder.rootView.setOnClickListener {
 
-            oldContentViewHolder.rootView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scale_up_bounce_interpolator))
+            val scaleUpBound = AnimationUtils.loadAnimation(context, R.anim.scale_up_bounce_interpolator)
 
-            openProductsDetails(context = context, fragmentInterface = fragmentInterface,
-                contentDetailsContainer = contentDetailsContainer, productDetailsFragment = productDetailsFragment,
-                storefrontContents = storefrontContents[position])
+            oldContentViewHolder.rootView.startAnimation(scaleUpBound)
+
+            scaleUpBound.setAnimationListener(object : Animation.AnimationListener {
+
+                override fun onAnimationStart(animation: Animation?) {
+
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+
+                    openProductsDetails(context = context, fragmentInterface = fragmentInterface,
+                        contentDetailsContainer = contentDetailsContainer, productDetailsFragment = productDetailsFragment,
+                        storefrontContents = storefrontContents[position])
+
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+
+                }
+
+            })
 
         }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 8:04 AM
+ * Last modified 7/11/21, 9:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -224,7 +224,7 @@ class StorefrontApplications : StorefrontActivity() {
 
         setupStorefrontUserInterface(context = this@StorefrontApplications,
             themePreferences = themePreferences,
-            allContentAdapter = allContentAdapter, featuredContentAdapter = featuredContentAdapter, newContentAdapter = newContentAdapter,
+            allContentAdapter = allContentAdapter, allMoreContentAdapter = allMoreContentAdapter, featuredContentAdapter = featuredContentAdapter, newContentAdapter = newContentAdapter, oldContentAdapter = oldContentAdapter,
             categoriesAdapter = categoriesAdapter,
             rootView = storefrontLayoutBinding.rootView,
             allContentBackground = storefrontLayoutBinding.allContentBackground, brandingBackground = storefrontLayoutBinding.brandingBackground,

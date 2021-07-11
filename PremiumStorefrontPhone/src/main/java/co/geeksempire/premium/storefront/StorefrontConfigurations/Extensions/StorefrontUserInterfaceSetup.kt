@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 4:48 AM
+ * Last modified 7/11/21, 9:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,12 +32,13 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.AllCo
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.Adapter.NewContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.Adapter.OldContentAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 fun setupStorefrontUserInterface(context: AppCompatActivity,
                                  themePreferences: ThemePreferences,
-                                 allContentAdapter: AllContentAdapter, featuredContentAdapter: FeaturedContentAdapter, newContentAdapter: NewContentAdapter,
+                                 allContentAdapter: AllContentAdapter, allMoreContentAdapter: AllContentAdapter?, featuredContentAdapter: FeaturedContentAdapter, newContentAdapter: NewContentAdapter, oldContentAdapter: OldContentAdapter?,
                                  categoriesAdapter: CategoriesAdapter,
                                  rootView: View,
                                  allContentBackground: ImageView, brandingBackground: ImageView,
@@ -65,6 +66,17 @@ fun setupStorefrontUserInterface(context: AppCompatActivity,
 
             }
 
+            oldContentAdapter?.apply {
+
+                themeType = it
+
+                if (storefrontContents.isNotEmpty()) {
+
+                    oldContentAdapter.notifyItemRangeChanged(0, oldContentAdapter.itemCount)
+                }
+
+            }
+
             newContentAdapter.apply {
 
                 themeType = it
@@ -83,6 +95,18 @@ fun setupStorefrontUserInterface(context: AppCompatActivity,
                 if (storefrontContents.isNotEmpty()) {
 
                     allContentAdapter.notifyItemRangeChanged(0, allContentAdapter.itemCount)
+
+                }
+
+            }
+
+            allMoreContentAdapter?.apply {
+
+                themeType = it
+
+                if (storefrontContents.isNotEmpty()) {
+
+                    allMoreContentAdapter.notifyItemRangeChanged(0, allMoreContentAdapter.itemCount)
 
                 }
 
