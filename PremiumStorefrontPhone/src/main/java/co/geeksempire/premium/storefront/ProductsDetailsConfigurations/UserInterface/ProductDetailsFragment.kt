@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 10:20 AM
+ * Last modified 7/11/21, 9:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -27,6 +28,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.startFavoriteProcess
@@ -220,9 +223,9 @@ class ProductDetailsFragment : Fragment() {
             val developerCountry = requireArguments().getString(ProductDataKey.ProductDeveloperCountry)
             val developerCity = requireArguments().getString(ProductDataKey.ProductDeveloperCity)
 
-            getString(ProductDataKey.ProductCategory)?.let {
+            getString(ProductDataKey.ProductCategoryName)?.let { categoryName ->
 
-                productDetailsLayoutBinding.categoryNameTextView.text = Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
+                productDetailsLayoutBinding.categoryNameTextView.text = Html.fromHtml(categoryName, Html.FROM_HTML_MODE_COMPACT)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 
@@ -236,8 +239,28 @@ class ProductDetailsFragment : Fragment() {
 
                 Glide.with(requireContext())
                     .asDrawable()
-                    .load((requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(it))
+                    .load((requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
                     .into(productDetailsLayoutBinding.categoryIconImageView)
+
+                productDetailsLayoutBinding.categoryIconImageView.setOnClickListener {
+
+                    requireContext().startActivity(Intent(requireContext(), CategoryDetails::class.java).apply {
+                        putExtra(CategoriesDataKeys.CategoryId, getString(ProductDataKey.ProductCategoryId))
+                        putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
+                        putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
+                    }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+
+                }
+
+                productDetailsLayoutBinding.categoryNameTextView.setOnClickListener {
+
+                    requireContext().startActivity(Intent(requireContext(), CategoryDetails::class.java).apply {
+                        putExtra(CategoriesDataKeys.CategoryId, getString(ProductDataKey.ProductCategoryId))
+                        putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
+                        putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
+                    }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+
+                }
 
             }
 

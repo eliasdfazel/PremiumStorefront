@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/7/21, 10:04 AM
+ * Last modified 7/11/21, 9:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,7 +55,9 @@ object ProductDataKey {
 
     const val ProductId = "ProductId"
     const val ProductPackageName = "ProductPackageName"
-    const val ProductCategory = "ProductCategory"
+
+    const val ProductCategoryId = "ProductCategoryId"
+    const val ProductCategoryName = "ProductCategory"
 
     const val ProductCoverImage = "ProductCoverImage"
     const val ProductIcon = "ProductIcon"
