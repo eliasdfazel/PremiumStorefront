@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 8:02 AM
+ * Last modified 7/11/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -80,6 +80,32 @@ class CategoriesAdapter(private val context: AppCompatActivity,
                 categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             }
+        }
+
+        categoriesViewHolder.categoryIconImageView.background = if (storefrontCategories[position].selectedCategory) {
+
+            context.getDrawable(when (themeType) {
+                ThemeType.ThemeLight -> {
+                    R.drawable.category_background_item_dark
+                }
+                ThemeType.ThemeDark -> {
+                    R.drawable.category_background_item_light
+                }
+                else -> R.drawable.category_background_item_dark
+            })
+
+        } else {
+
+            context.getDrawable(when (themeType) {
+                ThemeType.ThemeLight -> {
+                    R.drawable.category_background_item_light
+                }
+                ThemeType.ThemeDark -> {
+                    R.drawable.category_background_item_dark
+                }
+                else -> R.drawable.category_background_item_light
+            })
+
         }
 
     }
