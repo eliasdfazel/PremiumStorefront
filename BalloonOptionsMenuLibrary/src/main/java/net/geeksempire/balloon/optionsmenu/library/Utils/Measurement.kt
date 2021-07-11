@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/9/21, 6:46 AM
+ * Last modified 7/11/21, 7:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -81,7 +81,7 @@ fun percentageOfDisplayDiagonal(context: Context, percentageAmount: Float) : Flo
 
 fun percentageOfDisplayX(context: Context, percentageAmount: Float) : Float {
 
-    return ((displayX(context) * percentageAmount) / 100).toFloat()
+    return (((displayX(context)) * percentageAmount) / 100).toFloat()
 }
 
 /**

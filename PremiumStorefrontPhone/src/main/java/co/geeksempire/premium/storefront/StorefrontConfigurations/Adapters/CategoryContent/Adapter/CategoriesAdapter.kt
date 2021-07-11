@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/3/21, 10:58 AM
+ * Last modified 7/11/21, 8:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -149,49 +149,65 @@ class CategoriesAdapter(private val context: AppCompatActivity,
 
         categoriesViewHolder.rootView.setOnClickListener {
 
-            if (storefrontAllUnfilteredContents.isNotEmpty()) {
+            if (storefrontCategories[position].selectedCategory) {
 
-                notifyItemChanged(lastPosition, null)
+                allFilteredContentItemData.postValue(Pair(storefrontAllUntouchedContents, true))
 
-                if (position == 0) {
+                storefrontCategories[position].selectedCategory = false
 
-                    allFilteredContentItemData.postValue(Pair(storefrontAllUntouchedContents, true))
-
-                } else {
-
-                    filterAllContent.filterAllContentByCategory(storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
-
-                }
-
-                storefrontCategories[lastPosition].selectedCategory = false
-                storefrontCategories[position].selectedCategory = true
-
-                lastPosition = position
-
-                categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
-                categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
-
-                when (themeType) {
-                    ThemeType.ThemeLight -> {
-
-                        categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
-                        categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
-
-                    }
-                    ThemeType.ThemeDark -> {
-
-                        categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_light)
-                        categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
-
-                    }
-                }
-
-                categoryIndicatorTextView.text = storefrontCategories[position].categoryName
-                categoryIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                notifyItemChanged(position, storefrontCategories[position])
 
             } else {
 
+                if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
+                    notifyItemChanged(lastPosition, storefrontCategories[lastPosition])
+
+                    if (position == 0) {
+
+                        allFilteredContentItemData.postValue(Pair(storefrontAllUntouchedContents, true))
+
+                    } else {
+
+                        filterAllContent.filterAllContentByCategory(storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
+
+                    }
+
+                    storefrontCategories[lastPosition].selectedCategory = false
+                    storefrontCategories[position].selectedCategory = true
+
+                    lastPosition = position
+
+                    categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                    categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
+                    when (themeType) {
+                        ThemeType.ThemeLight -> {
+
+                            categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                            categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
+                        }
+                        ThemeType.ThemeDark -> {
+
+                            categoriesViewHolder.categoryIconImageView.background = context.getDrawable(R.drawable.category_background_item_light)
+                            categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
+                        }
+                    }
+
+                    categoryIndicatorTextView.text = storefrontCategories[position].categoryName
+                    categoryIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+
+                } else {
+
+                    context.startActivity(Intent(context, CategoryDetails::class.java).apply {
+                        putExtra(CategoriesDataKeys.CategoryId, storefrontCategories[position].categoryId)
+                        putExtra(CategoriesDataKeys.CategoryName, storefrontCategories[position].categoryName)
+                        putExtra(CategoriesDataKeys.CategoryIcon, storefrontCategories[position].categoryIconLink)
+                    }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+
+                }
 
             }
 

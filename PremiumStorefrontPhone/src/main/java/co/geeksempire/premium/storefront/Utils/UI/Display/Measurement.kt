@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/9/21, 6:18 AM
+ * Last modified 7/11/21, 7:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,9 +26,9 @@ fun columnCount(context: Context, itemWidth: Int): Int {
     return spanCount
 }
 
-fun columnCount(context: Context, widthOfRootView: Float, itemWidth: Int): Int {
+fun columnCount(context: Context, widthOfRootView: Float, itemWidth: Int, marginHorizontal: Float = 0f): Int {
 
-    var spanCount = (widthOfRootView / convertDpToPixel(context, itemWidth.toFloat())).toInt()
+    var spanCount = ((widthOfRootView - marginHorizontal)/ convertDpToPixel(context, itemWidth.toFloat())).toInt()
 
     if (spanCount < 1) {
         spanCount = 1

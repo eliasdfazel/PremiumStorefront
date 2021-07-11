@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/9/21, 6:46 AM
+ * Last modified 7/11/21, 8:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,6 +82,7 @@ import kotlinx.android.synthetic.main.storefront_layout.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import net.geeksempire.balloon.optionsmenu.library.Utils.percentageOfDisplayX
 import java.util.*
 import kotlin.collections.ArrayList
@@ -255,7 +256,7 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
 
-            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f),113), RecyclerView.VERTICAL)
+            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 113, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL)
             storefrontLayoutBinding.oldContentRecyclerView.adapter = oldContentAdapter
 
             storefrontLayoutBinding.allMoreContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
@@ -285,9 +286,6 @@ class StorefrontApplications : StorefrontActivity() {
                     allContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
-
-                    retrieveCategories(this@StorefrontApplications,
-                        generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.ApplicationsQuery)
 
                     retrieveOldContent(this@StorefrontApplications,
                         storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
@@ -377,8 +375,6 @@ class StorefrontApplications : StorefrontActivity() {
                     allContentAdapter.storefrontContents.addAll(initialData)
 
                     allContentAdapter.notifyDataSetChanged()
-
-
 
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
@@ -690,6 +686,9 @@ class StorefrontApplications : StorefrontActivity() {
 
     override fun networkAvailable() {
         Log.d(this@StorefrontApplications.javaClass.simpleName, "Network Available @ ${this@StorefrontApplications.javaClass.simpleName}")
+
+        retrieveCategories(this@StorefrontApplications,
+            generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.ApplicationsQuery)
 
         retrieveFeaturedContent(this@StorefrontApplications,
             storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
