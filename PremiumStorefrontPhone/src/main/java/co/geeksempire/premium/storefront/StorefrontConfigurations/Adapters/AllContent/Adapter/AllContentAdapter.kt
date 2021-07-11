@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 5:23 AM
+ * Last modified 7/11/21, 9:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Html
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
@@ -128,7 +127,7 @@ class AllContentAdapter(private val context: AppCompatActivity,
 
         if (position == storefrontContents.lastIndex) {
 
-            allContentViewHolder.productDividerView.visibility = View.GONE
+
 
         } else {
 
