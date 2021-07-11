@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/3/21, 10:57 AM
+ * Last modified 7/11/21, 8:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -261,9 +261,6 @@ class StorefrontGames : StorefrontActivity() {
                     allContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
-
-                    retrieveCategories(this@StorefrontGames,
-                        generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.GamesQuery)
 
                     storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
 
@@ -618,6 +615,9 @@ class StorefrontGames : StorefrontActivity() {
 
     override fun networkAvailable() {
         Log.d(this@StorefrontGames.javaClass.simpleName, "Network Available @ ${this@StorefrontGames.javaClass.simpleName}")
+
+        retrieveCategories(this@StorefrontGames,
+            generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.GamesQuery)
 
         retrieveFeaturedContent(this@StorefrontGames,
             storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.GamesQuery)
