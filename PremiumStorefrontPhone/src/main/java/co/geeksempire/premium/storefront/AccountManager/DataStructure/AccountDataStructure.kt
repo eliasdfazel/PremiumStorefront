@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 10:11 AM
+ * Last modified 7/11/21, 11:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,8 +39,36 @@ class AccountDataStructure {
         const val userDeveloper = "userDeveloper"
     }
 
-    fun userProfileDatabasePath(userUniqueIdentifier: String, userEmailAddress: String) : String = "PremiumStorefront/${userUniqueIdentifier}/${userEmailAddress}/Profile"
+    fun userProfileDatabasePath(userUniqueIdentifier: String, userEmailAddress: String) : String =
+        "/" +
+        "PremiumStorefront" +
+        "/" +
+        "UsersInformation" +
+        "/" +
+        "PrivateInformation" +
+        "/" +
+        "${userUniqueIdentifier}" +
+        "/" +
+        "${userEmailAddress}" +
+        "/" +
+        "Profile"
 
-    fun invitedSuccessDatabasePath(invitingFriendUniqueIdentifier: String, userUniqueIdentifier: String) : String = "PremiumStorefront/${invitingFriendUniqueIdentifier}/Profile/SuccessfulInvitations/Friends/${userUniqueIdentifier}"
+    fun invitedSuccessDatabasePath(invitingFriendUniqueIdentifier: String, userUniqueIdentifier: String) : String =
+        "/" +
+        "PremiumStorefront" +
+        "/" +
+        "UsersInformation" +
+        "/" +
+        "PrivateInformation" +
+        "/" +
+        "${invitingFriendUniqueIdentifier}" +
+        "/" +
+        "Profile" +
+        "/" +
+        "SuccessfulInvitations" +
+        "/" +
+        "Friends" +
+        "/" +
+        "${userUniqueIdentifier}"
 
 }
