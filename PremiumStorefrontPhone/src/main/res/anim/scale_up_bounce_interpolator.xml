@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/11/21, 9:31 AM
+  ~ Last modified 7/11/21, 9:42 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -16,9 +16,9 @@
     <scale
         android:interpolator="@android:anim/bounce_interpolator"
         android:duration="1357"
-        android:fromXScale="0.91"
+        android:fromXScale="0.93"
         android:toXScale="1.0"
-        android:fromYScale="0.91"
+        android:fromYScale="0.93"
         android:toYScale="1.0"
         android:pivotX="50%"
         android:pivotY="50%" />
