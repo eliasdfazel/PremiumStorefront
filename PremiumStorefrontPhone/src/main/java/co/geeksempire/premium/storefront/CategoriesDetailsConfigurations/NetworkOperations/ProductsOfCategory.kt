@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 5:57 AM
+ * Last modified 7/12/21, 6:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,9 +16,9 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
-import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
 import kotlinx.coroutines.*

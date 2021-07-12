@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 5:35 AM
+ * Last modified 7/12/21, 5:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -153,6 +153,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-config-ktx'
 
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
 
     implementation 'com.google.firebase:firebase-functions-ktx'
 

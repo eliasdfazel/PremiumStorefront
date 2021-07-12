@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/18/21, 5:09 AM
+ * Last modified 7/12/21, 6:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,9 +21,9 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.Extensi
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations.ProductsOfCategory
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
-import co.geeksempire.premium.storefront.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
