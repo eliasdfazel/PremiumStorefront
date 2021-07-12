@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 7:50 AM
+ * Last modified 7/12/21, 1:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,7 +53,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                     override fun onAnimationEnd(animation: Animator) {
 
-                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, android.R.anim.fade_out)
+                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
 
                         val switchIntent = Intent(context, StorefrontGames::class.java).apply {
 
@@ -139,7 +139,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                     override fun onAnimationEnd(animation: Animator) {
 
-                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, android.R.anim.fade_out)
+                        val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
 
                         val switchIntent = Intent(context, StorefrontApplications::class.java).apply {
 
