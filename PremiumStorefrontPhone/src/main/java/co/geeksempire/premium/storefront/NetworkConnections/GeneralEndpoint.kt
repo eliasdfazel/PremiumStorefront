@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/27/21, 11:32 AM
+ * Last modified 7/12/21, 5:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,5 +57,12 @@ class GeneralEndpoint {
                 "orderby=price" +
                 "&" +
                 "order=desc"
+
+    fun getProductsSpecificTagEndpoint(tagId: Int) : String =
+        "${generalStorefrontEndpoint}" + "products" + "?" +
+                "consumer_key=${consumerKey()}" +
+                "&" +
+                "consumer_secret=${consumerSecret()}" +
+                "&tag=${tagId}"
 
 }
