@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/9/21, 10:18 AM
+ * Last modified 7/12/21, 3:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
+import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import co.geeksempire.premium.storefront.Database.Write.InputProcess
 import co.geeksempire.premium.storefront.NetworkConnections.ApplicationsQueryEndpoint
@@ -115,6 +116,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                         notificationId = Foreground.NotificationId,
                         notificationTitle = applicationContext.getString(R.string.applicationName),
                         notificationContent = applicationContext.getString(R.string.doneText),
+                        notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
                         notificationDone = true)))
 
                     stringBuilder.append(rawDataJsonArray.toString())
@@ -152,6 +154,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                         notificationId = Foreground.NotificationId,
                         notificationTitle = applicationContext.getString(R.string.applicationName),
                         notificationContent = applicationContext.getString(R.string.doneText),
+                        notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
                         notificationDone = true)))
 
                     stringBuilder.append(rawDataJsonArray.toString())

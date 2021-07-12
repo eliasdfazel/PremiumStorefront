@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 11:47 AM
+ * Last modified 7/12/21, 3:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,6 +56,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.Utils.calculatePercentage
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 
 class ProductDetailsFragment : Fragment() {
@@ -166,6 +167,9 @@ class ProductDetailsFragment : Fragment() {
 
                                                 val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
                                                 productDetailsLayoutBinding.applicationFeaturedImageView.background = gradientFeaturedBackground
+
+                                                val temporaryPadding = dpToInteger(requireContext(), 3)
+                                                productDetailsLayoutBinding.applicationFeaturedImageView.setPadding(temporaryPadding, temporaryPadding, temporaryPadding, temporaryPadding)
 
                                                 Glide.with(requireContext())
                                                     .load(requireContext().getString(R.string.choicePremiumStorefront))
