@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 3:10 AM
+ * Last modified 7/12/21, 8:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,6 +32,8 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStr
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.DeveloperDataInterface
+import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.RetrieveDeveloperInformation
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.startFavoriteProcess
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
@@ -41,6 +43,7 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeCo
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
+import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
 import co.geeksempire.premium.storefront.Utils.UI.Colors.*
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.ProductDetailsLayoutBinding
@@ -320,6 +323,27 @@ class ProductDetailsFragment : Fragment() {
             productDetailsLayoutBinding.favoriteView.setOnClickListener {
 
                 startFavoriteProcess(productId!!, productName!!, productDescription!!, productIconLink!!)
+
+            }
+
+            productDetailsLayoutBinding.applicationDeveloper.setOnClickListener {
+                doVibrate(requireContext(), 258)
+
+                getString(ProductDataKey.ProductDeveloper)?.let { developerName ->
+
+                    RetrieveDeveloperInformation(developerName)
+                        .start(object : DeveloperDataInterface {
+
+                            override fun developerInformation(developerData: HashMap<String, String>) {
+                                super.developerInformation(developerData)
+
+                                println(">>> " + developerData)
+
+                            }
+
+                        })
+
+                }
 
             }
 

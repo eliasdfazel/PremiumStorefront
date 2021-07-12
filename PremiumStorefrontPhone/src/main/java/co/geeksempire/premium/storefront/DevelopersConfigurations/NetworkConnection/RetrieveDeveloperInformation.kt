@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 8:08 AM
+ * Last modified 7/12/21, 8:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,16 +16,17 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 interface DeveloperDataInterface {
-    fun developerInformation() { }
+    fun developerInformation(developerData: HashMap<String, String>) { }
 }
 
 class RetrieveDeveloperInformation (private val developerName: String) {
 
-    val developerData = HashMap<String, String>()
+    private val developerData = HashMap<String, String>()
 
     fun start(developerDataInterface: DeveloperDataInterface) {
 
@@ -37,7 +38,15 @@ class RetrieveDeveloperInformation (private val developerName: String) {
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                    processDeveloperData(dataSnapshot)
+                    CoroutineScope(Dispatchers.IO).launch {
+
+                        processDeveloperData(dataSnapshot).collect {
+
+                            developerDataInterface.developerInformation(it)
+
+                        }
+
+                    }
 
                 }
 
@@ -49,7 +58,7 @@ class RetrieveDeveloperInformation (private val developerName: String) {
 
     }
 
-    fun processDeveloperData(dataSnapshot: DataSnapshot) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun processDeveloperData(dataSnapshot: DataSnapshot) = flow<HashMap<String, String>> {
 
         dataSnapshot.children.forEach {
 
@@ -58,9 +67,11 @@ class RetrieveDeveloperInformation (private val developerName: String) {
                 //Application
                 val applicationsString = StringBuilder()
 
-                it.child(DevelopersDataKey.DeveloperApplications).children.forEach { applications ->
+                it.child(DevelopersDataKey.DeveloperApplications).children.forEach { product ->
 
-                    applicationsString.append("${applications.value},")
+                    if (product.exists()) {
+                        applicationsString.append("${product.value},")
+                    }
 
                 }
 
@@ -71,8 +82,9 @@ class RetrieveDeveloperInformation (private val developerName: String) {
 
                 it.child(DevelopersDataKey.DeveloperGames).children.forEach { product ->
 
-                    gamesString.append("${product.value},")
-
+                    if (product.exists()) {
+                        gamesString.append("${product.value},")
+                    }
                 }
 
                 developerData[DevelopersDataKey.DeveloperGames] = gamesString.toString()
@@ -82,7 +94,9 @@ class RetrieveDeveloperInformation (private val developerName: String) {
 
                 it.child(DevelopersDataKey.DeveloperBooks).children.forEach { product ->
 
-                    booksString.append("${product.value},")
+                    if (product.exists()) {
+                        booksString.append("${product.value},")
+                    }
 
                 }
 
@@ -93,7 +107,9 @@ class RetrieveDeveloperInformation (private val developerName: String) {
 
                 it.child(DevelopersDataKey.DeveloperMovies).children.forEach { product ->
 
-                    moviesString.append("${product.value},")
+                    if (product.exists()) {
+                        moviesString.append("${product.value},")
+                    }
 
                 }
 
@@ -106,6 +122,8 @@ class RetrieveDeveloperInformation (private val developerName: String) {
             }
 
         }
+
+        emit(developerData)
 
     }
 
