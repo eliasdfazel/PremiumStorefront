@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:02 AM
+ * Last modified 7/12/21, 8:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,6 +41,13 @@ class GeneralEndpoint {
             "consumer_key=${consumerKey()}" +
             "&" +
             "consumer_secret=${consumerSecret()}"
+
+    fun getSeveralProductsByIdEndpoint(csvProductsId: String) : String = "${generalStorefrontEndpoint}" + "products" + "?" +
+            "consumer_key=${consumerKey()}" +
+            "&" +
+            "consumer_secret=${consumerSecret()}" +
+            "&" +
+            "include=${csvProductsId}"
 
     fun getProductsSpecificCategoriesEndpoint(productCategoryId: Long = 67, productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) : String =
         "${generalStorefrontEndpoint}" + "products" + "?" +

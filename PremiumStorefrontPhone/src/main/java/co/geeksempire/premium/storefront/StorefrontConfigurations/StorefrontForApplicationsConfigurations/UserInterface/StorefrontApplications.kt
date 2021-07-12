@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:43 AM
+ * Last modified 7/12/21, 7:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,6 +32,8 @@ import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperation
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.DeveloperDataInterface
+import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.RetrieveDeveloperInformation
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
@@ -615,6 +617,17 @@ class StorefrontApplications : StorefrontActivity() {
                 }
 
             })
+
+
+
+
+
+
+
+
+
+        RetrieveDeveloperInformation("Geeks Empire").start(object : DeveloperDataInterface {})
+
 
     }
 
