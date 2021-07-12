@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 8:58 AM
+ * Last modified 7/12/21, 1:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -227,10 +227,22 @@ class ProductDetailsFragment : Fragment() {
                                 doVibrate(requireContext(), 258)
 
                                 val developerPageIntent = Intent(requireContext(), DeveloperIntroductionPage::class.java).apply {
+
                                     putExtra(DevelopersDataKey.DeveloperName, developerData[DevelopersDataKey.DeveloperName])
                                     putExtra(DevelopersDataKey.DeveloperDescription, developerData[DevelopersDataKey.DeveloperDescription])
+
                                     putExtra(DevelopersDataKey.DeveloperLogo, developerData[DevelopersDataKey.DeveloperLogo])
                                     putExtra(DevelopersDataKey.DeveloperCoverImage, developerData[DevelopersDataKey.DeveloperCoverImage])
+
+                                    putExtra(DevelopersDataKey.DeveloperCountry, developerData[DevelopersDataKey.DeveloperCountry])
+                                    putExtra(DevelopersDataKey.DeveloperCountryFlag, developerData[DevelopersDataKey.DeveloperCountryFlag])
+
+                                    putExtra(DevelopersDataKey.DeveloperEmail, developerData[DevelopersDataKey.DeveloperEmail])
+                                    putExtra(DevelopersDataKey.DeveloperWebsite, developerData[DevelopersDataKey.DeveloperWebsite])
+
+                                    putExtra(DevelopersDataKey.DeveloperSocialMedia, developerData[DevelopersDataKey.DeveloperSocialMedia])
+                                    putExtra(DevelopersDataKey.DeveloperSocialMediaLink, developerData[DevelopersDataKey.DeveloperSocialMediaLink])
+
                                     developerData[DevelopersDataKey.DeveloperApplications]?.let {
                                         putExtra(DevelopersDataKey.DeveloperApplications, it)
                                     }
@@ -243,6 +255,8 @@ class ProductDetailsFragment : Fragment() {
                                     developerData[DevelopersDataKey.DeveloperMovies]?.let {
                                         putExtra(DevelopersDataKey.DeveloperMovies, it)
                                     }
+
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 }
 
                                 requireContext().startActivity(developerPageIntent,
