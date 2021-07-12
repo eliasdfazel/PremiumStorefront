@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 8:24 AM
+ * Last modified 7/12/21, 8:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,8 +32,10 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStr
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DevelopersDataKey
 import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.DeveloperDataInterface
 import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.RetrieveDeveloperInformation
+import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.DeveloperIntroductionPage
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.Extensions.startFavoriteProcess
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
@@ -213,6 +215,46 @@ class ProductDetailsFragment : Fragment() {
 
             val productDeveloper = getString(ProductDataKey.ProductDeveloper)?:"Unknown"
             productDetailsLayoutBinding.applicationDeveloper.text = Html.fromHtml(productDeveloper, Html.FROM_HTML_MODE_COMPACT)
+            getString(ProductDataKey.ProductDeveloper)?.let { developerName ->
+
+                RetrieveDeveloperInformation(developerName)
+                    .start(object : DeveloperDataInterface {
+
+                        override fun developerInformation(developerData: HashMap<String, String>) {
+                            super.developerInformation(developerData)
+
+                            productDetailsLayoutBinding.applicationDeveloper.setOnClickListener {
+                                doVibrate(requireContext(), 258)
+
+                                val developerPageIntent = Intent(requireContext(), DeveloperIntroductionPage::class.java).apply {
+                                    putExtra(DevelopersDataKey.DeveloperName, developerData[DevelopersDataKey.DeveloperName])
+                                    putExtra(DevelopersDataKey.DeveloperDescription, developerData[DevelopersDataKey.DeveloperDescription])
+                                    putExtra(DevelopersDataKey.DeveloperLogo, developerData[DevelopersDataKey.DeveloperLogo])
+                                    putExtra(DevelopersDataKey.DeveloperCoverImage, developerData[DevelopersDataKey.DeveloperCoverImage])
+                                    developerData[DevelopersDataKey.DeveloperApplications]?.let {
+                                        putExtra(DevelopersDataKey.DeveloperApplications, it)
+                                    }
+                                    developerData[DevelopersDataKey.DeveloperGames]?.let {
+                                        putExtra(DevelopersDataKey.DeveloperGames, it)
+                                    }
+                                    developerData[DevelopersDataKey.DeveloperBooks]?.let {
+                                        putExtra(DevelopersDataKey.DeveloperBooks, it)
+                                    }
+                                    developerData[DevelopersDataKey.DeveloperMovies]?.let {
+                                        putExtra(DevelopersDataKey.DeveloperMovies, it)
+                                    }
+                                }
+
+                                requireContext().startActivity(developerPageIntent,
+                                    ActivityOptions.makeCustomAnimation(requireContext(), R.anim.slide_from_right, 0).toBundle())
+
+                            }
+
+                        }
+
+                    })
+
+            }
 
             Handler(Looper.getMainLooper()).postDelayed({
 
@@ -323,27 +365,6 @@ class ProductDetailsFragment : Fragment() {
             productDetailsLayoutBinding.favoriteView.setOnClickListener {
 
                 startFavoriteProcess(productId!!, productName!!, productDescription!!, productIconLink!!)
-
-            }
-
-            productDetailsLayoutBinding.applicationDeveloper.setOnClickListener {
-                doVibrate(requireContext(), 258)
-
-                getString(ProductDataKey.ProductDeveloper)?.let { developerName ->
-
-                    RetrieveDeveloperInformation(developerName)
-                        .start(object : DeveloperDataInterface {
-
-                            override fun developerInformation(developerData: HashMap<String, String>) {
-                                super.developerInformation(developerData)
-
-                                println(">>> " + developerData)
-
-                            }
-
-                        })
-
-                }
 
             }
 

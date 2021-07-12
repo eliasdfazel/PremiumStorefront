@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/12/21, 9:00 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/premiumLight"
+    tools:context=".StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/brandingBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tint="@color/dark"
+        android:alpha="0.03"
+        android:src="@drawable/premium_storefront_logo"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="13dp"
+        android:cacheColorHint="@android:color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="91dp"
+            android:paddingBottom="19dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productsOfCategoryRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutAnimation="@anim/fade_in_layout_animation"
+
+                apps:layout_constraintTop_toTopOf="parent"/>
+
+            <net.geeksempire.loadingspin.SpinKitView
+                android:id="@+id/loadingView"
+                android:layout_width="93dp"
+                android:layout_height="91dp"
+                android:padding="13dp"
+
+                apps:SpinKit_Style="ChasingDots"
+                apps:SpinKit_Color="@color/default_color_transparent"
+
+                apps:layout_constraintTop_toBottomOf="@id/productsOfCategoryRecyclerView"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/goBackView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="3dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:scaleType="fitCenter"
+        android:layout_marginVertical="19dp"
+        android:layout_marginHorizontal="19dp"
+        android:src="@drawable/go_back_layer_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Content Details  -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/contentDetailsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="gone"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
