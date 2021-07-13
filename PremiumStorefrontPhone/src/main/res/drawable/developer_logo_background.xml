@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/13/21, 9:43 AM
+  ~ Last modified 7/13/21, 9:52 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -42,7 +42,7 @@
 
     </item>
 
-    <!-- Left Of Circle -->
+    <!-- Bottom Left Of Circle -->
     <item
         android:height="51dp"
         android:width="23.3dp"
@@ -76,7 +76,7 @@
 
     </item>
 
-    <!-- Right Of Circle -->
+    <!-- Bottom Right Of Circle -->
     <item
         android:height="51dp"
         android:width="23.3dp"
