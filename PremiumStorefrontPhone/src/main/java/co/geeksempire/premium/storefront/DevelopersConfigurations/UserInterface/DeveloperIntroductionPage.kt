@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/13/21, 2:06 PM
+ * Last modified 7/13/21, 2:15 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,7 +11,11 @@
 package co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -100,11 +104,18 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
             developerIntroductionLayoutBinding.developerNameTextView.text = Html.fromHtml(developerName, Html.FROM_HTML_MODE_COMPACT)
 
-            gradientText(textView = developerIntroductionLayoutBinding.developerNameTextView,
-                gradientColors = intArrayOf(getColor(R.color.default_color), getColor(R.color.default_color_light)),
-                gradientColorsPositions = floatArrayOf(0f, 0.51f),
-                gradientVerticalEnd = developerIntroductionLayoutBinding.developerNameTextView.height.toFloat(),
-                gradientType = Gradient.VerticalGradient)
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                gradientText(textView = developerIntroductionLayoutBinding.developerNameTextView,
+                    gradientColors = intArrayOf(getColor(R.color.premiumDark), getColor(R.color.black)),
+                    gradientColorsPositions = floatArrayOf(0f, 0.73f),
+                    gradientVerticalEnd = developerIntroductionLayoutBinding.developerNameTextView.height.toFloat(),
+                    gradientType = Gradient.VerticalGradient)
+
+                developerIntroductionLayoutBinding.developerNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                developerIntroductionLayoutBinding.developerNameTextView.visibility = View.VISIBLE
+
+            }, 500)
 
             developerIntroductionLayoutBinding.developerDescriptionTextView.startTypingAnimation(developerDescription)
 
