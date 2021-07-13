@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/13/21, 9:59 AM
+  ~ Last modified 7/13/21, 10:05 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -49,10 +49,9 @@
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:id="@+id/developerLogoBlurView"
-        android:layout_width="101dp"
-        android:layout_height="101dp"
-        android:layout_marginStart="19dp"
-        android:paddingBottom="11dp"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_marginTop="49dp"
         android:src="@drawable/diamond_gradient_icon_dark"
 
         apps:realtimeBlurGradientType="none"
@@ -60,8 +59,7 @@
         apps:realtimeBlurTopLeft="51dp"
         apps:realtimeBlurTopRight="51dp"
 
-        apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"
-        apps:layout_constraintStart_toStartOf="parent"/>
+        apps:layout_constraintTop_toTopOf="@id/developerLogoImageView"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logoBackground"
@@ -75,7 +73,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="0dp"
         android:layout_height="101dp"
-        android:layout_marginStart="23dp"
+        android:layout_marginStart="179dp"
         android:background="@drawable/developer_logo_background_extended"
 
         apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"

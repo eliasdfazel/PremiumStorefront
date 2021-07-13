@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 1:17 PM
+ * Last modified 7/13/21, 10:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DevelopersDataKey
+import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Extensions.setupUserInterfaceDeveloperPage
 import co.geeksempire.premium.storefront.databinding.DeveloperIntroductionLayoutBinding
 
 class DeveloperIntroductionPage : AppCompatActivity() {
@@ -23,6 +24,8 @@ class DeveloperIntroductionPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         developerIntroductionLayoutBinding = DeveloperIntroductionLayoutBinding.inflate(layoutInflater)
         setContentView(developerIntroductionLayoutBinding.root)
+
+        setupUserInterfaceDeveloperPage()
 
         if (intent != null) {
 
