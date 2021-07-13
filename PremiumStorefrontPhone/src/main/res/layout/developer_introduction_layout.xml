@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/13/21, 10:05 AM
+  ~ Last modified 7/13/21, 1:26 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -20,18 +20,10 @@
     tools:context=".DevelopersConfigurations.UserInterface.DeveloperIntroductionPage">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/brandingBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:tint="@color/dark"
-        android:alpha="0.03"
-        android:src="@drawable/premium_storefront_logo"/>
-
-    <net.geekstools.imageview.customshapes.ShapesImage
         android:id="@+id/developerCoverImageView"
         android:layout_width="match_parent"
         android:layout_height="279dp"
-        android:background="@color/green"
+        android:background="@color/default_color"
 
         apps:layout_constraintTop_toTopOf="parent"/>
 
@@ -39,45 +31,96 @@
         android:id="@+id/developerLogoImageView"
         android:layout_width="101dp"
         android:layout_height="101dp"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="20dp"
         android:paddingBottom="11dp"
-        android:elevation="1dp"
-        android:src="@drawable/diamond_gradient_icon_dark"
+        android:elevation="3dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/diamond_gradient_icon_light"
 
         apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"
         apps:layout_constraintStart_toStartOf="parent"/>
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
-        android:id="@+id/developerLogoBlurView"
-        android:layout_width="match_parent"
-        android:layout_height="59dp"
-        android:layout_marginTop="49dp"
-        android:src="@drawable/diamond_gradient_icon_dark"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        android:layout_marginStart="17dp"
 
-        apps:realtimeBlurGradientType="none"
-        apps:realtimeFirstColor="@color/premiumLightTransparent"
+        apps:realtimeBlurRadius="19dp"
         apps:realtimeBlurTopLeft="51dp"
         apps:realtimeBlurTopRight="51dp"
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/light_transparent_higher"
 
-        apps:layout_constraintTop_toTopOf="@id/developerLogoImageView"/>
+        apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginTop="49dp"
+
+        apps:realtimeBlurRadius="19dp"
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/light_transparent_higher"
+
+        apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logoBackground"
-        android:layout_width="300dp"
-        android:layout_height="101dp"
-        android:src="@drawable/developer_logo_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/developer_logo_background"
 
         apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"
         apps:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="0dp"
-        android:layout_height="101dp"
-        android:layout_marginStart="179dp"
-        android:background="@drawable/developer_logo_background_extended"
+        android:layout_height="51dp"
+        android:background="@color/premiumLight"
 
         apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"
+        apps:layout_constraintStart_toEndOf="@id/logoBackground"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logoBackgroundExtended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/developer_logo_background_extended"
+
+        apps:layout_constraintTop_toTopOf="@id/developerLogoImageView"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/developerNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="7dp"
+        android:paddingEnd="19dp"
+        android:layout_marginTop="51dp"
+        android:gravity="center_vertical"
+        android:text="Geeks Empire"
+        android:textSize="53sp"
+        android:fontFamily="@font/upcil"
+
+        apps:layout_constraintTop_toTopOf="@id/developerLogoImageView"
         apps:layout_constraintStart_toEndOf="@id/developerLogoImageView"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/developerDescriptionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="3dp"
+        android:paddingEnd="19dp"
+        android:gravity="center_vertical"
+        android:text="Geeks Empire"
+        android:textSize="29sp"
+        android:fontFamily="@font/upcil"
+
+        apps:layout_constraintTop_toBottomOf="@id/developerNameTextView"
+        apps:layout_constraintStart_toStartOf="@id/developerLogoImageView"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.core.widget.NestedScrollView
@@ -96,6 +139,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="51dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/brandingBackground"
+                android:layout_width="match_parent"
+                android:layout_height="357dp"
+                android:tint="@color/dark"
+                android:alpha="0.03"
+                android:src="@drawable/premium_storefront_logo"
+
+                apps:layout_constraintTop_toTopOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productsOfCategoryRecyclerView"
