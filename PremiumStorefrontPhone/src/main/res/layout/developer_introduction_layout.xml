@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/13/21, 1:26 PM
+  ~ Last modified 7/13/21, 2:02 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -23,6 +23,7 @@
         android:id="@+id/developerCoverImageView"
         android:layout_width="match_parent"
         android:layout_height="279dp"
+        android:scaleType="centerCrop"
         android:background="@color/default_color"
 
         apps:layout_constraintTop_toTopOf="parent"/>
@@ -102,6 +103,10 @@
         android:gravity="center_vertical"
         android:text="Geeks Empire"
         android:textSize="53sp"
+        android:shadowRadius="7"
+        android:shadowColor="@color/dark_transparent"
+        android:shadowDy="1"
+        android:shadowDx="1"
         android:fontFamily="@font/upcil"
 
         apps:layout_constraintTop_toTopOf="@id/developerLogoImageView"
@@ -117,6 +122,7 @@
         android:gravity="center_vertical"
         android:text="Geeks Empire"
         android:textSize="29sp"
+        android:lineSpacingExtra="1.7dp"
         android:fontFamily="@font/upcil"
 
         apps:layout_constraintTop_toBottomOf="@id/developerNameTextView"
@@ -132,7 +138,7 @@
         android:fadingEdgeLength="13dp"
         android:cacheColorHint="@android:color/transparent"
 
-        apps:layout_constraintTop_toBottomOf="@id/developerCoverImageView"
+        apps:layout_constraintTop_toBottomOf="@id/developerDescriptionTextView"
         apps:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout

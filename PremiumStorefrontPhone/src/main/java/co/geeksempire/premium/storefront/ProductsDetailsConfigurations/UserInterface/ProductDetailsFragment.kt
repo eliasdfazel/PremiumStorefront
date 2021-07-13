@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 1:06 PM
+ * Last modified 7/13/21, 1:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -240,7 +240,7 @@ class ProductDetailsFragment : Fragment() {
                                     putExtra(DevelopersDataKey.DeveloperEmail, developerData[DevelopersDataKey.DeveloperEmail])
                                     putExtra(DevelopersDataKey.DeveloperWebsite, developerData[DevelopersDataKey.DeveloperWebsite])
 
-                                    putExtra(DevelopersDataKey.DeveloperSocialMedia, developerData[DevelopersDataKey.DeveloperSocialMedia])
+                                    putExtra(DevelopersDataKey.DeveloperSocialMediaIcon, developerData[DevelopersDataKey.DeveloperSocialMediaIcon])
                                     putExtra(DevelopersDataKey.DeveloperSocialMediaLink, developerData[DevelopersDataKey.DeveloperSocialMediaLink])
 
                                     developerData[DevelopersDataKey.DeveloperApplications]?.let {

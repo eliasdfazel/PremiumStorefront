@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/13/21, 1:13 PM
+  ~ Last modified 7/13/21, 1:39 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@
     <!-- Top Right -->
     <item
         android:height="51dp"
-        android:width="29dp"
+        android:width="51dp"
         android:gravity="top|end">
 
         <shape
@@ -30,7 +30,7 @@
     <item
         android:id="@+id/clearLayer"
         android:height="50dp"
-        android:width="29dp"
+        android:width="51dp"
         android:gravity="top|end">
 
         <shape

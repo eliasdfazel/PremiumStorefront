@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 1:04 PM
+ * Last modified 7/13/21, 1:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@ object DevelopersDataKey {
     const val DeveloperEmail = "DeveloperEmail"
     const val DeveloperWebsite = "DeveloperWebsite"
 
-    const val DeveloperSocialMedia = "DeveloperSocialMedia"
+    const val DeveloperSocialMediaIcon = "DeveloperSocialMediaIcon"
     const val DeveloperSocialMediaLink = "DeveloperSocialMediaLink"
 
     const val DeveloperProducts = "Products"
