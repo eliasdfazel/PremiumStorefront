@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/13/21, 1:31 PM
+ * Last modified 7/14/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -80,18 +80,26 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
         }
     }
 
+    setupDeveloperLogoDesign(themeType)
+
+    setupDeveloperCountryFlagDesign(themeType)
+
+}
+
+fun DeveloperIntroductionPage.setupDeveloperLogoDesign(themeType: Boolean) {
+
     val developerLogoBackground = when (themeType) {
         ThemeType.ThemeLight -> {
 
-            getDrawable(R.drawable.developer_logo_background) as LayerDrawable
+            getDrawable(R.drawable.developer_logo_background_light) as LayerDrawable
 
         }
         ThemeType.ThemeDark -> {
 
-            getDrawable(R.drawable.developer_logo_background) as LayerDrawable
+            getDrawable(R.drawable.developer_logo_background_dark) as LayerDrawable
 
         }
-        else -> getDrawable(R.drawable.developer_logo_background) as LayerDrawable
+        else -> getDrawable(R.drawable.developer_logo_background_light) as LayerDrawable
     }
 
     val shapeNegativeSpaceCircle: ShapeDrawable = ShapeDrawable(OvalShape())
@@ -114,15 +122,15 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
     val developerLogoBackgroundExtended = when (themeType) {
         ThemeType.ThemeLight -> {
 
-            getDrawable(R.drawable.developer_logo_background_extended) as LayerDrawable
+            getDrawable(R.drawable.developer_logo_background_extended_light) as LayerDrawable
 
         }
         ThemeType.ThemeDark -> {
 
-            getDrawable(R.drawable.developer_logo_background_extended) as LayerDrawable
+            getDrawable(R.drawable.developer_logo_background_extended_dark) as LayerDrawable
 
         }
-        else -> getDrawable(R.drawable.developer_logo_background_extended) as LayerDrawable
+        else -> getDrawable(R.drawable.developer_logo_background_extended_light) as LayerDrawable
     }
 
     val negativeSpaceRightExtended = floatArrayOf(
@@ -155,5 +163,98 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
     developerIntroductionLayoutBinding.logoBackgroundExtended.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
 
     developerIntroductionLayoutBinding.logoBackgroundExtended.setImageDrawable(developerLogoBackgroundExtended)
+
+}
+
+fun DeveloperIntroductionPage.setupDeveloperCountryFlagDesign(themeType: Boolean) {
+
+    val developerCountryFlagBackground = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            getDrawable(R.drawable.developer_country_flag_background_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            getDrawable(R.drawable.developer_country_flag_background_dark) as LayerDrawable
+
+        }
+        else -> getDrawable(R.drawable.developer_country_flag_background_light) as LayerDrawable
+    }
+
+    val negativeSpaceTopLeft = floatArrayOf(
+        0f,//topLeftCorner
+        0f,//topLeftCorner
+
+        51f,//topRightCorner
+        51f,//topRightCorner
+
+        0f,//bottomLeftCorner
+        0f,//bottomLeftCorner
+
+        0f,//bottomRightCorner
+        0f//bottomRightCorner
+    )
+
+    val shapeNegativeSpaceTopLeft: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceTopLeft, null, null))
+
+    shapeNegativeSpaceTopLeft.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerCountryFlagBackground.setDrawableByLayerId(R.id.clearTopLeft, shapeNegativeSpaceTopLeft)
+
+    val negativeSpaceBottomRight = floatArrayOf(
+        0f,//topLeftCorner
+        0f,//topLeftCorner
+
+        51f,//topRightCorner
+        51f,//topRightCorner
+
+        0f,//bottomLeftCorner
+        0f,//bottomLeftCorner
+
+        0f,//bottomRightCorner
+        0f//bottomRightCorner
+    )
+
+    val shapeNegativeSpaceBottomRight: ShapeDrawable = ShapeDrawable(RoundRectShape(negativeSpaceBottomRight, null, null))
+
+    shapeNegativeSpaceBottomRight.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerCountryFlagBackground.setDrawableByLayerId(R.id.clearBottomRight, shapeNegativeSpaceBottomRight)
+
+    val shapeNegativeSpaceBottomLeft: ShapeDrawable = ShapeDrawable(RoundRectShape(floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f), null, null))
+
+    shapeNegativeSpaceBottomLeft.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerCountryFlagBackground.setDrawableByLayerId(R.id.clearBottomLeft, shapeNegativeSpaceBottomLeft)
+
+    developerIntroductionLayoutBinding.developerCountryFlagBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    developerIntroductionLayoutBinding.developerCountryFlagBackground.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    developerIntroductionLayoutBinding.developerCountryFlagBackground.setImageDrawable(developerCountryFlagBackground)
 
 }

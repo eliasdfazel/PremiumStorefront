@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/13/21, 2:15 PM
+ * Last modified 7/14/21, 9:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -76,7 +76,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
             val developerEmail = intent.getStringExtra(DevelopersDataKey.DeveloperEmail)!!
             val developerWebsite = intent.getStringExtra(DevelopersDataKey.DeveloperWebsite)!!
 
-            val developerSocialMedia = intent.getStringExtra(DevelopersDataKey.DeveloperSocialMediaIcon)!!
+            val developerSocialMediaIcon = intent.getStringExtra(DevelopersDataKey.DeveloperSocialMediaIcon)!!
             val developerSocialMediaLink = intent.getStringExtra(DevelopersDataKey.DeveloperSocialMediaLink)!!
 
             val productsApplicationsId = if (intent.hasExtra(DevelopersDataKey.DeveloperApplications)) { intent.getStringExtra(DevelopersDataKey.DeveloperApplications)!! } else { null }
@@ -101,6 +101,21 @@ class DeveloperIntroductionPage : AppCompatActivity() {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transform(CircleCrop())
                 .into(developerIntroductionLayoutBinding.developerLogoImageView)
+
+            Glide.with(applicationContext)
+                .asDrawable()
+                .load(developerCountryFlag)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(CircleCrop())
+                .into(developerIntroductionLayoutBinding.developerCountryFlag)
+
+            developerIntroductionLayoutBinding.developerCountryFlag.contentDescription = developerCountry
+
+            developerIntroductionLayoutBinding.developerCountryFlag.setOnClickListener {
+
+
+
+            }
 
             developerIntroductionLayoutBinding.developerNameTextView.text = Html.fromHtml(developerName, Html.FROM_HTML_MODE_COMPACT)
 

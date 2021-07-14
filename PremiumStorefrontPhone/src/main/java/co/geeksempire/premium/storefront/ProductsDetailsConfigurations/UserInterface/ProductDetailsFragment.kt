@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/13/21, 1:41 PM
+ * Last modified 7/14/21, 7:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,7 +62,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.Utils.calculatePercentage
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
-
 
 class ProductDetailsFragment : Fragment() {
 
