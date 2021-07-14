@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/14/21, 2:15 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+
+    <array name="contactOptionsIcons">
+        <item>@drawable/email_icon_line</item>
+        <item>@drawable/twitter_icon</item>
+        <item>@drawable/website_icon</item>
+    </array>
+
+    <array name="contactOptionsColors">
+        <item>@color/light</item>
+        <item>@color/light</item>
+        <item>@color/light</item>
+    </array>
+
+</resources>

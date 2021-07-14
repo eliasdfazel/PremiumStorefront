@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 5:47 AM
+ * Last modified 7/14/21, 1:54 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -103,6 +103,7 @@ dependencies {
     implementation project(path: ':CustomShapes')
     implementation project(path: ':LoadingSpin')
     implementation project(path: ':BalloonOptionsMenuLibrary')
+    implementation project(path: ':CircularPopupMenu')
 
 
     implementation 'com.google.android.play:core-ktx:1.8.1'

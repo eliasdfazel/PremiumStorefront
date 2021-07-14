@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 9:08 AM
+ * Last modified 7/14/21, 2:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -256,5 +256,36 @@ fun DeveloperIntroductionPage.setupDeveloperCountryFlagDesign(themeType: Boolean
     developerIntroductionLayoutBinding.developerCountryFlagBackground.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
 
     developerIntroductionLayoutBinding.developerCountryFlagBackground.setImageDrawable(developerCountryFlagBackground)
+
+}
+
+fun DeveloperIntroductionPage.setupContactOptions() {
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.setOnClickListener {
+
+        developerIntroductionLayoutBinding.contactOptionsCircleMenu.open(true)
+
+    }
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.setOnItemClickListener { buttonIndex ->
+
+
+    }
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuOpenAnimationStart { }
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuOpenAnimationEnd { }
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuCloseAnimationStart { }
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuCloseAnimationEnd { }
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onButtonClickAnimationStart { buttonIndex ->
+
+    }
+
+    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onButtonClickAnimationEnd { buttonIndex ->
+
+    }
 
 }

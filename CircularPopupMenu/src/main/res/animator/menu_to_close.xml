@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/27/20, 11:18 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
+
+    <objectAnimator
+        android:propertyName="pathData"
+        android:valueFrom="@string/vector_path_menu"
+        android:valueTo="@string/vector_path_line"
+        android:valueType="pathType"
+        android:duration="100"
+        />
+
+    <objectAnimator
+        android:propertyName="pathData"
+        android:valueFrom="@string/vector_path_line"
+        android:valueTo="@string/vector_path_close"
+        android:valueType="pathType"
+        android:duration="100"
+        />
+
+</set>
