@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/15/21, 4:11 AM
+ * Last modified 7/15/21, 9:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -270,6 +270,7 @@ fun DeveloperIntroductionPage.setupContactOptions(themeType: Boolean) {
     }
 
     developerIntroductionLayoutBinding.contactOptionsCircleMenu.setOnItemClickListener { buttonIndex ->
+
 
 
     }

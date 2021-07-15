@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/15/21, 6:58 AM
+ * Last modified 7/15/21, 9:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -85,6 +85,7 @@ internal class CircleMenuLayout(
             val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             button.layoutParams = params
             addView(button)
+            button.bringToFront()
             button
         }
     }
