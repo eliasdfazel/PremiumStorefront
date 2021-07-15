@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 2:49 PM
+ * Last modified 7/15/21, 8:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -27,11 +28,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 @SuppressLint("ViewConstructor")
 internal class CenterMenuButton(
-        context: Context,
-        backgroundColor: Int,
-        menuIconType: CircleMenu.MenuIconType,
-        private val iconColor: Int,
-        private var isOpened: Boolean
+    context: Context,
+    backgroundColor: Int,
+    menuIconType: CircleMenu.MenuIconType,
+    private val iconColor: Int = Color.WHITE,
+    private var isOpened: Boolean
 ) : FloatingActionButton(context) {
 
     private var preLollipopAnimationSet: AnimatorSet? = null

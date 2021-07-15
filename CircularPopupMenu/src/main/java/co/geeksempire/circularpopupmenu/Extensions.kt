@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 12:56 PM
+ * Last modified 7/15/21, 8:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.circularpopupmenu
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
@@ -20,13 +21,15 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
 
 
-internal fun Drawable.setTintCompat(color: Int) {
+internal fun Drawable.setTintCompat(color: Int = Color.WHITE) {
+
     if (isLollipop()) {
         setTint(color)
     } else {
         val wrapperDrawable = DrawableCompat.wrap(this)
         DrawableCompat.setTintList(wrapperDrawable, ColorStateList.valueOf(color))
     }
+
 }
 
 

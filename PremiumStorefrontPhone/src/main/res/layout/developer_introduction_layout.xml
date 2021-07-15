@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/15/21, 7:01 AM
+  ~ Last modified 7/15/21, 8:16 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -232,13 +232,14 @@
         apps:buttonColors="@array/contactOptionsColors"
         apps:startAngle="-180"
         apps:menuIcon="hamburger"
-        apps:centerButtonColor="@color/white"
+        apps:centerButtonColor="@color/default_color"
         apps:centerButtonIconColor="@color/light"
         apps:iconsColor="@color/light"
         apps:distance="91dp"
-        apps:maxAngle="119"
+        apps:maxAngle="129"
         apps:showSelectAnimation="true"
         apps:openOnStart="false"
+        apps:iconSize="29dp"
 
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>

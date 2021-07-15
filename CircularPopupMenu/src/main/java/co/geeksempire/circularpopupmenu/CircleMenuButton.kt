@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/15/21, 6:58 AM
+ * Last modified 7/15/21, 8:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,6 @@ package co.geeksempire.circularpopupmenu
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -36,8 +35,7 @@ class CircleMenuButton @JvmOverloads constructor(
         this.iconResId = iconResId
 
         val icon = ContextCompat.getDrawable(context, iconResId)!!
-        icon.setTintCompat(Color.TRANSPARENT)
-        icon.setTintMode(PorterDuff.Mode.MULTIPLY)
+        icon.setTintCompat(iconColor)
         setImageDrawable(icon)
     }
 

@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/12/21, 8:38 AM
+  ~ Last modified 7/15/21, 8:12 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -162,7 +162,15 @@
 
     </style>
 
-    <style name="GeeksEmpire.Material.Developer" parent="GeeksEmpire.Material">
+    <style name="GeeksEmpire.Material.Developer" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:colorPrimary">@color/white</item>
+        <item name="android:colorPrimaryDark">@color/premiumDark</item>
+        <item name="android:colorAccent">@color/premiumLight</item>
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/premiumDark</item>
+        <item name="colorAccent">@color/premiumLight</item>
 
         <item name="android:statusBarColor">@color/default_color_light</item>
         <item name="android:navigationBarColor">@color/default_color_light</item>

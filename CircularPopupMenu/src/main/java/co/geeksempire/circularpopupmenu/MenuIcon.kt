@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 1:16 PM
+ * Last modified 7/15/21, 8:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,16 @@ class HamburgerMenuIcon : MenuIcon() {
 }
 
 class PlusMenuIcon : MenuIcon() {
+
+    override val openingAnimatedIcon = R.drawable.menu_plus_to_cross
+    override val closingAnimatedIcon = R.drawable.menu_cross_to_plus
+
+    override val openIcon = R.drawable.ic_plus
+    override val closeIcon = R.drawable.ic_close
+
+}
+
+class SupportMenuIcon : MenuIcon() {
 
     override val openingAnimatedIcon = R.drawable.menu_plus_to_cross
     override val closingAnimatedIcon = R.drawable.menu_cross_to_plus

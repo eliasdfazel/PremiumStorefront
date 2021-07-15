@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/15/21, 6:09 AM
+ * Last modified 7/15/21, 8:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.circularpopupmenu
 import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.Point
 import android.graphics.Rect
 import android.util.AttributeSet
@@ -132,7 +133,7 @@ class CircleMenu @JvmOverloads constructor(
     private fun initMenuButton(
             iconType: MenuIconType,
             buttonColor: Int,
-            iconColor: Int
+            iconColor: Int = Color.WHITE
     ) {
         val iconResId = if (iconType == MenuIconType.PLUS) {
             R.drawable.ic_plus
