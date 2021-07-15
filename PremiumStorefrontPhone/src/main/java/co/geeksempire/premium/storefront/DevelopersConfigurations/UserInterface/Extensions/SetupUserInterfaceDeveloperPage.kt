@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/15/21, 9:07 AM
+ * Last modified 7/15/21, 11:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
@@ -83,8 +84,6 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
     setupDeveloperLogoDesign(themeType)
 
     setupDeveloperCountryFlagDesign(themeType)
-
-    setupContactOptions(themeType)
 
 }
 
@@ -261,34 +260,8 @@ fun DeveloperIntroductionPage.setupDeveloperCountryFlagDesign(themeType: Boolean
 
 }
 
-fun DeveloperIntroductionPage.setupContactOptions(themeType: Boolean) {
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.setOnClickListener {
-
-        developerIntroductionLayoutBinding.contactOptionsCircleMenu.open(true)
-
-    }
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.setOnItemClickListener { buttonIndex ->
+fun DeveloperIntroductionPage.setupContactOptions(developerEmail: String, developerWebsite: String, developerSocialMediaLink: String, developerSocialMediaIcon: Drawable) {
 
 
-
-    }
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuOpenAnimationStart { }
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuOpenAnimationEnd { }
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuCloseAnimationStart { }
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onMenuCloseAnimationEnd { }
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onButtonClickAnimationStart { buttonIndex ->
-
-    }
-
-    developerIntroductionLayoutBinding.contactOptionsCircleMenu.onButtonClickAnimationEnd { buttonIndex ->
-
-    }
 
 }
