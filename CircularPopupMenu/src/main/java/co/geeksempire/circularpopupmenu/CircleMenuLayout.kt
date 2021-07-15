@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 2:36 PM
+ * Last modified 7/15/21, 6:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,12 +24,12 @@ internal class CircleMenuLayout(
         menuIconType: CircleMenu.MenuIconType,
         openOnStart: Boolean,
         showSelectAnimation: Boolean,
-        private val buttonIconsColor: Int,
-        private val distance: Int,
-        private val circleMaxAngle: Int,
-        private val circleStartAngle: Int,
-        private var icons: List<Int>,
-        private var colors: List<Int>
+        val buttonIconsColor: Int,
+        val distance: Int,
+        val circleMaxAngle: Int,
+        val circleStartAngle: Int,
+        var icons: List<Int>,
+        var colors: List<Int>
 ) : FrameLayout(context), MenuController.Listener {
 
     val isOpened: Boolean
@@ -80,7 +80,7 @@ internal class CircleMenuLayout(
         return colors.mapIndexed { index, color ->
             val button = CircleMenuButton(context)
             button.setIconColor(buttonIconsColor)
-            button.setIconNoTint(icons[index])
+            button.setIconTinted(icons[index])
             button.setColor(color)
             val params = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
             button.layoutParams = params

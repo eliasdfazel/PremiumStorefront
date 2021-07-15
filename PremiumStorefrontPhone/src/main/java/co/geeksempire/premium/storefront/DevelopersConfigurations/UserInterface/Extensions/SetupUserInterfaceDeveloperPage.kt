@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 2:08 PM
+ * Last modified 7/15/21, 4:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -83,6 +83,8 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
     setupDeveloperLogoDesign(themeType)
 
     setupDeveloperCountryFlagDesign(themeType)
+
+    setupContactOptions(themeType)
 
 }
 
@@ -259,7 +261,7 @@ fun DeveloperIntroductionPage.setupDeveloperCountryFlagDesign(themeType: Boolean
 
 }
 
-fun DeveloperIntroductionPage.setupContactOptions() {
+fun DeveloperIntroductionPage.setupContactOptions(themeType: Boolean) {
 
     developerIntroductionLayoutBinding.contactOptionsCircleMenu.setOnClickListener {
 

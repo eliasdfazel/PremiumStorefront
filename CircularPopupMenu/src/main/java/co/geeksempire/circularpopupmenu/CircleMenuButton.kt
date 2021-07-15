@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 2:49 PM
+ * Last modified 7/15/21, 6:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,20 +32,12 @@ class CircleMenuButton @JvmOverloads constructor(
         isClickable = true
     }
 
-    internal fun setIconNoTint(@DrawableRes iconResId: Int) {
+    internal fun setIconTinted(@DrawableRes iconResId: Int) {
         this.iconResId = iconResId
 
         val icon = ContextCompat.getDrawable(context, iconResId)!!
-//        icon.setTintCompat(Color.TRANSPARENT)
+        icon.setTintCompat(Color.TRANSPARENT)
         icon.setTintMode(PorterDuff.Mode.MULTIPLY)
-        setImageDrawable(icon)
-    }
-
-    internal fun setIcon(@DrawableRes iconResId: Int) {
-        this.iconResId = iconResId
-
-        val icon = ContextCompat.getDrawable(context, iconResId)!!
-        icon.setTintCompat(iconColor)
         setImageDrawable(icon)
     }
 

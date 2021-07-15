@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 1:40 PM
+ * Last modified 7/15/21, 6:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,15 +27,20 @@ class CircleMenu @JvmOverloads constructor(
         attrs: AttributeSet? = null
 ) : FloatingActionButton(context, attrs) {
 
+    val attributeSet = context.obtainStyledAttributes(attrs, R.styleable.CircleMenu)
+
     val isOpened: Boolean
         get() = menuLayout.isOpened
 
     private val menuLayout: CircleMenuLayout
 
+    var backgroundColorsOfItem: List<Int>
+    var iconsOfItems: List<Int>
+
     init {
         isClickable = true
 
-        context.obtainStyledAttributes(attrs, R.styleable.CircleMenu).apply {
+        attributeSet.apply {
             val circleStartAngle = getInteger(
                     R.styleable.CircleMenu_startAngle,
                     resources.getInteger(R.integer.circle_menu_start_angle)
@@ -50,31 +55,35 @@ class CircleMenu @JvmOverloads constructor(
             ).toInt()
             val openOnStart = getBoolean(R.styleable.CircleMenu_openOnStart, false)
 
-            val centerButtonColorDef = ContextCompat.getColor(context, R.color.circle_menu_center_button_color)
-            val centerButtonColor = getColor(R.styleable.CircleMenu_centerButtonColor, centerButtonColorDef)
-            val centerButtonIconColorDef = ContextCompat.getColor(context, R.color.circle_menu_center_button_icon_color)
-            val centerButtonIconColor = getColor(R.styleable.CircleMenu_centerButtonIconColor, centerButtonIconColorDef)
+            val centerButtonColorDefault = ContextCompat.getColor(context, R.color.circle_menu_center_button_color)
+            val centerButtonColor = getColor(R.styleable.CircleMenu_centerButtonColor, centerButtonColorDefault)
+
+            val centerButtonIconColorDefault = ContextCompat.getColor(context, R.color.circle_menu_center_button_icon_color)
+            val centerButtonIconColor = getColor(R.styleable.CircleMenu_centerButtonIconColor, centerButtonIconColorDefault)
+
             val menuIconType = MenuIconType.values()[getInt(R.styleable.CircleMenu_menuIcon, 0)]
 
             val iconsColorDef = ContextCompat.getColor(context, R.color.circle_menu_button_icon_color)
             val buttonIconsColor = getColor(R.styleable.CircleMenu_iconsColor, iconsColorDef)
+
             val iconArrayId: Int = getResourceId(R.styleable.CircleMenu_buttonIcons, 0)
             val colorArrayId: Int = getResourceId(R.styleable.CircleMenu_buttonColors, 0)
 
             val showSelectAnimation: Boolean = getBoolean(R.styleable.CircleMenu_showSelectAnimation, true)
 
-            val colors = resources.getIntArray(colorArrayId).asList()
-            val icons = resources.obtainTypedArray(iconArrayId).let { iconsIds ->
+            backgroundColorsOfItem = resources.getIntArray(colorArrayId).asList()
+
+            iconsOfItems = resources.obtainTypedArray(iconArrayId).let { iconsIds ->
                 (0 until iconsIds.length()).map {
                     iconsIds.getResourceId(it, -1)
                 }
             }
 
-            if (colors.isEmpty() || icons.isEmpty()) {
+            if (backgroundColorsOfItem.isNullOrEmpty() || iconsOfItems.isNullOrEmpty()) {
                 throw IllegalArgumentException("Colors and icons array must not be empty")
             }
 
-            if (colors.size != icons.size) {
+            if (backgroundColorsOfItem.size != iconsOfItems.size) {
                 throw IllegalArgumentException("Colors array size must be equal to the icons array")
             }
 
@@ -89,13 +98,35 @@ class CircleMenu @JvmOverloads constructor(
                     circleStartAngle = circleStartAngle,
                     showSelectAnimation = showSelectAnimation,
                     openOnStart = openOnStart,
-                    colors = colors,
-                    icons = icons
+                    colors = backgroundColorsOfItem,
+                    icons = iconsOfItems
             )
 
             initMenuButton(menuIconType, centerButtonColor, centerButtonIconColor)
             initMenuLayout()
         }.recycle()
+    }
+
+    fun setColorsOfItem(listOfColors: List<Int>?) {
+
+        backgroundColorsOfItem = if (!listOfColors.isNullOrEmpty()) {
+            listOfColors
+        } else {
+            resources.getIntArray(attributeSet.getResourceId(R.styleable.CircleMenu_buttonColors, 0)).asList()
+        }
+        menuLayout.colors = backgroundColorsOfItem
+        invalidate()
+    }
+
+    fun setIconsOfItem(listOfIcons: List<Int>?) {
+
+        iconsOfItems = if (!listOfIcons.isNullOrEmpty()) {
+            listOfIcons
+        } else {
+            resources.getIntArray(attributeSet.getResourceId(R.styleable.CircleMenu_buttonIcons, 0)).asList()
+        }
+        menuLayout.icons = iconsOfItems
+        invalidate()
     }
 
     private fun initMenuButton(

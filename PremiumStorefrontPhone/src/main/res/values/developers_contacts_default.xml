@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/14/21, 2:15 PM
+  ~ Last modified 7/15/21, 4:24 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,15 +12,15 @@
 <resources>
 
     <array name="contactOptionsIcons">
-        <item>@drawable/email_icon_line</item>
         <item>@drawable/twitter_icon</item>
+        <item>@drawable/email_icon_line</item>
         <item>@drawable/website_icon</item>
     </array>
 
     <array name="contactOptionsColors">
-        <item>@color/light</item>
-        <item>@color/light</item>
-        <item>@color/light</item>
+        <item>@color/default_color_light</item>
+        <item>@color/default_color_light</item>
+        <item>@color/default_color_light</item>
     </array>
 
 </resources>

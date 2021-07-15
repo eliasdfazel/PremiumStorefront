@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 2:37 PM
+ * Last modified 7/15/21, 5:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,7 +33,7 @@ internal class ItemSelectionAnimator(
         circleRadius: Int
 ) {
 
-    private var circleColor = 0
+    private var circleColor = Color.WHITE
     private var circleAlpha: Int
     private var startAngle = 0f
     private var currentCircleAngle: Float
