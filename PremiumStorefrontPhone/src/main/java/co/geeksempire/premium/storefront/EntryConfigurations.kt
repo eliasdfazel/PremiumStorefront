@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 6:07 AM
+ * Last modified 7/16/21, 7:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,10 +16,6 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DevelopersDataKey
-import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.DeveloperDataInterface
-import co.geeksempire.premium.storefront.DevelopersConfigurations.NetworkConnection.RetrieveDeveloperInformation
-import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.DeveloperIntroductionPage
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
@@ -52,75 +48,11 @@ class EntryConfigurations : AppCompatActivity() {
                     when (it) {
                         EntryPreferences.EntryStorefrontApplications -> {
 
-//                            startActivity(Intent().apply {
-//                                setClass(applicationContext, StorefrontApplications::class.java)
-//                            }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
-//
-//                            this@EntryConfigurations.finish()
+                            startActivity(Intent().apply {
+                                setClass(applicationContext, StorefrontApplications::class.java)
+                            }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0).toBundle())
 
-                            val productDeveloper = "Geeks Empire"
-                            productDeveloper.let { developerName ->
-
-                                RetrieveDeveloperInformation(developerName)
-                                    .start(object : DeveloperDataInterface {
-
-                                        override fun developerInformation(developerData: HashMap<String, String>) {
-                                            super.developerInformation(developerData)
-
-                                            val developerPageIntent = Intent(applicationContext, DeveloperIntroductionPage::class.java).apply {
-
-                                                putExtra(DevelopersDataKey.DeveloperName, developerData[DevelopersDataKey.DeveloperName])
-                                                putExtra(DevelopersDataKey.DeveloperDescription, developerData[DevelopersDataKey.DeveloperDescription])
-
-                                                putExtra(DevelopersDataKey.DeveloperLogo, developerData[DevelopersDataKey.DeveloperLogo])
-                                                putExtra(DevelopersDataKey.DeveloperCoverImage, developerData[DevelopersDataKey.DeveloperCoverImage])
-
-                                                putExtra(DevelopersDataKey.DeveloperCountry, developerData[DevelopersDataKey.DeveloperCountry])
-                                                putExtra(DevelopersDataKey.DeveloperCountryFlag, developerData[DevelopersDataKey.DeveloperCountryFlag])
-
-                                                putExtra(DevelopersDataKey.DeveloperEmail, developerData[DevelopersDataKey.DeveloperEmail])
-                                                putExtra(DevelopersDataKey.DeveloperWebsite, developerData[DevelopersDataKey.DeveloperWebsite])
-
-                                                putExtra(DevelopersDataKey.DeveloperSocialMediaIcon, developerData[DevelopersDataKey.DeveloperSocialMediaIcon])
-                                                putExtra(DevelopersDataKey.DeveloperSocialMediaLink, developerData[DevelopersDataKey.DeveloperSocialMediaLink])
-
-                                                developerData[DevelopersDataKey.DeveloperApplications]?.let {
-                                                    putExtra(DevelopersDataKey.DeveloperApplications, it)
-                                                }
-                                                developerData[DevelopersDataKey.DeveloperGames]?.let {
-                                                    putExtra(DevelopersDataKey.DeveloperGames, it)
-                                                }
-                                                developerData[DevelopersDataKey.DeveloperBooks]?.let {
-                                                    putExtra(DevelopersDataKey.DeveloperBooks, it)
-                                                }
-                                                developerData[DevelopersDataKey.DeveloperMovies]?.let {
-                                                    putExtra(DevelopersDataKey.DeveloperMovies, it)
-                                                }
-
-                                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                            }
-
-                                            startActivity(developerPageIntent,
-                                                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_from_right, 0).toBundle())
-
-                                        }
-
-                                    })
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            this@EntryConfigurations.finish()
 
                         }
                         EntryPreferences.EntryStorefrontGames -> {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 7:33 AM
+ * Last modified 7/16/21, 7:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,9 @@
 
 package co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -140,12 +142,6 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
             developerIntroductionLayoutBinding.developerCountryFlag.contentDescription = developerCountry
 
-            developerIntroductionLayoutBinding.developerCountryFlag.setOnClickListener {
-
-
-
-            }
-
             developerIntroductionLayoutBinding.developerNameTextView.text = Html.fromHtml(developerName, Html.FROM_HTML_MODE_COMPACT)
 
             Handler(Looper.getMainLooper()).postDelayed({
@@ -173,6 +169,10 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
             })
 
+            developerWebsiteInteraction(developerWebsite)
+            developerEmailInteraction(developerEmail)
+            developerSocialMediaInteraction(developerSocialMediaLink)
+
         } else {
 
             this@DeveloperIntroductionPage.finish()
@@ -184,18 +184,55 @@ class DeveloperIntroductionPage : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        developerIntroductionLayoutBinding.developerWebsiteImageView.setOnClickListener {
-
-
-
-        }
-
     }
 
     override fun onBackPressed() {
 
         overridePendingTransition(0, R.anim.slide_out_right)
         this@DeveloperIntroductionPage.finish()
+
+    }
+
+    private fun developerWebsiteInteraction(developerWebsite: String) {
+
+        developerIntroductionLayoutBinding.developerWebsiteImageView.setOnClickListener {
+
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(developerWebsite)))
+
+        }
+
+    }
+
+    private fun developerEmailInteraction(developerEmail: String) {
+
+        developerIntroductionLayoutBinding.developerEmailImageView.setOnClickListener {
+
+            val messageToSupport = "" +
+                    "\n\n\n" +
+                    "[Contacted From <b>Premium Storefront</b> " +
+                    "\n" +
+                    "${getString(R.string.premiumStorefrontPlayStoreLink)}]"
+
+            val emailIntent = Intent(Intent.ACTION_SEND).apply {
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(developerEmail))
+                putExtra(Intent.EXTRA_SUBJECT,  "Contact From Premium Storefront")
+                putExtra(Intent.EXTRA_TEXT, messageToSupport)
+                type = "text/*"
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(emailIntent)
+
+        }
+
+    }
+
+    private fun developerSocialMediaInteraction(developerSocialMedia: String) {
+
+        developerIntroductionLayoutBinding.developerWebsiteImageView.setOnClickListener {
+
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(developerSocialMedia)))
+
+        }
 
     }
 
