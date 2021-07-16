@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:43 AM
+ * Last modified 7/16/21, 8:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -142,8 +142,11 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
         intent?.let { inputData ->
 
-            productsOfCategory.retrieveProductsOfCategory(inputData.getLongExtra(CategoriesDataKeys.CategoryId, 67))
+            val categoryId = inputData.getIntExtra(CategoriesDataKeys.CategoryId, 67)
 
+            productsOfCategory.retrieveProductsOfCategory(categoryId)
+
+            Log.d(this@CategoryDetails.javaClass.simpleName, "Category Id $categoryId")
         }
 
     }

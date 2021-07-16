@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:43 AM
+ * Last modified 7/16/21, 8:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,7 +58,7 @@ class PopupShortcutsCreator (val context: Context) {
 
     private val shortcutManager: ShortcutManager = context.getSystemService(ShortcutManager::class.java) as ShortcutManager
 
-    private val categoryId: Long = 836
+    private val categoryId: Int = 836
 
     fun configure() = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 

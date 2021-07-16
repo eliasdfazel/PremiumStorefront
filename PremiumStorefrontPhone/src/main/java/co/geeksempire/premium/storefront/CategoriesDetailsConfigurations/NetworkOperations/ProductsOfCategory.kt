@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:43 AM
+ * Last modified 7/16/21, 8:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,7 +34,7 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
 
     var allLoadingFinished: Boolean = false
 
-    fun retrieveProductsOfCategory(categoryId: Long) {
+    fun retrieveProductsOfCategory(categoryId: Int) {
 
         GenericJsonRequest(context, object : JsonRequestResponses {
 
