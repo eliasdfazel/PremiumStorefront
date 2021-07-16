@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/15/21, 11:22 AM
+ * Last modified 7/16/21, 7:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,6 @@ import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DeveloperLiveData
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DevelopersDataKey
-import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Extensions.setupContactOptions
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Extensions.setupUserInterfaceDeveloperPage
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Animations.startTypingAnimation
@@ -104,7 +103,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                         resource?.let {
 
-                            setupContactOptions(developerEmail, developerWebsite, developerSocialMediaLink, resource)
+                            developerIntroductionLayoutBinding.developerSocialMediaImageView.setImageDrawable(resource)
 
                         }
 
@@ -179,6 +178,24 @@ class DeveloperIntroductionPage : AppCompatActivity() {
             this@DeveloperIntroductionPage.finish()
 
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        developerIntroductionLayoutBinding.developerWebsiteImageView.setOnClickListener {
+
+
+
+        }
+
+    }
+
+    override fun onBackPressed() {
+
+        overridePendingTransition(0, R.anim.slide_out_right)
+        this@DeveloperIntroductionPage.finish()
 
     }
 

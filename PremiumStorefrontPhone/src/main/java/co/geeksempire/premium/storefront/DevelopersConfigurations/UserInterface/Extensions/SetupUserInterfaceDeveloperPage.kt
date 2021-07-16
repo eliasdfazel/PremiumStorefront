@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/15/21, 11:22 AM
+ * Last modified 7/16/21, 7:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,12 +15,13 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.shapes.RoundRectShape
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.WindowInsetsController
 import androidx.appcompat.widget.AppCompatButton
@@ -258,10 +259,186 @@ fun DeveloperIntroductionPage.setupDeveloperCountryFlagDesign(themeType: Boolean
 
     developerIntroductionLayoutBinding.developerCountryFlagBackground.setImageDrawable(developerCountryFlagBackground)
 
+    Handler(Looper.getMainLooper()).postDelayed({
+
+        setupContactOptions(themeType)
+
+    }, 512)
+
 }
 
-fun DeveloperIntroductionPage.setupContactOptions(developerEmail: String, developerWebsite: String, developerSocialMediaLink: String, developerSocialMediaIcon: Drawable) {
+fun DeveloperIntroductionPage.setupContactOptions(themeType: Boolean) {
 
+    setupDeveloperWebsiteDesign(themeType)
 
+    setupDeveloperEmailDesign(themeType)
+
+    setupDeveloperSocialMediaDesign(themeType)
 
 }
+
+fun DeveloperIntroductionPage.setupDeveloperWebsiteDesign(themeType: Boolean) {
+
+    developerIntroductionLayoutBinding.developerWebsiteImageView.visibility = View.VISIBLE
+
+    val developerWebsiteBackground = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            getDrawable(R.drawable.developer_website_background_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            getDrawable(R.drawable.developer_website_background_light) as LayerDrawable
+
+        }
+        else -> getDrawable(R.drawable.developer_website_background_light) as LayerDrawable
+    }
+
+    val shapeNegativeSpaceCircle: ShapeDrawable = ShapeDrawable(OvalShape())
+
+    shapeNegativeSpaceCircle.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerWebsiteBackground.setDrawableByLayerId(R.id.clearCircle, shapeNegativeSpaceCircle)
+
+    val shapeNegativeSpaceRectangle: ShapeDrawable = ShapeDrawable(RoundRectShape(floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f), null, null))
+
+    shapeNegativeSpaceRectangle.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerWebsiteBackground.setDrawableByLayerId(R.id.clearRectangle, shapeNegativeSpaceRectangle)
+
+    developerIntroductionLayoutBinding.developerWebsiteImageView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    developerIntroductionLayoutBinding.developerWebsiteImageView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    developerIntroductionLayoutBinding.developerWebsiteImageView.background = developerWebsiteBackground
+
+}
+
+fun DeveloperIntroductionPage.setupDeveloperEmailDesign(themeType: Boolean) {
+
+    developerIntroductionLayoutBinding.developerEmailImageView.visibility = View.VISIBLE
+
+    val developerEmailBackground = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            getDrawable(R.drawable.developer_email_background_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            getDrawable(R.drawable.developer_email_background_light) as LayerDrawable
+
+        }
+        else -> getDrawable(R.drawable.developer_email_background_light) as LayerDrawable
+    }
+
+    val shapeNegativeSpaceCircle: ShapeDrawable = ShapeDrawable(OvalShape())
+
+    shapeNegativeSpaceCircle.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerEmailBackground.setDrawableByLayerId(R.id.clearCircle, shapeNegativeSpaceCircle)
+
+    val shapeNegativeSpaceRectangle: ShapeDrawable = ShapeDrawable(RoundRectShape(floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f), null, null))
+
+    shapeNegativeSpaceRectangle.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerEmailBackground.setDrawableByLayerId(R.id.clearRectangle, shapeNegativeSpaceRectangle)
+
+    developerIntroductionLayoutBinding.developerEmailImageView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    developerIntroductionLayoutBinding.developerEmailImageView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    developerIntroductionLayoutBinding.developerEmailImageView.background = developerEmailBackground
+
+}
+
+fun DeveloperIntroductionPage.setupDeveloperSocialMediaDesign(themeType: Boolean) {
+
+    developerIntroductionLayoutBinding.developerSocialMediaImageView.visibility = View.VISIBLE
+
+    val developerSocialMediaBackground = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            getDrawable(R.drawable.developer_social_media_background_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            getDrawable(R.drawable.developer_social_media_background_light) as LayerDrawable
+
+        }
+        else -> getDrawable(R.drawable.developer_social_media_background_light) as LayerDrawable
+    }
+
+    val shapeNegativeSpaceCircle: ShapeDrawable = ShapeDrawable(OvalShape())
+
+    shapeNegativeSpaceCircle.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerSocialMediaBackground.setDrawableByLayerId(R.id.clearCircle, shapeNegativeSpaceCircle)
+
+    val shapeNegativeSpaceRectangle: ShapeDrawable = ShapeDrawable(RoundRectShape(floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f), null, null))
+
+    shapeNegativeSpaceRectangle.paint.apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    }
+
+    developerSocialMediaBackground.setDrawableByLayerId(R.id.clearRectangle, shapeNegativeSpaceRectangle)
+
+    developerIntroductionLayoutBinding.developerSocialMediaImageView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    developerIntroductionLayoutBinding.developerSocialMediaImageView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    developerIntroductionLayoutBinding.developerSocialMediaImageView.background = developerSocialMediaBackground
+
+}
+
