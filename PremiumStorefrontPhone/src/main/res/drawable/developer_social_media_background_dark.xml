@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/16/21, 8:43 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:height="51dp"
+        android:width="51dp">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/premiumDark"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/clearCircle"
+        android:height="41dp"
+        android:width="41dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="oval">
+
+            <solid
+                android:color="@color/green"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/clearRectangle"
+        android:height="25dp"
+        android:width="25dp"
+        android:gravity="center_vertical|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/green"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="17dp"
+        android:width="11.6dp"
+        android:gravity="top|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="0dp"
+                android:topRightRadius="0dp"
+                android:bottomLeftRadius="3dp"
+                android:bottomRightRadius="51dp"/>
+
+            <solid
+                android:color="@color/premiumDark"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="18dp"
+        android:width="11dp"
+        android:gravity="bottom|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="3dp"
+                android:topRightRadius="51dp"
+                android:bottomLeftRadius="0dp"
+                android:bottomRightRadius="0dp"/>
+
+            <solid
+                android:color="@color/premiumDark"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>

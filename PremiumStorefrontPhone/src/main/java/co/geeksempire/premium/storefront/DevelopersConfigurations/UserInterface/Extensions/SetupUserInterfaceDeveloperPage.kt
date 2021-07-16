@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 7:21 AM
+ * Last modified 7/16/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,6 +58,10 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
 
             developerIntroductionLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
+            developerIntroductionLayoutBinding.logoBackgroundColor.setBackgroundColor(getColor(R.color.premiumLight))
+
+            developerIntroductionLayoutBinding.developerDescriptionTextView.setTextColor(getColor(R.color.dark))
+
         }
         ThemeType.ThemeDark -> {
 
@@ -78,6 +82,10 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
             developerIntroductionLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
 
             developerIntroductionLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
+
+            developerIntroductionLayoutBinding.logoBackgroundColor.setBackgroundColor(getColor(R.color.premiumDark))
+
+            developerIntroductionLayoutBinding.developerDescriptionTextView.setTextColor(getColor(R.color.light))
 
         }
     }
@@ -289,7 +297,7 @@ fun DeveloperIntroductionPage.setupDeveloperWebsiteDesign(themeType: Boolean) {
         }
         ThemeType.ThemeDark -> {
 
-            getDrawable(R.drawable.developer_website_background_light) as LayerDrawable
+            getDrawable(R.drawable.developer_website_background_dark) as LayerDrawable
 
         }
         else -> getDrawable(R.drawable.developer_website_background_light) as LayerDrawable
@@ -344,7 +352,7 @@ fun DeveloperIntroductionPage.setupDeveloperEmailDesign(themeType: Boolean) {
         }
         ThemeType.ThemeDark -> {
 
-            getDrawable(R.drawable.developer_email_background_light) as LayerDrawable
+            getDrawable(R.drawable.developer_email_background_dark) as LayerDrawable
 
         }
         else -> getDrawable(R.drawable.developer_email_background_light) as LayerDrawable
@@ -399,7 +407,7 @@ fun DeveloperIntroductionPage.setupDeveloperSocialMediaDesign(themeType: Boolean
         }
         ThemeType.ThemeDark -> {
 
-            getDrawable(R.drawable.developer_social_media_background_light) as LayerDrawable
+            getDrawable(R.drawable.developer_social_media_background_dark) as LayerDrawable
 
         }
         else -> getDrawable(R.drawable.developer_social_media_background_light) as LayerDrawable

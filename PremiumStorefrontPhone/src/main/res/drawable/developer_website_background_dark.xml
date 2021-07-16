@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/16/21, 9:21 AM
+  ~ Last modified 7/16/21, 8:42 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,9 +12,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:height="130dp"
-        android:width="130dp"
-        android:gravity="top|end">
+        android:height="51dp"
+        android:width="51dp">
 
         <shape
             android:shape="rectangle">
@@ -27,16 +26,13 @@
     </item>
 
     <item
-        android:id="@+id/clearTopLeft"
-        android:height="71dp"
-        android:width="31.3dp"
-        android:gravity="top|start">
+        android:id="@+id/clearCircle"
+        android:height="41dp"
+        android:width="41dp"
+        android:gravity="center">
 
         <shape
-            android:shape="rectangle">
-
-            <corners
-                android:topRightRadius="51dp"/>
+            android:shape="oval">
 
             <solid
                 android:color="@color/green"/>
@@ -46,29 +42,10 @@
     </item>
 
     <item
-        android:id="@+id/clearBottomRight"
-        android:height="31.3dp"
-        android:width="71dp"
-        android:gravity="bottom|end">
-
-        <shape
-            android:shape="rectangle">
-
-            <corners
-                android:topRightRadius="51dp"/>
-
-            <solid
-                android:color="@color/green"/>
-
-        </shape>
-
-    </item>
-
-    <item
-        android:id="@+id/clearBottomLeft"
-        android:height="73dp"
-        android:width="73dp"
-        android:gravity="bottom|start">
+        android:id="@+id/clearRectangle"
+        android:height="25dp"
+        android:width="25dp"
+        android:gravity="center_vertical|end">
 
         <shape
             android:shape="rectangle">
@@ -81,15 +58,39 @@
     </item>
 
     <item
-        android:height="99dp"
-        android:width="99dp"
+        android:height="17dp"
+        android:width="11.6dp"
         android:gravity="top|end">
 
         <shape
             android:shape="rectangle">
 
             <corners
-                android:bottomLeftRadius="51dp"/>
+                android:topLeftRadius="0dp"
+                android:topRightRadius="0dp"
+                android:bottomLeftRadius="51dp"
+                android:bottomRightRadius="3dp"/>
+
+            <solid
+                android:color="@color/premiumDark"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="18dp"
+        android:width="11dp"
+        android:gravity="bottom|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="51dp"
+                android:topRightRadius="3dp"
+                android:bottomLeftRadius="0dp"
+                android:bottomRightRadius="0dp"/>
 
             <solid
                 android:color="@color/premiumDark"/>

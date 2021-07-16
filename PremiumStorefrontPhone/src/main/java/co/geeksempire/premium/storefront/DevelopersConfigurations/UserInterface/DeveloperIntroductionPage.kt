@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 8:10 AM
+ * Last modified 7/16/21, 9:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DeveloperLiveData
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DevelopersDataKey
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Extensions.setupUserInterfaceDeveloperPage
@@ -146,14 +147,40 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
             Handler(Looper.getMainLooper()).postDelayed({
 
-                gradientText(textView = developerIntroductionLayoutBinding.developerNameTextView,
-                    gradientColors = intArrayOf(getColor(R.color.premiumDark), getColor(R.color.black)),
-                    gradientColorsPositions = floatArrayOf(0f, 0.73f),
-                    gradientVerticalEnd = developerIntroductionLayoutBinding.developerNameTextView.height.toFloat(),
-                    gradientType = Gradient.VerticalGradient)
+                lifecycleScope.launch {
 
-                developerIntroductionLayoutBinding.developerNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-                developerIntroductionLayoutBinding.developerNameTextView.visibility = View.VISIBLE
+                    themePreferences.checkThemeLightDark().collect {
+
+                        when (it) {
+                            ThemeType.ThemeLight -> {
+
+                                gradientText(textView = developerIntroductionLayoutBinding.developerNameTextView,
+                                    gradientColors = intArrayOf(getColor(R.color.premiumDark), getColor(R.color.black)),
+                                    gradientColorsPositions = floatArrayOf(0f, 0.79f),
+                                    gradientVerticalEnd = developerIntroductionLayoutBinding.developerNameTextView.height.toFloat(),
+                                    gradientType = Gradient.VerticalGradient)
+
+                                developerIntroductionLayoutBinding.developerNameTextView.setShadowLayer(developerIntroductionLayoutBinding.developerNameTextView.shadowRadius, developerIntroductionLayoutBinding.developerNameTextView.shadowDx, developerIntroductionLayoutBinding.developerNameTextView.shadowDy, getColor(R.color.dark_transparent_high))
+
+                            }
+                            ThemeType.ThemeDark -> {
+
+                                gradientText(textView = developerIntroductionLayoutBinding.developerNameTextView,
+                                    gradientColors = intArrayOf(getColor(R.color.premiumLight), getColor(R.color.white)),
+                                    gradientColorsPositions = floatArrayOf(0f, 0.79f),
+                                    gradientVerticalEnd = developerIntroductionLayoutBinding.developerNameTextView.height.toFloat(),
+                                    gradientType = Gradient.VerticalGradient)
+
+                                developerIntroductionLayoutBinding.developerNameTextView.setShadowLayer(developerIntroductionLayoutBinding.developerNameTextView.shadowRadius, developerIntroductionLayoutBinding.developerNameTextView.shadowDx, developerIntroductionLayoutBinding.developerNameTextView.shadowDy, getColor(R.color.light_transparent_high))
+
+                            }
+                        }
+
+                        developerIntroductionLayoutBinding.developerNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                        developerIntroductionLayoutBinding.developerNameTextView.visibility = View.VISIBLE
+
+                    }
+                }
 
             }, 500)
 

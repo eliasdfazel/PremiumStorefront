@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/16/21, 7:18 AM
+  ~ Last modified 7/16/21, 9:06 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -169,7 +169,7 @@
         android:shadowDy="3"
         android:shadowDx="3"
         android:fontFamily="@font/upcil"
-        android:visibility="visible"
+        android:visibility="invisible"
 
         apps:layout_constraintTop_toBottomOf="@id/developerLogoImageView"
         apps:layout_constraintStart_toStartOf="@id/developerLogoImageView"
@@ -184,6 +184,7 @@
         android:gravity="center_vertical"
         android:text="Digital Life To Improve Your Real Life | All Geeky Works Developed By Geeks For All"
         android:textSize="29sp"
+        android:textColor="@color/dark"
         android:lineSpacingExtra="1.7dp"
         android:fontFamily="@font/upcil"
 
@@ -223,6 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layoutAnimation="@anim/fade_in_layout_animation"
+                android:visibility="gone"
 
                 apps:layout_constraintTop_toTopOf="parent"/>
 
@@ -231,9 +233,23 @@
                 android:layout_width="93dp"
                 android:layout_height="91dp"
                 android:padding="13dp"
+                android:visibility="gone"
 
                 apps:SpinKit_Style="ChasingDots"
                 apps:SpinKit_Color="@color/default_color_transparent"
+
+                apps:layout_constraintTop_toBottomOf="@id/productsOfCategoryRecyclerView"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/comingSoonView"
+                android:layout_width="299dp"
+                android:layout_height="299dp"
+
+                apps:lottie_rawRes="@raw/coming_soon_animation"
+                apps:lottie_autoPlay="true"
+                apps:lottie_loop="true"
 
                 apps:layout_constraintTop_toBottomOf="@id/productsOfCategoryRecyclerView"
                 apps:layout_constraintStart_toStartOf="parent"
