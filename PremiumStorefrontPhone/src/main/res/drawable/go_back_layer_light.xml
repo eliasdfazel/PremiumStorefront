@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 6/9/21, 4:28 AM
+  ~ Last modified 7/16/21, 5:53 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -65,7 +65,7 @@
                 android:angle="270"
                 android:startColor="@color/white"
                 android:centerColor="@color/white_transparent"
-                android:centerY="0.6"
+                android:centerY="0.51"
                 android:endColor="@color/dark_transparent"/>
 
         </shape>
