@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 7:41 AM
+ * Last modified 7/16/21, 8:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -228,7 +228,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
     private fun developerSocialMediaInteraction(developerSocialMedia: String) {
 
-        developerIntroductionLayoutBinding.developerWebsiteImageView.setOnClickListener {
+        developerIntroductionLayoutBinding.developerSocialMediaImageView.setOnClickListener {
 
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(developerSocialMedia)))
 
