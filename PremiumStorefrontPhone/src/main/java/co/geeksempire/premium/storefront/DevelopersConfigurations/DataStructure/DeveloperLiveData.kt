@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 8:09 AM
+ * Last modified 7/17/21, 11:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -108,8 +108,6 @@ class DeveloperLiveData : ViewModel() {
                 productAttributes = attributesMap
             ))
 
-            println(">>> >> > " + applicationsContentJsonObject.getString(ProductsContentKey.NameKey))
-
             Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
                 ProductsContentKey.NameKey)}")
         }
@@ -191,13 +189,11 @@ class DeveloperLiveData : ViewModel() {
                 productAttributes = attributesMap
             ))
 
-            println(">>> >> > " + applicationsContentJsonObject.getString(ProductsContentKey.NameKey))
-
             Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
                 ProductsContentKey.NameKey)}")
         }
 
-        developerProductsApplications.postValue(storefrontAllContents)
+        developerProductsGames.postValue(storefrontAllContents)
 
     }
 

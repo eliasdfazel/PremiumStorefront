@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 10:59 AM
+ * Last modified 7/17/21, 11:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,17 +45,18 @@ class GamesShowcase (private val context: AppCompatActivity,
 
     }
 
-    fun prepareToPresent(applicationsList: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun prepareToPresent(gamesList: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         allContentAdapter.storefrontContents.clear()
 
-        allContentAdapter.storefrontContents.addAll(applicationsList)
+        allContentAdapter.storefrontContents.addAll(gamesList)
 
         withContext(Dispatchers.Main) {
+
             allContentAdapter.themeType = this@GamesShowcase.themeType
 
-
             allContentAdapter.notifyDataSetChanged()
+
         }
 
     }
