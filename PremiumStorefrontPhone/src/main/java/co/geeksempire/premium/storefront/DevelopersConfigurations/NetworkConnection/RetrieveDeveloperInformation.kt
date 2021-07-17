@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 8:31 AM
+ * Last modified 7/17/21, 7:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -38,11 +38,15 @@ class RetrieveDeveloperInformation (private val developerName: String) {
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                    CoroutineScope(Dispatchers.IO).launch {
+                    if (dataSnapshot.exists()) {
 
-                        processDeveloperData(dataSnapshot).collect {
+                        CoroutineScope(Dispatchers.IO).launch {
 
-                            developerDataInterface.developerInformation(it)
+                            processDeveloperData(dataSnapshot).collect {
+
+                                developerDataInterface.developerInformation(it)
+
+                            }
 
                         }
 

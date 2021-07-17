@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 7:47 AM
+ * Last modified 7/17/21, 6:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,7 @@ import android.util.TypedValue
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-fun columnCount(context: Context, itemWidth: Int): Int {
+fun columnCount(context: Context, itemWidth: Int) : Int {
 
     var spanCount = (displayX(context) / dpToPixel(context, itemWidth.toFloat())).toInt()
 
@@ -28,7 +28,7 @@ fun columnCount(context: Context, itemWidth: Int): Int {
     return spanCount
 }
 
-fun dpToPixel(context: Context, dp: Float): Float {
+fun dpToPixel(context: Context, dp: Float) : Float {
 
     val resources: Resources = context.resources
 
@@ -37,16 +37,12 @@ fun dpToPixel(context: Context, dp: Float): Float {
     return dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
 
-fun pixelToDp(context: Context, px: Float): Float {
+fun pixelToDp(context: Context, px: Float) : Float {
 
-    val resources: Resources = context.resources
-
-    val metrics = resources.displayMetrics
-
-    return px / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
 
-fun Float.dpToPixel(context: Context): Float {
+fun Float.dpToPixel(context: Context) : Float {
 
     val resources: Resources = context.resources
 
@@ -55,13 +51,23 @@ fun Float.dpToPixel(context: Context): Float {
     return this@dpToPixel * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
 
-fun Float.pixelToDp(context: Context): Float {
+fun Float.pixelToDp(context: Context) : Float {
 
     val resources: Resources = context.resources
 
     val metrics = resources.displayMetrics
 
     return this@pixelToDp / (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+fun pixelToFloat(context: Context, pixel: Float) : Float {
+
+    return dpToFloat(context, pixelToDp(context, pixel))
+}
+
+fun dpToFloat(context: Context, dp: Float): Float {
+
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics)
 }
 
 fun dpToInteger(context: Context, dp: Int): Int {
@@ -88,7 +94,7 @@ fun percentageOfDisplayX(context: Context, percentageAmount: Float) : Float {
  * Get Touch Pixel Position
  * @param displayEnd = displayX() Or displayY()
  **/
-fun Float.pixelToPercentage(displayEnd: Float): Float {
+fun Float.pixelToPercentage(displayEnd: Float) : Float {
 
     return (this@pixelToPercentage * 100) / displayEnd
 }
@@ -97,17 +103,17 @@ fun Float.pixelToPercentage(displayEnd: Float): Float {
  * Get Percentage Pixel Position
  * @param displayEnd = displayX() Or displayY()
  **/
-fun Float.percentageToPixel(displayEnd: Float): Float {
+fun Float.percentageToPixel(displayEnd: Float) : Float {
 
     return (this@percentageToPixel * displayEnd) / 100
 }
 
-fun displayX(context: Context): Int {
+fun displayX(context: Context) : Int {
 
     return context.resources.displayMetrics.widthPixels
 }
 
-fun displayY(context: Context): Int {
+fun displayY(context: Context) : Int {
 
     return context.resources.displayMetrics.heightPixels
 }
@@ -129,7 +135,7 @@ fun statusBarHeight(context: Context): Int {
     return statusBarHeight
 }
 
-fun navigationBarHeight(context: Context): Int {
+fun navigationBarHeight(context: Context) : Int {
 
     var navigationBarHeight = 0
 

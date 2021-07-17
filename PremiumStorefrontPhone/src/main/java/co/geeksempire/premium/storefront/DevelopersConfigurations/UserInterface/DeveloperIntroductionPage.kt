@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 5:38 AM
+ * Last modified 7/17/21, 7:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -155,22 +155,22 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                                 gradientText(textView = developerIntroductionLayoutBinding.developerNameTextView,
                                     gradientColors = intArrayOf(getColor(R.color.premiumDark), getColor(R.color.black)),
-                                    gradientColorsPositions = floatArrayOf(0f, 0.79f),
+                                    gradientColorsPositions = floatArrayOf(0f, 0.91f),
                                     gradientVerticalEnd = developerIntroductionLayoutBinding.developerNameTextView.height.toFloat(),
                                     gradientType = Gradient.VerticalGradient)
 
-                                developerIntroductionLayoutBinding.developerNameTextView.setShadowLayer(developerIntroductionLayoutBinding.developerNameTextView.shadowRadius, developerIntroductionLayoutBinding.developerNameTextView.shadowDx, developerIntroductionLayoutBinding.developerNameTextView.shadowDy, getColor(R.color.dark_transparent_high))
+                                developerIntroductionLayoutBinding.developerNameTextView.setShadowLayer(developerIntroductionLayoutBinding.developerNameTextView.shadowRadius, developerIntroductionLayoutBinding.developerNameTextView.shadowDx, developerIntroductionLayoutBinding.developerNameTextView.shadowDy, getColor(R.color.dark_transparent))
 
                             }
                             ThemeType.ThemeDark -> {
 
                                 gradientText(textView = developerIntroductionLayoutBinding.developerNameTextView,
                                     gradientColors = intArrayOf(getColor(R.color.premiumLight), getColor(R.color.white)),
-                                    gradientColorsPositions = floatArrayOf(0f, 0.79f),
+                                    gradientColorsPositions = floatArrayOf(0f, 0.99f),
                                     gradientVerticalEnd = developerIntroductionLayoutBinding.developerNameTextView.height.toFloat(),
                                     gradientType = Gradient.VerticalGradient)
 
-                                developerIntroductionLayoutBinding.developerNameTextView.setShadowLayer(developerIntroductionLayoutBinding.developerNameTextView.shadowRadius, developerIntroductionLayoutBinding.developerNameTextView.shadowDx, developerIntroductionLayoutBinding.developerNameTextView.shadowDy, getColor(R.color.light_transparent_high))
+                                developerIntroductionLayoutBinding.developerNameTextView.setShadowLayer(developerIntroductionLayoutBinding.developerNameTextView.shadowRadius, developerIntroductionLayoutBinding.developerNameTextView.shadowDx, developerIntroductionLayoutBinding.developerNameTextView.shadowDy, getColor(R.color.light_transparent))
 
                             }
                         }
