@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 5:38 AM
+ * Last modified 7/17/21, 8:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,7 +35,7 @@ class DeveloperLiveData : ViewModel() {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
     }
 
-    fun prepareDeveloperProducts(csvOfProductsIds: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun prepareDeveloperProductsApplications(csvOfProductsIds: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
 
@@ -47,10 +47,10 @@ class DeveloperLiveData : ViewModel() {
 
         for (indexContent in 0 until jsonArrayOfProducts.length()) {
 
-            val featuredContentJsonObject: JSONObject = jsonArrayOfProducts[indexContent] as JSONObject
+            val applicationsContentJsonObject: JSONObject = jsonArrayOfProducts[indexContent] as JSONObject
 
             /* Start - Images */
-            val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+            val featuredContentImages: JSONArray = applicationsContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
             val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
             val productCover: String? = try {
@@ -61,7 +61,7 @@ class DeveloperLiveData : ViewModel() {
             /* End - Images */
 
             /* Start - Primary Category */
-            val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
+            val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
 
             var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
                 ProductsContentKey.NameKey)
@@ -82,7 +82,7 @@ class DeveloperLiveData : ViewModel() {
             /* End - Primary Category */
 
             /* Start - Attributes */
-            val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+            val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
             val attributesMap = HashMap<String, String>()
 
@@ -97,18 +97,103 @@ class DeveloperLiveData : ViewModel() {
             /* End - Attributes */
 
             storefrontAllContents.add(StorefrontContentsData(
-                productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
-                productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
+                productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
                 productCategoryName = productCategory,
-                productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                 productIconLink = productIcon,
                 productCoverLink = productCover,
                 productAttributes = attributesMap
             ))
 
-            Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${featuredContentJsonObject.getString(
+            println(">>> >> > " + applicationsContentJsonObject.getString(ProductsContentKey.NameKey))
+
+            Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
+                ProductsContentKey.NameKey)}")
+        }
+
+        developerProductsApplications.postValue(storefrontAllContents)
+
+    }
+
+    fun prepareDeveloperProductsGames(csvOfProductsIds: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
+
+        val jsonOfProducts = URL(severalProductsByIdsEndpoint).readText(Charset.defaultCharset())
+
+        val jsonArrayOfProducts = JSONArray(jsonOfProducts)
+
+        val storefrontAllContents = ArrayList<StorefrontContentsData>()
+
+        for (indexContent in 0 until jsonArrayOfProducts.length()) {
+
+            val applicationsContentJsonObject: JSONObject = jsonArrayOfProducts[indexContent] as JSONObject
+
+            /* Start - Images */
+            val featuredContentImages: JSONArray = applicationsContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+
+            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            val productCover: String? = try {
+                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            } catch (e: Exception) {
+                null
+            }
+            /* End - Images */
+
+            /* Start - Primary Category */
+            val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
+
+            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
+                ProductsContentKey.NameKey)
+
+            for (indexCategory in 0 until productCategories.length()) {
+
+                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(
+                    ProductsContentKey.NameKey).split(" ")[0]
+
+                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+
+                    productCategory = (productCategories[indexCategory] as JSONObject).getString(
+                        ProductsContentKey.NameKey)
+
+                }
+
+            }
+            /* End - Primary Category */
+
+            /* Start - Attributes */
+            val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+
+            val attributesMap = HashMap<String, String>()
+
+            for (indexAttribute in 0 until featuredContentAttributes.length()) {
+
+                val attributesJsonObject: JSONObject = featuredContentAttributes[indexAttribute] as JSONObject
+
+                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] = attributesJsonObject.getJSONArray(
+                    ProductsContentKey.AttributeOptionsKey)[0].toString()
+
+            }
+            /* End - Attributes */
+
+            storefrontAllContents.add(StorefrontContentsData(
+                productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
+                productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                productCategoryName = productCategory,
+                productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                productIconLink = productIcon,
+                productCoverLink = productCover,
+                productAttributes = attributesMap
+            ))
+
+            println(">>> >> > " + applicationsContentJsonObject.getString(ProductsContentKey.NameKey))
+
+            Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
                 ProductsContentKey.NameKey)}")
         }
 

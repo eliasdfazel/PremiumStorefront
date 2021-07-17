@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 9:36 AM
+ * Last modified 7/17/21, 7:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,6 +64,11 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
 
             developerIntroductionLayoutBinding.developerDescriptionTextView.setTextColor(getColor(R.color.dark))
 
+            developerIntroductionLayoutBinding.productApplications.background = getDrawable(R.drawable.developer_products_background_light)
+            developerIntroductionLayoutBinding.productGames.background = getDrawable(R.drawable.developer_products_background_light)
+            developerIntroductionLayoutBinding.productBooks.background = getDrawable(R.drawable.developer_products_background_light)
+            developerIntroductionLayoutBinding.productMovies.background = getDrawable(R.drawable.developer_products_background_light)
+
         }
         ThemeType.ThemeDark -> {
 
@@ -90,6 +95,11 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
             developerIntroductionLayoutBinding.logoBackgroundColor.setBackgroundColor(getColor(R.color.premiumDark))
 
             developerIntroductionLayoutBinding.developerDescriptionTextView.setTextColor(getColor(R.color.light))
+
+            developerIntroductionLayoutBinding.productApplications.background = getDrawable(R.drawable.developer_products_background_dark)
+            developerIntroductionLayoutBinding.productGames.background = getDrawable(R.drawable.developer_products_background_dark)
+            developerIntroductionLayoutBinding.productBooks.background = getDrawable(R.drawable.developer_products_background_dark)
+            developerIntroductionLayoutBinding.productMovies.background = getDrawable(R.drawable.developer_products_background_dark)
 
         }
     }

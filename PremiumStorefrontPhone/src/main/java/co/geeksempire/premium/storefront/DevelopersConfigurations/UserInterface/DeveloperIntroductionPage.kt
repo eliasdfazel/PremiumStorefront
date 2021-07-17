@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 7:14 AM
+ * Last modified 7/17/21, 8:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -115,8 +115,8 @@ class DeveloperIntroductionPage : AppCompatActivity() {
                 })
                 .submit()
 
-            productsApplicationsId?.let { developerLiveData.prepareDeveloperProducts(it) }
-//            developerLiveData.prepareDeveloperProducts(productsGamesId)
+            productsApplicationsId?.let { developerLiveData.prepareDeveloperProductsApplications(it) }
+            productsGamesId?.let { developerLiveData.prepareDeveloperProductsGames(it) }
 //            developerLiveData.prepareDeveloperProducts(productsBooksId)
 //            developerLiveData.prepareDeveloperProducts(developerMoviesId)
 
@@ -189,6 +189,30 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                 if (it.isNotEmpty()) {
 
+                    if (developerIntroductionLayoutBinding.comingSoonView.isShown) {
+                        developerIntroductionLayoutBinding.comingSoonView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                        developerIntroductionLayoutBinding.comingSoonView.visibility = View.GONE
+                    }
+
+                    developerIntroductionLayoutBinding.productApplications.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    developerIntroductionLayoutBinding.productApplications.visibility = View.VISIBLE
+
+
+                }
+
+            })
+
+            developerLiveData.developerProductsGames.observe(this@DeveloperIntroductionPage, {
+
+                if (it.isNotEmpty()) {
+
+                    if (developerIntroductionLayoutBinding.comingSoonView.isShown) {
+                        developerIntroductionLayoutBinding.comingSoonView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                        developerIntroductionLayoutBinding.comingSoonView.visibility = View.GONE
+                    }
+
+                    developerIntroductionLayoutBinding.productGames.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    developerIntroductionLayoutBinding.productGames.visibility = View.VISIBLE
 
 
                 }
