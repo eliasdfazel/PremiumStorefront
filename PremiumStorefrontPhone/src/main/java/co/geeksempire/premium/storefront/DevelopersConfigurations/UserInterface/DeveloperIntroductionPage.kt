@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 8:10 AM
+ * Last modified 7/17/21, 10:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,6 +27,8 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DeveloperLiveData
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DevelopersDataKey
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Extensions.setupUserInterfaceDeveloperPage
+import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Products.Applications.ApplicationsShowcase
+import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Products.Games.GamesShowcase
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Animations.startTypingAnimation
 import co.geeksempire.premium.storefront.Utils.UI.Colors.Gradient
@@ -52,6 +54,15 @@ class DeveloperIntroductionPage : AppCompatActivity() {
         ThemePreferences(this@DeveloperIntroductionPage)
     }
 
+    lateinit var applicationsShowcase: ApplicationsShowcase
+
+    lateinit var gamesShowcase: GamesShowcase
+
+    var applicationsProductsAvailable = false
+    var gamesProductsAvailable = false
+    var booksProductsAvailable = false
+    var moviesProductsAvailable = false
+
     lateinit var developerIntroductionLayoutBinding: DeveloperIntroductionLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +75,10 @@ class DeveloperIntroductionPage : AppCompatActivity() {
             themePreferences.checkThemeLightDark().collect {
 
                 setupUserInterfaceDeveloperPage(it)
+
+                applicationsShowcase = ApplicationsShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, it)
+
+                gamesShowcase = GamesShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, it)
 
             }
 
@@ -194,9 +209,40 @@ class DeveloperIntroductionPage : AppCompatActivity() {
                         developerIntroductionLayoutBinding.comingSoonView.visibility = View.GONE
                     }
 
+                    applicationsProductsAvailable = true
+
                     developerIntroductionLayoutBinding.productApplications.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
                     developerIntroductionLayoutBinding.productApplications.visibility = View.VISIBLE
 
+                    developerIntroductionLayoutBinding.productApplications.setOnClickListener { view ->
+
+                        if (::applicationsShowcase.isLateinit) {
+
+                            applicationsShowcase.prepareToPresent(it)
+
+                            if (applicationsProductsAvailable) {
+                                developerIntroductionLayoutBinding.productApplications.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productApplications.visibility = View.GONE
+                            }
+
+                            if (gamesProductsAvailable) {
+                                developerIntroductionLayoutBinding.productGames.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productGames.visibility = View.GONE
+                            }
+
+                            if (booksProductsAvailable) {
+                                developerIntroductionLayoutBinding.productBooks.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productBooks.visibility = View.GONE
+                            }
+
+                            if (moviesProductsAvailable) {
+                                developerIntroductionLayoutBinding.productMovies.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productMovies.visibility = View.GONE
+                            }
+
+                        }
+
+                    }
 
                 }
 
@@ -211,9 +257,40 @@ class DeveloperIntroductionPage : AppCompatActivity() {
                         developerIntroductionLayoutBinding.comingSoonView.visibility = View.GONE
                     }
 
+                    gamesProductsAvailable = true
+
                     developerIntroductionLayoutBinding.productGames.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
                     developerIntroductionLayoutBinding.productGames.visibility = View.VISIBLE
 
+                    developerIntroductionLayoutBinding.productGames.setOnClickListener { view ->
+
+                        if (::gamesShowcase.isLateinit) {
+
+                            gamesShowcase.prepareToPresent(it)
+
+                            if (applicationsProductsAvailable) {
+                                developerIntroductionLayoutBinding.productApplications.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productApplications.visibility = View.GONE
+                            }
+
+                            if (gamesProductsAvailable) {
+                                developerIntroductionLayoutBinding.productGames.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productGames.visibility = View.GONE
+                            }
+
+                            if (booksProductsAvailable) {
+                                developerIntroductionLayoutBinding.productBooks.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productBooks.visibility = View.GONE
+                            }
+
+                            if (moviesProductsAvailable) {
+                                developerIntroductionLayoutBinding.productMovies.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                                developerIntroductionLayoutBinding.productMovies.visibility = View.GONE
+                            }
+
+                        }
+
+                    }
 
                 }
 
@@ -236,8 +313,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
         developerIntroductionLayoutBinding.goBackView.setOnClickListener {
 
-            overridePendingTransition(0, R.anim.slide_out_right)
-            this@DeveloperIntroductionPage.finish()
+            backButtonAction()
 
         }
 
@@ -245,8 +321,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
     override fun onBackPressed() {
 
-        overridePendingTransition(0, R.anim.slide_out_right)
-        this@DeveloperIntroductionPage.finish()
+        backButtonAction()
 
     }
 
@@ -288,6 +363,42 @@ class DeveloperIntroductionPage : AppCompatActivity() {
         developerIntroductionLayoutBinding.developerSocialMediaImageView.setOnClickListener {
 
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(developerSocialMedia)))
+
+        }
+
+    }
+
+    private fun backButtonAction() {
+
+        if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isShown) {
+
+            developerIntroductionLayoutBinding.productShowcaseRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+            developerIntroductionLayoutBinding.productShowcaseRecyclerView.visibility = View.GONE
+
+            if (applicationsProductsAvailable) {
+                developerIntroductionLayoutBinding.productApplications.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                developerIntroductionLayoutBinding.productApplications.visibility = View.VISIBLE
+            }
+
+            if (gamesProductsAvailable) {
+                developerIntroductionLayoutBinding.productGames.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                developerIntroductionLayoutBinding.productGames.visibility = View.VISIBLE
+            }
+
+            if (booksProductsAvailable) {
+                developerIntroductionLayoutBinding.productBooks.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                developerIntroductionLayoutBinding.productBooks.visibility = View.VISIBLE
+            }
+
+            if (moviesProductsAvailable) {
+                developerIntroductionLayoutBinding.productMovies.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                developerIntroductionLayoutBinding.productMovies.visibility = View.VISIBLE
+            }
+
+        } else {
+
+            overridePendingTransition(0, R.anim.slide_out_right)
+            this@DeveloperIntroductionPage.finish()
 
         }
 
