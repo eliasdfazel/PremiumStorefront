@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 8:45 AM
+ * Last modified 7/17/21, 5:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -103,7 +103,6 @@ dependencies {
     implementation project(path: ':CustomShapes')
     implementation project(path: ':LoadingSpin')
     implementation project(path: ':BalloonOptionsMenuLibrary')
-    implementation project(path: ':CircularPopupMenu')
 
 
     implementation 'com.google.android.play:core-ktx:1.8.1'
@@ -159,11 +158,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-functions-ktx'
 
 
-    implementation 'com.airbnb.android:lottie:3.7.0'
+    implementation 'com.airbnb.android:lottie:3.7.1'
 
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1-native-mt'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1-native-mt'
 
 
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
@@ -175,7 +174,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
 
-    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation 'org.jsoup:jsoup:1.14.1'
 
 
     testImplementation 'junit:junit:4.13.2'

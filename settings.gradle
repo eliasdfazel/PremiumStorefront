@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 1:53 PM
+ * Last modified 7/17/21, 5:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,4 +14,3 @@ include ':BlurryEffectLibrary'
 
 include ':PremiumStorefrontPhone'
 rootProject.name = "Premium Storefront"
-include ':CircularPopupMenu'
