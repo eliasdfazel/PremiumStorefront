@@ -19,6 +19,7 @@ import android.os.Looper
 import android.text.Html
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.lifecycle.ViewModelProvider
@@ -324,6 +325,34 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        developerIntroductionLayoutBinding.productApplications.setOnLongClickListener {
+
+            Toast.makeText(applicationContext, it.contentDescription, Toast.LENGTH_LONG).show()
+
+            false
+        }
+
+        developerIntroductionLayoutBinding.productGames.setOnLongClickListener {
+
+            Toast.makeText(applicationContext, it.contentDescription, Toast.LENGTH_LONG).show()
+
+            false
+        }
+
+        developerIntroductionLayoutBinding.productBooks.setOnLongClickListener {
+
+            Toast.makeText(applicationContext, it.contentDescription, Toast.LENGTH_LONG).show()
+
+            false
+        }
+
+        developerIntroductionLayoutBinding.productMovies.setOnLongClickListener {
+
+            Toast.makeText(applicationContext, it.contentDescription, Toast.LENGTH_LONG).show()
+
+            false
+        }
 
         developerIntroductionLayoutBinding.goBackView.setOnClickListener {
 
