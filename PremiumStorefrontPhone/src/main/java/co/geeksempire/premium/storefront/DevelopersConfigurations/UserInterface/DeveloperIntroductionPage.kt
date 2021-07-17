@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 9:39 AM
+ * Last modified 7/17/21, 5:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,7 +58,6 @@ class DeveloperIntroductionPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         developerIntroductionLayoutBinding = DeveloperIntroductionLayoutBinding.inflate(layoutInflater)
         setContentView(developerIntroductionLayoutBinding.root)
-
 
         lifecycleScope.launch {
 
@@ -116,7 +115,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
                 })
                 .submit()
 
-//            developerLiveData.prepareDeveloperProducts(productsApplicationsId)
+            productsApplicationsId?.let { developerLiveData.prepareDeveloperProducts(it) }
 //            developerLiveData.prepareDeveloperProducts(productsGamesId)
 //            developerLiveData.prepareDeveloperProducts(productsBooksId)
 //            developerLiveData.prepareDeveloperProducts(developerMoviesId)
@@ -186,7 +185,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
             developerIntroductionLayoutBinding.developerDescriptionTextView.startTypingAnimation(developerDescription)
 
-            developerLiveData.developerProducts.observe(this@DeveloperIntroductionPage, {
+            developerLiveData.developerProductsApplications.observe(this@DeveloperIntroductionPage, {
 
                 if (it.isNotEmpty()) {
 

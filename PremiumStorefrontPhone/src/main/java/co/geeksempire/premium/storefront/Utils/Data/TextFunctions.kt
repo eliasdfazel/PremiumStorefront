@@ -2,13 +2,15 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/2/21, 2:48 PM
+ * Last modified 7/17/21, 5:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 package co.geeksempire.premium.storefront.Utils.Data
+
+import android.graphics.Paint
 
 fun generateHashTag(inputText: String) : String {
 
@@ -36,4 +38,12 @@ fun generatePassword(inputText: String) : String {
     }
 
     return passwordBuilder.toString()
+}
+
+fun String.widthOfText(textSize: Float) : Float {
+
+    val paint = Paint()
+    paint.textSize = textSize
+
+    return paint.measureText(this@widthOfText, 0, this@widthOfText.length)
 }

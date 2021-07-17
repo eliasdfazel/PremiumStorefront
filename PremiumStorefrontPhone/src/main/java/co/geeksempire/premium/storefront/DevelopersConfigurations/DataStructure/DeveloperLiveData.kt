@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/13/21, 1:55 PM
+ * Last modified 7/17/21, 5:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,11 @@ import java.nio.charset.Charset
 
 class DeveloperLiveData : ViewModel() {
 
-    val developerProducts: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
+    val developerProductsApplications: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
+        MutableLiveData<ArrayList<StorefrontContentsData>>()
+    }
+
+    val developerProductsGames: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
     }
 
@@ -108,7 +112,7 @@ class DeveloperLiveData : ViewModel() {
                 ProductsContentKey.NameKey)}")
         }
 
-        developerProducts.postValue(storefrontAllContents)
+        developerProductsApplications.postValue(storefrontAllContents)
 
     }
 
