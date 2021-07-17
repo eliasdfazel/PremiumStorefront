@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 11:21 AM
+ * Last modified 7/17/21, 11:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,6 +30,7 @@ import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Extensions.setupUserInterfaceDeveloperPage
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Products.Applications.ApplicationsShowcase
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Products.Games.GamesShowcase
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Animations.startTypingAnimation
 import co.geeksempire.premium.storefront.Utils.UI.Colors.Gradient
@@ -55,6 +56,10 @@ class DeveloperIntroductionPage : AppCompatActivity() {
         ThemePreferences(this@DeveloperIntroductionPage)
     }
 
+    val productDetailsFragment: ProductDetailsFragment by lazy {
+        ProductDetailsFragment()
+    }
+
     lateinit var applicationsShowcase: ApplicationsShowcase
 
     lateinit var gamesShowcase: GamesShowcase
@@ -77,9 +82,9 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                 setupUserInterfaceDeveloperPage(it)
 
-                applicationsShowcase = ApplicationsShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, it)
+                applicationsShowcase = ApplicationsShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, productDetailsFragment, it)
 
-                gamesShowcase = GamesShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, it)
+                gamesShowcase = GamesShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, productDetailsFragment, it)
 
             }
 
@@ -133,8 +138,8 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
             productsApplicationsId?.let { developerLiveData.prepareDeveloperProductsApplications(it) }
             productsGamesId?.let { developerLiveData.prepareDeveloperProductsGames(it) }
-//            developerLiveData.prepareDeveloperProducts(productsBooksId)
-//            developerLiveData.prepareDeveloperProducts(developerMoviesId)
+//            developerLiveData.prepareDeveloperProductsBooks(productsBooksId)
+//            developerLiveData.prepareDeveloperProductsMovies(developerMoviesId)
 
             Glide.with(applicationContext)
                 .asDrawable()
@@ -379,7 +384,15 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
     private fun backButtonAction() {
 
-        if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isShown) {
+        if (productDetailsFragment.isShowing) {
+
+            supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(0, R.anim.fade_out)
+                .remove(productDetailsFragment)
+                .commitNow()
+
+        } else if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isShown) {
 
             developerIntroductionLayoutBinding.productShowcaseRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
             developerIntroductionLayoutBinding.productShowcaseRecyclerView.visibility = View.GONE

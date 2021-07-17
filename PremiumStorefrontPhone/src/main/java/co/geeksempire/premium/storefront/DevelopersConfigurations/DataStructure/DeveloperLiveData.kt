@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 11:13 AM
+ * Last modified 7/17/21, 11:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,163 +37,171 @@ class DeveloperLiveData : ViewModel() {
 
     fun prepareDeveloperProductsApplications(csvOfProductsIds: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
+        if (csvOfProductsIds.isNotBlank()) {
 
-        val jsonOfProducts = URL(severalProductsByIdsEndpoint).readText(Charset.defaultCharset())
+            val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
 
-        val jsonArrayOfProducts = JSONArray(jsonOfProducts)
+            val jsonOfProducts = URL(severalProductsByIdsEndpoint).readText(Charset.defaultCharset())
 
-        val storefrontAllContents = ArrayList<StorefrontContentsData>()
+            val jsonArrayOfProducts = JSONArray(jsonOfProducts)
 
-        for (indexContent in 0 until jsonArrayOfProducts.length()) {
+            val storefrontAllContents = ArrayList<StorefrontContentsData>()
 
-            val applicationsContentJsonObject: JSONObject = jsonArrayOfProducts[indexContent] as JSONObject
+            for (indexContent in 0 until jsonArrayOfProducts.length()) {
 
-            /* Start - Images */
-            val featuredContentImages: JSONArray = applicationsContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+                val applicationsContentJsonObject: JSONObject = jsonArrayOfProducts[indexContent] as JSONObject
 
-            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-            val productCover: String? = try {
-                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-            } catch (e: Exception) {
-                null
-            }
-            /* End - Images */
+                /* Start - Images */
+                val featuredContentImages: JSONArray = applicationsContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
-            /* Start - Primary Category */
-            val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
+                val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+                val productCover: String? = try {
+                    (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+                } catch (e: Exception) {
+                    null
+                }
+                /* End - Images */
 
-            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
-                ProductsContentKey.NameKey)
+                /* Start - Primary Category */
+                val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
 
-            for (indexCategory in 0 until productCategories.length()) {
+                var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
+                    ProductsContentKey.NameKey)
 
-                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(
-                    ProductsContentKey.NameKey).split(" ")[0]
+                for (indexCategory in 0 until productCategories.length()) {
 
-                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+                    val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(
+                        ProductsContentKey.NameKey).split(" ")[0]
 
-                    productCategory = (productCategories[indexCategory] as JSONObject).getString(
-                        ProductsContentKey.NameKey)
+                    if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+
+                        productCategory = (productCategories[indexCategory] as JSONObject).getString(
+                            ProductsContentKey.NameKey)
+
+                    }
 
                 }
+                /* End - Primary Category */
 
+                /* Start - Attributes */
+                val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+
+                val attributesMap = HashMap<String, String>()
+
+                for (indexAttribute in 0 until featuredContentAttributes.length()) {
+
+                    val attributesJsonObject: JSONObject = featuredContentAttributes[indexAttribute] as JSONObject
+
+                    attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] = attributesJsonObject.getJSONArray(
+                        ProductsContentKey.AttributeOptionsKey)[0].toString()
+
+                }
+                /* End - Attributes */
+
+                storefrontAllContents.add(StorefrontContentsData(
+                    productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
+                    productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                    productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                    productCategoryName = productCategory,
+                    productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                    productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                    productIconLink = productIcon,
+                    productCoverLink = productCover,
+                    productAttributes = attributesMap
+                ))
+
+                Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
+                    ProductsContentKey.NameKey)}")
             }
-            /* End - Primary Category */
 
-            /* Start - Attributes */
-            val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+            developerProductsApplications.postValue(storefrontAllContents)
 
-            val attributesMap = HashMap<String, String>()
-
-            for (indexAttribute in 0 until featuredContentAttributes.length()) {
-
-                val attributesJsonObject: JSONObject = featuredContentAttributes[indexAttribute] as JSONObject
-
-                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] = attributesJsonObject.getJSONArray(
-                    ProductsContentKey.AttributeOptionsKey)[0].toString()
-
-            }
-            /* End - Attributes */
-
-            storefrontAllContents.add(StorefrontContentsData(
-                productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
-                productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                productCategoryName = productCategory,
-                productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
-                productIconLink = productIcon,
-                productCoverLink = productCover,
-                productAttributes = attributesMap
-            ))
-
-            Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
-                ProductsContentKey.NameKey)}")
         }
-
-        developerProductsApplications.postValue(storefrontAllContents)
 
     }
 
     fun prepareDeveloperProductsGames(csvOfProductsIds: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
+        if (csvOfProductsIds.isNotBlank()) {
 
-        val jsonOfProducts = URL(severalProductsByIdsEndpoint).readText(Charset.defaultCharset())
+            val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
 
-        val jsonArrayOfProducts = JSONArray(jsonOfProducts)
+            val jsonOfProducts = URL(severalProductsByIdsEndpoint).readText(Charset.defaultCharset())
 
-        val storefrontAllContents = ArrayList<StorefrontContentsData>()
+            val jsonArrayOfProducts = JSONArray(jsonOfProducts)
 
-        for (indexContent in 0 until jsonArrayOfProducts.length()) {
+            val storefrontAllContents = ArrayList<StorefrontContentsData>()
 
-            val applicationsContentJsonObject: JSONObject = jsonArrayOfProducts[indexContent] as JSONObject
+            for (indexContent in 0 until jsonArrayOfProducts.length()) {
 
-            /* Start - Images */
-            val featuredContentImages: JSONArray = applicationsContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+                val applicationsContentJsonObject: JSONObject = jsonArrayOfProducts[indexContent] as JSONObject
 
-            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-            val productCover: String? = try {
-                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-            } catch (e: Exception) {
-                null
-            }
-            /* End - Images */
+                /* Start - Images */
+                val featuredContentImages: JSONArray = applicationsContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
-            /* Start - Primary Category */
-            val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
+                val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+                val productCover: String? = try {
+                    (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+                } catch (e: Exception) {
+                    null
+                }
+                /* End - Images */
 
-            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
-                ProductsContentKey.NameKey)
+                /* Start - Primary Category */
+                val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
 
-            for (indexCategory in 0 until productCategories.length()) {
+                var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
+                    ProductsContentKey.NameKey)
 
-                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(
-                    ProductsContentKey.NameKey).split(" ")[0]
+                for (indexCategory in 0 until productCategories.length()) {
 
-                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+                    val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(
+                        ProductsContentKey.NameKey).split(" ")[0]
 
-                    productCategory = (productCategories[indexCategory] as JSONObject).getString(
-                        ProductsContentKey.NameKey)
+                    if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+
+                        productCategory = (productCategories[indexCategory] as JSONObject).getString(
+                            ProductsContentKey.NameKey)
+
+                    }
 
                 }
+                /* End - Primary Category */
 
+                /* Start - Attributes */
+                val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+
+                val attributesMap = HashMap<String, String>()
+
+                for (indexAttribute in 0 until featuredContentAttributes.length()) {
+
+                    val attributesJsonObject: JSONObject = featuredContentAttributes[indexAttribute] as JSONObject
+
+                    attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] = attributesJsonObject.getJSONArray(
+                        ProductsContentKey.AttributeOptionsKey)[0].toString()
+
+                }
+                /* End - Attributes */
+
+                storefrontAllContents.add(StorefrontContentsData(
+                    productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
+                    productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                    productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                    productCategoryName = productCategory,
+                    productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                    productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                    productIconLink = productIcon,
+                    productCoverLink = productCover,
+                    productAttributes = attributesMap
+                ))
+
+                Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
+                    ProductsContentKey.NameKey)}")
             }
-            /* End - Primary Category */
 
-            /* Start - Attributes */
-            val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+            developerProductsGames.postValue(storefrontAllContents)
 
-            val attributesMap = HashMap<String, String>()
-
-            for (indexAttribute in 0 until featuredContentAttributes.length()) {
-
-                val attributesJsonObject: JSONObject = featuredContentAttributes[indexAttribute] as JSONObject
-
-                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] = attributesJsonObject.getJSONArray(
-                    ProductsContentKey.AttributeOptionsKey)[0].toString()
-
-            }
-            /* End - Attributes */
-
-            storefrontAllContents.add(StorefrontContentsData(
-                productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
-                productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                productCategoryName = productCategory,
-                productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
-                productIconLink = productIcon,
-                productCoverLink = productCover,
-                productAttributes = attributesMap
-            ))
-
-            Log.d(this@DeveloperLiveData.javaClass.simpleName, "All Products: ${applicationsContentJsonObject.getString(
-                ProductsContentKey.NameKey)}")
         }
-
-        developerProductsGames.postValue(storefrontAllContents)
 
     }
 

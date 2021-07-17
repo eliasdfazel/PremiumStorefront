@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 11:22 AM
+ * Last modified 7/17/21, 11:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,11 +24,8 @@ import kotlinx.coroutines.*
 class GamesShowcase (private val context: AppCompatActivity,
                      private val productShowcaseRecyclerView: RecyclerView,
                      private val contentDetailsContainer: FragmentContainerView,
+                     private val productDetailsFragment: ProductDetailsFragment,
                      private val themeType: Boolean) : FragmentInterface {
-
-    val productDetailsFragment: ProductDetailsFragment by lazy {
-        ProductDetailsFragment()
-    }
 
     val allContentAdapter: AllContentAdapter by lazy {
         AllContentAdapter(context = context,
