@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 11:08 AM
+ * Last modified 7/17/21, 11:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,24 +37,19 @@ class GamesShowcase (private val context: AppCompatActivity,
             fragmentInterface = this@GamesShowcase)
     }
 
-    init {
-
-        productShowcaseRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
-
-        productShowcaseRecyclerView.adapter = allContentAdapter
-
-    }
-
-    fun prepareToPresent(gamesList: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun prepareToPresent(applicationsList: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         allContentAdapter.storefrontContents.clear()
 
-        allContentAdapter.storefrontContents.addAll(gamesList)
+        allContentAdapter.storefrontContents.addAll(applicationsList)
 
         withContext(Dispatchers.Main) {
 
+            productShowcaseRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
+
             allContentAdapter.themeType = this@GamesShowcase.themeType
 
+            productShowcaseRecyclerView.adapter = allContentAdapter
             allContentAdapter.notifyDataSetChanged()
 
         }
