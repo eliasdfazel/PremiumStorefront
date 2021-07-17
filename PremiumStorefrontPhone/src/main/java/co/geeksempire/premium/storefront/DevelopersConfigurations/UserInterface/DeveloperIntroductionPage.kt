@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 10:55 AM
+ * Last modified 7/17/21, 10:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import android.text.Html
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
@@ -218,6 +219,10 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                         if (::applicationsShowcase.isLateinit) {
 
+                            if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isGone) {
+                                developerIntroductionLayoutBinding.productShowcaseRecyclerView.visibility = View.VISIBLE
+                            }
+
                             applicationsShowcase.prepareToPresent(it)
 
                             if (applicationsProductsAvailable) {
@@ -265,6 +270,10 @@ class DeveloperIntroductionPage : AppCompatActivity() {
                     developerIntroductionLayoutBinding.productGames.setOnClickListener { view ->
 
                         if (::gamesShowcase.isLateinit) {
+
+                            if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isGone) {
+                                developerIntroductionLayoutBinding.productShowcaseRecyclerView.visibility = View.VISIBLE
+                            }
 
                             gamesShowcase.prepareToPresent(it)
 

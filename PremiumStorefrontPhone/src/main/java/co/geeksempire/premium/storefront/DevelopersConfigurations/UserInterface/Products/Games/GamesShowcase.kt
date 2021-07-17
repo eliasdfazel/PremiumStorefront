@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 10:52 AM
+ * Last modified 7/17/21, 10:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,9 +10,7 @@
 
 package co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Products.Games
 
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
@@ -40,10 +38,6 @@ class GamesShowcase (private val context: AppCompatActivity,
     }
 
     init {
-
-        if (productShowcaseRecyclerView.isGone) {
-            productShowcaseRecyclerView.visibility = View.VISIBLE
-        }
 
         productShowcaseRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
 
