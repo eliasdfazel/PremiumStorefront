@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 8:48 AM
+ * Last modified 7/19/21, 9:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,7 +82,7 @@ object ProductDataKey {
  **/
 @Keep
 data class StorefrontContentsData (var productName: String, var productDescription: String, var productSummary: String,
-                                   var productCategoryName: String, var productCategoryId: Int = 15,
+                                   var productCategoryName: String, var productCategoryId: Int,
                                    var productIconLink: String, var productCoverLink: String?,
                                    var productPrice: String,
                                    var productSalePrice: String,

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 8:19 AM
+ * Last modified 7/19/21, 9:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -142,7 +142,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
         intent?.let { inputData ->
 
-            val categoryId = inputData.getIntExtra(CategoriesDataKeys.CategoryId, 67)
+            val categoryId = inputData.getIntExtra(CategoriesDataKeys.CategoryId, 15)
 
             productsOfCategory.retrieveProductsOfCategory(categoryId)
 

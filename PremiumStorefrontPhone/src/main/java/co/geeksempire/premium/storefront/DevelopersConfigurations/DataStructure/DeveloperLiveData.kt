@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 11:26 AM
+ * Last modified 7/19/21, 9:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,18 +65,21 @@ class DeveloperLiveData : ViewModel() {
                 /* Start - Primary Category */
                 val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
 
-                var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
-                    ProductsContentKey.NameKey)
+                var productCategory = (productCategories[productCategories.length() - 1] as JSONObject)
+
+                var productCategoryName = "All Products"
+                var productCategoryId = 15
 
                 for (indexCategory in 0 until productCategories.length()) {
 
-                    val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(
-                        ProductsContentKey.NameKey).split(" ")[0]
+                    val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                    if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+                    if (textCheckpoint != "All" && textCheckpoint != "Quick") {
 
-                        productCategory = (productCategories[indexCategory] as JSONObject).getString(
-                            ProductsContentKey.NameKey)
+                        productCategory = (productCategories[indexCategory] as JSONObject)
+
+                        productCategoryName = productCategory.getString(ProductsContentKey.NameKey)
+                        productCategoryId = productCategory.getInt(ProductsContentKey.IdKey)
 
                     }
 
@@ -102,7 +105,8 @@ class DeveloperLiveData : ViewModel() {
                     productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
                     productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                     productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                    productCategoryName = productCategory,
+                    productCategoryName = productCategoryName,
+                    productCategoryId = productCategoryId,
                     productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
                     productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                     productIconLink = productIcon,
@@ -150,18 +154,21 @@ class DeveloperLiveData : ViewModel() {
                 /* Start - Primary Category */
                 val productCategories = applicationsContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
 
-                var productCategory = (productCategories[productCategories.length() - 1] as JSONObject).getString(
-                    ProductsContentKey.NameKey)
+                var productCategory = (productCategories[productCategories.length() - 1] as JSONObject)
+
+                var productCategoryName = "All Products"
+                var productCategoryId = 15
 
                 for (indexCategory in 0 until productCategories.length()) {
 
-                    val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(
-                        ProductsContentKey.NameKey).split(" ")[0]
+                    val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                    if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+                    if (textCheckpoint != "All" && textCheckpoint != "Quick") {
 
-                        productCategory = (productCategories[indexCategory] as JSONObject).getString(
-                            ProductsContentKey.NameKey)
+                        productCategory = (productCategories[indexCategory] as JSONObject)
+
+                        productCategoryName = productCategory.getString(ProductsContentKey.NameKey)
+                        productCategoryId = productCategory.getInt(ProductsContentKey.IdKey)
 
                     }
 
@@ -187,7 +194,8 @@ class DeveloperLiveData : ViewModel() {
                     productName = applicationsContentJsonObject.getString(ProductsContentKey.NameKey),
                     productDescription = applicationsContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                     productSummary = applicationsContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                    productCategoryName = productCategory,
+                    productCategoryName = productCategoryName,
+                    productCategoryId = productCategoryId,
                     productPrice = applicationsContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
                     productSalePrice = applicationsContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                     productIconLink = productIcon,

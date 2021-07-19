@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/14/21, 7:58 AM
+ * Last modified 7/19/21, 9:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -307,7 +307,7 @@ class ProductDetailsFragment : Fragment() {
                 productDetailsLayoutBinding.categoryIconImageView.setOnClickListener {
 
                     requireContext().startActivity(Intent(requireContext(), CategoryDetails::class.java).apply {
-                        putExtra(CategoriesDataKeys.CategoryId, getString(ProductDataKey.ProductCategoryId))
+                        putExtra(CategoriesDataKeys.CategoryId, getInt(ProductDataKey.ProductCategoryId))
                         putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
                         putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
                     }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
@@ -317,7 +317,7 @@ class ProductDetailsFragment : Fragment() {
                 productDetailsLayoutBinding.categoryNameTextView.setOnClickListener {
 
                     requireContext().startActivity(Intent(requireContext(), CategoryDetails::class.java).apply {
-                        putExtra(CategoriesDataKeys.CategoryId, getString(ProductDataKey.ProductCategoryId))
+                        putExtra(CategoriesDataKeys.CategoryId, getInt(ProductDataKey.ProductCategoryId))
                         putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
                         putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
                     }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
