@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 7:56 AM
+ * Last modified 7/19/21, 8:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,6 +62,9 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
 
             developerIntroductionLayoutBinding.logoBackgroundColor.setBackgroundColor(getColor(R.color.premiumLight))
 
+            developerIntroductionLayoutBinding.contentBlurView.setOverlayColor(getColor(R.color.premiumLightTransparent))
+            developerIntroductionLayoutBinding.contentBlurView.setSecondOverlayColor(getColor(R.color.premiumLight))
+
             developerIntroductionLayoutBinding.developerDescriptionTextView.setTextColor(getColor(R.color.dark))
 
             developerIntroductionLayoutBinding.productApplications.background = getDrawable(R.drawable.developer_products_background_light)
@@ -93,6 +96,9 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
             developerIntroductionLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_dark))
 
             developerIntroductionLayoutBinding.logoBackgroundColor.setBackgroundColor(getColor(R.color.premiumDark))
+
+            developerIntroductionLayoutBinding.contentBlurView.setOverlayColor(getColor(R.color.premiumDarkTransparent))
+            developerIntroductionLayoutBinding.contentBlurView.setSecondOverlayColor(getColor(R.color.premiumDark))
 
             developerIntroductionLayoutBinding.developerDescriptionTextView.setTextColor(getColor(R.color.light))
 

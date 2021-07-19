@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/17/21, 11:34 AM
+  ~ Last modified 7/19/21, 8:40 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -26,6 +26,7 @@
         android:tint="@color/dark"
         android:alpha="0.03"
         android:src="@drawable/premium_storefront_logo"
+        android:elevation="1dp"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"/>
@@ -66,6 +67,106 @@
         apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"
         apps:layout_constraintStart_toStartOf="parent"/>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="13dp"
+        android:cacheColorHint="@android:color/transparent"
+
+        apps:layout_constraintTop_toBottomOf="@id/developerCoverImageView"
+        apps:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="151dp"
+            android:paddingBottom="47dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productApplications"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="31dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/applicationsSectionColor"
+                android:background="@drawable/developer_products_background_light"
+                android:src="@drawable/applications_icon"
+                android:visibility="gone"
+                android:contentDescription="@string/applicationsSectionText"
+
+                apps:layout_constraintHorizontal_bias="0.13"
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productGames"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="29dp"
+                android:scaleType="fitCenter"
+                android:background="@drawable/developer_products_background_light"
+                android:tint="@color/gamesSectionColor"
+                android:src="@drawable/games_icon"
+                android:visibility="gone"
+                android:contentDescription="@string/gamesSectionText"
+
+                apps:layout_constraintHorizontal_bias="0.87"
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productBooks"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="29dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/booksSectionColor"
+                android:background="@drawable/developer_products_background_light"
+                android:src="@drawable/books_icon"
+                android:visibility="gone"
+                android:contentDescription="@string/booksSectionText"
+
+                apps:layout_constraintHorizontal_bias="0.13"
+                apps:layout_constraintTop_toBottomOf="@id/productApplications"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productMovies"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="35dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/moviesSectionColor"
+                android:background="@drawable/developer_products_background_light"
+                android:src="@drawable/movies_icon"
+                android:visibility="gone"
+                android:contentDescription="@string/moviesSectionText"
+
+                apps:layout_constraintHorizontal_bias="0.87"
+                apps:layout_constraintTop_toBottomOf="@id/productGames"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productShowcaseRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="13dp"
+                android:layoutAnimation="@anim/fade_in_layout_animation"
+                android:visibility="gone"
+
+                apps:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:layout_width="match_parent"
         android:layout_height="51dp"
@@ -75,7 +176,7 @@
         apps:realtimeBlurGradientType="none"
         apps:realtimeFirstColor="@color/light_transparent_higher"
 
-        apps:layout_constraintBottom_toBottomOf="@id/developerCoverImageView"/>
+        apps:layout_constraintTop_toTopOf="@id/developerLogoImageView"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logoBackground"
@@ -175,12 +276,13 @@
         android:gravity="center_vertical"
         android:text="Geeks Empire"
         android:textSize="53sp"
-        android:shadowRadius="7"
+        android:shadowRadius="19"
         android:shadowColor="@color/dark_transparent"
         android:shadowDy="3"
         android:shadowDx="3"
         android:fontFamily="@font/upcil"
-        android:visibility="invisible"
+        android:visibility="visible"
+        android:elevation="7dp"
 
         apps:layout_constraintTop_toBottomOf="@id/developerLogoImageView"
         apps:layout_constraintStart_toStartOf="@id/developerLogoImageView"
@@ -199,109 +301,24 @@
         android:textColor="@color/dark"
         android:lineSpacingExtra="1.7dp"
         android:fontFamily="@font/upcil"
+        android:elevation="7dp"
 
         apps:layout_constraintTop_toBottomOf="@id/developerNameTextView"
         apps:layout_constraintStart_toStartOf="@id/developerLogoImageView"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
-    <androidx.core.widget.NestedScrollView
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/contentBlurView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="none"
-        android:fadingEdge="vertical"
-        android:requiresFadingEdge="vertical"
-        android:fadingEdgeLength="13dp"
-        android:cacheColorHint="@android:color/transparent"
 
-        apps:layout_constraintTop_toBottomOf="@id/developerDescriptionTextView"
-        apps:layout_constraintBottom_toBottomOf="parent">
+        apps:realtimeBlurRadius="23dp"
+        apps:realtimeBlurGradientType="linear"
+        apps:realtimeFirstColor="@color/premiumLightTransparent"
+        apps:realtimeSecondColor="@color/premiumLight"
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="47dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/productApplications"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:padding="31dp"
-                android:scaleType="fitCenter"
-                android:tint="@color/applicationsSectionColor"
-                android:background="@drawable/developer_products_background_light"
-                android:src="@drawable/applications_icon"
-                android:visibility="gone"
-                android:contentDescription="@string/applicationsSectionText"
-
-                apps:layout_constraintHorizontal_bias="0.13"
-                apps:layout_constraintTop_toTopOf="parent"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/productGames"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:padding="29dp"
-                android:scaleType="fitCenter"
-                android:background="@drawable/developer_products_background_light"
-                android:tint="@color/gamesSectionColor"
-                android:src="@drawable/games_icon"
-                android:visibility="gone"
-                android:contentDescription="@string/gamesSectionText"
-
-                apps:layout_constraintHorizontal_bias="0.87"
-                apps:layout_constraintTop_toTopOf="parent"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/productBooks"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:padding="29dp"
-                android:scaleType="fitCenter"
-                android:tint="@color/booksSectionColor"
-                android:background="@drawable/developer_products_background_light"
-                android:src="@drawable/books_icon"
-                android:visibility="gone"
-                android:contentDescription="@string/booksSectionText"
-
-                apps:layout_constraintHorizontal_bias="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/productApplications"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/productMovies"
-                android:layout_width="159dp"
-                android:layout_height="159dp"
-                android:padding="35dp"
-                android:scaleType="fitCenter"
-                android:tint="@color/moviesSectionColor"
-                android:background="@drawable/developer_products_background_light"
-                android:src="@drawable/movies_icon"
-                android:visibility="gone"
-                android:contentDescription="@string/moviesSectionText"
-
-                apps:layout_constraintHorizontal_bias="0.87"
-                apps:layout_constraintTop_toBottomOf="@id/productGames"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/productShowcaseRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="13dp"
-                android:layoutAnimation="@anim/fade_in_layout_animation"
-                android:visibility="gone"
-
-                apps:layout_constraintTop_toTopOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        apps:layout_constraintTop_toTopOf="@id/developerNameTextView"
+        apps:layout_constraintBottom_toBottomOf="@id/developerDescriptionTextView"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/comingSoonView"
