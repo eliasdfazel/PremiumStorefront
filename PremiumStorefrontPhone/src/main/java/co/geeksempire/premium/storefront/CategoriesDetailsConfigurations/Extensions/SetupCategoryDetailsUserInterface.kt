@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 6:47 AM
+ * Last modified 7/19/21, 1:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,6 +62,10 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.categoryIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             categoryDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
+            categoryDetailsLayoutBinding.uniqueNestedScrollView.background = getDrawable(R.drawable.unique_section_background_light)
+
+            categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_light)
+
         }
         ThemeType.ThemeDark -> {
 
@@ -91,6 +95,10 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.categoryIconImageView.background = getDrawable(R.drawable.squircle_icon_dark)
             categoryDetailsLayoutBinding.categoryIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.dark))
             categoryDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
+
+            categoryDetailsLayoutBinding.uniqueNestedScrollView.background = getDrawable(R.drawable.unique_section_background_dark)
+
+            categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_dark)
 
         }
         else -> {
@@ -127,6 +135,10 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.categoryIconImageView.background = getDrawable(R.drawable.squircle_icon_light)
             categoryDetailsLayoutBinding.categoryIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             categoryDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
+
+            categoryDetailsLayoutBinding.uniqueNestedScrollView.background = getDrawable(R.drawable.unique_section_background_light)
+
+            categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_light)
 
         }
     }
