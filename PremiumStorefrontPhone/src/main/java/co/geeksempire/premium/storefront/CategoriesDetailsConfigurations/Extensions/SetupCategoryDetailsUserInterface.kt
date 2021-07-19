@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 1:51 PM
+ * Last modified 7/19/21, 2:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
 
 fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = ThemeType.ThemeLight) {
 
@@ -141,6 +142,16 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_light)
 
         }
+    }
+
+    ShadowAnimation().apply {
+
+        textShadowValueAnimatorLoop(view = categoryDetailsLayoutBinding.uniqueRecommendationTextView,
+            startValue = 0f, endValue = categoryDetailsLayoutBinding.uniqueRecommendationTextView.shadowRadius,
+            startDuration = 1357, endDuration = 579,
+            shadowColor = categoryDetailsLayoutBinding.uniqueRecommendationTextView.shadowColor, shadowX = 0f, shadowY = 0f,
+            numberOfLoop = 13)
+
     }
 
 }

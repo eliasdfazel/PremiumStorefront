@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:03 PM
+ * Last modified 7/19/21, 2:22 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStr
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.Extensions.setupCategoryDetailsUserInterface
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations.ProductsOfCategory
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.UniqueRecommendationsCategoryAdapter
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
@@ -29,6 +30,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.CategoryDetailsLayoutBinding
 import com.bumptech.glide.Glide
@@ -55,6 +57,10 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
         ProductsOfCategoryAdapter(this@CategoryDetails)
     }
 
+    val uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter by lazy {
+        UniqueRecommendationsCategoryAdapter(this@CategoryDetails)
+    }
+
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(applicationContext)
     }
@@ -79,8 +85,8 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
             categoryDetailsLayoutBinding.productsOfCategoryRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             categoryDetailsLayoutBinding.productsOfCategoryRecyclerView.adapter = productsOfCategoryAdapter
 
-            categoryDetailsLayoutBinding.uniqueRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
-            categoryDetailsLayoutBinding.uniqueRecyclerView.adapter = productsOfCategoryAdapter
+            categoryDetailsLayoutBinding.uniqueRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL,false)
+            categoryDetailsLayoutBinding.uniqueRecyclerView.adapter = uniqueRecommendationsCategoryAdapter
 
             lifecycleScope.launch {
 
