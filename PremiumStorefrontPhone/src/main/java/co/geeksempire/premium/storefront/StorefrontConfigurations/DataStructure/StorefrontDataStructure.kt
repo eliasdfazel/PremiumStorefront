@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 9:21 AM
+ * Last modified 7/19/21, 8:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -90,4 +90,4 @@ data class StorefrontContentsData (var productName: String, var productDescripti
                                    var installViewText: String = "Install Now")
 
 @Keep
-data class StorefrontCategoriesData(var categoryId: Long, var categoryName: String, var categoryIconLink: String, var selectedCategory: Boolean = false)
+data class StorefrontCategoriesData(var categoryId: Int, var categoryName: String, var categoryIconLink: String, var selectedCategory: Boolean = false)

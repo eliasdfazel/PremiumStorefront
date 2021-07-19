@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/7/21, 10:48 AM
+ * Last modified 7/19/21, 8:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -526,7 +526,7 @@ class StorefrontLiveData : ViewModel() {
 
             val categoryJsonObject: JSONObject = allContentJsonArray[indexContent] as JSONObject
 
-            val categoryId = categoryJsonObject.getLong(ProductsContentKey.IdKey)
+            val categoryId = categoryJsonObject.getInt(ProductsContentKey.IdKey)
 
             val categoryName = categoryJsonObject.getString(ProductsContentKey.NameKey)
 
@@ -540,7 +540,7 @@ class StorefrontLiveData : ViewModel() {
                     categoryIconLink = categoryIconLink
             ))
 
-            Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Name: ${categoryName}")
+            Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Id: ${categoryId} | Category Name: ${categoryName}")
         }
 
         categoriesItemData.postValue(storefrontCategoriesData)
