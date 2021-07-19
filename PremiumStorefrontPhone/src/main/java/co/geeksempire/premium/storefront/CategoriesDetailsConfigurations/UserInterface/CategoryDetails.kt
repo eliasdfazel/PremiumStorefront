@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:22 PM
+ * Last modified 7/19/21, 2:54 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,7 +44,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
     }
 
     val productsOfCategory: ProductsOfCategory by lazy {
-        ProductsOfCategory(applicationContext, productsOfCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
+        ProductsOfCategory(applicationContext, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
     }
 
     val generalEndpoint: GeneralEndpoint = GeneralEndpoint()

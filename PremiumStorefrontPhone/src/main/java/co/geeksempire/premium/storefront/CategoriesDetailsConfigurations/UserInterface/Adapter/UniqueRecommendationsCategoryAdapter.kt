@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:03 PM
+ * Last modified 7/19/21, 2:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
-import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.ViewHolder.ProductsOfCategoryViewHolder
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.ViewHolder.UniqueRecommendationsCategoryViewHolder
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
@@ -36,7 +36,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<ProductsOfCategoryViewHolder>() {
+class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<UniqueRecommendationsCategoryViewHolder>() {
 
     val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
@@ -45,84 +45,84 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
         return storefrontContents.size
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : ProductsOfCategoryViewHolder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : UniqueRecommendationsCategoryViewHolder {
 
-        return ProductsOfCategoryViewHolder(LayoutInflater.from(context).inflate(R.layout.products_of_category_item, viewGroup, false))
+        return UniqueRecommendationsCategoryViewHolder(LayoutInflater.from(context).inflate(R.layout.products_of_category_item, viewGroup, false))
     }
 
-    override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int, payloads: MutableList<Any>) {
-        super.onBindViewHolder(productsOfCategoryViewHolder, position, payloads)
+    override fun onBindViewHolder(uniqueRecommendationsCategoryViewHolder: UniqueRecommendationsCategoryViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(uniqueRecommendationsCategoryViewHolder, position, payloads)
 
         if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
 
-            productsOfCategoryViewHolder.installView.icon = context.getDrawable(R.drawable.share_icon)
-            productsOfCategoryViewHolder.installView.iconSize = dpToInteger(context, 23)
+            uniqueRecommendationsCategoryViewHolder.installView.icon = context.getDrawable(R.drawable.share_icon)
+            uniqueRecommendationsCategoryViewHolder.installView.iconSize = dpToInteger(context, 23)
 
         }
 
-        productsOfCategoryViewHolder.installView.text = storefrontContents[position].installViewText
+        uniqueRecommendationsCategoryViewHolder.installView.text = storefrontContents[position].installViewText
 
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                productsOfCategoryViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
-                productsOfCategoryViewHolder.productNameTextView.setShadowLayer(productsOfCategoryViewHolder.productNameTextView.shadowRadius, productsOfCategoryViewHolder.productNameTextView.shadowDx, productsOfCategoryViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
+                uniqueRecommendationsCategoryViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
+                uniqueRecommendationsCategoryViewHolder.productNameTextView.setShadowLayer(uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowRadius, uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowDx, uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
 
-                productsOfCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
+                uniqueRecommendationsCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
-                productsOfCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
+                uniqueRecommendationsCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
 
-                productsOfCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
-                productsOfCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+                uniqueRecommendationsCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
+                uniqueRecommendationsCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
-                productsOfCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.light_transparent))
-                productsOfCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
+                uniqueRecommendationsCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.light_transparent))
+                uniqueRecommendationsCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
 
             }
             ThemeType.ThemeDark -> {
 
-                productsOfCategoryViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
-                productsOfCategoryViewHolder.productNameTextView.setShadowLayer(productsOfCategoryViewHolder.productNameTextView.shadowRadius, productsOfCategoryViewHolder.productNameTextView.shadowDx, productsOfCategoryViewHolder.productNameTextView.shadowDy, context.getColor(R.color.black))
+                uniqueRecommendationsCategoryViewHolder.productNameTextView.setTextColor(context.getColor(R.color.light))
+                uniqueRecommendationsCategoryViewHolder.productNameTextView.setShadowLayer(uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowRadius, uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowDx, uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowDy, context.getColor(R.color.black))
 
-                productsOfCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
+                uniqueRecommendationsCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.light))
 
-                productsOfCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_dark))
+                uniqueRecommendationsCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_dark))
 
-                productsOfCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_dark)
-                productsOfCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
+                uniqueRecommendationsCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_dark)
+                uniqueRecommendationsCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
 
-                productsOfCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.dark_transparent))
-                productsOfCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
+                uniqueRecommendationsCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.dark_transparent))
+                uniqueRecommendationsCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
 
             }
             else -> {
 
-                productsOfCategoryViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
-                productsOfCategoryViewHolder.productNameTextView.setShadowLayer(productsOfCategoryViewHolder.productNameTextView.shadowRadius, productsOfCategoryViewHolder.productNameTextView.shadowDx, productsOfCategoryViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
+                uniqueRecommendationsCategoryViewHolder.productNameTextView.setTextColor(context.getColor(R.color.dark))
+                uniqueRecommendationsCategoryViewHolder.productNameTextView.setShadowLayer(uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowRadius, uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowDx, uniqueRecommendationsCategoryViewHolder.productNameTextView.shadowDy, context.getColor(R.color.white))
 
-                productsOfCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
+                uniqueRecommendationsCategoryViewHolder.productSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
-                productsOfCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
+                uniqueRecommendationsCategoryViewHolder.productDividerView.setImageDrawable(context.getDrawable(R.drawable.diamond_solid_icon_light))
 
-                productsOfCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
-                productsOfCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+                uniqueRecommendationsCategoryViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.application_rating_glowing_frame_light)
+                uniqueRecommendationsCategoryViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
-                productsOfCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.light_transparent))
-                productsOfCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
+                uniqueRecommendationsCategoryViewHolder.blurryBackground.setSecondOverlayColor(context.getColor(R.color.light_transparent))
+                uniqueRecommendationsCategoryViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
 
             }
         }
 
     }
 
-    override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(uniqueRecommendationsCategoryViewHolder: UniqueRecommendationsCategoryViewHolder, position: Int) {
 
-        productsOfCategoryViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
-        productsOfCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
+        uniqueRecommendationsCategoryViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
+        uniqueRecommendationsCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
 
-        productsOfCategoryViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
+        uniqueRecommendationsCategoryViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
 
-        productsOfCategoryViewHolder.productCurrentRateView.setTextColor(context.getColor(R.color.white))
+        uniqueRecommendationsCategoryViewHolder.productCurrentRateView.setTextColor(context.getColor(R.color.white))
 
         //Product Icon Image
         Glide.with(context)
@@ -143,20 +143,20 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
                         context.runOnUiThread {
 
-                            productsOfCategoryViewHolder.productCurrentRateView.setShadowLayer(productsOfCategoryViewHolder.productCurrentRateView.shadowRadius, productsOfCategoryViewHolder.productCurrentRateView.shadowDx, productsOfCategoryViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+                            uniqueRecommendationsCategoryViewHolder.productCurrentRateView.setShadowLayer(uniqueRecommendationsCategoryViewHolder.productCurrentRateView.shadowRadius, uniqueRecommendationsCategoryViewHolder.productCurrentRateView.shadowDx, uniqueRecommendationsCategoryViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
-                            productsOfCategoryViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
-                            productsOfCategoryViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
+                            uniqueRecommendationsCategoryViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
+                            uniqueRecommendationsCategoryViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
 
-                            productsOfCategoryViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                            uniqueRecommendationsCategoryViewHolder.productCurrentRateView.setTextColor(vibrantColor)
 
                             val applicationGlowingFrame = context.getDrawable(R.drawable.all_application_icon_glowing_frame) as LayerDrawable
                             applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
                             applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconFrame).setTint(vibrantColor)
 
-                            productsOfCategoryViewHolder.productIconImageView.background = applicationGlowingFrame
+                            uniqueRecommendationsCategoryViewHolder.productIconImageView.background = applicationGlowingFrame
 
-                            productsOfCategoryViewHolder.productIconImageView.setImageDrawable(resource)
+                            uniqueRecommendationsCategoryViewHolder.productIconImageView.setImageDrawable(resource)
 
                         }
 
@@ -168,7 +168,7 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
             })
             .submit()
 
-        productsOfCategoryViewHolder.rootView.setOnClickListener {
+        uniqueRecommendationsCategoryViewHolder.rootView.setOnClickListener {
 
             openProductsDetails(context = context, fragmentInterface = context,
                 contentDetailsContainer= context.categoryDetailsLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
@@ -176,13 +176,13 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
         }
 
-        productsOfCategoryViewHolder.rootView.setOnLongClickListener {
+        uniqueRecommendationsCategoryViewHolder.rootView.setOnLongClickListener {
 
 
             true
         }
 
-        productsOfCategoryViewHolder.installView.setOnClickListener {
+        uniqueRecommendationsCategoryViewHolder.installView.setOnClickListener {
 
             if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
 

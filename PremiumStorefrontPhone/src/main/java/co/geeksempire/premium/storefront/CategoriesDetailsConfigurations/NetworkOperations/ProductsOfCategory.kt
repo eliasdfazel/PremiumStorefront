@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:40 PM
+ * Last modified 7/19/21, 2:59 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.UniqueRecommendationsCategoryAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
@@ -26,7 +27,10 @@ import net.geeksempire.loadingspin.SpinKitView
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: ProductsOfCategoryAdapter, val loadingView: SpinKitView) {
+class ProductsOfCategory(val context: Context,
+                         val productsOfCategoryAdapter: ProductsOfCategoryAdapter,
+                         val uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter,
+                         val loadingView: SpinKitView) {
 
     private val generalEndpoint = GeneralEndpoint()
 
@@ -45,6 +49,7 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
                     allContentJsonArray = rawDataJsonArray,
                     offsetIndex = productsOfCategoryAdapter.itemCount,
                     productsOfCategoryAdapter = productsOfCategoryAdapter,
+                    uniqueRecommendationsCategoryAdapter = uniqueRecommendationsCategoryAdapter,
                     loadingView = loadingView
                 )
 
@@ -72,7 +77,8 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
 
     fun processAllContentOfCategories(
         allContentJsonArray: JSONArray, offsetIndex: Int = 0,
-        productsOfCategoryAdapter: ProductsOfCategoryAdapter, loadingView: SpinKitView) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+        productsOfCategoryAdapter: ProductsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter,
+        loadingView: SpinKitView) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@ProductsOfCategory.javaClass.simpleName, "Process All Content Of Categories")
 
         for (indexContent in 0 until allContentJsonArray.length()) {
@@ -88,7 +94,33 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
             } catch (e: Exception) {
                 null
             }
+
+            val productVerticalArt: String? = try {
+                (featuredContentImages[3] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
+            } catch (e: Exception) {
+                null
+            }
             /* End - Images */
+
+            /* Start - Attributes */
+            val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+
+            val attributesMap = HashMap<String, String>()
+
+            for (indexAttribute in 0 until featuredContentAttributes.length()) {
+
+                val attributesJsonObject: JSONObject =
+                    featuredContentAttributes[indexAttribute] as JSONObject
+
+                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] =
+                    attributesJsonObject.getJSONArray(
+                        ProductsContentKey.AttributeOptionsKey
+                    )[0].toString()
+
+            }
+            /* End - Attributes */
+
+            val adapterIndex = offsetIndex + indexContent
 
             /* Start - Primary Category */
             val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
@@ -111,28 +143,28 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
 
                 }
 
+                 if (textCheckpoint == "Unique") {
+
+                     uniqueRecommendationsCategoryAdapter.storefrontContents.add(
+                         StorefrontContentsData(
+                             productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
+                             productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                             productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                             productCategoryName = productCategoryName,
+                             productCategoryId = productCategoryId,
+                             productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                             productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                             productIconLink = productIcon,
+                             productCoverLink = productCover,
+                             productVerticalArt = productVerticalArt,
+                             productAttributes = attributesMap
+                         )
+                     )
+
+                 }
+
             }
             /* End - Primary Category */
-
-            /* Start - Attributes */
-            val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
-
-            val attributesMap = HashMap<String, String>()
-
-            for (indexAttribute in 0 until featuredContentAttributes.length()) {
-
-                val attributesJsonObject: JSONObject =
-                    featuredContentAttributes[indexAttribute] as JSONObject
-
-                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] =
-                    attributesJsonObject.getJSONArray(
-                        ProductsContentKey.AttributeOptionsKey
-                    )[0].toString()
-
-            }
-            /* End - Attributes */
-
-            val adapterIndex = offsetIndex + indexContent
 
             productsOfCategoryAdapter.storefrontContents.add(
                 adapterIndex,
@@ -154,6 +186,8 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
 
                 productsOfCategoryAdapter.notifyItemInserted(adapterIndex)
 
+                uniqueRecommendationsCategoryAdapter.notifyItemInserted(0)
+
             }
 
             Log.d(
@@ -172,7 +206,5 @@ class ProductsOfCategory(val context: Context, val productsOfCategoryAdapter: Pr
         }
 
     }
-
-
 
 }
