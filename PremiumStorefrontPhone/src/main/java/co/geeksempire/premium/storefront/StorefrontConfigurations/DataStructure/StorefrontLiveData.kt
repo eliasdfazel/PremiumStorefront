@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 9:02 AM
+ * Last modified 7/19/21, 2:40 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -91,7 +91,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (textCheckpoint != "All" && textCheckpoint != "Quick") {
+                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject)
 
@@ -177,7 +177,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (textCheckpoint != "All" && textCheckpoint != "Quick") {
+                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject)
 
@@ -315,7 +315,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (textCheckpoint != "All" && textCheckpoint != "Quick") {
+                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject)
 
@@ -401,7 +401,7 @@ class StorefrontLiveData : ViewModel() {
 
                 val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (textCheckpoint != "All" && textCheckpoint != "Quick") {
+                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject)
 
