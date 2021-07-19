@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 3:06 PM
+ * Last modified 7/19/21, 3:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -26,8 +27,10 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<UniqueRecommendationsCategoryViewHolder>() {
 
@@ -91,6 +94,36 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
                         context.runOnUiThread {
 
 
+
+                        }
+
+                    }
+
+                    return true
+                }
+
+            })
+            .submit()
+
+        Glide.with(context)
+            .asDrawable()
+            .load(storefrontContents[position].productVerticalArt)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .transform(RoundedCorners(dpToInteger(context, 21)))
+            .listener(object : RequestListener<Drawable> {
+
+                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
+
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                    resource?.let {
+
+                        context.runOnUiThread {
+
+                            val uniqueVerticalArtLayer = context.getDrawable(R.drawable.unique_vertical_art_layer) as LayerDrawable
+                            uniqueVerticalArtLayer.setDrawableByLayerId(R.id.verticalArtLayer, resource)
+
+                            uniqueRecommendationsCategoryViewHolder.verticalArtImageView.setImageDrawable(uniqueVerticalArtLayer)
 
                         }
 
