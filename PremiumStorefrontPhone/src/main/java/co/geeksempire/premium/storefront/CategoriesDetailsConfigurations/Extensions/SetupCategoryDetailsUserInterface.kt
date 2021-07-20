@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:06 PM
+ * Last modified 7/20/21, 4:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,6 +65,8 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
 
             categoryDetailsLayoutBinding.uniqueNestedScrollView.background = getDrawable(R.drawable.unique_section_background_light)
 
+            categoryDetailsLayoutBinding.leftBlurView.setOverlayColor(getColor(R.color.premiumLightTransparent))
+
             categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_light)
 
         }
@@ -98,6 +100,8 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.categoryIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
             categoryDetailsLayoutBinding.uniqueNestedScrollView.background = getDrawable(R.drawable.unique_section_background_dark)
+
+            categoryDetailsLayoutBinding.leftBlurView.setOverlayColor(getColor(R.color.premiumDarkTransparent))
 
             categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_dark)
 
@@ -139,6 +143,8 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
 
             categoryDetailsLayoutBinding.uniqueNestedScrollView.background = getDrawable(R.drawable.unique_section_background_light)
 
+            categoryDetailsLayoutBinding.leftBlurView.setOverlayColor(getColor(R.color.premiumLightTransparent))
+
             categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_light)
 
         }
@@ -148,9 +154,9 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
 
         textShadowValueAnimatorLoop(view = categoryDetailsLayoutBinding.uniqueRecommendationTextView,
             startValue = 0f, endValue = categoryDetailsLayoutBinding.uniqueRecommendationTextView.shadowRadius,
-            startDuration = 1357, endDuration = 579,
-            shadowColor = categoryDetailsLayoutBinding.uniqueRecommendationTextView.shadowColor, shadowX = 0f, shadowY = 0f,
-            numberOfLoop = 13)
+            startDuration = 1357, endDuration = 753,
+            shadowColor = categoryDetailsLayoutBinding.uniqueRecommendationTextView.shadowColor, shadowX = categoryDetailsLayoutBinding.uniqueRecommendationTextView.shadowDx, shadowY = categoryDetailsLayoutBinding.uniqueRecommendationTextView.shadowDy,
+            numberOfLoop = 29)
 
     }
 

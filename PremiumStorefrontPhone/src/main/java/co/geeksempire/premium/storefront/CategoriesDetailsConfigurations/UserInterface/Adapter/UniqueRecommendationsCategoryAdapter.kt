@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 3:19 PM
+ * Last modified 7/20/21, 5:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -21,6 +22,9 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.Utils.UI.Colors.colorsTheSame
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -43,7 +47,7 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : UniqueRecommendationsCategoryViewHolder {
 
-        return UniqueRecommendationsCategoryViewHolder(LayoutInflater.from(context).inflate(R.layout.products_of_category_item, viewGroup, false))
+        return UniqueRecommendationsCategoryViewHolder(LayoutInflater.from(context).inflate(R.layout.unique_section_item, viewGroup, false))
     }
 
     override fun onBindViewHolder(uniqueRecommendationsCategoryViewHolder: UniqueRecommendationsCategoryViewHolder, position: Int, payloads: MutableList<Any>) {
@@ -72,9 +76,6 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
     override fun onBindViewHolder(uniqueRecommendationsCategoryViewHolder: UniqueRecommendationsCategoryViewHolder, position: Int) {
 
-
-
-        //Product Icon Image
         Glide.with(context)
             .asDrawable()
             .load(storefrontContents[position].productIconLink)
@@ -89,11 +90,19 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
                     resource?.let {
 
-                        val vibrantColor = extractVibrantColor(context, resource)
+                        val dominantColor = extractDominantColor(context, resource)
+                        var vibrantColor = extractVibrantColor(context, resource)
+
+                        if (colorsTheSame(dominantColor, vibrantColor)) {
+                            vibrantColor = extractMutedColor(context, resource)
+                        }
 
                         context.runOnUiThread {
 
+                            val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TR_BL, intArrayOf(dominantColor, vibrantColor))
+                            gradientFeaturedBackground.cornerRadius = dpToInteger(context, 19).toFloat()
 
+                            uniqueRecommendationsCategoryViewHolder.verticalArtImageView.background = gradientFeaturedBackground
 
                         }
 
@@ -107,9 +116,9 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
         Glide.with(context)
             .asDrawable()
-            .load(storefrontContents[position].productVerticalArt)
+            .load(storefrontContents[position].productVerticalArt?:context.getString(R.string.choicePremiumStorefrontUnique))
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(RoundedCorners(dpToInteger(context, 21)))
+            .transform(RoundedCorners(dpToInteger(context, 19)))
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/21/21, 2:37 PM
+ * Last modified 7/20/21, 4:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.Utils.UI.Colors
 
 import android.graphics.Color
+import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 fun setColorAlpha(color: Int, alphaValue: Float /* 1 (Opaque) -- 255 (Transparent) */): Int {
@@ -22,4 +23,11 @@ fun setColorAlpha(color: Int, alphaValue: Float /* 1 (Opaque) -- 255 (Transparen
     val blue = Color.blue(color)
 
     return Color.argb(alpha, red, green, blue)
+}
+
+fun colorsTheSame(firstColor: Int, secondColor: Int) : Boolean {
+
+    val colorCheckpoint = (firstColor.absoluteValue - secondColor.absoluteValue).absoluteValue
+
+    return (colorCheckpoint <= 5000)
 }

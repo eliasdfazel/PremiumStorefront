@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:59 PM
+ * Last modified 7/20/21, 3:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -143,7 +143,7 @@ class ProductsOfCategory(val context: Context,
 
                 }
 
-                 if (textCheckpoint == "Unique") {
+                 if (textCheckpoint.contains("Unique")) {
 
                      uniqueRecommendationsCategoryAdapter.storefrontContents.add(
                          StorefrontContentsData(
