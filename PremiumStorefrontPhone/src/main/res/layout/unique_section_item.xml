@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/20/21, 5:17 AM
+  ~ Last modified 7/20/21, 8:06 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,7 +15,8 @@
     android:id="@+id/rootViewItem"
     android:layout_width="199dp"
     android:layout_height="339dp"
-    android:layout_marginStart="39dp"
+    android:layout_marginStart="19dp"
+    android:layout_marginEnd="19dp"
     tools:context=".BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser">
 
     <androidx.appcompat.widget.AppCompatImageView

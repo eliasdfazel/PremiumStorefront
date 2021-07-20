@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 5:54 AM
+ * Last modified 7/20/21, 8:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInt
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.Utils.UI.Colors.colorsTheSame
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
@@ -116,9 +117,9 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
         Glide.with(context)
             .asDrawable()
-            .load(storefrontContents[position].productVerticalArt?:context.getString(R.string.choicePremiumStorefrontUnique))
+            .load(storefrontContents[position].productAttributes[ProductsContentKey.AttributesVerticalArtKey]?:context.getString(R.string.choicePremiumStorefrontUnique))
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(RoundedCorners(dpToInteger(context, 19)))
+            .transform(RoundedCorners(dpToInteger(context, 17)))
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }

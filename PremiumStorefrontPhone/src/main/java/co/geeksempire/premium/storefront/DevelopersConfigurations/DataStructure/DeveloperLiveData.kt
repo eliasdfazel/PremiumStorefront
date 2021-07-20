@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:40 PM
+ * Last modified 7/20/21, 7:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -89,7 +89,7 @@ class DeveloperLiveData : ViewModel() {
                 /* Start - Attributes */
                 val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-                val attributesMap = HashMap<String, String>()
+                val attributesMap = HashMap<String, String?>()
 
                 for (indexAttribute in 0 until featuredContentAttributes.length()) {
 
@@ -178,7 +178,7 @@ class DeveloperLiveData : ViewModel() {
                 /* Start - Attributes */
                 val featuredContentAttributes: JSONArray = applicationsContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-                val attributesMap = HashMap<String, String>()
+                val attributesMap = HashMap<String, String?>()
 
                 for (indexAttribute in 0 until featuredContentAttributes.length()) {
 

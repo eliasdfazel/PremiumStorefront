@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 3:46 AM
+ * Last modified 7/20/21, 8:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -95,27 +95,18 @@ class ProductsOfCategory(val context: Context,
                 null
             }
 
-            val productVerticalArt: String? = try {
-                (featuredContentImages[3] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-            } catch (e: Exception) {
-                null
-            }
             /* End - Images */
 
             /* Start - Attributes */
-            val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+            val contentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-            val attributesMap = HashMap<String, String>()
+            val attributesMap = HashMap<String, String?>()
 
-            for (indexAttribute in 0 until featuredContentAttributes.length()) {
+            for (indexAttribute in 0 until contentAttributes.length()) {
 
-                val attributesJsonObject: JSONObject =
-                    featuredContentAttributes[indexAttribute] as JSONObject
+                val attributesJsonObject: JSONObject = contentAttributes[indexAttribute] as JSONObject
 
-                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] =
-                    attributesJsonObject.getJSONArray(
-                        ProductsContentKey.AttributeOptionsKey
-                    )[0].toString()
+                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] = attributesJsonObject.getJSONArray(ProductsContentKey.AttributeOptionsKey)[0].toString()
 
             }
             /* End - Attributes */
@@ -156,7 +147,6 @@ class ProductsOfCategory(val context: Context,
                              productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                              productIconLink = productIcon,
                              productCoverLink = productCover,
-                             productVerticalArt = productVerticalArt,
                              productAttributes = attributesMap
                          )
                      )
@@ -186,7 +176,7 @@ class ProductsOfCategory(val context: Context,
 
                 productsOfCategoryAdapter.notifyItemInserted(adapterIndex)
 
-                uniqueRecommendationsCategoryAdapter.notifyItemInserted(0)
+                uniqueRecommendationsCategoryAdapter.notifyItemInserted(uniqueRecommendationsCategoryAdapter.itemCount)
 
             }
 

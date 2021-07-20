@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:40 PM
+ * Last modified 7/20/21, 7:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -106,7 +106,7 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-            val attributesMap = HashMap<String, String>()
+            val attributesMap = HashMap<String, String?>()
 
             for (indexAttribute in 0 until featuredContentAttributes.length()) {
 
@@ -192,7 +192,7 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-            val attributesMap = HashMap<String, String>()
+            val attributesMap = HashMap<String, String?>()
 
             for (indexAttribute in 0 until featuredContentAttributes.length()) {
 
@@ -330,7 +330,7 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-            val attributesMap = HashMap<String, String>()
+            val attributesMap = HashMap<String, String?>()
 
             for (indexAttribute in 0 until featuredContentAttributes.length()) {
 
@@ -342,16 +342,16 @@ class StorefrontLiveData : ViewModel() {
             /* End - Attributes */
 
             storefrontFeaturedContents.add(StorefrontContentsData(
-                    productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
-                    productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                    productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
+                productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
                 productCategoryName = productCategoryName,
                 productCategoryId = productCategoryId,
-                    productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                    productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
-                    productIconLink = productIcon,
-                    productCoverLink = productCover,
-                    productAttributes = attributesMap
+                productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                productIconLink = productIcon,
+                productCoverLink = productCover,
+                productAttributes = attributesMap
             ))
 
             Log.d(this@StorefrontLiveData.javaClass.simpleName, "Featured Product: ${featuredContentJsonObject.getString(ProductsContentKey.NameKey)}")
@@ -416,7 +416,7 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-            val attributesMap = HashMap<String, String>()
+            val attributesMap = HashMap<String, String?>()
 
             for (indexAttribute in 0 until featuredContentAttributes.length()) {
 
@@ -428,16 +428,16 @@ class StorefrontLiveData : ViewModel() {
             /* End - Attributes */
 
             storefrontAllContents.add(StorefrontContentsData(
-                    productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
-                    productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                    productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
+                productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
                 productCategoryName = productCategoryName,
                 productCategoryId = productCategoryId,
-                    productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                    productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
-                    productIconLink = productIcon,
-                    productCoverLink = productCover,
-                    productAttributes = attributesMap
+                productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                productIconLink = productIcon,
+                productCoverLink = productCover,
+                productAttributes = attributesMap
             ))
 
             Log.d(this@StorefrontLiveData.javaClass.simpleName, "All Products: ${featuredContentJsonObject.getString(ProductsContentKey.NameKey)}")
@@ -507,7 +507,7 @@ class StorefrontLiveData : ViewModel() {
             /* Start - Attributes */
             val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
 
-            val attributesMap = HashMap<String, String>()
+            val attributesMap = HashMap<String, String?>()
 
             for (indexAttribute in 0 until featuredContentAttributes.length()) {
 
