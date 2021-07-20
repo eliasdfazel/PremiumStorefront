@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 8:39 AM
+ * Last modified 7/20/21, 9:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,7 +82,6 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
             .load(storefrontContents[position].productIconLink)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .transform(CircleCrop())
-            .override(256, 256)
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }

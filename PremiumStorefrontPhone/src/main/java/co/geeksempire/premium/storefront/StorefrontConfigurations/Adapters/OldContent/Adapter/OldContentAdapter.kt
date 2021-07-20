@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 9:29 AM
+ * Last modified 7/20/21, 9:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -96,7 +96,6 @@ class OldContentAdapter(private val context: AppCompatActivity,
             .load(storefrontContents[position].productIconLink)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .transform(CenterCrop())
-            .override(256, 256)
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
