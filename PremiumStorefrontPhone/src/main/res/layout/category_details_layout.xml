@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/20/21, 8:11 AM
+  ~ Last modified 7/20/21, 9:01 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -55,6 +55,13 @@
                 android:id="@+id/uniqueRecyclerView"
                 android:layout_width="wrap_content"
                 android:layout_height="339dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="9dp"
+                android:requiresFadingEdge="horizontal"
+                android:scrollbars="none"
+                android:smoothScrollbar="true"
+                android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
                 android:layoutAnimation="@anim/fade_in_layout_animation"
@@ -122,8 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="91dp"
-        android:layout_marginStart="19dp"
-        android:paddingHorizontal="13dp"
+        android:paddingHorizontal="19dp"
         android:paddingVertical="13dp"
         android:text="@string/uniqueRecommendationText"
         android:textSize="23sp"
@@ -136,7 +142,8 @@
         android:background="@drawable/unique_section_text_background_light"
 
         apps:layout_constraintTop_toTopOf="parent"
-        apps:layout_constraintStart_toStartOf="parent"/>
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
 
     <co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView
         android:layout_width="match_parent"
@@ -162,6 +169,13 @@
                 android:id="@+id/productsOfCategoryRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:cacheColorHint="@android:color/transparent"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="9dp"
+                android:requiresFadingEdge="vertical"
+                android:scrollbars="none"
+                android:smoothScrollbar="true"
+                android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
                 android:layoutAnimation="@anim/fade_in_layout_animation"
