@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 11:41 AM
+ * Last modified 7/21/21, 12:15 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -223,7 +223,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                     developerIntroductionLayoutBinding.productApplications.setOnClickListener { view ->
 
-                        if (::applicationsShowcase.isLateinit) {
+                        if (::applicationsShowcase.isInitialized) {
 
                             if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isGone) {
                                 developerIntroductionLayoutBinding.productShowcaseRecyclerView.visibility = View.VISIBLE
@@ -275,7 +275,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                     developerIntroductionLayoutBinding.productGames.setOnClickListener { view ->
 
-                        if (::gamesShowcase.isLateinit) {
+                        if (::gamesShowcase.isInitialized) {
 
                             if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isGone) {
                                 developerIntroductionLayoutBinding.productShowcaseRecyclerView.visibility = View.VISIBLE
