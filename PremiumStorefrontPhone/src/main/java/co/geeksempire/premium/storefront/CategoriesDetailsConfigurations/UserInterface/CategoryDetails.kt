@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 4:02 AM
+ * Last modified 7/21/21, 9:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -85,7 +85,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
             categoryDetailsLayoutBinding.productsOfCategoryRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             categoryDetailsLayoutBinding.productsOfCategoryRecyclerView.adapter = productsOfCategoryAdapter
 
-            categoryDetailsLayoutBinding.uniqueRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL,true)
+            categoryDetailsLayoutBinding.uniqueRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL,false)
             categoryDetailsLayoutBinding.uniqueRecyclerView.adapter = uniqueRecommendationsCategoryAdapter
 
             lifecycleScope.launch {
