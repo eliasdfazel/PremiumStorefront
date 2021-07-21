@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 9:28 AM
+ * Last modified 7/21/21, 10:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,10 @@ package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserIn
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
@@ -44,7 +47,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
     }
 
     val productsOfCategory: ProductsOfCategory by lazy {
-        ProductsOfCategory(applicationContext, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
+        ViewModelProvider(this@CategoryDetails).get(ProductsOfCategory::class.java)
     }
 
     val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
@@ -106,6 +109,32 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
                 .load(inputData.getStringExtra(CategoriesDataKeys.CategoryIcon))
                 .into(categoryDetailsLayoutBinding.categoryIconImageView)
 
+            productsOfCategory.uniqueRecommendationsData.observe(this@CategoryDetails, {
+
+                if (categoryDetailsLayoutBinding.uniqueRecyclerView.isGone) {
+
+                    categoryDetailsLayoutBinding.uniqueRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.uniqueRecyclerView.visibility = View.VISIBLE
+
+                    categoryDetailsLayoutBinding.leftBlurView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.leftBlurView.visibility = View.VISIBLE
+
+                    categoryDetailsLayoutBinding.rightBlurView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.rightBlurView.visibility = View.VISIBLE
+
+                    categoryDetailsLayoutBinding.leftGlowView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.leftGlowView.visibility = View.VISIBLE
+
+                    categoryDetailsLayoutBinding.rightGlowView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.rightGlowView.visibility = View.VISIBLE
+
+                    categoryDetailsLayoutBinding.uniqueRecommendationTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.uniqueRecommendationTextView.visibility = View.VISIBLE
+
+                }
+
+            })
+
         }
 
         categoryDetailsLayoutBinding.goBackView.setOnClickListener {
@@ -153,7 +182,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
             val categoryId = inputData.getIntExtra(CategoriesDataKeys.CategoryId, 15)
 
-            productsOfCategory.retrieveProductsOfCategory(categoryId)
+            productsOfCategory.retrieveProductsOfCategory(categoryId, applicationContext, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
 
             Log.d(this@CategoryDetails.javaClass.simpleName, "Category Id $categoryId")
         }

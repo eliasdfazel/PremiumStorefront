@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 8:39 AM
+ * Last modified 7/21/21, 10:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.UniqueRecommendationsCategoryAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
@@ -27,10 +29,11 @@ import net.geeksempire.loadingspin.SpinKitView
 import org.json.JSONArray
 import org.json.JSONObject
 
-class ProductsOfCategory(val context: Context,
-                         val productsOfCategoryAdapter: ProductsOfCategoryAdapter,
-                         val uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter,
-                         val loadingView: SpinKitView) {
+class ProductsOfCategory : ViewModel() {
+
+    val uniqueRecommendationsData: MutableLiveData<Pair<Boolean, StorefrontContentsData>> by lazy {
+        MutableLiveData<Pair<Boolean, StorefrontContentsData>>()
+    }
 
     private val generalEndpoint = GeneralEndpoint()
 
@@ -38,7 +41,10 @@ class ProductsOfCategory(val context: Context,
 
     var allLoadingFinished: Boolean = false
 
-    fun retrieveProductsOfCategory(categoryId: Int) {
+    fun retrieveProductsOfCategory(categoryId: Int, context: Context,
+                                   productsOfCategoryAdapter: ProductsOfCategoryAdapter,
+                                   uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter,
+                                   loadingView: SpinKitView) {
 
         GenericJsonRequest(context, object : JsonRequestResponses {
 
@@ -59,7 +65,7 @@ class ProductsOfCategory(val context: Context,
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        retrieveProductsOfCategory(categoryId)
+                        retrieveProductsOfCategory(categoryId, context, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, loadingView)
 
                     }, 1579)
 
@@ -136,20 +142,22 @@ class ProductsOfCategory(val context: Context,
 
                  if (textCheckpoint.contains("Unique")) {
 
-                     uniqueRecommendationsCategoryAdapter.storefrontContents.add(
-                         StorefrontContentsData(
-                             productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
-                             productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                             productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                             productCategoryName = productCategoryName,
-                             productCategoryId = productCategoryId,
-                             productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                             productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
-                             productIconLink = productIcon,
-                             productCoverLink = productCover,
-                             productAttributes = attributesMap
-                         )
+                     val storefrontContentsData = StorefrontContentsData(
+                         productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
+                         productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
+                         productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
+                         productCategoryName = productCategoryName,
+                         productCategoryId = productCategoryId,
+                         productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
+                         productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
+                         productIconLink = productIcon,
+                         productCoverLink = productCover,
+                         productAttributes = attributesMap
                      )
+
+                     uniqueRecommendationsCategoryAdapter.storefrontContents.add(storefrontContentsData)
+
+                     uniqueRecommendationsData.postValue(Pair(true, storefrontContentsData))
 
                  }
 
