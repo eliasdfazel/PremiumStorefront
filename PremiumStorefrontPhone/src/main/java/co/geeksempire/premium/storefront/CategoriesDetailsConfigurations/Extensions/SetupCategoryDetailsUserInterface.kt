@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 9:35 AM
+ * Last modified 7/21/21, 10:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -66,6 +66,7 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.uniqueRecyclerView.background = getDrawable(R.drawable.unique_section_background_light)
 
             categoryDetailsLayoutBinding.leftBlurView.setOverlayColor(getColor(R.color.premiumLightTransparent))
+            categoryDetailsLayoutBinding.rightBlurView.setOverlayColor(getColor(R.color.premiumLightTransparent))
 
             categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_light)
 
@@ -102,6 +103,7 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.uniqueRecyclerView.background = getDrawable(R.drawable.unique_section_background_dark)
 
             categoryDetailsLayoutBinding.leftBlurView.setOverlayColor(getColor(R.color.premiumDarkTransparent))
+            categoryDetailsLayoutBinding.rightBlurView.setOverlayColor(getColor(R.color.premiumDarkTransparent))
 
             categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_dark)
 
@@ -144,6 +146,7 @@ fun CategoryDetails.setupCategoryDetailsUserInterface(themeType: Boolean = Theme
             categoryDetailsLayoutBinding.uniqueRecyclerView.background = getDrawable(R.drawable.unique_section_background_light)
 
             categoryDetailsLayoutBinding.leftBlurView.setOverlayColor(getColor(R.color.premiumLightTransparent))
+            categoryDetailsLayoutBinding.rightBlurView.setOverlayColor(getColor(R.color.premiumLightTransparent))
 
             categoryDetailsLayoutBinding.uniqueRecommendationTextView.background = getDrawable(R.drawable.unique_section_text_background_light)
 
