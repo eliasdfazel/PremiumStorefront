@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 10:26 AM
+ * Last modified 7/21/21, 10:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -181,7 +181,7 @@ class ProductsOfCategory : ViewModel() {
 
             withContext(Dispatchers.Main) {
 
-                productsOfCategoryAdapter.notifyItemInserted(uniqueRecommendationsCategoryAdapter.itemCount)
+                productsOfCategoryAdapter.notifyItemInserted(productsOfCategoryAdapter.itemCount)
 
                 uniqueRecommendationsCategoryAdapter.notifyItemInserted(uniqueRecommendationsCategoryAdapter.itemCount)
 
