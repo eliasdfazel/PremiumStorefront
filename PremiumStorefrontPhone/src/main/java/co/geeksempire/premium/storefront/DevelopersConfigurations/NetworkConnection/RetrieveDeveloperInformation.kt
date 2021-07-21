@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 7:11 AM
+ * Last modified 7/21/21, 12:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,6 +49,10 @@ class RetrieveDeveloperInformation (private val developerName: String) {
                             }
 
                         }
+
+                    } else {
+
+
 
                     }
 

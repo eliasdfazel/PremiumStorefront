@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:15 PM
+ * Last modified 7/21/21, 12:24 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -127,7 +127,11 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
                         resource?.let {
 
-                            developerIntroductionLayoutBinding.developerSocialMediaImageView.setImageDrawable(resource)
+                            runOnUiThread {
+
+                                developerIntroductionLayoutBinding.developerSocialMediaImageView.setImageDrawable(resource)
+
+                            }
 
                         }
 
