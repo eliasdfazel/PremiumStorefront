@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 10:21 AM
+ * Last modified 7/21/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -165,7 +165,6 @@ class ProductsOfCategory : ViewModel() {
             /* End - Primary Category */
 
             productsOfCategoryAdapter.storefrontContents.add(
-                adapterIndex,
                 StorefrontContentsData(
                     productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
                     productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
@@ -182,7 +181,7 @@ class ProductsOfCategory : ViewModel() {
 
             withContext(Dispatchers.Main) {
 
-                productsOfCategoryAdapter.notifyItemInserted(adapterIndex)
+                productsOfCategoryAdapter.notifyItemInserted(uniqueRecommendationsCategoryAdapter.itemCount)
 
                 uniqueRecommendationsCategoryAdapter.notifyItemInserted(uniqueRecommendationsCategoryAdapter.itemCount)
 
