@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 9:13 AM
+ * Last modified 7/21/21, 10:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -118,7 +118,7 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
             .asDrawable()
             .load(storefrontContents[position].productAttributes[ProductsContentKey.AttributesVerticalArtKey]?:context.getString(R.string.choicePremiumStorefrontUnique))
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(RoundedCorners(dpToInteger(context, 17)))
+            .transform(RoundedCorners(dpToInteger(context, 15)))
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
