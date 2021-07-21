@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/26/21, 5:41 AM
+ * Last modified 7/21/21, 12:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -113,7 +113,7 @@ class BuiltInBrowser : AppCompatActivity() {
     override fun onBackPressed() {
 
         this@BuiltInBrowser.finish()
-        overridePendingTransition(R.anim.fade_in, android.R.anim.slide_out_right)
+        overridePendingTransition(0, android.R.anim.slide_out_right)
 
     }
 

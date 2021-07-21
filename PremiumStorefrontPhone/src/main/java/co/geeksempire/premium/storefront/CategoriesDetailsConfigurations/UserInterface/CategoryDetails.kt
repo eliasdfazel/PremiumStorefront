@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 10:17 AM
+ * Last modified 7/21/21, 12:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -141,7 +141,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
             this@CategoryDetails.finish()
 
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_out_right)
+            overridePendingTransition(0, R.anim.slide_out_right)
 
         }
 
@@ -169,7 +169,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
             this@CategoryDetails.finish()
 
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_out_right)
+            overridePendingTransition(0, R.anim.slide_out_right)
 
         }
 

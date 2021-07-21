@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/14/21, 12:08 PM
+ * Last modified 7/21/21, 12:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -108,7 +108,7 @@ class FavoriteProducts : AppCompatActivity() {
 
                     this@FavoriteProducts.finish()
 
-                    overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_left)
+                    overridePendingTransition(0, R.anim.slide_from_left)
 
                 }
 
@@ -116,7 +116,7 @@ class FavoriteProducts : AppCompatActivity() {
 
                 this@FavoriteProducts.finish()
 
-                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_left)
+                overridePendingTransition(0, R.anim.slide_from_left)
 
             }
 
@@ -124,7 +124,7 @@ class FavoriteProducts : AppCompatActivity() {
 
             this@FavoriteProducts.finish()
 
-            overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_left)
+            overridePendingTransition(0, R.anim.slide_from_left)
 
         }
 
@@ -134,7 +134,7 @@ class FavoriteProducts : AppCompatActivity() {
 
         this@FavoriteProducts.finish()
 
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_from_left)
+        overridePendingTransition(0, R.anim.slide_from_left)
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 6:10 AM
+ * Last modified 7/21/21, 12:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -112,7 +112,7 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
         }
 
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_out_right)
+        overridePendingTransition(0, R.anim.slide_out_right)
 
     }
 
@@ -138,7 +138,7 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
         super.signInProcessFailed(error)
 
         this@AccountInformation.finish()
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_out_right)
+        overridePendingTransition(0, R.anim.slide_out_right)
 
     }
 
