@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 6:47 AM
+ * Last modified 7/21/21, 12:33 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,6 +34,10 @@ fun FavoriteProducts.setupFavoritedUserInterface(themeType: Boolean = ThemeType.
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
 
+                window.insetsController?.setSystemBarsAppearance(
+                    WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
+
             } else {
 
                 @Suppress("DEPRECATION")
@@ -58,6 +62,7 @@ fun FavoriteProducts.setupFavoritedUserInterface(themeType: Boolean = ThemeType.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
                 window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
 
             } else {
 
@@ -81,6 +86,10 @@ fun FavoriteProducts.setupFavoritedUserInterface(themeType: Boolean = ThemeType.
                 window.insetsController?.setSystemBarsAppearance(
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+
+                window.insetsController?.setSystemBarsAppearance(
+                    WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS,
+                    WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
 
             } else {
 
