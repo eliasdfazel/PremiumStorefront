@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/22/21, 2:39 AM
+  ~ Last modified 7/22/21, 9:03 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@
         android:alpha="0.03"
         android:src="@drawable/premium_storefront_logo"/>
 
-    <co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView
+    <co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
@@ -182,7 +182,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </co.geeksempire.premium.storefront.Utils.UI.Views.NextedScrollView.NextedScrollView>
+    </co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/goBackView"

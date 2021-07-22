@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 7:18 AM
+ * Last modified 7/22/21, 9:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@ package co.geeksempire.premium.storefront.Utils.UI.Gesture
 
 sealed class GestureConstants {
     class SwipeHorizontal(var horizontalDirection: Int) : GestureConstants()
-    class SwipeVertical(var verticallDirection: Int) : GestureConstants()
+    class SwipeVertical(var verticalDirection: Int) : GestureConstants()
 }
 
 class GestureListenerConstants {

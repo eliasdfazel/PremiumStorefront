@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 5/6/21, 7:18 AM
+ * Last modified 7/22/21, 9:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,16 +55,22 @@ class SwipeGestureListener(private val context: Context,
 
                 swipeMode = if (downMotionEvent.y > moveMotionEvent.y) {//Down -> Up
 
+                    gestureListenerInterface.onSwipeGestureUp()
+
                     gestureListenerInterface.onSwipeGesture(
                             GestureConstants.SwipeVertical(
                                     GestureListenerConstants.SWIPE_UP), downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
+
                     GestureListenerConstants.SWIPE_UP
 
                 } else {//Up -> Down
 
+                    gestureListenerInterface.onSwipeGestureDown()
+
                     gestureListenerInterface.onSwipeGesture(
                             GestureConstants.SwipeVertical(
                                     GestureListenerConstants.SWIPE_DOWN), downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
+
                     GestureListenerConstants.SWIPE_DOWN
 
                 }
@@ -76,16 +82,22 @@ class SwipeGestureListener(private val context: Context,
 
                 swipeMode = if (downMotionEvent.x > moveMotionEvent.x) {//Right -> Left
 
+                    gestureListenerInterface.onSwipeGestureLeft()
+
                     gestureListenerInterface.onSwipeGesture(
                             GestureConstants.SwipeHorizontal(
                                     GestureListenerConstants.SWIPE_LEFT), downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
+
                     GestureListenerConstants.SWIPE_LEFT
 
                 } else {//Left -> Right
 
+                    gestureListenerInterface.onSwipeGestureRight()
+
                     gestureListenerInterface.onSwipeGesture(
                             GestureConstants.SwipeHorizontal(
                                     GestureListenerConstants.SWIPE_RIGHT), downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
+
                     GestureListenerConstants.SWIPE_RIGHT
 
                 }
