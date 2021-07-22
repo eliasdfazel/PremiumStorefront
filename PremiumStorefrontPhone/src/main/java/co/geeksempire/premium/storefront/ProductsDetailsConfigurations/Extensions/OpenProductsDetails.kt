@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 9:15 AM
+ * Last modified 7/22/21, 2:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,7 +11,6 @@
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
@@ -31,7 +30,7 @@ fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentI
 
     delay(333)
 
-    contentDetailsContainer.visibility = View.VISIBLE
+//    contentDetailsContainer.visibility = View.VISIBLE
     contentDetailsContainer.bringToFront()
 
     productDetailsFragment.apply {

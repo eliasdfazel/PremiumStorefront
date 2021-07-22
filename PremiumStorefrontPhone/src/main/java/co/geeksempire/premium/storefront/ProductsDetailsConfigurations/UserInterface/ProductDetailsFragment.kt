@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 9:13 AM
+ * Last modified 7/22/21, 2:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -470,11 +470,14 @@ class ProductDetailsFragment : Fragment() {
             productDetailsLayoutBinding.goBackView.setOnClickListener {
 
                 instanceOfProductDetailsFragment?.let { detailsFragment ->
+
                     (requireActivity()).supportFragmentManager
                         .beginTransaction()
                         .setCustomAnimations(0, R.anim.fade_out)
                         .remove(detailsFragment)
-                        .commitNow()
+                        .detach(this@ProductDetailsFragment)
+                        .commit()
+
                 }
 
             }
