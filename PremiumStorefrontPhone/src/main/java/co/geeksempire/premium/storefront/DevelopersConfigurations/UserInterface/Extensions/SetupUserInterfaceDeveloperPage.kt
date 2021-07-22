@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:29 PM
+ * Last modified 7/22/21, 8:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -474,4 +474,3 @@ fun DeveloperIntroductionPage.setupDeveloperSocialMediaDesign(themeType: Boolean
     developerIntroductionLayoutBinding.developerSocialMediaImageView.background = developerSocialMediaBackground
 
 }
-
