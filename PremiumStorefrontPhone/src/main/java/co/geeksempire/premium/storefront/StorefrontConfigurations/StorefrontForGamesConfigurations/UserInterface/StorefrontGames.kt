@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 2:50 AM
+ * Last modified 7/22/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,8 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.app.ActivityOptions
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -18,6 +20,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
@@ -46,11 +49,13 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.applicationsSectionSwitcherDesign
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.storefrontUserInteractionSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
@@ -61,6 +66,9 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
+import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
+import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureListenerConstants
+import co.geeksempire.premium.storefront.Utils.UI.Gesture.SwipeGestureListener
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.android.Utils.System.hideKeyboard
@@ -178,6 +186,10 @@ class StorefrontGames : StorefrontActivity() {
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
     val firebaseRemoteConfiguration = Firebase.remoteConfig
+
+    private val swipeGestureListener: SwipeGestureListener by lazy {
+        SwipeGestureListener(applicationContext, this@StorefrontGames)
+    }
 
     /* Start - Sign In */
     val accountSignIn: AccountSignIn by lazy {
@@ -612,6 +624,110 @@ class StorefrontGames : StorefrontActivity() {
 
         }
 
+    }
+
+    override fun dispatchTouchEvent(motionEvent: MotionEvent?): Boolean {
+
+        motionEvent?.let {
+            swipeGestureListener.onTouchEvent(it)
+        }
+
+        return if (motionEvent != null) {
+            super.dispatchTouchEvent(motionEvent)
+        } else {
+            false
+        }
+    }
+
+    override fun onSwipeGesture(gestureConstants: GestureConstants, downMotionEvent: MotionEvent, moveMotionEvent: MotionEvent, initVelocityX: Float, initVelocityY: Float) {
+        super.onSwipeGesture(gestureConstants, downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
+
+        when (gestureConstants) {
+            is GestureConstants.SwipeHorizontal -> {
+                when (gestureConstants.horizontalDirection) {
+                    GestureListenerConstants.SWIPE_RIGHT -> {
+
+                        val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(applicationContext, 57), storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.width)
+                        valueAnimatorGames.duration = 333
+                        valueAnimatorGames.startDelay = 333
+                        valueAnimatorGames.addUpdateListener { animator ->
+
+                            val animatorValue = animator.animatedValue as Int
+
+                            storefrontLayoutBinding.sectionSwitcherContainer.applicationsSectionView.layoutParams.width = animatorValue
+                            storefrontLayoutBinding.sectionSwitcherContainer.applicationsSectionView.requestLayout()
+
+                        }
+                        valueAnimatorGames.addListener(object : Animator.AnimatorListener {
+
+                            override fun onAnimationStart(animation: Animator) {
+
+                                applicationsSectionSwitcherDesign(this@StorefrontGames, storefrontLayoutBinding.sectionSwitcherContainer)
+
+                            }
+
+                            override fun onAnimationEnd(animation: Animator) {
+
+                                val activityOptions = ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0)
+
+                                val switchIntent = Intent(this@StorefrontGames, StorefrontApplications::class.java).apply {
+
+                                }
+
+                                startActivity(switchIntent, activityOptions.toBundle())
+
+                            }
+
+                            override fun onAnimationCancel(animation: Animator) {
+
+                            }
+
+                            override fun onAnimationRepeat(animation: Animator) {
+
+                            }
+
+                        })
+
+                        val valueAnimatorApplications = ValueAnimator.ofInt(storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.width, dpToInteger(applicationContext, 57))
+                        valueAnimatorApplications.duration = 333
+                        valueAnimatorApplications.startDelay = 333
+                        valueAnimatorApplications.addUpdateListener { animator ->
+
+                            val animatorValue = animator.animatedValue as Int
+
+                            storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.layoutParams.width = animatorValue
+                            storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.requestLayout()
+
+                        }
+                        valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
+
+                            override fun onAnimationStart(animation: Animator) {
+
+                            }
+
+                            override fun onAnimationEnd(animation: Animator) {
+
+                                storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.text = ""
+
+                                valueAnimatorGames.start()
+
+                            }
+
+                            override fun onAnimationCancel(animation: Animator) {
+
+                            }
+
+                            override fun onAnimationRepeat(animation: Animator) {
+
+                            }
+
+                        })
+                        valueAnimatorApplications.start()
+
+                    }
+                }
+            }
+        }
     }
 
     override fun networkAvailable() {
