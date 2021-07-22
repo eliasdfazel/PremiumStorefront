@@ -30,7 +30,6 @@ fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentI
 
     delay(333)
 
-//    contentDetailsContainer.visibility = View.VISIBLE
     contentDetailsContainer.bringToFront()
 
     productDetailsFragment.apply {

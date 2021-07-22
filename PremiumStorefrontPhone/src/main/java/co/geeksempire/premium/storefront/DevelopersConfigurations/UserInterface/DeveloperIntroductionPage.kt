@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:24 PM
+ * Last modified 7/22/21, 2:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -423,6 +423,7 @@ class DeveloperIntroductionPage : AppCompatActivity() {
                 .beginTransaction()
                 .setCustomAnimations(0, R.anim.fade_out)
                 .remove(productDetailsFragment)
+                .detach(productDetailsFragment)
                 .commitNow()
 
         } else if (developerIntroductionLayoutBinding.productShowcaseRecyclerView.isShown) {

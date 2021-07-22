@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:00 PM
+ * Last modified 7/22/21, 2:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -163,6 +163,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
                 .beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .remove(productDetailsFragment)
+                .detach(productDetailsFragment)
                 .commitNow()
 
         } else {
