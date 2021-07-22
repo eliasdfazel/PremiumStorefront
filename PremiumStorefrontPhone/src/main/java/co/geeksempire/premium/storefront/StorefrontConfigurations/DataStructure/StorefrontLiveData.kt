@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 7:59 AM
+ * Last modified 7/22/21, 2:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -483,9 +483,9 @@ class StorefrontLiveData : ViewModel() {
 
             for (indexCategory in 0 until productCategories.length()) {
 
-                val allTextCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
+                val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
 
-                if (allTextCheckpoint != "All" && allTextCheckpoint != "Quick") {
+                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
 
                     productCategory = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey)
 
