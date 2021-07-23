@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/23/21, 6:24 AM
+ * Last modified 7/23/21, 7:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,12 +24,18 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowInsetsController
+import android.view.WindowManager
 import androidx.appcompat.widget.AppCompatButton
+import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.DeveloperIntroductionPage
 import co.geeksempire.premium.storefront.R
 
 fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean) {
+
+    if (!BuildConfig.DEBUG) {
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    }
 
     when (themeType) {
         ThemeType.ThemeLight -> {
