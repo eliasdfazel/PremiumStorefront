@@ -3,13 +3,14 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/19/21, 12:50 PM
+  ~ Last modified 7/23/21, 8:56 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
 <resources>
+
     <declare-styleable name="GlowButton">
         <!--  -->
         <attr name="backgroundColor" format="color" />
@@ -56,4 +57,5 @@
     <declare-styleable name="NextedScrollView">
         <attr name="flingVelocityFraction" format="integer"/>
     </declare-styleable>
+
 </resources>

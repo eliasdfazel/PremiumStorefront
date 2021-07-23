@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/23/21, 7:24 AM
+ * Last modified 7/23/21, 8:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -181,6 +181,7 @@ dependencies {
 
 
     implementation 'org.jsoup:jsoup:1.14.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
 
     testImplementation 'junit:junit:4.13.2'
