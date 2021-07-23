@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:43 AM
+ * Last modified 7/23/21, 8:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,6 +59,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
             notificationId = Foreground.NotificationId,
             notificationTitle = applicationContext.getString(R.string.applicationName),
             notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
+            notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
             notificationDone = false)
         ))
 
