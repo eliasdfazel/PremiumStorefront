@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/23/21, 6:17 AM
+  ~ Last modified 7/23/21, 6:33 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -351,6 +351,14 @@
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
 
+    <!-- Content Details  -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/contentDetailsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="7dp"
+        android:visibility="visible" />
+
     <!-- Action Center  -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/actionCenterView"
@@ -430,13 +438,5 @@
         apps:layout_constraintBottom_toBottomOf="@id/actionCenterView"
         apps:layout_constraintStart_toStartOf="@id/actionCenterView"
         apps:layout_constraintEnd_toEndOf="@+id/actionCenterView"/>
-
-    <!-- Content Details  -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/contentDetailsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="7dp"
-        android:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
