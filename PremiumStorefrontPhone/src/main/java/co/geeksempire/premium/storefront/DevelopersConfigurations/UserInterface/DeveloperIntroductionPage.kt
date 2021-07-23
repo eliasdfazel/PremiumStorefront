@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/23/21, 6:22 AM
+ * Last modified 7/23/21, 6:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -94,9 +94,9 @@ class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
 
                 setupUserInterfaceDeveloperPage(it)
 
-                applicationsShowcase = ApplicationsShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, productDetailsFragment, it)
+                applicationsShowcase = ApplicationsShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, productDetailsFragment, this@DeveloperIntroductionPage, it)
 
-                gamesShowcase = GamesShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, productDetailsFragment, it)
+                gamesShowcase = GamesShowcase(this@DeveloperIntroductionPage, developerIntroductionLayoutBinding.productShowcaseRecyclerView, developerIntroductionLayoutBinding.contentDetailsContainer, productDetailsFragment, this@DeveloperIntroductionPage, it)
 
             }
 

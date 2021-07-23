@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 11:37 AM
+ * Last modified 7/23/21, 6:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,13 +25,14 @@ class GamesShowcase (private val context: AppCompatActivity,
                      private val productShowcaseRecyclerView: RecyclerView,
                      private val contentDetailsContainer: FragmentContainerView,
                      private val productDetailsFragment: ProductDetailsFragment,
-                     private val themeType: Boolean) : FragmentInterface {
+                     private val fragmentInterface: FragmentInterface,
+                     private val themeType: Boolean) {
 
     val allContentAdapter: AllContentAdapter by lazy {
         AllContentAdapter(context = context,
             contentDetailsContainer = contentDetailsContainer,
             productDetailsFragment = productDetailsFragment,
-            fragmentInterface = this@GamesShowcase)
+            fragmentInterface = fragmentInterface)
     }
 
     fun prepareToPresent(applicationsList: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
