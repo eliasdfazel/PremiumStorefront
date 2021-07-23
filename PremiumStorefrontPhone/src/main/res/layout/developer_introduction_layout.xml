@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/22/21, 8:23 AM
+  ~ Last modified 7/23/21, 6:17 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -350,6 +350,86 @@
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Action Center  -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/actionCenterView"
+        android:layout_width="313dp"
+        android:layout_height="wrap_content"
+        android:padding="13dp"
+        android:layout_marginVertical="13dp"
+        android:scaleType="fitCenter"
+        android:elevation="21dp"
+        android:alpha="0.731"
+        android:src="@drawable/action_center_shadow_background_light"
+        android:visibility="invisible"
+
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/actionCenterBlurView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="13dp"
+        android:layout_marginVertical="19dp"
+        android:elevation="21dp"
+        android:visibility="invisible"
+
+        apps:realtimeBlurRadius="5dp"
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/light_transparent_higher"
+        apps:realtimeSecondColor="@color/light_transparent_higher"
+        apps:realtimeBlurTopLeft="51dp"
+        apps:realtimeBlurTopRight="51dp"
+        apps:realtimeBlurBottomLeft="51dp"
+        apps:realtimeBlurBottomRight="51dp"
+
+        apps:layout_constraintTop_toTopOf="@id/actionCenterView"
+        apps:layout_constraintBottom_toBottomOf="@id/actionCenterView"
+        apps:layout_constraintStart_toStartOf="@id/actionCenterView"
+        apps:layout_constraintEnd_toEndOf="@id/actionCenterView"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/leftActionView"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/action_center_left"
+        android:elevation="23dp"
+        android:visibility="invisible"
+
+        apps:layout_constraintTop_toTopOf="@id/actionCenterView"
+        apps:layout_constraintBottom_toBottomOf="@id/actionCenterView"
+        apps:layout_constraintStart_toStartOf="@id/actionCenterView"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/rightActionView"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/action_center_right"
+        android:elevation="23dp"
+        android:visibility="invisible"
+
+        apps:layout_constraintTop_toTopOf="@id/actionCenterView"
+        apps:layout_constraintBottom_toBottomOf="@id/actionCenterView"
+        apps:layout_constraintEnd_toEndOf="@+id/actionCenterView"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/middleActionView"
+        android:layout_width="113dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/action_center_middle"
+        android:elevation="23dp"
+        android:visibility="invisible"
+
+        apps:layout_constraintTop_toTopOf="@id/actionCenterView"
+        apps:layout_constraintBottom_toBottomOf="@id/actionCenterView"
+        apps:layout_constraintStart_toStartOf="@id/actionCenterView"
+        apps:layout_constraintEnd_toEndOf="@+id/actionCenterView"/>
 
     <!-- Content Details  -->
     <androidx.fragment.app.FragmentContainerView

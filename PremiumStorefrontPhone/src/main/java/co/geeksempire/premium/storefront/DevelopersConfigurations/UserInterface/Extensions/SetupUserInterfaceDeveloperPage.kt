@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 8:15 AM
+ * Last modified 7/23/21, 6:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,6 +58,8 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
 
             }
 
+            prepareActionCenterUserInterface.design(ThemeType.ThemeLight)
+
             developerIntroductionLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
 
             developerIntroductionLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
@@ -93,6 +95,8 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
                 window.decorView.systemUiVisibility = 0
 
             }
+
+            prepareActionCenterUserInterface.design(ThemeType.ThemeDark)
 
             developerIntroductionLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 2:56 AM
+ * Last modified 7/23/21, 6:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
+import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.DevelopersConfigurations.DataStructure.DeveloperLiveData
@@ -36,6 +38,7 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Animations.startTypingAnimation
 import co.geeksempire.premium.storefront.Utils.UI.Colors.Gradient
 import co.geeksempire.premium.storefront.Utils.UI.Colors.gradientText
+import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.DeveloperIntroductionLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -47,7 +50,7 @@ import com.bumptech.glide.request.target.Target
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class DeveloperIntroductionPage : AppCompatActivity() {
+class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
 
     val developerLiveData: DeveloperLiveData by lazy {
         ViewModelProvider(this@DeveloperIntroductionPage).get(DeveloperLiveData::class.java)
@@ -59,6 +62,14 @@ class DeveloperIntroductionPage : AppCompatActivity() {
 
     val productDetailsFragment: ProductDetailsFragment by lazy {
         ProductDetailsFragment()
+    }
+
+    val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
+        PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = developerIntroductionLayoutBinding.actionCenterView, actionLeftView = developerIntroductionLayoutBinding.leftActionView, actionMiddleView = developerIntroductionLayoutBinding.middleActionView, actionRightView = developerIntroductionLayoutBinding.rightActionView)
+    }
+
+    val actionCenterOperations: ActionCenterOperations by lazy {
+        ActionCenterOperations()
     }
 
     lateinit var applicationsShowcase: ApplicationsShowcase
@@ -369,6 +380,33 @@ class DeveloperIntroductionPage : AppCompatActivity() {
     override fun onBackPressed() {
 
         backButtonAction()
+
+    }
+
+    override fun fragmentCreated(applicationPackageName: String, applicationName: String, applicationSummary: String) {
+        super.fragmentCreated(applicationPackageName, applicationName, applicationSummary)
+
+        actionCenterOperations.setupDeveloperVisibility(this@DeveloperIntroductionPage)
+
+        actionCenterOperations.setupForDeveloperDetails(context = this@DeveloperIntroductionPage,
+            applicationPackageName = applicationPackageName?:packageName,
+            applicationName = applicationName?:getString(R.string.applicationName),
+            applicationSummary = applicationSummary?:getString(R.string.applicationSummary))
+
+        lifecycleScope.launch {
+            themePreferences.checkThemeLightDark().collect {
+
+                prepareActionCenterUserInterface.setupIconsForDetails(it)
+
+            }
+        }
+
+    }
+
+    override fun fragmentDestroyed() {
+        super.fragmentDestroyed()
+
+        actionCenterOperations.setupDeveloperVisibility(this@DeveloperIntroductionPage)
 
     }
 

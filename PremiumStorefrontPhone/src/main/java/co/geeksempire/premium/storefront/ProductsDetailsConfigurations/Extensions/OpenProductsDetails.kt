@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 2:55 AM
+ * Last modified 7/23/21, 6:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,8 +29,6 @@ fun openProductsDetails(context: AppCompatActivity, fragmentInterface: FragmentI
                         storefrontContents: StorefrontContentsData) = CoroutineScope(Dispatchers.Main).launch {
 
     delay(333)
-
-    contentDetailsContainer.bringToFront()
 
     productDetailsFragment.apply {
         this@apply.instanceOfProductDetailsFragment = productDetailsFragment

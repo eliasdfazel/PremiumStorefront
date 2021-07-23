@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/23/21, 5:38 AM
+ * Last modified 7/23/21, 6:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils
 import androidx.core.view.isInvisible
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.DeveloperIntroductionPage
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.filteringSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.searchingSetup
@@ -239,6 +240,83 @@ class ActionCenterOperations {
 
         /* Rate */
         context.categoryDetailsLayoutBinding.rightActionView.setOnClickListener {
+
+            openPlayStoreToInstall(context = context,
+                aPackageName = applicationPackageName,
+                applicationName = applicationName,
+                applicationSummary = applicationSummary)
+
+        }
+
+    }
+
+    /*
+     * Developer
+     */
+    fun setupDeveloperVisibility(context: DeveloperIntroductionPage) {
+
+        if (context.developerIntroductionLayoutBinding.actionCenterView.isShown) {
+
+            context.developerIntroductionLayoutBinding.actionCenterView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            context.developerIntroductionLayoutBinding.actionCenterView.visibility = View.INVISIBLE
+
+            context.developerIntroductionLayoutBinding.actionCenterBlurView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            context.developerIntroductionLayoutBinding.actionCenterBlurView.visibility = View.INVISIBLE
+
+            context.developerIntroductionLayoutBinding.leftActionView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            context.developerIntroductionLayoutBinding.leftActionView.visibility = View.INVISIBLE
+
+            context.developerIntroductionLayoutBinding.middleActionView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            context.developerIntroductionLayoutBinding.middleActionView.visibility = View.INVISIBLE
+
+            context.developerIntroductionLayoutBinding.rightActionView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            context.developerIntroductionLayoutBinding.rightActionView.visibility = View.INVISIBLE
+
+        } else if (context.developerIntroductionLayoutBinding.actionCenterView.isInvisible) {
+
+            context.developerIntroductionLayoutBinding.actionCenterView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            context.developerIntroductionLayoutBinding.actionCenterView.visibility = View.VISIBLE
+
+            context.developerIntroductionLayoutBinding.actionCenterBlurView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            context.developerIntroductionLayoutBinding.actionCenterBlurView.visibility = View.VISIBLE
+
+            context.developerIntroductionLayoutBinding.leftActionView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            context.developerIntroductionLayoutBinding.leftActionView.visibility = View.VISIBLE
+
+            context.developerIntroductionLayoutBinding.middleActionView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            context.developerIntroductionLayoutBinding.middleActionView.visibility = View.VISIBLE
+
+            context.developerIntroductionLayoutBinding.rightActionView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            context.developerIntroductionLayoutBinding.rightActionView.visibility = View.VISIBLE
+
+        }
+
+    }
+
+    fun setupForDeveloperDetails(context: DeveloperIntroductionPage, applicationPackageName: String, applicationName: String, applicationSummary: String) {
+
+        /* Share */
+        context.developerIntroductionLayoutBinding.leftActionView.setOnClickListener {
+
+            shareApplication(context = context,
+                aPackageName = applicationPackageName,
+                applicationName = applicationName,
+                applicationSummary = applicationSummary)
+
+        }
+
+        /* Install */
+        context.developerIntroductionLayoutBinding.middleActionView.setOnClickListener {
+
+            openPlayStoreToInstall(context = context,
+                aPackageName = applicationPackageName,
+                applicationName = applicationName,
+                applicationSummary = applicationSummary)
+
+        }
+
+        /* Rate */
+        context.developerIntroductionLayoutBinding.rightActionView.setOnClickListener {
 
             openPlayStoreToInstall(context = context,
                 aPackageName = applicationPackageName,
