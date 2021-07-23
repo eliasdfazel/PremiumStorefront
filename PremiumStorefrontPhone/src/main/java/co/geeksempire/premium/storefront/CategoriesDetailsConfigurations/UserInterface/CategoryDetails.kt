@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 2:56 AM
+ * Last modified 7/23/21, 6:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,8 @@ import androidx.core.view.isGone
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
+import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.Extensions.setupCategoryDetailsUserInterface
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations.ProductsOfCategory
@@ -62,6 +64,14 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
     val uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter by lazy {
         UniqueRecommendationsCategoryAdapter(this@CategoryDetails)
+    }
+
+    val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
+        PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = categoryDetailsLayoutBinding.actionCenterView, actionLeftView = categoryDetailsLayoutBinding.leftActionView, actionMiddleView = categoryDetailsLayoutBinding.middleActionView, actionRightView = categoryDetailsLayoutBinding.rightActionView)
+    }
+
+    val actionCenterOperations: ActionCenterOperations by lazy {
+        ActionCenterOperations()
     }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
@@ -201,6 +211,21 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
         categoryDetailsLayoutBinding.categoryIconImageView.visibility = View.INVISIBLE
         categoryDetailsLayoutBinding.categoryNameTextView.visibility = View.INVISIBLE
 
+        actionCenterOperations.setupCategoryVisibility(this@CategoryDetails)
+
+        actionCenterOperations.setupForCategoryDetails(context = this@CategoryDetails,
+            applicationPackageName = applicationPackageName?:packageName,
+            applicationName = applicationName?:getString(R.string.applicationName),
+            applicationSummary = applicationSummary?:getString(R.string.applicationSummary))
+
+        lifecycleScope.launch {
+            themePreferences.checkThemeLightDark().collect {
+
+                prepareActionCenterUserInterface.setupIconsForDetails(it)
+
+            }
+        }
+
     }
 
     override fun fragmentDestroyed() {
@@ -208,6 +233,8 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
         categoryDetailsLayoutBinding.categoryIconImageView.visibility = View.VISIBLE
         categoryDetailsLayoutBinding.categoryNameTextView.visibility = View.VISIBLE
+
+        actionCenterOperations.setupCategoryVisibility(this@CategoryDetails)
 
     }
 
