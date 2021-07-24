@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:02 AM
+ * Last modified 7/24/21, 6:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,8 +27,6 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
             "&" +
             "category=${GeneralEndpoint.QueryType.ApplicationsQuery}" +
             "&" +
-            "exclude=2341" +
-            "&" +
             "orderby=date" +
             "&" +
             "order=desc"
@@ -44,9 +42,7 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "&" +
                 "per_page=${productPerPage}" +
                 "&" +
-                "page=${numberOfPage}" +
-                "&" +
-                "exclude=2341"
+                "page=${numberOfPage}"
 
     fun getNewApplicationsEndpoint(numberOfProducts: Int = 3, numberOfPage: Int = 1) : String =
         "${getAllAndroidApplicationsEndpoint()}" +
@@ -54,8 +50,6 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "per_page=${numberOfProducts}" +
                 "&" +
                 "page=${numberOfPage}" +
-                "&" +
-                "exclude=2341" +
                 "&" +
                 "orderby=date" +
                 "&" +
@@ -67,8 +61,6 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "per_page=${numberOfProducts}" +
                 "&" +
                 "page=${numberOfPage}" +
-                "&" +
-                "exclude=2341" +
                 "&" +
                 "orderby=date" +
                 "&" +
