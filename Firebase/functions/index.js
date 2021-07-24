@@ -134,17 +134,56 @@ exports.triggerBackgroundUpdatingProcessMovies = functions.runWith(runtimeOption
 
 exports.transferApplicationsData = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
 
+    const IdKey = "id"
+
+    const NameKey = "name"
+    const DescriptionKey = "description"
+    const SummaryKey = "short_description"
+
+    const RegularPriceKey = "regular_price"
+    const SalePriceKey = "sale_price"
+
+    const CategoriesKey = "categories"
+    const TagsKey = "tags"
+
+    const ImagesKey = "images"
+    const ImageKey = "image"
+    const ImageSourceKey = "src"
+
+    const AttributesKey = "attributes"
+    const AttributeOptionsKey = "options"
+
+    const AttributesPackageNameKey = "Package Name"
+
+    const AttributesAndroidCompatibilitiesKey = "Android Compatibilies"
+    const AttributesContentSafetyRatingKey = "Content Safety Rating"
+
+    const AttributesDeveloperEmailKey = "Developer Email"
+    const AttributesDeveloperCountryKey = "Developer Country"
+    const AttributesDeveloperStateKey = "Developer State"
+
+    const AttributesDeveloperCityKey = "Developer City"
+    const AttributesDeveloperNameKey = "Developer Name"
+    const AttributesDeveloperWebsiteKey = "Developer Website"
+
+    const AttributesRatingKey = "Rating"
+    const AttributesYoutubeIntroductionKey = "Youtube Introduction"
+
+    const AttributesVerticalArtKey = "Vertical Art"
+
     var numberOfPage = req.query.numberOfPage;
 
     if (numberOfPage == null) {
         numberOfPage = 1;
     }
 
-    var xmlHttpRequest = new XMLHttpRequest();
-    xmlHttpRequest.open('GET', 'https://geeksempire.co/wp-json/wc/v3/products?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
+    var applicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
         + '&page=' + numberOfPage
-        + '&per_page=99'
-        + '&category=80', true);
+        + '&per_page=100'
+        + '&category=80';
+
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('GET', applicationsEndpoint, true);
     xmlHttpRequest.setRequestHeader('accept', 'application/json');
     xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
     xmlHttpRequest.onreadystatechange = function () {
@@ -158,10 +197,63 @@ exports.transferApplicationsData = functions.runWith(runtimeOptions).https.onReq
 
     };
     xmlHttpRequest.onload = function () {
-  
-        var jsonParserResponseText = JSON.parse(xmlHttpRequest.responseText);
 
-        
+        var jsonArrayParserResponse = JSON.parse(xmlHttpRequest.responseText);
+
+        jsonArrayParserResponse.forEach((jsonObject) => {
+
+            var applicationName = jsonObject[NameKey];
+
+            /* Start - Images */
+            var featuredContentImages = jsonObject[ImagesKey];
+
+            var productIcon = (featuredContentImages[0])[ImageSourceKey];
+            var productCover = null;
+            try {
+                productCover = (featuredContentImages[2])[ImageSourceKey];
+            } catch (exception) {
+                productCover = null
+            }
+            /* End - Images */
+
+            /* Start - Primary Category */
+            var productCategories = jsonObject[CategoriesKey];
+
+            var productCategory = (productCategories[productCategories.length - 1]);
+
+            var productCategoryName = "All Products";
+            var productCategoryId = 15;
+
+            productCategories.forEach((productCategory) => {
+
+                var textCheckpoint = (productCategory)[NameKey].split(" ")[0];
+
+                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
+
+                    productCategoryName = productCategory[NameKey];
+                    productCategoryId = productCategory[IdKey];
+
+                }
+
+            });
+            /* End - Primary Category */
+
+            /* Start - Attributes */
+            var contentAttributes = featuredContentJsonObject[AttributesKey]
+
+            contentAttributes.forEach((attributesJsonObject) => {
+
+                var attributeName = attributesJsonObject[NameKey]
+                var attributeValue = AttributeOptionsKey[0].toString()
+
+                //Add More To Document
+
+            });
+            /* End - Attributes */
+
+            res.status(200).send('<br/>' + '>   ' + applicationName + ': ' + productIcon + ' | ' + productCategoryName);
+
+        });
 
     };
     xmlHttpRequest.send();
