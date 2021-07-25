@@ -489,7 +489,7 @@ async function setProductsApplicationsData(jsonObject) {
     try {
         productCover = (featuredContentImages[2])[ImageSourceKey];
     } catch (exception) {
-        productCover = null
+        productCover = null;
     }
     /* End - Images */
 
@@ -507,6 +507,12 @@ async function setProductsApplicationsData(jsonObject) {
 
             productCategoryName = productCategory[NameKey].split(" ")[0];
             productCategoryId = productCategory[IdKey];
+
+        }
+
+        if (textCheckpoint == "Unique") {
+
+            uniqueRecommendation = true;
 
         }
 
@@ -650,6 +656,8 @@ async function setProductsGamesData(jsonObject) {
 
     var productId = jsonObject[IdKey];
 
+    var uniqueRecommendation = false;
+
     var applicationName = jsonObject[NameKey];
 
     var productDescription = jsonObject[DescriptionKey];
@@ -687,6 +695,12 @@ async function setProductsGamesData(jsonObject) {
 
         }
 
+        if (textCheckpoint == "Unique") {
+
+            uniqueRecommendation = true;
+
+        }
+
     });
     /* End - Primary Category */
 
@@ -710,6 +724,7 @@ async function setProductsGamesData(jsonObject) {
         productPrice: productPrice,
         productSalePrice: productSalePrice,
         productCreatedData: admin.firestore.FieldValue.serverTimestamp(),
+        uniqueRecommendation: uniqueRecommendation,
     }).then(result => {
 
 
