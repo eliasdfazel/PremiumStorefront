@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 7:58 AM
+ * Last modified 7/24/21, 4:33 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -87,6 +87,7 @@ data class StorefrontContentsData (var productName: String, var productDescripti
                                    var productIconLink: String, var productCoverLink: String?,
                                    var productPrice: String,
                                    var productSalePrice: String,
+                                   var uniqueRecommendation: Boolean = false,
                                    var productAttributes: HashMap<String, String?>,
                                    var installViewText: String = "Install Now")
 
