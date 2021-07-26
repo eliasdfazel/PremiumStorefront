@@ -2,15 +2,18 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/17/21, 5:07 AM
+ * Last modified 7/26/21, 6:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
+rootProject.name = "Premium Storefront"
+
 include ':BalloonOptionsMenuLibrary'
 include ':CustomShapes'
 include ':LoadingSpin'
 include ':BlurryEffectLibrary'
 
 include ':PremiumStorefrontPhone'
-rootProject.name = "Premium Storefront"
+include ':PremiumStorefrontPhoneMovies'
+include ':PremiumStorefrontBooks'

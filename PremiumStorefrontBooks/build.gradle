@@ -1,0 +1,63 @@
+/*
+ * Copyright © 2021 By Geeks Empire.
+ *
+ * Created by Elias Fazel
+ * Last modified 7/26/21, 6:39 AM
+ *
+ * Licensed Under MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+plugins {
+    id 'com.android.dynamic-feature'
+
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 25
+        targetSdkVersion 30
+
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "PremiumStorefront"
+    productFlavors {
+        productionConfiguration {
+            dimension "PremiumStorefront"
+
+            versionNameSuffix '[Android][Phone]'
+        }
+        betaConfiguration {
+            dimension "PremiumStorefront"
+
+            versionNameSuffix '[Android][Phone][BETA]'
+        }
+    }
+}
+
+dependencies {
+    implementation project(':PremiumStorefrontPhone')
+
+
+
+    testImplementation 'junit:junit:4.13.2'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.annotation:annotation:1.2.0'
+}
