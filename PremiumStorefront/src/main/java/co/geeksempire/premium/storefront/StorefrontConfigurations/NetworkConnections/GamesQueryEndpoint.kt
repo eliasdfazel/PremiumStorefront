@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/24/21, 6:29 AM
+ * Last modified 7/27/21, 9:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,8 +12,27 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnec
 
 class GamesQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
 
+
     val defaultProductsPerPage = 19
     val defaultNumberOfPage = 1
+
+    /*
+     * Firestore Endpoint
+     */
+
+    fun firestoreSpecificGame(categoryName: String, applicationId: String) : String =
+        generalEndpoint.generalStorefrontDatabaseEndpoint +
+                "/" +
+                "Games" +
+                "/" +
+                categoryName +
+                "/" +
+                applicationId
+
+
+    /*
+     * Wordpress Endpoint
+     */
 
     fun getAllAndroidGamesEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) =
         "https://geeksempire.co/wp-json/wc/v3/products?" +

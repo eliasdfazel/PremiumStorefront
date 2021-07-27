@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 10:11 AM
+ * Last modified 7/27/21, 9:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -423,7 +423,8 @@ class StorefrontApplications : StorefrontActivity() {
                     storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
 
                     PopupShortcutsCreator(applicationContext)
-                        .configure()
+                        .startConfiguration()
+
 
                 } else {
 
@@ -509,13 +510,11 @@ class StorefrontApplications : StorefrontActivity() {
 
             storefrontLayoutBinding.nestedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 
-                if (scrollY > oldScrollY) {
-                    Log.d(this@StorefrontApplications.javaClass.simpleName, "Scrolling Down")
+                if (scrollY > oldScrollY) {//Scrolling Down
 
                     balloonOptionsMenu.removeBalloonOption()
 
-                } else if (scrollY < oldScrollY) {
-                    Log.d(this@StorefrontApplications.javaClass.simpleName, "Scrolling Up")
+                } else if (scrollY < oldScrollY) {//Scrolling Up
 
                     balloonOptionsMenu.removeBalloonOption()
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 8:25 AM
+ * Last modified 7/27/21, 9:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,23 +19,20 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.annotation.Keep
 import androidx.annotation.RequiresApi
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsSerialize
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.ApplicationsQueryEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GamesQueryEndpoint
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
-import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
-import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
+import com.google.firebase.firestore.Source
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
-import org.json.JSONArray
-import org.json.JSONObject
 
 object PopupShortcutsItems {
     const val ShortcutId = "ShortcutId"
@@ -51,6 +48,15 @@ object PopupShortcutsActions {
 data class PopupShortcutsData(var applicationPackageName: String,
                               var applicationName: String, var applicationSummary: String, var applicationIconLink: String)
 
+@Keep
+data class QuickAccessData(var ProductsIds: ArrayList<HashMap<String, Any>>? = null)
+
+object QuickAccessKeys {
+    const val ProductType = "ProductType"
+    const val ProductCategory = "ProductCategory"
+    const val ProductId = "ProductId"
+}
+
 /**
  * POPUP_SHORTCUTS_OPEN_PLAY_STORE
  **/
@@ -60,67 +66,69 @@ class PopupShortcutsCreator (val context: Context) {
 
     private val categoryId: Int = 836
 
-    fun configure() = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun startConfiguration() {
 
         val generalEndpoint = GeneralEndpoint()
 
-        GenericJsonRequest(context, object : JsonRequestResponses {
+        val applicationQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
+        val gamesQueryEndpoint = GamesQueryEndpoint(generalEndpoint)
 
-            override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
-                super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
+        val firestoreDatabase = Firebase.firestore
 
-                shortcutManager.removeAllDynamicShortcuts()
+        firestoreDatabase.document("PremiumStorefront/Products/Android/QuickAccess")
+            .get(Source.SERVER).addOnSuccessListener { documentSnapshot ->
 
-                for (indexContent in 0 until rawDataJsonArray.length()) {
+                if (documentSnapshot.exists()) {
 
-                    val featuredContentJsonObject: JSONObject = rawDataJsonArray[indexContent] as JSONObject
+                    shortcutManager.removeAllDynamicShortcuts()
 
-                    /* Start - Images */
-                    val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+                    documentSnapshot.toObject(QuickAccessData::class.java)!!.ProductsIds?.forEach {
 
-                    val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-                    /* End - Images */
+                        val productCategory = it[QuickAccessKeys.ProductCategory].toString()
+                        val productId = it[QuickAccessKeys.ProductId].toString()
 
-                    /* Start - Attributes */
-                    val featuredContentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+                        val productDocumentEndpoint = when (it[QuickAccessKeys.ProductType]) {
+                            "Applications" -> {
 
-                    val attributesMap = HashMap<String, String>()
+                                applicationQueryEndpoint.firestoreSpecificApplication(productCategory, productId)
 
-                    for (indexAttribute in 0 until featuredContentAttributes.length()) {
+                            }
+                            "Games" -> {
 
-                        val attributesJsonObject: JSONObject =
-                            featuredContentAttributes[indexAttribute] as JSONObject
+                                gamesQueryEndpoint.firestoreSpecificGame(productCategory, productId)
 
-                        attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] =
-                            attributesJsonObject.getJSONArray(
-                                ProductsContentKey.AttributeOptionsKey
-                            )[0].toString()
+                            } else -> applicationQueryEndpoint.firestoreSpecificApplication(productCategory, productId)
+                        }
+
+
+                        println(">>> " + productCategory)
+
+                        firestoreDatabase.document(productDocumentEndpoint)
+                            .get(Source.SERVER).addOnSuccessListener { productDocument ->
+
+                                println(">>> document ::: " + productDocument)
+                                if (productDocument.exists()) {
+
+                                    addShortcutKeyboardTyping(PopupShortcutsData(
+                                        applicationPackageName = productDocument[StorefrontContentsSerialize.PackageName].toString(),
+                                        applicationName = productDocument[StorefrontContentsSerialize.ProductName].toString(),
+                                        applicationSummary = productDocument[StorefrontContentsSerialize.ProductSummary].toString(),
+                                        applicationIconLink = productDocument[StorefrontContentsSerialize.ProductIconLink].toString()
+                                    ))
+
+                                }
+
+                            }
 
                     }
-                    /* End - Attributes */
-
-                    addShortcutKeyboardTyping(PopupShortcutsData(
-                        applicationPackageName = attributesMap[ProductsContentKey.AttributesPackageNameKey].toString(),
-                        applicationName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
-                        applicationSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                        applicationIconLink = productIcon
-                    ))
 
                 }
 
-                if (rawDataJsonArray.length() == generalEndpoint.defaultProductsPerPage) {
+            }.addOnFailureListener {
 
 
-
-                } else {
-
-
-
-                }
 
             }
-
-        }).getMethod(generalEndpoint.getProductsSpecificCategoriesEndpoint(productCategoryId = categoryId))
 
     }
 
@@ -128,7 +136,7 @@ class PopupShortcutsCreator (val context: Context) {
     private fun addShortcutKeyboardTyping(popupShortcutsData: PopupShortcutsData) {
 
         val shortcutsHomeLauncherCategories: HashSet<String> = HashSet<String>()
-        shortcutsHomeLauncherCategories.addAll(arrayOf("Premium", "Storefront", "Shop", "Application", "Game", "Movie", "Book", "Music"))
+        shortcutsHomeLauncherCategories.addAll(arrayOf("Premium", "Storefront", "Shopping", "Application", "Game", "Movie", "Book"))
 
         val intent = Intent(context, PopupShortcutsController::class.java).apply {
             action = PopupShortcutsActions.OpenPlayStoreAction
@@ -142,7 +150,7 @@ class PopupShortcutsCreator (val context: Context) {
         Glide.with(context)
             .asBitmap()
             .load(popupShortcutsData.applicationIconLink)
-            .transform(RoundedCorners(dpToInteger(context, 37)))
+            .transform(RoundedCorners(dpToInteger(context, 51)))
             .listener(object : RequestListener<Bitmap> {
 
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 10:11 AM
+ * Last modified 7/27/21, 9:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,8 +64,8 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateRespons
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.*
+import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
-import co.geeksempire.premium.storefront.Utils.UI.Display.displayY
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureListenerConstants
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.SwipeGestureListener
@@ -360,11 +360,6 @@ class StorefrontGames : StorefrontActivity() {
 
                 if (it.isNotEmpty()) {
 
-                    val numberOfItemsToLoad = displayY(applicationContext) / (dpToInteger(applicationContext, 307))
-                    Log.d(this@StorefrontGames.javaClass.simpleName, "Number Of Items To Load | Featured Content: ${numberOfItemsToLoad}")
-
-                    val dataToSetup = it.subList(0, numberOfItemsToLoad)
-
                     featuredContentAdapter.storefrontContents.clear()
                     featuredContentAdapter.storefrontContents.addAll(it)
 
@@ -372,6 +367,9 @@ class StorefrontGames : StorefrontActivity() {
 
                     storefrontLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
                     storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+
+                    PopupShortcutsCreator(applicationContext)
+                        .startConfiguration()
 
                 } else {
 
@@ -437,13 +435,11 @@ class StorefrontGames : StorefrontActivity() {
 
             storefrontLayoutBinding.nestedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 
-                if (scrollY > oldScrollY) {
-                    Log.d(this@StorefrontGames.javaClass.simpleName, "Scrolling Down")
+                if (scrollY > oldScrollY) {//Scrolling Down
 
                     balloonOptionsMenu.removeBalloonOption()
 
-                } else if (scrollY < oldScrollY) {
-                    Log.d(this@StorefrontGames.javaClass.simpleName, "Scrolling Up")
+                } else if (scrollY < oldScrollY) {//Scrolling Up
 
                     balloonOptionsMenu.removeBalloonOption()
 

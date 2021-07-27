@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/24/21, 4:33 PM
+ * Last modified 7/27/21, 9:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -74,6 +74,43 @@ object ProductDataKey {
 
     const val ProductDeveloperEmail = "ProductDeveloperEmail"
 }
+
+object StorefrontContentsSerialize {
+    const val PackageName: String = "Package Name"
+    const val DeveloperName: String = "Developer Name"
+
+    const val DeveloperCity: String = "Developer City"
+    const val DeveloperCountry: String = "Developer Country"
+    const val DeveloperState: String = "Developer State"
+
+    const val DeveloperEmail: String = "Developer mail"
+    const val DeveloperWebsite: String = "Developer Website"
+
+    const val Rating: String = "Rating"
+    const val ContentSafetyRating: String = "Content Safety Rating"
+
+    const val AndroidCompatibilies: String = "Android Compatibilies"
+
+    const val YoutubeIntroduction: String = "Youtube Introduction"
+    const val VerticalArt: String = "Vertical Art"
+
+    const val ProductName: String = "productName"
+    const val ProductDescription: String = "productDescription"
+    const val ProductSummary: String = "productSummary"
+
+    const val ProductCategoryId: String = "productCategoryId"
+    const val ProductCategoryName: String = "ProductCategoryName"
+
+    const val ProductCoverLink: String = "productCoverLink"
+    const val ProductCreatedData: String = "productCreatedData"
+    const val ProductIconLink: String = "productIconLink"
+
+    const val ProductPrice: String = "productPrice"
+    const val ProductSalePrice: String = "productSalePrice"
+
+    const val UniqueRecommendation: String = "uniqueRecommendation"
+}
+
 
 /**
  *

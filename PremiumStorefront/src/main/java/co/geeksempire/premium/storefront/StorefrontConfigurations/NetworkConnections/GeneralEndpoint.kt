@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 8:25 AM
+ * Last modified 7/27/21, 7:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,24 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections
 
 class GeneralEndpoint {
+
+    val defaultProductsPerPage = 19
+    val defaultNumberOfPage = 1
+
+    /*
+     * Firestore Endpoint
+     */
+
+    val generalStorefrontDatabaseEndpoint = "/PremiumStorefront/Products/Android"
+
+    fun firestoreQuickAccessEndpoint() : String =
+        generalStorefrontDatabaseEndpoint +
+            "/" +
+            "QuickAccess"
+
+    /*
+     * Wordpress Endpoint
+     */
 
     object QueryType {
         const val ApplicationsQuery = "80"
@@ -23,9 +41,6 @@ class GeneralEndpoint {
     }
 
     val generalStorefrontEndpoint = "https://geeksempire.co/wp-json/wc/v3/"
-
-    val defaultProductsPerPage = 19
-    val defaultNumberOfPage = 1
 
     fun consumerKey(): String {
 

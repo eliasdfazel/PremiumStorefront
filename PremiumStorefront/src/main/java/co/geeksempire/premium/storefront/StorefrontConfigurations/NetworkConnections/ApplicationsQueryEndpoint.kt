@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/24/21, 3:40 PM
+ * Last modified 7/27/21, 8:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,24 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
 
     val defaultProductsPerPage = 19
     val defaultNumberOfPage = 1
+
+    /*
+     * Firestore Endpoint
+     */
+
+    fun firestoreSpecificApplication(categoryName: String, applicationId: String) : String =
+        generalEndpoint.generalStorefrontDatabaseEndpoint +
+                "/" +
+                "Applications" +
+                "/" +
+                categoryName +
+                "/" +
+                applicationId
+
+
+    /*
+     * Wordpress Endpoint
+     */
 
     fun getAllAndroidApplicationsEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) =
         "https://geeksempire.co/wp-json/wc/v3/products?" +
