@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/27/21, 9:42 AM
+ * Last modified 7/27/21, 9:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -100,13 +100,9 @@ class PopupShortcutsCreator (val context: Context) {
                             } else -> applicationQueryEndpoint.firestoreSpecificApplication(productCategory, productId)
                         }
 
-
-                        println(">>> " + productCategory)
-
                         firestoreDatabase.document(productDocumentEndpoint)
                             .get(Source.SERVER).addOnSuccessListener { productDocument ->
 
-                                println(">>> document ::: " + productDocument)
                                 if (productDocument.exists()) {
 
                                     addShortcutKeyboardTyping(PopupShortcutsData(
