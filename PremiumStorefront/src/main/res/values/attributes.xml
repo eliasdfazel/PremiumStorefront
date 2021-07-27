@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/23/21, 9:08 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+
+    <declare-styleable name="GlowButton">
+        <!--  -->
+        <attr name="backgroundColor" format="color" />
+
+        <!--  -->
+        <attr name="glowColor" format="color" />
+
+        <!--  -->
+        <attr name="unpressedGlowSize" format="dimension" />
+        <!--  -->
+        <attr name="pressedGlowSize" format="dimension" />
+
+        <!--  -->
+        <attr name="shadowX" format="dimension" />
+        <attr name="shadowY" format="dimension" />
+
+        <!--  -->
+        <attr name="cornerRadiusTopLeft" format="dimension"/>
+        <!--  -->
+        <attr name="cornerRadiusTopRight" format="dimension"/>
+        <!--  -->
+        <attr name="cornerRadiusBottomLeft" format="dimension"/>
+        <!--  -->
+        <attr name="cornerRadiusBottomRight" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="FluidSlider">
+        <attr name="bar_color" format="color"/>
+        <attr name="bubble_color" format="color"/>
+        <attr name="bar_text_color" format="color"/>
+        <attr name="bubble_text_color" format="color"/>
+        <attr name="start_text" format="string"/>
+        <attr name="end_text" format="string"/>
+        <attr name="text_size" format="dimension"/>
+        <attr name="duration" format="integer"/>
+        <!-- Initial position in range from 0.0 to 1.0 -->
+        <attr name="initial_position" format="float"/>
+        <attr name="size" format="enum">
+            <enum name="small" value="0"/>
+            <enum name="normal" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="NextedScrollView">
+        <attr name="flingVelocityFraction" format="integer"/>
+    </declare-styleable>
+
+</resources>

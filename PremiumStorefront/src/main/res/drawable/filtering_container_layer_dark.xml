@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/12/21, 7:43 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <corners android:radius="19dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#00ffffff"
+                android:centerColor="@color/transparent"
+                android:endColor="#0000A5FF"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <corners android:radius="19dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#10ffffff"
+                android:centerColor="@color/transparent"
+                android:endColor="#1000A5FF"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <corners android:radius="19dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#20ffffff"
+                android:centerColor="@color/transparent"
+                android:endColor="#2000A5FF"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <corners android:radius="19dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#30ffffff"
+                android:centerColor="@color/transparent"
+                android:endColor="#3000A5FF"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
+            <corners android:radius="19dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#50ffffff"
+                android:centerColor="@color/transparent"
+                android:endColor="#5000A5FF"/>
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="19dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#ffffff"
+                android:centerColor="@color/transparent"
+                android:endColor="#00A5FF"/>
+        </shape>
+    </item>
+
+    <item
+        android:start="2dp"
+        android:end="2dp"
+        android:top="2dp"
+        android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#000000" />
+            <corners android:radius="19dp" />
+        </shape>
+    </item>
+
+</layer-list>

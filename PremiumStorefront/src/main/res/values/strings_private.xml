@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 5/28/21, 12:13 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+
+    <string name="consumerKey">ck_e469d717bd778da4fb9ec24881ee589d9b202662</string>
+    <string name="consumerSecret">cs_ac53c1b36d1a85e36a362855d83af93f0d377686</string>
+
+</resources>

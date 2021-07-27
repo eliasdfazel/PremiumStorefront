@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/22/21, 9:56 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootViewFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/premiumLight"
+    tools:context=".StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/applicationFeaturedImageView"
+        android:layout_width="match_parent"
+        android:layout_height="239dp"
+        android:scaleType="centerCrop"
+        android:background="@color/transparent"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="11dp"
+        android:cacheColorHint="@android:color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="137dp"
+            android:paddingBottom="129dp"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/allContentBackground"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/product_details_background_light"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/brandingBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tint="@color/dark"
+                android:alpha="0.03"
+                android:src="@drawable/premium_storefront_logo"/>
+
+            <net.geeksempire.blurry.effect.view.RealtimeBlurView
+                android:id="@+id/applicationIconBlurView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+
+                apps:realtimeBlurRadius="11dp"
+                apps:realtimeBlurGradientType="linear"
+                apps:realtimeFirstColor="@color/default_color_transparent_high"
+                apps:realtimeSecondColor="@color/light_transparent_high"
+                apps:realtimeBlurTopLeft="43dp"
+                apps:realtimeBlurTopRight="43dp"
+                apps:realtimeBlurBottomLeft="43dp"
+                apps:realtimeBlurBottomRight="43dp"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/applicationIconImageView"
+                android:layout_width="159dp"
+                android:layout_height="159dp"
+                android:padding="19dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/premium_storefront_logo"
+                android:background="@drawable/product_icon_dimension_effect_light"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/applicationNameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:layout_marginHorizontal="19dp"
+                android:paddingTop="23dp"
+                android:paddingBottom="11dp"
+                android:lines="1"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:text="@string/applicationName"
+                android:textSize="51sp"
+                android:textColor="@color/dark"
+                android:fontFamily="@font/upcil"
+                android:focusable="true"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+
+                apps:layout_constraintTop_toBottomOf="@id/applicationIconImageView"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/applicationDeveloper"
+                android:layout_width="0dp"
+                android:layout_height="51dp"
+                android:layout_marginVertical="11dp"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:textSize="15sp"
+                android:textColor="@color/default_color"
+                android:text="Geeks Empire"
+                android:textAllCaps="true"
+                android:shadowColor="#30237DAE"
+                android:shadowRadius="7"
+                android:shadowDx="0"
+                android:shadowDy="5"
+                android:letterSpacing="0.137"
+                android:fontFamily="@font/ubuntu"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:visibility="invisible"
+
+                apps:layout_constraintWidth_percent="0.57"
+                apps:layout_constraintTop_toBottomOf="@id/applicationIconImageView"
+                apps:layout_constraintStart_toStartOf="@id/applicationNameTextView"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/categoryIconImageView"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:paddingVertical="7dp"
+                android:paddingStart="7dp"
+                android:paddingEnd="1dp"
+                android:layout_marginVertical="119dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/premiumDark"
+                android:src="@drawable/premium_storefront_icon"
+                android:background="@drawable/product_details_category_icon"
+
+                apps:layout_constraintStart_toStartOf="@id/applicationNameTextView"
+                apps:layout_constraintTop_toBottomOf="@id/applicationIconImageView"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/categoryNameTextView"
+                android:layout_width="239dp"
+                android:layout_height="43dp"
+                android:layout_marginHorizontal="61.9dp"
+                android:paddingHorizontal="7dp"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:textSize="12sp"
+                android:textColor="@color/default_color_game"
+                android:text="Shopping"
+                android:textAllCaps="true"
+                android:shadowColor="#30ae2357"
+                android:shadowRadius="7"
+                android:shadowDx="0"
+                android:shadowDy="5"
+                android:letterSpacing="0.137"
+                android:fontFamily="@font/ubuntu"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/product_details_category_name"
+
+                apps:layout_constraintTop_toTopOf="@id/categoryIconImageView"
+                apps:layout_constraintBottom_toBottomOf="@id/categoryIconImageView"
+                apps:layout_constraintStart_toStartOf="parent"/>
+
+            <com.google.android.youtube.player.YouTubeThumbnailView
+                android:id="@+id/applicationYoutubeView"
+                android:layout_width="match_parent"
+                android:layout_height="199dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginHorizontal="19dp"
+                android:visibility="gone"
+
+                apps:layout_constraintTop_toBottomOf="@id/categoryNameTextView"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/playYoutubeView"
+                android:layout_width="match_parent"
+                android:layout_height="193dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginHorizontal="13dp"
+                android:padding="51dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/youtube_icon"
+                android:visibility="gone"
+
+                apps:layout_constraintTop_toTopOf="@id/applicationYoutubeView"
+                apps:layout_constraintBottom_toBottomOf="@id/applicationYoutubeView"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/applicationDescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="19dp"
+                android:paddingTop="37dp"
+                android:paddingBottom="13dp"
+                android:text="@string/applicationSummary"
+                android:textSize="15sp"
+                android:textColor="@color/dark"
+                android:fontFamily="@font/play"
+
+                apps:layout_constraintTop_toBottomOf="@id/playYoutubeView" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/informationDetails"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:padding="2dp"
+                android:layout_marginVertical="23dp"
+                android:src="@drawable/information_icon"
+
+                apps:layout_constraintTop_toBottomOf="@id/applicationDescriptionTextView"
+                apps:layout_constraintEnd_toEndOf="@id/applicationRatingImageView"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/locationProductDetails"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="19dp"
+                android:paddingStart="51dp"
+                android:paddingEnd="11dp"
+                android:gravity="center_vertical|start"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="3"
+                android:lines="1"
+                android:singleLine="true"
+                android:textSize="15sp"
+                android:textColor="@color/default_color"
+                android:text="Nashville, United States Of America"
+                android:fontFamily="monospace"
+                android:shadowColor="@color/dark_transparent"
+                android:shadowRadius="5"
+                android:linksClickable="true"
+                android:autoLink="email"
+                android:textColorLink="@color/default_color_dark"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:visibility="invisible"
+
+                apps:layout_constraintTop_toTopOf="@id/informationDetails"
+                apps:layout_constraintBottom_toBottomOf="@id/informationDetails"
+                apps:layout_constraintEnd_toStartOf="@id/informationDetails"
+                apps:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/emailProductDetails"
+                android:layout_width="0dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="19dp"
+                android:paddingStart="51dp"
+                android:paddingEnd="11dp"
+                android:gravity="center_vertical|start"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="3"
+                android:lines="1"
+                android:singleLine="true"
+                android:textSize="15sp"
+                android:textColor="@color/default_color_dark"
+                android:text="Support@GeeksEmpire.net"
+                android:fontFamily="monospace"
+                android:shadowColor="@color/dark_transparent"
+                android:shadowRadius="5"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:visibility="invisible"
+
+                apps:layout_constraintTop_toBottomOf="@id/locationProductDetails"
+                apps:layout_constraintEnd_toStartOf="@id/informationDetails"
+                apps:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/locationProductDetailsIcon"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:padding="7dp"
+                android:src="@drawable/location_icon"
+                android:visibility="invisible"
+
+                apps:layout_constraintTop_toTopOf="@id/locationProductDetails"
+                apps:layout_constraintBottom_toBottomOf="@id/locationProductDetails"
+                apps:layout_constraintStart_toStartOf="@id/locationProductDetails" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/emailProductDetailsIcon"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:padding="5dp"
+                android:src="@drawable/email_icon"
+                android:visibility="invisible"
+
+                apps:layout_constraintTop_toTopOf="@id/emailProductDetails"
+                apps:layout_constraintBottom_toBottomOf="@id/emailProductDetails"
+                apps:layout_constraintStart_toStartOf="@id/emailProductDetails" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/applicationRatingImageView"
+                android:layout_width="99dp"
+                android:layout_height="99dp"
+                android:layout_marginHorizontal="19dp"
+                android:layout_marginVertical="119dp"
+                android:padding="27dp"
+                android:tint="@color/white"
+                android:alpha="0.5"
+                android:src="@drawable/rate_icon"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/applicationRatingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="19dp"
+                android:layout_marginVertical="119dp"
+                android:paddingStart="5dp"
+                android:paddingBottom="7dp"
+                android:gravity="center"
+                android:text="5.0"
+                android:textSize="51sp"
+                android:textColor="@color/default_color_bright"
+                android:fontFamily="@font/neon"
+                android:shadowRadius="11"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowColor="@color/default_color_bright"
+                android:background="@drawable/application_rating_details_glowing_frame"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/goBackView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="3dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:scaleType="fitCenter"
+        android:layout_marginVertical="19dp"
+        android:layout_marginHorizontal="19dp"
+        android:src="@drawable/go_back_layer_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favoriteView"
+        android:layout_width="101dp"
+        android:layout_height="103dp"
+        android:padding="29dp"
+        android:scaleType="fitCenter"
+        android:layout_marginHorizontal="23dp"
+        android:tint="@color/default_color_light"
+        android:src="@drawable/favorite_icon"
+        android:background="@drawable/favorite_layer_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

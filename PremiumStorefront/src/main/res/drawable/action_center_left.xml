@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/20/21, 8:23 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/rippleMask"
+        android:width="100dp"
+        android:height="75dp"
+        android:start="13dp">
+
+        <ripple
+            android:color="@color/black">
+
+            <item android:id="@android:id/mask">
+
+                <shape android:shape="rectangle">
+
+                    <corners
+                        android:topLeftRadius="51dp"
+                        android:topRightRadius="7dp"
+                        android:bottomLeftRadius="51dp"
+                        android:bottomRightRadius="7dp"/>
+
+                    <solid android:color="@color/black" />
+
+                </shape>
+
+            </item>
+
+        </ripple>
+
+    </item>
+
+    <item
+        android:id="@+id/actionCenterLeftIcon"
+        android:gravity="center"
+        android:width="29dp"
+        android:height="29dp"
+        android:drawable="@drawable/sort_icon"/>
+
+</layer-list>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/15/21, 11:48 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="19dp"
+    android:layout_marginEnd="19dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginBottom="11dp"
+    android:background="@android:color/transparent"
+
+    apps:layout_constraintDimensionRatio="1:1">
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/blurryBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        apps:realtimeBlurRadius="19dp"
+        apps:realtimeBlurGradientType="linear"
+        apps:realtimeFirstColor="@color/white"
+        apps:realtimeSecondColor="@color/premiumLight"
+        apps:realtimeBlurTopLeft="19dp"
+        apps:realtimeBlurTopRight="19dp"
+        apps:realtimeBlurBottomLeft="19dp"
+        apps:realtimeBlurBottomRight="19dp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/productIconImageView"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginHorizontal="7dp"
+        android:padding="7.7dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/launcher_foreground_icon"
+        android:background="@drawable/all_application_icon_glowing_frame"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/productRatingStarsView"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginVertical="11dp"
+        android:layout_marginHorizontal="43dp"
+        android:padding="11dp"
+        android:scaleType="fitCenter"
+        android:tint="@color/white"
+        android:src="@drawable/current_rate_icon"
+        android:background="@drawable/application_rating_glowing_frame_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productCurrentRateView"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="31sp"
+        android:text="5.0"
+        android:fontFamily="@font/neon"
+        android:shadowRadius="7"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowColor="@color/red"
+
+        apps:layout_constraintTop_toTopOf="@id/productRatingStarsView"
+        apps:layout_constraintBottom_toBottomOf="@id/productRatingStarsView"
+        apps:layout_constraintStart_toStartOf="@id/productRatingStarsView"
+        apps:layout_constraintEnd_toEndOf="@id/productRatingStarsView"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:paddingHorizontal="19dp"
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/dark"
+        android:textSize="37sp"
+        android:text="@string/applicationName"
+        android:fontFamily="@font/upcil"
+        android:shadowColor="@color/white"
+        android:shadowRadius="11"
+
+        apps:layout_constraintBottom_toBottomOf="@id/productIconImageView"
+        apps:layout_constraintStart_toEndOf="@id/productIconImageView"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productSummaryTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="13dp"
+        android:paddingStart="11dp"
+        android:paddingEnd="19dp"
+        android:gravity="top|start"
+        android:maxLines="3"
+        android:textColor="@color/dark"
+        android:textSize="17sp"
+        android:text="@string/applicationName"
+        android:fontFamily="@font/play"
+
+        apps:layout_constraintTop_toBottomOf="@id/productNameTextView"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/productDividerView"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:paddingVertical="7dp"
+        android:src="@drawable/diamond_solid_icon_light"
+
+        apps:layout_constraintTop_toBottomOf="@id/productSummaryTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/installView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:lines="1"
+        android:ellipsize="end"
+        android:textAllCaps="false"
+        android:text="@string/installNowText"
+        android:textSize="23sp"
+        android:fontFamily="@font/upcil"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+
+        apps:cornerRadius="51dp"
+        apps:icon="@drawable/install_now_icon"
+        apps:iconSize="31dp"
+        apps:iconTint="@color/light"
+        apps:iconGravity="textEnd"
+        apps:rippleColor="@color/white"
+
+        apps:layout_constraintTop_toTopOf="@id/productIconImageView"
+        apps:layout_constraintBottom_toTopOf="@id/productNameTextView"
+        apps:layout_constraintStart_toEndOf="@id/productIconImageView"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

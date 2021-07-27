@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/21/21, 9:32 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_width="199dp"
+    android:layout_height="339dp"
+    android:layout_marginStart="23dp"
+    android:layout_marginEnd="23dp"
+    tools:context=".BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/verticalArtImageView"
+        android:layout_width="199dp"
+        android:layout_height="303dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/unique_vertical_art_layer"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

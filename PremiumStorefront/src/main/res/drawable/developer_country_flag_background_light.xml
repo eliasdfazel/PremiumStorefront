@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/22/21, 8:15 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:height="130dp"
+        android:width="130dp"
+        android:gravity="top|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/premiumLight"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/clearTopLeft"
+        android:height="71dp"
+        android:width="31.3dp"
+        android:gravity="top|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topRightRadius="51dp"/>
+
+            <solid
+                android:color="@color/green"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/clearBottomRight"
+        android:height="31.3dp"
+        android:width="71dp"
+        android:gravity="bottom|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topRightRadius="51dp"/>
+
+            <solid
+                android:color="@color/green"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/clearBottomLeft"
+        android:height="73dp"
+        android:width="73dp"
+        android:gravity="bottom|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/green"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="99dp"
+        android:width="99dp"
+        android:gravity="top|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:bottomLeftRadius="49dp"/>
+
+            <solid
+                android:color="@color/premiumLight"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>

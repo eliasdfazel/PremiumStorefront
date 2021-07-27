@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/16/21, 9:21 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_width="307dp"
+    android:layout_height="182dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="7dp"
+    android:background="@android:color/transparent">
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/backgroundCoverImageView"
+        android:layout_width="307dp"
+        android:layout_height="163dp"
+        android:scaleType="centerCrop"
+
+        apps:shapeDrawable="@drawable/storefront_featured_product_image"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="279dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="131dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="23dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:lines="1"
+        android:singleLine="true"
+        android:textColor="@color/dark"
+        android:textSize="37sp"
+        android:text="@string/applicationName"
+        android:fontFamily="@font/upcil"
+        android:shadowColor="@color/white"
+        android:shadowRadius="17"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/productNameBlur"
+        android:layout_width="279dp"
+        android:layout_height="51dp"
+
+        apps:realtimeBlurRadius="19dp"
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/light_transparent_high"
+        apps:realtimeBlurTopLeft="11dp"
+        apps:realtimeBlurTopRight="1dp"
+        apps:realtimeBlurBottomLeft="11dp"
+        apps:realtimeBlurBottomRight="1dp"
+
+        apps:layout_constraintTop_toTopOf="@id/productNameTextView"
+        apps:layout_constraintBottom_toBottomOf="@id/productNameTextView"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/productIconImageView"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:padding="2.5dp"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/premium_storefront_logo"
+        android:background="@drawable/featured_application_icon_background_frame"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/productRateBlur"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="73dp"
+
+        apps:realtimeBlurRadius="3dp"
+        apps:realtimeBlurGradientType="none"
+        apps:realtimeFirstColor="@color/light_transparent_half"
+        apps:realtimeBlurTopLeft="51dp"
+        apps:realtimeBlurTopRight="51dp"
+        apps:realtimeBlurBottomLeft="51dp"
+        apps:realtimeBlurBottomRight="51dp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/rateStarsView"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:padding="7sp"
+        android:layout_marginTop="73dp"
+        android:scaleType="fitCenter"
+        android:tint="@color/white"
+        android:src="@drawable/current_rate_icon"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productCurrentRateView"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="73dp"
+        android:gravity="center"
+        android:textColor="@color/default_color_game_light"
+        android:textSize="33sp"
+        android:text="5.0"
+        android:fontFamily="@font/neon"
+        android:shadowRadius="5"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowColor="@color/default_color_game_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/installView"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+
+        apps:icon="@drawable/install_now_icon"
+        apps:iconSize="37dp"
+        apps:iconPadding="0dp"
+        apps:iconGravity="textStart"
+        apps:cornerRadius="51dp"
+        apps:rippleColor="@color/default_color_bright"
+        apps:backgroundTint="@color/dark"
+
+        apps:layout_constraintTop_toTopOf="@id/productNameTextView"
+        apps:layout_constraintBottom_toBottomOf="@id/productNameTextView"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

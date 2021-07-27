@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 6/11/21, 9:29 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_width="271dp"
+    android:layout_height="79dp"
+    android:layout_marginStart="17dp"
+    android:layout_marginVertical="3dp"
+    android:background="@android:color/transparent">
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/productIconImageView"
+        android:layout_width="59dp"
+        android:layout_height="59dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/launcher_foreground_icon"
+
+        apps:shape="circle"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="179dp"
+        android:layout_height="47dp"
+        android:paddingHorizontal="11dp"
+        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/dark"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:text="@string/applicationName"
+        android:fontFamily="@font/upcil"
+        android:shadowColor="@color/white"
+        android:shadowRadius="11"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toEndOf="@id/productIconImageView"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/productDividerView"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:padding="1dp"
+        android:layout_marginVertical="3dp"
+        android:layout_marginHorizontal="3dp"
+        android:src="@drawable/diamond_gradient_icon_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toEndOf="@id/productNameTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
