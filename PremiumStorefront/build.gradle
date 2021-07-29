@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/27/21, 9:45 AM
+ * Last modified 7/29/21, 6:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,7 +59,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding true
     }
 
     flavorDimensions "PremiumStorefront"
@@ -164,7 +164,7 @@ dependencies {
     api 'com.google.firebase:firebase-functions-ktx'
 
 
-    api 'com.airbnb.android:lottie:3.7.2'
+    api 'com.airbnb.android:lottie:4.0.0'
 
 
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
