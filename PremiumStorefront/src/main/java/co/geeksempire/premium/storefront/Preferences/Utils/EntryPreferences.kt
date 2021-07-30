@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 7:31 AM
+ * Last modified 7/30/21, 11:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ class EntryPreferences (private val preferencesIO: PreferencesIO) {
     companion object {
         const val EntryStorefrontApplications = "EntryStorefrontApplications"
         const val EntryStorefrontGames = "EntryStorefrontGames"
+        const val EntryStorefrontMovies = "EntryStorefrontMovies"
     }
 
     suspend fun entryType(inputValue: String) {
