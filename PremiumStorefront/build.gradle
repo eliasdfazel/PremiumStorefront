@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/29/21, 6:24 AM
+ * Last modified 7/30/21, 11:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -107,6 +107,7 @@ dependencies {
     api project(path: ':CustomShapes')
     api project(path: ':LoadingSpin')
     api project(path: ':BalloonOptionsMenuLibrary')
+    api project(path: ':GeeksEmpireLayoutManager')
 
 
     api 'com.google.android.play:core-ktx:1.8.1'
