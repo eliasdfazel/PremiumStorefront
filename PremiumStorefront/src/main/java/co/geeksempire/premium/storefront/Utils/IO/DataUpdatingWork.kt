@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/23/21, 8:47 AM
+ * Last modified 7/30/21, 10:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,22 +55,30 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
         val updateDataKey = workerParams.inputData.getByteArray(IO.UpdateDataKey)?.let { String(it) }
         Log.d(this@DataUpdatingWork.javaClass.simpleName, updateDataKey.toString())
 
-        setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
-            notificationId = Foreground.NotificationId,
-            notificationTitle = applicationContext.getString(R.string.applicationName),
-            notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
-            notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
-            notificationDone = false)
-        ))
-
         /* Start - Applications Data Updating */
         when (updateDataKey) {
             IO.UpdateApplicationsDataKey -> {
+
+                setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
+                    notificationId = Foreground.NotificationId,
+                    notificationTitle = applicationContext.getString(R.string.applicationName),
+                    notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
+                    notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
+                    notificationDone = false)
+                ))
 
                 startApplicationsContentRetrieval(IO.UpdateApplicationsDataKey)
 
             }
             IO.UpdateGamesDataKey -> {
+
+                setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
+                    notificationId = Foreground.NotificationId,
+                    notificationTitle = applicationContext.getString(R.string.applicationName),
+                    notificationContent = applicationContext.getString(R.string.updatingGamesDataText),
+                    notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
+                    notificationDone = false)
+                ))
 
                 startGamesContentRetrieval(IO.UpdateGamesDataKey)
 
