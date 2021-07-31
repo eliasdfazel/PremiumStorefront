@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 9:53 AM
+ * Last modified 7/31/21, 10:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
@@ -50,6 +52,17 @@ class StorefrontMovies : StorefrontSplitActivity() {
                 }
 
             }
+        }
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        lifecycleScope.launch {
+
+            (this@StorefrontMovies.application as PremiumStorefrontApplication).entryPreferences.entryType(EntryPreferences.EntryStorefrontMovies)
+
         }
 
     }
