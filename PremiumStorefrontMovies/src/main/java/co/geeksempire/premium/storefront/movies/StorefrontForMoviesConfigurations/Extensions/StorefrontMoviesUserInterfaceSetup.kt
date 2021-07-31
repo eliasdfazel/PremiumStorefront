@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 9:10 AM
+ * Last modified 7/31/21, 9:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,14 +13,24 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSectionsSwitcherLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-fun StorefrontMovies.setupStorefrontMoviesUserInterface() {
+fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
 
     moviesSectionSwitcherDesign(this@setupStorefrontMoviesUserInterface, storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer)
+
+    when (themeType) {
+        ThemeType.ThemeLight -> {
+
+        }
+        ThemeType.ThemeDark -> {
+
+        }
+    }
 
 }
 
