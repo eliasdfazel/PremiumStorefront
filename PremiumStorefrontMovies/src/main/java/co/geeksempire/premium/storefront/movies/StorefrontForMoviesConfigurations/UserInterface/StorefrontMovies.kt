@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 10:07 AM
+ * Last modified 7/31/21, 10:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
@@ -32,6 +33,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@StorefrontMovies)
+    }
+
+    val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
+        PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = storefrontMoviesLayoutBinding.actionCenterView, actionLeftView = storefrontMoviesLayoutBinding.leftActionView, actionMiddleView = storefrontMoviesLayoutBinding.middleActionView, actionRightView = storefrontMoviesLayoutBinding.rightActionView)
     }
 
     lateinit var storefrontMoviesLayoutBinding: StorefrontMoviesLayoutBinding
