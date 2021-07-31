@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/26/21, 6:46 AM
+ * Last modified 7/31/21, 7:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,13 +11,13 @@
 package co.geeksempire.premium.storefront.books
 
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import java.util.*
 
-class EntryConfigurationsBooks : StorefrontActivity() {
+class EntryConfigurationsBooks : StorefrontSplitActivity() {
 
     override fun networkAvailable() {
 
