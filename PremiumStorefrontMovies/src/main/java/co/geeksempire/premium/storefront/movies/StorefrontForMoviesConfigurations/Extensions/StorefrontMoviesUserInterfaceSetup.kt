@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 8:33 AM
+ * Last modified 7/31/21, 9:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,18 +14,17 @@ import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
+import co.geeksempire.premium.storefront.movies.databinding.MoviesSectionsSwitcherLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 fun StorefrontMovies.setupStorefrontMoviesUserInterface() {
 
-    moviesSectionSwitcherDesign(context = this@setupStorefrontMoviesUserInterface, sectionsSwitcherLayoutBinding = storefrontMoviesLayoutBinding.sectionsSwitcherContainer)
-
+    moviesSectionSwitcherDesign(this@setupStorefrontMoviesUserInterface, storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer)
 
 }
 
-fun moviesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
+fun moviesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: MoviesSectionsSwitcherLayoutBinding) {
 
     sectionsSwitcherLayoutBinding.applicationsSectionView.apply {
 

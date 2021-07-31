@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 8:35 AM
+ * Last modified 7/31/21, 8:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -231,7 +231,7 @@ class StorefrontGames : StorefrontActivity() {
 
             storefrontUserInteractionSetup(context = this@StorefrontGames, firebaseUser = firebaseUser, accountSelector = accountSelector,
                 profileView = storefrontLayoutBinding.profileView, preferencesView = storefrontLayoutBinding.preferencesView, favoritesView = storefrontLayoutBinding.favoritesView,
-                sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionSwitcherContainer)
+                sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionsSwitcherContainer)
 
             lifecycleScope.launch {
 
@@ -643,22 +643,22 @@ class StorefrontGames : StorefrontActivity() {
                 when (gestureConstants.horizontalDirection) {
                     GestureListenerConstants.SWIPE_RIGHT -> {
 
-                        val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(applicationContext, 57), storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.width)
+                        val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(applicationContext, 57), storefrontLayoutBinding.sectionsSwitcherContainer.gamesSectionView.width)
                         valueAnimatorGames.duration = 333
                         valueAnimatorGames.startDelay = 333
                         valueAnimatorGames.addUpdateListener { animator ->
 
                             val animatorValue = animator.animatedValue as Int
 
-                            storefrontLayoutBinding.sectionSwitcherContainer.applicationsSectionView.layoutParams.width = animatorValue
-                            storefrontLayoutBinding.sectionSwitcherContainer.applicationsSectionView.requestLayout()
+                            storefrontLayoutBinding.sectionsSwitcherContainer.applicationsSectionView.layoutParams.width = animatorValue
+                            storefrontLayoutBinding.sectionsSwitcherContainer.applicationsSectionView.requestLayout()
 
                         }
                         valueAnimatorGames.addListener(object : Animator.AnimatorListener {
 
                             override fun onAnimationStart(animation: Animator) {
 
-                                applicationsSectionSwitcherDesign(this@StorefrontGames, storefrontLayoutBinding.sectionSwitcherContainer)
+                                applicationsSectionSwitcherDesign(this@StorefrontGames, storefrontLayoutBinding.sectionsSwitcherContainer)
 
                             }
 
@@ -684,15 +684,15 @@ class StorefrontGames : StorefrontActivity() {
 
                         })
 
-                        val valueAnimatorApplications = ValueAnimator.ofInt(storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.width, dpToInteger(applicationContext, 57))
+                        val valueAnimatorApplications = ValueAnimator.ofInt(storefrontLayoutBinding.sectionsSwitcherContainer.gamesSectionView.width, dpToInteger(applicationContext, 57))
                         valueAnimatorApplications.duration = 333
                         valueAnimatorApplications.startDelay = 333
                         valueAnimatorApplications.addUpdateListener { animator ->
 
                             val animatorValue = animator.animatedValue as Int
 
-                            storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.layoutParams.width = animatorValue
-                            storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.requestLayout()
+                            storefrontLayoutBinding.sectionsSwitcherContainer.gamesSectionView.layoutParams.width = animatorValue
+                            storefrontLayoutBinding.sectionsSwitcherContainer.gamesSectionView.requestLayout()
 
                         }
                         valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
@@ -703,7 +703,7 @@ class StorefrontGames : StorefrontActivity() {
 
                             override fun onAnimationEnd(animation: Animator) {
 
-                                storefrontLayoutBinding.sectionSwitcherContainer.gamesSectionView.text = ""
+                                storefrontLayoutBinding.sectionsSwitcherContainer.gamesSectionView.text = ""
 
                                 valueAnimatorGames.start()
 

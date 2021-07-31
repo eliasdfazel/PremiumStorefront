@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/31/21, 8:33 AM
+  ~ Last modified 7/31/21, 8:56 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -70,7 +70,7 @@
             <include
                 layout="@layout/sections_switcher_layout"
 
-                android:id="@+id/sectionSwitcherContainer"
+                android:id="@+id/sectionsSwitcherContainer"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginStart="19dp"
@@ -96,7 +96,7 @@
                 android:layoutAnimation="@anim/fade_in_layout_animation"
                 android:visibility="gone"
 
-                apps:layout_constraintTop_toBottomOf="@id/sectionSwitcherContainer"
+                apps:layout_constraintTop_toBottomOf="@id/sectionsSwitcherContainer"
                 apps:layout_constraintStart_toStartOf="parent"/>
 
             <!-- New Section -->

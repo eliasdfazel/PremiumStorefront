@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/31/21, 8:36 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="81dp"
+    android:cacheColorHint="@android:color/transparent"
+    android:fadingEdge="horizontal"
+    android:fadingEdgeLength="7dp"
+    android:requiresFadingEdge="horizontal"
+    android:scrollbars="none"
+    android:smoothScrollbar="true"
+    android:alwaysDrawnWithCache="true"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="79dp"
+        android:paddingVertical="3dp"
+        android:isScrollContainer="false"
+        android:nestedScrollingEnabled="false">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/applicationsSectionView"
+            android:layout_width="0dp"
+            android:layout_height="57dp"
+            android:paddingVertical="3dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:textSize="13.9sp"
+            android:textColor="@color/white"
+            android:text="@string/applicationsSectionText"
+            android:fontFamily="@font/ubuntu"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:elevation="23dp"
+            android:contentDescription="@string/applicationsSectionText"
+
+            apps:icon="@drawable/applications_icon"
+            apps:iconSize="29dp"
+            apps:iconPadding="7dp"
+            apps:iconTint="@color/white"
+            apps:iconGravity="textStart"
+            apps:cornerRadius="51dp"
+            apps:rippleColor="@color/transparent"
+            apps:backgroundTint="@color/applicationsSectionColor"
+
+            apps:layout_constraintWidth_percent="0.51"
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/gamesSectionView"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="7dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:textSize="13.9sp"
+            android:textColor="@color/gamesSectionColor"
+            android:fontFamily="@font/ubuntu"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:elevation="23dp"
+            android:contentDescription="@string/gamesSectionText"
+
+            apps:icon="@drawable/games_icon"
+            apps:iconSize="25dp"
+            apps:iconPadding="0dp"
+            apps:iconTint="@color/gamesSectionColor"
+            apps:iconGravity="textStart"
+            apps:cornerRadius="51dp"
+            apps:rippleColor="@color/gamesSectionColor"
+            apps:backgroundTint="@color/premiumLight"
+
+            apps:layout_constraintWidth_percent="0.17"
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintStart_toEndOf="@id/applicationsSectionView"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/booksSectionView"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="7dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:textSize="13.9sp"
+            android:textColor="@color/booksSectionColor"
+            android:fontFamily="@font/ubuntu"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:elevation="13dp"
+            android:contentDescription="@string/booksSectionText"
+            android:visibility="gone"
+
+            apps:icon="@drawable/books_icon"
+            apps:iconSize="25dp"
+            apps:iconPadding="0dp"
+            apps:iconTint="@color/booksSectionColor"
+            apps:iconGravity="textStart"
+            apps:cornerRadius="51dp"
+            apps:rippleColor="@color/booksSectionColor"
+            apps:backgroundTint="@color/premiumLight"
+
+            apps:layout_constraintWidth_percent="0.17"
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintStart_toEndOf="@id/gamesSectionView"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/moviesSectionView"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="7dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:textSize="13.9sp"
+            android:textColor="@color/moviesSectionColor"
+            android:fontFamily="@font/ubuntu"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:elevation="23dp"
+            android:contentDescription="@string/moviesSectionText"
+            android:visibility="visible"
+
+            apps:icon="@drawable/movies_icon"
+            apps:iconSize="25dp"
+            apps:iconPadding="0dp"
+            apps:iconTint="@color/moviesSectionColor"
+            apps:iconGravity="textStart"
+            apps:cornerRadius="51dp"
+            apps:rippleColor="@color/moviesSectionColor"
+            apps:backgroundTint="@color/premiumLight"
+
+            apps:layout_constraintWidth_percent="0.17"
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintStart_toEndOf="@id/booksSectionView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</HorizontalScrollView>
