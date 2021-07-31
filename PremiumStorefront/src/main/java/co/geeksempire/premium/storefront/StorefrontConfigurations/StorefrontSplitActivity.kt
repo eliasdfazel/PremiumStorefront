@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 7:18 AM
+ * Last modified 7/31/21, 7:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,14 @@ abstract class StorefrontSplitActivity : AppCompatActivity(),
     FragmentInterface,
     FirebaseInAppMessagingClickListener,
     GestureListenerInterface {
+
+    object MoviesModule {
+        const val EntryConfigurations = "co.geeksempire.premium.storefront.movies.EntryConfigurationsMovies"
+    }
+
+    object BooksModule {
+        const val EntryConfigurations = "co.geeksempire.premium.storefront.books.EntryConfigurationsBooks"
+    }
 
     override fun attachBaseContext(baseContext: Context) {
         super.attachBaseContext(baseContext)

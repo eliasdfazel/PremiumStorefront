@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 7:20 AM
+ * Last modified 7/31/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,18 +10,59 @@
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
+import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
 
 class StorefrontMovies : StorefrontSplitActivity() {
 
+    val themePreferences: ThemePreferences by lazy {
+        ThemePreferences(this@StorefrontMovies)
+    }
+
+    lateinit var storefrontMoviesLayoutBinding: StorefrontMoviesLayoutBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        storefrontMoviesLayoutBinding = StorefrontMoviesLayoutBinding.inflate(layoutInflater)
+        setContentView(storefrontMoviesLayoutBinding.root)
+
+        storefrontMoviesLayoutBinding.root.post {
+
+            setupStorefrontMoviesUserInterface()
+
+            lifecycleScope.launch {
+
+                themePreferences.checkThemeLightDark().collect {
+
+
+
+                }
+
+            }
+        }
+
+    }
+
+    override fun onBackPressed() {
+
+        startActivity(Intent(Intent.ACTION_MAIN).apply {
+            this.addCategory(Intent.CATEGORY_HOME)
+            this.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, 0).toBundle())
+
     }
 
     override fun networkAvailable() {

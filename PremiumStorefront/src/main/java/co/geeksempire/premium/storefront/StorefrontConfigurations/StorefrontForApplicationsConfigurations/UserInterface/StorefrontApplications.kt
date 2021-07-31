@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/27/21, 9:27 AM
+ * Last modified 7/31/21, 8:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -251,7 +251,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             storefrontUserInteractionSetup(context = this@StorefrontApplications, firebaseUser = firebaseUser, accountSelector = accountSelector,
                 profileView = storefrontLayoutBinding.profileView, preferencesView = storefrontLayoutBinding.preferencesView, favoritesView = storefrontLayoutBinding.favoritesView,
-                sectionSwitcherLayoutBinding = storefrontLayoutBinding.sectionSwitcherContainer)
+                sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionSwitcherContainer)
 
             lifecycleScope.launch {
 

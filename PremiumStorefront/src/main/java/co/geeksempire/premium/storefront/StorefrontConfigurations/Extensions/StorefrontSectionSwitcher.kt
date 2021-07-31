@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 1:08 PM
+ * Last modified 7/31/21, 8:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,34 +20,35 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
-import co.geeksempire.premium.storefront.databinding.SectionSwitcherLayoutBinding
+import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutBinding: SectionSwitcherLayoutBinding) {
+fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
+
 
     when (context) {
         is StorefrontApplications -> {
 
-            applicationsSectionSwitcherDesign(context, sectionSwitcherLayoutBinding)
+            applicationsSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
 
-            sectionSwitcherLayoutBinding.gamesSectionView.setOnClickListener {
+            sectionsSwitcherLayoutBinding.gamesSectionView.setOnClickListener {
 
-                val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(context, 57), sectionSwitcherLayoutBinding.applicationsSectionView.width)
+                val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
                 valueAnimatorGames.duration = 333
                 valueAnimatorGames.startDelay = 333
                 valueAnimatorGames.addUpdateListener { animator ->
 
                     val animatorValue = animator.animatedValue as Int
 
-                    sectionSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
-                    sectionSwitcherLayoutBinding.gamesSectionView.requestLayout()
+                    sectionsSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
+                    sectionsSwitcherLayoutBinding.gamesSectionView.requestLayout()
 
                 }
                 valueAnimatorGames.addListener(object : Animator.AnimatorListener {
 
                     override fun onAnimationStart(animation: Animator) {
 
-                        gamesSectionSwitcherDesign(context, sectionSwitcherLayoutBinding)
+                        gamesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
 
                     }
 
@@ -73,15 +74,15 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                 })
 
-                val valueAnimatorApplications = ValueAnimator.ofInt(sectionSwitcherLayoutBinding.applicationsSectionView.width, dpToInteger(context, 57))
+                val valueAnimatorApplications = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.applicationsSectionView.width, dpToInteger(context, 57))
                 valueAnimatorApplications.duration = 333
                 valueAnimatorApplications.startDelay = 333
                 valueAnimatorApplications.addUpdateListener { animator ->
 
                     val animatorValue = animator.animatedValue as Int
 
-                    sectionSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
-                    sectionSwitcherLayoutBinding.applicationsSectionView.requestLayout()
+                    sectionsSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
+                    sectionsSwitcherLayoutBinding.applicationsSectionView.requestLayout()
 
                 }
                 valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
@@ -92,7 +93,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                     override fun onAnimationEnd(animation: Animator) {
 
-                        sectionSwitcherLayoutBinding.applicationsSectionView.text = ""
+                        sectionsSwitcherLayoutBinding.applicationsSectionView.text = ""
 
                         valueAnimatorGames.start()
 
@@ -111,29 +112,35 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
             }
 
+            sectionsSwitcherLayoutBinding.moviesSectionView.setOnClickListener {
+
+                startMoviesSwitching(context, sectionsSwitcherLayoutBinding)
+
+            }
+
         }
         is StorefrontGames -> {
 
-            gamesSectionSwitcherDesign(context, sectionSwitcherLayoutBinding)
+            gamesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
 
-            sectionSwitcherLayoutBinding.applicationsSectionView.setOnClickListener {
+            sectionsSwitcherLayoutBinding.applicationsSectionView.setOnClickListener {
 
-                val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(context, 57), sectionSwitcherLayoutBinding.gamesSectionView.width)
+                val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.gamesSectionView.width)
                 valueAnimatorGames.duration = 333
                 valueAnimatorGames.startDelay = 333
                 valueAnimatorGames.addUpdateListener { animator ->
 
                     val animatorValue = animator.animatedValue as Int
 
-                    sectionSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
-                    sectionSwitcherLayoutBinding.applicationsSectionView.requestLayout()
+                    sectionsSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
+                    sectionsSwitcherLayoutBinding.applicationsSectionView.requestLayout()
 
                 }
                 valueAnimatorGames.addListener(object : Animator.AnimatorListener {
 
                     override fun onAnimationStart(animation: Animator) {
 
-                        applicationsSectionSwitcherDesign(context, sectionSwitcherLayoutBinding)
+                        applicationsSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
 
                     }
 
@@ -159,15 +166,15 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                 })
 
-                val valueAnimatorApplications = ValueAnimator.ofInt(sectionSwitcherLayoutBinding.gamesSectionView.width, dpToInteger(context, 57))
+                val valueAnimatorApplications = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.gamesSectionView.width, dpToInteger(context, 57))
                 valueAnimatorApplications.duration = 333
                 valueAnimatorApplications.startDelay = 333
                 valueAnimatorApplications.addUpdateListener { animator ->
 
                     val animatorValue = animator.animatedValue as Int
 
-                    sectionSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
-                    sectionSwitcherLayoutBinding.gamesSectionView.requestLayout()
+                    sectionsSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
+                    sectionsSwitcherLayoutBinding.gamesSectionView.requestLayout()
 
                 }
                 valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
@@ -178,7 +185,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
                     override fun onAnimationEnd(animation: Animator) {
 
-                        sectionSwitcherLayoutBinding.gamesSectionView.text = ""
+                        sectionsSwitcherLayoutBinding.gamesSectionView.text = ""
 
                         valueAnimatorGames.start()
 
@@ -205,9 +212,9 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionSwitcherLayoutB
 
 }
 
-fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionSwitcherLayoutBinding: SectionSwitcherLayoutBinding) {
+fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
 
-    sectionSwitcherLayoutBinding.applicationsSectionView.apply {
+    sectionsSwitcherLayoutBinding.applicationsSectionView.apply {
 
         (layoutParams as ConstraintLayout.LayoutParams).width = 0
         requestLayout()
@@ -226,7 +233,7 @@ fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionSwitche
 
     }
 
-    sectionSwitcherLayoutBinding.gamesSectionView.apply {
+    sectionsSwitcherLayoutBinding.gamesSectionView.apply {
 
         text = ""
         iconTint = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
@@ -245,9 +252,9 @@ fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionSwitche
 
 }
 
-fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionSwitcherLayoutBinding: SectionSwitcherLayoutBinding) {
+fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
 
-    sectionSwitcherLayoutBinding.applicationsSectionView.apply {
+    sectionsSwitcherLayoutBinding.applicationsSectionView.apply {
 
         text = ""
         iconTint = ColorStateList.valueOf(context.getColor(R.color.applicationsSectionColor))
@@ -264,7 +271,7 @@ fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionSwitcherLayout
 
     }
 
-    sectionSwitcherLayoutBinding.gamesSectionView.apply {
+    sectionsSwitcherLayoutBinding.gamesSectionView.apply {
 
         (layoutParams as ConstraintLayout.LayoutParams).width = 0
         requestLayout()
@@ -286,4 +293,3 @@ fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionSwitcherLayout
     }
 
 }
-
