@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/27/21, 9:42 AM
+ * Last modified 7/31/21, 1:07 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,18 +32,18 @@ object ProductsContentKey {
     const val AttributesKey = "attributes"
     const val AttributeOptionsKey = "options"
 
-    const val AttributesPackageNameKey = "Package Name"
+    const val AttributesPackageNameKey = "Software Package Name"
 
     const val AttributesAndroidCompatibilitiesKey = "Android Compatibilies"
     const val AttributesContentSafetyRatingKey = "Content Safety Rating"
 
-    const val AttributesDeveloperEmailKey = "Developer Email"
-    const val AttributesDeveloperCountryKey = "Developer Country"
-    const val AttributesDeveloperStateKey = "Developer State"
+    const val AttributesDeveloperEmailKey = "Software Developer Email"
+    const val AttributesDeveloperCountryKey = "Software Developer Country"
+    const val AttributesDeveloperStateKey = "Software Developer State"
 
-    const val AttributesDeveloperCityKey = "Developer City"
-    const val AttributesDeveloperNameKey = "Developer Name"
-    const val AttributesDeveloperWebsiteKey = "Developer Website"
+    const val AttributesDeveloperCityKey = "Software Developer City"
+    const val AttributesDeveloperNameKey = "Software Developer Name"
+    const val AttributesDeveloperWebsiteKey = "Software Developer Website"
 
     const val AttributesRatingKey = "Rating"
     const val AttributesYoutubeIntroductionKey = "Youtube Introduction"
@@ -76,15 +76,15 @@ object ProductDataKey {
 }
 
 object StorefrontContentsSerialize {
-    const val PackageName: String = "Package Name"
-    const val DeveloperName: String = "Developer Name"
+    const val PackageName: String = "Software Package Name"
+    const val DeveloperName: String = "Software Developer Name"
 
-    const val DeveloperCity: String = "Developer City"
-    const val DeveloperCountry: String = "Developer Country"
-    const val DeveloperState: String = "Developer State"
+    const val DeveloperCity: String = "Software Developer City"
+    const val DeveloperCountry: String = "Software Developer Country"
+    const val DeveloperState: String = "Software Developer State"
 
-    const val DeveloperEmail: String = "Developer mail"
-    const val DeveloperWebsite: String = "Developer Website"
+    const val DeveloperEmail: String = "Software Developer mail"
+    const val DeveloperWebsite: String = "Software Developer Website"
 
     const val Rating: String = "Rating"
     const val ContentSafetyRating: String = "Content Safety Rating"
