@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 10:18 AM
+ * Last modified 8/1/21, 9:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,22 +11,44 @@
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface
 
 import android.app.ActivityOptions
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
+import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
+import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import java.util.*
 
 class StorefrontMovies : StorefrontSplitActivity() {
@@ -39,6 +61,34 @@ class StorefrontMovies : StorefrontSplitActivity() {
         PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = storefrontMoviesLayoutBinding.actionCenterView, actionLeftView = storefrontMoviesLayoutBinding.leftActionView, actionMiddleView = storefrontMoviesLayoutBinding.middleActionView, actionRightView = storefrontMoviesLayoutBinding.rightActionView)
     }
 
+    val balloonOptionsMenu: BalloonOptionsMenu by lazy {
+        BalloonOptionsMenu(context = this@StorefrontMovies,
+            rootView = storefrontMoviesLayoutBinding.rootView)
+    }
+
+    val actionCenterOperations: ActionCenterOperations by lazy {
+        ActionCenterOperations()
+    }
+
+    val favoritedProcess: FavoritedProcess by lazy {
+        FavoritedProcess(this@StorefrontMovies)
+    }
+
+    /* Start - Sign In */
+    val accountSignIn: AccountSignIn by lazy {
+        AccountSignIn(this@StorefrontMovies, this@StorefrontMovies)
+    }
+
+    val accountSelector: ActivityResultLauncher<Any?> = registerForActivityResult(accountSignIn.createProcess()) {
+
+
+
+    }
+    /* End - Sign In */
+
+    val firebaseAuthentication = Firebase.auth
+    var firebaseUser = firebaseAuthentication.currentUser
+
     lateinit var storefrontMoviesLayoutBinding: StorefrontMoviesLayoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +97,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
         setContentView(storefrontMoviesLayoutBinding.root)
 
         storefrontMoviesLayoutBinding.root.post {
+
+            storefrontMoviesUserInteractionSetup(context = this@StorefrontMovies, firebaseUser = firebaseUser, accountSelector = accountSelector,
+                profileView = storefrontMoviesLayoutBinding.profileView, preferencesView = storefrontMoviesLayoutBinding.preferencesView, favoritesView = storefrontMoviesLayoutBinding.favoritesView,
+                moviesSectionsSwitcherLayoutBinding = storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer)
 
             lifecycleScope.launch {
 
@@ -87,6 +141,82 @@ class StorefrontMovies : StorefrontSplitActivity() {
     }
 
     override fun networkLost() {
+
+
+    }
+
+    override fun userCreated(accountData: AccountData) {
+        super.userCreated(accountData)
+
+        val messageText = "Your Details On www.GeeksEmpire.co \n" +
+                "Username: ${accountData.usernameId} | Password: ${accountData.userPassword}"
+
+        SnackbarBuilder(applicationContext).show (
+            rootView = storefrontMoviesLayoutBinding.rootView,
+            messageText = messageText,
+            messageDuration = Snackbar.LENGTH_INDEFINITE,
+            actionButtonText = R.string.copyText,
+            snackbarActionHandlerInterface = object : SnackbarActionHandlerInterface {
+
+                override fun onActionButtonClicked(snackbar: Snackbar) {
+                    super.onActionButtonClicked(snackbar)
+
+                    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+                    val clipData = ClipData.newPlainText("Geeks Empire Account Data", messageText)
+
+                    clipboardManager.setPrimaryClip(clipData)
+
+                    snackbar.dismiss()
+
+                    Toast.makeText(applicationContext, "Copied!", Toast.LENGTH_LONG).show()
+
+                }
+
+            }
+        )
+
+    }
+
+    override fun signInProcessSucceed(authenticationResult: AuthResult) {
+        super.signInProcessSucceed(authenticationResult)
+
+        firebaseUser = authenticationResult.user
+        firebaseUser?.reload()
+
+        Glide.with(applicationContext)
+            .load(authenticationResult.user?.photoUrl)
+            .transform(CircleCrop())
+            .into(storefrontMoviesLayoutBinding.profileView)
+
+        favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid, accountSignIn.firebaseUser!!.email!!,
+            object : FavoriteProductQueryInterface {
+
+                override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                    super.favoriteProductsExist(isFavoriteProductsExist)
+
+                    storefrontMoviesLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+
+                }
+
+            })
+
+    }
+
+    override fun fragmentCreated(applicationPackageName: String, applicationName: String, applicationSummary: String) {
+        super.fragmentCreated(applicationPackageName, applicationName, applicationSummary)
+
+
+
+    }
+
+    override fun fragmentDestroyed() {
+        super.fragmentDestroyed()
+
 
 
     }
