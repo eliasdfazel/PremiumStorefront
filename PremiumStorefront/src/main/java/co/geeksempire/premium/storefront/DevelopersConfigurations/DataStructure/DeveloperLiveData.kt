@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 8:39 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -39,7 +39,7 @@ class DeveloperLiveData : ViewModel() {
 
         if (csvOfProductsIds.isNotBlank()) {
 
-            val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
+            val severalProductsByIdsEndpoint = GeneralEndpoints().getSeveralProductsByIdEndpoint(csvOfProductsIds)
 
             val jsonOfProducts = URL(severalProductsByIdsEndpoint).readText(Charset.defaultCharset())
 
@@ -128,7 +128,7 @@ class DeveloperLiveData : ViewModel() {
 
         if (csvOfProductsIds.isNotBlank()) {
 
-            val severalProductsByIdsEndpoint = GeneralEndpoint().getSeveralProductsByIdEndpoint(csvOfProductsIds)
+            val severalProductsByIdsEndpoint = GeneralEndpoints().getSeveralProductsByIdEndpoint(csvOfProductsIds)
 
             val jsonOfProducts = URL(severalProductsByIdsEndpoint).readText(Charset.defaultCharset())
 

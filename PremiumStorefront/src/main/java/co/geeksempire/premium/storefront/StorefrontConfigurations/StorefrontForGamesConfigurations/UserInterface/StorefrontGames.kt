@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 8:59 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,7 +52,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.applicationsSectionSwitcherDesign
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.storefrontUserInteractionSetup
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
@@ -100,14 +100,14 @@ class StorefrontGames : StorefrontActivity() {
         ThemePreferences(this@StorefrontGames)
     }
 
-    val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
+    val generalEndpoints: GeneralEndpoints = GeneralEndpoints()
 
     val storefrontLiveData: StorefrontLiveData by lazy {
         ViewModelProvider(this@StorefrontGames).get(StorefrontLiveData::class.java)
     }
 
     val allContent: AllContent by lazy {
-        AllContent(applicationContext, storefrontLiveData, GeneralEndpoint.QueryType.GamesQuery)
+        AllContent(applicationContext, storefrontLiveData, GeneralEndpoints.QueryType.GamesQuery)
     }
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
@@ -730,15 +730,15 @@ class StorefrontGames : StorefrontActivity() {
         Log.d(this@StorefrontGames.javaClass.simpleName, "Network Available @ ${this@StorefrontGames.javaClass.simpleName}")
 
         retrieveCategories(this@StorefrontGames,
-            generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.GamesQuery)
+            generalEndpoints, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoints.QueryType.GamesQuery)
 
         retrieveFeaturedContent(this@StorefrontGames,
-            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.GamesQuery)
+            storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.GamesQuery)
 
         allContent.retrieveAllContent()
 
         retrieveNewContent(this@StorefrontGames,
-            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.GamesQuery)
+            storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.GamesQuery)
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 8:59 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,7 +55,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.gamesSectionSwitcherDesign
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.storefrontUserInteractionSetup
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
@@ -105,14 +105,14 @@ class StorefrontApplications : StorefrontActivity() {
         ThemePreferences(this@StorefrontApplications)
     }
 
-    val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
+    val generalEndpoints: GeneralEndpoints = GeneralEndpoints()
 
     val storefrontLiveData: StorefrontLiveData by lazy {
         ViewModelProvider(this@StorefrontApplications).get(StorefrontLiveData::class.java)
     }
 
     val allContent: AllContent by lazy {
-        AllContent(applicationContext, storefrontLiveData, GeneralEndpoint.QueryType.ApplicationsQuery)
+        AllContent(applicationContext, storefrontLiveData, GeneralEndpoints.QueryType.ApplicationsQuery)
     }
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
@@ -301,7 +301,7 @@ class StorefrontApplications : StorefrontActivity() {
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
 
                     retrieveOldContent(this@StorefrontApplications,
-                        storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
+                        storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)
 
                     storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
 
@@ -806,15 +806,15 @@ class StorefrontApplications : StorefrontActivity() {
         Log.d(this@StorefrontApplications.javaClass.simpleName, "Network Available @ ${this@StorefrontApplications.javaClass.simpleName}")
 
         retrieveCategories(this@StorefrontApplications,
-            generalEndpoint, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoint.QueryType.ApplicationsQuery)
+            generalEndpoints, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoints.QueryType.ApplicationsQuery)
 
         retrieveFeaturedContent(this@StorefrontApplications,
-            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
+            storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)
 
         allContent.retrieveAllContent()
 
         retrieveNewContent(this@StorefrontApplications,
-            storefrontLiveData, generalEndpoint, GeneralEndpoint.QueryType.ApplicationsQuery)
+            storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)
 
     }
 

@@ -2,15 +2,15 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/27/21, 7:45 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections
+package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints
 
-class GeneralEndpoint {
+class GeneralEndpoints {
 
     val defaultProductsPerPage = 19
     val defaultNumberOfPage = 1

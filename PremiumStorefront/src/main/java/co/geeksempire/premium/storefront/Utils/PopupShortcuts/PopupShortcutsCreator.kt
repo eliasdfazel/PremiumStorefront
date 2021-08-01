@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/27/21, 9:44 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,9 +20,9 @@ import android.os.Build
 import androidx.annotation.Keep
 import androidx.annotation.RequiresApi
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsSerialize
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.ApplicationsQueryEndpoint
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GamesQueryEndpoint
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -68,10 +68,10 @@ class PopupShortcutsCreator (val context: Context) {
 
     fun startConfiguration() {
 
-        val generalEndpoint = GeneralEndpoint()
+        val generalEndpoint = GeneralEndpoints()
 
-        val applicationQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
-        val gamesQueryEndpoint = GamesQueryEndpoint(generalEndpoint)
+        val applicationQueryEndpoint = ApplicationsQueryEndpoints(generalEndpoint)
+        val gamesQueryEndpoint = GamesQueryEndpoints(generalEndpoint)
 
         val firestoreDatabase = Firebase.firestore
 

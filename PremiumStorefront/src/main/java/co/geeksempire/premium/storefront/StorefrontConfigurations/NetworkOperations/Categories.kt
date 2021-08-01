@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:43 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,9 +13,9 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperat
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.ApplicationsQueryEndpoint
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GamesQueryEndpoint
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
 import co.geeksempire.premium.storefront.Utils.Notifications.RemoteConfigurationKey
@@ -24,14 +24,14 @@ import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import org.json.JSONArray
 
 fun retrieveCategories(context: AppCompatActivity,
-                       generalEndpoint: GeneralEndpoint,
+                       generalEndpoints: GeneralEndpoints,
                        storefrontLiveData: StorefrontLiveData,
                        firebaseRemoteConfiguration: FirebaseRemoteConfig,
-                       queryType: String = GeneralEndpoint.QueryType.ApplicationsQuery) {
+                       queryType: String = GeneralEndpoints.QueryType.ApplicationsQuery) {
 
-    val applicationsQueryEndpoint: ApplicationsQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
+    val applicationsQueryEndpoints: ApplicationsQueryEndpoints = ApplicationsQueryEndpoints(generalEndpoints)
 
-    val gamesQueryEndpoint: GamesQueryEndpoint = GamesQueryEndpoint(generalEndpoint)
+    val gamesQueryEndpoints: GamesQueryEndpoints = GamesQueryEndpoints(generalEndpoints)
 
     firebaseRemoteConfiguration.setConfigSettingsAsync(remoteConfigSettings {
         minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) {
@@ -44,16 +44,16 @@ fun retrieveCategories(context: AppCompatActivity,
         .addOnSuccessListener {
 
             val queryEndpoint = when (queryType) {
-                GeneralEndpoint.QueryType.ApplicationsQuery -> {
+                GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
-                    applicationsQueryEndpoint.getApplicationsCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Applications_Categories_Exclusion))
+                    applicationsQueryEndpoints.getApplicationsCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Applications_Categories_Exclusion))
                 }
-                GeneralEndpoint.QueryType.GamesQuery -> {
+                GeneralEndpoints.QueryType.GamesQuery -> {
 
-                    gamesQueryEndpoint.getGamesCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Games_Categories_Exclusion))
+                    gamesQueryEndpoints.getGamesCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Games_Categories_Exclusion))
 
                 }
-                else -> applicationsQueryEndpoint.getApplicationsCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Applications_Categories_Exclusion))
+                else -> applicationsQueryEndpoints.getApplicationsCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Applications_Categories_Exclusion))
             }
 
             GenericJsonRequest(context, object : JsonRequestResponses {

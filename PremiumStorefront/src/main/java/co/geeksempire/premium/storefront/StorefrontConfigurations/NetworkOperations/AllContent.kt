@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/12/21, 6:43 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,9 +13,9 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperat
 import android.content.Context
 import android.util.Log
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.ApplicationsQueryEndpoint
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GamesQueryEndpoint
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
@@ -25,13 +25,13 @@ import java.nio.charset.Charset
 
 class AllContent (val context: Context,
                   val storefrontLiveData: StorefrontLiveData,
-                  val queryType: String = GeneralEndpoint.QueryType.ApplicationsQuery) {
+                  val queryType: String = GeneralEndpoints.QueryType.ApplicationsQuery) {
 
-    private val generalEndpoint = GeneralEndpoint()
+    private val generalEndpoint = GeneralEndpoints()
 
-    private val applicationsQueryEndpoint: ApplicationsQueryEndpoint = ApplicationsQueryEndpoint(generalEndpoint)
+    private val applicationsQueryEndpoints: ApplicationsQueryEndpoints = ApplicationsQueryEndpoints(generalEndpoint)
 
-    private val gamesQueryEndpoint: GamesQueryEndpoint = GamesQueryEndpoint(generalEndpoint)
+    private val gamesQueryEndpoints: GamesQueryEndpoints = GamesQueryEndpoints(generalEndpoint)
 
     private var numberOfPageToRetrieve: Int = 1
 
@@ -40,12 +40,12 @@ class AllContent (val context: Context,
     fun retrieveAllContent() {
 
         val allContentFile: File = when (queryType) {
-            GeneralEndpoint.QueryType.ApplicationsQuery -> {
+            GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
                 context.getFileStreamPath(IO.UpdateApplicationsDataKey)
 
             }
-            GeneralEndpoint.QueryType.GamesQuery -> {
+            GeneralEndpoints.QueryType.GamesQuery -> {
 
                 context.getFileStreamPath(IO.UpdateGamesDataKey)
 
@@ -67,17 +67,17 @@ class AllContent (val context: Context,
         } else {
 
             val endpoint = when (queryType) {
-                GeneralEndpoint.QueryType.ApplicationsQuery -> {
+                GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
-                    applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint()
-
-                }
-                GeneralEndpoint.QueryType.GamesQuery -> {
-
-                    gamesQueryEndpoint.getAllAndroidGamesEndpoint()
+                    applicationsQueryEndpoints.getAllAndroidApplicationsEndpoint()
 
                 }
-                else -> applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint()
+                GeneralEndpoints.QueryType.GamesQuery -> {
+
+                    gamesQueryEndpoints.getAllAndroidGamesEndpoint()
+
+                }
+                else -> applicationsQueryEndpoints.getAllAndroidApplicationsEndpoint()
             }
 
             GenericJsonRequest(context, object : JsonRequestResponses {
@@ -87,7 +87,7 @@ class AllContent (val context: Context,
 
                     storefrontLiveData.processAllContent(rawDataJsonArray)
 
-                    if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
+                    if (rawDataJsonArray.length() == applicationsQueryEndpoints.defaultProductsPerPage) {
                         Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
 
                         numberOfPageToRetrieve++
@@ -117,7 +117,7 @@ class AllContent (val context: Context,
 
                 storefrontLiveData.processAllContentMore(rawDataJsonArray)
 
-                if (rawDataJsonArray.length() == applicationsQueryEndpoint.defaultProductsPerPage) {
+                if (rawDataJsonArray.length() == applicationsQueryEndpoints.defaultProductsPerPage) {
                     Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
 
                     numberOfPageToRetrieve++
@@ -143,17 +143,17 @@ class AllContent (val context: Context,
             }
 
         }).getMethod( when (queryType) {
-            GeneralEndpoint.QueryType.ApplicationsQuery -> {
+            GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
-                applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve)
-
-            }
-            GeneralEndpoint.QueryType.GamesQuery -> {
-
-                gamesQueryEndpoint.getAllAndroidGamesEndpoint(numberOfPage = numberOfPageToRetrieve)
+                applicationsQueryEndpoints.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve)
 
             }
-            else -> applicationsQueryEndpoint.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve)
+            GeneralEndpoints.QueryType.GamesQuery -> {
+
+                gamesQueryEndpoints.getAllAndroidGamesEndpoint(numberOfPage = numberOfPageToRetrieve)
+
+            }
+            else -> applicationsQueryEndpoints.getAllAndroidApplicationsEndpoint(numberOfPage = numberOfPageToRetrieve)
         })
 
     }

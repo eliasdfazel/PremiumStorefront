@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/23/21, 6:15 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,7 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInt
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections.GeneralEndpoint
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
@@ -52,7 +52,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
         ViewModelProvider(this@CategoryDetails).get(ProductsOfCategory::class.java)
     }
 
-    val generalEndpoint: GeneralEndpoint = GeneralEndpoint()
+    val generalEndpoints: GeneralEndpoints = GeneralEndpoints()
 
     val productDetailsFragment: ProductDetailsFragment by lazy {
         ProductDetailsFragment()

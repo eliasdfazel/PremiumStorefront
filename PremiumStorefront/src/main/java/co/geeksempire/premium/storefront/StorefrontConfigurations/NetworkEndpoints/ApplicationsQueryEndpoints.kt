@@ -2,15 +2,15 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/27/21, 8:04 AM
+ * Last modified 8/1/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkConnections
+package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints
 
-class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
+class ApplicationsQueryEndpoints (private val generalEndpoints: GeneralEndpoints) {
 
     val defaultProductsPerPage = 19
     val defaultNumberOfPage = 1
@@ -20,7 +20,7 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
      */
 
     fun firestoreSpecificApplication(categoryName: String, applicationId: String) : String =
-        generalEndpoint.generalStorefrontDatabaseEndpoint +
+        generalEndpoints.generalStorefrontDatabaseEndpoint +
                 "/" +
                 "Applications" +
                 "/" +
@@ -35,15 +35,15 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
 
     fun getAllAndroidApplicationsEndpoint(productPerPage: Int = defaultProductsPerPage, numberOfPage: Int = defaultNumberOfPage) =
         "https://geeksempire.co/wp-json/wc/v3/products?" +
-            "consumer_key=${generalEndpoint.consumerKey()}" +
+            "consumer_key=${generalEndpoints.consumerKey()}" +
             "&" +
-            "consumer_secret=${generalEndpoint.consumerSecret()}" +
+            "consumer_secret=${generalEndpoints.consumerSecret()}" +
             "&" +
             "per_page=${productPerPage}" +
             "&" +
             "page=${numberOfPage}" +
             "&" +
-            "category=${GeneralEndpoint.QueryType.ApplicationsQuery}" +
+            "category=${GeneralEndpoints.QueryType.ApplicationsQuery}" +
             "&" +
             "orderby=date" +
             "&" +
@@ -85,10 +85,10 @@ class ApplicationsQueryEndpoint (private val generalEndpoint: GeneralEndpoint) {
                 "order=asc"
 
     fun getApplicationsCategoriesEndpoint(numberOfProducts: Int = 99, csvExclusions: String = "80,66,57,546") : String =
-        "${generalEndpoint.generalStorefrontEndpoint}" + "products/categories" + "?" +
-                "consumer_key=${generalEndpoint.consumerKey()}" +
+        "${generalEndpoints.generalStorefrontEndpoint}" + "products/categories" + "?" +
+                "consumer_key=${generalEndpoints.consumerKey()}" +
                 "&" +
-                "consumer_secret=${generalEndpoint.consumerSecret()}" +
+                "consumer_secret=${generalEndpoints.consumerSecret()}" +
                 "&" +
                 "exclude=${csvExclusions}" + //Add Exclusion of All Other Categories
                 "&" +
