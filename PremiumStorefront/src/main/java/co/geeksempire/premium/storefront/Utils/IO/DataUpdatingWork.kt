@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/30/21, 10:36 AM
+ * Last modified 8/1/21, 3:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -63,7 +63,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                     notificationId = Foreground.NotificationId,
                     notificationTitle = applicationContext.getString(R.string.applicationName),
                     notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
-                    notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
+                    notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
                     notificationDone = false)
                 ))
 
@@ -76,7 +76,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                     notificationId = Foreground.NotificationId,
                     notificationTitle = applicationContext.getString(R.string.applicationName),
                     notificationContent = applicationContext.getString(R.string.updatingGamesDataText),
-                    notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
+                    notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
                     notificationDone = false)
                 ))
 
@@ -125,7 +125,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                         notificationId = Foreground.NotificationId,
                         notificationTitle = applicationContext.getString(R.string.applicationName),
                         notificationContent = applicationContext.getString(R.string.doneText),
-                        notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
+                        notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
                         notificationDone = true)))
 
                     stringBuilder.append(rawDataJsonArray.toString())
@@ -163,7 +163,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                         notificationId = Foreground.NotificationId,
                         notificationTitle = applicationContext.getString(R.string.applicationName),
                         notificationContent = applicationContext.getString(R.string.doneText),
-                        notificationIntent = WorkManager.getInstance(appContext).createCancelPendingIntent(id),
+                        notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
                         notificationDone = true)))
 
                     stringBuilder.append(rawDataJsonArray.toString())
