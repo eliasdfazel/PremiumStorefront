@@ -386,6 +386,95 @@ exports.transferFeaturedGamesData = functions.runWith(runtimeOptions).https.onRe
 
 });
 
+
+exports.transferFeaturedMoviesData = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var numberOfPage = req.query.numberOfPage;
+
+    if (numberOfPage == null) {
+        numberOfPage = 1;
+    }
+
+    var featuredApplicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
+        + '&page=' + numberOfPage
+        + '&per_page=100'
+        + '&category=982'
+        + '&featured=true'
+
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('GET', featuredApplicationsEndpoint, true);
+    xmlHttpRequest.setRequestHeader('accept', 'application/json');
+    xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
+    xmlHttpRequest.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+        } else {
+
+        }
+    };
+    xmlHttpRequest.onprogress = function () {
+
+    };
+    xmlHttpRequest.onload = function () {
+
+        var jsonArrayParserResponse = JSON.parse(xmlHttpRequest.responseText);
+
+        var featuredContent = [];
+
+        jsonArrayParserResponse.forEach((jsonObject, index) => {
+
+            const IdKey = "id"
+            const NameKey = "name";
+
+            const CategoriesKey = "categories";
+            
+            var productId = jsonObject[IdKey];
+
+            /* Start - Primary Category */
+            var productCategories = jsonObject[CategoriesKey];
+
+            var productCategoryName = "All";
+            var productCategoryId = 15;
+
+            productCategories.forEach((productCategory) => {
+
+                var textCheckpoint = (productCategory)[NameKey].split(" ")[0];
+
+                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
+
+                    productCategoryName = productCategory[NameKey].split(" ")[0];
+                    productCategoryId = productCategory[IdKey];
+
+                }
+
+            });
+            /* End - Primary Category */
+
+            featuredContent[index] = {
+                'ProductId': productId,
+                'MovieGenre': productCategoryName,
+            };
+
+        });
+
+        /* Start - Document * With Even Directory */
+        var firestoreDirectory = '/' + 'PremiumStorefront'
+                + '/' + 'Products'
+                + '/' + 'Multimedia'
+                + '/' + 'Movies'
+                + '/' + 'Featured'
+                + '/' + 'Content';
+
+        firestore.doc(firestoreDirectory).set({
+            ProductsIds: featuredContent,
+        });
+        /* End - Document * With Even Directory */
+
+    };
+    xmlHttpRequest.send();
+
+});
+
 exports.transferApplicationsData = functions.runWith(runtimeOptions).https.onRequest(async (req, res) => {
 
     var numberOfPage = req.query.numberOfPage;

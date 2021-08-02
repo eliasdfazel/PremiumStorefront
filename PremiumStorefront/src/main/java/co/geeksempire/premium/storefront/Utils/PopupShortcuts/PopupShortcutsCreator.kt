@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 8/2/21, 8:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import androidx.annotation.Keep
 import androidx.annotation.RequiresApi
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsIds
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsSerialize
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
@@ -47,9 +48,6 @@ object PopupShortcutsActions {
 @Keep
 data class PopupShortcutsData(var applicationPackageName: String,
                               var applicationName: String, var applicationSummary: String, var applicationIconLink: String)
-
-@Keep
-data class QuickAccessData(var ProductsIds: ArrayList<HashMap<String, Any>>? = null)
 
 object QuickAccessKeys {
     const val ProductType = "ProductType"
@@ -82,7 +80,7 @@ class PopupShortcutsCreator (val context: Context) {
 
                     shortcutManager.removeAllDynamicShortcuts()
 
-                    documentSnapshot.toObject(QuickAccessData::class.java)!!.ProductsIds?.forEach {
+                    documentSnapshot.toObject(ProductsIds::class.java)!!.ProductsIds?.forEach {
 
                         val productCategory = it[QuickAccessKeys.ProductCategory].toString()
                         val productId = it[QuickAccessKeys.ProductId].toString()

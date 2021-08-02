@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 1:07 PM
+ * Last modified 8/2/21, 8:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -111,6 +111,8 @@ object StorefrontContentsSerialize {
     const val UniqueRecommendation: String = "uniqueRecommendation"
 }
 
+@Keep
+data class ProductsIds(var ProductsIds: ArrayList<HashMap<String, Any>>? = null)
 
 /**
  *

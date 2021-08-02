@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 8/2/21, 6:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,10 +19,14 @@ class GeneralEndpoints {
      * Firestore Endpoint
      */
 
-    val generalStorefrontDatabaseEndpoint = "/PremiumStorefront/Products/Android"
+    val generalStorefrontDatabaseEndpoint = "/PremiumStorefront/Products"
+
+    val generalStorefrontDatabaseAndroidEndpoint = generalStorefrontDatabaseEndpoint +
+            "/" +
+            "Android"
 
     fun firestoreQuickAccessEndpoint() : String =
-        generalStorefrontDatabaseEndpoint +
+        generalStorefrontDatabaseAndroidEndpoint +
             "/" +
             "QuickAccess"
 
