@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 2:45 PM
+ * Last modified 8/2/21, 2:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,7 +39,19 @@ fun startMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBindi
     dynamicModuleInstaller.addOnSuccessListener { sessionId ->
         Log.d("Dynamic Module", "Dynamic Module: Movies Section Installed Successfully")
 
-        val valueAnimatorMovies = ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
+        val valueAnimatorMovies = when (context) {
+            is StorefrontApplications -> {
+
+                ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
+
+            }
+            is StorefrontGames -> {
+
+                ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.gamesSectionView.width)
+
+            }
+            else -> ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
+        }
         valueAnimatorMovies.duration = 333
         valueAnimatorMovies.startDelay = 333
         valueAnimatorMovies.addUpdateListener { animator ->
