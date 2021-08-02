@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 8:12 AM
+ * Last modified 8/2/21, 8:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsIds
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.FeaturedMoviesDataKey
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoint
 
 fun retrieveFeaturedMovies(context: AppCompatActivity) {
@@ -40,7 +41,11 @@ fun retrieveFeaturedMovies(context: AppCompatActivity) {
                         .document(moviesQueryEndpoint.storefrontSpecificMovieEndpoint(movieGenre, productId))
                         .get().addOnSuccessListener { movieDocumentSnapshot ->
 
+                            if (movieDocumentSnapshot.exists()) {
 
+                                val movieDataStructure = MoviesDataStructure(movieDocumentSnapshot.data!!)
+
+                            }
 
                         }
 
