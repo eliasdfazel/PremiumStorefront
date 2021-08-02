@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 3:06 PM
+ * Last modified 8/2/21, 3:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -148,9 +148,13 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
             moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
 
-                featuredMoviesAdapter.featuredMoviesData.add(featuredMoviesAdapter.itemCount, it)
+                featuredMoviesAdapter.featuredMoviesData.add(it)
 
-                featuredMoviesAdapter.notifyItemInserted(featuredMoviesAdapter.itemCount)
+                featuredMoviesAdapter.notifyItemInserted(if (featuredMoviesAdapter.featuredMoviesData.isEmpty()) {
+                    0
+                } else {
+                    (featuredMoviesAdapter.featuredMoviesData.size - 1)
+                })
 
                 if (storefrontMoviesLayoutBinding.loadingView.isVisible) {
 
