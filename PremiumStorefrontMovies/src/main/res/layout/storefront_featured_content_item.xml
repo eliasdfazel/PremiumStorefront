@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/2/21, 11:09 AM
+  ~ Last modified 8/2/21, 1:42 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -20,6 +20,17 @@
     android:background="@color/transparent">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/movieContentBackground"
+        android:layout_width="323dp"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="2dp"
+        android:paddingVertical="2dp"
+        android:scaleType="fitCenter"
+        android:rotation="180"
+
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/featuredMovieBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +39,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/moviePosterImageView"
         android:layout_width="117dp"
-        android:layout_height="170dp"
+        android:layout_height="171dp"
         android:paddingHorizontal="3dp"
         android:scaleType="fitCenter"
 

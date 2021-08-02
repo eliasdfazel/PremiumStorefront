@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/2/21, 6:20 AM
+  ~ Last modified 8/2/21, 1:12 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@
                 android:right="1dp"
                 android:bottom="1dp"
                 android:left="1dp"/>
-            <corners android:radius="19dp" />
+            <corners android:radius="17dp" />
             <solid android:color="#00CCCCCC"/>
         </shape>
     </item>
@@ -29,7 +29,7 @@
                 android:right="1dp"
                 android:bottom="1dp"
                 android:left="1dp"/>
-            <corners android:radius="19dp" />
+            <corners android:radius="17dp" />
             <solid android:color="#10CCCCCC"/>
         </shape>
     </item>
@@ -40,7 +40,7 @@
                 android:right="1dp"
                 android:bottom="1dp"
                 android:left="1dp"/>
-            <corners android:radius="19dp" />
+            <corners android:radius="17dp" />
             <solid android:color="#20CCCCCC"/>
         </shape>
     </item>
@@ -51,7 +51,7 @@
                 android:right="1dp"
                 android:bottom="1dp"
                 android:left="1dp"/>
-            <corners android:radius="19dp" />
+            <corners android:radius="17dp" />
             <solid android:color="#30CCCCCC"/>
         </shape>
     </item>
@@ -62,7 +62,7 @@
                 android:right="1dp"
                 android:bottom="1dp"
                 android:left="1dp"/>
-            <corners android:radius="19dp" />
+            <corners android:radius="17dp" />
             <solid android:color="#50CCCCCC"/>
         </shape>
     </item>
@@ -74,7 +74,7 @@
 
             <stroke android:color="#CCC" android:width="1dp"/>
             <solid android:color="#FFF" />
-            <corners android:radius="19dp" />
+            <corners android:radius="17dp" />
 
         </shape>
 

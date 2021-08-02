@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 11:00 AM
+ * Last modified 8/2/21, 1:55 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.FeaturedMoviesDataKey
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoint
-import com.google.firebase.firestore.Source
 
 fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData: MoviesStorefrontLiveData) {
 
@@ -40,7 +39,7 @@ fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData:
                     (context.application as PremiumStorefrontApplication)
                         .firestoreDatabase
                         .document(moviesQueryEndpoint.storefrontSpecificMovieEndpoint(movieGenre, productId))
-                        .get(Source.SERVER).addOnSuccessListener { movieDocumentSnapshot ->
+                        .get().addOnSuccessListener { movieDocumentSnapshot ->
 
                             if (movieDocumentSnapshot.exists()) {
 

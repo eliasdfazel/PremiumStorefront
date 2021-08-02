@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 11:11 AM
+ * Last modified 8/2/21, 1:55 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,10 +11,14 @@
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designFeaturedMoviesBackground
@@ -49,7 +53,6 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
 
             val moviesDataStructure = MoviesDataStructure(it)
 
-
             featuredMoviesViewHolder.featuredMovieBackground.setImageDrawable(designFeaturedMoviesBackground(featuredMoviesViewHolder))
 
             Glide.with(context)
@@ -67,6 +70,19 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
                             context.runOnUiThread {
 
                                 featuredMoviesViewHolder.moviePosterImageView.setImageDrawable(resource)
+
+                                val dominantColor = extractDominantColor(context, resource)
+                                val vibrantColor = extractVibrantColor(context, resource)
+                                val mutedColor = extractMutedColor(context, resource)
+
+                                val movieGradient = GradientDrawable()
+                                movieGradient.orientation = GradientDrawable.Orientation.TL_BR
+                                movieGradient.colors = intArrayOf(vibrantColor, vibrantColor, dominantColor, mutedColor, mutedColor)
+                                movieGradient.cornerRadius = 43f
+                                movieGradient.gradientType = GradientDrawable.SWEEP_GRADIENT
+                                movieGradient.setGradientCenter(1f, 0.5f)
+
+                                featuredMoviesViewHolder.movieContentBackground.setImageDrawable(movieGradient)
 
                             }
 
