@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 10:12 AM
+ * Last modified 8/2/21, 3:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,8 +16,8 @@ import com.google.firebase.firestore.DocumentSnapshot
 
 class MoviesStorefrontLiveData : ViewModel() {
 
-    val featuredContentItemData: MutableLiveData<DocumentSnapshot> by lazy {
-        MutableLiveData<DocumentSnapshot>()
+    val featuredContentItemData: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 3:04 PM
+ * Last modified 8/2/21, 3:30 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataKey
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoint
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Source
 
 fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData: MoviesStorefrontLiveData) {
@@ -27,6 +28,8 @@ fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData:
 
     val moviesQueryEndpoint = MoviesQueryEndpoint(generalEndpoint)
 
+    val moviesDocumentSnapshots = ArrayList<DocumentSnapshot>()
+
     (context.application as PremiumStorefrontApplication)
         .firestoreDatabase
         .document(moviesQueryEndpoint.storefrontFeaturedMoviesEndpoint())
@@ -34,7 +37,9 @@ fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData:
 
             if (documentSnapshot.exists()) {
 
-                documentSnapshot.toObject(ProductsIds::class.java)!!.ProductsIds?.forEach {
+                val productsIds = documentSnapshot.toObject(ProductsIds::class.java)!!.ProductsIds
+
+                productsIds?.forEach {
 
                     val productId = it[FeaturedMoviesDataKey.ProductId].toString()
                     val movieGenre = it[FeaturedMoviesDataKey.MovieGenre].toString()
@@ -47,7 +52,13 @@ fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData:
                             if (movieDocumentSnapshot.exists()) {
                                 Log.d("Featured Movies", movieDocumentSnapshot.data?.get(MoviesDataKey.MovieName).toString())
 
-                                moviesStorefrontLiveData.featuredContentItemData.postValue(movieDocumentSnapshot)
+                                moviesDocumentSnapshots.add(movieDocumentSnapshot)
+
+                                if (productsIds.size == moviesDocumentSnapshots.size) {
+
+                                    moviesStorefrontLiveData.featuredContentItemData.postValue(moviesDocumentSnapshots)
+
+                                }
 
                             }
 
