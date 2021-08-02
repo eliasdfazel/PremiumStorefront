@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/2/21, 6:40 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:height="234dp"
+        android:width="358dp">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/transparent" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="234dp"
+        android:width="323dp"
+        android:gravity="end">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="17dp"
+                android:topRightRadius="17dp"
+                android:bottomLeftRadius="17dp"
+                android:bottomRightRadius="17dp"/>
+
+            <solid
+                android:color="@color/transparent" />
+
+            <stroke
+                android:width="3dp"
+                android:color="@color/blue"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="171dp"
+        android:width="111dp"
+        android:gravity="start|center_vertical">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="13dp"
+                android:topRightRadius="13dp"
+                android:bottomLeftRadius="13dp"
+                android:bottomRightRadius="13dp"/>
+
+            <solid
+                android:color="@color/dark" />
+
+            <stroke
+                android:width="3dp"
+                android:color="@color/blue"/>
+
+        </shape>
+
+    </item>
+
+    <!-- Top Round Connection -->
+    <item
+        android:height="17dp"
+        android:width="29dp"
+        android:top="15dp"
+        android:start="23dp"
+        android:gravity="start|top">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/blue" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/topLeftConnection"
+        android:height="17dp"
+        android:width="13dp"
+        android:top="14.5dp"
+        android:start="22.5dp"
+        android:gravity="start|top">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:bottomRightRadius="19dp"/>
+
+            <solid
+                android:color="@color/green" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/topRightConnection"
+        android:height="17.3dp"
+        android:width="15dp"
+        android:top="14.5dp"
+        android:start="38.7dp"
+        android:gravity="start|top">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:bottomLeftRadius="19dp"/>
+
+            <solid
+                android:color="@color/green" />
+
+        </shape>
+
+    </item>
+
+    <!-- Bottom Round Connection -->
+    <item
+        android:height="17dp"
+        android:width="29dp"
+        android:bottom="15dp"
+        android:start="23dp"
+        android:gravity="start|bottom">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/blue" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/bottomLeftConnection"
+        android:height="17dp"
+        android:width="13dp"
+        android:bottom="14.5dp"
+        android:start="22.5dp"
+        android:gravity="start|bottom">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topRightRadius="19dp"/>
+
+            <solid
+                android:color="@color/green" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/bottomRightConnection"
+        android:height="17.3dp"
+        android:width="15dp"
+        android:bottom="14.5dp"
+        android:start="38.7dp"
+        android:gravity="start|bottom">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="19dp"/>
+
+            <solid
+                android:color="@color/green" />
+
+        </shape>
+
+    </item>
+
+</layer-list>
