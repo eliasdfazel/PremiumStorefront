@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 2:28 PM
+ * Last modified 8/2/21, 2:40 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
-import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSectionsSwitcherLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
@@ -108,6 +108,87 @@ fun storefrontMoviesSectionSwitcher(context: AppCompatActivity, sectionsSwitcher
 
     }
 
+    sectionsSwitcherLayoutBinding.gamesSectionView.setOnClickListener {
+
+        val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.moviesSectionView.width)
+        valueAnimatorGames.duration = 333
+        valueAnimatorGames.startDelay = 333
+        valueAnimatorGames.addUpdateListener { animator ->
+
+            val animatorValue = animator.animatedValue as Int
+
+            sectionsSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
+            sectionsSwitcherLayoutBinding.gamesSectionView.requestLayout()
+
+        }
+        valueAnimatorGames.addListener(object : Animator.AnimatorListener {
+
+            override fun onAnimationStart(animation: Animator) {
+
+                gamesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
+
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+
+                val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
+
+                val switchIntent = Intent(context, StorefrontGames::class.java).apply {
+
+                }
+
+                context.startActivity(switchIntent, activityOptions.toBundle())
+
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+
+            }
+
+        })
+
+        val valueAnimatorMovies = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.moviesSectionView.width, dpToInteger(context, 57))
+        valueAnimatorMovies.duration = 333
+        valueAnimatorMovies.startDelay = 333
+        valueAnimatorMovies.addUpdateListener { animator ->
+
+            val animatorValue = animator.animatedValue as Int
+
+            sectionsSwitcherLayoutBinding.moviesSectionView.layoutParams.width = animatorValue
+            sectionsSwitcherLayoutBinding.moviesSectionView.requestLayout()
+
+        }
+        valueAnimatorMovies.addListener(object : Animator.AnimatorListener {
+
+            override fun onAnimationStart(animation: Animator) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+
+                sectionsSwitcherLayoutBinding.moviesSectionView.text = ""
+
+                valueAnimatorGames.start()
+
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+
+            }
+
+        })
+        valueAnimatorMovies.start()
+
+    }
+
 }
 
 fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: MoviesSectionsSwitcherLayoutBinding) {
@@ -150,7 +231,7 @@ fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitch
 
 }
 
-fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
+fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: MoviesSectionsSwitcherLayoutBinding) {
 
     sectionsSwitcherLayoutBinding.moviesSectionView.apply {
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 8:35 AM
+ * Last modified 8/2/21, 2:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
@@ -78,41 +80,87 @@ fun startMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBindi
 
         })
 
-        val valueAnimatorApplications = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.applicationsSectionView.width, dpToInteger(context, 57))
-        valueAnimatorApplications.duration = 333
-        valueAnimatorApplications.startDelay = 333
-        valueAnimatorApplications.addUpdateListener { animator ->
+        when (context) {
+            is StorefrontApplications -> {
 
-            val animatorValue = animator.animatedValue as Int
+                val valueAnimatorApplications = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.applicationsSectionView.width, dpToInteger(context, 57))
+                valueAnimatorApplications.duration = 333
+                valueAnimatorApplications.startDelay = 333
+                valueAnimatorApplications.addUpdateListener { animator ->
 
-            sectionsSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
-            sectionsSwitcherLayoutBinding.applicationsSectionView.requestLayout()
+                    val animatorValue = animator.animatedValue as Int
 
+                    sectionsSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
+                    sectionsSwitcherLayoutBinding.applicationsSectionView.requestLayout()
+
+                }
+                valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
+
+                    override fun onAnimationStart(animation: Animator) {
+
+                    }
+
+                    override fun onAnimationEnd(animation: Animator) {
+
+                        sectionsSwitcherLayoutBinding.applicationsSectionView.text = ""
+
+                        valueAnimatorMovies.start()
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator) {
+
+                    }
+
+                    override fun onAnimationRepeat(animation: Animator) {
+
+                    }
+
+                })
+                valueAnimatorApplications.start()
+
+            }
+            is StorefrontGames -> {
+
+                val valueAnimatorGames = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.gamesSectionView.width, dpToInteger(context, 57))
+                valueAnimatorGames.duration = 333
+                valueAnimatorGames.startDelay = 333
+                valueAnimatorGames.addUpdateListener { animator ->
+
+                    val animatorValue = animator.animatedValue as Int
+
+                    sectionsSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
+                    sectionsSwitcherLayoutBinding.gamesSectionView.requestLayout()
+
+                }
+                valueAnimatorGames.addListener(object : Animator.AnimatorListener {
+
+                    override fun onAnimationStart(animation: Animator) {
+
+                    }
+
+                    override fun onAnimationEnd(animation: Animator) {
+
+                        sectionsSwitcherLayoutBinding.gamesSectionView.text = ""
+
+                        valueAnimatorMovies.start()
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator) {
+
+                    }
+
+                    override fun onAnimationRepeat(animation: Animator) {
+
+                    }
+
+                })
+                valueAnimatorGames.start()
+
+            }
         }
-        valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
 
-            override fun onAnimationStart(animation: Animator) {
-
-            }
-
-            override fun onAnimationEnd(animation: Animator) {
-
-                sectionsSwitcherLayoutBinding.applicationsSectionView.text = ""
-
-                valueAnimatorMovies.start()
-
-            }
-
-            override fun onAnimationCancel(animation: Animator) {
-
-            }
-
-            override fun onAnimationRepeat(animation: Animator) {
-
-            }
-
-        })
-        valueAnimatorApplications.start()
 
     }.addOnFailureListener { exception ->
 
@@ -131,6 +179,23 @@ fun moviesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayo
         iconSize = dpToInteger(context, 25)
         iconPadding = 0
         rippleColor = ColorStateList.valueOf(context.getColor(R.color.applicationsSectionColor))
+        backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+
+        layoutParams.width = dpToInteger(context, 57)
+
+        requestLayout()
+
+        clearFocus()
+
+    }
+
+    sectionsSwitcherLayoutBinding.gamesSectionView.apply {
+
+        text = ""
+        iconTint = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
+        iconSize = dpToInteger(context, 25)
+        iconPadding = 0
+        rippleColor = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
         backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
 
         layoutParams.width = dpToInteger(context, 57)
