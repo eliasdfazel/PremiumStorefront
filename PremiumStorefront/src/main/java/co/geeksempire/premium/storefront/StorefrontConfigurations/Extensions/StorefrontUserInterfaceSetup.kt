@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:30 PM
+ * Last modified 8/2/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,11 +28,11 @@ import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.AllContent.Adapter.AllContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.CategoryContent.Adapter.CategoriesAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.FeaturedContent.Adapter.FeaturedContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.Adapter.NewContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.Adapter.OldContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.Adapter.AllContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.Adapter.CategoriesAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.Adapter.FeaturedContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.NewContent.Adapter.NewContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.OldContent.Adapter.OldContentAdapter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 

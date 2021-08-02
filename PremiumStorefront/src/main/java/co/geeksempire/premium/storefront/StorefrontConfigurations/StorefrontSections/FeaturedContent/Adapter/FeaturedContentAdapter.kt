@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/16/21, 9:21 AM
+ * Last modified 8/2/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.FeaturedContent.Adapter
+package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.Adapter
 
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -22,9 +22,9 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor

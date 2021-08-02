@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 9:13 AM
+ * Last modified 8/2/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.Adapter
+package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.NewContent.Adapter
 
 import android.graphics.drawable.Drawable
 import android.text.Html
@@ -21,8 +21,8 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.ViewHolder.NewContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.NewContent.ViewHolder.NewContentViewHolder
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import com.bumptech.glide.Glide

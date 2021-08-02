@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 8:14 AM
+ * Last modified 8/2/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.CategoryContent.Adapter
+package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.Adapter
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -28,10 +28,10 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStr
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.CategoryContent.ViewHolder.CategoriesViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontCategoriesData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.ViewHolder.CategoriesViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction

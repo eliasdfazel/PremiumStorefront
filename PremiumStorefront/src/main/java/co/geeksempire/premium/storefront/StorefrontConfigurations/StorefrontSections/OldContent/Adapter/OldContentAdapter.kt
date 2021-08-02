@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 9:13 AM
+ * Last modified 8/2/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.Adapter
+package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.OldContent.Adapter
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -30,8 +30,8 @@ import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.ViewHolder.OldContentViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.OldContent.ViewHolder.OldContentViewHolder
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorLightDark
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 2:23 AM
+ * Last modified 8/2/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModel
 import co.geeksempire.premium.storefront.Database.Json.JsonIO
 import co.geeksempire.premium.storefront.Database.Write.InputProcess
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.AllContent.Adapter.AllContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.Adapter.AllContentAdapter
 import co.geeksempire.premium.storefront.Utils.System.Installed
 import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import kotlinx.coroutines.*

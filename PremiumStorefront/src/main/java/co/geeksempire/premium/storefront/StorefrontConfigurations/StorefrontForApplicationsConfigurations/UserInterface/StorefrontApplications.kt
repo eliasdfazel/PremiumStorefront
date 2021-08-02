@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 8:57 AM
+ * Last modified 8/2/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,11 +41,6 @@ import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.AllContent.Adapter.AllContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.CategoryContent.Adapter.CategoriesAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.FeaturedContent.Adapter.FeaturedContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.NewContent.Adapter.NewContentAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.Adapters.OldContent.Adapter.OldContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
@@ -59,6 +54,11 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.Adapter.AllContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.Adapter.CategoriesAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.Adapter.FeaturedContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.NewContent.Adapter.NewContentAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.OldContent.Adapter.OldContentAdapter
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
