@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:32 AM
+ * Last modified 8/2/21, 2:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,7 @@ fun storefrontMoviesUserInteractionSetup(context: AppCompatActivity, firebaseUse
                                    profileView: ImageView, preferencesView: ImageView, favoritesView: ImageView,
                                    moviesSectionsSwitcherLayoutBinding: MoviesSectionsSwitcherLayoutBinding) {
 
-    moviesSectionSwitcherDesign(context, moviesSectionsSwitcherLayoutBinding)
+    storefrontMoviesSectionSwitcher(context, moviesSectionsSwitcherLayoutBinding)
 
     profileView.setOnClickListener {
 

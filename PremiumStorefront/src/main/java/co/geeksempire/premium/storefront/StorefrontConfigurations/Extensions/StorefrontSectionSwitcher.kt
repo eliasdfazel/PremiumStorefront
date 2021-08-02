@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 2:01 PM
+ * Last modified 8/2/21, 2:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -200,6 +200,12 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
                 })
                 valueAnimatorApplications.start()
+
+            }
+
+            sectionsSwitcherLayoutBinding.moviesSectionView.setOnClickListener {
+
+                startMoviesSwitching(context, sectionsSwitcherLayoutBinding)
 
             }
 
