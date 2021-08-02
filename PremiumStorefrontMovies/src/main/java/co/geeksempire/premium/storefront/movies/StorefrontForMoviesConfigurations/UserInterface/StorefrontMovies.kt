@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 8:57 AM
+ * Last modified 8/2/21, 11:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,9 +18,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
@@ -38,9 +43,12 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -61,6 +69,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
         ThemePreferences(this@StorefrontMovies)
     }
 
+    val moviesStorefrontLiveData: MoviesStorefrontLiveData by lazy {
+        ViewModelProvider(this@StorefrontMovies).get(MoviesStorefrontLiveData::class.java)
+    }
+
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
         PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = storefrontMoviesLayoutBinding.actionCenterView, actionLeftView = storefrontMoviesLayoutBinding.leftActionView, actionMiddleView = storefrontMoviesLayoutBinding.middleActionView, actionRightView = storefrontMoviesLayoutBinding.rightActionView)
     }
@@ -76,6 +88,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@StorefrontMovies)
+    }
+
+    val featuredMoviesAdapter: FeaturedMoviesAdapter by lazy {
+        FeaturedMoviesAdapter(this@StorefrontMovies)
     }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
@@ -125,6 +141,33 @@ class StorefrontMovies : StorefrontSplitActivity() {
                 }
 
             }
+
+            storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
+            storefrontMoviesLayoutBinding.featuredContentRecyclerView.adapter = featuredMoviesAdapter
+            featuredMoviesAdapter.featuredMoviesData.clear()
+
+            moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
+
+                if (storefrontMoviesLayoutBinding.loadingView.isVisible) {
+
+                    storefrontMoviesLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                    storefrontMoviesLayoutBinding.loadingView.visibility = View.GONE
+
+                }
+
+                if (storefrontMoviesLayoutBinding.featuredContentRecyclerView.isGone) {
+
+                    storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    storefrontMoviesLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
+
+                }
+
+                featuredMoviesAdapter.featuredMoviesData.add(it)
+
+                featuredMoviesAdapter.notifyItemInserted(featuredMoviesAdapter.itemCount)
+
+            })
+
         }
 
     }
@@ -152,7 +195,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
     override fun networkAvailable() {
         Log.d(this@StorefrontMovies.javaClass.simpleName, "Network Available @ ${this@StorefrontMovies.javaClass.simpleName}")
 
-        retrieveFeaturedMovies(this@StorefrontMovies)
+        retrieveFeaturedMovies(this@StorefrontMovies, moviesStorefrontLiveData)
 
     }
 

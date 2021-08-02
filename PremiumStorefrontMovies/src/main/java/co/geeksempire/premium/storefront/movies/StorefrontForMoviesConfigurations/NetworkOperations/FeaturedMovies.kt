@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 9:05 AM
+ * Last modified 8/2/21, 11:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,11 +15,11 @@ import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsIds
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.FeaturedMoviesDataKey
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoint
 import com.google.firebase.firestore.Source
 
-fun retrieveFeaturedMovies(context: AppCompatActivity) {
+fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData: MoviesStorefrontLiveData) {
 
     val generalEndpoint = GeneralEndpoints()
 
@@ -44,8 +44,7 @@ fun retrieveFeaturedMovies(context: AppCompatActivity) {
 
                             if (movieDocumentSnapshot.exists()) {
 
-                                val movieDataStructure = MoviesDataStructure(movieDocumentSnapshot.data!!)
-
+                                moviesStorefrontLiveData.featuredContentItemData.postValue(movieDocumentSnapshot)
 
                             }
 

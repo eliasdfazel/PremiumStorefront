@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 6:55 AM
+ * Last modified 8/2/21, 11:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,15 +17,13 @@ import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RoundRectShape
-import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatButton
 
-fun LayerDrawable.applyClearEffectRectangle(imageView: ImageView,
-                                            negativeSpaceLayerId: Int,
-                                            topLeftCorner: Int,
-                                            topRightCorner: Int,
-                                            bottomRightCorner: Int,
-                                            bottomLeftCorner: Int) : LayerDrawable {
+fun applyClearEffectRectangle(negativeSpaceDrawable: LayerDrawable,
+                              negativeSpaceLayerId: Int,
+                              topLeftCorner: Int,
+                              topRightCorner: Int,
+                              bottomRightCorner: Int,
+                              bottomLeftCorner: Int) : LayerDrawable {
 
     val backgroundShadowRadius = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f)
 
@@ -50,17 +48,7 @@ fun LayerDrawable.applyClearEffectRectangle(imageView: ImageView,
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
-    val negativeSpaceDrawable = this@applyClearEffectRectangle
-
     negativeSpaceDrawable.setDrawableByLayerId(negativeSpaceLayerId, negativeSpace)
-
-    imageView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
-        style = Paint.Style.FILL
-        color = Color.TRANSPARENT
-        isAntiAlias = true
-
-        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-    })
 
     return negativeSpaceDrawable
 }
