@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 10:49 AM
+ * Last modified 8/2/21, 11:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,6 +56,7 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
 
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     })
+    featuredMoviesViewHolder.featuredMovieBackground.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
 
     return featuredContentBackground
 }
