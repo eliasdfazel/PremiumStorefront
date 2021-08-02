@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:32 AM
+ * Last modified 8/2/21, 1:59 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,6 @@ import co.geeksempire.premium.storefront.movies.databinding.MoviesSectionsSwitch
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
-
 
     when (themeType) {
         ThemeType.ThemeLight -> {

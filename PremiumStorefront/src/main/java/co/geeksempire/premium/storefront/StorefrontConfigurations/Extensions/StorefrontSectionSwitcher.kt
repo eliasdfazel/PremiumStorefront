@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 8:34 AM
+ * Last modified 8/2/21, 2:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,6 @@ import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBindi
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
-
 
     when (context) {
         is StorefrontApplications -> {
