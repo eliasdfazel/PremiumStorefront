@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 8/2/21, 8:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -205,7 +205,6 @@ class StorefrontApplications : StorefrontActivity() {
     val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
     val firebaseRemoteConfiguration = Firebase.remoteConfig
-
 
     private val swipeGestureListener: SwipeGestureListener by lazy {
         SwipeGestureListener(applicationContext, this@StorefrontApplications)

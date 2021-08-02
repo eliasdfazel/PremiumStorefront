@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 7:42 AM
+ * Last modified 8/2/21, 9:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,8 +20,7 @@ class MoviesQueryEndpoint (private val generalEndpoints: GeneralEndpoints) {
             "/" +
             "Movies"
 
-    fun storefrontSpecificMovieEndpoint(movieGenre: String, movieId: String) = generalEndpoints.generalStorefrontDatabaseEndpoint +
-            generalStorefrontMoviesEndpoint +
+    fun storefrontSpecificMovieEndpoint(movieGenre: String, movieId: String) = generalStorefrontMoviesEndpoint +
             "/" +
             movieGenre +
             "/" +

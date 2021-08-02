@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:39 AM
+ * Last modified 8/2/21, 8:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -33,10 +34,13 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
+import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -74,6 +78,14 @@ class StorefrontMovies : StorefrontSplitActivity() {
         FavoritedProcess(this@StorefrontMovies)
     }
 
+    val networkCheckpoint: NetworkCheckpoint by lazy {
+        NetworkCheckpoint(applicationContext)
+    }
+
+    private val networkConnectionListener: NetworkConnectionListener by lazy {
+        NetworkConnectionListener(this@StorefrontMovies, storefrontMoviesLayoutBinding.rootView, networkCheckpoint)
+    }
+
     /* Start - Sign In */
     val accountSignIn: AccountSignIn by lazy {
         AccountSignIn(this@StorefrontMovies, this@StorefrontMovies)
@@ -95,6 +107,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
         super.onCreate(savedInstanceState)
         storefrontMoviesLayoutBinding = StorefrontMoviesLayoutBinding.inflate(layoutInflater)
         setContentView(storefrontMoviesLayoutBinding.root)
+
+        networkConnectionListener.networkConnectionListenerInterface = this@StorefrontMovies
 
         storefrontMoviesLayoutBinding.root.post {
 
@@ -136,11 +150,14 @@ class StorefrontMovies : StorefrontSplitActivity() {
     }
 
     override fun networkAvailable() {
+        Log.d(this@StorefrontMovies.javaClass.simpleName, "Network Available @ ${this@StorefrontMovies.javaClass.simpleName}")
 
+        retrieveFeaturedMovies(this@StorefrontMovies)
 
     }
 
     override fun networkLost() {
+        Log.d(this@StorefrontMovies.javaClass.simpleName, "No Network @ ${this@StorefrontMovies.javaClass.simpleName}")
 
 
     }

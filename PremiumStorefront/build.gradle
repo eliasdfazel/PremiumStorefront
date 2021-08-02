@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:19 AM
+ * Last modified 8/2/21, 8:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -184,9 +184,6 @@ dependencies {
 
 
     api 'org.jsoup:jsoup:1.14.1'
-
-
-    api 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 
 
     testImplementation 'junit:junit:4.13.2'
