@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/3/21, 11:16 AM
+  ~ Last modified 8/3/21, 11:22 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -55,7 +55,7 @@
             android:layout_width="323dp"
             android:layout_height="match_parent"
 
-            apps:realtimeBlurRadius="7dp"
+            apps:realtimeBlurRadius="6dp"
             apps:realtimeBlurTopLeft="27dp"
             apps:realtimeBlurTopRight="27dp"
             apps:realtimeBlurBottomLeft="27dp"

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 11:08 AM
+ * Last modified 8/3/21, 11:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorLightDark
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designFeaturedMoviesBackground
@@ -112,6 +113,13 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
                                 movieGradient.setGradientCenter(1f, 0.5f)
 
                                 featuredMoviesViewHolder.movieContentBackground.setImageDrawable(movieGradient)
+
+                                if (isColorLightDark(vibrantColor)) {
+
+                                    featuredMoviesViewHolder.movieNameTextView.setTextColor(context.getColor(R.color.dark))
+                                    featuredMoviesViewHolder.movieSummaryTextView.setTextColor(context.getColor(R.color.dark))
+
+                                }
 
                             }
 
