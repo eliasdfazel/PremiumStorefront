@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 9:49 AM
+ * Last modified 8/3/21, 10:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.ViewHolder.FeaturedMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.UI.Drawable.applyClearEffectRectangle
+import co.geeksempire.premium.storefront.movies.UI.Drawable.applyShadowEffectRectangle
 
 fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder, themeType: Boolean) : LayerDrawable {
 
@@ -78,4 +79,40 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
     featuredMoviesViewHolder.featuredMovieBackground.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
 
     return featuredContentBackground
+}
+
+fun FeaturedMoviesAdapter.designFeaturedMoviesPosterBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder, themeType: Boolean) : LayerDrawable {
+
+    var featuredPostBackground = context.getDrawable(R.drawable.featured_poster_background) as LayerDrawable
+
+    val shadowColor = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            context.getColor(R.color.premiumDark)
+
+        }
+        ThemeType.ThemeDark -> {
+
+            context.getColor(R.color.premiumLight)
+
+        }
+        else -> context.getColor(R.color.premiumDark)
+    }
+
+    featuredPostBackground = applyShadowEffectRectangle(shadowDrawable = featuredPostBackground,
+        shadowLayerId = R.id.shadowLayer,
+        shadowColor = shadowColor,
+        shadowRadius = 15f,
+        topLeftCorner = 29,
+        topRightCorner = 29,
+        bottomRightCorner = 29,
+        bottomLeftCorner = 29)
+
+    featuredMoviesViewHolder.moviePosterBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        color = shadowColor
+
+        setShadowLayer(13f, 0f, 0f, shadowColor)
+    })
+
+    return featuredPostBackground
 }

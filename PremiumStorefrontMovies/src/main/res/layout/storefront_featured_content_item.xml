@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/3/21, 9:37 AM
+  ~ Last modified 8/3/21, 10:45 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,54 +12,76 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootViewItem"
-    android:layout_width="358dp"
-    android:layout_height="234dp"
+    android:layout_width="373dp"
+    android:layout_height="237dp"
     android:layout_marginVertical="7dp"
     android:layout_marginStart="19dp"
     android:layout_marginEnd="13dp"
     android:background="@color/transparent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/movieContentBackground"
-        android:layout_width="323dp"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="2dp"
-        android:paddingVertical="2dp"
-        android:scaleType="fitCenter"
-        android:rotation="180"
-
-        apps:layout_constraintEnd_toEndOf="parent"/>
-
-    <net.geeksempire.blurry.effect.view.RealtimeBlurView
-        android:id="@+id/movieContentBackgroundBlur"
-        android:layout_width="323dp"
-        android:layout_height="match_parent"
-
-        apps:realtimeBlurRadius="7dp"
-        apps:realtimeBlurTopLeft="27dp"
-        apps:realtimeBlurTopRight="27dp"
-        apps:realtimeBlurBottomLeft="27dp"
-        apps:realtimeBlurBottomRight="27dp"
-        apps:realtimeBlurGradientType="none"
-        apps:realtimeFirstColor="@color/light_transparent_high"
-
-        apps:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/featuredMovieBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/featured_content_background_light"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/moviePosterImageView"
-        android:layout_width="117dp"
-        android:layout_height="171dp"
-        android:paddingHorizontal="3dp"
-        android:scaleType="fitCenter"
+        android:id="@+id/moviePosterBackground"
+        android:layout_width="119dp"
+        android:layout_height="191dp"
+        android:background="@drawable/featured_poster_background"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="358dp"
+        android:layout_height="234dp"
+        android:layout_marginStart="9dp"
+        android:background="@color/transparent"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/movieContentBackground"
+            android:layout_width="323dp"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="2dp"
+            android:paddingVertical="2dp"
+            android:scaleType="fitCenter"
+            android:rotation="180"
+
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <net.geeksempire.blurry.effect.view.RealtimeBlurView
+            android:id="@+id/movieContentBackgroundBlur"
+            android:layout_width="323dp"
+            android:layout_height="match_parent"
+
+            apps:realtimeBlurRadius="7dp"
+            apps:realtimeBlurTopLeft="27dp"
+            apps:realtimeBlurTopRight="27dp"
+            apps:realtimeBlurBottomLeft="27dp"
+            apps:realtimeBlurBottomRight="27dp"
+            apps:realtimeBlurGradientType="none"
+            apps:realtimeFirstColor="@color/light_transparent_high"
+
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/featuredMovieBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/featured_content_background_light"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/moviePosterImageView"
+            android:layout_width="117dp"
+            android:layout_height="171dp"
+            android:paddingHorizontal="3dp"
+            android:scaleType="fitCenter"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
