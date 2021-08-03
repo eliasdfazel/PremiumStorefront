@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 8:35 AM
+ * Last modified 8/3/21, 9:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,14 +16,27 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.LayerDrawable
 import androidx.appcompat.widget.AppCompatButton
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.ViewHolder.FeaturedMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.UI.Drawable.applyClearEffectRectangle
 
-fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder) : LayerDrawable {
+fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder, themeType: Boolean) : LayerDrawable {
 
-    var featuredContentBackground = context.getDrawable(R.drawable.featured_content_background_light) as LayerDrawable
+    var featuredContentBackground = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            context.getDrawable(R.drawable.featured_content_background_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            context.getDrawable(R.drawable.featured_content_background_dark) as LayerDrawable
+
+        }
+        else -> context.getDrawable(R.drawable.featured_content_background_light) as LayerDrawable
+    }
 
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.topLeftConnection,
         topLeftCorner = 0,
