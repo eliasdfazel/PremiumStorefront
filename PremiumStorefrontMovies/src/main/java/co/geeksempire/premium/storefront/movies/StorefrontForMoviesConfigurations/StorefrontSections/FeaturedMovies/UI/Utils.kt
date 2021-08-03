@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 11:03 AM
+ * Last modified 8/3/21, 8:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@ import co.geeksempire.premium.storefront.movies.UI.Drawable.applyClearEffectRect
 
 fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder) : LayerDrawable {
 
-    var featuredContentBackground = context.getDrawable(R.drawable.featured_content_background) as LayerDrawable
+    var featuredContentBackground = context.getDrawable(R.drawable.featured_content_background_light) as LayerDrawable
 
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.topLeftConnection,
         topLeftCorner = 0,
@@ -48,6 +48,12 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
         topRightCorner = 0,
         bottomLeftCorner = 0,
         bottomRightCorner = 0)
+
+    featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.centerClearLayer,
+        topLeftCorner = 39,
+        topRightCorner = 39,
+        bottomLeftCorner = 39,
+        bottomRightCorner = 39)
 
     featuredMoviesViewHolder.featuredMovieBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
         style = Paint.Style.FILL
