@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 7:32 AM
+ * Last modified 8/3/21, 9:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,6 +27,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
@@ -265,8 +266,12 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
 
+            PagerSnapHelper().attachToRecyclerView(storefrontLayoutBinding.featuredContentRecyclerView)
+
             storefrontLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allContentRecyclerView.adapter = allContentAdapter
+
+            PagerSnapHelper().attachToRecyclerView(storefrontLayoutBinding.allContentRecyclerView)
 
             storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 113, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL)
             storefrontLayoutBinding.oldContentRecyclerView.adapter = oldContentAdapter
@@ -274,8 +279,12 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.allMoreContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
             storefrontLayoutBinding.allMoreContentRecyclerView.adapter = allMoreContentAdapter
 
+            PagerSnapHelper().attachToRecyclerView(storefrontLayoutBinding.allMoreContentRecyclerView)
+
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
+
+            PagerSnapHelper().attachToRecyclerView(storefrontLayoutBinding.newContentRecyclerView)
 
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
