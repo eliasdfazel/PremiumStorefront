@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 1:08 PM
+ * Last modified 8/3/21, 9:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.storefront_featured_content_item.view.*
+import net.geeksempire.blurry.effect.view.RealtimeBlurView
 
 class FeaturedMoviesViewHolder (rootViewItem: View) : RecyclerView.ViewHolder(rootViewItem) {
     val rootViewItem: ConstraintLayout = rootViewItem.rootViewItem
@@ -22,4 +23,6 @@ class FeaturedMoviesViewHolder (rootViewItem: View) : RecyclerView.ViewHolder(ro
     val featuredMovieBackground: AppCompatImageView = rootViewItem.featuredMovieBackground
     val movieContentBackground: AppCompatImageView = rootViewItem.movieContentBackground
     val moviePosterImageView: AppCompatImageView = rootViewItem.moviePosterImageView
+
+    val movieContentBackgroundBlur: RealtimeBlurView = rootViewItem.movieContentBackgroundBlur
 }

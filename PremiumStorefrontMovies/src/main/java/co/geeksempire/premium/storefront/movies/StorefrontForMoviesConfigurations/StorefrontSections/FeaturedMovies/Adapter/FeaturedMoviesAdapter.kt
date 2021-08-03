@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 7:45 AM
+ * Last modified 8/3/21, 9:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
@@ -35,6 +36,8 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adapter<FeaturedMoviesViewHolder>() {
 
+    var themeType: Boolean = ThemeType.ThemeLight
+
     val featuredMoviesData = ArrayList<DocumentSnapshot>()
 
     override fun getItemCount(): Int {
@@ -45,6 +48,24 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): FeaturedMoviesViewHolder {
 
         return FeaturedMoviesViewHolder(LayoutInflater.from(context).inflate(R.layout.storefront_featured_content_item, viewGroup, false))
+    }
+
+    override fun onBindViewHolder(featuredMoviesViewHolder: FeaturedMoviesViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(featuredMoviesViewHolder, position, payloads)
+
+        when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
+
+            }
+        }
+
     }
 
     override fun onBindViewHolder(featuredMoviesViewHolder: FeaturedMoviesViewHolder, position: Int) {

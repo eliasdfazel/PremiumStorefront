@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 7:43 AM
+ * Last modified 8/3/21, 9:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,9 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
@@ -145,6 +147,9 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.adapter = featuredMoviesAdapter
+
+            val snapHelper: SnapHelper = PagerSnapHelper()
+            snapHelper.attachToRecyclerView(storefrontMoviesLayoutBinding.featuredContentRecyclerView)
 
             moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
 
