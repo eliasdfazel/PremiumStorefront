@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 10:45 AM
+ * Last modified 8/3/21, 11:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -77,6 +78,11 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
 
             featuredMoviesViewHolder.featuredMovieBackground.setImageDrawable(designFeaturedMoviesBackground(featuredMoviesViewHolder, themeType))
             featuredMoviesViewHolder.moviePosterBackground.background = (designFeaturedMoviesPosterBackground(featuredMoviesViewHolder, themeType))
+
+            featuredMoviesViewHolder.movieNameTextView.text = Html.fromHtml(moviesDataStructure.movieName(), Html.FROM_HTML_MODE_COMPACT)
+            featuredMoviesViewHolder.movieSummaryTextView.text = Html.fromHtml(moviesDataStructure.movieSummary().substring(
+                IntRange(0, moviesDataStructure.movieSummary().length/2)
+            ), Html.FROM_HTML_MODE_COMPACT)
 
             Glide.with(context)
                 .asDrawable()
