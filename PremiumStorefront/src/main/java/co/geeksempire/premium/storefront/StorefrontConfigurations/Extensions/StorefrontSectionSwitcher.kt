@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 2:14 PM
+ * Last modified 8/3/21, 7:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,18 +17,19 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
+fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
     when (context) {
         is StorefrontApplications -> {
 
-            applicationsSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
+            applicationsSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding, themeType)
 
             sectionsSwitcherLayoutBinding.gamesSectionView.setOnClickListener {
 
@@ -47,7 +48,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
                     override fun onAnimationStart(animation: Animator) {
 
-                        gamesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
+                        gamesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding, themeType)
 
                     }
 
@@ -113,14 +114,14 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
             sectionsSwitcherLayoutBinding.moviesSectionView.setOnClickListener {
 
-                startMoviesSwitching(context, sectionsSwitcherLayoutBinding)
+                startMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
 
             }
 
         }
         is StorefrontGames -> {
 
-            gamesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
+            gamesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding, themeType)
 
             sectionsSwitcherLayoutBinding.applicationsSectionView.setOnClickListener {
 
@@ -139,7 +140,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
                     override fun onAnimationStart(animation: Animator) {
 
-                        applicationsSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding)
+                        applicationsSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding, themeType)
 
                     }
 
@@ -205,7 +206,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
             sectionsSwitcherLayoutBinding.moviesSectionView.setOnClickListener {
 
-                startMoviesSwitching(context, sectionsSwitcherLayoutBinding)
+                startMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
 
             }
 
@@ -217,7 +218,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
 }
 
-fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
+fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
     sectionsSwitcherLayoutBinding.applicationsSectionView.apply {
 
@@ -245,7 +246,48 @@ fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitch
         iconSize = dpToInteger(context, 25)
         iconPadding = 0
         rippleColor = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
-        backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+        backgroundTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+
+            }
+            else -> ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+        }
+
+        layoutParams.width = dpToInteger(context, 57)
+
+        requestLayout()
+
+        clearFocus()
+
+    }
+
+    sectionsSwitcherLayoutBinding.moviesSectionView.apply {
+
+        text = ""
+        iconTint = ColorStateList.valueOf(context.getColor(R.color.moviesSectionColor))
+        iconSize = dpToInteger(context, 25)
+        iconPadding = 0
+        rippleColor = ColorStateList.valueOf(context.getColor(R.color.moviesSectionColor))
+        backgroundTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+
+            }
+            else -> ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+        }
 
         layoutParams.width = dpToInteger(context, 57)
 
@@ -257,7 +299,7 @@ fun applicationsSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitch
 
 }
 
-fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding) {
+fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
     sectionsSwitcherLayoutBinding.applicationsSectionView.apply {
 
@@ -266,7 +308,19 @@ fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayou
         iconSize = dpToInteger(context, 25)
         iconPadding = 0
         rippleColor = ColorStateList.valueOf(context.getColor(R.color.applicationsSectionColor))
-        backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+        backgroundTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+
+            }
+            else -> ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+        }
 
         layoutParams.width = dpToInteger(context, 57)
 
@@ -290,6 +344,35 @@ fun gamesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayou
         backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
 
         (layoutParams as ConstraintLayout.LayoutParams).matchConstraintPercentWidth = 0.51f
+
+        requestLayout()
+
+        clearFocus()
+
+    }
+
+    sectionsSwitcherLayoutBinding.moviesSectionView.apply {
+
+        text = ""
+        iconTint = ColorStateList.valueOf(context.getColor(R.color.moviesSectionColor))
+        iconSize = dpToInteger(context, 25)
+        iconPadding = 0
+        rippleColor = ColorStateList.valueOf(context.getColor(R.color.moviesSectionColor))
+        backgroundTintList = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+
+            }
+            else -> ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+        }
+
+        layoutParams.width = dpToInteger(context, 57)
 
         requestLayout()
 

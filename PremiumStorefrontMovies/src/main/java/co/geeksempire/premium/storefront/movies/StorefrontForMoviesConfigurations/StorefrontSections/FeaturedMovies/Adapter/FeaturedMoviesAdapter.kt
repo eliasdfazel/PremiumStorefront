@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 1:55 PM
+ * Last modified 8/3/21, 7:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,7 +59,7 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
                 .asDrawable()
                 .load(moviesDataStructure.moviePoster())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(RoundedCorners(dpToInteger(context, 43)))
+                .transform(RoundedCorners(dpToInteger(context, 37)))
                 .addListener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
 

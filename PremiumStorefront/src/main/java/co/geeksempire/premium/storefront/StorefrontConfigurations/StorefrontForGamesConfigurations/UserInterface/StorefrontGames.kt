@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 6:53 AM
+ * Last modified 8/3/21, 7:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -225,13 +225,13 @@ class StorefrontGames : StorefrontActivity() {
             categoryIndicatorTextView = storefrontLayoutBinding.categoryIndicatorTextView,
             prepareActionCenterUserInterface = prepareActionCenterUserInterface)
 
-        storefrontUserInteractionSetup(context = this@StorefrontGames, firebaseUser = firebaseUser, accountSelector = accountSelector,
-            profileView = storefrontLayoutBinding.profileView, preferencesView = storefrontLayoutBinding.preferencesView, favoritesView = storefrontLayoutBinding.favoritesView,
-            sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionsSwitcherContainer)
-
         lifecycleScope.launch {
 
             themePreferences.checkThemeLightDark().collect {
+
+                storefrontUserInteractionSetup(context = this@StorefrontGames, firebaseUser = firebaseUser, accountSelector = accountSelector,
+                    profileView = storefrontLayoutBinding.profileView, preferencesView = storefrontLayoutBinding.preferencesView, favoritesView = storefrontLayoutBinding.favoritesView,
+                    sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionsSwitcherContainer, themeType = it)
 
                 actionCenterOperations.setupForGamesStorefront(this@StorefrontGames, it)
 
@@ -658,7 +658,15 @@ class StorefrontGames : StorefrontActivity() {
 
                             override fun onAnimationStart(animation: Animator) {
 
-                                applicationsSectionSwitcherDesign(this@StorefrontGames, storefrontLayoutBinding.sectionsSwitcherContainer)
+                                lifecycleScope.launch {
+
+                                    themePreferences.checkThemeLightDark().collect {
+
+                                        applicationsSectionSwitcherDesign(this@StorefrontGames, storefrontLayoutBinding.sectionsSwitcherContainer, it)
+
+                                    }
+
+                                }
 
                             }
 

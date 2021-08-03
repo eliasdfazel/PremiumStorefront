@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 2:05 PM
+ * Last modified 8/3/21, 7:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,9 +27,9 @@ import com.google.firebase.auth.FirebaseUser
 
 fun storefrontMoviesUserInteractionSetup(context: AppCompatActivity, firebaseUser: FirebaseUser?, accountSelector: ActivityResultLauncher<Any?>,
                                    profileView: ImageView, preferencesView: ImageView, favoritesView: ImageView,
-                                   moviesSectionsSwitcherLayoutBinding: MoviesSectionsSwitcherLayoutBinding) {
+                                   moviesSectionsSwitcherLayoutBinding: MoviesSectionsSwitcherLayoutBinding, themeType: Boolean) {
 
-    storefrontMoviesSectionSwitcher(context, moviesSectionsSwitcherLayoutBinding)
+    storefrontMoviesSectionSwitcher(context, moviesSectionsSwitcherLayoutBinding, themeType)
 
     profileView.setOnClickListener {
 

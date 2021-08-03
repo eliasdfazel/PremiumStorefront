@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 6:54 AM
+ * Last modified 8/3/21, 7:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -126,13 +126,14 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
         networkConnectionListener.networkConnectionListenerInterface = this@StorefrontMovies
 
-        storefrontMoviesUserInteractionSetup(context = this@StorefrontMovies, firebaseUser = firebaseUser, accountSelector = accountSelector,
-            profileView = storefrontMoviesLayoutBinding.profileView, preferencesView = storefrontMoviesLayoutBinding.preferencesView, favoritesView = storefrontMoviesLayoutBinding.favoritesView,
-            moviesSectionsSwitcherLayoutBinding = storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer)
-
         lifecycleScope.launch {
 
             themePreferences.checkThemeLightDark().collect {
+
+                storefrontMoviesUserInteractionSetup(context = this@StorefrontMovies, firebaseUser = firebaseUser, accountSelector = accountSelector,
+                    profileView = storefrontMoviesLayoutBinding.profileView, preferencesView = storefrontMoviesLayoutBinding.preferencesView, favoritesView = storefrontMoviesLayoutBinding.favoritesView,
+                    moviesSectionsSwitcherLayoutBinding = storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer,
+                    themeType = it)
 
                 setupStorefrontMoviesUserInterface(it)
 
@@ -142,7 +143,6 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
         storefrontMoviesLayoutBinding.root.post {
 
-
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.adapter = featuredMoviesAdapter
 
@@ -151,7 +151,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
                 featuredMoviesAdapter.featuredMoviesData.clear()
                 featuredMoviesAdapter.featuredMoviesData.addAll(it)
 
-                featuredMoviesAdapter.notifyDataSetChanged()
+                featuredMoviesAdapter.notifyItemRangeInserted(0, featuredMoviesAdapter.featuredMoviesData.size)
 
                 if (storefrontMoviesLayoutBinding.loadingView.isVisible) {
 
