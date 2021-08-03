@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 3:31 PM
+ * Last modified 8/3/21, 6:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -126,6 +126,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
         networkConnectionListener.networkConnectionListenerInterface = this@StorefrontMovies
 
+        storefrontMoviesUserInteractionSetup(context = this@StorefrontMovies, firebaseUser = firebaseUser, accountSelector = accountSelector,
+            profileView = storefrontMoviesLayoutBinding.profileView, preferencesView = storefrontMoviesLayoutBinding.preferencesView, favoritesView = storefrontMoviesLayoutBinding.favoritesView,
+            moviesSectionsSwitcherLayoutBinding = storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer)
+
         lifecycleScope.launch {
 
             themePreferences.checkThemeLightDark().collect {
@@ -138,9 +142,6 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
         storefrontMoviesLayoutBinding.root.post {
 
-            storefrontMoviesUserInteractionSetup(context = this@StorefrontMovies, firebaseUser = firebaseUser, accountSelector = accountSelector,
-                profileView = storefrontMoviesLayoutBinding.profileView, preferencesView = storefrontMoviesLayoutBinding.preferencesView, favoritesView = storefrontMoviesLayoutBinding.favoritesView,
-                moviesSectionsSwitcherLayoutBinding = storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer)
 
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.adapter = featuredMoviesAdapter

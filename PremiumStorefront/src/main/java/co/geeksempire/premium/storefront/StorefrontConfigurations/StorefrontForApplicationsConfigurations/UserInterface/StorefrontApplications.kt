@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 9:08 AM
+ * Last modified 8/3/21, 6:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -244,23 +244,23 @@ class StorefrontApplications : StorefrontActivity() {
             categoryIndicatorTextView = storefrontLayoutBinding.categoryIndicatorTextView,
             prepareActionCenterUserInterface = prepareActionCenterUserInterface)
 
+        storefrontUserInteractionSetup(context = this@StorefrontApplications, firebaseUser = firebaseUser, accountSelector = accountSelector,
+            profileView = storefrontLayoutBinding.profileView, preferencesView = storefrontLayoutBinding.preferencesView, favoritesView = storefrontLayoutBinding.favoritesView,
+            sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionsSwitcherContainer)
+
+        lifecycleScope.launch {
+
+            themePreferences.checkThemeLightDark().collect {
+
+                actionCenterOperations.setupForApplicationsStorefront(this@StorefrontApplications, it)
+
+            }
+
+        }
+
         storefrontLayoutBinding.root.post {
 
             storefrontLayoutBinding.loadingView.visibility = View.VISIBLE
-
-            storefrontUserInteractionSetup(context = this@StorefrontApplications, firebaseUser = firebaseUser, accountSelector = accountSelector,
-                profileView = storefrontLayoutBinding.profileView, preferencesView = storefrontLayoutBinding.preferencesView, favoritesView = storefrontLayoutBinding.favoritesView,
-                sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionsSwitcherContainer)
-
-            lifecycleScope.launch {
-
-                themePreferences.checkThemeLightDark().collect {
-
-                    actionCenterOperations.setupForApplicationsStorefront(this@StorefrontApplications, it)
-
-                }
-
-            }
 
             storefrontLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.featuredContentRecyclerView.adapter = featuredContentAdapter
