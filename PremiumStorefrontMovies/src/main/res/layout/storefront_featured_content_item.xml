@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/3/21, 11:22 AM
+  ~ Last modified 8/4/21, 5:38 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -57,7 +57,7 @@
 
             apps:realtimeBlurRadius="6dp"
             apps:realtimeBlurTopLeft="27dp"
-            apps:realtimeBlurTopRight="27dp"
+            apps:realtimeBlurTopRight="51dp"
             apps:realtimeBlurBottomLeft="27dp"
             apps:realtimeBlurBottomRight="27dp"
             apps:realtimeBlurGradientType="none"
@@ -86,7 +86,10 @@
             android:id="@+id/movieNameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="11dp"
+            android:layout_marginTop="19dp"
+            android:paddingStart="11dp"
+            android:paddingEnd="13dp"
+            android:gravity="top"
             android:lines="1"
             android:singleLine="true"
             android:ellipsize="marquee"
@@ -100,7 +103,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
 
-            apps:layout_constraintTop_toTopOf="@id/moviePosterImageView"
+            apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintStart_toEndOf="@id/moviePosterImageView"
             apps:layout_constraintEnd_toEndOf="parent"/>
 
@@ -108,7 +111,11 @@
             android:id="@+id/movieSummaryTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingHorizontal="11dp"
+            android:layout_marginTop="25dp"
+            android:paddingVertical="3dp"
+            android:paddingStart="11dp"
+            android:paddingEnd="13dp"
+            android:gravity="top|start"
             android:maxLines="7"
             android:lineSpacingExtra="1.7dp"
             android:ellipsize="end"
@@ -117,10 +124,43 @@
             android:textColor="@color/light"
             android:fontFamily="@font/upcil"
 
-            apps:layout_constraintTop_toBottomOf="@id/movieNameTextView"
+            apps:layout_constraintTop_toTopOf="@id/movieNameTextView"
             apps:layout_constraintBottom_toBottomOf="@id/moviePosterImageView"
             apps:layout_constraintStart_toEndOf="@id/moviePosterImageView"
             apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/productRatingStarsView"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:layout_marginVertical="3dp"
+            android:layout_marginHorizontal="3dp"
+            android:padding="11dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/white"
+            android:background="@drawable/movie_rating_glowing_frame_light"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/productCurrentRateView"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:textSize="31sp"
+            android:text="5.0"
+            android:fontFamily="@font/neon"
+            android:shadowRadius="7"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowColor="@color/red"
+
+            apps:layout_constraintTop_toTopOf="@id/productRatingStarsView"
+            apps:layout_constraintBottom_toBottomOf="@id/productRatingStarsView"
+            apps:layout_constraintStart_toStartOf="@id/productRatingStarsView"
+            apps:layout_constraintEnd_toEndOf="@id/productRatingStarsView"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

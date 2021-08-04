@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 11:22 AM
+ * Last modified 8/4/21, 5:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,10 +61,14 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
 
                 featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
+                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
+
             }
             ThemeType.ThemeDark -> {
 
                 featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
+
+                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
 
             }
         }
@@ -84,6 +88,8 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
             featuredMoviesViewHolder.movieSummaryTextView.text = Html.fromHtml(moviesDataStructure.movieSummary().substring(
                 IntRange(0, moviesDataStructure.movieSummary().length/2)
             ), Html.FROM_HTML_MODE_COMPACT)
+
+            featuredMoviesViewHolder.productCurrentRateView.text = Html.fromHtml(moviesDataStructure.movieRating(), Html.FROM_HTML_MODE_COMPACT)
 
             Glide.with(context)
                 .asDrawable()
@@ -108,7 +114,12 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
                                 val movieGradient = GradientDrawable()
                                 movieGradient.orientation = GradientDrawable.Orientation.TL_BR
                                 movieGradient.colors = intArrayOf(vibrantColor, vibrantColor, dominantColor, mutedColor, mutedColor)
-                                movieGradient.cornerRadius = 43f
+                                movieGradient.cornerRadii = floatArrayOf(
+                                    43f, 43f,
+                                    43f, 43f,
+                                    43f, 43f,
+                                    71f, 71f
+                                )
                                 movieGradient.gradientType = GradientDrawable.SWEEP_GRADIENT
                                 movieGradient.setGradientCenter(1f, 0.5f)
 
@@ -119,7 +130,14 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
                                     featuredMoviesViewHolder.movieNameTextView.setTextColor(context.getColor(R.color.dark))
                                     featuredMoviesViewHolder.movieSummaryTextView.setTextColor(context.getColor(R.color.dark))
 
+                                } else {
+
+                                    featuredMoviesViewHolder.movieNameTextView.setTextColor(context.getColor(R.color.light))
+                                    featuredMoviesViewHolder.movieSummaryTextView.setTextColor(context.getColor(R.color.light))
+
                                 }
+
+                                featuredMoviesViewHolder.productCurrentRateView.setTextColor(dominantColor)
 
                             }
 
@@ -130,6 +148,12 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
 
                 })
                 .submit()
+
+            featuredMoviesViewHolder.rootViewItem.setOnClickListener {
+
+
+
+            }
 
         }
 
