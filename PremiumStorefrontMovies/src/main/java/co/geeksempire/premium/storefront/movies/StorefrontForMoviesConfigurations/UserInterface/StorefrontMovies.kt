@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 9:36 AM
+ * Last modified 8/4/21, 6:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,6 +50,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.bumptech.glide.Glide
@@ -200,6 +201,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     override fun networkAvailable() {
         Log.d(this@StorefrontMovies.javaClass.simpleName, "Network Available @ ${this@StorefrontMovies.javaClass.simpleName}")
+
+        retrieveGenreMovies(this@StorefrontMovies, moviesStorefrontLiveData)
 
         retrieveFeaturedMovies(this@StorefrontMovies, moviesStorefrontLiveData)
 

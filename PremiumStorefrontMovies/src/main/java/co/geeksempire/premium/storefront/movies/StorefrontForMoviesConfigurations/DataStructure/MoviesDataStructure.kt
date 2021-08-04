@@ -2,13 +2,15 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 8:26 AM
+ * Last modified 8/4/21, 7:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure
+
+import androidx.annotation.Keep
 
 object FeaturedMoviesDataKey {
     const val ProductId = "ProductId"
@@ -79,3 +81,9 @@ class MoviesDataStructure(private val movieData: MutableMap<String, Any>) {
     fun movieUniqueRecommendation() : String = movieData[MoviesDataKey.MovieUniqueRecommendation].toString()
 
 }
+
+@Keep
+data class GenreIds(var GenreIds: ArrayList<HashMap<String, Any>>? = null)
+
+@Keep
+data class StorefrontGenresData(var categoryId: Int, var categoryName: String, var categoryIconLink: String, var selectedCategory: Boolean = false)
