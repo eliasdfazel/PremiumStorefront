@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 7:20 AM
+ * Last modified 8/4/21, 7:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,8 +82,14 @@ class MoviesDataStructure(private val movieData: MutableMap<String, Any>) {
 
 }
 
+object GenreDataKey {
+    const val GenreId = "genreId"
+    const val GenreName = "genreName"
+    const val GenreIconLink = "genreIconLink"
+}
+
 @Keep
 data class GenreIds(var GenreIds: ArrayList<HashMap<String, Any>>? = null)
 
 @Keep
-data class StorefrontGenresData(var categoryId: Int, var categoryName: String, var categoryIconLink: String, var selectedCategory: Boolean = false)
+data class StorefrontGenresData(var genreId: Int, var genreName: String, var genreIconLink: String, var selectedCategory: Boolean = false)

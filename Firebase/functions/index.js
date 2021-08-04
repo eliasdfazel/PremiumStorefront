@@ -13,6 +13,7 @@ const runtimeOptions = {
     timeoutSeconds: 313,
 }
 
+/* Start - Triggering Updates On Clients */
 exports.triggerBackgroundUpdatingProcessApplications = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
 
     var message = {
@@ -132,7 +133,9 @@ exports.triggerBackgroundUpdatingProcessMovies = functions.runWith(runtimeOption
         });
 
 });
+/* End - Triggering Updates On Clients */
 
+/* Start - Transfering Applications/Games for Popup Shortcuts */
 exports.transferQuickAccessProducts = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
 
     var featuredApplicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
@@ -164,7 +167,7 @@ exports.transferQuickAccessProducts = functions.runWith(runtimeOptions).https.on
             const NameKey = "name";
 
             const CategoriesKey = "categories";
-            
+
             var productId = jsonObject[IdKey];
 
             /* Start - Primary Category */
@@ -196,9 +199,9 @@ exports.transferQuickAccessProducts = functions.runWith(runtimeOptions).https.on
 
         /* Start - Document * With Even Directory */
         var firestoreDirectory = '/' + 'PremiumStorefront'
-                + '/' + 'Products'
-                + '/' + 'Android'
-                + '/' + 'QuickAccess'
+            + '/' + 'Products'
+            + '/' + 'Android'
+            + '/' + 'QuickAccess'
 
         firestore.doc(firestoreDirectory).set({
             ProductsIds: featuredContent,
@@ -209,7 +212,9 @@ exports.transferQuickAccessProducts = functions.runWith(runtimeOptions).https.on
     xmlHttpRequest.send();
 
 });
+/* End - Transfering Applications/Games for Popup Shortcuts */
 
+/* Start - Transfering Featured Products */
 exports.transferFeaturedApplicationsData = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
 
     var numberOfPage = req.query.numberOfPage;
@@ -250,7 +255,7 @@ exports.transferFeaturedApplicationsData = functions.runWith(runtimeOptions).htt
             const NameKey = "name";
 
             const CategoriesKey = "categories";
-            
+
             var productId = jsonObject[IdKey];
 
             /* Start - Primary Category */
@@ -282,11 +287,11 @@ exports.transferFeaturedApplicationsData = functions.runWith(runtimeOptions).htt
 
         /* Start - Document * With Even Directory */
         var firestoreDirectory = '/' + 'PremiumStorefront'
-                + '/' + 'Products'
-                + '/' + 'Android'
-                + '/' + 'Applications'
-                + '/' + 'Featured'
-                + '/' + 'Content';
+            + '/' + 'Products'
+            + '/' + 'Android'
+            + '/' + 'Applications'
+            + '/' + 'Featured'
+            + '/' + 'Content';
 
         firestore.doc(firestoreDirectory).set({
             ProductsIds: featuredContent,
@@ -338,7 +343,7 @@ exports.transferFeaturedGamesData = functions.runWith(runtimeOptions).https.onRe
             const NameKey = "name";
 
             const CategoriesKey = "categories";
-            
+
             var productId = jsonObject[IdKey];
 
             /* Start - Primary Category */
@@ -370,11 +375,11 @@ exports.transferFeaturedGamesData = functions.runWith(runtimeOptions).https.onRe
 
         /* Start - Document * With Even Directory */
         var firestoreDirectory = '/' + 'PremiumStorefront'
-                + '/' + 'Products'
-                + '/' + 'Android'
-                + '/' + 'Games'
-                + '/' + 'Featured'
-                + '/' + 'Content';
+            + '/' + 'Products'
+            + '/' + 'Android'
+            + '/' + 'Games'
+            + '/' + 'Featured'
+            + '/' + 'Content';
 
         firestore.doc(firestoreDirectory).set({
             ProductsIds: featuredContent,
@@ -427,7 +432,7 @@ exports.transferFeaturedMoviesData = functions.runWith(runtimeOptions).https.onR
             const NameKey = "name";
 
             const CategoriesKey = "categories";
-            
+
             var productId = jsonObject[IdKey];
 
             /* Start - Primary Category */
@@ -459,11 +464,11 @@ exports.transferFeaturedMoviesData = functions.runWith(runtimeOptions).https.onR
 
         /* Start - Document * With Even Directory */
         var firestoreDirectory = '/' + 'PremiumStorefront'
-                + '/' + 'Products'
-                + '/' + 'Multimedia'
-                + '/' + 'Movies'
-                + '/' + 'Featured'
-                + '/' + 'Content';
+            + '/' + 'Products'
+            + '/' + 'Multimedia'
+            + '/' + 'Movies'
+            + '/' + 'Featured'
+            + '/' + 'Content';
 
         firestore.doc(firestoreDirectory).set({
             ProductsIds: featuredContent,
@@ -474,7 +479,9 @@ exports.transferFeaturedMoviesData = functions.runWith(runtimeOptions).https.onR
     xmlHttpRequest.send();
 
 });
+/* End - Transfering Featured Products */
 
+/* Start - Transfering All Data */
 exports.transferApplicationsData = functions.runWith(runtimeOptions).https.onRequest(async (req, res) => {
 
     var numberOfPage = req.query.numberOfPage;
@@ -858,7 +865,7 @@ exports.transferMoviesData = functions.runWith(runtimeOptions).https.onRequest((
         + '&per_page=100'
         + '&category=982'
         + '&orderby=date'
-        + '&order=asc'; 
+        + '&order=asc';
 
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open('GET', applicationsEndpoint, true);
@@ -996,3 +1003,50 @@ async function setProductsMoviesData(jsonObject) {
     /* End - Attributes */
 
 }
+/* End - Transfering All Data */
+
+/* Start - Transferring Categories Data */
+exports.transferApplicationsCategories = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var numberOfPage = req.query.numberOfPage;
+
+    if (numberOfPage == null) {
+        numberOfPage = 1;
+    }
+
+    //get all categories and add categories that contains Applications
+    var applicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
+        + '&page=' + numberOfPage
+        + '&per_page=100'
+
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('GET', applicationsEndpoint, true);
+    xmlHttpRequest.setRequestHeader('accept', 'application/json');
+    xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
+    xmlHttpRequest.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+        } else {
+
+        }
+    };
+    xmlHttpRequest.onprogress = function () {
+
+    };
+    xmlHttpRequest.onload = function () {
+
+        var jsonArrayParserResponse = JSON.parse(xmlHttpRequest.responseText);
+
+        jsonArrayParserResponse.forEach((jsonObject) => {
+
+            //id
+            //name
+            //icon
+
+        });
+
+    };
+    xmlHttpRequest.send();
+
+});
+/* End - Transferring Categories Data */

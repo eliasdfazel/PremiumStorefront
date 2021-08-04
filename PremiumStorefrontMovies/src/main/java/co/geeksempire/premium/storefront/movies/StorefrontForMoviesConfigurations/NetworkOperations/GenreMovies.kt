@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 7:20 AM
+ * Last modified 8/4/21, 7:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,10 +13,11 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.GenreDataKey
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.GenreIds
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.StorefrontGenresData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoint
-import com.google.firebase.firestore.DocumentSnapshot
 
 fun retrieveGenreMovies(context: AppCompatActivity, moviesStorefrontLiveData: MoviesStorefrontLiveData) {
 
@@ -24,7 +25,7 @@ fun retrieveGenreMovies(context: AppCompatActivity, moviesStorefrontLiveData: Mo
 
     val moviesQueryEndpoint = MoviesQueryEndpoint(generalEndpoint)
 
-    val moviesDocumentSnapshots = ArrayList<DocumentSnapshot>()
+    val moviesDocumentSnapshots = ArrayList<StorefrontGenresData>()
 
     (context.application as PremiumStorefrontApplication)
         .firestoreDatabase
@@ -35,10 +36,13 @@ fun retrieveGenreMovies(context: AppCompatActivity, moviesStorefrontLiveData: Mo
 
                 documentSnapshot.toObject(GenreIds::class.java)!!.GenreIds?.forEach { documentMap ->
 
-                    println(">>> >> > " + documentMap.keys.first() + " ::: " + documentMap.values.first())
-
+                    moviesDocumentSnapshots.add(StorefrontGenresData(genreId = documentMap[GenreDataKey.GenreId].toString().toInt(),
+                        genreName = documentMap[GenreDataKey.GenreName].toString(),
+                        genreIconLink = documentMap[GenreDataKey.GenreIconLink].toString()))
 
                 }
+
+                moviesStorefrontLiveData.genresMoviesItemData.postValue(moviesDocumentSnapshots)
 
             }
 
