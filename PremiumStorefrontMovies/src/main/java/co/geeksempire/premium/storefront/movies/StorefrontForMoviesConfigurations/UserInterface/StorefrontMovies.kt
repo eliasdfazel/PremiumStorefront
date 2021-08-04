@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 6:08 AM
+ * Last modified 8/4/21, 7:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -154,22 +154,36 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
             moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
 
-                featuredMoviesAdapter.featuredMoviesData.clear()
-                featuredMoviesAdapter.featuredMoviesData.addAll(it)
+                if (it.isNotEmpty()) {
 
-                featuredMoviesAdapter.notifyItemRangeInserted(0, featuredMoviesAdapter.featuredMoviesData.size)
+                    featuredMoviesAdapter.featuredMoviesData.clear()
+                    featuredMoviesAdapter.featuredMoviesData.addAll(it)
 
-                if (storefrontMoviesLayoutBinding.loadingView.isVisible) {
+                    featuredMoviesAdapter.notifyItemRangeInserted(0, featuredMoviesAdapter.featuredMoviesData.size)
 
-                    storefrontMoviesLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
-                    storefrontMoviesLayoutBinding.loadingView.visibility = View.GONE
+                    if (storefrontMoviesLayoutBinding.loadingView.isVisible) {
+
+                        storefrontMoviesLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                        storefrontMoviesLayoutBinding.loadingView.visibility = View.GONE
+
+                    }
+
+                    if (storefrontMoviesLayoutBinding.featuredContentRecyclerView.isGone) {
+
+                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
+
+                    }
 
                 }
 
-                if (storefrontMoviesLayoutBinding.featuredContentRecyclerView.isGone) {
+            })
 
-                    storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-                    storefrontMoviesLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
+            moviesStorefrontLiveData.genresMoviesItemData.observe(this@StorefrontMovies, {
+
+                if (it.isNotEmpty()) {
+
+
 
                 }
 
