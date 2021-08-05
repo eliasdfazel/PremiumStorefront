@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 11:14 AM
+ * Last modified 8/5/21, 12:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,6 +51,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
+import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.snappedItemPosition
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
@@ -187,8 +188,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.adapter = featuredMoviesAdapter
 
-            val snapHelper: SnapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(storefrontMoviesLayoutBinding.featuredContentRecyclerView)
+            val featuredSnapHelper: SnapHelper = PagerSnapHelper()
+            featuredSnapHelper.attachToRecyclerView(storefrontMoviesLayoutBinding.featuredContentRecyclerView)
 
             storefrontMoviesLayoutBinding.genresRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontMoviesLayoutBinding.genresRecyclerView.adapter = genresAdapter
@@ -249,6 +250,27 @@ class StorefrontMovies : StorefrontSplitActivity() {
                 } else {
 
                     updatingDataIO.startUpdatingMoviesData()
+
+                }
+
+            })
+
+            storefrontMoviesLayoutBinding.featuredContentRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+
+                    when (newState) {
+                        RecyclerView.SCROLL_STATE_IDLE -> {
+
+                            val snappedItemPosition = snappedItemPosition(storefrontMoviesLayoutBinding.featuredContentRecyclerView, featuredSnapHelper)
+
+//                            (storefrontMoviesLayoutBinding.featuredContentRecyclerView.no
+
+                            featuredMoviesAdapter.notifyItemChanged(snappedItemPosition, "Focus")
+
+                        }
+                    }
 
                 }
 

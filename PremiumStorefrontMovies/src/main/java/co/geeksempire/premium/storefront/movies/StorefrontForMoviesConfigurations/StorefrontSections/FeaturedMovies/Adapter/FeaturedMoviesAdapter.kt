@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 5:45 AM
+ * Last modified 8/5/21, 12:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,21 +56,29 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
     override fun onBindViewHolder(featuredMoviesViewHolder: FeaturedMoviesViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(featuredMoviesViewHolder, position, payloads)
 
-        when (themeType) {
-            ThemeType.ThemeLight -> {
+        if (!payloads.isNullOrEmpty() && payloads.first().toString() == "Focus") {
 
-                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+            featuredMoviesViewHolder.movieNameTextView.requestFocus()
 
-                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
+        } else {
 
+            when (themeType) {
+                ThemeType.ThemeLight -> {
+
+                    featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+
+                    featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
+
+                }
+                ThemeType.ThemeDark -> {
+
+                    featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
+
+                    featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
+
+                }
             }
-            ThemeType.ThemeDark -> {
 
-                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
-
-                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
-
-            }
         }
 
     }
