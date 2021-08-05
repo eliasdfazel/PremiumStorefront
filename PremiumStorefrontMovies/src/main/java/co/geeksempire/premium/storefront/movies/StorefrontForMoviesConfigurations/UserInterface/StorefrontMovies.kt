@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 9:42 AM
+ * Last modified 8/5/21, 9:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -244,11 +244,11 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                 if (getFileStreamPath(IO.UpdateApplicationsDataKey).exists()) {
 
-                    updatingDataIO.startUpdatingApplicationsDataPeriodic()
+                    updatingDataIO.startUpdatingMoviesDataPeriodic()
 
                 } else {
 
-                    updatingDataIO.startUpdatingApplicationsData()
+                    updatingDataIO.startUpdatingMoviesData()
 
                 }
 
