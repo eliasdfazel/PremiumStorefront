@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 12:12 PM
+ * Last modified 8/5/21, 12:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -265,9 +266,9 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                             val snappedItemPosition = snappedItemPosition(storefrontMoviesLayoutBinding.featuredContentRecyclerView, featuredSnapHelper)
 
-//                            (storefrontMoviesLayoutBinding.featuredContentRecyclerView.no
+                            (storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager as RecycleViewSmoothLayoutList).findViewByPosition(snappedItemPosition)
+                                ?.findViewWithTag<AppCompatTextView>("movieNameTextView")?.requestFocus()
 
-                            featuredMoviesAdapter.notifyItemChanged(snappedItemPosition, "Focus")
 
                         }
                     }

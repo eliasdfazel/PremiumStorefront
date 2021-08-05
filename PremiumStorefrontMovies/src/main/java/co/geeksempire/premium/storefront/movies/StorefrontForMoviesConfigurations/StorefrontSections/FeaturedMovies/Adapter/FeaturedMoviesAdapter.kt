@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 12:12 PM
+ * Last modified 8/5/21, 12:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,29 +56,21 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
     override fun onBindViewHolder(featuredMoviesViewHolder: FeaturedMoviesViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(featuredMoviesViewHolder, position, payloads)
 
-        if (!payloads.isNullOrEmpty() && payloads.first().toString() == "Focus") {
+        when (themeType) {
+            ThemeType.ThemeLight -> {
 
-            featuredMoviesViewHolder.movieNameTextView.requestFocus()
+                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
-        } else {
+                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
 
-            when (themeType) {
-                ThemeType.ThemeLight -> {
-
-                    featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
-
-                    featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
-
-                }
-                ThemeType.ThemeDark -> {
-
-                    featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
-
-                    featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
-
-                }
             }
+            ThemeType.ThemeDark -> {
 
+                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
+
+                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
+
+            }
         }
 
     }
