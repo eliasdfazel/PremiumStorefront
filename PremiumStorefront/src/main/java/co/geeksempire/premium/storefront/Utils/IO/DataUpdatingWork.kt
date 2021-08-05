@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 8/5/21, 9:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -90,7 +90,8 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
             }
             IO.UpdateMoviesDataKey -> {
 
-
+                //Get List Genres
+                    //Then Get Genres Collections
 
             }
         }
