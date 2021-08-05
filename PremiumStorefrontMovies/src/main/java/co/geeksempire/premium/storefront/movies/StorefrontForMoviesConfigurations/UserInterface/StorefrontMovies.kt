@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 9:43 AM
+ * Last modified 8/5/21, 11:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -123,8 +123,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
             allFilteredContentItemData = storefrontLiveData.allFilteredContentItemData,
             storefrontAllUnfilteredContents = storefrontAllUnfilteredContents,
             storefrontAllUntouchedContents = storefrontAllUntouchedContents,
-            categoryIndicatorTextView = storefrontMoviesLayoutBinding.categoryIndicatorTextView,
-            categoriesRecyclerView = storefrontMoviesLayoutBinding.categoriesRecyclerView,
+            categoryIndicatorTextView = storefrontMoviesLayoutBinding.genreIndicatorTextView,
+            categoriesRecyclerView = storefrontMoviesLayoutBinding.genresRecyclerView,
             balloonOptionsMenu = balloonOptionsMenu)
     }
 
@@ -190,8 +190,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
             val snapHelper: SnapHelper = PagerSnapHelper()
             snapHelper.attachToRecyclerView(storefrontMoviesLayoutBinding.featuredContentRecyclerView)
 
-            storefrontMoviesLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
-            storefrontMoviesLayoutBinding.categoriesRecyclerView.adapter = genresAdapter
+            storefrontMoviesLayoutBinding.genresRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
+            storefrontMoviesLayoutBinding.genresRecyclerView.adapter = genresAdapter
 
             moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
 
@@ -227,11 +227,11 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     genresAdapter.storefrontGenres.clear()
                     genresAdapter.storefrontGenres.addAll(it)
 
-                    genresAdapter.notifyItemRangeInserted(0, featuredMoviesAdapter.featuredMoviesData.size)
+                    genresAdapter.notifyItemRangeInserted(0, genresAdapter.storefrontGenres.size)
 
-                    storefrontMoviesLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
+                    storefrontMoviesLayoutBinding.genresRecyclerView.visibility = View.VISIBLE
 
-                    storefrontMoviesLayoutBinding.categoryIndicatorTextView.visibility = View.VISIBLE
+                    storefrontMoviesLayoutBinding.genreIndicatorTextView.visibility = View.VISIBLE
 
                     genresData.clearData()
                     genresData.prepareAllGenresData(it)
@@ -254,7 +254,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
             })
 
-            storefrontMoviesLayoutBinding.categoriesRecyclerView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
+            storefrontMoviesLayoutBinding.genresRecyclerView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 
                 if (scrollY > oldScrollY) {
                     Log.d(this@StorefrontMovies.javaClass.simpleName, "Scrolling Down")

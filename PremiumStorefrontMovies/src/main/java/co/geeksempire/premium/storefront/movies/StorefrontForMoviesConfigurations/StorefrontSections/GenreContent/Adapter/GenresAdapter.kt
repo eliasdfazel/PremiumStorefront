@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 9:39 AM
+ * Last modified 8/5/21, 11:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -70,13 +71,13 @@ class GenresAdapter(private val context: AppCompatActivity,
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                genresViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_light)
+                genresViewHolder.genreIconImageView.background = getDrawable(context, R.drawable.category_background_item_light)
                 genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
             }
             ThemeType.ThemeDark -> {
 
-                genresViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                genresViewHolder.genreIconImageView.background = getDrawable(context, R.drawable.category_background_item_dark)
                 genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             }
@@ -84,7 +85,7 @@ class GenresAdapter(private val context: AppCompatActivity,
 
         genresViewHolder.genreIconImageView.background = if (storefrontGenres[position].selectedCategory) {
 
-            context.getDrawable(when (themeType) {
+            getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
                     R.drawable.category_background_item_dark
                 }
@@ -96,7 +97,7 @@ class GenresAdapter(private val context: AppCompatActivity,
 
         } else {
 
-            context.getDrawable(when (themeType) {
+            getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
                     R.drawable.category_background_item_light
                 }
@@ -110,11 +111,12 @@ class GenresAdapter(private val context: AppCompatActivity,
 
     }
 
+
     override fun onBindViewHolder(categoriesViewHolder: GenresViewHolder, position: Int) {
 
         categoriesViewHolder.genreIconImageView.background = if (storefrontGenres[position].selectedCategory) {
 
-            context.getDrawable(when (themeType) {
+            getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
                     R.drawable.category_background_item_dark
                 }
@@ -126,7 +128,7 @@ class GenresAdapter(private val context: AppCompatActivity,
 
         } else {
 
-            context.getDrawable(when (themeType) {
+            getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
                     R.drawable.category_background_item_light
                 }

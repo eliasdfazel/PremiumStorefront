@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 9:49 AM
+ * Last modified 8/5/21, 11:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -109,7 +109,7 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_light))
             storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_light)
 
-            storefrontMoviesLayoutBinding.categoryIndicatorTextView.setTextColor(getColor(R.color.dark))
+            storefrontMoviesLayoutBinding.genreIndicatorTextView.setTextColor(getColor(R.color.dark))
 
         }
         ThemeType.ThemeDark -> {
@@ -175,7 +175,7 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_dark))
             storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_dark)
 
-            storefrontMoviesLayoutBinding.categoryIndicatorTextView.setTextColor(getColor(R.color.light))
+            storefrontMoviesLayoutBinding.genreIndicatorTextView.setTextColor(getColor(R.color.light))
 
         }
     }
