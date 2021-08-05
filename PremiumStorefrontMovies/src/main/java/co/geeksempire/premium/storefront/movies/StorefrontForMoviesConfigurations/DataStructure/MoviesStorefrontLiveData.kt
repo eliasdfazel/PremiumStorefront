@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 11:36 AM
+ * Last modified 8/5/21, 11:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,10 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 
 class MoviesStorefrontLiveData : ViewModel() {
 
@@ -24,7 +28,7 @@ class MoviesStorefrontLiveData : ViewModel() {
         MutableLiveData<ArrayList<StorefrontGenresData>>()
     }
 
-    fun processGenreData(documentSnapshot: DocumentSnapshot) {
+    fun processGenreData(documentSnapshot: DocumentSnapshot) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val moviesDocumentSnapshots = ArrayList<StorefrontGenresData>()
 
