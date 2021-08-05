@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 12:14 PM
+ * Last modified 8/5/21, 12:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -118,7 +118,7 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
                                     43f, 43f,
                                     43f, 43f,
                                     43f, 43f,
-                                    71f, 71f
+                                    43f, 43f
                                 )
                                 movieGradient.gradientType = GradientDrawable.SWEEP_GRADIENT
                                 movieGradient.setGradientCenter(1f, 0.5f)

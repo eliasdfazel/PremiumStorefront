@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 5:25 AM
+ * Last modified 8/5/21, 12:30 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,7 +65,7 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
 
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.centerClearLayer,
         topLeftCorner = 39,
-        topRightCorner = 63,
+        topRightCorner = 39,
         bottomLeftCorner = 39,
         bottomRightCorner = 39)
 
