@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 7:44 AM
+ * Last modified 8/5/21, 9:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,9 +36,11 @@ fun retrieveGenreMovies(context: AppCompatActivity, moviesStorefrontLiveData: Mo
 
                 documentSnapshot.toObject(GenreIds::class.java)!!.GenreIds?.forEach { documentMap ->
 
-                    moviesDocumentSnapshots.add(StorefrontGenresData(genreId = documentMap[GenreDataKey.GenreId].toString().toInt(),
+                    moviesDocumentSnapshots.add(StorefrontGenresData(
+                        genreId = documentMap[GenreDataKey.GenreId].toString().toInt(),
                         genreName = documentMap[GenreDataKey.GenreName].toString(),
-                        genreIconLink = documentMap[GenreDataKey.GenreIconLink].toString()))
+                        genreIconLink = documentMap[GenreDataKey.GenreIconLink].toString()
+                    ))
 
                 }
 

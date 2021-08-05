@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 7:46 AM
+ * Last modified 8/5/21, 9:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -38,9 +38,14 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.Favor
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.IO.IO
+import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
@@ -52,6 +57,8 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.Adapter.GenresAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.GenreData
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -61,6 +68,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
@@ -68,12 +76,20 @@ import java.util.*
 
 class StorefrontMovies : StorefrontSplitActivity() {
 
+    val updatingDataIO: UpdatingDataIO by lazy {
+        UpdatingDataIO(applicationContext)
+    }
+
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@StorefrontMovies)
     }
 
     val moviesStorefrontLiveData: MoviesStorefrontLiveData by lazy {
         ViewModelProvider(this@StorefrontMovies).get(MoviesStorefrontLiveData::class.java)
+    }
+
+    val storefrontLiveData: StorefrontLiveData by lazy {
+        ViewModelProvider(this@StorefrontMovies).get(StorefrontLiveData::class.java)
     }
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
@@ -89,6 +105,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
         ActionCenterOperations()
     }
 
+    val filterAllContent: FilterAllContent by lazy {
+        FilterAllContent(storefrontLiveData)
+    }
+
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@StorefrontMovies)
     }
@@ -97,6 +117,19 @@ class StorefrontMovies : StorefrontSplitActivity() {
         FeaturedMoviesAdapter(this@StorefrontMovies)
     }
 
+    val genresAdapter: GenresAdapter by lazy {
+        GenresAdapter(context = this@StorefrontMovies,
+            filterAllContent = filterAllContent,
+            allFilteredContentItemData = storefrontLiveData.allFilteredContentItemData,
+            storefrontAllUnfilteredContents = storefrontAllUnfilteredContents,
+            storefrontAllUntouchedContents = storefrontAllUntouchedContents,
+            categoryIndicatorTextView = storefrontMoviesLayoutBinding.categoryIndicatorTextView,
+            categoriesRecyclerView = storefrontMoviesLayoutBinding.categoriesRecyclerView,
+            balloonOptionsMenu = balloonOptionsMenu)
+    }
+
+    val genresData: GenreData = GenreData()
+
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(applicationContext)
     }
@@ -104,6 +137,11 @@ class StorefrontMovies : StorefrontSplitActivity() {
     private val networkConnectionListener: NetworkConnectionListener by lazy {
         NetworkConnectionListener(this@StorefrontMovies, storefrontMoviesLayoutBinding.rootView, networkCheckpoint)
     }
+
+    val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+    val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+
+    val firebaseRemoteConfiguration = Firebase.remoteConfig
 
     /* Start - Sign In */
     val accountSignIn: AccountSignIn by lazy {
@@ -152,6 +190,9 @@ class StorefrontMovies : StorefrontSplitActivity() {
             val snapHelper: SnapHelper = PagerSnapHelper()
             snapHelper.attachToRecyclerView(storefrontMoviesLayoutBinding.featuredContentRecyclerView)
 
+            storefrontMoviesLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
+            storefrontMoviesLayoutBinding.categoriesRecyclerView.adapter = genresAdapter
+
             moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
 
                 if (it.isNotEmpty()) {
@@ -183,11 +224,51 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                 if (it.isNotEmpty()) {
 
+                    genresAdapter.storefrontGenres.clear()
+                    genresAdapter.storefrontGenres.addAll(it)
+
+                    genresAdapter.notifyItemRangeInserted(0, featuredMoviesAdapter.featuredMoviesData.size)
+
+                    storefrontMoviesLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
+
+                    storefrontMoviesLayoutBinding.categoryIndicatorTextView.visibility = View.VISIBLE
+
+                    genresData.clearData()
+                    genresData.prepareAllGenresData(it)
+
+                } else {
+
 
 
                 }
 
+                if (getFileStreamPath(IO.UpdateApplicationsDataKey).exists()) {
+
+                    updatingDataIO.startUpdatingApplicationsDataPeriodic()
+
+                } else {
+
+                    updatingDataIO.startUpdatingApplicationsData()
+
+                }
+
             })
+
+            storefrontMoviesLayoutBinding.categoriesRecyclerView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+                if (scrollY > oldScrollY) {
+                    Log.d(this@StorefrontMovies.javaClass.simpleName, "Scrolling Down")
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                } else if (scrollY < oldScrollY) {
+                    Log.d(this@StorefrontMovies.javaClass.simpleName, "Scrolling Up")
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                }
+
+            }
 
         }
 
