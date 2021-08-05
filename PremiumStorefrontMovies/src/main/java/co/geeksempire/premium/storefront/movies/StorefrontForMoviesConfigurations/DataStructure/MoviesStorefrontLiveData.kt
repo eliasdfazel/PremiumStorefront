@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 11:32 AM
+ * Last modified 8/5/21, 11:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,7 +39,7 @@ class MoviesStorefrontLiveData : ViewModel() {
 
         }
 
-        val moviesDocumentSnapshotsSorted = moviesDocumentSnapshots.sortedBy {
+        val moviesDocumentSnapshotsSorted = moviesDocumentSnapshots.sortedByDescending {
 
             it.productCount
         }

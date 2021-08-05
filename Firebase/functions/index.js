@@ -1061,6 +1061,15 @@ exports.transferApplicationsCategories = functions.runWith(runtimeOptions).https
 
         });
 
+        var initialEntry = {};
+
+        initialEntry['categoryId'] = '80';
+        initialEntry['categoryName'] = 'All';
+        initialEntry['categoryIconLink'] = 'https://geeksempire.co/wp-content/uploads/2021/05/main_section_icon.png';
+        initialEntry['productCount'] = '666';
+
+        applicationCategoryArray[applicationCategoryArray.length] = initialEntry;
+
         var firestoreDirectory = '/' + 'PremiumStorefront'
             + '/' + 'Products'
             + '/' + 'Android'
@@ -1131,6 +1140,15 @@ exports.transferGamesCategories = functions.runWith(runtimeOptions).https.onRequ
 
         });
 
+        var initialEntry = {};
+
+        initialEntry['categoryId'] = '546';
+        initialEntry['categoryName'] = 'All';
+        initialEntry['categoryIconLink'] = 'https://geeksempire.co/wp-content/uploads/2021/05/main_section_icon.png';
+        initialEntry['productCount'] = '666';
+
+        gameCategoryArray[gameCategoryArray.length] = initialEntry;
+
         var firestoreDirectory = '/' + 'PremiumStorefront'
             + '/' + 'Products'
             + '/' + 'Android'
@@ -1200,7 +1218,6 @@ exports.transferMoviesCategories = functions.runWith(runtimeOptions).https.onReq
             }
 
         });
-
         
         var firestoreDirectory = '/' + 'PremiumStorefront'
             + '/' + 'Products'
