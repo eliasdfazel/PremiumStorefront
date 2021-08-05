@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/5/21, 12:25 PM
+  ~ Last modified 8/5/21, 12:36 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -131,27 +131,16 @@
             apps:layout_constraintStart_toEndOf="@id/moviePosterImageView"
             apps:layout_constraintEnd_toEndOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/productRatingStarsView"
-            android:layout_width="57dp"
-            android:layout_height="57dp"
-            android:layout_marginVertical="3dp"
-            android:layout_marginHorizontal="3dp"
-            android:padding="11dp"
-            android:scaleType="fitCenter"
-            android:tint="@color/white"
-            android:background="@drawable/movie_rating_glowing_frame_light"
-
-            apps:layout_constraintTop_toTopOf="parent"
-            apps:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/productCurrentRateView"
             android:layout_width="57dp"
-            android:layout_height="57dp"
+            android:layout_height="29dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="11dp"
             android:gravity="center"
             android:textColor="@color/red"
-            android:textSize="31sp"
+            android:textSize="23sp"
             android:text="5.0"
             android:fontFamily="@font/neon"
             android:shadowRadius="7"
@@ -159,10 +148,23 @@
             android:shadowDy="0"
             android:shadowColor="@color/red"
 
-            apps:layout_constraintTop_toTopOf="@id/productRatingStarsView"
-            apps:layout_constraintBottom_toBottomOf="@id/productRatingStarsView"
-            apps:layout_constraintStart_toStartOf="@id/productRatingStarsView"
-            apps:layout_constraintEnd_toEndOf="@id/productRatingStarsView"/>
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/productRatingStarsView"
+            android:layout_width="77dp"
+            android:layout_height="29dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="11dp"
+            android:padding="11dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/white"
+            android:background="@drawable/movie_rating_glowing_frame_light"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintEnd_toStartOf="@id/productCurrentRateView"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
