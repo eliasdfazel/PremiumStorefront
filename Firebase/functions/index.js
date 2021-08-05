@@ -10,7 +10,7 @@ const firestore = admin.firestore();
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 const runtimeOptions = {
-    timeoutSeconds: 313,
+    timeoutSeconds: 512,
 }
 
 /* Start - Triggering Updates On Clients */
@@ -201,7 +201,7 @@ exports.transferQuickAccessProducts = functions.runWith(runtimeOptions).https.on
         var firestoreDirectory = '/' + 'PremiumStorefront'
             + '/' + 'Products'
             + '/' + 'Android'
-            + '/' + 'QuickAccess'
+            + '/' + 'QuickAccess';
 
         firestore.doc(firestoreDirectory).set({
             ProductsIds: featuredContent,
@@ -1014,10 +1014,9 @@ exports.transferApplicationsCategories = functions.runWith(runtimeOptions).https
         numberOfPage = 1;
     }
 
-    //get all categories and add categories that contains Applications
-    var applicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
+    var applicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products/categories?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
         + '&page=' + numberOfPage
-        + '&per_page=100'
+        + '&per_page=100';
 
     var xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open('GET', applicationsEndpoint, true);
@@ -1037,12 +1036,171 @@ exports.transferApplicationsCategories = functions.runWith(runtimeOptions).https
 
         var jsonArrayParserResponse = JSON.parse(xmlHttpRequest.responseText);
 
-        jsonArrayParserResponse.forEach((jsonObject) => {
+        var applicationCategoryArray = [];
 
-            //id
-            //name
-            //icon
+        jsonArrayParserResponse.forEach((jsonObject, index) => {
 
+            var categoryId = jsonObject['id'].toString();
+            var categoryName = jsonObject['name'].toString();
+            var categoryIconLink = jsonObject['image']['src'].toString();
+
+            if (categoryName.split(" ")[1] == 'Applications') {
+
+                var applications = {};
+
+                applications['categoryId'] = categoryId;
+                applications['categoryName'] = categoryName.split(" ")[0];
+                applications['categoryIconLink'] = categoryIconLink;
+
+                applicationCategoryArray[index] = applications;
+
+            }
+
+        });
+
+        var firestoreDirectory = '/' + 'PremiumStorefront'
+            + '/' + 'Products'
+            + '/' + 'Android'
+            + '/' + 'Applications';
+
+        firestore.settings({ ignoreUndefinedProperties: true });
+        firestore.doc(firestoreDirectory).set({
+            CategoriesIds: applicationCategoryArray,
+        });
+
+    };
+    xmlHttpRequest.send();
+
+});
+
+exports.transferGamesCategories = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var numberOfPage = req.query.numberOfPage;
+
+    if (numberOfPage == null) {
+        numberOfPage = 1;
+    }
+
+    var applicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products/categories?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
+        + '&page=' + numberOfPage
+        + '&per_page=100';
+
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('GET', applicationsEndpoint, true);
+    xmlHttpRequest.setRequestHeader('accept', 'application/json');
+    xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
+    xmlHttpRequest.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+        } else {
+
+        }
+    };
+    xmlHttpRequest.onprogress = function () {
+
+    };
+    xmlHttpRequest.onload = function () {
+
+        var jsonArrayParserResponse = JSON.parse(xmlHttpRequest.responseText);
+
+        var gameCategoryArray = [];
+
+        jsonArrayParserResponse.forEach((jsonObject, index) => {
+
+            var categoryId = jsonObject['id'].toString();
+            var categoryName = jsonObject['name'].toString();
+            var categoryIconLink = jsonObject['image']['src'].toString();
+
+            if (categoryName.split(" ")[1] == 'Games') {
+
+                var games = {};
+
+                games['categoryId'] = categoryId;
+                games['categoryName'] = categoryName.split(" ")[0];
+                games['categoryIconLink'] = categoryIconLink;
+
+                gameCategoryArray[index] = games;
+
+            }
+
+        });
+
+        var firestoreDirectory = '/' + 'PremiumStorefront'
+            + '/' + 'Products'
+            + '/' + 'Android'
+            + '/' + 'Games';
+
+        firestore.settings({ ignoreUndefinedProperties: true });
+        firestore.doc(firestoreDirectory).set({
+            CategoriesIds: gameCategoryArray,
+        });
+
+    };
+    xmlHttpRequest.send();
+
+});
+
+exports.transferMoviesCategories = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var numberOfPage = req.query.numberOfPage;
+
+    if (numberOfPage == null) {
+        numberOfPage = 1;
+    }
+
+    var applicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products/categories?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686'
+        + '&page=' + numberOfPage
+        + '&per_page=100';
+
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('GET', applicationsEndpoint, true);
+    xmlHttpRequest.setRequestHeader('accept', 'application/json');
+    xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
+    xmlHttpRequest.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+        } else {
+
+        }
+    };
+    xmlHttpRequest.onprogress = function () {
+
+    };
+    xmlHttpRequest.onload = function () {
+
+        var jsonArrayParserResponse = JSON.parse(xmlHttpRequest.responseText);
+
+        var moviesCategoryArray = [];
+        
+        jsonArrayParserResponse.forEach((jsonObject, index) => {
+
+            var categoryId = jsonObject['id'].toString();
+            var categoryName = jsonObject['name'].toString();
+            var categoryIconLink = jsonObject['image']['src'].toString();
+
+            if (categoryName.split(" ")[1] == 'Movies') {
+
+                var movies = {};
+
+                movies['genreId'] = categoryId;
+                movies['genreName'] = categoryName.split(" ")[0];
+                movies['genreIconLink'] = categoryIconLink;
+
+                moviesCategoryArray[index] = movies;
+
+            }
+
+        });
+
+        
+        var firestoreDirectory = '/' + 'PremiumStorefront'
+            + '/' + 'Products'
+            + '/' + 'Multimedia'
+            + '/' + 'Movies';
+
+        firestore.settings({ ignoreUndefinedProperties: true });
+        firestore.doc(firestoreDirectory).set({
+            GenreIds: moviesCategoryArray,
         });
 
     };
