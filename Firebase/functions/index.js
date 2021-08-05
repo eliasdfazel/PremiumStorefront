@@ -1043,6 +1043,8 @@ exports.transferApplicationsCategories = functions.runWith(runtimeOptions).https
             var categoryId = jsonObject['id'].toString();
             var categoryName = jsonObject['name'].toString();
             var categoryIconLink = jsonObject['image']['src'].toString();
+            
+            var productCount = jsonObject['count'].toString();
 
             if (categoryName.split(" ")[1] == 'Applications') {
 
@@ -1051,6 +1053,7 @@ exports.transferApplicationsCategories = functions.runWith(runtimeOptions).https
                 applications['categoryId'] = categoryId;
                 applications['categoryName'] = categoryName.split(" ")[0];
                 applications['categoryIconLink'] = categoryIconLink;
+                applications['productCount'] = productCount;
 
                 applicationCategoryArray[index] = applications;
 
@@ -1110,6 +1113,8 @@ exports.transferGamesCategories = functions.runWith(runtimeOptions).https.onRequ
             var categoryId = jsonObject['id'].toString();
             var categoryName = jsonObject['name'].toString();
             var categoryIconLink = jsonObject['image']['src'].toString();
+            
+            var productCount = jsonObject['count'].toString();
 
             if (categoryName.split(" ")[1] == 'Games') {
 
@@ -1118,6 +1123,7 @@ exports.transferGamesCategories = functions.runWith(runtimeOptions).https.onRequ
                 games['categoryId'] = categoryId;
                 games['categoryName'] = categoryName.split(" ")[0];
                 games['categoryIconLink'] = categoryIconLink;
+                games['productCount'] = productCount;
 
                 gameCategoryArray[index] = games;
 
@@ -1178,6 +1184,8 @@ exports.transferMoviesCategories = functions.runWith(runtimeOptions).https.onReq
             var categoryName = jsonObject['name'].toString();
             var categoryIconLink = jsonObject['image']['src'].toString();
 
+            var productCount = jsonObject['count'].toString();
+
             if (categoryName.split(" ")[1] == 'Movies') {
 
                 var movies = {};
@@ -1185,6 +1193,7 @@ exports.transferMoviesCategories = functions.runWith(runtimeOptions).https.onReq
                 movies['genreId'] = categoryId;
                 movies['genreName'] = categoryName.split(" ")[0];
                 movies['genreIconLink'] = categoryIconLink;
+                movies['productCount'] = productCount;
 
                 moviesCategoryArray[index] = movies;
 

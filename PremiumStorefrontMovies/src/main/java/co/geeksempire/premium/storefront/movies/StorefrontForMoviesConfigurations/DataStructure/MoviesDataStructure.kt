@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/4/21, 7:38 AM
+ * Last modified 8/5/21, 11:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -86,10 +86,11 @@ object GenreDataKey {
     const val GenreId = "genreId"
     const val GenreName = "genreName"
     const val GenreIconLink = "genreIconLink"
+    const val ProductCount = "productCount"
 }
 
 @Keep
 data class GenreIds(var GenreIds: ArrayList<HashMap<String, Any>>? = null)
 
 @Keep
-data class StorefrontGenresData(var genreId: Int, var genreName: String, var genreIconLink: String, var selectedCategory: Boolean = false)
+data class StorefrontGenresData(var genreId: Int, var genreName: String, var genreIconLink: String, var productCount: Int, var selectedCategory: Boolean = false)
