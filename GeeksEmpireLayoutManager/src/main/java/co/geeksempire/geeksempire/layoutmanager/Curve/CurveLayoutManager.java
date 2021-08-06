@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 12:12 PM
+ * Last modified 8/6/21, 12:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -840,59 +840,63 @@ public class CurveLayoutManager extends RecyclerView.LayoutManager {
             return;
         }
 
-        // close item animation
-        mAnimationHelper.closeItem(viewToDeselect, delay, new SimpleAnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
+        if (fanLayoutManagerSettings.isSelectedAnimation()) {
 
-                // change states
-                mIsDeselectAnimationInProcess = true;
-                mIsWaitingToDeselectAnimation = false;
+            // close item animation
+            mAnimationHelper.closeItem(viewToDeselect, delay, new SimpleAnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
 
-                // shift distance between center view and left, right views.
-                final int delta = fanLayoutManagerSettings.getViewWidthPx() / 2;
+                    // change states
+                    mIsDeselectAnimationInProcess = true;
+                    mIsWaitingToDeselectAnimation = false;
 
-                // generate data for animation helper. (calculate final positions for all views)
-                final Collection<ViewAnimationInfo> infoViews =
-                        ViewAnimationInfoGenerator.generate(delta,
-                                false,
-                                CurveLayoutManager.this,
-                                position,
-                                false);
+                    // shift distance between center view and left, right views.
+                    final int delta = fanLayoutManagerSettings.getViewWidthPx() / 2;
 
-                // animate shifting let and right views
-                mAnimationHelper.shiftSideViews(
-                        infoViews,
-                        0,
-                        CurveLayoutManager.this,
-                        null,
-                        new ValueAnimator.AnimatorUpdateListener() {
-                            @Override
-                            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                // update rotation and translation for all views
-                                updateArcViewPositions();
-                            }
-                        });
-            }
+                    // generate data for animation helper. (calculate final positions for all views)
+                    final Collection<ViewAnimationInfo> infoViews =
+                            ViewAnimationInfoGenerator.generate(delta,
+                                    false,
+                                    CurveLayoutManager.this,
+                                    position,
+                                    false);
 
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                mIsDeselectAnimationInProcess = false;
-                if (recyclerView != null && scrollToPosition != RecyclerView.NO_POSITION) {
-                    // scroll to new position after deselect animation end
-                    smoothScrollToPosition(recyclerView, null, scrollToPosition);
+                    // animate shifting let and right views
+                    mAnimationHelper.shiftSideViews(
+                            infoViews,
+                            0,
+                            CurveLayoutManager.this,
+                            null,
+                            new ValueAnimator.AnimatorUpdateListener() {
+                                @Override
+                                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                    // update rotation and translation for all views
+                                    updateArcViewPositions();
+                                }
+                            });
                 }
-            }
 
-            @Override
-            public void onAnimationCancel(Animator animator) {
-                mIsDeselectAnimationInProcess = false;
-                if (recyclerView != null && scrollToPosition != RecyclerView.NO_POSITION) {
-                    // scroll to new position after deselect animation cancel
-                    smoothScrollToPosition(recyclerView, null, scrollToPosition);
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    mIsDeselectAnimationInProcess = false;
+                    if (recyclerView != null && scrollToPosition != RecyclerView.NO_POSITION) {
+                        // scroll to new position after deselect animation end
+                        smoothScrollToPosition(recyclerView, null, scrollToPosition);
+                    }
                 }
-            }
-        });
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+                    mIsDeselectAnimationInProcess = false;
+                    if (recyclerView != null && scrollToPosition != RecyclerView.NO_POSITION) {
+                        // scroll to new position after deselect animation cancel
+                        smoothScrollToPosition(recyclerView, null, scrollToPosition);
+                    }
+                }
+            });
+
+        }
 
     }
 
