@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 12:30 PM
+ * Last modified 8/6/21, 10:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -79,6 +79,76 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
     featuredMoviesViewHolder.featuredMovieBackground.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
 
     return featuredContentBackground
+}
+
+fun FeaturedMoviesAdapter.designOptionsMoviesBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder, themeType: Boolean) : LayerDrawable {
+
+    var featuredOptionsBackground = when (themeType) {
+        ThemeType.ThemeLight -> {
+
+            context.getDrawable(R.drawable.movie_rating_glowing_frame_light) as LayerDrawable
+
+        }
+        ThemeType.ThemeDark -> {
+
+            context.getDrawable(R.drawable.movie_rating_glowing_frame_dark) as LayerDrawable
+
+        }
+        else -> context.getDrawable(R.drawable.movie_rating_glowing_frame_light) as LayerDrawable
+    }
+
+    featuredOptionsBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredOptionsBackground, negativeSpaceLayerId = R.id.clearLayer,
+        topLeftCorner = 19,
+        topRightCorner = 19,
+        bottomLeftCorner = 19,
+        bottomRightCorner = 19)
+
+    featuredMoviesViewHolder.productRatingStarsView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    featuredMoviesViewHolder.productRatingStarsView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    featuredMoviesViewHolder.productContentRatingView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    featuredMoviesViewHolder.productContentRatingView.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    featuredMoviesViewHolder.movieGenreFirst.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    featuredMoviesViewHolder.movieGenreFirst.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    featuredMoviesViewHolder.movieGenreSecond.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    featuredMoviesViewHolder.movieGenreSecond.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    featuredMoviesViewHolder.movieGenreThird.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, Paint().apply {
+        style = Paint.Style.FILL
+        color = Color.TRANSPARENT
+        isAntiAlias = true
+
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
+    })
+    featuredMoviesViewHolder.movieGenreThird.setLayerType(AppCompatButton.LAYER_TYPE_HARDWARE, null)
+
+    return featuredOptionsBackground
 }
 
 fun FeaturedMoviesAdapter.designFeaturedMoviesPosterBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder, themeType: Boolean) : LayerDrawable {

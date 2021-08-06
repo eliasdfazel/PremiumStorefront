@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 9:57 AM
+ * Last modified 8/6/21, 10:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designFeaturedMoviesBackground
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designFeaturedMoviesPosterBackground
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designOptionsMoviesBackground
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.ViewHolder.FeaturedMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
 import com.bumptech.glide.Glide
@@ -64,7 +66,6 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                 featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
                 featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white_transparent))
-                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
 
                 featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
                 featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
@@ -76,7 +77,6 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                 featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
 
                 featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
-                featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
 
                 featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
                 featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
@@ -94,12 +94,19 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
             val moviesDataStructure = MoviesDataStructure(it)
 
             featuredMoviesViewHolder.featuredMovieBackground.setImageDrawable(designFeaturedMoviesBackground(featuredMoviesViewHolder, themeType))
+
             featuredMoviesViewHolder.moviePosterBackground.background = (designFeaturedMoviesPosterBackground(featuredMoviesViewHolder, themeType))
 
+            featuredMoviesViewHolder.productRatingStarsView.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
+            featuredMoviesViewHolder.productContentRatingView.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
+
+            featuredMoviesViewHolder.movieGenreFirst.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
+            featuredMoviesViewHolder.movieGenreSecond.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
+            featuredMoviesViewHolder.movieGenreThird.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
+
+
             featuredMoviesViewHolder.movieNameTextView.text = Html.fromHtml(moviesDataStructure.movieName(), Html.FROM_HTML_MODE_COMPACT)
-            featuredMoviesViewHolder.movieSummaryTextView.text = Html.fromHtml(moviesDataStructure.movieSummary().substring(
-                IntRange(0, moviesDataStructure.movieSummary().length/2)
-            ), Html.FROM_HTML_MODE_COMPACT)
+            featuredMoviesViewHolder.movieSummaryTextView.text = Html.fromHtml(moviesDataStructure.movieSummary().substring(IntRange(0, moviesDataStructure.movieSummary().length/2)), Html.FROM_HTML_MODE_COMPACT)
 
             featuredMoviesViewHolder.productCurrentRateView.text = Html.fromHtml(moviesDataStructure.movieRating(), Html.FROM_HTML_MODE_COMPACT)
 
@@ -190,6 +197,7 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                 .submit()
 
             val movieGenres = moviesDataStructure.movieGenres().split(",")
+            Log.d(this@FeaturedMoviesAdapter.javaClass.simpleName, movieGenres.toString())
 
             Glide.with(context)
                 .asDrawable()
