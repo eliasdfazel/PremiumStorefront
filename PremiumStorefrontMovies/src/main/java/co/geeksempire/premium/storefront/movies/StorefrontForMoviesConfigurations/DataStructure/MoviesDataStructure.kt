@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 11:26 AM
+ * Last modified 8/6/21, 9:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ object FeaturedMoviesDataKey {
 
 object MoviesDataKey {
     const val MovieId= "Movie Id"
-    const val MovieGenre =  "Movie Genre"
+    const val MovieGenres =  "Movie Genres"
 
     const val MoviePurchasePrice = "Movie Purchasing Price"
     const val MovieRentingPrice = "Movie Renting Price"
@@ -36,6 +36,7 @@ object MoviesDataKey {
     const val MovieReleaseData = "Movie Release Date"
 
     const val MovieContentSafetyRating = "Content Safety Rating"
+    const val MovieContentSafetyRatingIcon = "Content Safety Rating Icon"
 
     const val MovieRating = "Rating"
 
@@ -52,7 +53,7 @@ object MoviesDataKey {
 class MoviesDataStructure(private val movieData: MutableMap<String, Any>) {
 
     fun movieId() : String = movieData[MoviesDataKey.MovieId].toString()
-    fun movieGenre() : String = movieData[MoviesDataKey.MovieGenre].toString()
+    fun movieGenres() : String = movieData[MoviesDataKey.MovieGenres].toString()
 
     fun moviePurchasePrice() : String = movieData[MoviesDataKey.MoviePurchasePrice].toString()
     fun movieRentingPrice() : String = movieData[MoviesDataKey.MovieRentingPrice].toString()
@@ -67,7 +68,9 @@ class MoviesDataStructure(private val movieData: MutableMap<String, Any>) {
     fun movieDirectors() : String = movieData[MoviesDataKey.MovieDirectors].toString()
 
     fun movieReleaseDate() : String = movieData[MoviesDataKey.MovieReleaseData].toString()
+
     fun movieContentSafetyRating() : String = movieData[MoviesDataKey.MovieContentSafetyRating].toString()
+    fun movieContentSafetyRatingIcon() : String = movieData[MoviesDataKey.MovieContentSafetyRatingIcon].toString()
 
     fun movieRating() : String = movieData[MoviesDataKey.MovieRating].toString()
 

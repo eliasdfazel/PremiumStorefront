@@ -987,7 +987,7 @@ async function setProductsMoviesData(jsonObject) {
     contentAttributes.forEach((attributesJsonObject) => {
 
         var attributeName = attributesJsonObject[NameKey];
-        var attributeValue = attributesJsonObject[AttributeOptionsKey][0];
+        var attributeValue = attributesJsonObject[AttributeOptionsKey];
 
         var contentAttribute = {};
         contentAttribute[attributeName] = attributeValue.toString();

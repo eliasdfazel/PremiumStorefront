@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 12:25 PM
+ * Last modified 8/6/21, 9:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,12 +10,13 @@
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
@@ -27,6 +28,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designFeaturedMoviesBackground
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designFeaturedMoviesPosterBackground
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.ViewHolder.FeaturedMoviesViewHolder
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -37,7 +39,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.DocumentSnapshot
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adapter<FeaturedMoviesViewHolder>() {
+class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapter<FeaturedMoviesViewHolder>() {
 
     var themeType: Boolean = ThemeType.ThemeLight
 
@@ -61,6 +63,7 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
 
                 featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
 
+                featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white_transparent))
                 featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
 
             }
@@ -68,6 +71,7 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
 
                 featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
 
+                featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
                 featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
 
             }
@@ -97,6 +101,7 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transform(RoundedCorners(dpToInteger(context, 37)))
                 .addListener(object : RequestListener<Drawable> {
+
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
 
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
@@ -148,6 +153,35 @@ class FeaturedMoviesAdapter (val context: AppCompatActivity) : RecyclerView.Adap
 
                 })
                 .submit()
+
+            Glide.with(context)
+                .asDrawable()
+                .load(moviesDataStructure.movieContentSafetyRatingIcon())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .addListener(object : RequestListener<Drawable> {
+
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                        resource?.let {
+
+                            context.runOnUiThread {
+
+                                featuredMoviesViewHolder.productContentRatingView.setImageDrawable(resource)
+                                featuredMoviesViewHolder.productContentRatingView.visibility = View.VISIBLE
+
+                            }
+
+                        }
+
+                        return true
+                    }
+
+                })
+                .submit()
+
+            println(">>> >> > $position" + ". " + context.genresData.getGenreIconByName(moviesDataStructure.movieGenres().split(",").first()))
 
             featuredMoviesViewHolder.rootViewItem.setOnClickListener {
 
