@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 9:13 AM
+ * Last modified 8/6/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extension
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
@@ -192,7 +192,7 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
             } else {
 
-                openPlayStoreToInstall(context = context,
+                openPlayStoreToInstallApplications(context = context,
                     aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
                     applicationName = storefrontContents[position].productName,
                     applicationSummary = storefrontContents[position].productSummary)

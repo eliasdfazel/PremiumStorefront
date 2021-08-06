@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 7:27 AM
+ * Last modified 8/6/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import android.os.Bundle
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
-import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.databinding.EntryConfigurationsLayoutBinding
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
@@ -73,7 +73,7 @@ class EntryConfigurationsMovies : StorefrontActivity() {
             val applicationName = dataMessage[ProductDataKey.ProductName]!!
             val applicationSummary = dataMessage[ProductDataKey.ProductSummary]!!
 
-            openPlayStoreToInstall(context = applicationContext,
+            openPlayStoreToInstallApplications(context = applicationContext,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)

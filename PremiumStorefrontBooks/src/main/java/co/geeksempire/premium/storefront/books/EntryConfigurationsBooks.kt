@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 7:20 AM
+ * Last modified 8/6/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,7 @@ package co.geeksempire.premium.storefront.books
 
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
-import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import java.util.*
@@ -43,7 +43,7 @@ class EntryConfigurationsBooks : StorefrontSplitActivity() {
             val applicationName = dataMessage[ProductDataKey.ProductName]!!
             val applicationSummary = dataMessage[ProductDataKey.ProductSummary]!!
 
-            openPlayStoreToInstall(context = applicationContext,
+            openPlayStoreToInstallApplications(context = applicationContext,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)

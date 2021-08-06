@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/3/21, 11:01 AM
+ * Last modified 8/6/21, 10:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,18 +26,18 @@ import com.google.firebase.dynamiclinks.ShortDynamicLink
 import com.google.firebase.dynamiclinks.ktx.*
 import com.google.firebase.ktx.Firebase
 
-private fun generateGooglePlayStoreDownloadLink(aPackageName: String) : String {
+private fun generateGooglePlayStoreApplications(aPackageName: String) : String {
 
     return "https://play.google.com/store/apps/details?id=${aPackageName}" + "&rdid=${aPackageName}"
 }
 
-private fun generateInstallDynamicLink(context: Context,
-                               aPackageName: String,
-                               applicationName: String, applicationSummary: String,
-                               mediatingSolution: String = context.packageName,
-                               campaignName: String = context.packageName) : Uri {
+private fun generateInstallDynamicApplicationsLink(context: Context,
+                                                   aPackageName: String,
+                                                   applicationName: String, applicationSummary: String,
+                                                   mediatingSolution: String = context.packageName,
+                                                   campaignName: String = context.packageName) : Uri {
 
-    val playStoreLink: String = generateGooglePlayStoreDownloadLink(aPackageName)
+    val playStoreLink: String = generateGooglePlayStoreApplications(aPackageName)
 
     val dynamicLink = Firebase.dynamicLinks.dynamicLink {
         link = Uri.parse(playStoreLink)
@@ -59,14 +59,14 @@ private fun generateInstallDynamicLink(context: Context,
     return dynamicLink.uri
 }
 
-private fun prepareInstallShortDynamicLink(context: Context,
-                                    aPackageName: String,
-                                    applicationName: String, applicationSummary: String,
-                                    mediatingSolution: String = context.packageName,
-                                    campaignName: String = context.packageName) : Task<ShortDynamicLink> {
+private fun prepareInstallShortDynamicApplicationsLink(context: Context,
+                                                       aPackageName: String,
+                                                       applicationName: String, applicationSummary: String,
+                                                       mediatingSolution: String = context.packageName,
+                                                       campaignName: String = context.packageName) : Task<ShortDynamicLink> {
 
     return Firebase.dynamicLinks.shortLinkAsync {
-        link = Uri.parse(generateGooglePlayStoreDownloadLink(aPackageName))
+        link = Uri.parse(generateGooglePlayStoreApplications(aPackageName))
         domainUriPrefix = "https://premiumstorefront.page.link"
         androidParameters(aPackageName) {
 
@@ -83,7 +83,8 @@ private fun prepareInstallShortDynamicLink(context: Context,
     }
 }
 
-fun openPlayStoreToInstall(context: Context, aPackageName: String, applicationName: String, applicationSummary: String) {
+fun openPlayStoreToInstallApplications(context: Context, aPackageName: String, applicationName: String, applicationSummary: String) {
+
     Firebase.analytics.logEvent(Firebase.auth.currentUser?.displayName?:"Unknown", Bundle().apply {
         putString(ProductDataKey.ProductPackageName, aPackageName)
         putString(ProductDataKey.ProductName, applicationName)
@@ -92,13 +93,14 @@ fun openPlayStoreToInstall(context: Context, aPackageName: String, applicationNa
     doVibrate(context, 159)
 
     context.startActivity(Intent(Intent.ACTION_VIEW,
-        generateInstallDynamicLink(context = context, aPackageName = aPackageName,
+        generateInstallDynamicApplicationsLink(context = context, aPackageName = aPackageName,
             applicationName = applicationName, applicationSummary = applicationSummary)
     ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0).toBundle())
 
 }
 
 fun shareApplication(context: Context, aPackageName: String, applicationName: String, applicationSummary: String) {
+
     Firebase.analytics.logEvent(Firebase.auth.currentUser?.displayName?:"Unknown", Bundle().apply {
         putString(ProductDataKey.ProductPackageName, aPackageName)
         putString(ProductDataKey.ProductName, applicationName)
@@ -106,7 +108,7 @@ fun shareApplication(context: Context, aPackageName: String, applicationName: St
 
     doVibrate(context, 159)
 
-    prepareInstallShortDynamicLink(context, aPackageName, applicationName, applicationSummary)
+    prepareInstallShortDynamicApplicationsLink(context, aPackageName, applicationName, applicationSummary)
         .addOnSuccessListener { shortDynamicLink ->
 
             val textToShare = Html.fromHtml(applicationName, Html.FROM_HTML_MODE_COMPACT).toString() + "\n" +

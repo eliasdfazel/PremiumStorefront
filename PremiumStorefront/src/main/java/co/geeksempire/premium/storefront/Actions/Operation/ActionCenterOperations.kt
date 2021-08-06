@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:37 AM
+ * Last modified 8/6/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.sea
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.sortingSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
-import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 
 class ActionCenterOperations {
@@ -82,7 +82,7 @@ class ActionCenterOperations {
         /* Install */
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
@@ -92,7 +92,7 @@ class ActionCenterOperations {
         /* Rate */
         context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
@@ -155,7 +155,7 @@ class ActionCenterOperations {
         /* Install */
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
@@ -165,7 +165,7 @@ class ActionCenterOperations {
         /* Rate */
         context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
@@ -198,7 +198,7 @@ class ActionCenterOperations {
         /* Install */
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = movieId,
                 applicationName = MovieName,
                 applicationSummary = movieSummary)
@@ -208,7 +208,7 @@ class ActionCenterOperations {
         /* Rate */
         context.storefrontLayoutBinding.rightActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = movieId,
                 applicationName = MovieName,
                 applicationSummary = movieSummary)
@@ -275,7 +275,7 @@ class ActionCenterOperations {
         /* Install */
         context.categoryDetailsLayoutBinding.middleActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
@@ -285,7 +285,7 @@ class ActionCenterOperations {
         /* Rate */
         context.categoryDetailsLayoutBinding.rightActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
@@ -352,7 +352,7 @@ class ActionCenterOperations {
         /* Install */
         context.developerIntroductionLayoutBinding.middleActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
@@ -362,7 +362,7 @@ class ActionCenterOperations {
         /* Rate */
         context.developerIntroductionLayoutBinding.rightActionView.setOnClickListener {
 
-            openPlayStoreToInstall(context = context,
+            openPlayStoreToInstallApplications(context = context,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)

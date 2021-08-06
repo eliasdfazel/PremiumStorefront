@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 12:08 PM
+ * Last modified 8/6/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,7 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStru
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.ViewHolder.FavoritedViewHolder
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -131,7 +131,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
         favoritedViewHolder.installView.setOnClickListener {
 
-            openPlayStoreToInstall(context,
+            openPlayStoreToInstallApplications(context,
                 favoritedContentItems[position].productId,
                 favoritedContentItems[position].productName,
                 favoritedContentItems[position].productDescription)

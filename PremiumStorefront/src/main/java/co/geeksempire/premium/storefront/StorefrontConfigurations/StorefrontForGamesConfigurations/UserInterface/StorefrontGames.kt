@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 9:43 AM
+ * Last modified 8/6/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,7 +57,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSect
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.Adapter.CategoriesAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.NewContent.Adapter.NewContentAdapter
-import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstall
+import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
@@ -897,7 +897,7 @@ class StorefrontGames : StorefrontActivity() {
             val applicationName = dataMessage[ProductDataKey.ProductName]!!
             val applicationSummary = dataMessage[ProductDataKey.ProductSummary]!!
 
-            openPlayStoreToInstall(context = applicationContext,
+            openPlayStoreToInstallApplications(context = applicationContext,
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
