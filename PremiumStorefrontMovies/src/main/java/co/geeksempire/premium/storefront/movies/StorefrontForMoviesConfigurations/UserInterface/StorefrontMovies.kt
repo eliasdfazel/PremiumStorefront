@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 12:19 PM
+ * Last modified 8/6/21, 9:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -254,6 +254,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                 }
 
+                retrieveFeaturedMovies(this@StorefrontMovies, moviesStorefrontLiveData)
+
             })
 
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -321,8 +323,6 @@ class StorefrontMovies : StorefrontSplitActivity() {
         Log.d(this@StorefrontMovies.javaClass.simpleName, "Network Available @ ${this@StorefrontMovies.javaClass.simpleName}")
 
         retrieveGenreMovies(this@StorefrontMovies, moviesStorefrontLiveData)
-
-        retrieveFeaturedMovies(this@StorefrontMovies, moviesStorefrontLiveData)
 
     }
 

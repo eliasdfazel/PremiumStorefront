@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 9:37 AM
+ * Last modified 8/6/21, 9:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -66,6 +66,10 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                 featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white_transparent))
                 featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_light)
 
+                featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+                featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+                featuredMoviesViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+
             }
             ThemeType.ThemeDark -> {
 
@@ -73,6 +77,10 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
                 featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
                 featuredMoviesViewHolder.productRatingStarsView.background = context.getDrawable(R.drawable.movie_rating_glowing_frame_dark)
+
+                featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+                featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+                featuredMoviesViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
 
             }
         }
@@ -181,7 +189,25 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                 })
                 .submit()
 
-            println(">>> >> > $position" + ". " + context.genresData.getGenreIconByName(moviesDataStructure.movieGenres().split(",").first()))
+            val movieGenres = moviesDataStructure.movieGenres().split(",")
+
+            Glide.with(context)
+                .asDrawable()
+                .load(context.genresData.getGenreIconByName(movieGenres[0]))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(featuredMoviesViewHolder.movieGenreFirst)
+
+            Glide.with(context)
+                .asDrawable()
+                .load(context.genresData.getGenreIconByName(movieGenres[1]))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(featuredMoviesViewHolder.movieGenreSecond)
+
+            Glide.with(context)
+                .asDrawable()
+                .load(context.genresData.getGenreIconByName(movieGenres[2]))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(featuredMoviesViewHolder.movieGenreThird)
 
             featuredMoviesViewHolder.rootViewItem.setOnClickListener {
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 8:53 AM
+ * Last modified 8/6/21, 9:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,6 +27,10 @@ class FeaturedMoviesViewHolder (rootViewItem: View) : RecyclerView.ViewHolder(ro
     val moviePosterImageView: AppCompatImageView = rootViewItem.moviePosterImageView
     val productRatingStarsView: AppCompatImageView = rootViewItem.productRatingStarsView
     val productContentRatingView: AppCompatImageView = rootViewItem.productContentRatingView
+
+    val movieGenreFirst: AppCompatImageView = rootViewItem.movieGenreFirst
+    val movieGenreSecond: AppCompatImageView = rootViewItem.movieGenreSecond
+    val movieGenreThird: AppCompatImageView = rootViewItem.movieGenreThird
 
     val movieNameTextView: AppCompatTextView = rootViewItem.movieNameTextView
     val movieSummaryTextView: AppCompatTextView = rootViewItem.movieSummaryTextView
