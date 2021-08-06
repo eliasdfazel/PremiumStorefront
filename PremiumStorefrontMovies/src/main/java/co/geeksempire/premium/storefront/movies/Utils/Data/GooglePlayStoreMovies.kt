@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:31 AM
+ * Last modified 8/6/21, 11:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -84,7 +84,7 @@ private fun prepareInstallShortDynamicMoviesLink(context: Context,
     }
 }
 
-fun openPlayStoreToInstallMovie(context: Context, movieId: String, movieName: String, movieSummary: String) {
+fun openPlayStoreToWatchMovie(context: Context, movieId: String, movieName: String, movieSummary: String) {
 
     Firebase.analytics.logEvent(Firebase.auth.currentUser?.displayName?:"Unknown", Bundle().apply {
         putString(MoviesDataKey.MovieId, movieId)

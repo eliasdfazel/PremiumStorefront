@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 11:03 AM
+ * Last modified 8/6/21, 11:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,18 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
         if (this.featuredMoviesData.isNotEmpty()) {
 
             notifyItemRangeChanged(0, featuredMoviesAdapter.itemCount)
+
+        }
+
+    }
+
+    newMoviesAdapter.apply {
+
+        this.themeType = themeType
+
+        if (storefrontMoviesContents.isNotEmpty()) {
+
+            notifyItemRangeChanged(0, newMoviesAdapter.itemCount)
 
         }
 

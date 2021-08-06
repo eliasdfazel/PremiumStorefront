@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 6:58 AM
+ * Last modified 8/6/21, 10:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,6 +37,7 @@ class GeneralEndpoints {
     object QueryType {
         const val ApplicationsQuery = "80"
         const val GamesQuery = "546"
+        const val MoviesQuery = "982"
     }
 
     private object Security {

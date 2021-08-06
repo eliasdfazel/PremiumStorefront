@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:33 AM
+ * Last modified 8/6/21, 11:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,7 +31,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.UI.designOptionsMoviesBackground
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.ViewHolder.FeaturedMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
-import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToInstallMovie
+import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -220,7 +220,7 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
             featuredMoviesViewHolder.rootViewItem.setOnClickListener {
 
-                openPlayStoreToInstallMovie(context = context,
+                openPlayStoreToWatchMovie(context = context,
                     movieId = moviesDataStructure.movieId(),
                     movieName = moviesDataStructure.movieName(),
                     movieSummary = moviesDataStructure.movieSummary())

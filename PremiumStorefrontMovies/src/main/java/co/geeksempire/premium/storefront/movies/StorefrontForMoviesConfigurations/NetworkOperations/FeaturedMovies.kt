@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 3:30 PM
+ * Last modified 8/6/21, 10:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.FeaturedMoviesDataKey
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataKey
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoint
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Source
 
@@ -26,7 +26,7 @@ fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData:
 
     val generalEndpoint = GeneralEndpoints()
 
-    val moviesQueryEndpoint = MoviesQueryEndpoint(generalEndpoint)
+    val moviesQueryEndpoint = MoviesQueryEndpoints(generalEndpoint)
 
     val moviesDocumentSnapshots = ArrayList<DocumentSnapshot>()
 

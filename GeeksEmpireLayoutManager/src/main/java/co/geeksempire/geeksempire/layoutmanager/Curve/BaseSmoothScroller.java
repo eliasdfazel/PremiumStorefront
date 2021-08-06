@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/30/21, 11:04 AM
+ * Last modified 8/6/21, 10:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,7 @@ abstract class BaseSmoothScroller extends LinearSmoothScroller {
     public PointF computeScrollVectorForPosition(int targetPosition) {
         RecyclerView.LayoutManager layoutManager = getLayoutManager();
         // calculate vector for position
-        if (layoutManager != null && layoutManager instanceof FanLayoutManager) {
+        if (layoutManager != null && layoutManager instanceof CurveLayoutManager) {
             if (getChildCount() == 0) {
                 return null;
             }

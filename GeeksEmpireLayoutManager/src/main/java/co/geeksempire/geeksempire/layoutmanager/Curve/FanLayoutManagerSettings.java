@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/30/21, 11:04 AM
+ * Last modified 8/6/21, 12:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,6 +28,8 @@ public class FanLayoutManagerSettings {
     private boolean mIsFanRadiusEnable;
     private float mAngleItemBounce;
 
+    private boolean selectedAnimation;
+
     private FanLayoutManagerSettings(Builder builder) {
         mViewWidthDp = builder.mViewWidthDp;
         mViewHeightDp = builder.mViewHeightDp;
@@ -35,6 +37,8 @@ public class FanLayoutManagerSettings {
         mAngleItemBounce = builder.mAngleItemBounce;
         mViewWidthPx = builder.mViewWidthPx;
         mViewHeightPx = builder.mViewHeightPx;
+
+        selectedAnimation = builder.selectedAnimation;
     }
 
     public static Builder newBuilder(Context context) {
@@ -65,6 +69,10 @@ public class FanLayoutManagerSettings {
         return mViewHeightPx;
     }
 
+    boolean isSelectedAnimation() {
+
+        return selectedAnimation;
+    }
 
     /**
      * {@code FanLayoutManagerSettings} builder static inner class.
@@ -78,6 +86,7 @@ public class FanLayoutManagerSettings {
         private float mAngleItemBounce;
         private int mViewWidthPx;
         private int mViewHeightPx;
+        private boolean selectedAnimation;
 
 
         private Builder(Context context) {
@@ -118,6 +127,11 @@ public class FanLayoutManagerSettings {
          */
         public Builder withFanRadius(boolean isFanRadiusEnable) {
             mIsFanRadiusEnable = isFanRadiusEnable;
+            return this;
+        }
+
+        public Builder withSelectedAnimation(boolean animation) {
+            selectedAnimation = animation;
             return this;
         }
 

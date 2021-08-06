@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:26 AM
+ * Last modified 8/6/21, 12:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,6 +29,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
+import co.geeksempire.geeksempire.layoutmanager.Curve.CurveLayoutManager
+import co.geeksempire.geeksempire.layoutmanager.Curve.FanLayoutManagerSettings
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
@@ -43,6 +45,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.IO.IO
@@ -58,9 +61,11 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveNewContent
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.Adapter.GenresAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.GenreData
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.NewMovies.Adapter.NewMoviesAdapter
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -85,6 +90,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@StorefrontMovies)
     }
+
+    val generalEndpoints: GeneralEndpoints = GeneralEndpoints()
 
     val moviesStorefrontLiveData: MoviesStorefrontLiveData by lazy {
         ViewModelProvider(this@StorefrontMovies).get(MoviesStorefrontLiveData::class.java)
@@ -117,6 +124,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     val featuredMoviesAdapter: FeaturedMoviesAdapter by lazy {
         FeaturedMoviesAdapter(this@StorefrontMovies)
+    }
+
+    val newMoviesAdapter: NewMoviesAdapter by lazy {
+        NewMoviesAdapter(context = this@StorefrontMovies)
     }
 
     val genresAdapter: GenresAdapter by lazy {
@@ -192,6 +203,16 @@ class StorefrontMovies : StorefrontSplitActivity() {
             val featuredSnapHelper: SnapHelper = PagerSnapHelper()
             featuredSnapHelper.attachToRecyclerView(storefrontMoviesLayoutBinding.featuredContentRecyclerView)
 
+            val curveLayoutManager = CurveLayoutManager(applicationContext,
+                FanLayoutManagerSettings.newBuilder(applicationContext).apply {
+                    withFanRadius(true)
+                    withSelectedAnimation(false)
+                    withViewWidthDp(279f)
+                    withViewHeightDp(399f)
+                }.build())
+            storefrontMoviesLayoutBinding.newContentRecyclerView.layoutManager = curveLayoutManager
+            storefrontMoviesLayoutBinding.newContentRecyclerView.adapter = newMoviesAdapter
+
             storefrontMoviesLayoutBinding.genresRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontMoviesLayoutBinding.genresRecyclerView.adapter = genresAdapter
 
@@ -215,6 +236,33 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                         storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
                         storefrontMoviesLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
+
+                    }
+
+                }
+
+            })
+
+            moviesStorefrontLiveData.newContentItemData.observe(this@StorefrontMovies, {
+
+                if (it.isNotEmpty()) {
+
+                    newMoviesAdapter.storefrontMoviesContents.clear()
+                    newMoviesAdapter.storefrontMoviesContents.addAll(it)
+
+                    newMoviesAdapter.notifyItemRangeInserted(0, newMoviesAdapter.itemCount)
+
+                    if (storefrontMoviesLayoutBinding.newContentRecyclerView.isGone) {
+
+                        storefrontMoviesLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                        storefrontMoviesLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
+
+                    }
+
+                    if (storefrontMoviesLayoutBinding.randomMovieSelection.isGone) {
+
+                        storefrontMoviesLayoutBinding.randomMovieSelection.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                        storefrontMoviesLayoutBinding.randomMovieSelection.visibility = View.VISIBLE
 
                     }
 
@@ -279,6 +327,42 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
             })
 
+            storefrontMoviesLayoutBinding.newContentRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+
+                    when (newState) {
+                        RecyclerView.SCROLL_STATE_IDLE -> {
+
+                            val snappedItemPosition = curveLayoutManager.selectedItemPosition
+
+                        }
+                    }
+
+                }
+
+            })
+
+            storefrontMoviesLayoutBinding.randomMovieSelection.setOnClickListener {
+
+                val loopCount = IntRange(5, 10).random()
+
+                val animationFrames = IntRange(0, 50)
+
+                storefrontMoviesLayoutBinding.randomMovieSelection.repeatCount = loopCount
+                storefrontMoviesLayoutBinding.randomMovieSelection.playAnimation()
+
+                storefrontMoviesLayoutBinding.randomMovieSelection.addAnimatorUpdateListener {
+
+
+
+                }
+
+                curveLayoutManager.smoothScrollToPosition(storefrontMoviesLayoutBinding.newContentRecyclerView, RecyclerView.State(), 3)
+
+            }
+
             storefrontMoviesLayoutBinding.genresRecyclerView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 
                 if (scrollY > oldScrollY) {
@@ -323,6 +407,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
         Log.d(this@StorefrontMovies.javaClass.simpleName, "Network Available @ ${this@StorefrontMovies.javaClass.simpleName}")
 
         retrieveGenreMovies(this@StorefrontMovies, moviesStorefrontLiveData)
+
+        retrieveNewContent(this@StorefrontMovies, moviesStorefrontLiveData, generalEndpoints)
 
     }
 

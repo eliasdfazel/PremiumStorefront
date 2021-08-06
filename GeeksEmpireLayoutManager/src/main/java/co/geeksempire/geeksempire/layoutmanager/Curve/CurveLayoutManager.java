@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/30/21, 11:04 AM
+ * Last modified 8/6/21, 12:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +35,9 @@ import java.util.Random;
  * How to use:
  * <p>
  * 1) Create object of FanLayoutManager class. You can use
- * {@link #FanLayoutManager(Context)} with default settings
+ * {@link #CurveLayoutManager(Context)} with default settings
  * or
- * {@link #FanLayoutManager(Context, FanLayoutManagerSettings)} with custom settings.
+ * {@link #CurveLayoutManager(Context, FanLayoutManagerSettings)} with custom settings.
  * See {@link FanLayoutManagerSettings} to create custom settings.
  * <p>
  * 2) Set the FanLayoutManager to your RecyclerView. See {@link RecyclerView#setLayoutManager(RecyclerView.LayoutManager)}
@@ -56,11 +55,11 @@ import java.util.Random;
  * @author alex yarovoi
  * @version 1.0
  */
-public class FanLayoutManager extends RecyclerView.LayoutManager {
+public class CurveLayoutManager extends RecyclerView.LayoutManager {
     /**
      * Settings for fan layout manager. {@link FanLayoutManagerSettings.Builder}
      */
-    private final FanLayoutManagerSettings mSettings;
+    private final FanLayoutManagerSettings fanLayoutManagerSettings;
 
     /**
      * Map with view cache.
@@ -156,14 +155,14 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
      */
     private View mCenterView = null;
 
-    public FanLayoutManager(@NonNull Context context) {
+    public CurveLayoutManager(@NonNull Context context) {
         this(context, null);
         mAnimationHelper = new AnimationHelperImpl();
     }
 
-    public FanLayoutManager(@NonNull Context context, @Nullable FanLayoutManagerSettings settings) {
+    public CurveLayoutManager(@NonNull Context context, @Nullable FanLayoutManagerSettings settings) {
         // create default settings
-        mSettings = settings == null ? FanLayoutManagerSettings.newBuilder(context).build() : settings;
+        fanLayoutManagerSettings = settings == null ? FanLayoutManagerSettings.newBuilder(context).build() : settings;
         // create default animation helper
         mAnimationHelper = new AnimationHelperImpl();
         // create default FanCardScroller
@@ -283,7 +282,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         int centerViewPosition = mCenterView == null ? 0 : getPosition(mCenterView);
 
         // left offset for center view
-        int centerViewOffset = mCenterView == null ? (int) (getWidth() / 2F - mSettings.getViewWidthPx() / 2F) :
+        int centerViewOffset = mCenterView == null ? (int) (getWidth() / 2F - fanLayoutManagerSettings.getViewWidthPx() / 2F) :
                 getDecoratedLeft(mCenterView);
 
         // main fill logic
@@ -377,8 +376,8 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state, int widthSpec, int heightSpec) {
         int heightMode = View.MeasureSpec.getMode(heightSpec);
-        long scaledHeight = (long) (mSettings.getViewHeightPx() * mAnimationHelper.getViewScaleFactor());
-        long scaledWidth = (long) (mSettings.getViewWidthPx() * mAnimationHelper.getViewScaleFactor());
+        long scaledHeight = (long) (fanLayoutManagerSettings.getViewHeightPx() * mAnimationHelper.getViewScaleFactor());
+        long scaledWidth = (long) (fanLayoutManagerSettings.getViewWidthPx() * mAnimationHelper.getViewScaleFactor());
         int height = heightMode == View.MeasureSpec.EXACTLY ? View.MeasureSpec.getSize(heightSpec) :
                 (int) (Math.sqrt(scaledHeight * scaledHeight + scaledWidth * scaledWidth));
 
@@ -490,7 +489,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
             view.setPivotX(halfViewWidth);
             view.setPivotY(view.getHeight());
 
-            if (mSettings.isFanRadiusEnable()) {
+            if (fanLayoutManagerSettings.isFanRadiusEnable()) {
 
                 // distance between center of screen to center of view in x-axis
                 deltaX = halfWidth - getDecoratedLeft(view) - halfViewWidth;
@@ -518,7 +517,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     }
 
     private float generateBaseViewRotation() {
-        return mRandom.nextFloat() * mSettings.getAngleItemBounce() * 2 - mSettings.getAngleItemBounce();
+        return mRandom.nextFloat() * fanLayoutManagerSettings.getAngleItemBounce() * 2 - fanLayoutManagerSettings.getAngleItemBounce();
     }
 
     /**
@@ -531,31 +530,31 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         // +++++++++++ Prepare data +++++++++++
 
         // left limit. need to prepare with before they will be show to user.
-        int leftBorder = -(mSettings.getViewWidthPx() + (mIsCollapsed ? mSettings.getViewWidthPx() : 0));
+        int leftBorder = -(fanLayoutManagerSettings.getViewWidthPx() + (mIsCollapsed ? fanLayoutManagerSettings.getViewWidthPx() : 0));
 
         // right limit.
-        int rightBorder = getWidth() + (mSettings.getViewWidthPx() + (mIsCollapsed ? mSettings.getViewWidthPx() : 0));
+        int rightBorder = getWidth() + (fanLayoutManagerSettings.getViewWidthPx() + (mIsCollapsed ? fanLayoutManagerSettings.getViewWidthPx() : 0));
         int leftViewOffset = centerViewOffset;
         int leftViewPosition = centerViewPosition;
 
         // margin to draw cards in bottom
-        final int baseTopMargin = Math.max(0, getHeight() - mSettings.getViewHeightPx() - mSettings.getViewWidthPx() / 4);
+        final int baseTopMargin = Math.max(0, getHeight() - fanLayoutManagerSettings.getViewHeightPx() - fanLayoutManagerSettings.getViewWidthPx() / 4);
         int overlapDistance;
         if (mIsCollapsed) {
 
             // overlap distance if views are collapsed
-            overlapDistance = -mSettings.getViewWidthPx() / 4;
+            overlapDistance = -fanLayoutManagerSettings.getViewWidthPx() / 4;
         } else {
 
             // overlap distance if views aren't collapsed
-            overlapDistance = mSettings.getViewWidthPx() / 4;
+            overlapDistance = fanLayoutManagerSettings.getViewWidthPx() / 4;
         }
 
         boolean fillRight = true;
 
         // specs for item views
-        final int widthSpec = View.MeasureSpec.makeMeasureSpec(mSettings.getViewWidthPx(), View.MeasureSpec.EXACTLY);
-        final int heightSpec = View.MeasureSpec.makeMeasureSpec(mSettings.getViewHeightPx(), View.MeasureSpec.EXACTLY);
+        final int widthSpec = View.MeasureSpec.makeMeasureSpec(fanLayoutManagerSettings.getViewWidthPx(), View.MeasureSpec.EXACTLY);
+        final int heightSpec = View.MeasureSpec.makeMeasureSpec(fanLayoutManagerSettings.getViewHeightPx(), View.MeasureSpec.EXACTLY);
 
         // if have to restore state with selected item
         boolean hasPendingStateSelectedItem = mPendingSavedState != null && mPendingSavedState.isSelected &&
@@ -564,7 +563,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         // offset for left and right views in case we have to restore pending state with selected view.
         // this is delta distance between overlap cards state and collapse (selected card) card state
         // need to use ones for all left view and right views
-        float deltaOffset = mSettings.getViewWidthPx() / 2;
+        float deltaOffset = fanLayoutManagerSettings.getViewWidthPx() / 2;
 
         // --------- Prepare data ---------
 
@@ -572,10 +571,10 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         while (leftViewOffset > leftBorder && leftViewPosition >= 0) {
             if (mIsCollapsed) {
                 // offset for collapsed views
-                leftViewOffset -= (mSettings.getViewWidthPx() + Math.abs(overlapDistance));
+                leftViewOffset -= (fanLayoutManagerSettings.getViewWidthPx() + Math.abs(overlapDistance));
             } else {
                 // offset for NOT collapsed views
-                leftViewOffset -= (mSettings.getViewWidthPx() - Math.abs(overlapDistance));
+                leftViewOffset -= (fanLayoutManagerSettings.getViewWidthPx() - Math.abs(overlapDistance));
             }
             leftViewPosition--;
         }
@@ -584,10 +583,10 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
             // if theoretically position for left view is less than left view.
             if (mIsCollapsed) {
                 // offset for collapsed views
-                leftViewOffset += (mSettings.getViewWidthPx() + Math.abs(overlapDistance)) * Math.abs(leftViewPosition);
+                leftViewOffset += (fanLayoutManagerSettings.getViewWidthPx() + Math.abs(overlapDistance)) * Math.abs(leftViewPosition);
             } else {
                 // offset for NOT collapsed views
-                leftViewOffset += (mSettings.getViewWidthPx() - Math.abs(overlapDistance)) * Math.abs(leftViewPosition);
+                leftViewOffset += (fanLayoutManagerSettings.getViewWidthPx() - Math.abs(overlapDistance)) * Math.abs(leftViewPosition);
             }
             leftViewPosition = 0;
         }
@@ -619,7 +618,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
                 measureChildWithDecorationsAndMargin(view, widthSpec, heightSpec);
                 // set offsets, with and height in the recyclerView
                 layoutDecorated(view, leftViewOffset, baseTopMargin,
-                        leftViewOffset + mSettings.getViewWidthPx(), baseTopMargin + mSettings.getViewHeightPx());
+                        leftViewOffset + fanLayoutManagerSettings.getViewWidthPx(), baseTopMargin + fanLayoutManagerSettings.getViewHeightPx());
             } else {
                 attachView(view, leftViewPosition);
                 mViewCache.remove(leftViewPosition);
@@ -634,7 +633,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
 
 
             // calculate position for next view. last position + view height - overlap between views.
-            leftViewOffset = leftViewOffset + mSettings.getViewWidthPx() - overlapDistance;
+            leftViewOffset = leftViewOffset + fanLayoutManagerSettings.getViewWidthPx() - overlapDistance;
 
             // check right border. stop loop if next view is > then right border.
             fillRight = leftViewOffset < rightBorder;
@@ -716,48 +715,52 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
         // select item animation prepare and wait until smooth scroll is finished
         mIsWaitingToSelectAnimation = true;
 
-        mAnimationHelper.openItem(viewToSelect, delay * 3 /*need to finish scroll before start open*/,
-                new SimpleAnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {
-                        super.onAnimationStart(animator);
-                        // change state of select animation progress
-                        mIsSelectAnimationInProcess = true;
-                        mIsWaitingToSelectAnimation = false;
-                        // shift distance between center view and left, right views.
-                        final int delta = mSettings.getViewWidthPx() / 2;
-                        // generate data for animation helper. (calculate final positions for all views)
-                        final Collection<ViewAnimationInfo> infoViews = ViewAnimationInfoGenerator.generate(delta,
-                                true,
-                                FanLayoutManager.this,
-                                mSelectedItemPosition,
-                                false);
+        if (fanLayoutManagerSettings.isSelectedAnimation()) {
 
-                        // animate shifting let and right views
-                        mAnimationHelper.shiftSideViews(
-                                infoViews,
-                                0,
-                                FanLayoutManager.this,
-                                null,
-                                new ValueAnimator.AnimatorUpdateListener() {
-                                    @Override
-                                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                        // update rotation and translation for all views
-                                        updateArcViewPositions();
-                                    }
-                                });
-                    }
+            mAnimationHelper.openItem(viewToSelect, delay * 3 /*need to finish scroll before start open*/,
+                    new SimpleAnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animator) {
+                            super.onAnimationStart(animator);
+                            // change state of select animation progress
+                            mIsSelectAnimationInProcess = true;
+                            mIsWaitingToSelectAnimation = false;
+                            // shift distance between center view and left, right views.
+                            final int delta = fanLayoutManagerSettings.getViewWidthPx() / 2;
+                            // generate data for animation helper. (calculate final positions for all views)
+                            final Collection<ViewAnimationInfo> infoViews = ViewAnimationInfoGenerator.generate(delta,
+                                    true,
+                                    CurveLayoutManager.this,
+                                    mSelectedItemPosition,
+                                    false);
 
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        mIsSelectAnimationInProcess = false;
-                    }
+                            // animate shifting let and right views
+                            mAnimationHelper.shiftSideViews(
+                                    infoViews,
+                                    0,
+                                    CurveLayoutManager.this,
+                                    null,
+                                    new ValueAnimator.AnimatorUpdateListener() {
+                                        @Override
+                                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                                            // update rotation and translation for all views
+                                            updateArcViewPositions();
+                                        }
+                                    });
+                        }
 
-                    @Override
-                    public void onAnimationCancel(Animator animator) {
-                        mIsSelectAnimationInProcess = false;
-                    }
-                });
+                        @Override
+                        public void onAnimationEnd(Animator animator) {
+                            mIsSelectAnimationInProcess = false;
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animator) {
+                            mIsSelectAnimationInProcess = false;
+                        }
+                    });
+
+        }
     }
 
     /**
@@ -847,13 +850,13 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
                 mIsWaitingToDeselectAnimation = false;
 
                 // shift distance between center view and left, right views.
-                final int delta = mSettings.getViewWidthPx() / 2;
+                final int delta = fanLayoutManagerSettings.getViewWidthPx() / 2;
 
                 // generate data for animation helper. (calculate final positions for all views)
                 final Collection<ViewAnimationInfo> infoViews =
                         ViewAnimationInfoGenerator.generate(delta,
                                 false,
-                                FanLayoutManager.this,
+                                CurveLayoutManager.this,
                                 position,
                                 false);
 
@@ -861,7 +864,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
                 mAnimationHelper.shiftSideViews(
                         infoViews,
                         0,
-                        FanLayoutManager.this,
+                        CurveLayoutManager.this,
                         null,
                         new ValueAnimator.AnimatorUpdateListener() {
                             @Override
@@ -923,9 +926,6 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
 
     @Override
     public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, final int position) {
-
-        System.out.println(">>> >> > XYZ" + position);
-        Log.d(">>> >> >", "" + position);
 
         if (position >= getItemCount()) {
             // if position is not in range
@@ -1113,20 +1113,20 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
     private void updateItemsByMode() {
 
         // collapse distance
-        int delta = mSettings.getViewWidthPx() / 2;
+        int delta = fanLayoutManagerSettings.getViewWidthPx() / 2;
 
         // generate data for collapse animation
         final Collection<ViewAnimationInfo> infoViews =
                 ViewAnimationInfoGenerator.generate(delta,
                         mIsCollapsed = !mIsCollapsed,
-                        FanLayoutManager.this,
+                        CurveLayoutManager.this,
                         findCurrentCenterViewPos(),
                         true);
 
         // collapse views
         mAnimationHelper.shiftSideViews(infoViews,
                 0,
-                FanLayoutManager.this,
+                CurveLayoutManager.this,
                 new SimpleAnimatorListener() {
                     @Override
                     public void onAnimationEnd(Animator animator) {
@@ -1155,7 +1155,7 @@ public class FanLayoutManager extends RecyclerView.LayoutManager {
 
         // center of the screen in x-axis
         float centerX = getWidth() / 2F;
-        float viewHalfWidth = mSettings.getViewWidthPx() / 2F;
+        float viewHalfWidth = fanLayoutManagerSettings.getViewWidthPx() / 2F;
         View nearestToCenterView = null;
         int nearestDeltaX = 0;
         View item;
