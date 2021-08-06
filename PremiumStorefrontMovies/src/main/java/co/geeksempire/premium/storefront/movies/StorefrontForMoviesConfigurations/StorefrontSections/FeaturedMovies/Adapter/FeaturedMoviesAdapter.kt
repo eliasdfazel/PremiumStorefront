@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 9:53 AM
+ * Last modified 8/6/21, 9:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -193,19 +193,19 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
             Glide.with(context)
                 .asDrawable()
-                .load(context.genresData.getGenreIconByName(movieGenres[0]))
+                .load(try { context.genresData.getGenreIconByName(movieGenres[0]) } catch (e: Exception) { "" })
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(featuredMoviesViewHolder.movieGenreFirst)
 
             Glide.with(context)
                 .asDrawable()
-                .load(context.genresData.getGenreIconByName(movieGenres[1]))
+                .load(try { context.genresData.getGenreIconByName(movieGenres[1]) } catch (e: Exception) { "" })
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(featuredMoviesViewHolder.movieGenreSecond)
 
             Glide.with(context)
                 .asDrawable()
-                .load(context.genresData.getGenreIconByName(movieGenres[2]))
+                .load(try { context.genresData.getGenreIconByName(movieGenres[2]) } catch (e: Exception) { "" })
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(featuredMoviesViewHolder.movieGenreThird)
 

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/6/21, 9:53 AM
+  ~ Last modified 8/6/21, 9:59 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -37,7 +37,7 @@
     </item>
 
     <item
-        android:id="@+id/circleIconBackground"
+        android:id="@+id/clearLayer"
         android:height="29dp"
         android:width="30dp"
         android:gravity="center">
