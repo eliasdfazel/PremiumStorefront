@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/7/21, 9:09 AM
+ * Last modified 8/7/21, 9:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,12 +10,14 @@
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.AllMovies.Adapter
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.AllMovies.ViewHolder.AllMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
@@ -91,6 +93,7 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
                                 allMoviesViewHolder.moviesPosterImageView.setImageDrawable(resource)
 
+                                allMoviesViewHolder.movieGlowingBackground.backgroundTintList = ColorStateList.valueOf(setColorAlpha(vibrantColor, 153f))
                             }
 
                         }
