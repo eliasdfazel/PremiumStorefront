@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:52 AM
+ * Last modified 8/7/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,6 +44,10 @@ class MoviesQueryEndpoints (private val generalEndpoints: GeneralEndpoints) {
             "Multimedia" +
             "/" +
             "Movies"
+
+    fun storefrontMoviesGenreCollectionsEndpoint(genreName: String) : String = storefrontMoviesGenreEndpoint() +
+            "/" +
+            genreName
 
     /*
      * Wordpress Endpoint

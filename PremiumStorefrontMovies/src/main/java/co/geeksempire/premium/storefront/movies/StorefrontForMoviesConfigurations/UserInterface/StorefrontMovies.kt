@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/7/21, 7:37 AM
+ * Last modified 8/7/21, 9:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,14 +57,18 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.snappedItemPosition
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveNewContent
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.AllMovies.Adapter.AllMoviesAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.Adapter.GenresAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.GenreData
@@ -87,6 +91,8 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+import net.geeksempire.balloon.optionsmenu.library.Utils.percentageOfDisplayX
 import java.util.*
 
 class StorefrontMovies : StorefrontSplitActivity() {
@@ -128,6 +134,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@StorefrontMovies)
+    }
+
+    val allMoviesAdapter: AllMoviesAdapter by lazy {
+        AllMoviesAdapter(this@StorefrontMovies)
     }
 
     val featuredMoviesAdapter: FeaturedMoviesAdapter by lazy {
@@ -224,6 +234,9 @@ class StorefrontMovies : StorefrontSplitActivity() {
             storefrontMoviesLayoutBinding.genresRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontMoviesLayoutBinding.genresRecyclerView.adapter = genresAdapter
 
+            storefrontMoviesLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 179, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL, false)
+            storefrontMoviesLayoutBinding.allContentRecyclerView.adapter = allMoviesAdapter
+
             moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
 
                 if (it.isNotEmpty()) {
@@ -261,7 +274,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     newMoviesAdapter.storefrontMoviesContents.clear()
                     newMoviesAdapter.storefrontMoviesContents.addAll(it)
 
-                    newMoviesAdapter.notifyItemRangeInserted(0, newMoviesAdapter.itemCount)
+                    newMoviesAdapter.notifyItemRangeInserted(0, newMoviesAdapter.storefrontMoviesContents.size)
 
                     if (storefrontMoviesLayoutBinding.newContentRecyclerView.isGone) {
 
@@ -278,6 +291,33 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     }
 
                     setSelectedBlurryBackground()
+
+                }
+
+            })
+
+            moviesStorefrontLiveData.allContentItemData.observe(this@StorefrontMovies, {
+
+                if (it.isNotEmpty()) {
+
+
+                    if (allMoviesAdapter.storefrontMoviesContents.isEmpty()) {
+
+                        allMoviesAdapter.storefrontMoviesContents.addAll(it)
+
+                        allMoviesAdapter.notifyDataSetChanged()
+
+                    } else {
+
+                        allMoviesAdapter.storefrontMoviesContents.addAll(it)
+
+                        allMoviesAdapter.notifyItemRangeInserted(allMoviesAdapter.itemCount + 1, allMoviesAdapter.storefrontMoviesContents.size)
+
+                    }
+
+                    if (storefrontMoviesLayoutBinding.allContentRecyclerView.isGone) {
+                        storefrontMoviesLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
+                    }
 
                 }
 
@@ -433,6 +473,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     override fun networkAvailable() {
         Log.d(this@StorefrontMovies.javaClass.simpleName, "Network Available @ ${this@StorefrontMovies.javaClass.simpleName}")
+
+        retrieveAllMovies(this@StorefrontMovies, moviesStorefrontLiveData)
 
         retrieveGenreMovies(this@StorefrontMovies, moviesStorefrontLiveData)
 

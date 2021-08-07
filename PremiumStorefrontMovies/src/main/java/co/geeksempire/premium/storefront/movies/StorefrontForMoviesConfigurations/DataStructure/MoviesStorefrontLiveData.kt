@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 11:16 AM
+ * Last modified 8/7/21, 8:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,10 +15,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import com.google.firebase.firestore.DocumentSnapshot
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.flow
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -30,6 +29,10 @@ class MoviesStorefrontLiveData : ViewModel() {
 
     val newContentItemData: MutableLiveData<ArrayList<StorefrontMoviesContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontMoviesContentsData>>()
+    }
+
+    val allContentItemData: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
     val genresMoviesItemData: MutableLiveData<ArrayList<StorefrontGenresData>> by lazy {
@@ -79,6 +82,39 @@ class MoviesStorefrontLiveData : ViewModel() {
         }
 
         newContentItemData.postValue(storefrontAllContents)
+
+    }
+
+    fun processAllMoviesGenreData(documentSnapshot: DocumentSnapshot) = flow<ArrayList<StorefrontGenresData>> {
+
+        val moviesDocumentSnapshots = ArrayList<StorefrontGenresData>()
+
+        documentSnapshot.toObject(GenreIds::class.java)!!.GenreIds?.forEach { documentMap ->
+
+            moviesDocumentSnapshots.add(StorefrontGenresData(
+                genreId = documentMap[GenreDataKey.GenreId].toString().toInt(),
+                genreName = documentMap[GenreDataKey.GenreName].toString(),
+                genreIconLink = documentMap[GenreDataKey.GenreIconLink].toString(),
+                productCount = documentMap[GenreDataKey.ProductCount].toString().toInt()
+            ))
+
+        }
+
+        emit(moviesDocumentSnapshots)
+
+    }
+
+    fun processAllMoviesData(querySnapshot: QuerySnapshot) = CoroutineScope(Dispatchers.IO).launch {
+
+        val allMovies = ArrayList<DocumentSnapshot>()
+
+        querySnapshot.documents.forEach {
+
+            allMovies.add(it)
+
+        }
+
+        allContentItemData.postValue(allMovies)
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 11:11 AM
+ * Last modified 8/7/21, 8:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,6 +43,18 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
         if (storefrontMoviesContents.isNotEmpty()) {
 
             notifyItemRangeChanged(0, newMoviesAdapter.itemCount)
+
+        }
+
+    }
+
+    allMoviesAdapter.apply {
+
+        this.themeType = themeType
+
+        if (storefrontMoviesContents.isNotEmpty()) {
+
+            notifyItemRangeChanged(0, allMoviesAdapter.itemCount)
 
         }
 
@@ -123,6 +135,8 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
 
             storefrontMoviesLayoutBinding.genreIndicatorTextView.setTextColor(getColor(R.color.dark))
 
+            storefrontMoviesLayoutBinding.newMovieBlurryBackground.setSecondOverlayColor(getColor(R.color.premiumLightTransparent))
+
         }
         ThemeType.ThemeDark -> {
 
@@ -188,6 +202,8 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_dark)
 
             storefrontMoviesLayoutBinding.genreIndicatorTextView.setTextColor(getColor(R.color.light))
+
+            storefrontMoviesLayoutBinding.newMovieBlurryBackground.setSecondOverlayColor(getColor(R.color.premiumDarkTransparent))
 
         }
     }

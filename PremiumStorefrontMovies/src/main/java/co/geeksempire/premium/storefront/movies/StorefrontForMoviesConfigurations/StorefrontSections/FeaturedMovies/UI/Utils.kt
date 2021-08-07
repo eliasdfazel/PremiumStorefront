@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:09 AM
+ * Last modified 8/7/21, 8:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,8 +20,8 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.ViewHolder.FeaturedMoviesViewHolder
-import co.geeksempire.premium.storefront.movies.UI.Drawable.applyClearEffectRectangle
-import co.geeksempire.premium.storefront.movies.UI.Drawable.applyShadowEffectRectangle
+import co.geeksempire.premium.storefront.movies.Utils.UI.Drawable.applyClearEffectRectangle
+import co.geeksempire.premium.storefront.movies.Utils.UI.Drawable.applyShadowEffectRectangle
 
 fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder, themeType: Boolean) : LayerDrawable {
 

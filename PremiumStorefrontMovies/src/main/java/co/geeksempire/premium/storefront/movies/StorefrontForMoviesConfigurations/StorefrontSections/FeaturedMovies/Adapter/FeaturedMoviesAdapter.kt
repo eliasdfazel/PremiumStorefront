@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 11:21 AM
+ * Last modified 8/7/21, 8:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -68,9 +68,9 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
                 featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white_transparent))
 
-                featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
-                featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
-                featuredMoviesViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDark))
+                featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                featuredMoviesViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
 
             }
             ThemeType.ThemeDark -> {
@@ -79,9 +79,9 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
                 featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
 
-                featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
-                featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
-                featuredMoviesViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.premiumLight))
+                featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+                featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+                featuredMoviesViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
 
             }
         }

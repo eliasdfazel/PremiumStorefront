@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/7/21, 7:00 AM
+  ~ Last modified 8/7/21, 9:08 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -190,7 +190,7 @@
                 android:id="@+id/allContentRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="13dp"
+                android:layout_marginVertical="23dp"
                 android:layout_marginEnd="17dp"
                 android:alwaysDrawnWithCache="true"
                 android:layoutAnimation="@anim/fade_in_layout_animation"
