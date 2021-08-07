@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 11:04 AM
+ * Last modified 8/7/21, 9:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,9 +13,9 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import co.geeksempire.premium.storefront.movies.databinding.StorefrontNewContentItemBinding
+import co.geeksempire.premium.storefront.movies.databinding.StorefrontNewMoviesItemBinding
 
-class NewMoviesViewHolder (rootItemView: StorefrontNewContentItemBinding) : RecyclerView.ViewHolder(rootItemView.root) {
+class NewMoviesViewHolder (rootItemView: StorefrontNewMoviesItemBinding) : RecyclerView.ViewHolder(rootItemView.root) {
     val rootViewItem: ConstraintLayout = rootItemView.rootViewItem
 
     val moviesPosterImageView: ImageView = rootItemView.moviesPosterImageView

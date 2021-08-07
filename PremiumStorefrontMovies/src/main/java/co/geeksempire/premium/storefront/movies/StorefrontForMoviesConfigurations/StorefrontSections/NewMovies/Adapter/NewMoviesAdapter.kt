@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 11:36 AM
+ * Last modified 8/7/21, 9:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.StorefrontMoviesContentsData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.NewMovies.ViewHolder.NewMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
-import co.geeksempire.premium.storefront.movies.databinding.StorefrontNewContentItemBinding
+import co.geeksempire.premium.storefront.movies.databinding.StorefrontNewMoviesItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -44,7 +44,7 @@ class NewMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : NewMoviesViewHolder {
 
-        return NewMoviesViewHolder(StorefrontNewContentItemBinding.inflate(context.layoutInflater))
+        return NewMoviesViewHolder(StorefrontNewMoviesItemBinding.inflate(context.layoutInflater))
     }
 
     override fun onBindViewHolder(newContentViewHolder: NewMoviesViewHolder, position: Int, payloads: MutableList<Any>) {

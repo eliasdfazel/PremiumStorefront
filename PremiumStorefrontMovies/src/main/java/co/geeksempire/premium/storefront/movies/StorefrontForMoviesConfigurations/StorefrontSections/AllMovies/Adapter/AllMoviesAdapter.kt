@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/7/21, 9:29 AM
+ * Last modified 8/7/21, 10:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.AllMovies.ViewHolder.AllMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
-import co.geeksempire.premium.storefront.movies.databinding.StorefrontAllContentItemBinding
+import co.geeksempire.premium.storefront.movies.databinding.StorefrontAllMoviesItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -45,33 +45,28 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : AllMoviesViewHolder {
 
-        return AllMoviesViewHolder(StorefrontAllContentItemBinding.inflate(context.layoutInflater))
-    }
-
-    override fun onBindViewHolder(allMoviesViewHolder: AllMoviesViewHolder, position: Int, payloads: MutableList<Any>) {
-        super.onBindViewHolder(allMoviesViewHolder, position, payloads)
-
-        when (themeType) {
-            ThemeType.ThemeLight -> {
-
-
-
-            }
-            ThemeType.ThemeDark -> {
-
-
-            }
-            else -> {
-
-
-            }
-        }
-
+        return AllMoviesViewHolder(StorefrontAllMoviesItemBinding.inflate(context.layoutInflater))
     }
 
     override fun onBindViewHolder(allMoviesViewHolder: AllMoviesViewHolder, position: Int) {
 
         storefrontMoviesContents[position].data?.let {
+
+            when (themeType) {
+                ThemeType.ThemeLight -> {
+
+
+
+                }
+                ThemeType.ThemeDark -> {
+
+
+                }
+                else -> {
+
+
+                }
+            }
 
             val moviesDataStructure = MoviesDataStructure(it)
 
