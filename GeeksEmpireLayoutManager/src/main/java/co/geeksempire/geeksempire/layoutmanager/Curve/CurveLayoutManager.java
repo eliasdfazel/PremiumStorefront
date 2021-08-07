@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 12:16 PM
+ * Last modified 8/7/21, 5:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -184,7 +184,7 @@ public class CurveLayoutManager extends RecyclerView.LayoutManager {
     public void saveState() {
         mPendingSavedState = new SavedState();
         // save center view position
-        mPendingSavedState.mCenterItemPosition = findCurrentCenterViewPos();
+        mPendingSavedState.mCenterItemPosition = findCurrentCenterViewPosition();
         // save selected state for center view
         mPendingSavedState.isSelected = mIsSelected;
         // save collapsed state for views
@@ -1124,7 +1124,7 @@ public class CurveLayoutManager extends RecyclerView.LayoutManager {
                 ViewAnimationInfoGenerator.generate(delta,
                         mIsCollapsed = !mIsCollapsed,
                         CurveLayoutManager.this,
-                        findCurrentCenterViewPos(),
+                        findCurrentCenterViewPosition(),
                         true);
 
         // collapse views
@@ -1183,7 +1183,7 @@ public class CurveLayoutManager extends RecyclerView.LayoutManager {
      *
      * @return position of center view or {@link RecyclerView#NO_POSITION}
      */
-    public int findCurrentCenterViewPos() {
+    public int findCurrentCenterViewPosition() {
         View view = mCenterView;
 
         return view == null ? RecyclerView.NO_POSITION : getPosition(view);

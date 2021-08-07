@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/28/21 6:37 PM
+ * Last modified 8/7/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -72,8 +72,11 @@ public class RealtimeBlurView extends View {
 	int gradientType = 0;
 
 	public static int GradientTypeNone = 0;
-	public static int GradientTypeLinear = 1;
-	public static int GradientTypeRadial = 2;
+	public static int GradientTypeRadial = 1;
+
+	public static int GradientTypeLinearTB = 2;
+	public static int GradientTypeLinearLR = 3;
+
 
 	public RealtimeBlurView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -97,9 +100,11 @@ public class RealtimeBlurView extends View {
 		if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 0) {
 			gradientType = GradientTypeNone;
 		} else if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 1) {
-			gradientType = GradientTypeLinear;
-		} else if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 2) {
 			gradientType = GradientTypeRadial;
+		} else if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 2) {
+			gradientType = GradientTypeLinearTB;
+		} else if (a.getInteger(R.styleable.RealtimeBlurView_realtimeBlurGradientType, 0) == 3) {
+			gradientType = GradientTypeLinearLR;
 		}
 
 		a.recycle();
@@ -439,7 +444,15 @@ public class RealtimeBlurView extends View {
 
 			paintInstance.setColor(mOverlayColor);
 
-		} else if (gradientType == GradientTypeLinear) {
+		} else if (gradientType == GradientTypeLinearLR) {
+
+			paintInstance.setShader(new LinearGradient(
+					0, 0,
+					getWidth(), 0,
+					/* First Color */ sOverlayColor, /* Second Color */ mOverlayColor,
+					Shader.TileMode.CLAMP));
+
+		} else if (gradientType == GradientTypeLinearTB) {
 
 			paintInstance.setShader(new LinearGradient(
 					0, 0,

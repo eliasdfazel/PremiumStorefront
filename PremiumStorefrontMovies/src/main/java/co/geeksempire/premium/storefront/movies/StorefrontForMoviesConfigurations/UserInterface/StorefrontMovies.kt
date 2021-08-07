@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 12:22 PM
+ * Last modified 8/7/21, 7:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface
 
+import android.animation.Animator
 import android.app.ActivityOptions
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -25,6 +26,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.size
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -70,6 +72,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
@@ -213,7 +216,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     withFanRadius(true)
                     withSelectedAnimation(false)
                     withViewWidthDp(279f)
-                    withViewHeightDp(399f)
+                    withViewHeightDp(439f)
                 }.build())
             storefrontMoviesLayoutBinding.newContentRecyclerView.layoutManager = curveLayoutManager
             storefrontMoviesLayoutBinding.newContentRecyclerView.adapter = newMoviesAdapter
@@ -273,6 +276,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
                         storefrontMoviesLayoutBinding.randomMovieSelection.visibility = View.VISIBLE
 
                     }
+
+                    setSelectedBlurryBackground()
 
                 }
 
@@ -343,35 +348,9 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     when (newState) {
                         RecyclerView.SCROLL_STATE_IDLE -> {
 
-                            val snappedItemPosition = curveLayoutManager.selectedItemPosition
+                            val snappedItemPosition = curveLayoutManager.findCurrentCenterViewPosition()
 
-                            Glide.with(applicationContext)
-                                .asDrawable()
-                                .load(newMoviesAdapter.storefrontMoviesContents[snappedItemPosition].moviePosterLink)
-                                .addListener(object : RequestListener<Drawable> {
-                                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-
-                                        return true
-                                    }
-
-                                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-
-                                        resource?.let {
-
-                                            runOnUiThread {
-
-                                                storefrontMoviesLayoutBinding.newMovieBackground.setImageDrawable(resource)
-
-                                            }
-
-                                        }
-
-                                        return true
-                                    }
-
-
-                                })
-                                .submit()
+                            setSelectedBlurryBackground(snappedItemPosition)
 
                         }
                     }
@@ -382,20 +361,33 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
             storefrontMoviesLayoutBinding.randomMovieSelection.setOnClickListener {
 
-                val loopCount = IntRange(5, 10).random()
+                val repeatCount = IntRange(1, 3).random()
+                val animationFrames = IntRange(0, 50).random()
 
-                val animationFrames = IntRange(0, 50)
-
-                storefrontMoviesLayoutBinding.randomMovieSelection.repeatCount = loopCount
+                storefrontMoviesLayoutBinding.randomMovieSelection.repeatCount = repeatCount
+                storefrontMoviesLayoutBinding.randomMovieSelection.setMaxFrame(animationFrames)
                 storefrontMoviesLayoutBinding.randomMovieSelection.playAnimation()
 
-                storefrontMoviesLayoutBinding.randomMovieSelection.addAnimatorUpdateListener {
+                val randomScrollPosition = IntRange(0, storefrontMoviesLayoutBinding.newContentRecyclerView.size).random()
 
+                storefrontMoviesLayoutBinding.randomMovieSelection.addAnimatorListener(object : Animator.AnimatorListener {
 
+                    override fun onAnimationStart(animation: Animator?) {}
 
-                }
+                    override fun onAnimationEnd(animation: Animator?) {
 
-                curveLayoutManager.smoothScrollToPosition(storefrontMoviesLayoutBinding.newContentRecyclerView, RecyclerView.State(), 3)
+                        curveLayoutManager.smoothScrollToPosition(
+                            storefrontMoviesLayoutBinding.newContentRecyclerView, RecyclerView.State(),
+                            randomScrollPosition
+                        )
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator?) {}
+
+                    override fun onAnimationRepeat(animation: Animator?) {}
+
+                })
 
             }
 
@@ -550,6 +542,39 @@ class StorefrontMovies : StorefrontSplitActivity() {
                 applicationSummary = applicationSummary)
 
         }
+
+    }
+
+    private fun setSelectedBlurryBackground(snappedItemPosition: Int = 0) {
+
+        Glide.with(applicationContext)
+            .asDrawable()
+            .load(newMoviesAdapter.storefrontMoviesContents[snappedItemPosition].moviePosterLink)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .addListener(object : RequestListener<Drawable> {
+
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+
+                    return true
+                }
+
+                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                    resource?.let {
+
+                        runOnUiThread {
+
+                            storefrontMoviesLayoutBinding.newMovieBackground.setImageDrawable(resource)
+
+                        }
+
+                    }
+
+                    return true
+                }
+
+            })
+            .submit()
 
     }
 

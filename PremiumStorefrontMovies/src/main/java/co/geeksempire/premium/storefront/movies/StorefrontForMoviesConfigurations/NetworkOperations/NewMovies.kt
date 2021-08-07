@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:54 AM
+ * Last modified 8/7/21, 5:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,7 @@ fun retrieveNewContent(context: AppCompatActivity,
 
     val moviesQueryEndpoints: MoviesQueryEndpoints = MoviesQueryEndpoints(generalEndpoints)
 
-    val queryEndpoint = moviesQueryEndpoints.getNewMoviesEndpoint(numberOfProducts = (columnCount(context, 271) * 3) + 3)
+    val queryEndpoint = moviesQueryEndpoints.getNewMoviesEndpoint(numberOfProducts = (columnCount(context, 279) * 5) + 3)
 
     GenericJsonRequest(context, object : JsonRequestResponses {
 
