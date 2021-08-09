@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 10:40 AM
+ * Last modified 8/9/21, 11:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 
 object SortingOptions {
-    const val SortByPrice = "productPrice"
+    const val SortByPrice = "ProductPrice"
     const val SortByRating = "Rating"
 }
 
@@ -35,34 +35,31 @@ data class FilterOptionsItem(var filterOptionLabel: String, var filterOptionIcon
 
 class FilterAllMovies (private val moviesStorefrontLiveData: MoviesStorefrontLiveData) {
 
-    fun filterAllMoviesByGenre(storefrontAllMovies: ArrayList<DocumentSnapshot>,
-                                    selectedCategory: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun filterAllMoviesByGenre(storefrontAllUnfilteredMovies: ArrayList<DocumentSnapshot>,
+                               selectedGenre: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        Log.d(this@FilterAllMovies.javaClass.simpleName, "Selected Category: ${selectedCategory}")
+        Log.d(this@FilterAllMovies.javaClass.simpleName, "Selected Genre: ${selectedGenre}")
 
-        storefrontAllMovies.forEach {
+        val filteredMovies = ArrayList<DocumentSnapshot>()
 
-            if (it.exists()) {
+        storefrontAllUnfilteredMovies.forEach {
 
-                it.data?.let { moviesHashMap ->
+            it.data?.let { moviesHashMap ->
 
-                    val moviesDataStructure = MoviesDataStructure(moviesHashMap)
+                val moviesDataStructure = MoviesDataStructure(moviesHashMap)
 
-                    val storefrontAllContentsFilter = storefrontAllMovies.filter {
 
-                        (moviesDataStructure.movieGenres() == selectedCategory)
-                    }
+                if (moviesDataStructure.movieGenres().lowercase().contains(selectedGenre.lowercase())) {
 
-                    storefrontAllMovies.clear()
-                    storefrontAllMovies.addAll(storefrontAllContentsFilter)
-
-                    moviesStorefrontLiveData.allFilteredMoviesItemData.postValue(Pair(storefrontAllMovies, false))
+                    filteredMovies.add(it)
 
                 }
 
             }
 
         }
+
+        moviesStorefrontLiveData.allFilteredMoviesItemData.postValue(Pair(filteredMovies, false))
 
     }
 
