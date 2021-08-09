@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/7/21, 9:40 AM
+ * Last modified 8/9/21, 7:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,7 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_high))
+                featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.light_transparent_higher))
 
                 featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white_transparent))
 
@@ -77,7 +77,7 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
                 featuredMoviesViewHolder.movieContentBackgroundBlur.setOverlayColor(context.getColor(R.color.dark_transparent_high))
 
-                featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black_transparent))
+                featuredMoviesViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_higher))
 
                 featuredMoviesViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
                 featuredMoviesViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
@@ -136,10 +136,10 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                                 movieGradient.orientation = GradientDrawable.Orientation.TL_BR
                                 movieGradient.colors = intArrayOf(vibrantColor, vibrantColor, dominantColor, mutedColor, mutedColor)
                                 movieGradient.cornerRadii = floatArrayOf(
-                                    43f, 43f,
-                                    43f, 43f,
-                                    43f, 43f,
-                                    43f, 43f
+                                    43f, 43f,//Bottom Right
+                                    37f, 37f,//Bottom Left
+                                    37f, 37f,//Top Left
+                                    43f, 43f//Top Right
                                 )
                                 movieGradient.gradientType = GradientDrawable.SWEEP_GRADIENT
                                 movieGradient.setGradientCenter(1f, 0.5f)

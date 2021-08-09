@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/7/21, 10:28 AM
+ * Last modified 8/9/21, 7:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -73,7 +73,7 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
             Glide.with(context)
                 .load(moviesDataStructure.moviePoster())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(RoundedCorners(dpToInteger(context, 23)))
+                .transform(RoundedCorners(dpToInteger(context, 29)))
                 .listener(object : RequestListener<Drawable> {
 
                     override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
