@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 1:50 PM
+ * Last modified 8/9/21, 1:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,6 +27,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForA
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
+import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
@@ -36,60 +37,55 @@ fun startMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBindi
 
     val splitInstallManager = SplitInstallManagerFactory.create(context)
 
-    installedModuleLoop@ for (installedModule in splitInstallManager.installedModules) {
+    if (checkInstalledModules(splitInstallManager, "PremiumStorefrontMovies")) {
 
-        if (installedModule == "PremiumStorefrontMovies") {
+        completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
 
-            completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
+    } else {
 
-            break@installedModuleLoop
-        } else {
+        if (sectionsSwitcherLayoutBinding.installLoadingView.isGone) {
 
-            if (sectionsSwitcherLayoutBinding.installLoadingView.isGone) {
+            sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.VISIBLE
 
-                sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
-                sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.VISIBLE
+        }
 
-            }
+        val splitInstallRequest = SplitInstallRequest.newBuilder()
+            .addModule("PremiumStorefrontMovies")
+            .build()
 
-            val splitInstallRequest = SplitInstallRequest.newBuilder()
-                .addModule("PremiumStorefrontMovies")
-                .build()
+        val dynamicModuleInstaller = splitInstallManager.startInstall(splitInstallRequest)
 
-            val dynamicModuleInstaller = splitInstallManager.startInstall(splitInstallRequest)
+        splitInstallManager.registerListener {
 
-            splitInstallManager.registerListener {
-
-                when (it.status()) {
-                    SplitInstallSessionStatus.DOWNLOADING -> {
-                        Log.d("Dynamic Feature", "${it.bytesDownloaded()} | ${it.totalBytesToDownload()}")
+            when (it.status()) {
+                SplitInstallSessionStatus.DOWNLOADING -> {
+                    Log.d("Dynamic Feature", "${it.bytesDownloaded()} | ${it.totalBytesToDownload()}")
 
 
 
-                    }
-                    SplitInstallSessionStatus.INSTALLED -> {
-                        Log.d("Dynamic Feature", "Installed")
+                }
+                SplitInstallSessionStatus.INSTALLED -> {
+                    Log.d("Dynamic Feature", "Installed")
 
-                        sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
-                        sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.INVISIBLE
+                    sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                    sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.INVISIBLE
 
-                        completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
-
-                    }
+                    completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
 
                 }
 
             }
 
-            dynamicModuleInstaller.addOnSuccessListener { sessionId ->
-                Log.d("Dynamic Module", "Dynamic Module: Movies Section Installed Successfully")
+        }
+
+        dynamicModuleInstaller.addOnSuccessListener { sessionId ->
+            Log.d("Dynamic Module", "Dynamic Module: Movies Section Installed Successfully")
 
 
-            }.addOnFailureListener { exception ->
+        }.addOnFailureListener { exception ->
 
 
-
-            }
 
         }
 
@@ -317,4 +313,26 @@ fun moviesSectionSwitcherDesign(context: AppCompatActivity, sectionsSwitcherLayo
 
     }
 
+}
+
+fun checkInstalledModules(splitInstallManager: SplitInstallManager, moduleName: String) : Boolean {
+
+    var moduleInstalled = false
+
+    installedModuleLoop@ for (installedModule in splitInstallManager.installedModules) {
+
+        if (installedModule == moduleName) {
+
+            moduleInstalled = true
+
+            break@installedModuleLoop
+        } else {
+
+            moduleInstalled = false
+
+        }
+
+    }
+
+    return moduleInstalled
 }
