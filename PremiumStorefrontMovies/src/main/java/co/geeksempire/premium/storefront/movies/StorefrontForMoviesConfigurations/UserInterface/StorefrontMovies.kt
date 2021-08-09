@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 6:22 AM
+ * Last modified 8/9/21, 7:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -422,6 +422,20 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     override fun onAnimationRepeat(animation: Animator?) {}
 
                 })
+
+            }
+
+            storefrontMoviesLayoutBinding.nestedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+                if (scrollY > oldScrollY) {//Scrolling Down
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                } else if (scrollY < oldScrollY) {//Scrolling Up
+
+                    balloonOptionsMenu.removeBalloonOption()
+
+                }
 
             }
 
