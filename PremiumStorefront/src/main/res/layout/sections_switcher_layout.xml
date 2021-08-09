@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/31/21, 7:35 AM
+  ~ Last modified 8/9/21, 1:38 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -164,6 +164,21 @@
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintBottom_toBottomOf="parent"
             apps:layout_constraintStart_toEndOf="@id/booksSectionView"/>
+
+        <net.geeksempire.loadingspin.SpinKitView
+            android:id="@+id/installLoadingView"
+            android:layout_width="57dp"
+            android:layout_height="57dp"
+            android:padding="7dp"
+            android:elevation="29dp"
+            android:visibility="gone"
+
+            apps:SpinKit_Style="Wave"
+            apps:SpinKit_Color="@color/moviesSectionColor"
+
+            apps:layout_constraintTop_toTopOf="parent"
+            apps:layout_constraintBottom_toBottomOf="parent"
+            apps:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

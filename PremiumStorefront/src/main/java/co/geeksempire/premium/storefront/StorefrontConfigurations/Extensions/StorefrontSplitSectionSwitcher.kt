@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 7:26 AM
+ * Last modified 8/9/21, 1:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,8 +16,11 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isGone
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
@@ -26,159 +29,209 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSpli
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
+import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 fun startMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
     val splitInstallManager = SplitInstallManagerFactory.create(context)
 
-    val splitInstallRequest = SplitInstallRequest.newBuilder()
-        .addModule("PremiumStorefrontMovies")
-        .build()
+    installedModuleLoop@ for (installedModule in splitInstallManager.installedModules) {
 
-    val dynamicModuleInstaller = splitInstallManager.startInstall(splitInstallRequest)
-    dynamicModuleInstaller.addOnSuccessListener { sessionId ->
-        Log.d("Dynamic Module", "Dynamic Module: Movies Section Installed Successfully")
+        if (installedModule == "PremiumStorefrontMovies") {
 
-        val valueAnimatorMovies = when (context) {
-            is StorefrontApplications -> {
+            completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
 
-                ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
+            break@installedModuleLoop
+        } else {
 
-            }
-            is StorefrontGames -> {
+            if (sectionsSwitcherLayoutBinding.installLoadingView.isGone) {
 
-                ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.gamesSectionView.width)
-
-            }
-            else -> ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
-        }
-        valueAnimatorMovies.duration = 333
-        valueAnimatorMovies.startDelay = 333
-        valueAnimatorMovies.addUpdateListener { animator ->
-
-            val animatorValue = animator.animatedValue as Int
-
-            sectionsSwitcherLayoutBinding.moviesSectionView.layoutParams.width = animatorValue
-            sectionsSwitcherLayoutBinding.moviesSectionView.requestLayout()
-
-        }
-        valueAnimatorMovies.addListener(object : Animator.AnimatorListener {
-
-            override fun onAnimationStart(animation: Animator) {
-
-                moviesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding, themeType)
+                sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+                sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.VISIBLE
 
             }
 
-            override fun onAnimationEnd(animation: Animator) {
+            val splitInstallRequest = SplitInstallRequest.newBuilder()
+                .addModule("PremiumStorefrontMovies")
+                .build()
 
-                val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
+            val dynamicModuleInstaller = splitInstallManager.startInstall(splitInstallRequest)
 
-                val switchIntent = Intent().apply {
-                    setClassName(context.packageName, StorefrontSplitActivity.MoviesModule.EntryConfigurations)
+            splitInstallManager.registerListener {
+
+                when (it.status()) {
+                    SplitInstallSessionStatus.DOWNLOADING -> {
+                        Log.d("Dynamic Feature", "${it.bytesDownloaded()} | ${it.totalBytesToDownload()}")
+
+
+
+                    }
+                    SplitInstallSessionStatus.INSTALLED -> {
+                        Log.d("Dynamic Feature", "Installed")
+
+                        sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                        sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.INVISIBLE
+
+                        completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
+
+                    }
+
                 }
 
-                context.startActivity(switchIntent, activityOptions.toBundle())
+            }
+
+            dynamicModuleInstaller.addOnSuccessListener { sessionId ->
+                Log.d("Dynamic Module", "Dynamic Module: Movies Section Installed Successfully")
+
+
+            }.addOnFailureListener { exception ->
+
+
 
             }
 
-            override fun onAnimationCancel(animation: Animator) {
-
-            }
-
-            override fun onAnimationRepeat(animation: Animator) {
-
-            }
-
-        })
-
-        when (context) {
-            is StorefrontApplications -> {
-
-                val valueAnimatorApplications = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.applicationsSectionView.width, dpToInteger(context, 57))
-                valueAnimatorApplications.duration = 333
-                valueAnimatorApplications.startDelay = 333
-                valueAnimatorApplications.addUpdateListener { animator ->
-
-                    val animatorValue = animator.animatedValue as Int
-
-                    sectionsSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
-                    sectionsSwitcherLayoutBinding.applicationsSectionView.requestLayout()
-
-                }
-                valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
-
-                    override fun onAnimationStart(animation: Animator) {
-
-                    }
-
-                    override fun onAnimationEnd(animation: Animator) {
-
-                        sectionsSwitcherLayoutBinding.applicationsSectionView.text = ""
-
-                        valueAnimatorMovies.start()
-
-                    }
-
-                    override fun onAnimationCancel(animation: Animator) {
-
-                    }
-
-                    override fun onAnimationRepeat(animation: Animator) {
-
-                    }
-
-                })
-                valueAnimatorApplications.start()
-
-            }
-            is StorefrontGames -> {
-
-                val valueAnimatorGames = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.gamesSectionView.width, dpToInteger(context, 57))
-                valueAnimatorGames.duration = 333
-                valueAnimatorGames.startDelay = 333
-                valueAnimatorGames.addUpdateListener { animator ->
-
-                    val animatorValue = animator.animatedValue as Int
-
-                    sectionsSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
-                    sectionsSwitcherLayoutBinding.gamesSectionView.requestLayout()
-
-                }
-                valueAnimatorGames.addListener(object : Animator.AnimatorListener {
-
-                    override fun onAnimationStart(animation: Animator) {
-
-                    }
-
-                    override fun onAnimationEnd(animation: Animator) {
-
-                        sectionsSwitcherLayoutBinding.gamesSectionView.text = ""
-
-                        valueAnimatorMovies.start()
-
-                    }
-
-                    override fun onAnimationCancel(animation: Animator) {
-
-                    }
-
-                    override fun onAnimationRepeat(animation: Animator) {
-
-                    }
-
-                })
-                valueAnimatorGames.start()
-
-            }
         }
 
+    }
 
-    }.addOnFailureListener { exception ->
+}
 
 
+fun completeMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
+    val valueAnimatorMovies = when (context) {
+        is StorefrontApplications -> {
+
+            ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
+
+        }
+        is StorefrontGames -> {
+
+            ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.gamesSectionView.width)
+
+        }
+        else -> ValueAnimator.ofInt(dpToInteger(context, 57), sectionsSwitcherLayoutBinding.applicationsSectionView.width)
+    }
+    valueAnimatorMovies.duration = 333
+    valueAnimatorMovies.startDelay = 333
+    valueAnimatorMovies.addUpdateListener { animator ->
+
+        val animatorValue = animator.animatedValue as Int
+
+        sectionsSwitcherLayoutBinding.moviesSectionView.layoutParams.width = animatorValue
+        sectionsSwitcherLayoutBinding.moviesSectionView.requestLayout()
+
+    }
+    valueAnimatorMovies.addListener(object : Animator.AnimatorListener {
+
+        override fun onAnimationStart(animation: Animator) {
+
+            moviesSectionSwitcherDesign(context, sectionsSwitcherLayoutBinding, themeType)
+
+        }
+
+        override fun onAnimationEnd(animation: Animator) {
+
+            val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
+
+            val switchIntent = Intent().apply {
+                setClassName(context.packageName, StorefrontSplitActivity.MoviesModule.EntryConfigurations)
+            }
+
+            context.startActivity(switchIntent, activityOptions.toBundle())
+
+        }
+
+        override fun onAnimationCancel(animation: Animator) {
+
+        }
+
+        override fun onAnimationRepeat(animation: Animator) {
+
+        }
+
+    })
+
+    when (context) {
+        is StorefrontApplications -> {
+
+            val valueAnimatorApplications = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.applicationsSectionView.width, dpToInteger(context, 57))
+            valueAnimatorApplications.duration = 333
+            valueAnimatorApplications.startDelay = 333
+            valueAnimatorApplications.addUpdateListener { animator ->
+
+                val animatorValue = animator.animatedValue as Int
+
+                sectionsSwitcherLayoutBinding.applicationsSectionView.layoutParams.width = animatorValue
+                sectionsSwitcherLayoutBinding.applicationsSectionView.requestLayout()
+
+            }
+            valueAnimatorApplications.addListener(object : Animator.AnimatorListener {
+
+                override fun onAnimationStart(animation: Animator) {
+
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+
+                    sectionsSwitcherLayoutBinding.applicationsSectionView.text = ""
+
+                    valueAnimatorMovies.start()
+
+                }
+
+                override fun onAnimationCancel(animation: Animator) {
+
+                }
+
+                override fun onAnimationRepeat(animation: Animator) {
+
+                }
+
+            })
+            valueAnimatorApplications.start()
+
+        }
+        is StorefrontGames -> {
+
+            val valueAnimatorGames = ValueAnimator.ofInt(sectionsSwitcherLayoutBinding.gamesSectionView.width, dpToInteger(context, 57))
+            valueAnimatorGames.duration = 333
+            valueAnimatorGames.startDelay = 333
+            valueAnimatorGames.addUpdateListener { animator ->
+
+                val animatorValue = animator.animatedValue as Int
+
+                sectionsSwitcherLayoutBinding.gamesSectionView.layoutParams.width = animatorValue
+                sectionsSwitcherLayoutBinding.gamesSectionView.requestLayout()
+
+            }
+            valueAnimatorGames.addListener(object : Animator.AnimatorListener {
+
+                override fun onAnimationStart(animation: Animator) {
+
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+
+                    sectionsSwitcherLayoutBinding.gamesSectionView.text = ""
+
+                    valueAnimatorMovies.start()
+
+                }
+
+                override fun onAnimationCancel(animation: Animator) {
+
+                }
+
+                override fun onAnimationRepeat(animation: Animator) {
+
+                }
+
+            })
+            valueAnimatorGames.start()
+
+        }
     }
 
 }
