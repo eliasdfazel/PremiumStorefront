@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 11:58 AM
+ * Last modified 8/9/21, 7:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,7 +41,7 @@ class GenresAdapter(private val context: AppCompatActivity,
                     private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>,
                     private val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
                     private val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData>,
-                    private val categoryIndicatorTextView: TextView,
+                    private val genreIndicatorTextView: TextView,
                     private val categoriesRecyclerView: RecyclerView,
                     private val balloonOptionsMenu: BalloonOptionsMenu) : RecyclerView.Adapter<GenresViewHolder>() {
 
@@ -220,8 +220,8 @@ class GenresAdapter(private val context: AppCompatActivity,
                         }
                     }
 
-                    categoryIndicatorTextView.text = storefrontGenres[position].genreName
-                    categoryIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                    genreIndicatorTextView.text = storefrontGenres[position].genreName
+                    genreIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
 
                 } else {
 

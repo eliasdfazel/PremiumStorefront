@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/26/21, 6:46 AM
+  ~ Last modified 8/9/21, 7:54 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -16,6 +16,8 @@
     <string name="applicationSummary">Collection Of Premium Applications &amp; Games &amp; Books &amp; Movies</string>
 
     <string name="allApplications">All Applications</string>
+    <string name="allGames">All Games</string>
+    <string name="allMovies">All Movies</string>
 
     <string name="favoriteDescription">Favorite Products</string>
     <string name="preferencesDescription">Preferences Of Premium Storefront</string>

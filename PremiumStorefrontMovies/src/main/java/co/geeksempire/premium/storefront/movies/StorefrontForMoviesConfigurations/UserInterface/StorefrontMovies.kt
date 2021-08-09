@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 7:53 AM
+ * Last modified 8/9/21, 7:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -151,7 +151,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
             allFilteredContentItemData = storefrontLiveData.allFilteredContentItemData,
             storefrontAllUnfilteredContents = storefrontAllUnfilteredContents,
             storefrontAllUntouchedContents = storefrontAllUntouchedContents,
-            categoryIndicatorTextView = storefrontMoviesLayoutBinding.genreIndicatorTextView,
+            genreIndicatorTextView = storefrontMoviesLayoutBinding.genreIndicatorTextView,
             categoriesRecyclerView = storefrontMoviesLayoutBinding.genresRecyclerView,
             balloonOptionsMenu = balloonOptionsMenu)
     }
@@ -328,6 +328,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                     storefrontMoviesLayoutBinding.genresRecyclerView.visibility = View.VISIBLE
 
+                    storefrontMoviesLayoutBinding.genreIndicatorTextView.text = getString(R.string.allMovies)
                     storefrontMoviesLayoutBinding.genreIndicatorTextView.visibility = View.VISIBLE
 
                     genresData.clearData()
