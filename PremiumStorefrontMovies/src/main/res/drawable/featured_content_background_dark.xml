@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/5/21, 12:24 PM
+  ~ Last modified 8/9/21, 7:16 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@
 
     <item
         android:height="234dp"
-        android:width="323dp"
+        android:width="324dp"
         android:gravity="end">
 
         <shape
@@ -43,7 +43,7 @@
                 android:angle="0"
                 android:startColor="@color/premiumLight"
                 android:centerColor="@color/light"
-                android:endColor="@color/premiumLight"/>
+                android:endColor="@color/premiumLightTransparent"/>
 
         </shape>
 
@@ -78,7 +78,8 @@
     <item
         android:height="171dp"
         android:width="117dp"
-        android:gravity="start|center_vertical">
+        android:top="32dp"
+        android:gravity="start">
 
         <shape
             android:shape="rectangle">
@@ -101,9 +102,9 @@
 
     <!-- Top Round Connection -->
     <item
-        android:height="13dp"
+        android:height="18dp"
         android:width="29dp"
-        android:top="20dp"
+        android:top="17dp"
         android:start="20dp"
         android:gravity="start|top">
 
@@ -119,17 +120,17 @@
 
     <item
         android:id="@+id/topLeftConnection"
-        android:height="13.6dp"
-        android:width="15.4dp"
-        android:top="18dp"
-        android:start="19.8dp"
+        android:height="29dp"
+        android:width="34dp"
+        android:top="3dp"
+        android:start="0dp"
         android:gravity="start|top">
 
         <shape
             android:shape="rectangle">
 
             <corners
-                android:bottomRightRadius="19dp"/>
+                android:bottomRightRadius="10dp"/>
 
             <solid
                 android:color="@color/green" />
@@ -140,9 +141,9 @@
 
     <item
         android:id="@+id/topRightConnection"
-        android:height="13.2dp"
-        android:width="15dp"
-        android:top="18.5dp"
+        android:height="29dp"
+        android:width="80dp"
+        android:top="3dp"
         android:start="38dp"
         android:gravity="start|top">
 
@@ -150,8 +151,8 @@
             android:shape="rectangle">
 
             <corners
-                android:topLeftRadius="2dp"
-                android:bottomLeftRadius="19dp"/>
+                android:topLeftRadius="13dp"
+                android:bottomLeftRadius="13dp"/>
 
             <solid
                 android:color="@color/green" />
@@ -160,12 +161,12 @@
 
     </item>
 
-    <!-- Bottom Round Connection -->
+    <!-- Bottom Round Connections -->
     <item
-        android:height="17dp"
+        android:height="15dp"
         android:width="29dp"
-        android:bottom="15dp"
-        android:start="23dp"
+        android:bottom="17dp"
+        android:start="20dp"
         android:gravity="start|bottom">
 
         <shape
@@ -180,17 +181,17 @@
 
     <item
         android:id="@+id/bottomLeftConnection"
-        android:height="17.4dp"
-        android:width="13.3dp"
-        android:bottom="14.5dp"
-        android:start="22.0dp"
+        android:height="29dp"
+        android:width="34dp"
+        android:bottom="3dp"
+        android:start="0dp"
         android:gravity="start|bottom">
 
         <shape
             android:shape="rectangle">
 
             <corners
-                android:topRightRadius="19dp"/>
+                android:topRightRadius="10dp"/>
 
             <solid
                 android:color="@color/green" />
@@ -201,18 +202,20 @@
 
     <item
         android:id="@+id/bottomRightConnection"
-        android:height="17.3dp"
-        android:width="15dp"
-        android:bottom="14.3dp"
-        android:start="39dp"
+        android:height="29dp"
+        android:width="80dp"
+        android:bottom="4dp"
+        android:start="38dp"
         android:gravity="start|bottom">
 
         <shape
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:shape="rectangle">
 
             <corners
-                android:bottomLeftRadius="2dp"
-                android:topLeftRadius="19dp"/>
+                android:bottomLeftRadius="13dp"
+                android:topLeftRadius="13dp" />
 
             <solid
                 android:color="@color/green" />
