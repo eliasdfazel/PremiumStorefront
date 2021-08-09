@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 6:26 AM
+ * Last modified 8/9/21, 6:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -133,13 +133,8 @@ fun setupStorefrontUserInterface(context: AppCompatActivity,
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-                        context.window.insetsController?.setSystemBarsAppearance(
-                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
-                            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-
-                        context.window.insetsController?.setSystemBarsAppearance(
-                            WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS,
-                            WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
+                        context.window.insetsController?.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                        context.window.insetsController?.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS, WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
 
                     } else {
 
@@ -208,8 +203,8 @@ fun setupStorefrontUserInterface(context: AppCompatActivity,
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-                        context.window.insetsController?.setSystemBarsAppearance(0, 0)
-                        context.window.insetsController?.setSystemBarsAppearance(0, 0)
+                        context.window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
+                        context.window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
 
                     } else {
 
