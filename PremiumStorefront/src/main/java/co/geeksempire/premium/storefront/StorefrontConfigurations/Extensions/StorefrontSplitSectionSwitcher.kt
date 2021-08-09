@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 2:13 PM
+ * Last modified 8/9/21, 2:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -84,6 +84,8 @@ fun startMoviesSwitching(context: AppCompatActivity, activityRootView: ViewGroup
                         messageText= context.getString(R.string.moviesDynamicFeatureInstalled),
                         messageDuration = Snackbar.LENGTH_INDEFINITE,
                         actionButtonText = android.R.string.ok,
+                        backgroundColor = when (themeType) {ThemeType.ThemeLight -> { context.getColor(R.color.premiumDark) }ThemeType.ThemeDark -> { context.getColor(R.color.premiumLight) }else -> { context.getColor(R.color.premiumDark) } },
+                        messageTextColor = when (themeType) {ThemeType.ThemeLight -> { context.getColor(R.color.light) }ThemeType.ThemeDark -> { context.getColor(R.color.dark) }else -> { context.getColor(R.color.light) } },
                         snackbarActionHandlerInterface = object : SnackbarActionHandlerInterface {
 
                             override fun onActionButtonClicked(snackbar: Snackbar) {
