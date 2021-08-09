@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 9:08 AM
+ * Last modified 8/9/21, 8:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -195,7 +195,7 @@ class CategoriesAdapter(private val context: AppCompatActivity,
 
                     } else {
 
-                        filterAllContent.filterAllContentByCategory(storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
+                        filterAllContent.filterAllContentsByCategory(storefrontAllUnfilteredContents, storefrontCategories[position].categoryName)
 
                     }
 

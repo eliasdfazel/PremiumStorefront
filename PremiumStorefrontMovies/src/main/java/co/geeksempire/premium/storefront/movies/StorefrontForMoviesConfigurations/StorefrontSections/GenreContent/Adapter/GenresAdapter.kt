@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 7:56 AM
+ * Last modified 8/9/21, 8:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,12 +25,12 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.databinding.StorefrontCategoryItemBinding
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.StorefrontGenresData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.ViewHolder.GenresViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.firestore.DocumentSnapshot
 import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.OptionDataItems
@@ -38,9 +38,9 @@ import net.geeksempire.balloon.optionsmenu.library.TitleTextViewCustomization
 
 class GenresAdapter(private val context: AppCompatActivity,
                     private val filterAllContent: FilterAllContent,
-                    private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>,
-                    private val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
-                    private val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData>,
+                    private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<DocumentSnapshot>, Boolean>>,
+                    private val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
+                    private val storefrontAllUntouchedContents: ArrayList<DocumentSnapshot>,
                     private val genreIndicatorTextView: TextView,
                     private val categoriesRecyclerView: RecyclerView,
                     private val balloonOptionsMenu: BalloonOptionsMenu) : RecyclerView.Adapter<GenresViewHolder>() {
@@ -193,7 +193,7 @@ class GenresAdapter(private val context: AppCompatActivity,
 
                     } else {
 
-                        filterAllContent.filterAllContentByCategory(storefrontAllUnfilteredContents, storefrontGenres[position].genreName)
+//                        filterAllContent.filterAllMoviesByCategory(storefrontAllUnfilteredContents, storefrontGenres[position].genreName)
 
                     }
 
