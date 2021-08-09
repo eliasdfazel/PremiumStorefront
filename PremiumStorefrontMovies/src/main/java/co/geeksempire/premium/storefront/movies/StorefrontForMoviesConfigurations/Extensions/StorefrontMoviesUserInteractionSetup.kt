@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 7:07 AM
+ * Last modified 8/9/21, 6:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -19,6 +20,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
+import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.R
@@ -28,6 +30,10 @@ import com.google.firebase.auth.FirebaseUser
 fun storefrontMoviesUserInteractionSetup(context: AppCompatActivity, firebaseUser: FirebaseUser?, accountSelector: ActivityResultLauncher<Any?>,
                                    profileView: ImageView, preferencesView: ImageView, favoritesView: ImageView,
                                    moviesSectionsSwitcherLayoutBinding: MoviesSectionsSwitcherLayoutBinding, themeType: Boolean) {
+
+    if (!BuildConfig.DEBUG) {
+        context.window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+    }
 
     storefrontMoviesSectionSwitcher(context, moviesSectionsSwitcherLayoutBinding, themeType)
 
