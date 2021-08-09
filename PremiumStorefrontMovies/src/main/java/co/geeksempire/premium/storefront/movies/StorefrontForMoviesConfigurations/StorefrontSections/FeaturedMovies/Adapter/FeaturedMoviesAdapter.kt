@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 7:48 AM
+ * Last modified 8/9/21, 7:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -137,8 +137,8 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                                 movieGradient.colors = intArrayOf(vibrantColor, vibrantColor, dominantColor, mutedColor, mutedColor)
                                 movieGradient.cornerRadii = floatArrayOf(
                                     43f, 43f,//Bottom Right
-                                    37f, 37f,//Bottom Left
-                                    37f, 37f,//Top Left
+                                    33f, 33f,//Bottom Left
+                                    33f, 33f,//Top Left
                                     43f, 43f//Top Right
                                 )
                                 movieGradient.gradientType = GradientDrawable.SWEEP_GRADIENT
