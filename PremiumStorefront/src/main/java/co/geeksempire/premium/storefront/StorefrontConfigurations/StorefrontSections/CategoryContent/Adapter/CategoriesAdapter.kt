@@ -89,7 +89,7 @@ class CategoriesAdapter(private val context: AppCompatActivity,
             }
         }
 
-        categoriesViewHolder.categoryIconImageView.background = if (storefrontGenres[position].selectedCategory) {
+        categoriesViewHolder.categoryIconImageView.background = if (storefrontCategories[position].selectedCategory) {
 
             AppCompatResources.getDrawable(
                 context, when (themeType) {
