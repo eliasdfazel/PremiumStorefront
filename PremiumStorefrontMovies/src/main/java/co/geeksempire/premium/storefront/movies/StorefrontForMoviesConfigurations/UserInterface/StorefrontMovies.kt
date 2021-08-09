@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 8:27 AM
+ * Last modified 8/9/21, 10:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
@@ -53,12 +54,14 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.Notifications.showToast
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
@@ -115,6 +118,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
         PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = storefrontMoviesLayoutBinding.actionCenterView, actionLeftView = storefrontMoviesLayoutBinding.leftActionView, actionMiddleView = storefrontMoviesLayoutBinding.middleActionView, actionRightView = storefrontMoviesLayoutBinding.rightActionView)
     }
 
+    val filterAllMovies: FilterAllMovies by lazy {
+        FilterAllMovies(moviesStorefrontLiveData)
+    }
+
     val balloonOptionsMenu: BalloonOptionsMenu by lazy {
         BalloonOptionsMenu(context = this@StorefrontMovies,
             rootView = storefrontMoviesLayoutBinding.rootView)
@@ -142,8 +149,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     val genresAdapter: GenresAdapter by lazy {
         GenresAdapter(context = this@StorefrontMovies,
-            filterAllContent = filterAllContent,
-            allFilteredContentItemData = storefrontLiveData.allFilteredContentItemData,
+            filterAllMovies = filterAllMovies,
+            allFilteredContentItemData = moviesStorefrontLiveData.allFilteredMoviesItemData,
             storefrontAllUnfilteredContents = storefrontAllUnfilteredContents,
             storefrontAllUntouchedContents = storefrontAllUntouchedContents,
             genreIndicatorTextView = storefrontMoviesLayoutBinding.genreIndicatorTextView,
@@ -290,6 +297,13 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                 if (it.isNotEmpty()) {
 
+                    storefrontAllUntouchedContents.clear()
+                    storefrontAllUntouchedContents.addAll(it)
+
+                    storefrontAllUnfilteredContents.clear()
+                    storefrontAllUnfilteredContents.addAll(it)
+
+
                     if (allMoviesAdapter.storefrontMoviesContents.isEmpty()) {
 
                         allMoviesAdapter.storefrontMoviesContents.addAll(it)
@@ -309,12 +323,6 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     }
 
                 }
-
-            })
-
-            moviesStorefrontLiveData.allFilteredMoviesItemData.observe(this@StorefrontMovies, {
-
-
 
             })
 
@@ -352,6 +360,36 @@ class StorefrontMovies : StorefrontSplitActivity() {
                 }
 
                 retrieveFeaturedMovies(this@StorefrontMovies, moviesStorefrontLiveData)
+
+            })
+
+            moviesStorefrontLiveData.allFilteredMoviesItemData.observe(this@StorefrontMovies, {
+
+                if (it.first.isNotEmpty()) {
+
+                    allMoviesAdapter.storefrontMoviesContents.clear()
+                    allMoviesAdapter.storefrontMoviesContents.addAll(it.first)
+
+                    allMoviesAdapter.notifyDataSetChanged()
+
+                    storefrontAllUnfilteredContents.clear()
+                    storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
+
+                } else {
+
+                    showToast(applicationContext, getString(R.string.nothingFoundText), Gravity.TOP)
+
+                }
+
+                lifecycleScope.launch {
+
+                    themePreferences.checkThemeLightDark().collect {
+
+                        prepareActionCenterUserInterface.resetActionCenterIcon(it)
+
+                    }
+
+                }
 
             })
 

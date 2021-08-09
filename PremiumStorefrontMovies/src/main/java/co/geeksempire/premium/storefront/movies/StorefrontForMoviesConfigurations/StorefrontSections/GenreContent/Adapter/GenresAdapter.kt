@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 8:24 AM
+ * Last modified 8/9/21, 11:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,9 +24,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.databinding.StorefrontCategoryItemBinding
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.StorefrontGenresData
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.ViewHolder.GenresViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -37,7 +37,7 @@ import net.geeksempire.balloon.optionsmenu.library.OptionDataItems
 import net.geeksempire.balloon.optionsmenu.library.TitleTextViewCustomization
 
 class GenresAdapter(private val context: AppCompatActivity,
-                    private val filterAllContent: FilterAllContent,
+                    private val filterAllMovies: FilterAllMovies,
                     private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<DocumentSnapshot>, Boolean>>,
                     private val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                     private val storefrontAllUntouchedContents: ArrayList<DocumentSnapshot>,
@@ -193,7 +193,7 @@ class GenresAdapter(private val context: AppCompatActivity,
 
                     } else {
 
-//                        filterAllContent.filterAllMoviesByCategory(storefrontAllUnfilteredContents, storefrontGenres[position].genreName)
+                        filterAllMovies.filterAllMoviesByGenre(storefrontAllUnfilteredContents, storefrontGenres[position].genreName)
 
                     }
 
