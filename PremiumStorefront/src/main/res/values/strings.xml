@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/9/21, 7:54 AM
+  ~ Last modified 8/9/21, 2:09 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -77,6 +77,9 @@
     <string name="notSignUp">You Are Not A Member</string>
 
     <string name="noNetworkConnection">No Network Connection</string>
+
+    <string name="moviesDynamicFeatureInstalled">Premium Storefront\'s Movies Section Installed</string>
+    <string name="booksDynamicFeatureInstalled">Premium Storefront\'s Books Section Installed</string>
 
     <string name="welcomeText">Welcome %1$s To Premium Storefront…!</string>
 

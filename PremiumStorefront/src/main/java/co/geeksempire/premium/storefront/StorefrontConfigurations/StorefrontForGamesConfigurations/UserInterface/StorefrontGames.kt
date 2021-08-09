@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 7:55 AM
+ * Last modified 8/9/21, 2:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -230,7 +230,8 @@ class StorefrontGames : StorefrontActivity() {
 
             themePreferences.checkThemeLightDark().collect {
 
-                storefrontUserInteractionSetup(context = this@StorefrontGames, firebaseUser = firebaseUser, accountSelector = accountSelector,
+                storefrontUserInteractionSetup(context = this@StorefrontGames, rootView = storefrontLayoutBinding.rootView,
+                    firebaseUser = firebaseUser, accountSelector = accountSelector,
                     profileView = storefrontLayoutBinding.profileView, preferencesView = storefrontLayoutBinding.preferencesView, favoritesView = storefrontLayoutBinding.favoritesView,
                     sectionsSwitcherLayoutBinding = storefrontLayoutBinding.sectionsSwitcherContainer, themeType = it)
 

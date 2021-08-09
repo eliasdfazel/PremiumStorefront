@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 1:58 PM
+ * Last modified 8/9/21, 2:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -26,14 +27,17 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-fun startMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
+fun startMoviesSwitching(context: AppCompatActivity, activityRootView: ViewGroup, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
     val splitInstallManager = SplitInstallManagerFactory.create(context)
 
@@ -44,6 +48,8 @@ fun startMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBindi
     } else {
 
         if (sectionsSwitcherLayoutBinding.installLoadingView.isGone) {
+
+            sectionsSwitcherLayoutBinding.moviesSectionView.icon = null
 
             sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
             sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.VISIBLE
@@ -68,10 +74,29 @@ fun startMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBindi
                 SplitInstallSessionStatus.INSTALLED -> {
                     Log.d("Dynamic Feature", "Installed")
 
-                    sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
-                    sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.INVISIBLE
+                    sectionsSwitcherLayoutBinding.moviesSectionView.icon = context.getDrawable(R.drawable.movies_icon)
 
-                    completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
+                    sectionsSwitcherLayoutBinding.installLoadingView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                    sectionsSwitcherLayoutBinding.installLoadingView.visibility = View.GONE
+
+                    SnackbarBuilder(context).show (
+                        rootView = activityRootView,
+                        messageText= context.getString(R.string.moviesDynamicFeatureInstalled),
+                        messageDuration = Snackbar.LENGTH_INDEFINITE,
+                        actionButtonText = android.R.string.ok,
+                        snackbarActionHandlerInterface = object : SnackbarActionHandlerInterface {
+
+                            override fun onActionButtonClicked(snackbar: Snackbar) {
+                                super.onActionButtonClicked(snackbar)
+
+                                snackbar.dismiss()
+
+                                completeMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
+
+                            }
+
+                        }
+                    )
 
                 }
 

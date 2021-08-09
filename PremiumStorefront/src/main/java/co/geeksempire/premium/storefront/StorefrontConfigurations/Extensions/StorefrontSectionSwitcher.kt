@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/3/21, 7:41 AM
+ * Last modified 8/9/21, 2:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.animation.ValueAnimator
 import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
@@ -24,7 +25,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForG
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
-fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
+fun storefrontSectionSwitcher(context: AppCompatActivity, rootView: ViewGroup, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
     when (context) {
         is StorefrontApplications -> {
@@ -114,7 +115,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
             sectionsSwitcherLayoutBinding.moviesSectionView.setOnClickListener {
 
-                startMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
+                startMoviesSwitching(context, rootView, sectionsSwitcherLayoutBinding, themeType)
 
             }
 
@@ -206,7 +207,7 @@ fun storefrontSectionSwitcher(context: AppCompatActivity, sectionsSwitcherLayout
 
             sectionsSwitcherLayoutBinding.moviesSectionView.setOnClickListener {
 
-                startMoviesSwitching(context, sectionsSwitcherLayoutBinding, themeType)
+                startMoviesSwitching(context, rootView, sectionsSwitcherLayoutBinding, themeType)
 
             }
 
