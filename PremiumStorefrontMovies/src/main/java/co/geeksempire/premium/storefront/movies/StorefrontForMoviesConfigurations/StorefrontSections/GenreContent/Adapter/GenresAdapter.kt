@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 11:01 AM
+ * Last modified 8/9/21, 11:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -83,24 +83,40 @@ class GenresAdapter(private val context: AppCompatActivity,
 
             getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
+                    genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
                     R.drawable.category_background_item_dark
                 }
                 ThemeType.ThemeDark -> {
+                    genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
                     R.drawable.category_background_item_light
                 }
-                else -> R.drawable.category_background_item_dark
+                else -> {
+                    genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
+                    R.drawable.category_background_item_dark
+                }
             })
 
         } else {
 
             getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
+                    genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
                     R.drawable.category_background_item_light
                 }
                 ThemeType.ThemeDark -> {
+                    genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+
                     R.drawable.category_background_item_dark
                 }
-                else -> R.drawable.category_background_item_light
+                else -> {
+                    genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
+                    R.drawable.category_background_item_light
+                }
             })
 
         }
@@ -185,8 +201,6 @@ class GenresAdapter(private val context: AppCompatActivity,
 
                 if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
-                    notifyItemChanged(lastPosition, storefrontGenres[lastPosition])
-
                     if (position == 0) {
 
                         allFilteredContentItemData.postValue(Pair(storefrontAllUntouchedContents, true))
@@ -200,10 +214,9 @@ class GenresAdapter(private val context: AppCompatActivity,
                     storefrontGenres[lastPosition].selectedCategory = false
                     storefrontGenres[position].selectedCategory = true
 
-                    lastPosition = position
+                    notifyItemChanged(lastPosition, storefrontGenres[lastPosition])
 
-                    categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
-                    categoriesViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
+                    lastPosition = position
 
                     when (themeType) {
                         ThemeType.ThemeLight -> {
@@ -216,6 +229,12 @@ class GenresAdapter(private val context: AppCompatActivity,
 
                             categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_light)
                             categoriesViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
+
+                        }
+                        else -> {
+
+                            categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                            categoriesViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
                         }
                     }
