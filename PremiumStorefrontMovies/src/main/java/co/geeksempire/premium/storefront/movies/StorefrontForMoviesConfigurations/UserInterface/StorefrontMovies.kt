@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/7/21, 9:02 AM
+ * Last modified 8/9/21, 6:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,9 +29,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
 import co.geeksempire.geeksempire.layoutmanager.Curve.CurveLayoutManager
 import co.geeksempire.geeksempire.layoutmanager.Curve.FanLayoutManagerSettings
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
@@ -60,7 +58,6 @@ import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
-import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.snappedItemPosition
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
@@ -215,11 +212,9 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
         storefrontMoviesLayoutBinding.root.post {
 
-            storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
+            val featuredMoviesLayoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
+            storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager = featuredMoviesLayoutManager
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.adapter = featuredMoviesAdapter
-
-            val featuredSnapHelper: SnapHelper = PagerSnapHelper()
-            featuredSnapHelper.attachToRecyclerView(storefrontMoviesLayoutBinding.featuredContentRecyclerView)
 
             val curveLayoutManager = CurveLayoutManager(applicationContext,
                 FanLayoutManagerSettings.newBuilder(applicationContext).apply {
@@ -300,7 +295,6 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                 if (it.isNotEmpty()) {
 
-
                     if (allMoviesAdapter.storefrontMoviesContents.isEmpty()) {
 
                         allMoviesAdapter.storefrontMoviesContents.addAll(it)
@@ -367,7 +361,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     when (newState) {
                         RecyclerView.SCROLL_STATE_IDLE -> {
 
-                            val snappedItemPosition = snappedItemPosition(storefrontMoviesLayoutBinding.featuredContentRecyclerView, featuredSnapHelper)
+                            val snappedItemPosition = featuredMoviesLayoutManager.findLastVisibleItemPosition()
 
                             (storefrontMoviesLayoutBinding.featuredContentRecyclerView.layoutManager as RecycleViewSmoothLayoutList).findViewByPosition(snappedItemPosition)
                                 ?.findViewWithTag<AppCompatTextView>("movieNameTextView")?.requestFocus()
