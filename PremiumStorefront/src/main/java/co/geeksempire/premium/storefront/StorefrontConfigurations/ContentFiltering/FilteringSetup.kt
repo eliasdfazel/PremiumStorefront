@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/30/21, 9:56 AM
+ * Last modified 8/10/21, 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions
+package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering
 
 import android.animation.Animator
 import android.content.Context
