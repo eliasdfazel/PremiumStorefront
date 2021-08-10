@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 11:19 AM
+ * Last modified 8/10/21, 7:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,6 +37,7 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountDat
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
+import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
@@ -50,11 +51,11 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSpli
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
+import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplicationUpdateProcess
+import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
-import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
-import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
-import co.geeksempire.premium.storefront.Utils.Notifications.showToast
+import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
@@ -299,11 +300,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
                     storefrontAllUntouchedContents.addAll(it)
 
-                    println(">>> >> > 0 " + storefrontAllUntouchedContents.size)
-
                     storefrontAllUnfilteredContents.addAll(it)
-
-                    println(">>> >> > 1 " + storefrontAllUnfilteredContents.size)
 
                     if (allMoviesAdapter.storefrontMoviesContents.isEmpty()) {
 
@@ -495,6 +492,109 @@ class StorefrontMovies : StorefrontSplitActivity() {
                 }
 
             }
+
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        RemoteSubscriptions()
+            .subscribe("PremiumStorefront", object : SubscriptionInterface {
+
+                override fun subscriptionSucceed() {
+                    super.subscriptionSucceed()
+                }
+
+                override fun subscriptionFailed() {
+                    super.subscriptionFailed()
+                }
+
+            })
+
+        Firebase.auth.currentUser?.let {
+
+            RemoteSubscriptions()
+                .subscribe(it.uid, object : SubscriptionInterface {
+
+                    override fun subscriptionSucceed() {
+                        super.subscriptionSucceed()
+                    }
+
+                    override fun subscriptionFailed() {
+                        super.subscriptionFailed()
+                    }
+
+                })
+
+        }
+
+        if (BuildConfig.VERSION_NAME.uppercase(Locale.getDefault()).contains("Beta".uppercase(Locale.getDefault()))) {
+
+            RemoteSubscriptions()
+                .subscribe("Beta", object : SubscriptionInterface {
+
+                    override fun subscriptionSucceed() {
+                        super.subscriptionSucceed()
+                    }
+
+                    override fun subscriptionFailed() {
+                        super.subscriptionFailed()
+                    }
+
+                })
+
+        }
+
+        InApplicationUpdateProcess(this@StorefrontMovies, storefrontMoviesLayoutBinding.rootView)
+            .initialize(object : UpdateResponse {
+
+                override fun newUpdateAvailable() {
+                    super.newUpdateAvailable()
+
+
+
+                }
+
+                override fun latestVersionAlreadyInstalled() {
+                    super.latestVersionAlreadyInstalled()
+
+
+
+                }
+
+            })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        accountSignIn.firebaseUser = Firebase.auth.currentUser
+
+        accountSignIn.firebaseUser?.let {
+
+            Glide.with(applicationContext)
+                .load(it.photoUrl)
+                .transform(CircleCrop())
+                .into(storefrontMoviesLayoutBinding.profileView)
+
+            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid, it.email,
+                object : FavoriteProductQueryInterface {
+
+                    override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                        super.favoriteProductsExist(isFavoriteProductsExist)
+
+                        storefrontMoviesLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                            View.VISIBLE
+                        } else {
+                            View.GONE
+                        }
+
+                    }
+
+                })
 
         }
 
