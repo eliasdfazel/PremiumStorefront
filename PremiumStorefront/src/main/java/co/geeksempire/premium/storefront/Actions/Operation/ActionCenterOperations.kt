@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:26 AM
+ * Last modified 8/10/21, 12:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,7 +12,6 @@ package co.geeksempire.premium.storefront.Actions.Operation
 
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isInvisible
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
@@ -169,49 +168,6 @@ class ActionCenterOperations {
                 aPackageName = applicationPackageName,
                 applicationName = applicationName,
                 applicationSummary = applicationSummary)
-
-        }
-
-    }
-
-    /*
- * Applications
- */
-    fun setupForMoviesStorefront(context: AppCompatActivity, themeType: Boolean = ThemeType.ThemeLight) {
-
-
-
-    }
-
-    fun setupForMoviesDetails(context: StorefrontApplications, movieId: String, MovieName: String, movieSummary: String) {
-
-        /* Share */
-        context.storefrontLayoutBinding.leftActionView.setOnClickListener {
-
-            shareApplication(context = context,
-                aPackageName = movieId,
-                applicationName = MovieName,
-                applicationSummary = movieSummary)
-
-        }
-
-        /* Install */
-        context.storefrontLayoutBinding.middleActionView.setOnClickListener {
-
-            openPlayStoreToInstallApplications(context = context,
-                aPackageName = movieId,
-                applicationName = MovieName,
-                applicationSummary = movieSummary)
-
-        }
-
-        /* Rate */
-        context.storefrontLayoutBinding.rightActionView.setOnClickListener {
-
-            openPlayStoreToInstallApplications(context = context,
-                aPackageName = movieId,
-                applicationName = MovieName,
-                applicationSummary = movieSummary)
 
         }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 7:15 AM
+ * Last modified 8/10/21, 12:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,7 +35,6 @@ import co.geeksempire.geeksempire.layoutmanager.Curve.CurveLayoutManager
 import co.geeksempire.geeksempire.layoutmanager.Curve.FanLayoutManagerSettings
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
-import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
@@ -45,7 +44,6 @@ import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
@@ -59,6 +57,7 @@ import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
+import co.geeksempire.premium.storefront.movies.Actions.Operation.ActionCenterOperationsMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
@@ -111,10 +110,6 @@ class StorefrontMovies : StorefrontSplitActivity() {
         ViewModelProvider(this@StorefrontMovies).get(MoviesStorefrontLiveData::class.java)
     }
 
-    val storefrontLiveData: StorefrontLiveData by lazy {
-        ViewModelProvider(this@StorefrontMovies).get(StorefrontLiveData::class.java)
-    }
-
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
         PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = storefrontMoviesLayoutBinding.actionCenterView, actionLeftView = storefrontMoviesLayoutBinding.leftActionView, actionMiddleView = storefrontMoviesLayoutBinding.middleActionView, actionRightView = storefrontMoviesLayoutBinding.rightActionView)
     }
@@ -128,8 +123,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
             rootView = storefrontMoviesLayoutBinding.rootView)
     }
 
-    val actionCenterOperations: ActionCenterOperations by lazy {
-        ActionCenterOperations()
+    val actionCenterOperationsMovies: ActionCenterOperationsMovies by lazy {
+        ActionCenterOperationsMovies()
     }
 
     val favoritedProcess: FavoritedProcess by lazy {
