@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 1:06 PM
+ * Last modified 8/10/21, 1:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,9 +24,9 @@ class ActionCenterOperationsMovies {
         context.storefrontMoviesLayoutBinding.leftActionView.setOnClickListener {
 
             moviesSortingSetup(context = context, filterAllMovies = context.filterAllMovies,
-            sortingInclude = context.storefrontMoviesLayoutBinding.moviesSortingInclude, filteringInclude = context.storefrontMoviesLayoutBinding.moviesFilteringInclude,
-            rightActionView = context.storefrontMoviesLayoutBinding.rightActionView, middleActionView =  context.storefrontMoviesLayoutBinding.middleActionView, leftActionView = context.storefrontMoviesLayoutBinding.leftActionView, context.allMoviesAdapter,
-            themeType = themeType)
+                sortingInclude = context.storefrontMoviesLayoutBinding.moviesSortingInclude, filteringInclude = context.storefrontMoviesLayoutBinding.moviesFilteringInclude,
+                rightActionView = context.storefrontMoviesLayoutBinding.rightActionView, middleActionView =  context.storefrontMoviesLayoutBinding.middleActionView, leftActionView = context.storefrontMoviesLayoutBinding.leftActionView, context.allMoviesAdapter,
+                themeType = themeType)
 
         }
 
