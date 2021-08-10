@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 2:04 PM
+ * Last modified 8/10/21, 7:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -818,6 +818,7 @@ class StorefrontApplications : StorefrontActivity() {
                 }
             }
         }
+
     }
 
     override fun networkAvailable() {

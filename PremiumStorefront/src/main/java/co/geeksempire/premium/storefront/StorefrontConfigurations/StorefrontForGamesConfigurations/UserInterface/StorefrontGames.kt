@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 2:04 PM
+ * Last modified 8/10/21, 7:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,6 +48,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.applicationsSectionSwitcherDesign
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
+import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.startMoviesSwitching
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.storefrontUserInteractionSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
@@ -650,6 +651,19 @@ class StorefrontGames : StorefrontActivity() {
         when (gestureConstants) {
             is GestureConstants.SwipeHorizontal -> {
                 when (gestureConstants.horizontalDirection) {
+                    GestureListenerConstants.SWIPE_LEFT -> {
+
+                        lifecycleScope.launch {
+
+                            themePreferences.checkThemeLightDark().collect {
+
+                                startMoviesSwitching(this@StorefrontGames, rootView, storefrontLayoutBinding.sectionsSwitcherContainer, it)
+
+                            }
+
+                        }
+
+                    }
                     GestureListenerConstants.SWIPE_RIGHT -> {
 
                         val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(applicationContext, 57), storefrontLayoutBinding.sectionsSwitcherContainer.gamesSectionView.width)
@@ -741,6 +755,7 @@ class StorefrontGames : StorefrontActivity() {
                 }
             }
         }
+
     }
 
     override fun networkAvailable() {
