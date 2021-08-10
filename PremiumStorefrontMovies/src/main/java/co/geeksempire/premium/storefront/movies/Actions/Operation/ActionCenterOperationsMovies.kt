@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 1:11 PM
+ * Last modified 8/10/21, 1:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.movies.Actions.Operation
 
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.ContentSorting.moviesSortingSetup
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.moviesFilteringSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
 import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
 import co.geeksempire.premium.storefront.movies.Utils.Data.shareMovie
@@ -40,7 +41,11 @@ class ActionCenterOperationsMovies {
         /* Filter */
         context.storefrontMoviesLayoutBinding.rightActionView.setOnClickListener {
 
-
+            moviesFilteringSetup(context = context,
+                moviesSortingLayoutBinding = context.storefrontMoviesLayoutBinding.moviesSortingInclude, moviesFilteringLayoutBinding = context.storefrontMoviesLayoutBinding.moviesFilteringInclude,
+                rightActionView = context.storefrontMoviesLayoutBinding.rightActionView, middleActionView =  context.storefrontMoviesLayoutBinding.middleActionView, leftActionView = context.storefrontMoviesLayoutBinding.leftActionView, filterOptionsAdapter = context.filterOptionsAdapter,
+                storefrontAllUnfilteredContents = context.storefrontAllUnfilteredContents,
+                themeType = themeType)
 
         }
 

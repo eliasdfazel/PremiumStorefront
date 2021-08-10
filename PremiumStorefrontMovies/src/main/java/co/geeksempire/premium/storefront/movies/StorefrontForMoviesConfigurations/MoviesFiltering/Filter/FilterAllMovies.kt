@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 1:10 PM
+ * Last modified 8/10/21, 1:21 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,7 @@ object SortingOptions {
 }
 
 object FilteringOptions {
-    const val FilterByCountry = "FilterByCountry"
+    const val FilterByDirector = "FilterByDirector"
     const val FilterByStudio = "FilterByStudio"
 }
 

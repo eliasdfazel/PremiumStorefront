@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 1:02 PM
+ * Last modified 8/10/21, 1:24 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,6 +62,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterAllMovies
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
@@ -87,6 +88,7 @@ import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
+import kotlinx.android.synthetic.main.storefront_movies_layout.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
@@ -162,6 +164,13 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     private val networkConnectionListener: NetworkConnectionListener by lazy {
         NetworkConnectionListener(this@StorefrontMovies, storefrontMoviesLayoutBinding.rootView, networkCheckpoint)
+    }
+
+    val filterOptionsAdapter: FilterOptionsAdapter by lazy {
+        FilterOptionsAdapter(this@StorefrontMovies,
+            filterAllMovies = filterAllMovies,
+            storefrontAllUnfilteredContents = storefrontAllUnfilteredContents,
+            moviesFilteringLayoutBinding = storefrontMoviesLayoutBinding.moviesFilteringInclude)
     }
 
     val storefrontAllUntouchedContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
