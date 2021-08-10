@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 11:34 AM
+ * Last modified 8/10/21, 1:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 
 import android.util.Log
 import androidx.annotation.Keep
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.SortingOptions
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import com.google.firebase.firestore.DocumentSnapshot
@@ -60,6 +61,48 @@ class FilterAllMovies (private val moviesStorefrontLiveData: MoviesStorefrontLiv
         }
 
         moviesStorefrontLiveData.allFilteredMoviesItemData.postValue(Pair(filteredMovies, false))
+
+    }
+
+    fun sortAllMoviesByInput(storefrontFilteredContents: ArrayList<DocumentSnapshot>,
+                              sortInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        Log.d(this@FilterAllMovies.javaClass.simpleName, "Sorting Input Data | ${storefrontFilteredContents.size} Products: ${sortInputParameter}")
+
+        if (storefrontFilteredContents.isNotEmpty()) {
+
+            val sortedStorefrontFilteredContents = ArrayList<DocumentSnapshot>()
+
+            val storefrontAllContentsFilter = storefrontFilteredContents.sortedByDescending { documentSnapshot ->
+
+                documentSnapshot.data?.let {
+
+                    val moviesDataStructure = MoviesDataStructure(it)
+
+                    when (sortInputParameter) {
+                        SortingOptions.SortByRating -> {
+
+                            moviesDataStructure.movieRating()
+
+                        }
+                        SortingOptions.SortByPrice -> {
+
+                            moviesDataStructure.moviePurchasePrice()
+
+                        }
+                        else -> moviesDataStructure.movieName()
+                    }
+
+                }
+
+            }
+
+            sortedStorefrontFilteredContents.clear()
+            sortedStorefrontFilteredContents.addAll(storefrontAllContentsFilter)
+
+            moviesStorefrontLiveData.allFilteredMoviesItemData.postValue(Pair(sortedStorefrontFilteredContents, false))
+
+        }
 
     }
 

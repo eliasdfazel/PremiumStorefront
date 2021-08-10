@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 12:43 PM
+ * Last modified 8/10/21, 1:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -203,6 +203,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
                     themeType = it)
 
                 setupStorefrontMoviesUserInterface(it)
+
+                actionCenterOperationsMovies.setupForMoviesStorefront(this@StorefrontMovies, it)
 
             }
 
@@ -704,7 +706,41 @@ class StorefrontMovies : StorefrontSplitActivity() {
     override fun fragmentDestroyed() {
         super.fragmentDestroyed()
 
+        lifecycleScope.launch {
 
+            themePreferences.checkThemeLightDark().collect {
+
+                prepareActionCenterUserInterface.setupIconsForStorefront(it)
+
+                actionCenterOperationsMovies.setupForMoviesStorefront(this@StorefrontMovies, it)
+
+            }
+
+        }
+
+        if (!storefrontMoviesLayoutBinding.favoritesView.isShown) {
+
+            accountSignIn.firebaseUser?.let {
+
+                favoritedProcess.isFavoriteProductsExist(it.uid, it.email,
+                    object : FavoriteProductQueryInterface {
+
+                        override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
+                            super.favoriteProductsExist(isFavoriteProductsExist)
+
+                            storefrontMoviesLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
+                                View.VISIBLE
+                            } else {
+                                View.GONE
+                            }
+
+                        }
+
+                    })
+
+            }
+
+        }
 
     }
 

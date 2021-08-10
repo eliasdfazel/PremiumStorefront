@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 12:43 PM
+ * Last modified 8/10/21, 1:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.movies.Actions.Operation
 
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.ContentSorting.moviesSortingSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
 import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
 import co.geeksempire.premium.storefront.movies.Utils.Data.shareMovie
@@ -22,7 +23,10 @@ class ActionCenterOperationsMovies {
         /* Sort */
         context.storefrontMoviesLayoutBinding.leftActionView.setOnClickListener {
 
-
+            moviesSortingSetup(context = context, filterAllMovies = context.filterAllMovies,
+            sortingInclude = context.storefrontMoviesLayoutBinding.moviesSortingInclude, filteringInclude = context.storefrontMoviesLayoutBinding.moviesFilteringInclude,
+            rightActionView = context.storefrontMoviesLayoutBinding.rightActionView, middleActionView =  context.storefrontMoviesLayoutBinding.middleActionView, leftActionView = context.storefrontMoviesLayoutBinding.leftActionView, context.allMoviesAdapter,
+            themeType = themeType)
 
         }
 

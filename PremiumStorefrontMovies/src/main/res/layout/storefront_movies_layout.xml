@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/7/21, 9:08 AM
+  ~ Last modified 8/10/21, 1:03 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -340,14 +340,14 @@
     <include
         layout="@layout/movies_filtering_layout"
 
-        android:id="@+id/filteringInclude"
+        android:id="@+id/moviesFilteringInclude"
         android:visibility="gone"/>
 
     <!-- Sort View -->
     <include
         layout="@layout/movies_sorting_layout"
 
-        android:id="@+id/sortingInclude"
+        android:id="@+id/moviesSortingInclude"
         android:visibility="gone"/>
 
     <!-- Search View -->
