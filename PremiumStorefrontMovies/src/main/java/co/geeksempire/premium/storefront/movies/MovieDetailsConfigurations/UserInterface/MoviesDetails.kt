@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 8:45 AM
+ * Last modified 8/11/21, 9:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,12 +16,17 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSpli
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import java.util.*
 
 class MoviesDetails : StorefrontSplitActivity() {
+
+    val movieDetailsPagerAdapter: MovieDetailsPagerAdapter by lazy {
+        MovieDetailsPagerAdapter(this@MoviesDetails)
+    }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(applicationContext)
