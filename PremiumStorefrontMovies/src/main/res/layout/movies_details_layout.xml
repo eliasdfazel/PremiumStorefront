@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/11/21, 9:56 AM
+  ~ Last modified 8/11/21, 10:03 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,9 +14,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/brandingBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tint="@color/dark"
+        android:alpha="0.03"
+        android:src="@drawable/premium_storefront_logo"/>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/moviesViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/transparent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

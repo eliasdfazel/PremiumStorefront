@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 9:59 AM
+ * Last modified 8/11/21, 10:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,18 +11,27 @@
 package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
 
 class MoviesDetails : StorefrontSplitActivity() {
+
+    val themePreferences: ThemePreferences by lazy {
+        ThemePreferences(this@MoviesDetails)
+    }
 
     val movieDetailsPagerAdapter: MovieDetailsPagerAdapter by lazy {
         MovieDetailsPagerAdapter(this@MoviesDetails)
@@ -45,6 +54,15 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         networkConnectionListener.networkConnectionListenerInterface = this@MoviesDetails
 
+        lifecycleScope.launch {
+
+            themePreferences.checkThemeLightDark().collect {
+
+                setupMoviesDetailsUserInterface(it)
+
+            }
+
+        }
 
     }
 
