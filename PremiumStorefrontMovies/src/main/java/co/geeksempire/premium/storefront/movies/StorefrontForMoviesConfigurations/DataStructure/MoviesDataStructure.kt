@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 11:00 AM
+ * Last modified 8/11/21, 1:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -47,6 +47,8 @@ object MoviesDataKey {
     const val MovieSummary = "productSummary"
     const val MoviePoster = "productPoster"
 
+    const val MoviePrimaryGenre = "primaryGenre"
+
     const val MovieUniqueRecommendation = "uniqueRecommendation"
 }
 
@@ -80,6 +82,8 @@ class MoviesDataStructure(private val movieData: MutableMap<String, Any>) {
     fun movieDescription() : String = movieData[MoviesDataKey.MovieDescription].toString()
     fun movieSummary() : String = movieData[MoviesDataKey.MovieSummary].toString()
     fun moviePoster() : String = movieData[MoviesDataKey.MoviePoster].toString()
+
+    fun moviePrimaryGenre() : String = movieData[MoviesDataKey.MoviePrimaryGenre].toString()
 
     fun movieUniqueRecommendation() : String = movieData[MoviesDataKey.MovieUniqueRecommendation].toString()
 

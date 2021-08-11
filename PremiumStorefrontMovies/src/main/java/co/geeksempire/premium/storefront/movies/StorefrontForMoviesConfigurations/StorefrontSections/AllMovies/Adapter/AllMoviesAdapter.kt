@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 11:03 AM
+ * Last modified 8/11/21, 2:00 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -102,7 +102,8 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
             allMoviesViewHolder.rootViewItem.setOnClickListener {
 
                 MoviesDetails.openMoviesDetails(context = context,
-                    documentSnapshotMoviesDetails = storefrontMoviesContents[position])
+                    movieGenre = moviesDataStructure.moviePrimaryGenre(),
+                    movieId = moviesDataStructure.movieId())
 
             }
 

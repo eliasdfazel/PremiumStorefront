@@ -972,6 +972,7 @@ async function setProductsMoviesData(jsonObject) {
         productDescription: productDescription,
         productSummary: productSummary,
         productPoster: productPoster,
+        primaryGenre: productCategoryName,
         uniqueRecommendation: uniqueRecommendation,
     }).then(result => {
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 11:54 AM
+ * Last modified 8/11/21, 2:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,14 +25,13 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataKey
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MoviesDetails : StorefrontSplitActivity() {
 
@@ -52,16 +51,15 @@ class MoviesDetails : StorefrontSplitActivity() {
         NetworkConnectionListener(this@MoviesDetails, moviesDetailsLayoutBinding.rootView, networkCheckpoint)
     }
 
+    var movieGenre: String = ""
+    var movieId: String = ""
+
     lateinit var moviesDetailsLayoutBinding: MoviesDetailsLayoutBinding
 
     companion object {
 
-        var selectedMovieDocumentSnapshot: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
-
         fun openMoviesDetails(context: Context,
-                              documentSnapshotMoviesDetails: DocumentSnapshot) {
-
-            selectedMovieDocumentSnapshot = arrayListOf(documentSnapshotMoviesDetails)
+                              movieGenre: String, movieId: String) {
 
             context.startActivity(Intent(context, MoviesDetails::class.java).apply {
 
@@ -108,16 +106,14 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         }
 
-        if (selectedMovieDocumentSnapshot.isNotEmpty()) {
+        if (intent.hasExtra(MoviesDataKey.MovieId) && intent.hasExtra(MoviesDataKey.MovieGenres)) {
 
-            movieDetailsPagerAdapter.moviesDetailsList.clear()
-            movieDetailsPagerAdapter.moviesDetailsList.addAll(selectedMovieDocumentSnapshot)
+            movieGenre = intent.getStringExtra(MoviesDataKey.MovieGenres)?:"Comedy"
+            movieId = intent.getStringExtra(MoviesDataKey.MovieId)?:"3889"
 
-            movieDetailsPagerAdapter.notifyDataSetChanged()
+
 
         } else {
-
-            selectedMovieDocumentSnapshot.clear()
 
             this@MoviesDetails.finish()
 
@@ -130,7 +126,8 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         moviesDetailsLayoutBinding.goBackView.setOnClickListener {
 
-            selectedMovieDocumentSnapshot.clear()
+            overridePendingTransition(0, R.anim.slide_out_right)
+            this@MoviesDetails.finish()
 
         }
 
@@ -141,8 +138,6 @@ class MoviesDetails : StorefrontSplitActivity() {
     }
 
     override fun onBackPressed() {
-
-        selectedMovieDocumentSnapshot.clear()
 
         overridePendingTransition(0, R.anim.slide_out_right)
         this@MoviesDetails.finish()
