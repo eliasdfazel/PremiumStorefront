@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 6:18 AM
+ * Last modified 8/11/21, 7:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,6 +35,54 @@ object FilteringOptions {
 data class FilterOptionsItem(var filterOptionLabel: String, var filterOptionIconLink: String?)
 
 class FilterAllMovies (private val moviesStorefrontLiveData: MoviesStorefrontLiveData) {
+
+    fun searchThroughAllMovies(storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
+                                searchQuery: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        Log.d(this@FilterAllMovies.javaClass.simpleName, "Search Query: ${searchQuery}")
+
+        if (storefrontAllUnfilteredContents.isNotEmpty()) {
+
+            val storefrontAllContentsFilter = ArrayList<DocumentSnapshot>()
+
+            storefrontAllUnfilteredContents.forEachIndexed { index, documentSnapshot ->
+
+                documentSnapshot.data?.let {
+
+                    val moviesDataStructure = MoviesDataStructure(it)
+
+                    val inputSearchQuery = searchQuery.lowercase()
+
+                    val movieName = moviesDataStructure.movieName().lowercase()
+                    val movieSummary = moviesDataStructure.movieSummary().lowercase()
+
+                    val movieGenres = moviesDataStructure.movieGenres().lowercase()
+
+                    val movieStudios = moviesDataStructure.movieStudios().lowercase()
+
+                    val movieDirectors = moviesDataStructure.movieDirectors().lowercase()
+                    val movieStars = moviesDataStructure.movieStars().lowercase()
+
+                    if (movieName.contains(inputSearchQuery)
+                        || movieSummary.contains(inputSearchQuery)
+                        || movieGenres.contains(inputSearchQuery)
+                        || movieStudios.contains(inputSearchQuery)
+                        || movieDirectors.contains(inputSearchQuery)
+                        || movieStars.contains(inputSearchQuery)) {
+
+                        storefrontAllContentsFilter.add(documentSnapshot)
+
+                    }
+
+                }
+
+            }
+
+            moviesStorefrontLiveData.allFilteredMoviesItemData.postValue(Pair(storefrontAllContentsFilter, false))
+
+        }
+
+    }
 
     fun filterAllMoviesByGenre(storefrontAllUnfilteredMovies: ArrayList<DocumentSnapshot>,
                                selectedGenre: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
