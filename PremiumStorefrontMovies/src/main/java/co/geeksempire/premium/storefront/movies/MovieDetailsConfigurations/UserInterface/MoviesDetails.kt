@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 2:01 PM
+ * Last modified 8/11/21, 2:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,7 +62,8 @@ class MoviesDetails : StorefrontSplitActivity() {
                               movieGenre: String, movieId: String) {
 
             context.startActivity(Intent(context, MoviesDetails::class.java).apply {
-
+                putExtra(MoviesDataKey.MoviePrimaryGenre, movieGenre)
+                putExtra(MoviesDataKey.MovieId, movieId)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
@@ -106,9 +107,9 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         }
 
-        if (intent.hasExtra(MoviesDataKey.MovieId) && intent.hasExtra(MoviesDataKey.MovieGenres)) {
+        if (intent.hasExtra(MoviesDataKey.MovieId) && intent.hasExtra(MoviesDataKey.MoviePrimaryGenre)) {
 
-            movieGenre = intent.getStringExtra(MoviesDataKey.MovieGenres)?:"Comedy"
+            movieGenre = intent.getStringExtra(MoviesDataKey.MoviePrimaryGenre)?:"Comedy"
             movieId = intent.getStringExtra(MoviesDataKey.MovieId)?:"3889"
 
 
