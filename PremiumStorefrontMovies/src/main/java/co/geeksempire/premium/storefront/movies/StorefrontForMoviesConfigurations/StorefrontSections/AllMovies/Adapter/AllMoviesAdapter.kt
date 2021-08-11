@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 2:34 PM
+ * Last modified 8/11/21, 3:36 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,11 +26,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.DocumentSnapshot
-import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Adapter<AllMoviesViewHolder>() {
 
@@ -73,7 +71,6 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
             Glide.with(context)
                 .load(moviesDataStructure.moviePoster())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(RoundedCorners(dpToInteger(context, 29)))
                 .listener(object : RequestListener<Drawable> {
 
                     override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return false }
