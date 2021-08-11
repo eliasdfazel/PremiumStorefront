@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 10:01 AM
+ * Last modified 8/11/21, 10:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,8 @@
 
 package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
@@ -46,6 +48,19 @@ class MoviesDetails : StorefrontSplitActivity() {
     }
 
     lateinit var moviesDetailsLayoutBinding: MoviesDetailsLayoutBinding
+
+    companion object {
+
+        fun openMoviesDetails(context: Context) {
+
+            context.startActivity(Intent(context, MoviesDetails::class.java).apply {
+
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            })
+
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
