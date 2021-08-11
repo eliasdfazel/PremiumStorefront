@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 11:15 AM
+ * Last modified 8/11/21, 5:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,7 @@ class MoviesDataStructure(private val movieData: MutableMap<String, Any>) {
     fun movieAudioLanguages() : String = movieData[MoviesDataKey.MovieAudioLanguages].toString()
 
     fun movieStars() : String = movieData[MoviesDataKey.MovieStars].toString()
-    fun movieStudio() : String = movieData[MoviesDataKey.MovieStudio].toString()
+    fun movieStudios() : String = movieData[MoviesDataKey.MovieStudio].toString()
     fun movieDirectors() : String = movieData[MoviesDataKey.MovieDirectors].toString()
 
     fun movieReleaseDate() : String = movieData[MoviesDataKey.MovieReleaseData].toString()

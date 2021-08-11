@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 5:32 AM
+ * Last modified 8/11/21, 5:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,7 +65,7 @@ class FilterAllMovies (private val moviesStorefrontLiveData: MoviesStorefrontLiv
     }
 
     fun filterAlMoviesByInput(storefrontAllContents: ArrayList<DocumentSnapshot>,
-                               filterType: String, filterInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+                              filterType: String, filterInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         Log.d(this@FilterAllMovies.javaClass.simpleName, "Filtering Input Data: ${filterInputParameter}")
 
@@ -77,6 +77,8 @@ class FilterAllMovies (private val moviesStorefrontLiveData: MoviesStorefrontLiv
 
                     val moviesDataStructure = MoviesDataStructure(it.data!!)
 
+                    println(">>> >> > ${filterType} ::: " + moviesDataStructure.movieDirectors() + " >< " + filterInputParameter)
+
                     when (filterType) {
                         FilteringOptions.FilterByDirector -> {
 
@@ -85,7 +87,7 @@ class FilterAllMovies (private val moviesStorefrontLiveData: MoviesStorefrontLiv
                         }
                         FilteringOptions.FilterByStudio -> {
 
-                            moviesDataStructure.movieStudio().contains(filterInputParameter)
+                            moviesDataStructure.movieStudios().contains(filterInputParameter)
 
                         }
                         else -> true //All Unfiltered Content

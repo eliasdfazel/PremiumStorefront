@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 5:32 AM
+ * Last modified 8/11/21, 5:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,11 +21,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
 import co.geeksempire.premium.storefront.Utils.UI.Animations.AnimationListener
 import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnimation
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterOptionsItem
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.movies.databinding.MoviesFilteringLayoutBinding
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSortingLayoutBinding
@@ -311,7 +311,7 @@ fun filterByStudioDataProcess(context: Context,
 
                 val moviesDataStructure = MoviesDataStructure(documentSnapshot)
 
-                val csvMoviesStudio = moviesDataStructure.movieStudio().split(",")
+                val csvMoviesStudio = moviesDataStructure.movieStudios().split(",")
 
                 csvMoviesStudio.forEach {
 
