@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 11/11/19, 12:32 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+    <dimen name="ayp_8dp">8dp</dimen>
+    <dimen name="ayp_12sp">12sp</dimen>
+    <dimen name="ayp_menu_dialog_container_margin">8dp</dimen>
+    <dimen name="ayp_menu_item_padding">12dp</dimen>
+    <dimen name="ayp_menu_item_text_size">16sp</dimen>
+</resources>
