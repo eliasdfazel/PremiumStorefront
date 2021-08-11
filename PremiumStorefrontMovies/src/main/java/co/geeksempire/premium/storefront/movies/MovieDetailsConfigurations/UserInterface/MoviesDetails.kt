@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 2:34 PM
+ * Last modified 8/11/21, 3:09 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,6 +29,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataKey
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
@@ -116,7 +117,7 @@ class MoviesDetails : StorefrontSplitActivity() {
 
             val rotation = -13f * position * -1.25f
 
-            page.pivotX = (width * 1.7f)
+            page.pivotX = (width * 1.3f)
             page.pivotY = height.toFloat()
 
             page.rotation = rotation
@@ -169,6 +170,31 @@ class MoviesDetails : StorefrontSplitActivity() {
 
 
                 }
+
+            moviesDetailsLayoutBinding.moviesViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+
+                    moviesDetailsLayoutBinding.favoriteView.setOnClickListener {
+
+                        if (movieDetailsPagerAdapter.moviesDetailsList.isNotEmpty()) {
+
+                            movieDetailsPagerAdapter.moviesDetailsList[position].data?.let {
+
+                                val moviesDataStructure = MoviesDataStructure(it)
+
+
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            })
 
         } else {
 

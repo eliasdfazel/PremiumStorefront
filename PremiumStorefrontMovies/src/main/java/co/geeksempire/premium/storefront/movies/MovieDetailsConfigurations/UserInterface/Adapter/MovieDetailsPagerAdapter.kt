@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 2:29 PM
+ * Last modified 8/11/21, 3:09 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,15 +11,11 @@
 package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter
 
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsetsController
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
-import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorLightDark
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.ViewHolder.MovieDetailsViewHolder
@@ -58,8 +54,6 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
             val moviesDataStructure = MoviesDataStructure(documentSnapshot)
 
-            println(">>> " + moviesDataStructure.movieName())
-
             Glide.with(context)
                 .asDrawable()
                 .load(moviesDataStructure.moviePoster())
@@ -81,10 +75,10 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                                 val dominantColor = extractDominantColor(context, resource)
                                 val vibrantColor = extractVibrantColor(context, resource)
 
-                                movieDetailsViewHolder.blurryBackground.setSecondOverlayColor(setColorAlpha(dominantColor, 73f))
-                                movieDetailsViewHolder.blurryBackground.setOverlayColor(when (themeType) {
+                                movieDetailsViewHolder.blurryBackground.setOverlayColor(setColorAlpha(dominantColor, 111f))
+                                movieDetailsViewHolder.blurryBackground.setSecondOverlayColor(when (themeType) {
                                     ThemeType.ThemeLight -> {
-                                        context.getColor(R.color.premiumDarkTransparent)
+                                        context.getColor(R.color.premiumLightTransparent)
                                     }
                                     ThemeType.ThemeDark -> {
                                         context.getColor(R.color.premiumDarkTransparent)
@@ -93,40 +87,6 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                                         context.getColor(R.color.premiumLightTransparent)
                                     }
                                 })
-
-                                if (isColorLightDark(dominantColor)) {
-
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
-                                        context.window.insetsController?.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-                                        context.window.insetsController?.setSystemBarsAppearance(WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS, WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
-
-                                    } else {
-
-                                        @Suppress("DEPRECATION")
-                                        context.window.decorView.systemUiVisibility = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                                        } else {
-                                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                                        }
-
-                                    }
-
-                                } else {
-
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
-                                        context.window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS)
-                                        context.window.insetsController?.setSystemBarsAppearance(0, WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS)
-
-                                    } else {
-
-                                        @Suppress("DEPRECATION")
-                                        context.window.decorView.systemUiVisibility = 0
-
-                                    }
-
-                                }
 
                             }
 

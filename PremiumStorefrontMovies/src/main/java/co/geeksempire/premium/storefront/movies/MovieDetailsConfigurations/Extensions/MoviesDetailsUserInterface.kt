@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 11:54 AM
+ * Last modified 8/11/21, 3:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.core.view.marginTop
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
@@ -28,8 +29,16 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
         setMargins(moviesDetailsLayoutBinding.goBackView.marginStart, moviesDetailsLayoutBinding.goBackView.marginTop + statusBarHeight(applicationContext), 0, 0)
     }
 
+    applyNegativeSpaceEffectsForFavorite(themeType)
+
+    moviesDetailsLayoutBinding.favoriteView.layoutParams = (moviesDetailsLayoutBinding.favoriteView.layoutParams as ConstraintLayout.LayoutParams).apply {
+        setMargins(0, moviesDetailsLayoutBinding.favoriteView.marginTop + statusBarHeight(applicationContext), moviesDetailsLayoutBinding.favoriteView.marginEnd, 0)
+    }
+
     when (themeType) {
         ThemeType.ThemeLight -> {
+
+            window.statusBarColor = getColor(R.color.premiumLight)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
@@ -53,6 +62,8 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
 
         }
         ThemeType.ThemeDark -> {
+
+            window.statusBarColor = getColor(R.color.premiumDark)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
