@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 7:37 AM
+ * Last modified 8/11/21, 10:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.AllMovies.ViewHolder.AllMoviesViewHolder
-import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontAllMoviesItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -101,10 +101,12 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
             allMoviesViewHolder.rootViewItem.setOnClickListener {
 
-                openPlayStoreToWatchMovie(context = context,
-                    movieId = moviesDataStructure.movieId(),
-                    movieName = moviesDataStructure.movieName(),
-                    movieSummary = moviesDataStructure.movieSummary())
+                MoviesDetails.openMoviesDetails(context = context)
+
+//                openPlayStoreToWatchMovie(context = context,
+//                    movieId = moviesDataStructure.movieId(),
+//                    movieName = moviesDataStructure.movieName(),
+//                    movieSummary = moviesDataStructure.movieSummary())
 
             }
 
