@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 1:21 PM
+ * Last modified 8/11/21, 5:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,9 +10,13 @@
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.FilterAdapter
 
+import android.os.Handler
+import android.os.Looper
 import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.R
@@ -57,42 +61,42 @@ class FilterOptionsAdapter (private val context: AppCompatActivity,
 
         filterOptionsViewHolder.rootViewItem.setOnClickListener {
 
-//            when (filterOptionsType) {
-//                FilteringOptions.FilterByCountry -> {
-//
-//                    filterAllContent.filterAlContentByInput(storefrontAllUnfilteredContents,
-//                        FilteringOptions.FilterByCountry,
-//                        filterOptionsData[position].filterOptionLabel)
-//                        .invokeOnCompletion {
-//
-//                            Handler(Looper.getMainLooper()).postDelayed({
-//
-//                                filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
-//                                filteringInclude.root.visibility = View.GONE
-//
-//                            }, 531)
-//
-//                        }
-//
-//                }
-//                FilteringOptions.FilterByAndroidCompatibilities -> {
-//
-//                    filterAllContent.filterAlContentByInput(storefrontAllUnfilteredContents,
-//                        FilteringOptions.FilterByAndroidCompatibilities,
-//                        filterOptionsData[position].filterOptionLabel)
-//                        .invokeOnCompletion {
-//
-//                            Handler(Looper.getMainLooper()).postDelayed({
-//
-//                                filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
-//                                filteringInclude.root.visibility = View.GONE
-//
-//                            }, 531)
-//
-//                        }
-//
-//                }
-//            }
+            when (filterOptionsType) {
+                FilteringOptions.FilterByDirector -> {
+
+                    filterAllMovies.filterAlMoviesByInput(storefrontAllUnfilteredContents,
+                        FilteringOptions.FilterByDirector,
+                        filterOptionsData[position].filterOptionLabel)
+                        .invokeOnCompletion {
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+
+                                moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                moviesFilteringLayoutBinding.root.visibility = View.GONE
+
+                            }, 531)
+
+                        }
+
+                }
+                FilteringOptions.FilterByStudio -> {
+
+                    filterAllMovies.filterAlMoviesByInput(storefrontAllUnfilteredContents,
+                        FilteringOptions.FilterByStudio,
+                        filterOptionsData[position].filterOptionLabel)
+                        .invokeOnCompletion {
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+
+                                moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                moviesFilteringLayoutBinding.root.visibility = View.GONE
+
+                            }, 531)
+
+                        }
+
+                }
+            }
 
         }
 

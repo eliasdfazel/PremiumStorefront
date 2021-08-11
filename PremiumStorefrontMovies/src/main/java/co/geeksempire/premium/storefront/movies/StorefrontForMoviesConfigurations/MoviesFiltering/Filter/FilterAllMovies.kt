@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 1:21 PM
+ * Last modified 8/11/21, 5:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,6 +61,49 @@ class FilterAllMovies (private val moviesStorefrontLiveData: MoviesStorefrontLiv
         }
 
         moviesStorefrontLiveData.allFilteredMoviesItemData.postValue(Pair(filteredMovies, false))
+
+    }
+
+    fun filterAlMoviesByInput(storefrontAllContents: ArrayList<DocumentSnapshot>,
+                               filterType: String, filterInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        Log.d(this@FilterAllMovies.javaClass.simpleName, "Filtering Input Data: ${filterInputParameter}")
+
+        if (storefrontAllContents.isNotEmpty()) {
+
+            val storefrontAllContentsFilter = storefrontAllContents.filter {
+
+                if (it.data != null) {
+
+                    val moviesDataStructure = MoviesDataStructure(it.data!!)
+
+                    when (filterType) {
+                        FilteringOptions.FilterByDirector -> {
+
+                            moviesDataStructure.movieDirectors().contains(filterInputParameter)
+
+                        }
+                        FilteringOptions.FilterByStudio -> {
+
+                            moviesDataStructure.movieStudio().contains(filterInputParameter)
+
+                        }
+                        else -> true //All Unfiltered Content
+                    }
+
+                } else {
+
+                    true
+                }
+
+            }
+
+            storefrontAllContents.clear()
+            storefrontAllContents.addAll(storefrontAllContentsFilter)
+
+            moviesStorefrontLiveData.allFilteredMoviesItemData.postValue(Pair(storefrontAllContents, false))
+
+        }
 
     }
 

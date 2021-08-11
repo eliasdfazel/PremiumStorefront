@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 1:22 PM
+ * Last modified 8/11/21, 5:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,20 +11,27 @@
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering
 
 import android.animation.Animator
+import android.content.Context
 import android.content.res.ColorStateList
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
 import co.geeksempire.premium.storefront.Utils.UI.Animations.AnimationListener
 import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnimation
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.movies.databinding.MoviesFilteringLayoutBinding
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSortingLayoutBinding
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import kotlin.math.absoluteValue
 
 fun moviesFilteringSetup(context: AppCompatActivity,
@@ -146,14 +153,17 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
         if (filterOptionsAdapter.filterOptionsData.isEmpty()) {
 
-            //
+            filterByDirectorsDataProcess(context,
+                storefrontAllUnfilteredContents,
+                moviesFilteringLayoutBinding,
+                filterOptionsAdapter)
 
         }
 
-        moviesFilteringLayoutBinding.filterCountryView.setOnClickListener {
+        moviesFilteringLayoutBinding.filterDirectorView.setOnClickListener {
 
             moviesFilteringLayoutBinding.filterSelectedView.animate()
-                .translationYBy(-(moviesFilteringLayoutBinding.filterCompatibilitiesView.y - moviesFilteringLayoutBinding.filterCountryView.y))
+                .translationYBy(-(moviesFilteringLayoutBinding.filterStudioView.y - moviesFilteringLayoutBinding.filterDirectorView.y))
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
@@ -163,10 +173,10 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
                     override fun onAnimationEnd(animation: Animator?) {
 
-//                        filterByCountriesDataProcess(context,
-//                            storefrontAllUnfilteredContents,
-//                            moviesFilteringLayoutBinding,
-//                            filterOptionsAdapter)
+                        filterByDirectorsDataProcess(context,
+                            storefrontAllUnfilteredContents,
+                            moviesFilteringLayoutBinding,
+                            filterOptionsAdapter)
 
                     }
 
@@ -176,15 +186,15 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
                 }).start()
 
-            moviesFilteringLayoutBinding.filterCountryView.setTextColor(context.getColor(R.color.white))
-            moviesFilteringLayoutBinding.filterCompatibilitiesView.setTextColor(context.getColor(R.color.default_color_bright))
+            moviesFilteringLayoutBinding.filterDirectorView.setTextColor(context.getColor(R.color.white))
+            moviesFilteringLayoutBinding.filterStudioView.setTextColor(context.getColor(R.color.default_color_bright))
 
         }
 
-        moviesFilteringLayoutBinding.filterCompatibilitiesView.setOnClickListener {
+        moviesFilteringLayoutBinding.filterStudioView.setOnClickListener {
 
             moviesFilteringLayoutBinding.filterSelectedView.animate()
-                .translationYBy((moviesFilteringLayoutBinding.filterCountryView.y - moviesFilteringLayoutBinding.filterCompatibilitiesView.y).absoluteValue)
+                .translationYBy((moviesFilteringLayoutBinding.filterDirectorView.y - moviesFilteringLayoutBinding.filterStudioView.y).absoluteValue)
                 .apply {
                     interpolator = OvershootInterpolator()
                     duration = 531
@@ -194,10 +204,10 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
                     override fun onAnimationEnd(animation: Animator?) {
 
-//                        filterByCompatibilitiesDataProcess(context,
-//                            storefrontAllUnfilteredContents,
-//                            moviesFilteringLayoutBinding,
-//                            filterOptionsAdapter)
+                        filterByStudioDataProcess(context,
+                            storefrontAllUnfilteredContents,
+                            moviesFilteringLayoutBinding,
+                            filterOptionsAdapter)
 
                     }
 
@@ -207,8 +217,122 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
                 }).start()
 
-            moviesFilteringLayoutBinding.filterCountryView.setTextColor(context.getColor(R.color.default_color_bright))
-            moviesFilteringLayoutBinding.filterCompatibilitiesView.setTextColor(context.getColor(R.color.white))
+            moviesFilteringLayoutBinding.filterDirectorView.setTextColor(context.getColor(R.color.default_color_bright))
+            moviesFilteringLayoutBinding.filterStudioView.setTextColor(context.getColor(R.color.white))
+
+        }
+
+    }
+
+}
+
+
+fun filterByDirectorsDataProcess(context: Context,
+                                 storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
+                                 filteringInclude: MoviesFilteringLayoutBinding,
+                                 filterOptionsAdapter: FilterOptionsAdapter) {
+
+    if (storefrontAllUnfilteredContents.isNotEmpty()) {
+
+        filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
+        filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
+
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+            var lastLabel = "-666"
+
+            filterOptionsAdapter.filterOptionsData.clear()
+
+            storefrontAllUnfilteredContents.sortedBy {
+
+                it.data?.let { documentSnapshot ->
+                    val moviesDataStructure = MoviesDataStructure(documentSnapshot)
+
+                    moviesDataStructure.movieDirectors()
+                }
+
+            }.asFlow()
+                .map {
+
+                    it.data?.let { documentSnapshot ->
+                        val moviesDataStructure = MoviesDataStructure(documentSnapshot)
+
+                        moviesDataStructure.movieDirectors()
+                    }
+
+                }
+                .flowOn(Dispatchers.IO)
+                .onCompletion {
+
+                }
+                .collect { countryName ->
+
+
+                    countryName?.let {
+
+                        if (countryName != lastLabel) {
+
+                            filterOptionsAdapter.filterOptionsData.add(FilterOptionsItem(it, null))
+
+                        }
+
+                        lastLabel = countryName
+
+                    }
+
+                }
+
+            withContext(SupervisorJob() + Dispatchers.Main) {
+
+                filterOptionsAdapter.notifyDataSetChanged()
+
+            }
+
+        }
+
+    }
+
+}
+
+fun filterByStudioDataProcess(context: Context,
+                                       storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
+                                       filteringInclude: MoviesFilteringLayoutBinding,
+                                       filterOptionsAdapter: FilterOptionsAdapter) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+
+    if (storefrontAllUnfilteredContents.isNotEmpty()) {
+
+        val filterOptionsData: ArrayList<FilterOptionsItem> = ArrayList<FilterOptionsItem>()
+
+        filterOptionsAdapter.filterOptionsData.clear()
+
+        storefrontAllUnfilteredContents.forEachIndexed { index, documentSnapshot ->
+
+            documentSnapshot.data?.let { documentSnapshot ->
+
+                val moviesDataStructure = MoviesDataStructure(documentSnapshot)
+
+                val csvMoviesStudio = moviesDataStructure.movieStudio().split(",")
+
+                csvMoviesStudio.forEach {
+
+                    filterOptionsData.add(FilterOptionsItem(it, null))
+
+                }
+
+            }
+
+        }
+
+        filterOptionsAdapter.filterOptionsData.addAll(filterOptionsData.toSet().toList())
+
+        filterOptionsData.clear()
+
+        withContext(SupervisorJob() + Dispatchers.Main) {
+
+            filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
+            filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
+
+            filterOptionsAdapter.notifyDataSetChanged()
 
         }
 
