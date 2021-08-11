@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 5:38 AM
+ * Last modified 8/11/21, 6:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,6 +26,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnima
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterOptionsItem
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.movies.databinding.MoviesFilteringLayoutBinding
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSortingLayoutBinding
@@ -237,6 +238,8 @@ fun filterByDirectorsDataProcess(context: Context,
         filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
         filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
 
+        filterOptionsAdapter.filterOptionsType = FilteringOptions.FilterByDirector
+
         CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
             var lastLabel = "-666"
@@ -327,7 +330,10 @@ fun filterByStudioDataProcess(context: Context,
 
         filterOptionsData.clear()
 
+
         withContext(SupervisorJob() + Dispatchers.Main) {
+
+            filterOptionsAdapter.filterOptionsType = FilteringOptions.FilterByStudio
 
             filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
             filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter

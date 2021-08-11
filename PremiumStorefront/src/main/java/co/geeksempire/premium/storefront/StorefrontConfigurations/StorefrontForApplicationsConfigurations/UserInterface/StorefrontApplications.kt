@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 7:05 AM
+ * Last modified 8/11/21, 6:02 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,6 +43,7 @@ import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
@@ -199,7 +200,8 @@ class StorefrontApplications : StorefrontActivity() {
         FilterOptionsAdapter(this@StorefrontApplications,
             filterAllContent = filterAllContent,
             storefrontAllUnfilteredContents = storefrontAllUnfilteredContents,
-            filteringInclude = storefrontLayoutBinding.filteringInclude)
+            filteringInclude = storefrontLayoutBinding.filteringInclude,
+            filterOptionsType = FilteringOptions.FilterByCountry)
     }
 
     val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()

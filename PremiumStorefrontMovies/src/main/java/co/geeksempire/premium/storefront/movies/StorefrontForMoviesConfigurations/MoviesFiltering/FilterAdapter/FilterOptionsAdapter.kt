@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 5:35 AM
+ * Last modified 8/11/21, 6:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,7 +33,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 class FilterOptionsAdapter (private val context: AppCompatActivity,
                             private val filterAllMovies: FilterAllMovies,
                             private val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
-                            private val filterOptionsType: String = FilteringOptions.FilterByDirector,
+                            var filterOptionsType: String,
                             private val moviesFilteringLayoutBinding: MoviesFilteringLayoutBinding) : RecyclerView.Adapter<FilterOptionsViewHolder>() {
 
     val filterOptionsData: ArrayList<FilterOptionsItem> = ArrayList<FilterOptionsItem>()

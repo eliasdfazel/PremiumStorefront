@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 5:23 AM
+ * Last modified 8/11/21, 6:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,7 +33,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 class FilterOptionsAdapter (private val context: AppCompatActivity,
                             private val filterAllContent: FilterAllContent,
                             private val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
-                            private val filterOptionsType: String = FilteringOptions.FilterByCountry,
+                            var filterOptionsType: String,
                             private val filteringInclude: FilteringLayoutBinding) : RecyclerView.Adapter<FilterOptionsViewHolder>() {
 
     val filterOptionsData: ArrayList<FilterOptionsItem> = ArrayList<FilterOptionsItem>()

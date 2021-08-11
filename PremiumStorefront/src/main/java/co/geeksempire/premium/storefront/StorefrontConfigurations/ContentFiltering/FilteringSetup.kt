@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 12:46 PM
+ * Last modified 8/11/21, 6:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
@@ -236,6 +237,8 @@ fun filterByCountriesDataProcess(context: Context,
         filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
         filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
 
+        filterOptionsAdapter.filterOptionsType = FilteringOptions.FilterByCountry
+
         CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
             var lastLabel = "-666"
@@ -293,6 +296,8 @@ fun filterByCompatibilitiesDataProcess(context: Context,
 
         filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
         filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
+
+        filterOptionsAdapter.filterOptionsType = FilteringOptions.FilterByCountry
 
         CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
