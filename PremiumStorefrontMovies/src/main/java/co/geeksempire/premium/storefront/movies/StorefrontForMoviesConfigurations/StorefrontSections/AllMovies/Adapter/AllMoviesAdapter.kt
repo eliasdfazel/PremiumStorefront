@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 10:08 AM
+ * Last modified 8/11/21, 11:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -101,12 +101,8 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
             allMoviesViewHolder.rootViewItem.setOnClickListener {
 
-                MoviesDetails.openMoviesDetails(context = context)
-
-//                openPlayStoreToWatchMovie(context = context,
-//                    movieId = moviesDataStructure.movieId(),
-//                    movieName = moviesDataStructure.movieName(),
-//                    movieSummary = moviesDataStructure.movieSummary())
+                MoviesDetails.openMoviesDetails(context = context,
+                    documentSnapshotMoviesDetails = storefrontMoviesContents[position])
 
             }
 

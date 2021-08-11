@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 11:07 AM
+ * Last modified 8/11/21, 11:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,6 +52,8 @@ class MoviesStorefrontLiveData : ViewModel() {
 
             val featuredContentJsonObject: JSONObject = allContentJsonArray[indexContent] as JSONObject
 
+            val movieId = featuredContentJsonObject[ProductsContentKey.IdKey].toString()
+
             /* Start - Images */
             val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
 
@@ -74,6 +76,7 @@ class MoviesStorefrontLiveData : ViewModel() {
 
             storefrontAllContents.add(
                 StorefrontMoviesContentsData(
+                    movieId = movieId,
                     movieName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
                     movieDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                     movieSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),

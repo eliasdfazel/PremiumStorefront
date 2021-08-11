@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 10:04 AM
+ * Last modified 8/11/21, 11:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,35 +14,22 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
-import androidx.viewpager2.widget.ViewPager2
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
+import net.geeksempire.balloon.optionsmenu.library.Utils.statusBarHeight
 
 fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
 
-    moviesDetailsLayoutBinding.moviesViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-    moviesDetailsLayoutBinding.moviesViewPager.adapter = movieDetailsPagerAdapter
-
-    moviesDetailsLayoutBinding.moviesViewPager.setPageTransformer { page, position ->
-
-        val width = page.width
-        val height = page.height
-
-        val rotation = -13f * position * -1.25f
-
-        page.pivotX = (width * 1.7f)
-        page.pivotY = height.toFloat()
-
-        page.rotation = rotation
-
+    moviesDetailsLayoutBinding.goBackView.layoutParams = (moviesDetailsLayoutBinding.goBackView.layoutParams as ConstraintLayout.LayoutParams).apply {
+        setMargins(moviesDetailsLayoutBinding.goBackView.marginStart, moviesDetailsLayoutBinding.goBackView.marginTop + statusBarHeight(applicationContext), 0, 0)
     }
 
     when (themeType) {
         ThemeType.ThemeLight -> {
-
-            window.statusBarColor = getColor(R.color.premiumLight)
-            window.navigationBarColor = getColor(R.color.premiumLight)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
@@ -66,9 +53,6 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
 
         }
         ThemeType.ThemeDark -> {
-
-            window.statusBarColor = getColor(R.color.premiumDark)
-            window.navigationBarColor = getColor(R.color.premiumDark)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 

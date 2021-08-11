@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 10:08 AM
+ * Last modified 8/11/21, 10:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -220,7 +220,8 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
             featuredMoviesViewHolder.rootViewItem.setOnClickListener {
 
-                MoviesDetails.openMoviesDetails(context = context)
+                MoviesDetails.openMoviesDetails(context = context,
+                    documentSnapshotMoviesDetails = featuredMoviesData[position])
 
             }
 

@@ -3,24 +3,54 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/11/21, 9:56 AM
+  ~ Last modified 8/11/21, 11:51 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootViewItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/allItemContainer"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moviePostBackground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scaleY="1.13"
+        android:scaleX="1.13"
+        android:scaleType="centerCrop"
+
+        apps:layout_constraintTop_toTopOf="parent"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/blurryBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        apps:realtimeBlurRadius="25dp"
+        apps:realtimeBlurGradientType="linearTopBottom"
+        apps:realtimeFirstColor="@color/premiumLightTransparent"
+        apps:realtimeSecondColor="@color/premiumLight"
+
+        apps:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/allItemContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/11/21, 8:43 AM
+  ~ Last modified 8/11/21, 11:20 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -11,36 +11,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="GeeksEmpire.Material.Storefront" parent="GeeksEmpire.Material">
-
-        <item name="android:colorPrimary">@color/black</item>
-        <item name="android:colorPrimaryDark">@color/premiumDark</item>
-        <item name="android:colorAccent">@color/premiumLight</item>
-
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/premiumDark</item>
-        <item name="colorAccent">@color/premiumLight</item>
-
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-
-        <item name="android:windowBackground">@color/premiumLight</item>
-
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:windowTranslucentNavigation">false</item>
-
-        <item name="android:windowContentTransitions">true</item>
-
-        <item name="android:windowEnterAnimation">@anim/fade_in</item>
-        <item name="android:windowExitAnimation">@anim/fade_out</item>
-
-        <item name="android:popupBackground">@color/default_color</item>
-
-    </style>
-
-    <style name="GeeksEmpire.Material.Details" parent="GeeksEmpire.Material">
 
         <item name="android:colorPrimary">@color/black</item>
         <item name="android:colorPrimaryDark">@color/premiumDark</item>

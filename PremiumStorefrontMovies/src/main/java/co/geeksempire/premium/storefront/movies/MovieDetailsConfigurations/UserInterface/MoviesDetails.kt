@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 10:06 AM
+ * Last modified 8/11/21, 11:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,11 +10,14 @@
 
 package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
@@ -23,11 +26,13 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MoviesDetails : StorefrontSplitActivity() {
 
@@ -51,12 +56,17 @@ class MoviesDetails : StorefrontSplitActivity() {
 
     companion object {
 
-        fun openMoviesDetails(context: Context) {
+        var selectedMovieDocumentSnapshot: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
+
+        fun openMoviesDetails(context: Context,
+                              documentSnapshotMoviesDetails: DocumentSnapshot) {
+
+            selectedMovieDocumentSnapshot = arrayListOf(documentSnapshotMoviesDetails)
 
             context.startActivity(Intent(context, MoviesDetails::class.java).apply {
 
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            })
+            }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
         }
 
@@ -75,9 +85,67 @@ class MoviesDetails : StorefrontSplitActivity() {
 
                 setupMoviesDetailsUserInterface(it)
 
+                movieDetailsPagerAdapter.themeType = it
+
             }
 
         }
+
+        moviesDetailsLayoutBinding.moviesViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        moviesDetailsLayoutBinding.moviesViewPager.adapter = movieDetailsPagerAdapter
+
+        moviesDetailsLayoutBinding.moviesViewPager.setPageTransformer { page, position ->
+
+            val width = page.width
+            val height = page.height
+
+            val rotation = -13f * position * -1.25f
+
+            page.pivotX = (width * 1.7f)
+            page.pivotY = height.toFloat()
+
+            page.rotation = rotation
+
+        }
+
+        if (selectedMovieDocumentSnapshot.isNotEmpty()) {
+
+            movieDetailsPagerAdapter.moviesDetailsList.clear()
+            movieDetailsPagerAdapter.moviesDetailsList.addAll(selectedMovieDocumentSnapshot)
+
+            movieDetailsPagerAdapter.notifyDataSetChanged()
+
+        } else {
+
+            selectedMovieDocumentSnapshot.clear()
+
+            this@MoviesDetails.finish()
+
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        moviesDetailsLayoutBinding.goBackView.setOnClickListener {
+
+            selectedMovieDocumentSnapshot.clear()
+
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onBackPressed() {
+
+        selectedMovieDocumentSnapshot.clear()
+
+        overridePendingTransition(0, R.anim.slide_out_right)
+        this@MoviesDetails.finish()
 
     }
 

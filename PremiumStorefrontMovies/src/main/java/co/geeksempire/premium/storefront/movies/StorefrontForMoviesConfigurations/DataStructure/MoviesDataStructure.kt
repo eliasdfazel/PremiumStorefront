@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 5:36 AM
+ * Last modified 8/11/21, 11:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -86,7 +86,8 @@ class MoviesDataStructure(private val movieData: MutableMap<String, Any>) {
 }
 
 @Keep
-data class StorefrontMoviesContentsData (var movieName: String, var movieDescription: String, var movieSummary: String,
+data class StorefrontMoviesContentsData (var movieId: String,
+                                         var movieName: String, var movieDescription: String, var movieSummary: String,
                                          var moviePosterLink: String,
                                          var productAttributes: HashMap<String, String?>)
 

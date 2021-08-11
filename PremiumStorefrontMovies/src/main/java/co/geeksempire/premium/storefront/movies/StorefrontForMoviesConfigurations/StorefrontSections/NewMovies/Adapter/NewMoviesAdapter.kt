@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 10:08 AM
+ * Last modified 8/11/21, 11:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,9 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
-import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.StorefrontMoviesContentsData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.NewMovies.ViewHolder.NewMoviesViewHolder
+import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontNewMoviesItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -98,7 +98,10 @@ class NewMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
         newContentViewHolder.rootViewItem.setOnClickListener {
 
-            MoviesDetails.openMoviesDetails(context = context)
+            openPlayStoreToWatchMovie(context = context,
+                movieId = storefrontMoviesContents[position].movieId,
+                movieName = storefrontMoviesContents[position].movieName,
+                movieSummary = storefrontMoviesContents[position].movieSummary)
 
         }
 
