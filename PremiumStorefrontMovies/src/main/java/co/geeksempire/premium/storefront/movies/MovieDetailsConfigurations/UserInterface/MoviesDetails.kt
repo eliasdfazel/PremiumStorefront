@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 3:09 PM
+ * Last modified 8/11/21, 3:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -117,7 +117,7 @@ class MoviesDetails : StorefrontSplitActivity() {
 
             val rotation = -13f * position * -1.25f
 
-            page.pivotX = (width * 1.3f)
+            page.pivotX = (width * 0.7f)
             page.pivotY = height.toFloat()
 
             page.rotation = rotation
