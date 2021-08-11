@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 11:01 AM
+ * Last modified 8/11/21, 2:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,6 +32,10 @@ class MoviesStorefrontLiveData : ViewModel() {
     }
 
     val allMoviesItemData: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
+    }
+
+    val allMoviesOfGenre: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
         MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
@@ -149,6 +153,34 @@ class MoviesStorefrontLiveData : ViewModel() {
         moviesDocumentSnapshots.addAll(moviesDocumentSnapshotsSorted)
 
         genresMoviesItemData.postValue(moviesDocumentSnapshots)
+
+    }
+
+    fun processAllMoviesOfGenre(querySnapshot: QuerySnapshot, excludedMovie: String) {
+
+        val moviesOfGenre = ArrayList<DocumentSnapshot>()
+
+        querySnapshot.documents.forEachIndexed { index, documentSnapshot ->
+
+            if (documentSnapshot.exists()) {
+
+                documentSnapshot.data?.let {
+
+                    val moviesDataStructure = MoviesDataStructure(it)
+
+                    if (moviesDataStructure.movieProductId() != excludedMovie) {
+
+                        moviesOfGenre.add(documentSnapshot)
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        allMoviesOfGenre.postValue(moviesOfGenre)
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 2:02 PM
+ * Last modified 8/11/21, 2:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,11 +14,14 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
@@ -26,7 +29,10 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataKey
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
+import com.google.firebase.firestore.Source
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import kotlinx.coroutines.flow.collect
@@ -43,6 +49,16 @@ class MoviesDetails : StorefrontSplitActivity() {
         MovieDetailsPagerAdapter(this@MoviesDetails)
     }
 
+    val generalEndpoints = GeneralEndpoints()
+
+    val moviesQueryEndpoints: MoviesQueryEndpoints by lazy {
+        MoviesQueryEndpoints(generalEndpoints)
+    }
+
+    val moviesStorefrontLiveData: MoviesStorefrontLiveData by lazy {
+        ViewModelProvider(this@MoviesDetails).get(MoviesStorefrontLiveData::class.java)
+    }
+
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(applicationContext)
     }
@@ -51,19 +67,19 @@ class MoviesDetails : StorefrontSplitActivity() {
         NetworkConnectionListener(this@MoviesDetails, moviesDetailsLayoutBinding.rootView, networkCheckpoint)
     }
 
-    var movieGenre: String = ""
-    var movieId: String = ""
+    var moviePrimaryGenre: String = ""
+    var movieProductId: String = ""
 
     lateinit var moviesDetailsLayoutBinding: MoviesDetailsLayoutBinding
 
     companion object {
 
         fun openMoviesDetails(context: Context,
-                              movieGenre: String, movieId: String) {
+                              moviePrimaryGenre: String, movieProductId: String) {
 
             context.startActivity(Intent(context, MoviesDetails::class.java).apply {
-                putExtra(MoviesDataKey.MoviePrimaryGenre, movieGenre)
-                putExtra(MoviesDataKey.MovieId, movieId)
+                putExtra(MoviesDataKey.MoviePrimaryGenre, moviePrimaryGenre)
+                putExtra(MoviesDataKey.MovieProductId, movieProductId)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
@@ -107,12 +123,52 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         }
 
-        if (intent.hasExtra(MoviesDataKey.MovieId) && intent.hasExtra(MoviesDataKey.MoviePrimaryGenre)) {
+        if (intent.hasExtra(MoviesDataKey.MovieProductId) && intent.hasExtra(MoviesDataKey.MoviePrimaryGenre)) {
 
-            movieGenre = intent.getStringExtra(MoviesDataKey.MoviePrimaryGenre)?:"Comedy"
-            movieId = intent.getStringExtra(MoviesDataKey.MovieId)?:"3889"
+            moviePrimaryGenre = intent.getStringExtra(MoviesDataKey.MoviePrimaryGenre)?:"Comedy"
+            movieProductId = intent.getStringExtra(MoviesDataKey.MovieProductId)?:"3889"
+
+            moviesStorefrontLiveData.allMoviesOfGenre.observe(this@MoviesDetails, {
+
+                if (it.isNotEmpty()) {
+
+                    movieDetailsPagerAdapter.moviesDetailsList.addAll(it)
+
+                    movieDetailsPagerAdapter.notifyItemRangeInserted(movieDetailsPagerAdapter.itemCount, movieDetailsPagerAdapter.moviesDetailsList.size)
+
+                }
+
+            })
+
+            (application as PremiumStorefrontApplication)
+                .firestoreDatabase
+                .document(moviesQueryEndpoints.storefrontSpecificMovieEndpoint(moviePrimaryGenre, movieProductId))
+                .get(Source.DEFAULT).addOnSuccessListener { documentSnapshot ->
+
+                    movieDetailsPagerAdapter.moviesDetailsList.clear()
+
+                    movieDetailsPagerAdapter.moviesDetailsList.add(documentSnapshot)
+
+                    movieDetailsPagerAdapter.notifyItemInserted(0)
+
+                    (application as PremiumStorefrontApplication)
+                        .firestoreDatabase
+                        .collection(moviesQueryEndpoints.storefrontMoviesGenreCollectionsEndpoint(moviePrimaryGenre))
+                        .get(Source.DEFAULT).addOnSuccessListener { querySnapshot ->
+
+                            moviesStorefrontLiveData.processAllMoviesOfGenre(querySnapshot, movieProductId)
+
+                        }.addOnFailureListener {
 
 
+
+                        }
+
+                }.addOnFailureListener {
+
+
+
+                }
 
         } else {
 

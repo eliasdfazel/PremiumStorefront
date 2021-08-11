@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 11:54 AM
+ * Last modified 8/11/21, 2:29 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,6 +57,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
         moviesDetailsList[position].data?.let { documentSnapshot ->
 
             val moviesDataStructure = MoviesDataStructure(documentSnapshot)
+
+            println(">>> " + moviesDataStructure.movieName())
 
             Glide.with(context)
                 .asDrawable()
