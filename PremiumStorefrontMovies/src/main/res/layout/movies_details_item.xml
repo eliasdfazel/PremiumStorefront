@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/12/21, 10:51 AM
+  ~ Last modified 8/12/21, 11:42 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -51,7 +51,7 @@
             android:id="@+id/allItemContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="103dp"
+            android:paddingTop="119dp"
             android:paddingBottom="193dp">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -122,18 +122,107 @@
                 apps:layout_constraintStart_toStartOf="parent"
                 apps:layout_constraintEnd_toEndOf="parent"/>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productRatingStarsView"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginHorizontal="19dp"
+                android:padding="11dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/white_transparent"
+                android:background="@drawable/movie_details_rating_glowing_frame_light"
+                android:src="@drawable/star_rate_icon_light"
+
+                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/productCurrentRateView"
+                android:layout_width="51dp"
+                android:layout_height="51dp"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="27sp"
+                android:text="5.0"
+                android:fontFamily="@font/neon"
+                android:shadowRadius="7"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowColor="@color/red"
+
+                apps:layout_constraintTop_toTopOf="@id/productRatingStarsView"
+                apps:layout_constraintBottom_toBottomOf="@id/productRatingStarsView"
+                apps:layout_constraintStart_toStartOf="@id/productRatingStarsView"
+                apps:layout_constraintEnd_toEndOf="@id/productRatingStarsView"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/productContentRatingView"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginHorizontal="7dp"
+                android:padding="13dp"
+                android:scaleType="fitCenter"
+                android:background="@drawable/movie_details_rating_glowing_frame_light"
+
+                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintEnd_toStartOf="@id/productRatingStarsView"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/movieGenreFirst"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginHorizontal="19dp"
+                android:padding="13dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/premiumDark"
+                android:background="@drawable/movie_details_rating_glowing_frame_light"
+
+                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/movieGenreSecond"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginHorizontal="7dp"
+                android:padding="13dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/premiumDark"
+                android:background="@drawable/movie_details_rating_glowing_frame_light"
+
+                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintStart_toEndOf="@id/movieGenreFirst"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/movieGenreThird"
+                android:layout_width="57dp"
+                android:layout_height="57dp"
+                android:layout_marginVertical="11dp"
+                android:layout_marginHorizontal="7dp"
+                android:padding="13dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/premiumDark"
+                android:background="@drawable/movie_details_rating_glowing_frame_light"
+
+                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintStart_toEndOf="@id/movieGenreSecond"/>
+
             <co.geeksempire.youtubeplayer.player.views.YouTubePlayerView
                 android:id="@+id/movieTrailerYouTube"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="29dp"
-                android:layout_marginHorizontal="23dp"
+                android:layout_marginHorizontal="19dp"
 
                 apps:enableAutomaticInitialization="true"
                 apps:autoPlay="false"
                 apps:showFullScreenButton="false"
 
-                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"/>
+                apps:layout_constraintTop_toBottomOf="@id/productRatingStarsView"/>
 
             <net.geekstools.imageview.customshapes.ShapesImage
                 android:id="@+id/firstStar"

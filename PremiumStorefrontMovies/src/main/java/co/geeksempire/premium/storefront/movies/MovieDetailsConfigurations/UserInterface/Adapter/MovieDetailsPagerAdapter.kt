@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 10:47 AM
+ * Last modified 8/12/21, 11:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.app.SearchManager
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.text.Html
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
@@ -23,6 +24,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UI.designOptionsMoviesBackground
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.ViewHolder.MovieDetailsViewHolder
 import co.geeksempire.premium.storefront.movies.R
@@ -56,17 +58,56 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
     override fun onBindViewHolder(movieDetailsViewHolder: MovieDetailsViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(movieDetailsViewHolder, position, payloads)
+
+        moviesDetailsList[position].data?.let { documentSnapshot ->
+
+            val moviesDataStructure = MoviesDataStructure(documentSnapshot)
+
+            val movieGenres = moviesDataStructure.movieGenres().split(",")
+            Log.d(this@MovieDetailsPagerAdapter.javaClass.simpleName, movieGenres.toString())
+
+            Glide.with(context)
+                .asDrawable()
+                .load(try { context.genresData.getGenreIconByName(movieGenres[0]) } catch (e: Exception) { "" })
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(movieDetailsViewHolder.movieGenreFirst)
+
+            Glide.with(context)
+                .asDrawable()
+                .load(try { context.genresData.getGenreIconByName(movieGenres[1]) } catch (e: Exception) { "" })
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(movieDetailsViewHolder.movieGenreSecond)
+
+            Glide.with(context)
+                .asDrawable()
+                .load(try { context.genresData.getGenreIconByName(movieGenres[2]) } catch (e: Exception) { "" })
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(movieDetailsViewHolder.movieGenreThird)
+
+        }
+
     }
 
     override fun onBindViewHolder(movieDetailsViewHolder: MovieDetailsViewHolder, position: Int) {
 
         moviesDetailsList[position].data?.let { documentSnapshot ->
 
+            val optionsMoviesBackground = designOptionsMoviesBackground(movieDetailsViewHolder, themeType)
+
+            movieDetailsViewHolder.productRatingStarsView.background = optionsMoviesBackground
+            movieDetailsViewHolder.productContentRatingView.background = optionsMoviesBackground
+
+            movieDetailsViewHolder.movieGenreFirst.background = optionsMoviesBackground
+            movieDetailsViewHolder.movieGenreSecond.background = optionsMoviesBackground
+            movieDetailsViewHolder.movieGenreThird.background = optionsMoviesBackground
+
             val moviesDataStructure = MoviesDataStructure(documentSnapshot)
 
             movieDetailsViewHolder.movieNameTextView.text = Html.fromHtml(moviesDataStructure.movieName(), Html.FROM_HTML_MODE_COMPACT)
 
             movieDetailsViewHolder.movieDescriptionFirst.text = Html.fromHtml(moviesDataStructure.movieDescription(), Html.FROM_HTML_MODE_COMPACT)
+
+            movieDetailsViewHolder.productCurrentRateView.text = Html.fromHtml(moviesDataStructure.movieRating(), Html.FROM_HTML_MODE_COMPACT)
 
             Glide.with(context)
                 .asDrawable()
@@ -122,6 +163,13 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transform(RoundedCorners(dpToInteger(context, 19)))
                 .into(movieDetailsViewHolder.moviesPosterImageView)
+
+            Glide.with(context)
+                .asDrawable()
+                .load(moviesDataStructure.movieContentSafetyRatingIcon())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(RoundedCorners(dpToInteger(context, 19)))
+                .into(movieDetailsViewHolder.productContentRatingView)
 
             context.lifecycle.addObserver(movieDetailsViewHolder.movieTrailerYouTube)
 

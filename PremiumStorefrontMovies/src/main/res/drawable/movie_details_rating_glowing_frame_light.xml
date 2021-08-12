@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/12/21, 11:19 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/circleIconFrame"
+        android:height="53dp"
+        android:width="53dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:radius="23dp" />
+
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="@color/dark_transparent"
+                android:centerColor="@color/white"
+                android:centerX="0.6"
+                android:centerY="0.5"
+                android:endColor="@color/white" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/clearLayer"
+        android:height="51dp"
+        android:width="51dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:radius="23dp" />
+
+            <solid android:color="@color/premiumLight" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="51dp"
+        android:width="51dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:radius="23dp" />
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="53dp"
+                android:startColor="@color/premiumLightTransparent"
+                android:centerColor="@color/premiumLightTransparent"
+                android:centerX="0.59"
+                android:centerY="0.79"
+                android:endColor="@color/black" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="51dp"
+        android:width="51dp"
+        android:gravity="center">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:radius="23dp" />
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="57dp"
+                android:startColor="@color/premiumLightTransparent"
+                android:centerColor="@color/premiumLightTransparent"
+                android:centerX="0.41"
+                android:centerY="0.19"
+                android:endColor="@color/white" />
+
+        </shape>
+
+    </item>
+
+</layer-list>

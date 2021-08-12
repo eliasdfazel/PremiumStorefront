@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 10:42 AM
+ * Last modified 8/12/21, 11:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,12 +34,16 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.GenreData
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
 import com.google.firebase.firestore.Source
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class MoviesDetails : StorefrontSplitActivity() {
@@ -69,6 +73,8 @@ class MoviesDetails : StorefrontSplitActivity() {
     val moviesStorefrontLiveData: MoviesStorefrontLiveData by lazy {
         ViewModelProvider(this@MoviesDetails).get(MoviesStorefrontLiveData::class.java)
     }
+
+    val genresData: GenreData = GenreData()
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(applicationContext)
@@ -148,6 +154,31 @@ class MoviesDetails : StorefrontSplitActivity() {
                     movieDetailsPagerAdapter.moviesDetailsList.addAll(it)
 
                     movieDetailsPagerAdapter.notifyItemRangeInserted(movieDetailsPagerAdapter.itemCount, movieDetailsPagerAdapter.moviesDetailsList.size)
+
+                }
+
+            })
+
+            moviesStorefrontLiveData.genresMoviesItemData.observe(this@MoviesDetails, {
+
+                if (it.isNotEmpty()) {
+
+                    lifecycleScope.launch {
+
+                        genresData.clearData()
+                        genresData.prepareAllGenresData(it).await()
+
+                        withContext(Dispatchers.Main) {
+
+                            movieDetailsPagerAdapter.notifyItemRangeChanged(0, movieDetailsPagerAdapter.itemCount)
+
+                        }
+
+                    }
+
+                } else {
+
+
 
                 }
 
@@ -259,6 +290,7 @@ class MoviesDetails : StorefrontSplitActivity() {
 
     override fun networkAvailable() {
 
+        retrieveGenreMovies(this@MoviesDetails, moviesStorefrontLiveData)
 
     }
 

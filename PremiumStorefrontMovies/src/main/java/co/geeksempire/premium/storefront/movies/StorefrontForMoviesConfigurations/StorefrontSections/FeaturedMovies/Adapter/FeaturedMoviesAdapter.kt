@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 2:34 PM
+ * Last modified 8/12/21, 11:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -98,13 +98,14 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
             featuredMoviesViewHolder.moviePosterBackground.background = (designFeaturedMoviesPosterBackground(featuredMoviesViewHolder, themeType))
 
-            featuredMoviesViewHolder.productRatingStarsView.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
-            featuredMoviesViewHolder.productContentRatingView.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
+            val optionMoviesBackground = designOptionsMoviesBackground(featuredMoviesViewHolder, themeType)
 
-            featuredMoviesViewHolder.movieGenreFirst.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
-            featuredMoviesViewHolder.movieGenreSecond.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
-            featuredMoviesViewHolder.movieGenreThird.background = (designOptionsMoviesBackground(featuredMoviesViewHolder, themeType))
+            featuredMoviesViewHolder.productRatingStarsView.background = optionMoviesBackground
+            featuredMoviesViewHolder.productContentRatingView.background = optionMoviesBackground
 
+            featuredMoviesViewHolder.movieGenreFirst.background = optionMoviesBackground
+            featuredMoviesViewHolder.movieGenreSecond.background = optionMoviesBackground
+            featuredMoviesViewHolder.movieGenreThird.background = optionMoviesBackground
 
             featuredMoviesViewHolder.movieNameTextView.text = Html.fromHtml(moviesDataStructure.movieName(), Html.FROM_HTML_MODE_COMPACT)
             featuredMoviesViewHolder.movieSummaryTextView.text = Html.fromHtml(moviesDataStructure.movieSummary().substring(IntRange(0, moviesDataStructure.movieSummary().length/2)), Html.FROM_HTML_MODE_COMPACT)

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 10:45 AM
+ * Last modified 8/12/21, 11:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,15 @@ class MovieDetailsViewHolder (moviesDetailsItemBinding: MoviesDetailsItemBinding
     val movieNameTextView: AppCompatTextView = moviesDetailsItemBinding.movieNameTextView
     val movieDescriptionFirst: AppCompatTextView = moviesDetailsItemBinding.movieDescriptionFirst
     val movieDescriptionSecond: AppCompatTextView = moviesDetailsItemBinding.movieDescriptionSecond
+
+    val productRatingStarsView: AppCompatImageView = moviesDetailsItemBinding.productRatingStarsView
+    val productCurrentRateView: AppCompatTextView = moviesDetailsItemBinding.productCurrentRateView
+
+    val productContentRatingView: AppCompatImageView = moviesDetailsItemBinding.productContentRatingView
+
+    val movieGenreFirst: AppCompatImageView = moviesDetailsItemBinding.movieGenreFirst
+    val movieGenreSecond: AppCompatImageView = moviesDetailsItemBinding.movieGenreSecond
+    val movieGenreThird: AppCompatImageView = moviesDetailsItemBinding.movieGenreThird
 
     val movieTrailerYouTube: YouTubePlayerView = moviesDetailsItemBinding.movieTrailerYouTube
 
