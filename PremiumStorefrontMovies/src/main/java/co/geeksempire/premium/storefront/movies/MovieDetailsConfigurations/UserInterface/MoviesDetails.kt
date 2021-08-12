@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 3:10 PM
+ * Last modified 8/12/21, 9:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
@@ -26,6 +27,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSpli
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
+import co.geeksempire.premium.storefront.movies.Actions.Operation.ActionCenterOperationsMovies
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataKey
@@ -50,6 +52,14 @@ class MoviesDetails : StorefrontSplitActivity() {
         MovieDetailsPagerAdapter(this@MoviesDetails)
     }
 
+    val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {
+        PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = moviesDetailsLayoutBinding.actionCenterView, actionLeftView = moviesDetailsLayoutBinding.leftActionView, actionMiddleView = moviesDetailsLayoutBinding.middleActionView, actionRightView = moviesDetailsLayoutBinding.rightActionView)
+    }
+
+    val actionCenterOperationsMovies: ActionCenterOperationsMovies by lazy {
+        ActionCenterOperationsMovies()
+    }
+
     val generalEndpoints = GeneralEndpoints()
 
     val moviesQueryEndpoints: MoviesQueryEndpoints by lazy {
@@ -71,6 +81,8 @@ class MoviesDetails : StorefrontSplitActivity() {
     var moviePrimaryGenre: String = ""
     var movieProductId: String = ""
 
+    var movieSelectedPosition: Int = 0
+
     lateinit var moviesDetailsLayoutBinding: MoviesDetailsLayoutBinding
 
     companion object {
@@ -82,7 +94,7 @@ class MoviesDetails : StorefrontSplitActivity() {
                 putExtra(MoviesDataKey.MoviePrimaryGenre, moviePrimaryGenre)
                 putExtra(MoviesDataKey.MovieProductId, movieProductId)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+            }, ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0).toBundle())
 
         }
 
@@ -115,7 +127,7 @@ class MoviesDetails : StorefrontSplitActivity() {
             val width = page.width
             val height = page.height
 
-            val rotation = -13f * position * -1.25f
+            val rotation = -11f * position * -1.13f
 
             page.pivotX = (width * 0.7f)
             page.pivotY = height.toFloat()
@@ -144,26 +156,34 @@ class MoviesDetails : StorefrontSplitActivity() {
             (application as PremiumStorefrontApplication)
                 .firestoreDatabase
                 .document(moviesQueryEndpoints.storefrontSpecificMovieEndpoint(moviePrimaryGenre, movieProductId))
-                .get(Source.DEFAULT).addOnSuccessListener { documentSnapshot ->
+                .get(Source.CACHE).addOnSuccessListener { documentSnapshot ->
 
-                    movieDetailsPagerAdapter.moviesDetailsList.clear()
+                    documentSnapshot.data?.let {
 
-                    movieDetailsPagerAdapter.moviesDetailsList.add(documentSnapshot)
+                        movieDetailsPagerAdapter.moviesDetailsList.clear()
 
-                    movieDetailsPagerAdapter.notifyItemInserted(0)
+                        movieDetailsPagerAdapter.moviesDetailsList.add(documentSnapshot)
 
-                    (application as PremiumStorefrontApplication)
-                        .firestoreDatabase
-                        .collection(moviesQueryEndpoints.storefrontMoviesGenreCollectionsEndpoint(moviePrimaryGenre))
-                        .get(Source.DEFAULT).addOnSuccessListener { querySnapshot ->
+                        movieDetailsPagerAdapter.notifyItemInserted(0)
 
-                            moviesStorefrontLiveData.processAllMoviesOfGenre(querySnapshot, movieProductId)
+                        val moviesDataStructure = MoviesDataStructure(it)
 
-                        }.addOnFailureListener {
+                        actionCenterOperationsMovies.setupForMoviesDetails(this@MoviesDetails, movieProductId, moviesDataStructure.movieName(), moviesDataStructure.movieSummary())
+
+                        (application as PremiumStorefrontApplication)
+                            .firestoreDatabase
+                            .collection(moviesQueryEndpoints.storefrontMoviesGenreCollectionsEndpoint(moviePrimaryGenre))
+                            .get(Source.CACHE).addOnSuccessListener { querySnapshot ->
+
+                                moviesStorefrontLiveData.processAllMoviesOfGenre(querySnapshot, movieProductId)
+
+                            }.addOnFailureListener {
 
 
 
-                        }
+                            }
+
+                    }
 
                 }.addOnFailureListener {
 
@@ -175,6 +195,8 @@ class MoviesDetails : StorefrontSplitActivity() {
 
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
+
+                    movieSelectedPosition = position
 
                     moviesDetailsLayoutBinding.favoriteView.setOnClickListener {
 
@@ -209,7 +231,7 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         moviesDetailsLayoutBinding.goBackView.setOnClickListener {
 
-            overridePendingTransition(0, R.anim.slide_out_right)
+            overridePendingTransition(0, R.anim.fade_out)
             this@MoviesDetails.finish()
 
         }
@@ -222,7 +244,7 @@ class MoviesDetails : StorefrontSplitActivity() {
 
     override fun onBackPressed() {
 
-        overridePendingTransition(0, R.anim.slide_out_right)
+        overridePendingTransition(0, R.anim.fade_out)
         this@MoviesDetails.finish()
 
     }

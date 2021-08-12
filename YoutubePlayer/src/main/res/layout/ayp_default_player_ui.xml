@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 11/11/19, 12:32 AM
+  ~ Last modified 8/12/21, 9:20 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -117,7 +117,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true" >
 
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.views.YouTubePlayerSeekBar
+            <co.geeksempire.youtubeplayer.ui.views.YouTubePlayerSeekBar
                 android:id="@+id/youtube_player_seekbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

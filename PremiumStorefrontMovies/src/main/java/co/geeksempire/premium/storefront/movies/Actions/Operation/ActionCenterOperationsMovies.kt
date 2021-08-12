@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 7:17 AM
+ * Last modified 8/12/21, 9:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.movies.Actions.Operation
 
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.moviesFilteringSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesSearching.searchingSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesSorting.moviesSortingSetup
@@ -59,10 +60,10 @@ class ActionCenterOperationsMovies {
 
     }
 
-    fun setupForMoviesDetails(context: StorefrontMovies, movieId: String, MovieName: String, movieSummary: String) {
+    fun setupForMoviesDetails(context: MoviesDetails, movieId: String, MovieName: String, movieSummary: String) {
 
         /* Share */
-        context.storefrontMoviesLayoutBinding.leftActionView.setOnClickListener {
+        context.moviesDetailsLayoutBinding.leftActionView.setOnClickListener {
 
             shareMovie(context = context,
                 movieId = movieId,
@@ -72,7 +73,7 @@ class ActionCenterOperationsMovies {
         }
 
         /* Watch */
-        context.storefrontMoviesLayoutBinding.middleActionView.setOnClickListener {
+        context.moviesDetailsLayoutBinding.middleActionView.setOnClickListener {
 
             openPlayStoreToWatchMovie(context = context,
                 movieId = movieId,
@@ -82,7 +83,7 @@ class ActionCenterOperationsMovies {
         }
 
         /* Rate */
-        context.storefrontMoviesLayoutBinding.rightActionView.setOnClickListener {
+        context.moviesDetailsLayoutBinding.rightActionView.setOnClickListener {
 
             openPlayStoreToWatchMovie(context = context,
                 movieId = movieId,

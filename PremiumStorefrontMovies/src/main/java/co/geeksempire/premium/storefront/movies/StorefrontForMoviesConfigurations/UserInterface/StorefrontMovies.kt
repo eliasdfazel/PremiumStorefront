@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 6:06 AM
+ * Last modified 8/12/21, 9:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -117,6 +117,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
         PrepareActionCenterUserInterface(context = applicationContext, actionCenterView = storefrontMoviesLayoutBinding.actionCenterView, actionLeftView = storefrontMoviesLayoutBinding.leftActionView, actionMiddleView = storefrontMoviesLayoutBinding.middleActionView, actionRightView = storefrontMoviesLayoutBinding.rightActionView)
     }
 
+    val actionCenterOperationsMovies: ActionCenterOperationsMovies by lazy {
+        ActionCenterOperationsMovies()
+    }
+
     val filterAllMovies: FilterAllMovies by lazy {
         FilterAllMovies(moviesStorefrontLiveData)
     }
@@ -124,10 +128,6 @@ class StorefrontMovies : StorefrontSplitActivity() {
     val balloonOptionsMenu: BalloonOptionsMenu by lazy {
         BalloonOptionsMenu(context = this@StorefrontMovies,
             rootView = storefrontMoviesLayoutBinding.rootView)
-    }
-
-    val actionCenterOperationsMovies: ActionCenterOperationsMovies by lazy {
-        ActionCenterOperationsMovies()
     }
 
     val favoritedProcess: FavoritedProcess by lazy {

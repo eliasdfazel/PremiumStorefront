@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/22/21, 9:37 AM
+ * Last modified 8/12/21, 10:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -189,7 +189,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         }
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
-        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.install_icon)?.apply {
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.watch_icon)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)
