@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 10:23 AM
+ * Last modified 8/12/21, 10:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.app.SearchManager
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.text.Html
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.appcompat.widget.AppCompatImageView
@@ -163,6 +164,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
         return when (dataIndex) {
             0 -> {
 
+                movieDetailsViewHolder.movieStarFirstImageView.visibility = View.VISIBLE
+
                 movieDetailsViewHolder.movieStarFirstImageView.tag = starName
 
                 movieDetailsViewHolder.movieStarFirstImageView.setOnClickListener {
@@ -176,6 +179,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                 movieDetailsViewHolder.movieStarFirstImageView
             }
             1 -> {
+
+                movieDetailsViewHolder.movieStarSecondImageView.visibility = View.VISIBLE
 
                 movieDetailsViewHolder.movieStarSecondImageView.tag = starName
 
@@ -191,6 +196,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
             }
             2 -> {
 
+                movieDetailsViewHolder.movieStarThirdImageView.visibility = View.VISIBLE
+
                 movieDetailsViewHolder.movieStarThirdImageView.tag = starName
 
                 movieDetailsViewHolder.movieStarThirdImageView.setOnClickListener {
@@ -203,7 +210,70 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
                 movieDetailsViewHolder.movieStarThirdImageView
             }
-            else -> movieDetailsViewHolder.movieStarFirstImageView
+            3 -> {
+
+                movieDetailsViewHolder.movieStarFourthImageView.visibility = View.VISIBLE
+
+                movieDetailsViewHolder.movieStarFourthImageView.tag = starName
+
+                movieDetailsViewHolder.movieStarFourthImageView.setOnClickListener {
+
+                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
+                        .putExtra(SearchManager.QUERY, it.tag.toString())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                }
+
+                movieDetailsViewHolder.movieStarFourthImageView
+            }
+            4 -> {
+
+                movieDetailsViewHolder.movieStarFifthImageView.visibility = View.VISIBLE
+
+                movieDetailsViewHolder.movieStarFifthImageView.tag = starName
+
+                movieDetailsViewHolder.movieStarFifthImageView.setOnClickListener {
+
+                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
+                        .putExtra(SearchManager.QUERY, it.tag.toString())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                }
+
+                movieDetailsViewHolder.movieStarFifthImageView
+            }
+            5 -> {
+
+                movieDetailsViewHolder.movieStarSixthImageView.visibility = View.VISIBLE
+
+                movieDetailsViewHolder.movieStarSixthImageView.tag = starName
+
+                movieDetailsViewHolder.movieStarSixthImageView.setOnClickListener {
+
+                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
+                        .putExtra(SearchManager.QUERY, it.tag.toString())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                }
+
+                movieDetailsViewHolder.movieStarSixthImageView
+            }
+            else -> {
+
+                movieDetailsViewHolder.movieStarFirstImageView.visibility = View.VISIBLE
+
+                movieDetailsViewHolder.movieStarFirstImageView.tag = starName
+
+                movieDetailsViewHolder.movieStarFirstImageView.setOnClickListener {
+
+                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
+                        .putExtra(SearchManager.QUERY, it.tag.toString())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                }
+
+                movieDetailsViewHolder.movieStarFirstImageView
+            }
         }
     }
 
