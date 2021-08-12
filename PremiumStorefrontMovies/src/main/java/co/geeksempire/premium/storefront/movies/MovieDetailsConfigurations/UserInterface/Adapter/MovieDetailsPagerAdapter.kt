@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 11:40 AM
+ * Last modified 8/12/21, 11:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.User
 
 import android.app.SearchManager
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.text.Html
 import android.util.Log
@@ -86,6 +87,27 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
         }
 
+        when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white_transparent))
+
+                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_higher))
+
+                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+
+            }
+        }
+
     }
 
     override fun onBindViewHolder(movieDetailsViewHolder: MovieDetailsViewHolder, position: Int) {
@@ -147,6 +169,9 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                                     }
                                 })
 
+                                movieDetailsViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                                movieDetailsViewHolder.productCurrentRateView.setShadowLayer(movieDetailsViewHolder.productCurrentRateView.shadowRadius, movieDetailsViewHolder.productCurrentRateView.shadowDx, movieDetailsViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+
                             }
 
                         }
@@ -168,7 +193,6 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                 .asDrawable()
                 .load(moviesDataStructure.movieContentSafetyRatingIcon())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transform(RoundedCorners(dpToInteger(context, 19)))
                 .into(movieDetailsViewHolder.productContentRatingView)
 
             context.lifecycle.addObserver(movieDetailsViewHolder.movieTrailerYouTube)
