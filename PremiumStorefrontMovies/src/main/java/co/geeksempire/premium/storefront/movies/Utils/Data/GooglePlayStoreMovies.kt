@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 11:21 AM
+ * Last modified 8/12/21, 10:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,17 +33,17 @@ private fun generateGooglePlayStoreMovies(movieId: String) : String {
 }
 
 private fun generateInstallDynamicMoviesLink(context: Context,
-                                             aPackageName: String,
-                                             applicationName: String, applicationSummary: String,
+                                             movieId: String,
+                                             movieName: String, movieSummary: String,
                                              mediatingSolution: String = context.packageName,
                                              campaignName: String = context.packageName) : Uri {
 
-    val playStoreLink: String = generateGooglePlayStoreMovies(aPackageName)
+    val playStoreLink: String = generateGooglePlayStoreMovies(movieId)
 
     val dynamicLink = Firebase.dynamicLinks.dynamicLink {
         link = Uri.parse(playStoreLink)
         domainUriPrefix = "https://premiumstorefront.page.link"
-        androidParameters(aPackageName) {
+        androidParameters(movieId) {
 
         }
         googleAnalyticsParameters {
@@ -52,24 +52,24 @@ private fun generateInstallDynamicMoviesLink(context: Context,
             campaign = campaignName
         }
         socialMetaTagParameters {
-            title = applicationName
-            description = applicationSummary
+            title = movieName
+            description = movieSummary
         }
     }
 
     return dynamicLink.uri
 }
 
-private fun prepareInstallShortDynamicMoviesLink(context: Context,
-                                                 aPackageName: String,
-                                                 applicationName: String, applicationSummary: String,
-                                                 mediatingSolution: String = context.packageName,
-                                                 campaignName: String = context.packageName) : Task<ShortDynamicLink> {
+private fun prepareWatchShortDynamicMoviesLink(context: Context,
+                                               movieId: String,
+                                               movieName: String, movieSummary: String,
+                                               mediatingSolution: String = context.packageName,
+                                               campaignName: String = context.packageName) : Task<ShortDynamicLink> {
 
     return Firebase.dynamicLinks.shortLinkAsync {
-        link = Uri.parse(generateGooglePlayStoreMovies(aPackageName))
+        link = Uri.parse(generateGooglePlayStoreMovies(movieId))
         domainUriPrefix = "https://premiumstorefront.page.link"
-        androidParameters(aPackageName) {
+        androidParameters(movieId) {
 
         }
         googleAnalyticsParameters {
@@ -78,8 +78,8 @@ private fun prepareInstallShortDynamicMoviesLink(context: Context,
             campaign = campaignName
         }
         socialMetaTagParameters {
-            title = applicationName
-            description = applicationSummary
+            title = movieName
+            description = movieSummary
         }
     }
 }
@@ -94,8 +94,8 @@ fun openPlayStoreToWatchMovie(context: Context, movieId: String, movieName: Stri
     doVibrate(context, 159)
 
     context.startActivity(Intent(Intent.ACTION_VIEW,
-        generateInstallDynamicMoviesLink(context = context, aPackageName = movieId,
-            applicationName = movieName, applicationSummary = movieSummary)
+        generateInstallDynamicMoviesLink(context = context, movieId = movieId,
+            movieName = movieName, movieSummary = movieSummary)
     ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0).toBundle())
 
 }
@@ -109,7 +109,7 @@ fun shareMovie(context: Context, movieId: String, movieName: String, movieSummar
 
     doVibrate(context, 159)
 
-    prepareInstallShortDynamicMoviesLink(context, movieId, movieName, movieSummary)
+    prepareWatchShortDynamicMoviesLink(context, movieId, movieName, movieSummary)
         .addOnSuccessListener { shortDynamicLink ->
 
             val textToShare = Html.fromHtml(movieName, Html.FROM_HTML_MODE_COMPACT).toString() + "\n" +

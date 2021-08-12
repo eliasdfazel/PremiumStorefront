@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 9:59 AM
+ * Last modified 8/12/21, 10:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -168,7 +168,7 @@ class MoviesDetails : StorefrontSplitActivity() {
 
                         val moviesDataStructure = MoviesDataStructure(it)
 
-                        actionCenterOperationsMovies.setupForMoviesDetails(this@MoviesDetails, movieProductId, moviesDataStructure.movieName(), moviesDataStructure.movieSummary())
+                        actionCenterOperationsMovies.setupForMoviesDetails(this@MoviesDetails, moviesDataStructure.movieId(), moviesDataStructure.movieName(), moviesDataStructure.movieSummary())
 
                         (application as PremiumStorefrontApplication)
                             .firestoreDatabase
