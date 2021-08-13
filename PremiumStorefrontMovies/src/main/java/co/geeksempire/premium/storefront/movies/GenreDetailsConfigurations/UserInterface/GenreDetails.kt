@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 10:17 AM
+ * Last modified 8/13/21, 10:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,9 +10,7 @@
 
 package co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface
 
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -43,7 +41,6 @@ import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.Hor
 import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.snappedItemPosition
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.Extensions.setupGenreDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.UniqueSection.Adapter.UniqueMoviesAdapter
-import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints
@@ -214,20 +211,11 @@ class GenreDetails : StorefrontSplitActivity() {
                                                     val vibrantColor = extractVibrantColor(applicationContext, resource)
                                                     val mutedColor = extractMutedColor(applicationContext, resource)
 
-                                                    genreDetailsLayoutBinding.movieNameTextView.setTextColor(dominantColor)
-
-                                                    genreDetailsLayoutBinding.movieNameTextView.setShadowLayer(genreDetailsLayoutBinding.movieNameTextView.shadowRadius, genreDetailsLayoutBinding.movieNameTextView.shadowDx, genreDetailsLayoutBinding.movieNameTextView.shadowDy, dominantColor)
-
                                                     shadowAnimationUtils.textShadowValueAnimatorLoop(view = genreDetailsLayoutBinding.movieNameTextView,
                                                         startValue = 0f, endValue = genreDetailsLayoutBinding.movieNameTextView.shadowRadius,
                                                         startDuration = 1357, endDuration = 753,
                                                         shadowColor = genreDetailsLayoutBinding.movieNameTextView.shadowColor, shadowX = genreDetailsLayoutBinding.movieNameTextView.shadowDx, shadowY = genreDetailsLayoutBinding.movieNameTextView.shadowDy,
                                                         numberOfLoop = 3)
-
-                                                    val movieNameFrame = getDrawable(R.drawable.movie_name_frame) as LayerDrawable
-                                                    movieNameFrame.findDrawableByLayerId(R.id.strokeLayer)?.setTintList(ColorStateList.valueOf(mutedColor))
-
-                                                    genreDetailsLayoutBinding.movieNameBlurryView.background = movieNameFrame
 
                                                 }
 

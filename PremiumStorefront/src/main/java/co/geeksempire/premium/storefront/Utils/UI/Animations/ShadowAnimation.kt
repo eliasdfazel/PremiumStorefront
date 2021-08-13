@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/19/21, 2:22 PM
+ * Last modified 8/13/21, 10:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,7 +26,9 @@ class ShadowAnimation {
 
         var loopCounter = 0
 
-        val glowDownAnimation = ValueAnimator.ofFloat(startValue, endValue)
+        val glowDownAnimation = ValueAnimator.ofFloat(startValue, endValue).apply {
+            end()
+        }
         glowDownAnimation.startDelay = startDuration.toLong()
         glowDownAnimation.duration = startDuration.toLong()
         glowDownAnimation.addUpdateListener { animator ->
@@ -43,7 +45,9 @@ class ShadowAnimation {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                val glowUpAnimation = ValueAnimator.ofFloat(endValue, startValue)
+                val glowUpAnimation = ValueAnimator.ofFloat(endValue, startValue).apply {
+                    end()
+                }
                 glowUpAnimation.duration = endDuration.toLong()
                 glowUpAnimation.addUpdateListener { animator ->
 
@@ -101,7 +105,9 @@ class ShadowAnimation {
 
         var loopCounter = 0
 
-        val glowDownAnimation = ValueAnimator.ofFloat(startValue, endValue)
+        val glowDownAnimation = ValueAnimator.ofFloat(startValue, endValue).apply {
+            end()
+        }
         glowDownAnimation.startDelay = startDuration.toLong()
         glowDownAnimation.duration = startDuration.toLong()
         glowDownAnimation.addUpdateListener { animator ->
@@ -118,7 +124,9 @@ class ShadowAnimation {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                val glowUpAnimation = ValueAnimator.ofFloat(endValue, startValue)
+                val glowUpAnimation = ValueAnimator.ofFloat(endValue, startValue).apply {
+                    end()
+                }
                 glowUpAnimation.duration = endDuration.toLong()
                 glowUpAnimation.addUpdateListener { animator ->
 
