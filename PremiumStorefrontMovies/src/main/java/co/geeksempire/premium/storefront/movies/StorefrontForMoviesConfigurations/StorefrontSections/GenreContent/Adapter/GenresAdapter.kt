@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 7:01 AM
+ * Last modified 8/13/21, 11:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -265,7 +265,7 @@ class GenresAdapter(private val context: AppCompatActivity,
                 it.setupOptionsItems(
                     menuId = storefrontGenres[position].genreId.toString(),
                     menuTitle = storefrontGenres[position].genreName,
-                    titlesOfItems = arrayListOf<OptionDataItems>(OptionDataItems(storefrontGenres[position].genreId.toString(), context.getString(R.string.categoryShowAllApplications))),
+                    titlesOfItems = arrayListOf<OptionDataItems>(OptionDataItems(storefrontGenres[position].genreId.toString(), context.getString(R.string.categoryShowAllMovies))),
                     titleTextViewCustomization = TitleTextViewCustomization(textSize = 37f, textColor = context.getColor(R.color.dark), textShadowColor = context.getColor(R.color.dark_transparent_high), textFont = ResourcesCompat.getFont(context, R.font.upcil)?: Typeface.DEFAULT)
                 )
 
