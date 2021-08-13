@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/13/21, 6:52 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GenreDetailsConfigurations.UserInterface.GenreDetails">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/brandingBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tint="@color/dark"
+        android:alpha="0.03"
+        android:src="@drawable/premium_storefront_logo"/>
+
+    <co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="13dp"
+        android:cacheColorHint="@android:color/transparent"
+
+        apps:flingVelocityFraction="5"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="103dp"
+            android:paddingBottom="19dp"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/uniqueMoviesGenreRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="379dp"
+                android:layout_marginTop="11dp"
+                android:scrollbars="none"
+                android:smoothScrollbar="true"
+                android:alwaysDrawnWithCache="true"
+                android:isScrollContainer="false"
+                android:nestedScrollingEnabled="false"
+                android:layoutAnimation="@anim/fade_in_layout_animation"
+
+                apps:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/moviesGenreRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:scrollbars="none"
+                android:smoothScrollbar="true"
+                android:alwaysDrawnWithCache="true"
+                android:isScrollContainer="false"
+                android:nestedScrollingEnabled="false"
+                android:layoutAnimation="@anim/fade_in_layout_animation"
+
+                apps:layout_constraintTop_toBottomOf="@id/uniqueMoviesGenreRecyclerView"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/goBackView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="3dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:scaleType="fitCenter"
+        android:layout_marginVertical="19dp"
+        android:layout_marginHorizontal="19dp"
+        android:src="@drawable/go_back_layer_light"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/genreIconImageView"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:padding="11dp"
+        android:layout_marginVertical="19dp"
+        android:layout_marginHorizontal="19dp"
+        android:scaleType="fitCenter"
+        android:background="@drawable/squircle_icon_light"
+        android:elevation="23dp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/genreNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginHorizontal="1dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:lines="1"
+        android:singleLine="true"
+        android:textAllCaps="false"
+        android:textColor="@color/dark"
+        android:textSize="23sp"
+        android:text="@string/applicationName"
+        android:fontFamily="@font/upcil"
+        android:insetTop="3dp"
+        android:insetBottom="3dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        apps:rippleColor="@color/pink"
+        apps:backgroundTint="@color/light"
+        apps:cornerRadius="17dp"
+
+        apps:layout_constraintWidth_percent="0.43"
+        apps:layout_constraintTop_toTopOf="@id/genreIconImageView"
+        apps:layout_constraintBottom_toBottomOf="@id/genreIconImageView"
+        apps:layout_constraintEnd_toStartOf="@id/genreIconImageView"/>
+
+    <net.geeksempire.loadingspin.SpinKitView
+        android:id="@+id/loadingView"
+        android:layout_width="93dp"
+        android:layout_height="91dp"
+        android:padding="13dp"
+
+        apps:SpinKit_Style="MultiplePulse"
+        apps:SpinKit_Color="@color/default_color_transparent"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

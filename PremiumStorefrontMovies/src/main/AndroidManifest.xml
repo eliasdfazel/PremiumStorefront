@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/11/21, 11:20 AM
+  ~ Last modified 8/13/21, 6:42 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -47,6 +47,12 @@
             android:name=".MovieDetailsConfigurations.UserInterface.MoviesDetails"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/GeeksEmpire.Material.MovieDetail">
+        </activity>
+
+        <activity
+            android:name=".GenreDetailsConfigurations.UserInterface.GenreDetails"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/GeeksEmpire.Material.Genre">
         </activity>
 
     </application>
