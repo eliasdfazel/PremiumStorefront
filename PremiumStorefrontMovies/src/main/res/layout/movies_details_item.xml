@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/12/21, 11:49 AM
+  ~ Last modified 8/13/21, 6:01 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -231,7 +231,7 @@
                 android:layout_marginStart="19dp"
                 android:layout_marginTop="19dp"
                 android:scaleType="centerCrop"
-                android:visibility="gone"
+                android:visibility="visible"
 
                 apps:shapeDrawable="@drawable/rectercle"
 

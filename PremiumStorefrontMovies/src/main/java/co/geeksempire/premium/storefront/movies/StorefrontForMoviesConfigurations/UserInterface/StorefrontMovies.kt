@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 9:48 AM
+ * Last modified 8/13/21, 6:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -606,6 +606,18 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
         }
 
+        lifecycleScope.launch {
+
+            themePreferences.checkThemeLightDark().collect {
+
+                prepareActionCenterUserInterface.setupIconsForStorefront(it)
+
+                actionCenterOperationsMovies.setupForMoviesStorefront(this@StorefrontMovies, it)
+
+            }
+
+        }
+
     }
 
     override fun onPause() {
@@ -709,50 +721,10 @@ class StorefrontMovies : StorefrontSplitActivity() {
 
     override fun fragmentCreated(applicationPackageName: String, applicationName: String, applicationSummary: String) {
         super.fragmentCreated(applicationPackageName, applicationName, applicationSummary)
-
-
-
     }
 
     override fun fragmentDestroyed() {
         super.fragmentDestroyed()
-
-        lifecycleScope.launch {
-
-            themePreferences.checkThemeLightDark().collect {
-
-                prepareActionCenterUserInterface.setupIconsForStorefront(it)
-
-                actionCenterOperationsMovies.setupForMoviesStorefront(this@StorefrontMovies, it)
-
-            }
-
-        }
-
-        if (!storefrontMoviesLayoutBinding.favoritesView.isShown) {
-
-            accountSignIn.firebaseUser?.let {
-
-                favoritedProcess.isFavoriteProductsExist(it.uid, it.email,
-                    object : FavoriteProductQueryInterface {
-
-                        override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {
-                            super.favoriteProductsExist(isFavoriteProductsExist)
-
-                            storefrontMoviesLayoutBinding.favoritesView.visibility = if (isFavoriteProductsExist) {
-                                View.VISIBLE
-                            } else {
-                                View.GONE
-                            }
-
-                        }
-
-                    })
-
-            }
-
-        }
-
     }
 
     override fun messageClicked(inAppMessage: InAppMessage, action: Action) {
