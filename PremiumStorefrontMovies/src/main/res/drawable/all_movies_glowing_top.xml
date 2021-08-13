@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/9/21, 7:18 AM
+  ~ Last modified 8/13/21, 11:00 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,11 +12,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:height="52dp"
+        android:width="159dp"
+        android:height="131dp"
         android:gravity="top|center_horizontal">
 
         <shape
-            android:shape="rectangle">
+            android:shape="oval">
 
             <gradient
                 android:type="radial"
@@ -24,7 +25,7 @@
                 android:startColor="@color/default_color"
                 android:centerColor="@color/transparent"
                 android:centerX="0.5"
-                android:centerY="1.9"
+                android:centerY="0.8"
                 android:endColor="@color/transparent" />
 
         </shape>
