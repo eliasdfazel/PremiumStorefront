@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 6:38 AM
+ * Last modified 8/13/21, 9:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,16 +20,20 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.abs
 import kotlin.math.min
 
-class ScaleLayoutManager(val context: Context) : LinearLayoutManager(context) {
+class ScaleLayoutManager(val context: Context, val recyclerViewOrientation: Int = RecyclerView.HORIZONTAL) : LinearLayoutManager(context, recyclerViewOrientation, false) {
 
-    val velocityMillisecondPerInch = 23f
+    var velocityMillisecondPerInch = 23f
 
-    val shrinkAmount = 0.15f
-    val shrinkDistance = 0.9f
+    var shrinkAmount = 0.15f
+    var shrinkDistance = 0.9f
+
+    override fun setOrientation(orientation: Int) {
+        super.setOrientation(recyclerViewOrientation)
+    }
 
     override fun supportsPredictiveItemAnimations(): Boolean {
 
-        return false
+        return true
     }
 
     override fun smoothScrollToPosition(recyclerView: RecyclerView?, state: RecyclerView.State?, position: Int) {
@@ -59,8 +63,10 @@ class ScaleLayoutManager(val context: Context) : LinearLayoutManager(context) {
         return if (orientation == HORIZONTAL) {
             val scrolled = super.scrollHorizontallyBy(dx, recycler, recycleViewState)
             val midpoint = width / 2f
+
             val d0 = 0f
             val d1: Float = shrinkDistance * midpoint
+
             val s0 = 1f
             val s1: Float = 1f - shrinkAmount
 

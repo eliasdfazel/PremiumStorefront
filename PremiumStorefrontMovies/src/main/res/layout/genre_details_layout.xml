@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/13/21, 6:52 AM
+  ~ Last modified 8/13/21, 10:13 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -16,6 +16,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GenreDetailsConfigurations.UserInterface.GenreDetails">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moviePosterBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+
+        apps:layout_constraintHeight_percent="0.71"
+        apps:layout_constraintTop_toTopOf="parent"/>
+
+    <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/blurryBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        apps:realtimeBlurRadius="23dp"
+        apps:realtimeBlurGradientType="linearTopBottom"
+        apps:realtimeFirstColor="@color/premiumLightTransparent"
+        apps:realtimeSecondColor="@color/premiumDark"
+
+        apps:layout_constraintHeight_percent="0.73"
+        apps:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/brandingBackground"
@@ -40,10 +62,11 @@
         apps:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/genreDetailsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="103dp"
-            android:paddingBottom="19dp"
+            android:paddingBottom="103dp"
             android:isScrollContainer="false"
             android:nestedScrollingEnabled="false">
 
@@ -51,29 +74,74 @@
                 android:id="@+id/uniqueMoviesGenreRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="379dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="23dp"
                 android:scrollbars="none"
                 android:smoothScrollbar="true"
                 android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
                 android:layoutAnimation="@anim/fade_in_layout_animation"
+                android:visibility="invisible"
 
                 apps:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/movieNameTextView"
+                android:layout_width="259dp"
+                android:layout_height="139dp"
+                android:layout_marginTop="351dp"
+                android:elevation="19dp"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Premium\nStorefront"
+                android:textSize="29sp"
+                android:textStyle="bold"
+                android:textColor="@color/default_color_game_bright"
+                android:shadowColor="@color/default_color_game_bright"
+                android:shadowRadius="11"
+                android:fontFamily="@font/neon"
+                android:background="@drawable/movie_name_frame"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <net.geeksempire.blurry.effect.view.RealtimeBlurView
+                android:id="@+id/movieNameBlurryView"
+                android:layout_width="213dp"
+                android:layout_height="95dp"
+
+                apps:realtimeBlurRadius="25dp"
+                apps:realtimeBlurGradientType="none"
+                apps:realtimeFirstColor="@color/light_transparent"
+                apps:realtimeBlurTopLeft="23dp"
+                apps:realtimeBlurTopRight="23dp"
+                apps:realtimeBlurBottomLeft="23dp"
+                apps:realtimeBlurBottomRight="23dp"
+
+                apps:layout_constraintTop_toTopOf="@id/movieNameTextView"
+                apps:layout_constraintBottom_toBottomOf="@id/movieNameTextView"
+                apps:layout_constraintStart_toStartOf="@id/movieNameTextView"
+                apps:layout_constraintEnd_toEndOf="@id/movieNameTextView"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/moviesGenreRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginHorizontal="19dp"
                 android:scrollbars="none"
+                android:fadingEdge="horizontal"
+                android:requiresFadingEdge="horizontal"
+                android:fadingEdgeLength="13dp"
                 android:smoothScrollbar="true"
                 android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
                 android:layoutAnimation="@anim/fade_in_layout_animation"
+                android:visibility="invisible"
 
-                apps:layout_constraintTop_toBottomOf="@id/uniqueMoviesGenreRecyclerView"/>
+                apps:layout_constraintTop_toBottomOf="@id/movieNameTextView"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

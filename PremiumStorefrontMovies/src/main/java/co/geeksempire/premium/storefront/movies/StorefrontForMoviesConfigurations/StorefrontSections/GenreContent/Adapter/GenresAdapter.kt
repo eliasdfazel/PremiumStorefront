@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 11:47 AM
+ * Last modified 8/13/21, 7:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,8 @@
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.Adapter
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.util.Log
@@ -22,9 +24,11 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.databinding.StorefrontCategoryItemBinding
+import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.GenreDetails
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.StorefrontGenresData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.ViewHolder.GenresViewHolder
@@ -269,6 +273,11 @@ class GenresAdapter(private val context: AppCompatActivity,
 
                     override fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View, itemTextView: TextView, itemData: OptionDataItems) {
 
+                        context.startActivity(Intent(context, GenreDetails::class.java).apply {
+                            putExtra(CategoriesDataKeys.CategoryId, storefrontGenres[position].genreId)
+                            putExtra(CategoriesDataKeys.CategoryName, storefrontGenres[position].genreName)
+                            putExtra(CategoriesDataKeys.CategoryIcon, storefrontGenres[position].genreIconLink)
+                        }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
                         balloonOptionsMenu.removeBalloonOption()
 
