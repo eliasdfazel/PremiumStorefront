@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 10:53 AM
+ * Last modified 8/15/21, 9:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -149,6 +149,12 @@ class GenreDetails : StorefrontSplitActivity() {
                         genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
                         genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.visibility = View.VISIBLE
 
+                        genreDetailsLayoutBinding.movieNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                        genreDetailsLayoutBinding.movieNameTextView.visibility = View.VISIBLE
+
+                        genreDetailsLayoutBinding.movieNameBlurryView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                        genreDetailsLayoutBinding.movieNameBlurryView.visibility = View.VISIBLE
+
                     }, 999)
 
                     genreDetailsLayoutBinding.loadingView.visibility = View.GONE
@@ -161,12 +167,13 @@ class GenreDetails : StorefrontSplitActivity() {
 
                 if (it.isNotEmpty()) {
 
-                    genreDetailsLayoutBinding.moviesGenreRecyclerView.visibility = View.VISIBLE
-
                     allMoviesAdapter.storefrontMoviesContents.clear()
                     allMoviesAdapter.storefrontMoviesContents.addAll(it)
 
                     allMoviesAdapter.notifyDataSetChanged()
+
+                    genreDetailsLayoutBinding.moviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.moviesGenreRecyclerView.visibility = View.VISIBLE
 
                 }
 

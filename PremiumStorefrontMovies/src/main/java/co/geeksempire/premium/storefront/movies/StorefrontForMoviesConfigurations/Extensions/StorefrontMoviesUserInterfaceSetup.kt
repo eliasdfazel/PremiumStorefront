@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 10:31 AM
+ * Last modified 8/15/21, 9:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -129,6 +129,9 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.allContentBackground.background = (shadowLayer)
             /* End - Add Shadow To Content Background */
 
+            storefrontMoviesLayoutBinding.dividerImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light))
+            storefrontMoviesLayoutBinding.dividerImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.featured_content_divider_light)
+
             storefrontMoviesLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_light)
             storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_light))
             storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_light)
@@ -196,6 +199,9 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.allContentBackground.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeShadow.paint)
             storefrontMoviesLayoutBinding.allContentBackground.background = (shadowLayer)
             /* End - Add Shadow To Content Background */
+
+            storefrontMoviesLayoutBinding.dividerImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_dark))
+            storefrontMoviesLayoutBinding.dividerImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.featured_content_divider_dark)
 
             storefrontMoviesLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_dark)
             storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_dark))
