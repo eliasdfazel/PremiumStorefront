@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 11:59 AM
+ * Last modified 8/15/21, 12:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,9 +32,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<FavoritedViewHolder>() {
 
@@ -54,7 +55,13 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): FavoritedViewHolder {
 
-        return FavoritedViewHolder(LayoutInflater.from(context).inflate(R.layout.favorited_product_item, viewGroup, false))
+        val layoutId = when (viewType) {
+            ProductType.EntryStorefrontApplications -> R.layout.favorited_product_applications_item
+            ProductType.EntryStorefrontMovies -> R.layout.favorited_product_movies_item
+            else -> R.layout.favorited_product_applications_item
+        }
+
+        return FavoritedViewHolder(LayoutInflater.from(context).inflate(layoutId, viewGroup, false))
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -115,7 +122,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
             .asDrawable()
             .load(favoritedContentItems[position].productIcon)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(CircleCrop())
+            .transform(RoundedCorners(dpToInteger(context, 23)))
             .listener(object : RequestListener<Drawable> {
 
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/14/21, 12:11 PM
+ * Last modified 8/15/21, 12:30 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,19 +15,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.R
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.favorited_product_item.view.*
 import net.geeksempire.blurry.effect.view.RealtimeBlurView
 
 class FavoritedViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
-    val rootViewItem: ConstraintLayout = rootItemView.rootViewItem
+    val rootViewItem: ConstraintLayout = rootItemView.findViewById(R.id.rootViewItem)
 
-    val productIconImageView: ImageView = rootItemView.productIconImageView
-    val productNameTextView: TextView = rootItemView.productNameTextView
-    val productSummaryTextView: TextView = rootItemView.productSummaryTextView
+    val productIconImageView: ImageView = rootItemView.findViewById(R.id.productIconImageView)
+    val productNameTextView: TextView = rootItemView.findViewById(R.id.productNameTextView)
+    val productSummaryTextView: TextView = rootItemView.findViewById(R.id.productSummaryTextView)
 
-    val installView: MaterialButton = rootItemView.installView
-    val removeView: MaterialButton = rootItemView.removeView
+    val installView: MaterialButton = rootItemView.findViewById(R.id.installView)
+    val removeView: MaterialButton = rootItemView.findViewById(R.id.removeView)
 
-    val blurryBackgroundItem: RealtimeBlurView = rootItemView.blurryBackgroundItem
+    val blurryBackgroundItem: RealtimeBlurView = rootItemView.findViewById(R.id.blurryBackgroundItem)
 }
