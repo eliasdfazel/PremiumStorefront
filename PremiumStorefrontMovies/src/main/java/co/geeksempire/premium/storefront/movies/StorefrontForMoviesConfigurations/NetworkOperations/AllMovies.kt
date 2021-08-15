@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/7/21, 9:09 AM
+ * Last modified 8/15/21, 10:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -36,20 +37,30 @@ fun retrieveAllMovies(context: AppCompatActivity, moviesStorefrontLiveData: Movi
 
                     moviesStorefrontLiveData.processAllMoviesGenreData(documentSnapshot).collect { availableGenre ->
 
-                        availableGenre.forEach { genre ->
+                        val rawQuerySnapshot = ArrayList<QuerySnapshot>()
+
+                        val allGenreCount = availableGenre.size
+
+                        var genreCounter = 0
+
+                        availableGenre.forEachIndexed { index, storefrontGenresData ->
 
                             (context.application as PremiumStorefrontApplication)
                                 .firestoreDatabase
-                                .collection(moviesQueryEndpoint.storefrontMoviesGenreCollectionsEndpoint(genre.genreName))
+                                .collection(moviesQueryEndpoint.storefrontMoviesGenreCollectionsEndpoint(storefrontGenresData.genreName))
                                 .get().addOnSuccessListener { querySnapshot ->
+
+                                    genreCounter++
 
                                     if (!querySnapshot.isEmpty) {
 
-                                        context.lifecycleScope.launch {
+                                        rawQuerySnapshot.add(querySnapshot)
 
-                                            moviesStorefrontLiveData.processAllMoviesData(querySnapshot)
+                                    }
 
-                                        }
+                                    if (allGenreCount == genreCounter) {
+
+                                        moviesStorefrontLiveData.processAllMoviesData(rawQuerySnapshot)
 
                                     }
 

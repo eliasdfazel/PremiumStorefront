@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 9:05 AM
+ * Last modified 8/15/21, 10:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -119,13 +119,17 @@ class MoviesStorefrontLiveData : ViewModel() {
 
     }
 
-    fun processAllMoviesData(querySnapshot: QuerySnapshot) = CoroutineScope(Dispatchers.IO).launch {
+    fun processAllMoviesData(allQuerySnapshot: ArrayList<QuerySnapshot>) = CoroutineScope(Dispatchers.IO).launch {
 
         val allMovies = ArrayList<DocumentSnapshot>()
 
-        querySnapshot.documents.forEach {
+        allQuerySnapshot.forEachIndexed { index, querySnapshot ->
 
-            allMovies.add(it)
+            querySnapshot.documents.forEach {
+
+                allMovies.add(it)
+
+            }
 
         }
 
