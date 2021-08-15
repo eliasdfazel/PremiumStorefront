@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/5/21, 9:44 AM
+ * Last modified 8/15/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,29 +13,17 @@ package co.geeksempire.premium.storefront.Utils.IO
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
-import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import co.geeksempire.premium.storefront.Database.Write.InputProcess
-import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
-import co.geeksempire.premium.storefront.Utils.Notifications.NotificationBuilder
 import kotlinx.coroutines.delay
 import org.json.JSONArray
 
 class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams) {
-
-    object Foreground {
-        const val NotificationId = 123
-    }
-
-    private val notificationBuilder: NotificationBuilder by lazy {
-        NotificationBuilder(applicationContext)
-    }
 
     private val generalEndpoint = GeneralEndpoints()
 
@@ -59,26 +47,10 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
         when (updateDataKey) {
             IO.UpdateApplicationsDataKey -> {
 
-                setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
-                    notificationId = Foreground.NotificationId,
-                    notificationTitle = applicationContext.getString(R.string.applicationName),
-                    notificationContent = applicationContext.getString(R.string.updatingApplicationsDataText),
-                    notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
-                    notificationDone = false)
-                ))
-
                 startApplicationsContentRetrieval(IO.UpdateApplicationsDataKey)
 
             }
             IO.UpdateGamesDataKey -> {
-
-                setForegroundAsync(ForegroundInfo(Foreground.NotificationId, notificationBuilder.create(
-                    notificationId = Foreground.NotificationId,
-                    notificationTitle = applicationContext.getString(R.string.applicationName),
-                    notificationContent = applicationContext.getString(R.string.updatingGamesDataText),
-                    notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
-                    notificationDone = false)
-                ))
 
                 startGamesContentRetrieval(IO.UpdateGamesDataKey)
 
@@ -122,13 +94,6 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
                 } else {
                     Log.d(this@DataUpdatingWork.javaClass.simpleName, "No More Content")
 
-                    setForegroundAsync(ForegroundInfo(Foreground.NotificationId,  notificationBuilder.create(
-                        notificationId = Foreground.NotificationId,
-                        notificationTitle = applicationContext.getString(R.string.applicationName),
-                        notificationContent = applicationContext.getString(R.string.doneText),
-                        notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
-                        notificationDone = true)))
-
                     stringBuilder.append(rawDataJsonArray.toString())
 
                     inputProcess.writeDataToFile(updateDataKey, stringBuilder.toString())
@@ -159,13 +124,6 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
 
                 } else {
                     Log.d(this@DataUpdatingWork.javaClass.simpleName, "No More Content")
-
-                    setForegroundAsync(ForegroundInfo(Foreground.NotificationId,  notificationBuilder.create(
-                        notificationId = Foreground.NotificationId,
-                        notificationTitle = applicationContext.getString(R.string.applicationName),
-                        notificationContent = applicationContext.getString(R.string.doneText),
-                        notificationIntent = WorkManager.getInstance(applicationContext).createCancelPendingIntent(id),
-                        notificationDone = true)))
 
                     stringBuilder.append(rawDataJsonArray.toString())
 
