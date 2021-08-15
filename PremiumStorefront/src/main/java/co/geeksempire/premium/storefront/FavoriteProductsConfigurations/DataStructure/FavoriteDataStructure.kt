@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 10:21 AM
+ * Last modified 8/15/21, 12:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,11 +19,14 @@ object Favorite {
     const val ProductIcon = "productIcon"
 
     const val ProductFavorited: String = "productFavorited"
+
+    const val ProductType: String = "productType"
 }
 
 @Keep
 data class FavoriteDataStructure(var productId: String,
                                  var productName: String,
                                  var productDescription: String,
-                                 val productIcon: String,
-                                 var productFavorited: Boolean)
+                                 var productIcon: String,
+                                 var productFavorited: Boolean,
+                                 var productType: String)

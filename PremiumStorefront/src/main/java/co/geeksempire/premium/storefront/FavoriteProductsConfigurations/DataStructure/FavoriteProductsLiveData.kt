@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/12/21, 11:55 AM
+ * Last modified 8/15/21, 11:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStr
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +48,8 @@ class FavoriteProductsLiveData : ViewModel() {
                     productName = it.getString(Favorite.ProductName)?:"Float It",
                     productDescription = it.getString(Favorite.ProductDescription)?:"Float It To Become Master Of Multitasking ⚡",
                     productIcon = it.getString(Favorite.ProductIcon)?:"https://geeksempire.co/wp-content/uploads/2021/04/Float-It.jpg",
-                    productFavorited = it.getBoolean(Favorite.ProductFavorited)?:true
+                    productFavorited = it.getBoolean(Favorite.ProductFavorited)?:true,
+                    productType = it.getString(Favorite.ProductType)?:EntryPreferences.EntryStorefrontApplications
                 ))
 
             }

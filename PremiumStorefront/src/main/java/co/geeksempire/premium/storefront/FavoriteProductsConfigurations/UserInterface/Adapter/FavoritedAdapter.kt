@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:26 AM
+ * Last modified 8/15/21, 11:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,6 +24,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.DataStructure.FavoriteDataStructure
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.ViewHolder.FavoritedViewHolder
+import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
@@ -39,6 +40,13 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
     val favoritedContentItems: ArrayList<FavoriteDataStructure> = ArrayList<FavoriteDataStructure>()
 
+    object ProductType {
+        const val EntryStorefrontApplications = 0
+        const val EntryStorefrontGames = 1
+        const val EntryStorefrontMovies = 2
+        const val EntryStorefrontBooks = 3
+    }
+
     override fun getItemCount(): Int {
 
         return favoritedContentItems.size
@@ -47,6 +55,15 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): FavoritedViewHolder {
 
         return FavoritedViewHolder(LayoutInflater.from(context).inflate(R.layout.favorited_product_item, viewGroup, false))
+    }
+
+    override fun getItemViewType(position: Int): Int {
+
+        return when (favoritedContentItems[position].productType) {
+            EntryPreferences.EntryStorefrontApplications -> ProductType.EntryStorefrontApplications
+            EntryPreferences.EntryStorefrontMovies -> ProductType.EntryStorefrontMovies
+            else -> ProductType.EntryStorefrontApplications
+        }
     }
 
     override fun onBindViewHolder(favoritedViewHolder: FavoritedViewHolder, position: Int) {

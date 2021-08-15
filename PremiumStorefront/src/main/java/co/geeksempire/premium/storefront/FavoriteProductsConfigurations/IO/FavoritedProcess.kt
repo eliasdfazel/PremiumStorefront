@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/11/21, 12:08 PM
+ * Last modified 8/15/21, 11:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,8 @@ interface FavoriteProductQueryInterface {
 class FavoritedProcess (private val context: AppCompatActivity) {
 
     fun add(userUniqueIdentifier: String, userEmailAddress: String,
-            productIdToFavorite: String, productName: String, productDescription: String, productIcon: String) {
+            productIdToFavorite: String, productName: String, productDescription: String, productIcon: String,
+            productType: String) {
 
         (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
@@ -35,7 +36,8 @@ class FavoritedProcess (private val context: AppCompatActivity) {
                 productName = productName,
                 productDescription = productDescription,
                 productIcon = productIcon,
-                productFavorited = true))
+                productFavorited = true,
+                productType = productType))
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 11:44 AM
+ * Last modified 8/15/21, 12:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,12 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
+import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
+import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
@@ -27,6 +31,8 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSpli
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.movies.Actions.Operation.ActionCenterOperationsMovies
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter.MovieDetailsPagerAdapter
@@ -37,9 +43,12 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.GenreData
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsLayoutBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Source
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -75,6 +84,10 @@ class MoviesDetails : StorefrontSplitActivity() {
     }
 
     val genresData: GenreData = GenreData()
+
+    val favoritedProcess: FavoritedProcess by lazy {
+        FavoritedProcess(this@MoviesDetails)
+    }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(applicationContext)
@@ -229,15 +242,39 @@ class MoviesDetails : StorefrontSplitActivity() {
 
                     movieSelectedPosition = position
 
-                    moviesDetailsLayoutBinding.favoriteView.setOnClickListener {
+                    movieDetailsPagerAdapter.moviesDetailsList[position].data?.let {
 
-                        if (movieDetailsPagerAdapter.moviesDetailsList.isNotEmpty()) {
+                        val moviesDataStructure = MoviesDataStructure(it)
 
-                            movieDetailsPagerAdapter.moviesDetailsList[position].data?.let {
+                        Firebase.auth.currentUser?.let { firebaseUser ->
 
-                                val moviesDataStructure = MoviesDataStructure(it)
+                            favoritedProcess.isProductFavorited(firebaseUser.uid, firebaseUser.email!!, moviesDataStructure.movieProductId(),
+                                object : FavoriteProductQueryInterface {
 
+                                    override fun favoriteProduct(isProductFavorited: Boolean) {
+                                        super.favoriteProduct(isProductFavorited)
 
+                                        if (isProductFavorited) {
+
+                                            moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon))
+
+                                        }
+
+                                    }
+
+                                })
+
+                        }
+
+                        moviesDetailsLayoutBinding.favoriteView.setOnClickListener {
+
+                            if (movieDetailsPagerAdapter.moviesDetailsList.isNotEmpty()) {
+
+                                movieDetailsPagerAdapter.moviesDetailsList[position].data?.let {
+
+                                    startFavoriteProcess(moviesDataStructure.movieProductId(), moviesDataStructure.movieName(), moviesDataStructure.movieDescription(), moviesDataStructure.moviePoster(), EntryPreferences.EntryStorefrontMovies)
+
+                                }
 
                             }
 
@@ -320,4 +357,126 @@ class MoviesDetails : StorefrontSplitActivity() {
         }
 
     }
+
+    fun startFavoriteProcess(productId: String, productName: String, productDescription: String, productIcon: String, favoriteType: String = EntryPreferences.EntryStorefrontMovies) {
+
+        if (Firebase.auth.currentUser != null) {
+
+            favoritedProcess.isProductFavorited(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email!!, productId,
+                object : FavoriteProductQueryInterface {
+
+                    override fun favoriteProduct(isProductFavorited: Boolean) {
+                        super.favoriteProduct(isProductFavorited)
+
+                        if (isProductFavorited) {
+
+                            if (networkCheckpoint.networkConnection()) {
+
+                                favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser!!.uid , productId)
+
+                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(applicationContext.getDrawable(R.drawable.favorite_icon))
+
+                            } else {
+
+                                SnackbarBuilder(applicationContext).show (
+                                    rootView = moviesDetailsLayoutBinding.rootView,
+                                    messageText= getString(R.string.noNetworkConnection),
+                                    messageDuration = Snackbar.LENGTH_INDEFINITE,
+                                    actionButtonText = R.string.retryText,
+                                    snackbarActionHandlerInterface = object :
+                                        SnackbarActionHandlerInterface {
+
+                                        override fun onActionButtonClicked(snackbar: Snackbar) {
+                                            super.onActionButtonClicked(snackbar)
+
+                                            if (networkCheckpoint.networkConnection()) {
+
+                                                favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser!!.uid, productId)
+
+                                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorite_icon))
+
+                                                snackbar.dismiss()
+
+                                            } else {
+
+
+
+                                            }
+
+                                        }
+
+                                    }
+                                )
+
+                            }
+
+                        } else {
+
+                            if (networkCheckpoint.networkConnection()) {
+
+                                favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
+                                    userEmailAddress = Firebase.auth.currentUser.email!!,
+                                    productIdToFavorite = productId,
+                                    productName = productName,
+                                    productDescription = productDescription,
+                                    productIcon = productIcon,
+                                    productType = favoriteType)
+
+                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon))
+
+                            } else {
+
+                                SnackbarBuilder(applicationContext).show (
+                                    rootView = moviesDetailsLayoutBinding.rootView,
+                                    messageText= getString(R.string.noNetworkConnection),
+                                    messageDuration = Snackbar.LENGTH_INDEFINITE,
+                                    actionButtonText = R.string.retryText,
+                                    snackbarActionHandlerInterface = object : SnackbarActionHandlerInterface {
+
+                                        override fun onActionButtonClicked(snackbar: Snackbar) {
+                                            super.onActionButtonClicked(snackbar)
+
+                                            if (networkCheckpoint.networkConnection()) {
+
+                                                favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
+                                                    userEmailAddress = Firebase.auth.currentUser.email!!,
+                                                    productIdToFavorite = productId,
+                                                    productName = productName,
+                                                    productDescription = productDescription,
+                                                    productIcon = productIcon,
+                                                    productType = favoriteType)
+
+                                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon))
+
+                                                snackbar.dismiss()
+
+                                            } else {
+
+
+
+                                            }
+
+                                        }
+
+                                    }
+                                )
+
+                            }
+
+                        }
+
+                    }
+
+                })
+
+
+        } else {
+
+            startActivity(Intent(applicationContext, AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, 0).toBundle())
+
+        }
+
+    }
+
 }
