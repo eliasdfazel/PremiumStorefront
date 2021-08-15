@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 9:08 AM
+ * Last modified 8/15/21, 12:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.Utils.IO
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.Keep
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import co.geeksempire.premium.storefront.Database.Write.InputProcess
@@ -20,6 +21,10 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.Source
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
 import org.json.JSONArray
 
@@ -62,8 +67,7 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
             }
             IO.UpdateMoviesDataKey -> {
 
-                //Get List Genres
-                    //Then Get Genres Collections
+                startMoviesContentRetrieval(IO.UpdateMoviesDataKey)
 
             }
         }
@@ -134,6 +138,79 @@ class DataUpdatingWork(val appContext: Context, val workerParams: WorkerParamete
             }
 
         }).getMethod(gamesQueryEndpoints.getAllAndroidGamesEndpoint(productPerPage = 99, numberOfPage = numberOfPageToRetrieve))
+
+    }
+
+    object GenreDataKey {
+        const val GenreId = "genreId"
+        const val GenreName = "genreName"
+        const val GenreIconLink = "genreIconLink"
+        const val ProductCount = "productCount"
+    }
+
+    @Keep
+    data class GenreIds(var GenreIds: ArrayList<HashMap<String, Any>>? = null)
+
+    @Keep
+    data class StorefrontGenresData(var genreId: Int, var genreName: String, var genreIconLink: String, var productCount: Int, var selectedCategory: Boolean = false)
+
+    private fun startMoviesContentRetrieval(updateDataKey: String) {
+
+        Firebase.firestore
+            .document("/PremiumStorefront/Products" + "/" + "Multimedia" + "/" + "Movies")
+            .get(Source.SERVER).addOnSuccessListener { documentSnapshot ->
+
+                if (documentSnapshot.exists()) {
+
+                    val moviesDocumentSnapshots = ArrayList<StorefrontGenresData>()
+
+                    documentSnapshot.toObject(GenreIds::class.java)!!.GenreIds?.forEach { documentMap ->
+
+                        moviesDocumentSnapshots.add(StorefrontGenresData(
+                            genreId = documentMap[GenreDataKey.GenreId].toString().toInt(),
+                            genreName = documentMap[GenreDataKey.GenreName].toString(),
+                            genreIconLink = documentMap[GenreDataKey.GenreIconLink].toString(),
+                            productCount = documentMap[GenreDataKey.ProductCount].toString().toInt()
+                        ))
+
+                    }
+
+                    val rawQuerySnapshot = ArrayList<QuerySnapshot>()
+
+                    val allGenreCount = moviesDocumentSnapshots.size
+
+                    var genreCounter = 0
+
+                    moviesDocumentSnapshots.forEachIndexed { index, storefrontGenresData ->
+
+                        Firebase.firestore
+                            .collection("/PremiumStorefront/Products" + "/" + "Multimedia" + "/" + "Movies" + "/" + storefrontGenresData.genreName)
+                            .get(Source.SERVER).addOnSuccessListener { querySnapshot ->
+
+                                genreCounter++
+
+                                if (!querySnapshot.isEmpty) {
+
+                                    rawQuerySnapshot.add(querySnapshot)
+
+                                }
+
+                                if (allGenreCount == genreCounter) {
+
+
+
+                                }
+
+                            }
+
+                    }
+
+                }
+
+            }.addOnFailureListener {
+                it.printStackTrace()
+
+            }
 
     }
 
