@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:52 AM
+ * Last modified 8/15/21, 11:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,6 +39,8 @@ fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData:
 
                 val productsIds = documentSnapshot.toObject(ProductsIds::class.java)!!.ProductsIds
 
+                var featuredMoviesCounter = 0
+
                 productsIds?.forEach {
 
                     val productId = it[FeaturedMoviesDataKey.ProductId].toString()
@@ -49,12 +51,14 @@ fun retrieveFeaturedMovies(context: AppCompatActivity, moviesStorefrontLiveData:
                         .document(moviesQueryEndpoint.storefrontSpecificMovieEndpoint(movieGenre, productId))
                         .get(Source.SERVER).addOnSuccessListener { movieDocumentSnapshot ->
 
+                            featuredMoviesCounter++
+
                             if (movieDocumentSnapshot.exists()) {
                                 Log.d("Featured Movies", movieDocumentSnapshot.data?.get(MoviesDataKey.MovieName).toString())
 
                                 moviesDocumentSnapshots.add(movieDocumentSnapshot)
 
-                                if (productsIds.size == moviesDocumentSnapshots.size) {
+                                if (productsIds.size == featuredMoviesCounter) {
 
                                     moviesStorefrontLiveData.featuredContentItemData.postValue(moviesDocumentSnapshots)
 
