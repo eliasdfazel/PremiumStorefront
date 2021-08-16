@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 9:55 AM
+ * Last modified 8/16/21, 9:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -144,18 +144,18 @@ class GenreDetails : StorefrontSplitActivity() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
 
-                        genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.smoothScrollToPosition(1)
-
-                        genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
-                        genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.visibility = View.VISIBLE
-
-                        genreDetailsLayoutBinding.movieNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
-                        genreDetailsLayoutBinding.movieNameTextView.visibility = View.VISIBLE
-
-                        genreDetailsLayoutBinding.movieNameBlurryView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
-                        genreDetailsLayoutBinding.movieNameBlurryView.visibility = View.VISIBLE
+                        scaleLayoutManager.smoothScrollToPosition(genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView, RecyclerView.State(), 1)
 
                     }, 999)
+
+                    genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.visibility = View.VISIBLE
+
+                    genreDetailsLayoutBinding.movieNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.movieNameTextView.visibility = View.VISIBLE
+
+                    genreDetailsLayoutBinding.movieNameBlurryView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.movieNameBlurryView.visibility = View.VISIBLE
 
                     genreDetailsLayoutBinding.loadingView.visibility = View.GONE
 

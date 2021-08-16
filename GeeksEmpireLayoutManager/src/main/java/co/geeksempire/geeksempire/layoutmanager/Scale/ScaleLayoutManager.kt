@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 9:07 AM
+ * Last modified 8/16/21, 9:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,7 +61,9 @@ class ScaleLayoutManager(val context: Context, val recyclerViewOrientation: Int 
         val orientation = orientation
 
         return if (orientation == HORIZONTAL) {
+
             val scrolled = super.scrollHorizontallyBy(dx, recycler, recycleViewState)
+
             val midpoint = width / 2f
 
             val d0 = 0f
