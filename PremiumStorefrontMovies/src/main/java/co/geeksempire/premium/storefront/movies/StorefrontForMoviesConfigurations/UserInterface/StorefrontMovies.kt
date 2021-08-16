@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 11:23 AM
+ * Last modified 8/16/21, 8:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -240,7 +240,7 @@ class StorefrontMovies : StorefrontSplitActivity() {
             storefrontMoviesLayoutBinding.genresRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontMoviesLayoutBinding.genresRecyclerView.adapter = genresAdapter
 
-            storefrontMoviesLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 179, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL, false)
+            storefrontMoviesLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 159, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL, false)
             storefrontMoviesLayoutBinding.allContentRecyclerView.adapter = allMoviesAdapter
 
             moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
