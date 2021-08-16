@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/15/21, 10:06 AM
+  ~ Last modified 8/16/21, 9:17 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -103,6 +103,7 @@
                 android:id="@+id/dividerImageView"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
+                android:layout_marginEnd="16.6dp"
                 android:padding="7dp"
                 android:src="@drawable/diamond_solid_icon_light"
                 android:background="@drawable/featured_content_divider_light"
