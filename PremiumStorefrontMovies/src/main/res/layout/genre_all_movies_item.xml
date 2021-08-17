@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/17/21, 7:38 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootViewItem"
+    android:layout_height="wrap_content"
+    android:layout_width="179dp"
+    android:background="@color/transparent"
+
+    apps:layout_constraintDimensionRatio="1:1">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/movieGlowingBackground"
+        android:layout_height="131dp"
+        android:layout_width="179dp"
+        android:background="@drawable/all_movies_glowing_top"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent" />
+
+    <net.geekstools.imageview.customshapes.ShapesImage
+        android:id="@+id/moviesPosterImageView"
+        android:layout_height="257dp"
+        android:layout_width="179dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="7dp"
+        android:scaleType="centerCrop"
+        android:background="@color/transparent"
+
+        apps:shapeDrawable="@drawable/rectercle"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

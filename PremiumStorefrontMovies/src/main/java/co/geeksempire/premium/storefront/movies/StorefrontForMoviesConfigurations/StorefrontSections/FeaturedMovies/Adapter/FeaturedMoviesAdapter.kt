@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 11:13 AM
+ * Last modified 8/17/21, 6:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -147,7 +147,7 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
                                 featuredMoviesViewHolder.movieContentBackground.setImageDrawable(movieGradient)
 
-                                if (isColorLightDark(vibrantColor)) {
+                                if (isColorLightDark(dominantColor)) {
 
                                     featuredMoviesViewHolder.movieNameTextView.setTextColor(context.getColor(R.color.dark))
                                     featuredMoviesViewHolder.movieSummaryTextView.setTextColor(context.getColor(R.color.dark))

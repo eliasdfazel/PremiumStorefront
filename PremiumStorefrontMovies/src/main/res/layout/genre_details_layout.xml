@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/16/21, 9:19 AM
+  ~ Last modified 8/17/21, 7:40 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -48,6 +48,7 @@
         android:src="@drawable/premium_storefront_logo"/>
 
     <co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView
+        android:id="@+id/nextedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
@@ -109,6 +110,21 @@
                 apps:layout_constraintStart_toStartOf="parent"
                 apps:layout_constraintEnd_toEndOf="parent"/>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/movieNameLineView"
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:gravity="center"
+                android:lines="1"
+                android:text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
+                android:textColor="@color/default_color_transparent"
+                android:textSize="33sp"
+                android:elevation="11dp"
+                android:visibility="gone"
+
+                apps:layout_constraintTop_toTopOf="@id/movieNameTextView"
+                apps:layout_constraintBottom_toBottomOf="@id/movieNameTextView" />
+
             <net.geeksempire.blurry.effect.view.RealtimeBlurView
                 android:id="@+id/movieNameBlurryView"
                 android:layout_width="213dp"
@@ -135,12 +151,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:layout_marginHorizontal="19dp"
-                android:scrollbars="none"
-                android:fadingEdge="horizontal"
-                android:requiresFadingEdge="horizontal"
-                android:fadingEdgeLength="13dp"
-                android:smoothScrollbar="true"
-                android:alwaysDrawnWithCache="true"
                 android:isScrollContainer="false"
                 android:nestedScrollingEnabled="false"
                 android:layoutAnimation="@anim/fade_in_layout_animation"

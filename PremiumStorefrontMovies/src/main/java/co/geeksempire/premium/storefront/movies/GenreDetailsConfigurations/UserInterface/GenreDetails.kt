@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/16/21, 9:33 AM
+ * Last modified 8/17/21, 7:41 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.core.view.isInvisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -36,15 +37,16 @@ import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
-import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
-import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.HorizontalSpacingItemDecoration
+import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.snappedItemPosition
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.Extensions.setupGenreDetailsUserInterface
+import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.AllMoviesSection.Adapter.GenreAllMoviesAdapter
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.UniqueSection.Adapter.UniqueMoviesAdapter
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.AllMovies.Adapter.AllMoviesAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveAllMoviesWithExclusion
 import co.geeksempire.premium.storefront.movies.databinding.GenreDetailsLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -75,8 +77,8 @@ class GenreDetails : StorefrontSplitActivity() {
         ViewModelProvider(this@GenreDetails).get(MoviesStorefrontLiveData::class.java)
     }
 
-    val allMoviesAdapter: AllMoviesAdapter by lazy {
-        AllMoviesAdapter(this@GenreDetails)
+    val genreAllMoviesAdapter: GenreAllMoviesAdapter by lazy {
+        GenreAllMoviesAdapter(this@GenreDetails)
     }
 
     val uniqueMoviesAdapter: UniqueMoviesAdapter by lazy {
@@ -121,9 +123,8 @@ class GenreDetails : StorefrontSplitActivity() {
         val uniqueMoviesSnapHelper: SnapHelper = PagerSnapHelper()
         uniqueMoviesSnapHelper.attachToRecyclerView(genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView)
 
-        genreDetailsLayoutBinding.moviesGenreRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
-        genreDetailsLayoutBinding.moviesGenreRecyclerView.adapter = allMoviesAdapter
-        genreDetailsLayoutBinding.moviesGenreRecyclerView.addItemDecoration(HorizontalSpacingItemDecoration(applicationContext, 19))
+        genreDetailsLayoutBinding.moviesGenreRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 179), RecyclerView.VERTICAL, false)
+        genreDetailsLayoutBinding.moviesGenreRecyclerView.adapter = genreAllMoviesAdapter
 
         intent?.let { inputData ->
 
@@ -154,6 +155,8 @@ class GenreDetails : StorefrontSplitActivity() {
                     genreDetailsLayoutBinding.movieNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
                     genreDetailsLayoutBinding.movieNameTextView.visibility = View.VISIBLE
 
+                    genreDetailsLayoutBinding.movieNameLineView.visibility = View.VISIBLE
+
                     genreDetailsLayoutBinding.movieNameBlurryView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
                     genreDetailsLayoutBinding.movieNameBlurryView.visibility = View.VISIBLE
 
@@ -167,13 +170,29 @@ class GenreDetails : StorefrontSplitActivity() {
 
                 if (it.isNotEmpty()) {
 
-                    allMoviesAdapter.storefrontMoviesContents.clear()
-                    allMoviesAdapter.storefrontMoviesContents.addAll(it)
+                    genreAllMoviesAdapter.storefrontMoviesContents.clear()
+                    genreAllMoviesAdapter.storefrontMoviesContents.addAll(it)
 
-                    allMoviesAdapter.notifyDataSetChanged()
+                    genreAllMoviesAdapter.notifyDataSetChanged()
 
                     genreDetailsLayoutBinding.moviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
                     genreDetailsLayoutBinding.moviesGenreRecyclerView.visibility = View.VISIBLE
+
+                    inputData.getStringExtra(CategoriesDataKeys.CategoryName)?.let { genreName ->
+                        retrieveAllMoviesWithExclusion(this@GenreDetails, moviesStorefrontLiveData, genreName)
+                    }
+
+                }
+
+            })
+
+            moviesStorefrontLiveData.allMoviesItemData.observe(this@GenreDetails, {
+
+                if (it.isNotEmpty()) {
+
+                    genreAllMoviesAdapter.storefrontMoviesContents.addAll(it)
+
+                    genreAllMoviesAdapter.notifyItemRangeInserted(genreAllMoviesAdapter.itemCount, genreAllMoviesAdapter.storefrontMoviesContents.size)
 
                 }
 
@@ -242,6 +261,41 @@ class GenreDetails : StorefrontSplitActivity() {
                 }
 
             })
+
+            genreDetailsLayoutBinding.nextedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
+
+                val positionXY = IntArray(2)
+                genreDetailsLayoutBinding.movieNameLineView.getLocationInWindow(positionXY)
+
+                if (scrollY > oldScrollY) {//Scrolling Up
+
+                    if (positionXY.last() <= 29 ) {
+
+                        if (genreDetailsLayoutBinding.moviePosterBackground.isShown) {
+
+                            genreDetailsLayoutBinding.moviePosterBackground.startAnimation(AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_out))
+                            genreDetailsLayoutBinding.moviePosterBackground.visibility = View.INVISIBLE
+
+                        }
+
+                    }
+
+                } else if (scrollY < oldScrollY) {//Scrolling Down
+
+                    if (positionXY.last() >= 29) {
+
+                        if (genreDetailsLayoutBinding.moviePosterBackground.isInvisible) {
+
+                            genreDetailsLayoutBinding.moviePosterBackground.startAnimation(AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_in))
+                            genreDetailsLayoutBinding.moviePosterBackground.visibility = View.VISIBLE
+
+                        }
+
+                    }
+
+                }
+
+            }
 
         }
 

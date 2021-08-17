@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 10:33 AM
+ * Last modified 8/17/21, 6:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -119,6 +119,29 @@ class MoviesStorefrontLiveData : ViewModel() {
 
     }
 
+    fun processAllMoviesGenreDataWithExclusion(documentSnapshot: DocumentSnapshot, excludedMovie: String) = flow<ArrayList<StorefrontGenresData>> {
+
+        val moviesDocumentSnapshots = ArrayList<StorefrontGenresData>()
+
+        documentSnapshot.toObject(GenreIds::class.java)!!.GenreIds?.forEach { documentMap ->
+
+            if (documentMap[GenreDataKey.GenreName].toString() != excludedMovie) {
+
+                moviesDocumentSnapshots.add(StorefrontGenresData(
+                    genreId = documentMap[GenreDataKey.GenreId].toString().toInt(),
+                    genreName = documentMap[GenreDataKey.GenreName].toString(),
+                    genreIconLink = documentMap[GenreDataKey.GenreIconLink].toString(),
+                    productCount = documentMap[GenreDataKey.ProductCount].toString().toInt()
+                ))
+
+            }
+
+        }
+
+        emit(moviesDocumentSnapshots)
+
+    }
+
     fun processAllMoviesData(allQuerySnapshot: ArrayList<QuerySnapshot>) = CoroutineScope(Dispatchers.IO).launch {
 
         val allMovies = ArrayList<DocumentSnapshot>()
@@ -128,6 +151,34 @@ class MoviesStorefrontLiveData : ViewModel() {
             querySnapshot.documents.forEach {
 
                 allMovies.add(it)
+
+            }
+
+        }
+
+        allMoviesItemData.postValue(allMovies)
+
+    }
+
+    fun processAllMoviesData(allQuerySnapshot: ArrayList<QuerySnapshot>, selectedGenre: String) = CoroutineScope(Dispatchers.IO).launch {
+
+        val allMovies = ArrayList<DocumentSnapshot>()
+
+        allQuerySnapshot.forEachIndexed { index, querySnapshot ->
+
+            querySnapshot.documents.forEach {
+
+                it.data?.let { moviesData ->
+
+                    val moviesDataStructure = MoviesDataStructure(moviesData)
+
+                    if (moviesDataStructure.movieGenres().contains(selectedGenre)) {
+
+                        allMovies.add(it)
+
+                    }
+
+                }
 
             }
 
