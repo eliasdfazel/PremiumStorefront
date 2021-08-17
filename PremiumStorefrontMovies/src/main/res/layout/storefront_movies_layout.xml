@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/16/21, 9:17 AM
+  ~ Last modified 8/17/21, 4:33 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -127,7 +127,7 @@
             <net.geeksempire.blurry.effect.view.RealtimeBlurView
                 android:id="@+id/newMovieBlurryBackground"
                 android:layout_width="match_parent"
-                android:layout_height="512dp"
+                android:layout_height="543dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="23dp"
                 android:layout_marginEnd="17dp"
