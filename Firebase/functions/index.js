@@ -852,6 +852,43 @@ async function setProductsGamesData(jsonObject) {
 
 }
 
+exports.transferSpecificMovieData = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
+
+    var productId = req.query.productId;
+
+    if (productId == null) {
+        productId = '3889';
+    }
+
+    var applicationsEndpoint = 'https://geeksempire.co/wp-json/wc/v3/products/'
+        + productId
+        + '?consumer_key=ck_e469d717bd778da4fb9ec24881ee589d9b202662&consumer_secret=cs_ac53c1b36d1a85e36a362855d83af93f0d377686';
+
+    var xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open('GET', applicationsEndpoint, true);
+    xmlHttpRequest.setRequestHeader('accept', 'application/json');
+    xmlHttpRequest.setRequestHeader('Content-Type', 'application/json');
+    xmlHttpRequest.onreadystatechange = function () {
+        if (this.readyState == 4) {
+
+        } else {
+
+        }
+    };
+    xmlHttpRequest.onprogress = function () {
+
+    };
+    xmlHttpRequest.onload = function () {
+
+        var jsonObjectParserResponse = JSON.parse(xmlHttpRequest.responseText);
+
+        setProductsMoviesData(jsonObjectParserResponse);
+
+    };
+    xmlHttpRequest.send();
+
+});
+
 exports.transferMoviesData = functions.runWith(runtimeOptions).https.onRequest((req, res) => {
 
     var numberOfPage = req.query.numberOfPage;
