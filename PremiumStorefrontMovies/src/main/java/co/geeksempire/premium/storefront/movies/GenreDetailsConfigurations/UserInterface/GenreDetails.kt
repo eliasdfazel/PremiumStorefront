@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/17/21, 7:41 AM
+ * Last modified 8/18/21, 7:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,6 +27,7 @@ import co.geeksempire.geeksempire.layoutmanager.Scale.ScaleLayoutManager
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
@@ -296,6 +297,18 @@ class GenreDetails : StorefrontSplitActivity() {
                 }
 
             }
+
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        genreDetailsLayoutBinding.goBackView.setOnClickListener {
+
+            overridePendingTransition(0, R.anim.fade_out)
+            this@GenreDetails.finish()
 
         }
 
