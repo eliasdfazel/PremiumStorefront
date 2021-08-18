@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/18/21, 8:09 AM
+ * Last modified 8/18/21, 8:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -161,8 +161,6 @@ class GenreDetails : StorefrontSplitActivity() {
                     genreDetailsLayoutBinding.movieNameBlurryView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
                     genreDetailsLayoutBinding.movieNameBlurryView.visibility = View.VISIBLE
 
-                    genreDetailsLayoutBinding.loadingView.visibility = View.GONE
-
                 }
 
             })
@@ -170,6 +168,8 @@ class GenreDetails : StorefrontSplitActivity() {
             moviesStorefrontLiveData.allMoviesOfGenre.observe(this@GenreDetails, {
 
                 if (it.isNotEmpty()) {
+
+                    genreDetailsLayoutBinding.loadingView.visibility = View.GONE
 
                     genreAllMoviesAdapter.storefrontMoviesContents.clear()
                     genreAllMoviesAdapter.storefrontMoviesContents.addAll(it)
