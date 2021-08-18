@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/18/21, 11:03 AM
+ * Last modified 8/18/21, 2:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -166,7 +166,7 @@ dependencies {
     api 'com.google.firebase:firebase-functions-ktx'
 
 
-    api 'com.airbnb.android:lottie:4.0.0'
+    api 'com.airbnb.android:lottie:4.1.0'
 
 
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
@@ -184,7 +184,7 @@ dependencies {
     api 'com.github.bumptech.glide:glide:4.12.0'
 
 
-    api 'org.jsoup:jsoup:1.14.1'
+    api 'org.jsoup:jsoup:1.14.2'
 
 
     testImplementation 'junit:junit:4.13.2'
