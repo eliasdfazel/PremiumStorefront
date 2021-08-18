@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/18/21, 7:59 AM
+ * Last modified 8/18/21, 8:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -307,7 +307,7 @@ class GenreDetails : StorefrontSplitActivity() {
 
         genreDetailsLayoutBinding.goBackView.setOnClickListener {
 
-            overridePendingTransition(0, R.anim.fade_out)
+            overridePendingTransition(0, R.anim.slide_out_right)
             this@GenreDetails.finish()
 
         }
