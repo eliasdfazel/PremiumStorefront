@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 7:37 AM
+ * Last modified 8/18/21, 8:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.LayerDrawable
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.movies.R
@@ -28,15 +29,15 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
     var featuredContentBackground = when (themeType) {
         ThemeType.ThemeLight -> {
 
-            context.getDrawable(R.drawable.featured_content_background_light) as LayerDrawable
+            AppCompatResources.getDrawable(context, R.drawable.featured_content_background_light) as LayerDrawable
 
         }
         ThemeType.ThemeDark -> {
 
-            context.getDrawable(R.drawable.featured_content_background_dark) as LayerDrawable
+            AppCompatResources.getDrawable(context, R.drawable.featured_content_background_dark) as LayerDrawable
 
         }
-        else -> context.getDrawable(R.drawable.featured_content_background_light) as LayerDrawable
+        else -> AppCompatResources.getDrawable(context, R.drawable.featured_content_background_light) as LayerDrawable
     }
 
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.topLeftConnection,
@@ -46,7 +47,7 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
         bottomRightCorner = 19)
 
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.topRightConnection,
-        topLeftCorner = 19,
+        topLeftCorner = 29,
         topRightCorner = 0,
         bottomLeftCorner = 19,
         bottomRightCorner = 0)
@@ -60,7 +61,7 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.bottomRightConnection,
         topLeftCorner = 19,
         topRightCorner = 0,
-        bottomLeftCorner = 19,
+        bottomLeftCorner = 29,
         bottomRightCorner = 0)
 
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.centerClearLayer,
