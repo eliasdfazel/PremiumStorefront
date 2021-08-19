@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 11:50 AM
+ * Last modified 8/19/21, 12:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -90,7 +90,12 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white_transparent))
+                movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
+
+                movieDetailsViewHolder.movieDescriptionFirst.setTextColor(context.getColor(R.color.dark))
+                movieDetailsViewHolder.movieDescriptionSecond.setTextColor(context.getColor(R.color.dark))
+
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light_transparent_high))
 
                 movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
                 movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
@@ -99,11 +104,16 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
             }
             ThemeType.ThemeDark -> {
 
-                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_higher))
+                movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
 
-                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
-                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
-                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.white))
+                movieDetailsViewHolder.movieDescriptionFirst.setTextColor(context.getColor(R.color.light))
+                movieDetailsViewHolder.movieDescriptionSecond.setTextColor(context.getColor(R.color.light))
+
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_high))
+
+                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
 
             }
         }
@@ -214,11 +224,13 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                 it
             }.forEachIndexed { index, starName ->
 
+                val starImageView = generateMovieStarView(movieDetailsViewHolder, index, starName)
+
                 Glide.with(context)
                     .asDrawable()
                     .load(generateMovieStarImage(starName))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(generateMovieStarView(movieDetailsViewHolder, index, starName))
+                    .into(starImageView)
 
             }
 
