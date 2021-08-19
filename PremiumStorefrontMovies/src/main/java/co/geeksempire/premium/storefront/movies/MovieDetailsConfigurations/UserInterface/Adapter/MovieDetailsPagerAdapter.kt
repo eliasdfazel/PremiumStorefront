@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/19/21, 12:58 PM
+ * Last modified 8/19/21, 1:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -67,23 +67,38 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
             val movieGenres = moviesDataStructure.movieGenres().split(",")
             Log.d(this@MovieDetailsPagerAdapter.javaClass.simpleName, movieGenres.toString())
 
+            val firstGenre = movieGenres[0]
             Glide.with(context)
                 .asDrawable()
                 .load(try { context.genresData.getGenreIconByName(movieGenres[0]) } catch (e: Exception) { "" })
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(movieDetailsViewHolder.movieGenreFirst)
+            movieDetailsViewHolder.movieGenreFirst.contentDescription = firstGenre
+            movieDetailsViewHolder.movieGenreFirst.setOnClickListener {
 
+            }
+
+            val secondGenre = movieGenres[1]
             Glide.with(context)
                 .asDrawable()
                 .load(try { context.genresData.getGenreIconByName(movieGenres[1]) } catch (e: Exception) { "" })
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(movieDetailsViewHolder.movieGenreSecond)
+            movieDetailsViewHolder.movieGenreSecond.contentDescription = secondGenre
+            movieDetailsViewHolder.movieGenreSecond.setOnClickListener {
 
+            }
+
+            val thirdGenre = movieGenres[2]
             Glide.with(context)
                 .asDrawable()
                 .load(try { context.genresData.getGenreIconByName(movieGenres[2]) } catch (e: Exception) { "" })
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(movieDetailsViewHolder.movieGenreThird)
+            movieDetailsViewHolder.movieGenreThird.contentDescription = thirdGenre
+            movieDetailsViewHolder.movieGenreThird.setOnClickListener {
+
+            }
 
         }
 
