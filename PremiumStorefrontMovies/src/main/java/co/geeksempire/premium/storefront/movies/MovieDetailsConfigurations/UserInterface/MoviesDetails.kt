@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/19/21, 9:10 AM
+ * Last modified 8/19/21, 10:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,6 +54,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+import kotlin.math.abs
 
 class MoviesDetails : StorefrontSplitActivity() {
 
@@ -143,18 +144,54 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         moviesDetailsLayoutBinding.moviesViewPager.setPageTransformer { page, position ->
 
-            val width = page.width
-            val height = page.height
+            page.apply {
 
-            val rotation = (-11f) * (position) * (-1.13f)
+                val width = width
+                val height = height
 
-            page.pivotX = (width * 0.7f)
-            page.pivotY = height.toFloat()
+                val rotationAmount = (-11f) * (position) * (-1.13f)
 
-            page.scaleX = 0.975f
-            page.scaleY = 0.975f
+                pivotX = (width * 0.7f)
+                pivotY = height.toFloat()
 
-            page.rotation = rotation
+                scaleX = 0.975f
+                scaleY = 0.975f
+
+                rotation = rotationAmount
+
+                val minimumScale = 0.85f
+
+                when {
+                    position < -1 -> {
+
+                        alpha = 0f
+
+                    }
+                    position <= 1 -> {
+
+                        val scaleFactor = minimumScale.coerceAtLeast(1 - abs(position))
+
+                        val verticalMargin = height * (1 - scaleFactor) / 2
+                        val horizontalMargin = width * (1 - scaleFactor) / 2
+
+                        translationX = if (position < 0) {
+                            horizontalMargin - verticalMargin / 2
+                        } else {
+                            horizontalMargin + verticalMargin / 2
+                        }
+
+                        scaleX = scaleFactor
+                        scaleY = scaleFactor
+
+                    }
+                    else -> {
+
+                        alpha = 0f
+
+                    }
+                }
+            }
+
 
         }
 
