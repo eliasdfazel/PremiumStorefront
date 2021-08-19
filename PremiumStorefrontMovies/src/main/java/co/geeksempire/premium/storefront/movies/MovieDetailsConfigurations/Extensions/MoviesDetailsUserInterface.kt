@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 10:23 AM
+ * Last modified 8/19/21, 1:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.os.Build
 import android.view.View
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.marginBottom
 import androidx.core.view.marginEnd
@@ -80,6 +81,8 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
 
             moviesDetailsLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
+            moviesDetailsLayoutBinding.goBackView.setImageDrawable(AppCompatResources.getDrawable(applicationContext, R.drawable.go_back_layer_light))
+
         }
         ThemeType.ThemeDark -> {
 
@@ -108,6 +111,8 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
             moviesDetailsLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
 
             moviesDetailsLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
+
+            moviesDetailsLayoutBinding.goBackView.setImageDrawable(AppCompatResources.getDrawable(applicationContext, R.drawable.go_back_layer_dark))
 
         }
     }
