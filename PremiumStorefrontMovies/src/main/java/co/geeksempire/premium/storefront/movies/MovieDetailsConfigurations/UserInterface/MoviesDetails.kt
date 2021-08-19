@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 12:01 PM
+ * Last modified 8/19/21, 9:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -126,6 +126,9 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         networkConnectionListener.networkConnectionListenerInterface = this@MoviesDetails
 
+        moviesDetailsLayoutBinding.moviesViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        moviesDetailsLayoutBinding.moviesViewPager.adapter = movieDetailsPagerAdapter
+
         lifecycleScope.launch {
 
             themePreferences.checkThemeLightDark().collect {
@@ -138,18 +141,18 @@ class MoviesDetails : StorefrontSplitActivity() {
 
         }
 
-        moviesDetailsLayoutBinding.moviesViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        moviesDetailsLayoutBinding.moviesViewPager.adapter = movieDetailsPagerAdapter
-
         moviesDetailsLayoutBinding.moviesViewPager.setPageTransformer { page, position ->
 
             val width = page.width
             val height = page.height
 
-            val rotation = -11f * position * -1.13f
+            val rotation = (-11f) * (position) * (-1.13f)
 
             page.pivotX = (width * 0.7f)
             page.pivotY = height.toFloat()
+
+            page.scaleX = 0.975f
+            page.scaleY = 0.975f
 
             page.rotation = rotation
 
@@ -166,7 +169,7 @@ class MoviesDetails : StorefrontSplitActivity() {
 
                     movieDetailsPagerAdapter.moviesDetailsList.addAll(it)
 
-                    movieDetailsPagerAdapter.notifyItemRangeInserted(movieDetailsPagerAdapter.itemCount, movieDetailsPagerAdapter.moviesDetailsList.size)
+                    movieDetailsPagerAdapter.notifyItemRangeInserted(movieDetailsPagerAdapter.itemCount, it.size)
 
                 }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/16/21, 8:47 AM
+ * Last modified 8/19/21, 9:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,6 +54,7 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateRespons
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.*
+import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
@@ -492,6 +493,9 @@ class StorefrontMovies : StorefrontSplitActivity() {
             }
 
         }
+
+        PopupShortcutsCreator(applicationContext)
+            .startConfiguration()
 
     }
 

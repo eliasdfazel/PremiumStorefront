@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 8:03 AM
+ * Last modified 8/19/21, 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,9 +14,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
-import android.graphics.Bitmap
+import android.graphics.*
 import android.graphics.drawable.Icon
 import android.os.Build
+import android.util.Log
 import androidx.annotation.Keep
 import androidx.annotation.RequiresApi
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsIds
@@ -29,7 +30,6 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -61,8 +61,6 @@ object QuickAccessKeys {
 class PopupShortcutsCreator (val context: Context) {
 
     private val shortcutManager: ShortcutManager = context.getSystemService(ShortcutManager::class.java) as ShortcutManager
-
-    private val categoryId: Int = 836
 
     fun startConfiguration() {
 
@@ -102,6 +100,7 @@ class PopupShortcutsCreator (val context: Context) {
                             .get(Source.SERVER).addOnSuccessListener { productDocument ->
 
                                 if (productDocument.exists()) {
+                                    Log.d(this@PopupShortcutsCreator.javaClass.simpleName, productDocument[StorefrontContentsSerialize.ProductName].toString())
 
                                     addShortcutKeyboardTyping(PopupShortcutsData(
                                         applicationPackageName = productDocument[StorefrontContentsSerialize.PackageName].toString(),
@@ -147,13 +146,13 @@ class PopupShortcutsCreator (val context: Context) {
             .transform(RoundedCorners(dpToInteger(context, 51)))
             .listener(object : RequestListener<Bitmap> {
 
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
+                override fun onLoadFailed(e: GlideException?, model: Any?, target: com.bumptech.glide.request.target.Target<Bitmap>?, isFirstResource: Boolean): Boolean {
                     e?.printStackTrace()
 
                     return true
                 }
 
-                override fun onResourceReady(resource: Bitmap?, model: Any?, target: Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                override fun onResourceReady(resource: Bitmap?, model: Any?, target: com.bumptech.glide.request.target.Target<Bitmap>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
                     resource?.let {
 
