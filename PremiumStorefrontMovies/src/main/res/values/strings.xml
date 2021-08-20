@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/11/21, 4:56 AM
+  ~ Last modified 8/20/21, 4:32 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -11,7 +11,19 @@
 
 <resources>
 
+    <string name="applicationName">Premium Storefront</string>
+
     <string name="directorsFilterText">Directors</string>
     <string name="studiosFilterText">Studios</string>
+
+    <string name="allMovies">All Movies</string>
+    <string name="categoryShowAllMovies">Show Movies</string>
+
+    <string name="noNetworkConnection">No Network Connection</string>
+
+    <string name="retryText">Retry</string>
+    <string name="copyText">Copy</string>
+
+    <string name="nothingFoundText">Nothing Found</string>
 
 </resources>

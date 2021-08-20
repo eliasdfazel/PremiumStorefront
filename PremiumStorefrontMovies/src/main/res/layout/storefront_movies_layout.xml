@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/17/21, 4:33 AM
+  ~ Last modified 8/20/21, 4:15 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -100,7 +100,7 @@
                 apps:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/dividerImageView"
+                android:id="@+id/dividerTopImageView"
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
                 android:layout_marginEnd="16.6dp"
@@ -119,15 +119,17 @@
                 android:layout_marginBottom="23dp"
                 android:layout_marginEnd="17dp"
                 android:scaleType="centerCrop"
+                android:scaleX="1.01"
+                android:scaleY="1.01"
                 android:visibility="gone"
 
-                apps:layout_constraintTop_toBottomOf="@id/dividerImageView"
+                apps:layout_constraintTop_toBottomOf="@id/dividerTopImageView"
                 apps:layout_constraintStart_toStartOf="parent" />
 
             <net.geeksempire.blurry.effect.view.RealtimeBlurView
                 android:id="@+id/newMovieBlurryBackground"
                 android:layout_width="match_parent"
-                android:layout_height="543dp"
+                android:layout_height="571dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="23dp"
                 android:layout_marginEnd="17dp"
@@ -163,6 +165,17 @@
                 apps:layout_constraintTop_toTopOf="@id/newMovieBackground"
                 apps:layout_constraintStart_toStartOf="parent" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/dividerNewContentImageView"
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:layout_marginEnd="16.6dp"
+                android:padding="7dp"
+                android:src="@drawable/diamond_solid_icon_light"
+                android:background="@drawable/new_content_divider_light"
+
+                apps:layout_constraintTop_toBottomOf="@id/newMovieBlurryBackground"/>
+
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/randomMovieSelection"
                 android:layout_width="223dp"
@@ -193,7 +206,7 @@
                 android:textColor="@color/dark"
                 android:visibility="gone"
 
-                apps:layout_constraintTop_toBottomOf="@id/randomMovieSelection"
+                apps:layout_constraintTop_toBottomOf="@id/dividerNewContentImageView"
                 apps:layout_constraintStart_toStartOf="parent"/>
 
             <!-- First Load Of All Content -->

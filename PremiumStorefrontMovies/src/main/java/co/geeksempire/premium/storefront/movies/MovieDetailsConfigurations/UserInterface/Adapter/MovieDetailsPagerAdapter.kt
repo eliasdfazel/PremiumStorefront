@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/19/21, 1:12 PM
+ * Last modified 8/20/21, 4:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -155,6 +155,10 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
             movieDetailsViewHolder.movieDescriptionFirst.text = Html.fromHtml(moviesDataStructure.movieDescription(), Html.FROM_HTML_MODE_COMPACT)
 
             movieDetailsViewHolder.productCurrentRateView.text = Html.fromHtml(moviesDataStructure.movieRating(), Html.FROM_HTML_MODE_COMPACT)
+
+            println(">>> >> > full ${moviesDataStructure.movieName()} : " + moviesDataStructure.movieDescription().length)
+            println(">>> >> > set ${moviesDataStructure.movieName()} : " + movieDetailsViewHolder.movieDescriptionFirst.text.length)
+
 
             Glide.with(context)
                 .asDrawable()

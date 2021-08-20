@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/18/21, 8:16 AM
+ * Last modified 8/20/21, 4:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,6 @@ import co.geeksempire.geeksempire.layoutmanager.Scale.ScaleLayoutManager
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
-import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
@@ -44,6 +43,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.sna
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.Extensions.setupGenreDetailsUserInterface
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.AllMoviesSection.Adapter.GenreAllMoviesAdapter
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.UniqueSection.Adapter.UniqueMoviesAdapter
+import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkEndpoints.MoviesQueryEndpoints

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 6:31 AM
+ * Last modified 8/20/21, 4:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@ import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInf
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.FavoriteProducts
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
-import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSectionsSwitcherLayoutBinding
 import com.google.firebase.auth.FirebaseUser
 

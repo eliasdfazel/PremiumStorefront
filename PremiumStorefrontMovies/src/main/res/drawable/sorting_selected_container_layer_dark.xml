@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/27/21, 6:46 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:height="97dp"
+        android:start="2dp"
+        android:end="2dp"
+        android:gravity="center"
+        android:drawable="@color/default_color_bright"/>
+
+    <item
+        android:height="18.7dp"
+        android:gravity="top"
+        android:start="2dp"
+        android:end="2dp">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:bottomLeftRadius="99dp"
+                android:bottomRightRadius="99dp"/>
+
+            <solid
+                android:color="@color/black"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="19dp"
+        android:gravity="bottom"
+        android:start="2dp"
+        android:end="2dp">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topRightRadius="99dp"
+                android:topLeftRadius="99dp"/>
+
+            <solid
+                android:color="@color/black"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/12/21, 10:37 AM
+ * Last modified 8/20/21, 4:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,9 +16,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
-import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.generateHashTag
 import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
+import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataKey
 import com.google.android.gms.tasks.Task
 import com.google.firebase.analytics.ktx.analytics

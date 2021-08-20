@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 10:17 AM
+ * Last modified 8/20/21, 4:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,8 +20,8 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
-import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.GenreDetails
+import co.geeksempire.premium.storefront.movies.R
 import net.geeksempire.balloon.optionsmenu.library.Utils.statusBarHeight
 
 fun GenreDetails.setupGenreDetailsUserInterface(themeType: Boolean) {
