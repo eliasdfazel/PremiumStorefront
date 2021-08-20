@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 4:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,7 +29,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePrefere
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontDynamicActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
@@ -62,7 +62,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.*
 
-class GenreDetails : StorefrontSplitActivity() {
+class GenreDetails : StorefrontDynamicActivity() {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@GenreDetails)

@@ -8,7 +8,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.Actions.View
+package co.geeksempire.premium.storefront.movies.Actions.View
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -189,7 +189,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         }
 
         val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
-        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.install_now_icon)?.apply {
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.watch_icon)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)

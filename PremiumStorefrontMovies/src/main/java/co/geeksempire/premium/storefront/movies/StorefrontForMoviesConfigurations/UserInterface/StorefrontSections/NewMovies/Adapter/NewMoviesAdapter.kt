@@ -2,13 +2,13 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 11:54 AM
+ * Last modified 8/20/21, 5:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.NewMovies.Adapter
+package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.NewMovies.Adapter
 
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.StorefrontMoviesContentsData
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.NewMovies.ViewHolder.NewMoviesViewHolder
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.NewMovies.ViewHolder.NewMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.Utils.Data.openPlayStoreToWatchMovie
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontNewMoviesItemBinding
 import com.bumptech.glide.Glide

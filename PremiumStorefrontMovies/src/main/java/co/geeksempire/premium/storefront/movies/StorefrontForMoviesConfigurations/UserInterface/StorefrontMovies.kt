@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 5:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,7 +35,6 @@ import co.geeksempire.geeksempire.layoutmanager.Curve.CurveLayoutManager
 import co.geeksempire.geeksempire.layoutmanager.Curve.FanLayoutManagerSettings
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
-import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
@@ -44,7 +43,7 @@ import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontDynamicActivity
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
@@ -58,6 +57,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.movies.Actions.Operation.ActionCenterOperationsMovies
+import co.geeksempire.premium.storefront.movies.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
@@ -69,11 +69,11 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveNewContent
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.AllMovies.Adapter.AllMoviesAdapter
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.Adapter.GenresAdapter
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.GenreContent.GenreData
-import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.StorefrontSections.NewMovies.Adapter.NewMoviesAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.AllMovies.Adapter.AllMoviesAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.FeaturedMovies.Adapter.FeaturedMoviesAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.GenreContent.Adapter.GenresAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.GenreContent.GenreData
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.NewMovies.Adapter.NewMoviesAdapter
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontMoviesLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -98,7 +98,7 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import net.geeksempire.balloon.optionsmenu.library.Utils.percentageOfDisplayX
 import java.util.*
 
-class StorefrontMovies : StorefrontSplitActivity() {
+class StorefrontMovies : StorefrontDynamicActivity() {
 
     val updatingDataIO: UpdatingDataIO by lazy {
         UpdatingDataIO(applicationContext)
@@ -268,6 +268,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
                         storefrontMoviesLayoutBinding.newMovieBackground.visibility = View.VISIBLE
                         storefrontMoviesLayoutBinding.newMovieBlurryBackground.visibility = View.VISIBLE
 
+                        storefrontMoviesLayoutBinding.dividerTopImageView.visibility = View.VISIBLE
+
                     }
 
                 }
@@ -296,6 +298,8 @@ class StorefrontMovies : StorefrontSplitActivity() {
                         storefrontMoviesLayoutBinding.randomMovieSelection.visibility = View.VISIBLE
 
                     }
+
+                    storefrontMoviesLayoutBinding.dividerNewContentImageView.visibility = View.VISIBLE
 
                     setSelectedBlurryBackground()
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 10:15 AM
+ * Last modified 8/20/21, 5:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,9 +17,9 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontDynamicActivity
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
@@ -70,7 +70,7 @@ class EntryConfigurations : AppCompatActivity() {
                             val activityOptions = ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, 0)
 
                             val switchIntent = Intent().apply {
-                                setClassName(packageName, StorefrontSplitActivity.MoviesModule.EntryConfigurations)
+                                setClassName(packageName, StorefrontDynamicActivity.MoviesModule.EntryConfigurations)
                             }
 
                             startActivity(switchIntent, activityOptions.toBundle())

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:15 AM
+ * Last modified 8/20/21, 4:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.text.Html
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.annotation.NonNull
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -156,9 +157,20 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
             movieDetailsViewHolder.productCurrentRateView.text = Html.fromHtml(moviesDataStructure.movieRating(), Html.FROM_HTML_MODE_COMPACT)
 
-            println(">>> >> > full ${moviesDataStructure.movieName()} : " + moviesDataStructure.movieDescription().length)
-            println(">>> >> > set ${moviesDataStructure.movieName()} : " + movieDetailsViewHolder.movieDescriptionFirst.text.length)
+            if (moviesDataStructure.movieDescription().length > movieDetailsViewHolder.movieDescriptionFirst.text.length) {
 
+                movieDetailsViewHolder.movieDescriptionFirst.setOnClickListener {
+
+                    val remainMovieDescription = moviesDataStructure.movieDescription().substring(movieDetailsViewHolder.movieDescriptionFirst.text.length, moviesDataStructure.movieDescription().length)
+
+                    movieDetailsViewHolder.movieDescriptionSecond.text = Html.fromHtml(remainMovieDescription, Html.FROM_HTML_MODE_COMPACT)
+
+                    movieDetailsViewHolder.movieDescriptionSecond.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_down_from_up_bounce))
+                    movieDetailsViewHolder.movieDescriptionSecond.visibility = View.VISIBLE
+
+                }
+
+            }
 
             Glide.with(context)
                 .asDrawable()

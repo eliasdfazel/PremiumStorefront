@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 2:19 PM
+ * Last modified 8/20/21, 5:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,9 +24,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isGone
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontDynamicActivity
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSplitActivity
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
@@ -159,7 +159,7 @@ fun completeMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBi
             val activityOptions = ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0)
 
             val switchIntent = Intent().apply {
-                setClassName(context.packageName, StorefrontSplitActivity.MoviesModule.EntryConfigurations)
+                setClassName(context.packageName, StorefrontDynamicActivity.MoviesModule.EntryConfigurations)
             }
 
             context.startActivity(switchIntent, activityOptions.toBundle())
