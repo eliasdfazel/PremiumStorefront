@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:32 AM
+ * Last modified 8/20/21, 5:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -114,7 +114,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
                 putExtra(MoviesDataKey.MoviePrimaryGenre, moviePrimaryGenre)
                 putExtra(MoviesDataKey.MovieProductId, movieProductId)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }, ActivityOptions.makeCustomAnimation(context, co.geeksempire.premium.storefront.R.anim.fade_in, 0).toBundle())
+            }, ActivityOptions.makeCustomAnimation(context, co.geeksempire.premium.storefront.movies.R.anim.fade_in, 0).toBundle())
 
         }
 

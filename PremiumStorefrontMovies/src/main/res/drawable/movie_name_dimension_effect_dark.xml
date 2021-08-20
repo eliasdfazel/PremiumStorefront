@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/20/21, 5:55 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:height="73dp" >
+
+        <shape
+            android:shape="rectangle">
+
+            <corners android:radius="23dp"/>
+
+            <stroke
+                android:width="0.7dp"
+                android:color="@color/black_transparent"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="73dp" >
+
+        <shape
+            android:shape="rectangle">
+
+            <corners android:radius="23dp"/>
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="53dp"
+                android:startColor="@color/dark_transparent_half"
+                android:centerColor="@color/dark_transparent_high"
+                android:centerX="0"
+                android:centerY="0"
+                android:endColor="@color/transparent"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="73dp" >
+
+        <shape
+            android:shape="rectangle">
+
+            <corners android:radius="23dp"/>
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="53dp"
+                android:startColor="@color/dark_transparent_half"
+                android:centerColor="@color/dark_transparent_high"
+                android:centerX="1"
+                android:centerY="1"
+                android:endColor="@color/transparent"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="73dp" >
+
+        <shape
+            android:shape="rectangle">
+
+            <corners android:radius="23dp"/>
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="53dp"
+                android:startColor="@color/dark_transparent_half"
+                android:centerColor="@color/dark_transparent_high"
+                android:centerX="0"
+                android:centerY="1"
+                android:endColor="@color/transparent"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:gravity="top|start"
+        android:height="73dp" >
+
+        <shape
+            android:shape="rectangle">
+
+            <corners android:radius="23dp"/>
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="53dp"
+                android:startColor="@color/dark_transparent_half"
+                android:centerColor="@color/dark_transparent_high"
+                android:centerX="1"
+                android:centerY="0"
+                android:endColor="@color/transparent"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>

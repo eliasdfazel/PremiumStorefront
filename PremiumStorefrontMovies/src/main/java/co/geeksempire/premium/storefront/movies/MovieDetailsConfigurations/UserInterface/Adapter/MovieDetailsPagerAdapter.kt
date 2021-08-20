@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:58 AM
+ * Last modified 8/20/21, 6:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.annotation.NonNull
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
@@ -108,6 +109,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
                 movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
 
+                movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light)
+
                 movieDetailsViewHolder.movieDescriptionFirst.setTextColor(context.getColor(R.color.dark))
                 movieDetailsViewHolder.movieDescriptionSecond.setTextColor(context.getColor(R.color.dark))
 
@@ -121,6 +124,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
             ThemeType.ThemeDark -> {
 
                 movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
+
+                movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark)
 
                 movieDetailsViewHolder.movieDescriptionFirst.setTextColor(context.getColor(R.color.light))
                 movieDetailsViewHolder.movieDescriptionSecond.setTextColor(context.getColor(R.color.light))
@@ -158,6 +163,9 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
             movieDetailsViewHolder.productCurrentRateView.text = Html.fromHtml(moviesDataStructure.movieRating(), Html.FROM_HTML_MODE_COMPACT)
 
             if (moviesDataStructure.movieDescription().length > movieDetailsViewHolder.movieDescriptionFirst.text.length) {
+
+                println(">>> >> > " + moviesDataStructure.movieDescription())
+                println(">>> >> > " + movieDetailsViewHolder.movieDescriptionFirst.text)
 
                 movieDetailsViewHolder.movieDescriptionFirst.setOnClickListener {
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/19/21, 12:57 PM
+ * Last modified 8/20/21, 5:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,6 +30,7 @@ class MovieDetailsViewHolder (moviesDetailsItemBinding: MoviesDetailsItemBinding
 
     val movieNameTextView: AppCompatTextView = moviesDetailsItemBinding.movieNameTextView
     val blurryMovieName: RealtimeBlurView = moviesDetailsItemBinding.blurryMovieName
+    val backgroundMovieName: AppCompatImageView = moviesDetailsItemBinding.backgroundMovieName
 
     val movieDescriptionFirst: AppCompatTextView = moviesDetailsItemBinding.movieDescriptionFirst
     val movieDescriptionSecond: AppCompatTextView = moviesDetailsItemBinding.movieDescriptionSecond
