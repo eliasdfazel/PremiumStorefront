@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:28 AM
+ * Last modified 8/20/21, 12:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -255,14 +255,14 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                     if (storefrontMoviesLayoutBinding.loadingView.isVisible) {
 
-                        storefrontMoviesLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out))
+                        storefrontMoviesLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out_movie))
                         storefrontMoviesLayoutBinding.loadingView.visibility = View.GONE
 
                     }
 
                     if (storefrontMoviesLayoutBinding.featuredContentRecyclerView.isGone) {
 
-                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
                         storefrontMoviesLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
 
                         storefrontMoviesLayoutBinding.newMovieBackground.visibility = View.VISIBLE
@@ -287,14 +287,14 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                     if (storefrontMoviesLayoutBinding.newContentRecyclerView.isGone) {
 
-                        storefrontMoviesLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                        storefrontMoviesLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
                         storefrontMoviesLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
 
                     }
 
                     if (storefrontMoviesLayoutBinding.randomMovieSelection.isGone) {
 
-                        storefrontMoviesLayoutBinding.randomMovieSelection.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                        storefrontMoviesLayoutBinding.randomMovieSelection.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
                         storefrontMoviesLayoutBinding.randomMovieSelection.visibility = View.VISIBLE
 
                     }

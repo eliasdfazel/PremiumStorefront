@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/20/21, 4:35 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:width="55dp"
+        android:height="55dp"
+        android:gravity="center_horizontal">
+
+        <shape
+            android:shape="oval">
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="25.9dp"
+                android:startColor="@color/default_color_light"
+                android:centerColor="@color/default_color_light"
+                android:centerX="0.5"
+                android:centerY="0.5"
+                android:endColor="#03008DDA"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:gravity="top|center_horizontal"
+        android:width="47dp"
+        android:height="47dp"
+        android:top="3.1dp">
+
+        <shape
+            android:shape="oval">
+
+            <solid
+                android:color="@color/premiumDark" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="47dp"
+        android:width="47dp"
+        android:top="3.1dp"
+        android:gravity="top|center_horizontal">
+
+        <shape
+            android:shape="ring"
+            android:innerRadius="22.72dp"
+            android:thickness="0.9dp"
+            android:useLevel="false">
+
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="@color/white"
+                android:centerColor="@color/white_transparent"
+                android:centerY="0.6"
+                android:endColor="@color/dark_transparent"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="47dp"
+        android:width="47dp"
+        android:top="3.1dp"
+        android:gravity="top|center_horizontal">
+
+        <shape
+            android:shape="ring"
+            android:innerRadius="23.57dp"
+            android:thickness="0.5dp"
+            android:useLevel="false">
+
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="@color/transparent"
+                android:centerColor="@color/transparent"
+                android:centerY="0.6"
+                android:endColor="@color/default_color_light"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:width="14dp"
+        android:height="4.9dp"
+        android:top="30.9dp"
+        android:start="21.8dp">
+
+        <rotate
+            android:toDegrees="0"
+            android:fromDegrees="45"
+            android:pivotX="50%"
+            android:pivotY="0%">
+
+            <shape
+                android:shape="rectangle">
+
+                <corners
+                    android:radius="51dp" />
+
+                <gradient
+                    android:type="linear"
+                    android:gradientRadius="25dp"
+                    android:startColor="@color/premiumDark"
+                    android:centerColor="@color/black"
+                    android:centerX="0.5"
+                    android:centerY="0.5"
+                    android:endColor="@color/black"/>
+
+            </shape>
+
+        </rotate>
+
+    </item>
+
+    <item
+        android:id="@+id/rippleMask"
+        android:height="45dp"
+        android:width="46dp"
+        android:top="4dp"
+        android:gravity="center_horizontal|top">
+
+        <ripple
+            android:color="@color/blue_transparent">
+
+            <item android:id="@android:id/mask">
+
+                <shape android:shape="oval">
+
+                    <solid android:color="@color/blue_transparent" />
+
+                </shape>
+
+            </item>
+
+        </ripple>
+
+    </item>
+
+    <item
+        android:width="23dp"
+        android:height="23dp"
+        android:top="14.9dp"
+        android:start="14dp"
+        android:drawable="@drawable/back_indicator_icon"/>
+
+</layer-list>

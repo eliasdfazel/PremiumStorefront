@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 12:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,28 +50,28 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
             moviesFilteringLayoutBinding.popupBlurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
 
-            moviesFilteringLayoutBinding.filtersContainerView.background = context.getDrawable(R.drawable.filtering_container_layer_light)
+            moviesFilteringLayoutBinding.filtersContainerView.background = context.getDrawable(R.drawable.filtering_container_layer_light_movie)
 
-            moviesFilteringLayoutBinding.filterSelectedView.background = context.getDrawable(R.drawable.filtering_selected_container_layer_light)
+            moviesFilteringLayoutBinding.filterSelectedView.background = context.getDrawable(R.drawable.filtering_selected_container_layer_light_movie)
 
         }
         ThemeType.ThemeDark -> {
 
             moviesFilteringLayoutBinding.popupBlurryBackground.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
 
-            moviesFilteringLayoutBinding.filtersContainerView.background = context.getDrawable(R.drawable.filtering_container_layer_dark)
+            moviesFilteringLayoutBinding.filtersContainerView.background = context.getDrawable(R.drawable.filtering_container_layer_dark_movie)
 
-            moviesFilteringLayoutBinding.filterSelectedView.background = context.getDrawable(R.drawable.filtering_selected_container_layer_dark)
+            moviesFilteringLayoutBinding.filterSelectedView.background = context.getDrawable(R.drawable.filtering_selected_container_layer_dark_movie)
 
         }
     }
 
     if (moviesSortingLayoutBinding.root.isShown) {
 
-        moviesSortingLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+        moviesSortingLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
         moviesSortingLayoutBinding.root.visibility = View.GONE
 
-        leftActionView.background = context.getDrawable(R.drawable.action_center_glowing)
+        leftActionView.background = context.getDrawable(R.drawable.action_center_glowing_movie)
 
         leftActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
@@ -87,7 +87,7 @@ fun moviesFilteringSetup(context: AppCompatActivity,
             else -> ColorStateList.valueOf(context.getColor(R.color.default_color_dark))
         }
 
-        middleActionView.background = context.getDrawable(R.drawable.action_center_glowing)
+        middleActionView.background = context.getDrawable(R.drawable.action_center_glowing_movie)
 
         middleActionView.imageTintList = when (themeType) {
             ThemeType.ThemeLight -> {
@@ -109,7 +109,7 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
         rightActionView.background = null
 
-        moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+        moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
         moviesFilteringLayoutBinding.root.visibility = View.GONE
 
         rightActionView.imageTintList = when (themeType) {
@@ -128,7 +128,7 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
     } else {
 
-        rightActionView.background = context.getDrawable(R.drawable.action_center_glowing)
+        rightActionView.background = context.getDrawable(R.drawable.action_center_glowing_movie)
 
         rightActionView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_game_dark))
 

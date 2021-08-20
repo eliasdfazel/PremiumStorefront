@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/20/21, 4:32 AM
+  ~ Last modified 8/20/21, 1:02 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -25,5 +25,13 @@
     <string name="copyText">Copy</string>
 
     <string name="nothingFoundText">Nothing Found</string>
+
+    <string name="installActionDescription">Get It From Google Play Store</string>
+    <string name="shareActionDescription">Share It With Your Friends</string>
+    <string name="rateActionDescription">Rate &amp; Write Review For It</string>
+
+    <string name="searchActionDescription">Search Movies In Premium Storefront</string>
+    <string name="filterActionDescription">Filter To See Your Preferred Movies</string>
+    <string name="sortActionDescription">Sort List Of Movies</string>
 
 </resources>

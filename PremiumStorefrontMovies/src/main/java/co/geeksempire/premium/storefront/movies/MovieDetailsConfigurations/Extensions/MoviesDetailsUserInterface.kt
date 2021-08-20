@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 1:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -81,7 +81,7 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
 
             moviesDetailsLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
-            moviesDetailsLayoutBinding.goBackView.setImageDrawable(AppCompatResources.getDrawable(applicationContext, R.drawable.go_back_layer_light))
+            moviesDetailsLayoutBinding.goBackView.setImageDrawable(AppCompatResources.getDrawable(applicationContext, R.drawable.go_back_layer_light_movie))
 
         }
         ThemeType.ThemeDark -> {
@@ -112,7 +112,7 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
 
             moviesDetailsLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
-            moviesDetailsLayoutBinding.goBackView.setImageDrawable(AppCompatResources.getDrawable(applicationContext, R.drawable.go_back_layer_dark))
+            moviesDetailsLayoutBinding.goBackView.setImageDrawable(AppCompatResources.getDrawable(applicationContext, R.drawable.go_back_layer_dark_movie))
 
         }
     }

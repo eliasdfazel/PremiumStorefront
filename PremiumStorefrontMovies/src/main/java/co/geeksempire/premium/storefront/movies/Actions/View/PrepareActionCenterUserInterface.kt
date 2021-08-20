@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:06 AM
+ * Last modified 8/20/21, 1:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
-import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.movies.R
 
 class PrepareActionCenterUserInterface(private val context: Context,
                                        private val actionCenterView: ImageView,
@@ -70,7 +70,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
             setShadowLayer(29f, 0f, 0f, context.getColor(R.color.dark_transparent))
         }
 
-        val shadowLayer = context.getDrawable(R.drawable.action_center_shadow_background_light) as LayerDrawable
+        val shadowLayer = context.getDrawable(R.drawable.action_center_shadow_background_light_movie) as LayerDrawable
 
         actionCenterView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeDarkShadow.paint)
 
@@ -96,8 +96,8 @@ class PrepareActionCenterUserInterface(private val context: Context,
 
     fun setupIconsForStorefront(themeType: Boolean = ThemeType.ThemeLight) {
 
-        val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
-        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon)?.apply {
+        val actionCenterLeft = context.getDrawable(R.drawable.action_center_left_movie) as LayerDrawable
+        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.sort_icon_movie)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)
@@ -110,7 +110,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         })
         actionLeftView.setImageDrawable(actionCenterLeft)
         actionLeftView.contentDescription = context.getString(R.string.sortActionDescription)
-        actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+        actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_movie))
         actionLeftView.setOnLongClickListener {
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
@@ -118,8 +118,8 @@ class PrepareActionCenterUserInterface(private val context: Context,
             true
         }
 
-        val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
-        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.search_icon)?.apply {
+        val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle_movie) as LayerDrawable
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.search_icon_movie)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)
@@ -132,7 +132,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         })
         actionMiddleView.setImageDrawable(actionCenterMiddle)
         actionMiddleView.contentDescription = context.getString(R.string.searchActionDescription)
-        actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+        actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_movie))
         actionMiddleView.setOnLongClickListener {
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
@@ -140,8 +140,8 @@ class PrepareActionCenterUserInterface(private val context: Context,
             true
         }
 
-        val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
-        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.filter_icon)?.apply {
+        val actionCenterRight = context.getDrawable(R.drawable.action_center_right_movie) as LayerDrawable
+        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.filter_icon_movie)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)
@@ -154,7 +154,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         })
         actionRightView.setImageDrawable(actionCenterRight)
         actionRightView.contentDescription = context.getString(R.string.filterActionDescription)
-        actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+        actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_movie))
         actionRightView.setOnLongClickListener {
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
@@ -166,8 +166,8 @@ class PrepareActionCenterUserInterface(private val context: Context,
 
     fun setupIconsForDetails(themeType: Boolean = ThemeType.ThemeLight) {
 
-        val actionCenterLeft = context.getDrawable(R.drawable.action_center_left) as LayerDrawable
-        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.share_icon)?.apply {
+        val actionCenterLeft = context.getDrawable(R.drawable.action_center_left_movie) as LayerDrawable
+        actionCenterLeft.setDrawableByLayerId(R.id.actionCenterLeftIcon, context.getDrawable(R.drawable.share_icon_movie)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)
@@ -180,7 +180,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         })
         actionLeftView.setImageDrawable(actionCenterLeft)
         actionLeftView.contentDescription = context.getString(R.string.shareActionDescription)
-        actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+        actionLeftView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_movie))
         actionLeftView.setOnLongClickListener {
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
@@ -188,8 +188,8 @@ class PrepareActionCenterUserInterface(private val context: Context,
             true
         }
 
-        val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle) as LayerDrawable
-        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.watch_icon)?.apply {
+        val actionCenterMiddle = context.getDrawable(R.drawable.action_center_middle_movie) as LayerDrawable
+        actionCenterMiddle.setDrawableByLayerId(R.id.actionCenterMiddleIcon, context.getDrawable(R.drawable.watch_icon_movie)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)
@@ -202,7 +202,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         })
         actionMiddleView.setImageDrawable(actionCenterMiddle)
         actionMiddleView.contentDescription = context.getString(R.string.installActionDescription)
-        actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+        actionMiddleView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_movie))
         actionMiddleView.setOnLongClickListener {
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()
@@ -210,8 +210,8 @@ class PrepareActionCenterUserInterface(private val context: Context,
             true
         }
 
-        val actionCenterRight = context.getDrawable(R.drawable.action_center_right) as LayerDrawable
-        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.rate_icon)?.apply {
+        val actionCenterRight = context.getDrawable(R.drawable.action_center_right_movie) as LayerDrawable
+        actionCenterRight.setDrawableByLayerId(R.id.actionCenterRightIcon, context.getDrawable(R.drawable.rate_icon_movie)?.apply {
             setTint(when (themeType) {
                 ThemeType.ThemeLight -> {
                     context.getColor(R.color.default_color_dark)
@@ -224,7 +224,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
         })
         actionRightView.setImageDrawable(actionCenterRight)
         actionRightView.contentDescription = context.getString(R.string.rateActionDescription)
-        actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+        actionRightView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_movie))
         actionRightView.setOnLongClickListener {
 
             Toast.makeText(context, it.contentDescription, Toast.LENGTH_LONG).show()

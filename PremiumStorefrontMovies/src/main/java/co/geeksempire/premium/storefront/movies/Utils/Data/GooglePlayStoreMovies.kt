@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 12:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -96,7 +96,7 @@ fun openPlayStoreToWatchMovie(context: Context, movieId: String, movieName: Stri
     context.startActivity(Intent(Intent.ACTION_VIEW,
         generateInstallDynamicMoviesLink(context = context, movieId = movieId,
             movieName = movieName, movieSummary = movieSummary)
-    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0).toBundle())
+    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in_movie, 0).toBundle())
 
 }
 

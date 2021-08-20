@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 12:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -73,12 +73,12 @@ fun GenreDetails.setupGenreDetailsUserInterface(themeType: Boolean) {
 
             genreDetailsLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
-            genreDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light))
+            genreDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light_movie))
 
             genreDetailsLayoutBinding.genreNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             genreDetailsLayoutBinding.genreNameTextView.setTextColor(getColor(R.color.dark))
 
-            genreDetailsLayoutBinding.genreIconImageView.background = getDrawable(R.drawable.squircle_icon_light)
+            genreDetailsLayoutBinding.genreIconImageView.background = getDrawable(R.drawable.squircle_icon_light_movie)
             genreDetailsLayoutBinding.genreIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             genreDetailsLayoutBinding.genreIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
@@ -109,12 +109,12 @@ fun GenreDetails.setupGenreDetailsUserInterface(themeType: Boolean) {
 
             genreDetailsLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
-            genreDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_dark))
+            genreDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_dark_movie))
 
             genreDetailsLayoutBinding.genreNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.dark))
             genreDetailsLayoutBinding.genreNameTextView.setTextColor(getColor(R.color.light))
 
-            genreDetailsLayoutBinding.genreIconImageView.background = getDrawable(R.drawable.squircle_icon_dark)
+            genreDetailsLayoutBinding.genreIconImageView.background = getDrawable(R.drawable.squircle_icon_dark_movie)
             genreDetailsLayoutBinding.genreIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.dark))
             genreDetailsLayoutBinding.genreIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.light))
 
@@ -154,12 +154,12 @@ fun GenreDetails.setupGenreDetailsUserInterface(themeType: Boolean) {
 
             genreDetailsLayoutBinding.brandingBackground.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 
-            genreDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light))
+            genreDetailsLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light_movie))
 
             genreDetailsLayoutBinding.genreNameTextView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             genreDetailsLayoutBinding.genreNameTextView.setTextColor(getColor(R.color.dark))
 
-            genreDetailsLayoutBinding.genreIconImageView.background = getDrawable(R.drawable.squircle_icon_light)
+            genreDetailsLayoutBinding.genreIconImageView.background = getDrawable(R.drawable.squircle_icon_light_movie)
             genreDetailsLayoutBinding.genreIconImageView.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light))
             genreDetailsLayoutBinding.genreIconImageView.imageTintList = ColorStateList.valueOf(getColor(R.color.dark))
 

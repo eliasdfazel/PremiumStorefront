@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:27 AM
+ * Last modified 8/20/21, 1:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,25 +46,25 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
 
             sortingInclude.popupBlurryBackground.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
 
-            sortingInclude.sortsContainerView.background = context.getDrawable(R.drawable.sorting_container_layer_light)
+            sortingInclude.sortsContainerView.background = context.getDrawable(R.drawable.sorting_container_layer_light_movie)
 
-            sortingInclude.sortSelectedView.background = context.getDrawable(R.drawable.sorting_selected_container_layer_light)
+            sortingInclude.sortSelectedView.background = context.getDrawable(R.drawable.sorting_selected_container_layer_light_movie)
 
         }
         ThemeType.ThemeDark -> {
 
             sortingInclude.popupBlurryBackground.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
 
-            sortingInclude.sortsContainerView.background = context.getDrawable(R.drawable.sorting_container_layer_dark)
+            sortingInclude.sortsContainerView.background = context.getDrawable(R.drawable.sorting_container_layer_dark_movie)
 
-            sortingInclude.sortSelectedView.background = context.getDrawable(R.drawable.sorting_selected_container_layer_dark)
+            sortingInclude.sortSelectedView.background = context.getDrawable(R.drawable.sorting_selected_container_layer_dark_movie)
 
         }
     }
 
     if (filteringInclude.root.isShown) {
 
-        filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+        filteringInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
         filteringInclude.root.visibility = View.GONE
 
         rightActionView.background = null
@@ -105,7 +105,7 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
 
         leftActionView.background = null
 
-        sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+        sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
         sortingInclude.root.visibility = View.GONE
 
         leftActionView.imageTintList = when (themeType) {
@@ -124,7 +124,7 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
 
     } else {
 
-        leftActionView.background = context.getDrawable(R.drawable.action_center_glowing)
+        leftActionView.background = context.getDrawable(R.drawable.action_center_glowing_movie)
 
         leftActionView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_game_dark))
 
@@ -167,7 +167,7 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
 
                                     context.lifecycleScope.launch {
 
-                                        sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                        sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
                                         sortingInclude.root.visibility = View.GONE
 
                                     }
@@ -208,7 +208,7 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
 
                                     context.lifecycleScope.launch {
 
-                                        sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                        sortingInclude.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
                                         sortingInclude.root.visibility = View.GONE
 
                                     }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 12:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,15 +27,15 @@ fun MoviesDetails.applyNegativeSpaceEffectsForFavorite(themeType: Boolean) {
     val favoriteLayer = when (themeType) {
         ThemeType.ThemeLight -> {
 
-            applicationContext.getDrawable(R.drawable.favorite_layer_light) as LayerDrawable
+            applicationContext.getDrawable(R.drawable.favorite_layer_light_movie) as LayerDrawable
 
         }
         ThemeType.ThemeDark -> {
 
-            applicationContext.getDrawable(R.drawable.favorite_layer_dark) as LayerDrawable
+            applicationContext.getDrawable(R.drawable.favorite_layer_dark_movie) as LayerDrawable
 
         }
-        else -> applicationContext.getDrawable(R.drawable.favorite_layer_light) as LayerDrawable
+        else -> applicationContext.getDrawable(R.drawable.favorite_layer_light_movie) as LayerDrawable
     }
 
     val negativeSpaceLeft = floatArrayOf(

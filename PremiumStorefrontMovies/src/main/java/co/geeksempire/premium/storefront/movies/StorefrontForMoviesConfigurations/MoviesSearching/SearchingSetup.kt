@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 12:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -74,7 +74,7 @@ fun searchingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMovies,
 
     } else {
 
-        middleActionView.background = context.getDrawable(R.drawable.action_center_glowing)
+        middleActionView.background = context.getDrawable(R.drawable.action_center_glowing_movie)
 
         middleActionView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.default_color_game_dark))
 
@@ -136,7 +136,7 @@ fun searchingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMovies,
 
         })
 
-        val slideUpAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_up_from_bottom_bounce)
+        val slideUpAnimation = AnimationUtils.loadAnimation(context, R.anim.slide_up_from_bottom_bounce_movie)
         textInputSearchView.visibility = View.VISIBLE
         textInputSearchView.startAnimation(slideUpAnimation)
 
@@ -188,7 +188,7 @@ fun hideSearchView(context: AppCompatActivity,
 
     middleActionView.background = null
 
-    val fadeOutAnimation = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+    val fadeOutAnimation = AnimationUtils.loadAnimation(context, R.anim.fade_out_movie)
 
     textInputSearchView.visibility = View.INVISIBLE
     textInputSearchView.startAnimation(fadeOutAnimation)

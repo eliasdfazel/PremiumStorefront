@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:59 AM
+ * Last modified 8/20/21, 12:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -114,7 +114,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
                 putExtra(MoviesDataKey.MoviePrimaryGenre, moviePrimaryGenre)
                 putExtra(MoviesDataKey.MovieProductId, movieProductId)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }, ActivityOptions.makeCustomAnimation(context, co.geeksempire.premium.storefront.movies.R.anim.fade_in, 0).toBundle())
+            }, ActivityOptions.makeCustomAnimation(context, co.geeksempire.premium.storefront.movies.R.anim.fade_in_movie, 0).toBundle())
 
         }
 
@@ -296,7 +296,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
 
                                         if (isProductFavorited) {
 
-                                            moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon))
+                                            moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon_movie))
 
                                         }
 
@@ -347,7 +347,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
 
         moviesDetailsLayoutBinding.goBackView.setOnClickListener {
 
-            overridePendingTransition(0, R.anim.fade_out)
+            overridePendingTransition(0, R.anim.fade_out_movie)
             this@MoviesDetails.finish()
 
         }
@@ -360,7 +360,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
 
     override fun onBackPressed() {
 
-        overridePendingTransition(0, R.anim.fade_out)
+        overridePendingTransition(0, R.anim.fade_out_movie)
         this@MoviesDetails.finish()
 
     }
@@ -414,7 +414,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
 
                                 favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser!!.uid , productId)
 
-                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(applicationContext.getDrawable(R.drawable.favorite_icon))
+                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(applicationContext.getDrawable(R.drawable.favorite_icon_movie))
 
                             } else {
 
@@ -433,7 +433,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
 
                                                 favoritedProcess.remove(userUniqueIdentifier = Firebase.auth.currentUser!!.uid, userEmailAddress = Firebase.auth.currentUser!!.uid, productId)
 
-                                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorite_icon))
+                                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorite_icon_movie))
 
                                                 snackbar.dismiss()
 
@@ -462,7 +462,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
                                     productIcon = productIcon,
                                     productType = favoriteType)
 
-                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon))
+                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon_movie))
 
                             } else {
 
@@ -486,7 +486,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
                                                     productIcon = productIcon,
                                                     productType = favoriteType)
 
-                                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon))
+                                                moviesDetailsLayoutBinding.favoriteView.setImageDrawable(getDrawable(R.drawable.favorited_icon_movie))
 
                                                 snackbar.dismiss()
 
@@ -513,7 +513,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
         } else {
 
             startActivity(Intent(applicationContext, AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right, 0).toBundle())
+                ActivityOptions.makeCustomAnimation(applicationContext, R.anim.slide_in_right_movie, 0).toBundle())
 
         }
 

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 7/31/21, 9:59 AM
+  ~ Last modified 8/20/21, 12:56 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -31,7 +31,7 @@
         android:id="@+id/sortsContainerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/sorting_container_layer_light"
+        android:background="@drawable/sorting_container_layer_light_movie"
 
         apps:layout_constraintWidth_percent="0.91"
         apps:layout_constraintHeight_percent="0.59"
@@ -45,7 +45,7 @@
             android:id="@+id/sortSelectedView"
             android:layout_width="0dp"
             android:layout_height="97dp"
-            android:background="@drawable/sorting_selected_container_layer_light"
+            android:background="@drawable/sorting_selected_container_layer_light_movie"
 
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintBottom_toBottomOf="parent"

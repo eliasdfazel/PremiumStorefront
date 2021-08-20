@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/11/21, 4:57 AM
+  ~ Last modified 8/20/21, 12:56 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -31,7 +31,7 @@
         android:id="@+id/filtersContainerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/filtering_container_layer_light"
+        android:background="@drawable/filtering_container_layer_light_movie"
 
         apps:layout_constraintWidth_percent="0.91"
         apps:layout_constraintHeight_percent="0.66"
@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:paddingHorizontal="13dp"
             android:paddingVertical="13dp"
-            android:layoutAnimation="@anim/fade_in_layout_animation"
+            android:layoutAnimation="@anim/fade_in_layout_animation_movie"
             android:background="@drawable/filtering_options_container_layer"
             android:visibility="visible"
 
@@ -58,7 +58,7 @@
             android:id="@+id/filterSelectedView"
             android:layout_width="0dp"
             android:layout_height="97dp"
-            android:background="@drawable/filtering_selected_container_layer_light"
+            android:background="@drawable/filtering_selected_container_layer_light_movie"
 
             apps:layout_constraintTop_toTopOf="parent"
             apps:layout_constraintBottom_toBottomOf="parent"

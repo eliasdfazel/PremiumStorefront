@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/13/21, 6:43 AM
+  ~ Last modified 8/20/21, 1:00 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -42,7 +42,7 @@
         android:scaleType="fitCenter"
         android:layout_marginVertical="19dp"
         android:layout_marginHorizontal="19dp"
-        android:src="@drawable/go_back_layer_light"
+        android:src="@drawable/go_back_layer_light_movie"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintStart_toStartOf="parent"/>
@@ -55,8 +55,8 @@
         android:scaleType="fitCenter"
         android:layout_marginHorizontal="23dp"
         android:tint="@color/default_color_light"
-        android:src="@drawable/favorite_icon"
-        android:background="@drawable/favorite_layer_light"
+        android:src="@drawable/favorite_icon_movie"
+        android:background="@drawable/favorite_layer_light_movie"
 
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
@@ -71,7 +71,7 @@
         android:scaleType="fitCenter"
         android:elevation="13dp"
         android:alpha="0.731"
-        android:src="@drawable/action_center_shadow_background_light"
+        android:src="@drawable/action_center_shadow_background_light_movie"
 
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
         android:layout_width="100dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/action_center_left"
+        android:src="@drawable/action_center_left_movie"
         android:elevation="19dp"
 
         apps:layout_constraintTop_toTopOf="@id/actionCenterView"
@@ -115,7 +115,7 @@
         android:layout_width="100dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/action_center_right"
+        android:src="@drawable/action_center_right_movie"
         android:elevation="19dp"
 
         apps:layout_constraintTop_toTopOf="@id/actionCenterView"
@@ -127,7 +127,7 @@
         android:layout_width="113dp"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/action_center_middle"
+        android:src="@drawable/action_center_middle_movie"
         android:elevation="19dp"
 
         apps:layout_constraintTop_toTopOf="@id/actionCenterView"

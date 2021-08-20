@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:50 AM
+ * Last modified 8/20/21, 1:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -150,15 +150,15 @@ class GenreDetails : StorefrontDynamicActivity() {
 
                     }, 999)
 
-                    genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
                     genreDetailsLayoutBinding.uniqueMoviesGenreRecyclerView.visibility = View.VISIBLE
 
-                    genreDetailsLayoutBinding.movieNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.movieNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
                     genreDetailsLayoutBinding.movieNameTextView.visibility = View.VISIBLE
 
                     genreDetailsLayoutBinding.movieNameLineView.visibility = View.VISIBLE
 
-                    genreDetailsLayoutBinding.movieNameBlurryView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.movieNameBlurryView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
                     genreDetailsLayoutBinding.movieNameBlurryView.visibility = View.VISIBLE
 
                 }
@@ -176,7 +176,7 @@ class GenreDetails : StorefrontDynamicActivity() {
 
                     genreAllMoviesAdapter.notifyDataSetChanged()
 
-                    genreDetailsLayoutBinding.moviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, co.geeksempire.premium.storefront.R.anim.fade_in))
+                    genreDetailsLayoutBinding.moviesGenreRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
                     genreDetailsLayoutBinding.moviesGenreRecyclerView.visibility = View.VISIBLE
 
                     inputData.getStringExtra(CategoriesDataKeys.CategoryName)?.let { genreName ->
@@ -307,7 +307,7 @@ class GenreDetails : StorefrontDynamicActivity() {
 
         genreDetailsLayoutBinding.goBackView.setOnClickListener {
 
-            overridePendingTransition(0, R.anim.slide_out_right)
+            overridePendingTransition(0, R.anim.slide_out_right_movie)
             this@GenreDetails.finish()
 
         }
@@ -320,7 +320,7 @@ class GenreDetails : StorefrontDynamicActivity() {
 
     override fun onBackPressed() {
 
-        overridePendingTransition(0, co.geeksempire.premium.storefront.R.anim.fade_out)
+        overridePendingTransition(0, R.anim.fade_out_movie)
         this@GenreDetails.finish()
 
     }

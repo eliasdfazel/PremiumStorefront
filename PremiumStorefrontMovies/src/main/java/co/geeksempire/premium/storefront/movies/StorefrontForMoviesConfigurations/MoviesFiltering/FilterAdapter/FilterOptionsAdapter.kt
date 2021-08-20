@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:35 AM
+ * Last modified 8/20/21, 12:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -71,7 +71,7 @@ class FilterOptionsAdapter (private val context: AppCompatActivity,
 
                             Handler(Looper.getMainLooper()).postDelayed({
 
-                                moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
                                 moviesFilteringLayoutBinding.root.visibility = View.GONE
 
                             }, 531)
@@ -88,7 +88,7 @@ class FilterOptionsAdapter (private val context: AppCompatActivity,
 
                             Handler(Looper.getMainLooper()).postDelayed({
 
-                                moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                                moviesFilteringLayoutBinding.root.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
                                 moviesFilteringLayoutBinding.root.visibility = View.GONE
 
                             }, 531)

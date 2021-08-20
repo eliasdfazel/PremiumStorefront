@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/20/21, 12:50 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+	android:interpolator="@anim/bounce_interpolator_movie"
+	android:shareInterpolator="true">
+
+	<translate
+		android:fromYDelta="+10%p"
+		android:toYDelta="0"
+		android:duration="977"/>
+
+	<alpha
+		android:fromAlpha="0.0"
+		android:toAlpha="1.0"
+		android:duration="@android:integer/config_mediumAnimTime" />
+
+</set>

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:15 AM
+ * Last modified 8/20/21, 12:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,7 +46,7 @@ fun storefrontMoviesUserInteractionSetup(context: AppCompatActivity, firebaseUse
         } else {
 
             context.startActivity(Intent(context, AccountInformation::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+                ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right_movie, 0).toBundle())
 
         }
 
@@ -54,7 +54,7 @@ fun storefrontMoviesUserInteractionSetup(context: AppCompatActivity, firebaseUse
 
     preferencesView.setOnClickListener {
 
-        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.rotate_bounce_interpolator)
+        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.rotate_bounce_interpolator_movie)
         preferencesView.startAnimation(rotateAnimation)
 
         rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
@@ -64,7 +64,7 @@ fun storefrontMoviesUserInteractionSetup(context: AppCompatActivity, firebaseUse
             override fun onAnimationEnd(animation: Animation?) {
 
                 context.startActivity(Intent(context, PreferencesControl::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                    ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+                    ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right_movie, 0).toBundle())
 
             }
 
@@ -78,7 +78,7 @@ fun storefrontMoviesUserInteractionSetup(context: AppCompatActivity, firebaseUse
 
         context.startActivity(
             Intent(context, FavoriteProducts::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-            ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
+            ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right_movie, 0).toBundle())
 
     }
 

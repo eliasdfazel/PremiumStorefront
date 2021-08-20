@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:26 AM
+ * Last modified 8/20/21, 12:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,15 +29,15 @@ fun FeaturedMoviesAdapter.designFeaturedMoviesBackground(featuredMoviesViewHolde
     var featuredContentBackground = when (themeType) {
         ThemeType.ThemeLight -> {
 
-            AppCompatResources.getDrawable(context, R.drawable.featured_content_background_light) as LayerDrawable
+            AppCompatResources.getDrawable(context, R.drawable.featured_content_background_light_movie) as LayerDrawable
 
         }
         ThemeType.ThemeDark -> {
 
-            AppCompatResources.getDrawable(context, R.drawable.featured_content_background_dark) as LayerDrawable
+            AppCompatResources.getDrawable(context, R.drawable.featured_content_background_dark_movie) as LayerDrawable
 
         }
-        else -> AppCompatResources.getDrawable(context, R.drawable.featured_content_background_light) as LayerDrawable
+        else -> AppCompatResources.getDrawable(context, R.drawable.featured_content_background_light_movie) as LayerDrawable
     }
 
     featuredContentBackground = applyClearEffectRectangle(negativeSpaceDrawable = featuredContentBackground, negativeSpaceLayerId = R.id.topLeftConnection,
@@ -154,7 +154,7 @@ fun FeaturedMoviesAdapter.designOptionsMoviesBackground(featuredMoviesViewHolder
 
 fun FeaturedMoviesAdapter.designFeaturedMoviesPosterBackground(featuredMoviesViewHolder: FeaturedMoviesViewHolder, themeType: Boolean) : LayerDrawable {
 
-    var featuredPostBackground = context.getDrawable(R.drawable.featured_poster_background) as LayerDrawable
+    var featuredPostBackground = context.getDrawable(R.drawable.featured_poster_background_movie) as LayerDrawable
 
     val shadowColor = when (themeType) {
         ThemeType.ThemeLight -> {

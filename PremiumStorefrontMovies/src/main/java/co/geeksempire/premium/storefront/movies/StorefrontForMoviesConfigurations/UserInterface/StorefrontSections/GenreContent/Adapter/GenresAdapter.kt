@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:27 AM
+ * Last modified 8/20/21, 12:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -71,13 +71,13 @@ class GenresAdapter(private val context: AppCompatActivity,
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                genresViewHolder.genreIconImageView.background = getDrawable(context, R.drawable.category_background_item_light)
+                genresViewHolder.genreIconImageView.background = getDrawable(context, R.drawable.category_background_item_light_movie)
                 genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
             }
             ThemeType.ThemeDark -> {
 
-                genresViewHolder.genreIconImageView.background = getDrawable(context, R.drawable.category_background_item_dark)
+                genresViewHolder.genreIconImageView.background = getDrawable(context, R.drawable.category_background_item_dark_movie)
                 genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             }
@@ -89,17 +89,17 @@ class GenresAdapter(private val context: AppCompatActivity,
                 ThemeType.ThemeLight -> {
                     genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
-                    R.drawable.category_background_item_dark
+                    R.drawable.category_background_item_dark_movie
                 }
                 ThemeType.ThemeDark -> {
                     genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
-                    R.drawable.category_background_item_light
+                    R.drawable.category_background_item_light_movie
                 }
                 else -> {
                     genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
-                    R.drawable.category_background_item_dark
+                    R.drawable.category_background_item_dark_movie
                 }
             })
 
@@ -109,17 +109,17 @@ class GenresAdapter(private val context: AppCompatActivity,
                 ThemeType.ThemeLight -> {
                     genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
-                    R.drawable.category_background_item_light
+                    R.drawable.category_background_item_light_movie
                 }
                 ThemeType.ThemeDark -> {
                     genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
-                    R.drawable.category_background_item_dark
+                    R.drawable.category_background_item_dark_movie
                 }
                 else -> {
                     genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
-                    R.drawable.category_background_item_light
+                    R.drawable.category_background_item_light_movie
                 }
             })
 
@@ -134,24 +134,24 @@ class GenresAdapter(private val context: AppCompatActivity,
 
             getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
-                    R.drawable.category_background_item_dark
+                    R.drawable.category_background_item_dark_movie
                 }
                 ThemeType.ThemeDark -> {
-                    R.drawable.category_background_item_light
+                    R.drawable.category_background_item_light_movie
                 }
-                else -> R.drawable.category_background_item_dark
+                else -> R.drawable.category_background_item_dark_movie
             })
 
         } else {
 
             getDrawable(context, when (themeType) {
                 ThemeType.ThemeLight -> {
-                    R.drawable.category_background_item_light
+                    R.drawable.category_background_item_light_movie
                 }
                 ThemeType.ThemeDark -> {
-                    R.drawable.category_background_item_dark
+                    R.drawable.category_background_item_dark_movie
                 }
-                else -> R.drawable.category_background_item_light
+                else -> R.drawable.category_background_item_light_movie
             })
 
         }
@@ -225,26 +225,26 @@ class GenresAdapter(private val context: AppCompatActivity,
                     when (themeType) {
                         ThemeType.ThemeLight -> {
 
-                            categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                            categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark_movie)
                             categoriesViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
                         }
                         ThemeType.ThemeDark -> {
 
-                            categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_light)
+                            categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_light_movie)
                             categoriesViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
                         }
                         else -> {
 
-                            categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark)
+                            categoriesViewHolder.genreIconImageView.background = context.getDrawable(R.drawable.category_background_item_dark_movie)
                             categoriesViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
                         }
                     }
 
                     genreIndicatorTextView.text = storefrontGenres[position].genreName
-                    genreIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                    genreIndicatorTextView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out_movie))
 
                 } else {
 
@@ -277,7 +277,7 @@ class GenresAdapter(private val context: AppCompatActivity,
                             putExtra(CategoriesDataKeys.CategoryId, storefrontGenres[position].genreId)
                             putExtra(CategoriesDataKeys.CategoryName, storefrontGenres[position].genreName)
                             putExtra(CategoriesDataKeys.CategoryIcon, storefrontGenres[position].genreIconLink)
-                        }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+                        }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right_movie, 0).toBundle())
 
                         balloonOptionsMenu.removeBalloonOption()
 

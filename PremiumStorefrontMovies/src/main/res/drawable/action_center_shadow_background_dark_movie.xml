@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 7/27/21, 6:46 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:width="303dp"
+        android:height="79dp">
+
+        <color android:color="@color/transparent"/>
+
+    </item>
+
+    <item
+        android:id="@+id/lightShadow"
+        android:width="277dp"
+        android:height="37dp"
+        android:top="5.5dp"
+        android:start="3dp"
+        android:gravity="top|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="51dp"
+                android:topRightRadius="13dp"
+                android:bottomLeftRadius="7dp"
+                android:bottomRightRadius="13dp"/>
+
+            <solid android:color="@color/white"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/darkShadow"
+        android:width="277dp"
+        android:height="37dp"
+        android:bottom="5.5dp"
+        android:end="3dp"
+        android:gravity="bottom|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="13dp"
+                android:topRightRadius="7dp"
+                android:bottomLeftRadius="13dp"
+                android:bottomRightRadius="51dp"/>
+
+            <solid android:color="@color/black"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/foregroundLayer"
+        android:width="303dp"
+        android:height="70dp"
+
+        android:gravity="center">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="51dp"
+                android:topRightRadius="51dp"
+                android:bottomLeftRadius="51dp"
+                android:bottomRightRadius="51dp"/>
+
+            <solid android:color="#000000" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/rippleMask"
+        android:width="303dp"
+        android:height="70dp"
+        android:top="5dp">
+        <ripple
+            android:color="@color/white">
+
+            <item
+                android:id="@android:id/mask">
+
+                <shape android:shape="rectangle">
+
+                    <corners
+                        android:topLeftRadius="51dp"
+                        android:topRightRadius="51dp"
+                        android:bottomLeftRadius="51dp"
+                        android:bottomRightRadius="51dp"/>
+
+                    <solid android:color="@color/white" />
+
+                </shape>
+
+            </item>
+
+        </ripple>
+    </item>
+
+</layer-list>

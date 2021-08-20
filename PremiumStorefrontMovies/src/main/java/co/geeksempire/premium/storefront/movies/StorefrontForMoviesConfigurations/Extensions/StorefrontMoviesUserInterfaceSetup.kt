@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 4:15 AM
+ * Last modified 8/20/21, 12:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -121,7 +121,7 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
                 setShadowLayer(31f, 0f, 0f, getColor(R.color.dark_transparent_high))
             }
 
-            val shadowLayer = getDrawable(R.drawable.storefront_content_background_light) as LayerDrawable
+            val shadowLayer = getDrawable(R.drawable.storefront_content_background_light_movie) as LayerDrawable
 
             shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
@@ -129,15 +129,15 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.allContentBackground.background = (shadowLayer)
             /* End - Add Shadow To Content Background */
 
-            storefrontMoviesLayoutBinding.dividerTopImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light))
-            storefrontMoviesLayoutBinding.dividerTopImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.featured_content_divider_light)
+            storefrontMoviesLayoutBinding.dividerTopImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light_movie))
+            storefrontMoviesLayoutBinding.dividerTopImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.featured_content_divider_light_movie)
 
-            storefrontMoviesLayoutBinding.dividerNewContentImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light))
-            storefrontMoviesLayoutBinding.dividerNewContentImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.new_content_divider_light)
+            storefrontMoviesLayoutBinding.dividerNewContentImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light_movie))
+            storefrontMoviesLayoutBinding.dividerNewContentImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.new_content_divider_light_movie)
 
-            storefrontMoviesLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_light)
-            storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_light))
-            storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_light)
+            storefrontMoviesLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_light_movie)
+            storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_light_movie))
+            storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_light_movie)
 
             storefrontMoviesLayoutBinding.genreIndicatorTextView.setTextColor(getColor(R.color.dark))
 
@@ -195,7 +195,7 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
                 setShadowLayer(31f, 0f, 0f, getColor(R.color.black_transparent))
             }
 
-            val shadowLayer = getDrawable(R.drawable.storefront_content_background_dark) as LayerDrawable
+            val shadowLayer = getDrawable(R.drawable.storefront_content_background_dark_movie) as LayerDrawable
 
             shadowLayer.setDrawableByLayerId(R.id.temporaryBackground, shapeShadow)
 
@@ -203,15 +203,15 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.allContentBackground.background = (shadowLayer)
             /* End - Add Shadow To Content Background */
 
-            storefrontMoviesLayoutBinding.dividerTopImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_dark))
-            storefrontMoviesLayoutBinding.dividerTopImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.featured_content_divider_dark)
+            storefrontMoviesLayoutBinding.dividerTopImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_dark_movie))
+            storefrontMoviesLayoutBinding.dividerTopImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.featured_content_divider_dark_movie)
 
-            storefrontMoviesLayoutBinding.dividerNewContentImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_dark))
-            storefrontMoviesLayoutBinding.dividerNewContentImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.new_content_divider_dark)
+            storefrontMoviesLayoutBinding.dividerNewContentImageView.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_dark_movie))
+            storefrontMoviesLayoutBinding.dividerNewContentImageView.background = getDrawable(co.geeksempire.premium.storefront.movies.R.drawable.new_content_divider_dark_movie)
 
-            storefrontMoviesLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_dark)
-            storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_dark))
-            storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_dark)
+            storefrontMoviesLayoutBinding.profileView.background = getDrawable(R.drawable.profile_icon_dark_movie)
+            storefrontMoviesLayoutBinding.preferencesView.setImageDrawable(getDrawable(R.drawable.preferences_icon_dark_movie))
+            storefrontMoviesLayoutBinding.favoritesView.background = getDrawable(R.drawable.squircle_background_dark_movie)
 
             storefrontMoviesLayoutBinding.genreIndicatorTextView.setTextColor(getColor(R.color.light))
 

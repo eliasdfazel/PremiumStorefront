@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2021 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel
+  ~ Last modified 8/20/21, 4:35 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <item
+        android:width="101dp"
+        android:height="55dp"
+        android:gravity="bottom|center_horizontal">
+
+        <color android:color="@color/transparent" />
+
+    </item>
+
+    <item
+        android:width="55dp"
+        android:height="55dp"
+        android:gravity="bottom|center_horizontal">
+
+        <shape
+            android:shape="oval">
+
+            <gradient
+                android:type="radial"
+                android:gradientRadius="26.9dp"
+                android:startColor="@color/default_color_light"
+                android:centerColor="@color/default_color_light"
+                android:centerX="0.5"
+                android:centerY="0.52"
+                android:endColor="#03008DDA"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:gravity="top|center_horizontal"
+        android:width="56dp"
+        android:height="99dp">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:bottomLeftRadius="51dp"
+                android:bottomRightRadius="51dp"/>
+
+            <gradient
+                android:type="linear"
+                android:startColor="#03008dda"
+                android:centerColor="@color/default_color_light"
+                android:centerX="0.5"
+                android:centerY="0.5"
+                android:endColor="#03008dda"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:gravity="top|center_horizontal"
+        android:width="51dp"
+        android:height="99dp"
+        android:bottom="3dp">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:bottomLeftRadius="51dp"
+                android:bottomRightRadius="51dp"/>
+
+            <solid
+                android:color="@color/premiumDark" />
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="51dp"
+        android:width="51dp"
+        android:bottom="2.7dp"
+        android:gravity="bottom|center_horizontal">
+
+        <shape
+            android:shape="ring"
+            android:innerRadius="24.5dp"
+            android:thickness="0.9dp"
+            android:useLevel="false">
+
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="@color/premiumDark"
+                android:centerColor="@color/premiumDark"
+                android:centerY="0.57"
+                android:endColor="@color/default_color_light"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="25dp"
+        android:width="25dp"
+        android:gravity="top|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/premiumDark"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/leftClearLayer"
+        android:height="25dp"
+        android:width="24.8dp"
+        android:gravity="top|start">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topRightRadius="51dp"/>
+
+            <solid
+                android:color="@color/green"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:height="25dp"
+        android:width="26dp"
+        android:gravity="top|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <solid
+                android:color="@color/premiumDark"/>
+
+        </shape>
+
+    </item>
+
+    <item
+        android:id="@+id/rightClearLayer"
+        android:height="25dp"
+        android:width="25dp"
+        android:gravity="top|end">
+
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topLeftRadius="51dp"/>
+
+            <solid
+                android:color="@color/green"/>
+
+        </shape>
+
+    </item>
+
+</layer-list>
