@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/6/21, 10:29 AM
+ * Last modified 8/20/21, 1:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -118,7 +118,7 @@ fun shareApplication(context: Context, aPackageName: String, applicationName: St
 
             context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND, shortDynamicLink.shortLink).apply {
                 putExtra(Intent.EXTRA_TEXT, textToShare)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 type = "text/plain"
             }, "Share $applicationName"))
 
