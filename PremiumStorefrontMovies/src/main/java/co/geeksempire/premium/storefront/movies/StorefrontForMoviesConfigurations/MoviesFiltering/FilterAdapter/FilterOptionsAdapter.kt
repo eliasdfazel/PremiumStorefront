@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 12:50 PM
+ * Last modified 8/20/21, 1:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,7 +45,7 @@ class FilterOptionsAdapter (private val context: AppCompatActivity,
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): FilterOptionsViewHolder {
 
-        return FilterOptionsViewHolder(LayoutInflater.from(context).inflate(R.layout.filter_options_item_layout, viewGroup, false))
+        return FilterOptionsViewHolder(LayoutInflater.from(context).inflate(R.layout.filter_options_item_layout_movie, viewGroup, false))
     }
 
     override fun onBindViewHolder(filterOptionsViewHolder: FilterOptionsViewHolder, position: Int) {
