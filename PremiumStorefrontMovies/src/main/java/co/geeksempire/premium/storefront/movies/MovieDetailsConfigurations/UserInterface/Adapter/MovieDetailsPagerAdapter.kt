@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 6:04 AM
+ * Last modified 8/20/21, 12:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,11 +14,11 @@ import android.app.SearchManager
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.text.Html
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.annotation.NonNull
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
@@ -44,6 +44,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.DocumentSnapshot
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+
 
 class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boolean = ThemeType.ThemeLight): RecyclerView.Adapter<MovieDetailsViewHolder>() {
 
@@ -111,8 +112,7 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
                 movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light)
 
-                movieDetailsViewHolder.movieDescriptionFirst.setTextColor(context.getColor(R.color.dark))
-                movieDetailsViewHolder.movieDescriptionSecond.setTextColor(context.getColor(R.color.dark))
+                movieDetailsViewHolder.movieDescription.setTextColor(context.getColor(R.color.dark))
 
                 movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light_transparent_high))
 
@@ -123,12 +123,11 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
             }
             ThemeType.ThemeDark -> {
 
-                movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.premiumDarkTransparent))
+                movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.dark_transparent_high))
 
                 movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark)
 
-                movieDetailsViewHolder.movieDescriptionFirst.setTextColor(context.getColor(R.color.light))
-                movieDetailsViewHolder.movieDescriptionSecond.setTextColor(context.getColor(R.color.light))
+                movieDetailsViewHolder.movieDescription.setTextColor(context.getColor(R.color.light))
 
                 movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_high))
 
@@ -140,6 +139,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
         }
 
     }
+
+
 
     override fun onBindViewHolder(movieDetailsViewHolder: MovieDetailsViewHolder, position: Int) {
 
@@ -158,27 +159,9 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
             movieDetailsViewHolder.movieNameTextView.text = Html.fromHtml(moviesDataStructure.movieName(), Html.FROM_HTML_MODE_COMPACT)
 
-            movieDetailsViewHolder.movieDescriptionFirst.text = Html.fromHtml(moviesDataStructure.movieDescription(), Html.FROM_HTML_MODE_COMPACT)
+            movieDetailsViewHolder.movieDescription.text = Html.fromHtml(moviesDataStructure.movieDescription(), Html.FROM_HTML_MODE_COMPACT)
 
             movieDetailsViewHolder.productCurrentRateView.text = Html.fromHtml(moviesDataStructure.movieRating(), Html.FROM_HTML_MODE_COMPACT)
-
-            if (moviesDataStructure.movieDescription().length > movieDetailsViewHolder.movieDescriptionFirst.text.length) {
-
-                println(">>> >> > " + moviesDataStructure.movieDescription())
-                println(">>> >> > " + movieDetailsViewHolder.movieDescriptionFirst.text)
-
-                movieDetailsViewHolder.movieDescriptionFirst.setOnClickListener {
-
-                    val remainMovieDescription = moviesDataStructure.movieDescription().substring(movieDetailsViewHolder.movieDescriptionFirst.text.length, moviesDataStructure.movieDescription().length)
-
-                    movieDetailsViewHolder.movieDescriptionSecond.text = Html.fromHtml(remainMovieDescription, Html.FROM_HTML_MODE_COMPACT)
-
-                    movieDetailsViewHolder.movieDescriptionSecond.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_down_from_up_bounce))
-                    movieDetailsViewHolder.movieDescriptionSecond.visibility = View.VISIBLE
-
-                }
-
-            }
 
             Glide.with(context)
                 .asDrawable()
@@ -203,7 +186,7 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                                 val vibrantColor = extractVibrantColor(context, resource)
 
                                 movieDetailsViewHolder.movieNameTextView.setTextColor(vibrantColor)
-                                movieDetailsViewHolder.movieNameTextView.setShadowLayer(movieDetailsViewHolder.movieNameTextView.shadowRadius, movieDetailsViewHolder.movieNameTextView.shadowDx, movieDetailsViewHolder.movieNameTextView.shadowDy, vibrantColor)
+                                movieDetailsViewHolder.movieNameTextView.setShadowLayer(movieDetailsViewHolder.movieNameTextView.shadowRadius, movieDetailsViewHolder.movieNameTextView.shadowDx, movieDetailsViewHolder.movieNameTextView.shadowDy, setColorAlpha(vibrantColor, 19f))
 
                                 movieDetailsViewHolder.blurryBackground.setOverlayColor(setColorAlpha(dominantColor, 111f))
                                 movieDetailsViewHolder.blurryBackground.setSecondOverlayColor(when (themeType) {
@@ -215,6 +198,27 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
                                     }
                                     else -> {
                                         context.getColor(R.color.premiumLightTransparent)
+                                    }
+                                })
+
+                                movieDetailsViewHolder.backgroundMovieName.background = (when (themeType) {
+                                    ThemeType.ThemeLight -> {
+                                        val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light) as LayerDrawable
+                                        movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTint(vibrantColor)
+
+                                        movieNameGlow
+                                    }
+                                    ThemeType.ThemeDark -> {
+                                        val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark) as LayerDrawable
+                                        movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTintList(ColorStateList.valueOf(vibrantColor))
+
+                                        movieNameGlow
+                                    }
+                                    else -> {
+                                        val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light) as LayerDrawable
+                                        movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTintList(ColorStateList.valueOf(vibrantColor))
+
+                                        movieNameGlow
                                     }
                                 })
 

@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/20/21, 6:02 AM
+  ~ Last modified 8/20/21, 12:41 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -54,10 +54,31 @@
             android:paddingTop="137dp"
             android:paddingBottom="193dp">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/moviesPosterImageView"
+                android:layout_height="253dp"
+                android:layout_width="173dp"
+                android:layout_marginHorizontal="19dp"
+                android:background="@color/transparent"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backgroundMovieName"
+                android:layout_width="0dp"
+                android:layout_height="253dp"
+                android:layout_marginHorizontal="11dp"
+                android:background="@drawable/movie_name_dimension_effect_light"
+
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toStartOf="@id/moviesPosterImageView"/>
+
             <net.geeksempire.blurry.effect.view.RealtimeBlurView
                 android:id="@+id/blurryMovieName"
-                android:layout_width="match_parent"
-                android:layout_height="73dp"
+                android:layout_width="0dp"
+                android:layout_height="253dp"
                 android:layout_marginHorizontal="11dp"
 
                 apps:realtimeBlurRadius="25dp"
@@ -68,93 +89,40 @@
                 apps:realtimeBlurBottomLeft="23dp"
                 apps:realtimeBlurBottomRight="23dp"
 
-                apps:layout_constraintTop_toTopOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/backgroundMovieName"
-                android:layout_width="match_parent"
-                android:layout_height="73dp"
-                android:layout_marginHorizontal="11dp"
-                android:background="@drawable/movie_name_dimension_effect_light"
-
-                apps:layout_constraintTop_toTopOf="parent"/>
+                apps:layout_constraintTop_toTopOf="parent"
+                apps:layout_constraintStart_toStartOf="parent"
+                apps:layout_constraintEnd_toStartOf="@id/moviesPosterImageView"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/movieNameTextView"
-                android:layout_width="match_parent"
-                android:layout_height="73dp"
+                android:layout_width="0dp"
+                android:layout_height="253dp"
                 android:paddingVertical="17dp"
-                android:paddingHorizontal="19dp"
+                android:paddingHorizontal="29dp"
                 android:gravity="center_vertical"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="3"
-                android:lines="1"
-                android:singleLine="true"
                 android:text="@string/applicationName"
                 android:textColor="@color/default_color_game_bright"
-                android:textSize="31sp"
                 android:textStyle="bold"
                 android:shadowColor="@color/default_color_game_bright"
-                android:shadowRadius="7"
-                android:shadowDx="1"
-                android:shadowDy="1"
+                android:shadowRadius="9"
+                android:shadowDx="0"
+                android:shadowDy="0"
                 android:fontFamily="@font/neon"
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
 
-                apps:layout_constraintTop_toTopOf="parent"/>
+                apps:autoSizeTextType="uniform"
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/moviesPosterImageView"
-                android:layout_height="253dp"
-                android:layout_width="173dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginHorizontal="19dp"
-                android:background="@color/transparent"
-
-                apps:layout_constraintTop_toBottomOf="@id/movieNameTextView"
-                apps:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/movieDescriptionFirst"
-                android:layout_width="0dp"
-                android:layout_height="257dp"
-                android:layout_marginTop="11dp"
-                android:paddingStart="19dp"
-                android:paddingEnd="7dp"
-                android:paddingVertical="3dp"
-                android:lines="14"
-                android:ellipsize="end"
-                android:text="@string/applicationSummary"
-                android:textSize="17sp"
-                android:textColor="@color/dark"
-                android:fontFamily="monospace"
-
-                apps:layout_constraintTop_toBottomOf="@id/movieNameTextView"
+                apps:layout_constraintTop_toTopOf="parent"
                 apps:layout_constraintStart_toStartOf="parent"
                 apps:layout_constraintEnd_toStartOf="@id/moviesPosterImageView"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/movieDescriptionSecond"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="19dp"
-                android:paddingVertical="1dp"
-                android:textSize="17sp"
-                android:textColor="@color/premiumDark"
-                android:fontFamily="monospace"
-                android:visibility="invisible"
-
-                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionFirst"
-                apps:layout_constraintStart_toStartOf="parent"
-                apps:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/productRatingStarsView"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
-                android:layout_marginVertical="11dp"
+                android:layout_marginVertical="13dp"
                 android:layout_marginHorizontal="19dp"
                 android:padding="11dp"
                 android:scaleType="fitCenter"
@@ -162,7 +130,7 @@
                 android:background="@drawable/movie_details_rating_glowing_frame_light"
                 android:src="@drawable/star_rate_icon_light"
 
-                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintTop_toBottomOf="@id/moviesPosterImageView"
                 apps:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -188,56 +156,74 @@
                 android:id="@+id/productContentRatingView"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
-                android:layout_marginVertical="11dp"
+                android:layout_marginVertical="13dp"
                 android:layout_marginHorizontal="7dp"
                 android:padding="11dp"
                 android:scaleType="fitCenter"
                 android:background="@drawable/movie_details_rating_glowing_frame_light"
 
-                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintTop_toBottomOf="@id/moviesPosterImageView"
                 apps:layout_constraintEnd_toStartOf="@id/productRatingStarsView"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/movieGenreFirst"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
-                android:layout_marginVertical="11dp"
+                android:layout_marginVertical="13dp"
                 android:layout_marginHorizontal="19dp"
                 android:padding="13dp"
                 android:scaleType="fitCenter"
                 android:tint="@color/premiumDark"
                 android:background="@drawable/movie_details_rating_glowing_frame_light"
 
-                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintTop_toBottomOf="@id/moviesPosterImageView"
                 apps:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/movieGenreSecond"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
-                android:layout_marginVertical="11dp"
+                android:layout_marginVertical="13dp"
                 android:layout_marginHorizontal="7dp"
                 android:padding="13dp"
                 android:scaleType="fitCenter"
                 android:tint="@color/premiumDark"
                 android:background="@drawable/movie_details_rating_glowing_frame_light"
 
-                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintTop_toBottomOf="@id/moviesPosterImageView"
                 apps:layout_constraintStart_toEndOf="@id/movieGenreFirst"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/movieGenreThird"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
-                android:layout_marginVertical="11dp"
+                android:layout_marginVertical="13dp"
                 android:layout_marginHorizontal="7dp"
                 android:padding="13dp"
+
                 android:scaleType="fitCenter"
                 android:tint="@color/premiumDark"
                 android:background="@drawable/movie_details_rating_glowing_frame_light"
 
-                apps:layout_constraintTop_toBottomOf="@id/movieDescriptionSecond"
+                apps:layout_constraintTop_toBottomOf="@id/moviesPosterImageView"
                 apps:layout_constraintStart_toEndOf="@id/movieGenreSecond"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/movieDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:paddingStart="19dp"
+                android:paddingEnd="7dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="3dp"
+                android:letterSpacing="0.1"
+                android:text="@string/applicationSummary"
+                android:textSize="17sp"
+                android:textColor="@color/dark"
+                android:fontFamily="monospace"
+
+                apps:layout_constraintTop_toBottomOf="@id/productRatingStarsView" />
 
             <co.geeksempire.youtubeplayer.player.views.YouTubePlayerView
                 android:id="@+id/movieTrailerYouTube"
@@ -250,7 +236,7 @@
                 apps:autoPlay="false"
                 apps:showFullScreenButton="false"
 
-                apps:layout_constraintTop_toBottomOf="@id/productRatingStarsView"/>
+                apps:layout_constraintTop_toBottomOf="@id/movieDescription"/>
 
             <net.geekstools.imageview.customshapes.ShapesImage
                 android:id="@+id/firstStar"
