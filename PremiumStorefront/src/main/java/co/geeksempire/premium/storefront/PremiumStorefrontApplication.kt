@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 9:08 AM
+ * Last modified 8/21/21, 10:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,11 +10,13 @@
 
 package co.geeksempire.premium.storefront
 
+import android.content.Context
 import android.os.Bundle
 import co.geeksempire.premium.storefront.Database.GeneralConfigurations.FirestoreConfiguration
 import co.geeksempire.premium.storefront.Database.Preferences.PreferencesIO
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.CategoryData
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.android.play.core.splitcompat.SplitCompatApplication
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -50,6 +52,12 @@ class PremiumStorefrontApplication : SplitCompatApplication() {
 
         firestoreDatabase = firestoreConfiguration.initialize()
 
+    }
+
+    override fun attachBaseContext(baseApplicationContext: Context) {
+        super.attachBaseContext(baseApplicationContext)
+
+        SplitCompat.install(applicationContext)
     }
 
 }

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:28 AM
+ * Last modified 8/21/21, 10:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.animation.ValueAnimator
 import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandl
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.databinding.SectionsSwitcherLayoutBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.splitinstall.SplitInstallHelper
 import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
@@ -73,6 +75,10 @@ fun startMoviesSwitching(context: AppCompatActivity, activityRootView: ViewGroup
                 }
                 SplitInstallSessionStatus.INSTALLED -> {
                     Log.d("Dynamic Feature", "Installed")
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        SplitInstallHelper.updateAppInfo(context.applicationContext)
+                    }
 
                     sectionsSwitcherLayoutBinding.moviesSectionView.icon = context.getDrawable(R.drawable.movies_icon)
 
