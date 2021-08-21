@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:28 AM
+ * Last modified 8/21/21, 6:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -129,9 +129,9 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
                                 featuredMoviesViewHolder.moviePosterImageView.setImageDrawable(resource)
 
-                                val dominantColor = extractDominantColor(context, resource)
-                                val vibrantColor = extractVibrantColor(context, resource)
-                                val mutedColor = extractMutedColor(context, resource)
+                                val dominantColor = extractDominantColor(resource)
+                                val vibrantColor = extractVibrantColor(resource)
+                                val mutedColor = extractMutedColor(resource)
 
                                 val movieGradient = GradientDrawable()
                                 movieGradient.orientation = GradientDrawable.Orientation.TL_BR

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/20/21, 5:54 AM
+ * Last modified 8/21/21, 6:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,18 +10,16 @@
 
 package co.geeksempire.premium.storefront.Utils.UI.Colors
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import androidx.core.graphics.ColorUtils
 import androidx.palette.graphics.Palette
-import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Images.drawableToBitmap
 
-fun extractDominantColor(context: Context, drawable: Drawable): Int {
+fun extractDominantColor(drawable: Drawable): Int {
 
-    var dominantColor: Int = context.getColor(R.color.default_color)
+    var dominantColor: Int = Color.BLACK
 
     val bitmap: Bitmap = drawableToBitmap(drawable)
 
@@ -29,7 +27,7 @@ fun extractDominantColor(context: Context, drawable: Drawable): Int {
     try {
         if (bitmap != null && !bitmap.isRecycled) {
             currentColor = Palette.from(bitmap).generate()
-            val defaultColor: Int = context.getColor(R.color.default_color)
+            val defaultColor: Int = Color.BLACK
             dominantColor = currentColor.getDominantColor(defaultColor)
         }
     } catch (e: Exception) {
@@ -38,7 +36,7 @@ fun extractDominantColor(context: Context, drawable: Drawable): Int {
         try {
             if (bitmap != null && !bitmap.isRecycled) {
                 currentColor = Palette.from(bitmap).generate()
-                val defaultColor: Int = context.getColor(R.color.default_color)
+                val defaultColor: Int = Color.BLACK
                 dominantColor = currentColor.getMutedColor(defaultColor)
             }
         } catch (e1: Exception) {
@@ -48,9 +46,9 @@ fun extractDominantColor(context: Context, drawable: Drawable): Int {
     return dominantColor
 }
 
-fun extractVibrantColor(context: Context, drawable: Drawable): Int {
+fun extractVibrantColor(drawable: Drawable): Int {
 
-    var vibrantColor: Int = context.getColor(R.color.default_color_game_bright)
+    var vibrantColor: Int = Color.MAGENTA
 
     val bitmap: Bitmap = drawableToBitmap(drawable)
 
@@ -58,7 +56,7 @@ fun extractVibrantColor(context: Context, drawable: Drawable): Int {
     try {
         if (bitmap != null && !bitmap.isRecycled) {
             currentColor = Palette.from(bitmap).generate()
-            val defaultColor: Int = context.getColor(R.color.default_color_game_bright)
+            val defaultColor: Int = Color.MAGENTA
             vibrantColor = currentColor.getVibrantColor(defaultColor)
         }
     } catch (e: Exception) {
@@ -66,7 +64,7 @@ fun extractVibrantColor(context: Context, drawable: Drawable): Int {
         try {
             if (bitmap != null && !bitmap.isRecycled) {
                 currentColor = Palette.from(bitmap).generate()
-                val defaultColor: Int = context.getColor(R.color.default_color_game_bright)
+                val defaultColor: Int = Color.MAGENTA
                 vibrantColor = currentColor.getMutedColor(defaultColor)
             }
         } catch (e1: Exception) {
@@ -77,9 +75,9 @@ fun extractVibrantColor(context: Context, drawable: Drawable): Int {
     return vibrantColor
 }
 
-fun extractMutedColor(context: Context, drawable: Drawable): Int {
+fun extractMutedColor(drawable: Drawable): Int {
 
-    var vibrantColor: Int = context.getColor(R.color.default_color_game_dark)
+    var mutedColor: Int = Color.DKGRAY
 
     val bitmap: Bitmap = drawableToBitmap(drawable)
 
@@ -87,22 +85,22 @@ fun extractMutedColor(context: Context, drawable: Drawable): Int {
     try {
         if (bitmap != null && !bitmap.isRecycled) {
             currentColor = Palette.from(bitmap).generate()
-            val defaultColor: Int = context.getColor(R.color.default_color_game_dark)
-            vibrantColor = currentColor.getDarkMutedColor(defaultColor)
+            val defaultColor: Int = Color.DKGRAY
+            mutedColor = currentColor.getDarkMutedColor(defaultColor)
         }
     } catch (e: Exception) {
         e.printStackTrace()
         try {
             if (bitmap != null && !bitmap.isRecycled) {
                 currentColor = Palette.from(bitmap).generate()
-                val defaultColor: Int = context.getColor(R.color.default_color_game_dark)
-                vibrantColor = currentColor.getMutedColor(defaultColor)
+                val defaultColor: Int = Color.DKGRAY
+                mutedColor = currentColor.getMutedColor(defaultColor)
             }
         } catch (e1: Exception) {
             e1.printStackTrace()
         }
     }
-    return vibrantColor
+    return mutedColor
 }
 
 fun isColorDark(color: Int): Boolean {
@@ -112,11 +110,11 @@ fun isColorDark(color: Int): Boolean {
     return (darkness >= 0.50)
 }
 
-fun isDrawableLightDark(context: Context, drawable: Drawable): Boolean {
+fun isDrawableLightDark(drawable: Drawable): Boolean {
 
     var isLightDark = false
 
-    val calculateLuminance = ColorUtils.calculateLuminance(extractDominantColor(context, drawable))
+    val calculateLuminance = ColorUtils.calculateLuminance(extractDominantColor(drawable))
 
     if (calculateLuminance > 0.50) { //light
         isLightDark = true

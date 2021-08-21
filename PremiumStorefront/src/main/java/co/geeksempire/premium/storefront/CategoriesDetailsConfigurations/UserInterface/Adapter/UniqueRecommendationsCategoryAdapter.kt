@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 10:38 AM
+ * Last modified 8/21/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -90,11 +90,11 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
                     resource?.let {
 
-                        val dominantColor = extractDominantColor(context, resource)
-                        var vibrantColor = extractVibrantColor(context, resource)
+                        val dominantColor = extractDominantColor(resource)
+                        var vibrantColor = extractVibrantColor(resource)
 
                         if (colorsTheSame(dominantColor, vibrantColor)) {
-                            vibrantColor = extractMutedColor(context, resource)
+                            vibrantColor = extractMutedColor(resource)
                         }
 
                         context.runOnUiThread {

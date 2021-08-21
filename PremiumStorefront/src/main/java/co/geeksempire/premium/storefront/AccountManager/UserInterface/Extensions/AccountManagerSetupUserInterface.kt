@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/2/21, 9:16 AM
+ * Last modified 8/21/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -104,8 +104,8 @@ fun AccountInformation.accountManagerSetupUserInterface() {
 
                         resource?.let {
 
-                            dominantColor = extractDominantColor(applicationContext, it)
-                            vibrantColor = extractVibrantColor(applicationContext, it)
+                            dominantColor = extractDominantColor(it)
+                            vibrantColor = extractVibrantColor(it)
 
                             window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
 
@@ -431,8 +431,8 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
 
                         resource?.let {
 
-                            val dominantColor = extractDominantColor(applicationContext, it)
-                            val vibrantColor = extractVibrantColor(applicationContext, it)
+                            val dominantColor = extractDominantColor(it)
+                            val vibrantColor = extractVibrantColor(it)
 
                             window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
 

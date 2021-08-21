@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 1:06 PM
+ * Last modified 8/21/21, 6:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -234,9 +234,9 @@ class GenreDetails : StorefrontDynamicActivity() {
 
                                                     genreDetailsLayoutBinding.moviePosterBackground.setImageDrawable(resource)
 
-                                                    val dominantColor = extractDominantColor(applicationContext, resource)
-                                                    val vibrantColor = extractVibrantColor(applicationContext, resource)
-                                                    val mutedColor = extractMutedColor(applicationContext, resource)
+                                                    val dominantColor = extractDominantColor(resource)
+                                                    val vibrantColor = extractVibrantColor(resource)
+                                                    val mutedColor = extractMutedColor(resource)
 
                                                     shadowAnimationUtils.textShadowValueAnimatorLoop(view = genreDetailsLayoutBinding.movieNameTextView,
                                                         startValue = 0f, endValue = genreDetailsLayoutBinding.movieNameTextView.shadowRadius,

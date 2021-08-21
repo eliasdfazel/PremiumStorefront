@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 12:41 PM
+ * Last modified 8/21/21, 6:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -182,8 +182,8 @@ class MovieDetailsPagerAdapter (val context: MoviesDetails, var themeType: Boole
 
                                 movieDetailsViewHolder.moviePostBackground.background = resource
 
-                                val dominantColor = extractDominantColor(context, resource)
-                                val vibrantColor = extractVibrantColor(context, resource)
+                                val dominantColor = extractDominantColor(resource)
+                                val vibrantColor = extractVibrantColor(resource)
 
                                 movieDetailsViewHolder.movieNameTextView.setTextColor(vibrantColor)
                                 movieDetailsViewHolder.movieNameTextView.setShadowLayer(movieDetailsViewHolder.movieNameTextView.shadowRadius, movieDetailsViewHolder.movieNameTextView.shadowDx, movieDetailsViewHolder.movieNameTextView.shadowDy, setColorAlpha(vibrantColor, 19f))

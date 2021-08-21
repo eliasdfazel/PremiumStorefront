@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 12:34 PM
+ * Last modified 8/21/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -138,7 +138,7 @@ class FavoritedAdapter (val context: FavoriteProducts, var themeType: Boolean = 
 
                             favoritedViewHolder.productIconImageView.setImageDrawable(resource)
 
-                            val dominantColor = extractVibrantColor(context, resource)
+                            val dominantColor = extractVibrantColor(resource)
 
                             favoritedViewHolder.installView.backgroundTintList = ColorStateList.valueOf(dominantColor)
 

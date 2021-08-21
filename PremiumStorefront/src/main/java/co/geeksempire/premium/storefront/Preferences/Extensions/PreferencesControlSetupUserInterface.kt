@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:34 PM
+ * Last modified 8/21/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -69,7 +69,7 @@ fun PreferencesControl.preferencesControlSetupUserInterface() {
 
                             preferencesControlLayoutBinding.profileImageView.icon = resource
 
-                            val dominantColor = extractVibrantColor(applicationContext, resource)
+                            val dominantColor = extractVibrantColor(resource)
 
                             preferencesControlLayoutBinding.profileImageColorView.backgroundTintList = ColorStateList.valueOf(setColorAlpha(dominantColor, 111f))
 

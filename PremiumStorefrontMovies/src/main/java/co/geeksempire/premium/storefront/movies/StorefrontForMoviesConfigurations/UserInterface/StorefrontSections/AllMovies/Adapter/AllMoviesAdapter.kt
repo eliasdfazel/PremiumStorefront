@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:27 AM
+ * Last modified 8/21/21, 6:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -79,7 +79,7 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
                         resource?.let {
 
-                            val vibrantColor = extractVibrantColor(context, resource)
+                            val vibrantColor = extractVibrantColor(resource)
 
                             context.runOnUiThread {
 
