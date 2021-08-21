@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 12:53 PM
+ * Last modified 8/21/21, 3:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,6 +56,17 @@ import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.math.abs
 
+fun openMoviesDetails(context: Context,
+                      moviePrimaryGenre: String, movieProductId: String) {
+
+    context.startActivity(Intent(context, MoviesDetails::class.java).apply {
+        putExtra(MoviesDataKey.MoviePrimaryGenre, moviePrimaryGenre)
+        putExtra(MoviesDataKey.MovieProductId, movieProductId)
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }, ActivityOptions.makeCustomAnimation(context, co.geeksempire.premium.storefront.movies.R.anim.fade_in_movie, 0).toBundle())
+
+}
+
 class MoviesDetails : StorefrontDynamicActivity() {
 
     val themePreferences: ThemePreferences by lazy {
@@ -104,21 +115,6 @@ class MoviesDetails : StorefrontDynamicActivity() {
     var movieSelectedPosition: Int = 0
 
     lateinit var moviesDetailsLayoutBinding: MoviesDetailsLayoutBinding
-
-    companion object {
-
-        fun openMoviesDetails(context: Context,
-                              moviePrimaryGenre: String, movieProductId: String) {
-
-            context.startActivity(Intent(context, MoviesDetails::class.java).apply {
-                putExtra(MoviesDataKey.MoviePrimaryGenre, moviePrimaryGenre)
-                putExtra(MoviesDataKey.MovieProductId, movieProductId)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }, ActivityOptions.makeCustomAnimation(context, co.geeksempire.premium.storefront.movies.R.anim.fade_in_movie, 0).toBundle())
-
-        }
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

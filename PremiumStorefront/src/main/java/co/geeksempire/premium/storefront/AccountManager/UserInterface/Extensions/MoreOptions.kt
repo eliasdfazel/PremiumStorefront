@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/22/21, 2:14 PM
+ * Last modified 8/21/21, 3:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import android.view.Gravity
 import android.view.Menu
 import androidx.appcompat.widget.PopupMenu
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
-import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser
+import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.showBuiltInBrowser
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.Data.resizeDrawable
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
@@ -68,7 +68,7 @@ class MoreOptions(private val context: AccountInformation) {
                 when (menuItem?.itemId) {
                     MenuItemIdentifier.PrivacyAgreementItem -> {
 
-                        BuiltInBrowser.show(
+                        showBuiltInBrowser(
                             context = context,
                             linkToLoad = context.getString(R.string.privacyAgreementLink),
                             gradientColorOne = context.getColor(R.color.default_color_dark),

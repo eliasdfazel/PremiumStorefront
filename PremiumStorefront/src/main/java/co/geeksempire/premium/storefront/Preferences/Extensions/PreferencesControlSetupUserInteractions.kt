@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 6:26 AM
+ * Last modified 8/21/21, 3:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,7 @@ import android.net.Uri
 import android.util.TypedValue
 import androidx.lifecycle.lifecycleScope
 import co.geeksempire.premium.storefront.AccountManager.UserInterface.AccountInformation
-import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.BuiltInBrowser
+import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.showBuiltInBrowser
 import co.geeksempire.premium.storefront.Invitations.Send.SendInvitation
 import co.geeksempire.premium.storefront.Preferences.UserInterface.PreferencesControl
 import co.geeksempire.premium.storefront.R
@@ -59,7 +59,7 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
     preferencesControlLayoutBinding.whatNewView.setOnClickListener {
 
-        BuiltInBrowser.show(context = applicationContext,
+        showBuiltInBrowser(context = applicationContext,
             linkToLoad = getString(R.string.premiumStorefrontWhatsNewLink),
             gradientColorOne = getColor(R.color.default_color_game),
             gradientColorTwo = getColor(R.color.default_color_game_light))
@@ -68,7 +68,7 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
     preferencesControlLayoutBinding.supportView.setOnClickListener {
 
-        BuiltInBrowser.show(context = applicationContext,
+        showBuiltInBrowser(context = applicationContext,
             linkToLoad = getString(R.string.supportLink),
             gradientColorOne = getColor(R.color.default_color_game),
             gradientColorTwo = getColor(R.color.default_color_game_light))
@@ -77,7 +77,7 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
     preferencesControlLayoutBinding.submissionRequestView.setOnClickListener {
 
-        BuiltInBrowser.show(context = applicationContext,
+        showBuiltInBrowser(context = applicationContext,
             linkToLoad = getString(R.string.developersSubmissionRequest),
             gradientColorOne = getColor(R.color.default_color),
             gradientColorTwo = getColor(R.color.default_color_bright))

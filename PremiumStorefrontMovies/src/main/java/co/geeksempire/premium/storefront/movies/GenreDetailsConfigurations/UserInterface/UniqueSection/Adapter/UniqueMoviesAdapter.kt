@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/13/21, 9:14 AM
+ * Last modified 8/21/21, 3:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.GenreDetails
 import co.geeksempire.premium.storefront.movies.GenreDetailsConfigurations.UserInterface.UniqueSection.ViewHolder.UniqueMoviesViewHolder
-import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.openMoviesDetails
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.databinding.GenreUniqueMoviesItemBinding
 import com.bumptech.glide.Glide
@@ -80,7 +80,7 @@ class UniqueMoviesAdapter (val context: GenreDetails) : RecyclerView.Adapter<Uni
 
             uniqueMoviesViewHolder.rootViewItem.setOnClickListener {
 
-                MoviesDetails.openMoviesDetails(context = context,
+                openMoviesDetails(context = context,
                     moviePrimaryGenre = moviesDataStructure.moviePrimaryGenre(),
                     movieProductId = moviesDataStructure.movieProductId())
 

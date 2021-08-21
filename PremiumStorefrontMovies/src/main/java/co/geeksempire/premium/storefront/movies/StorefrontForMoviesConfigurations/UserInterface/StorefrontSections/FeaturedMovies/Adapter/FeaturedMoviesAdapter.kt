@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:25 AM
+ * Last modified 8/21/21, 3:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorLightDark
-import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.openMoviesDetails
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontMovies
@@ -221,7 +221,7 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
 
             featuredMoviesViewHolder.rootViewItem.setOnClickListener {
 
-                MoviesDetails.openMoviesDetails(context = context,
+                openMoviesDetails(context = context,
                     moviePrimaryGenre = moviesDataStructure.moviePrimaryGenre(),
                     movieProductId = moviesDataStructure.movieProductId())
 

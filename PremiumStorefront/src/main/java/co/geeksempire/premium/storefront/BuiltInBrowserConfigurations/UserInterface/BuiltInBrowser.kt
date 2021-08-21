@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:00 PM
+ * Last modified 8/21/21, 3:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,28 +30,24 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.statusBarHeight
 import co.geeksempire.premium.storefront.databinding.BrowserViewBinding
 import java.io.File
 
+fun showBuiltInBrowser(context: Context,
+                       linkToLoad: String,
+                       gradientColorOne: Int?,
+                       gradientColorTwo: Int?) {
+
+    Intent(context, BuiltInBrowser::class.java).apply {
+        putExtra(Intent.EXTRA_TEXT, linkToLoad)
+        putExtra("GradientColorOne", gradientColorOne)
+        putExtra("GradientColorTwo", gradientColorTwo)
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(this@apply, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
+    }
+
+}
+
 class BuiltInBrowser : AppCompatActivity() {
 
     private lateinit var browserViewBinding: BrowserViewBinding
-
-    companion object {
-
-        fun show(context: Context,
-                 linkToLoad: String,
-                 gradientColorOne: Int?,
-                 gradientColorTwo: Int?) {
-
-            Intent(context, BuiltInBrowser::class.java).apply {
-                putExtra(Intent.EXTRA_TEXT, linkToLoad)
-                putExtra("GradientColorOne", gradientColorOne)
-                putExtra("GradientColorTwo", gradientColorTwo)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(this@apply, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
-            }
-
-        }
-
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

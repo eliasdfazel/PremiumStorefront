@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:25 AM
+ * Last modified 8/21/21, 3:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
-import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.openMoviesDetails
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.AllMovies.ViewHolder.AllMoviesViewHolder
 import co.geeksempire.premium.storefront.movies.databinding.StorefrontAllMoviesItemBinding
@@ -98,7 +98,7 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
             allMoviesViewHolder.rootViewItem.setOnClickListener {
 
-                MoviesDetails.openMoviesDetails(context = context,
+                openMoviesDetails(context = context,
                     moviePrimaryGenre = moviesDataStructure.moviePrimaryGenre(),
                     movieProductId = moviesDataStructure.movieProductId())
 
