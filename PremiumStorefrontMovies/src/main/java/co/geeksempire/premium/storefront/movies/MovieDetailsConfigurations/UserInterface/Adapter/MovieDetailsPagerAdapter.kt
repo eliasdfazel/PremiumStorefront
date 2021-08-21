@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 11:51 AM
+ * Last modified 8/21/21, 2:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -107,44 +107,100 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
 
         }
 
-        when (themeType) {
-            ThemeType.ThemeLight -> {
-
-                movieDetailsViewHolder.blurryMovieName.setOverlayColor(ContextCompat.getColor(context, R.color.premiumLightTransparent))
-
-                movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light)
-
-                movieDetailsViewHolder.movieDescription.setTextColor(ContextCompat.getColor(context, R.color.dark))
-
-                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.light_transparent_high))
-
-                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
-                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
-                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
-
-            }
-            ThemeType.ThemeDark -> {
-
-                movieDetailsViewHolder.blurryMovieName.setOverlayColor(ContextCompat.getColor(context, R.color.dark_transparent_high))
-
-                movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark)
-
-                movieDetailsViewHolder.movieDescription.setTextColor(ContextCompat.getColor(context, R.color.light))
-
-                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.dark_transparent_high))
-
-                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
-                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
-                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
-
-            }
-        }
-
     }
 
 
 
     override fun onBindViewHolder(movieDetailsViewHolder: MovieDetailsViewHolder, position: Int) {
+
+        when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                movieDetailsViewHolder.blurryMovieName.setOverlayColor(try {
+                    ContextCompat.getColor(context, R.color.premiumLightTransparent)
+                } catch (e: Exception) {
+                    Color.argb(129, 213, 224, 243)
+                })
+
+                movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light)
+
+                movieDetailsViewHolder.movieDescription.setTextColor(try {
+                    ContextCompat.getColor(context, R.color.dark)
+                } catch (e: Exception) {
+                    Color.rgb(10, 15, 24)
+
+                })
+
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.light_transparent_high)
+                } catch (e: Exception) {
+                    Color.argb(13, 242, 247, 255)
+                })
+
+                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.black)
+                } catch (e: Exception) {
+                    Color.BLACK
+                })
+                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.black)
+                } catch (e: Exception) {
+                    Color.BLACK
+                })
+                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.black)
+                } catch (e: Exception) {
+                    Color.BLACK
+                })
+
+            }
+            ThemeType.ThemeDark -> {
+
+                movieDetailsViewHolder.blurryMovieName.setOverlayColor(try {
+                    ContextCompat.getColor(context, R.color.premiumDarkTransparent)
+                } catch (e: Exception) {
+                    Color.argb(129, 60, 67, 77)
+
+                })
+
+                movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark)
+
+                movieDetailsViewHolder.movieDescription.setTextColor(try {
+                    ContextCompat.getColor(context, R.color.light)
+                } catch (e: Exception) {
+                    Color.rgb(242, 247, 255)
+                })
+
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.dark_transparent_high)
+                } catch (e: Exception) {
+                    Color.argb(13, 10, 15, 24)
+                })
+
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.light_transparent_high)
+                } catch (e: Exception) {
+                    Color.argb(13, 242, 247, 255)
+                })
+
+                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.black)
+                } catch (e: Exception) {
+                    Color.BLACK
+                })
+                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.black)
+                } catch (e: Exception) {
+                    Color.BLACK
+                })
+                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(try {
+                    ContextCompat.getColor(context, R.color.black)
+                } catch (e: Exception) {
+                    Color.BLACK
+                })
+
+            }
+        }
 
         moviesDetailsList[position].data?.let { documentSnapshot ->
 
@@ -198,7 +254,7 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
                                         } catch (e: Exception) {
                                             e.printStackTrace()
 
-                                            Color.argb(113, 213, 224, 243)
+                                            Color.argb(129, 213, 224, 243)
                                         }
                                     }
                                     ThemeType.ThemeDark -> {
@@ -207,7 +263,7 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
                                         } catch (e: Exception) {
                                             e.printStackTrace()
 
-                                            Color.argb(113, 60, 67, 77)
+                                            Color.argb(129, 60, 67, 77)
                                         }
                                     }
                                     else -> {
@@ -216,7 +272,7 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
                                         } catch (e: Exception) {
                                             e.printStackTrace()
 
-                                            Color.argb(113, 213, 224, 243)
+                                            Color.argb(129, 213, 224, 243)
                                         }
                                     }
                                 })
