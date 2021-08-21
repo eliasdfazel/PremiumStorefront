@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:35 AM
+ * Last modified 8/21/21, 3:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Images.drawableToBitmap
 
 fun extractDominantColor(drawable: Drawable): Int {
 
-    var dominantColor: Int = Color.BLACK
+    var dominantColor: Int = Color.rgb(35, 125, 174)
 
     val bitmap: Bitmap = drawableToBitmap(drawable)
 
@@ -27,7 +27,7 @@ fun extractDominantColor(drawable: Drawable): Int {
     try {
         if (bitmap != null && !bitmap.isRecycled) {
             currentColor = Palette.from(bitmap).generate()
-            val defaultColor: Int = Color.BLACK
+            val defaultColor: Int = Color.rgb(35, 125, 174)
             dominantColor = currentColor.getDominantColor(defaultColor)
         }
     } catch (e: Exception) {
@@ -36,7 +36,7 @@ fun extractDominantColor(drawable: Drawable): Int {
         try {
             if (bitmap != null && !bitmap.isRecycled) {
                 currentColor = Palette.from(bitmap).generate()
-                val defaultColor: Int = Color.BLACK
+                val defaultColor: Int = Color.rgb(35, 125, 174)
                 dominantColor = currentColor.getMutedColor(defaultColor)
             }
         } catch (e1: Exception) {
@@ -48,7 +48,7 @@ fun extractDominantColor(drawable: Drawable): Int {
 
 fun extractVibrantColor(drawable: Drawable): Int {
 
-    var vibrantColor: Int = Color.MAGENTA
+    var vibrantColor: Int = Color.rgb(174, 35, 87)
 
     val bitmap: Bitmap = drawableToBitmap(drawable)
 
@@ -56,7 +56,7 @@ fun extractVibrantColor(drawable: Drawable): Int {
     try {
         if (bitmap != null && !bitmap.isRecycled) {
             currentColor = Palette.from(bitmap).generate()
-            val defaultColor: Int = Color.MAGENTA
+            val defaultColor: Int = Color.rgb(174, 35, 87)
             vibrantColor = currentColor.getVibrantColor(defaultColor)
         }
     } catch (e: Exception) {
@@ -64,7 +64,7 @@ fun extractVibrantColor(drawable: Drawable): Int {
         try {
             if (bitmap != null && !bitmap.isRecycled) {
                 currentColor = Palette.from(bitmap).generate()
-                val defaultColor: Int = Color.MAGENTA
+                val defaultColor: Int = Color.rgb(174, 35, 87)
                 vibrantColor = currentColor.getMutedColor(defaultColor)
             }
         } catch (e1: Exception) {
