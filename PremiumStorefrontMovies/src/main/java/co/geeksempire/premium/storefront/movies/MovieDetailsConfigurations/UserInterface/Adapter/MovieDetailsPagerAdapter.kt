@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 10:10 AM
+ * Last modified 8/21/21, 11:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.User
 import android.app.SearchManager
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Html
@@ -22,6 +23,7 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
@@ -108,32 +110,32 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-                movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.premiumLightTransparent))
+                movieDetailsViewHolder.blurryMovieName.setOverlayColor(ContextCompat.getColor(context, R.color.premiumLightTransparent))
 
                 movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light)
 
-                movieDetailsViewHolder.movieDescription.setTextColor(context.getColor(R.color.dark))
+                movieDetailsViewHolder.movieDescription.setTextColor(ContextCompat.getColor(context, R.color.dark))
 
-                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light_transparent_high))
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.light_transparent_high))
 
-                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
-                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
-                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
+                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
+                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
 
             }
             ThemeType.ThemeDark -> {
 
-                movieDetailsViewHolder.blurryMovieName.setOverlayColor(context.getColor(R.color.dark_transparent_high))
+                movieDetailsViewHolder.blurryMovieName.setOverlayColor(ContextCompat.getColor(context, R.color.dark_transparent_high))
 
                 movieDetailsViewHolder.backgroundMovieName.background = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark)
 
-                movieDetailsViewHolder.movieDescription.setTextColor(context.getColor(R.color.light))
+                movieDetailsViewHolder.movieDescription.setTextColor(ContextCompat.getColor(context, R.color.light))
 
-                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark_transparent_high))
+                movieDetailsViewHolder.productRatingStarsView.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.dark_transparent_high))
 
-                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
-                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
-                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
+                movieDetailsViewHolder.movieGenreFirst.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
+                movieDetailsViewHolder.movieGenreSecond.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
+                movieDetailsViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))
 
             }
         }
@@ -191,13 +193,31 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
                                 movieDetailsViewHolder.blurryBackground.setOverlayColor(setColorAlpha(dominantColor, 111f))
                                 movieDetailsViewHolder.blurryBackground.setSecondOverlayColor(when (themeType) {
                                     ThemeType.ThemeLight -> {
-                                        context.getColor(R.color.premiumLightTransparent)
+                                        try {
+                                            ContextCompat.getColor(context, R.color.premiumLightTransparent)
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+
+                                            Color.argb(113, 213, 224, 243)
+                                        }
                                     }
                                     ThemeType.ThemeDark -> {
-                                        context.getColor(R.color.premiumDarkTransparent)
+                                        try {
+                                            ContextCompat.getColor(context, R.color.premiumDarkTransparent)
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+
+                                            Color.argb(113, 60, 67, 77)
+                                        }
                                     }
                                     else -> {
-                                        context.getColor(R.color.premiumLightTransparent)
+                                        try {
+                                            ContextCompat.getColor(context, R.color.premiumLightTransparent)
+                                        } catch (e: Exception) {
+                                            e.printStackTrace()
+
+                                            Color.argb(113, 213, 224, 243)
+                                        }
                                     }
                                 })
 
