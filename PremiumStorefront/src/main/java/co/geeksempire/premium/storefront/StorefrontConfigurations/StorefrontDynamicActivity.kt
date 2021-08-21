@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 10:19 AM
+ * Last modified 8/21/21, 10:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,7 +37,7 @@ abstract class StorefrontDynamicActivity : AppCompatActivity(),
     override fun attachBaseContext(baseContext: Context) {
         super.attachBaseContext(baseContext)
 
-        SplitCompat.installActivity(applicationContext)
+        SplitCompat.installActivity(this@StorefrontDynamicActivity)
     }
 
 }
