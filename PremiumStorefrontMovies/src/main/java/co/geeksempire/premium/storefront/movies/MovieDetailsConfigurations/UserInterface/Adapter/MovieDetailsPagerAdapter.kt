@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 3:51 PM
+ * Last modified 8/22/21, 3:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -285,30 +285,26 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
                                     }
                                 })
 
-                                try {
-                                    movieDetailsViewHolder.backgroundMovieName.background = (when (themeType) {
-                                        ThemeType.ThemeLight -> {
-                                            val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light) as LayerDrawable
-                                            movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTint(vibrantColor)
+                                movieDetailsViewHolder.backgroundMovieName.background = (when (themeType) {
+                                    ThemeType.ThemeLight -> {
+                                        val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light) as LayerDrawable
+                                        movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTint(vibrantColor)
 
-                                            movieNameGlow
-                                        }
-                                        ThemeType.ThemeDark -> {
-                                            val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark) as LayerDrawable
-                                            movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTintList(ColorStateList.valueOf(vibrantColor))
+                                        movieNameGlow
+                                    }
+                                    ThemeType.ThemeDark -> {
+                                        val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_dark) as LayerDrawable
+                                        movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTintList(ColorStateList.valueOf(vibrantColor))
 
-                                            movieNameGlow
-                                        }
-                                        else -> {
-                                            val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light) as LayerDrawable
-                                            movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTintList(ColorStateList.valueOf(vibrantColor))
+                                        movieNameGlow
+                                    }
+                                    else -> {
+                                        val movieNameGlow = AppCompatResources.getDrawable(context, R.drawable.movie_name_dimension_effect_light) as LayerDrawable
+                                        movieNameGlow.findDrawableByLayerId(R.id.lineGlow).setTintList(ColorStateList.valueOf(vibrantColor))
 
-                                            movieNameGlow
-                                        }
-                                    })
-                                } catch (e: Exception) {
-                                    e.printStackTrace()
-                                }
+                                        movieNameGlow
+                                    }
+                                })
 
                                 movieDetailsViewHolder.productCurrentRateView.setTextColor(vibrantColor)
                                 movieDetailsViewHolder.productCurrentRateView.setShadowLayer(movieDetailsViewHolder.productCurrentRateView.shadowRadius, movieDetailsViewHolder.productCurrentRateView.shadowDx, movieDetailsViewHolder.productCurrentRateView.shadowDy, vibrantColor)
