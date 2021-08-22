@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/22/21, 4:58 AM
+  ~ Last modified 8/22/21, 5:21 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -250,7 +250,7 @@
                 apps:shapeDrawable="@drawable/rectercle"
 
                 apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.19"
+                apps:layout_constraintHeight_percent="0.17"
                 apps:layout_constraintTop_toBottomOf="@id/movieDescription"
                 apps:layout_constraintStart_toStartOf="parent"/>
 
@@ -266,7 +266,7 @@
                 apps:shapeDrawable="@drawable/rectercle"
 
                 apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.19"
+                apps:layout_constraintHeight_percent="0.17"
                 apps:layout_constraintTop_toBottomOf="@id/movieDescription"
                 apps:layout_constraintStart_toEndOf="@id/firstStar"/>
 
@@ -282,7 +282,7 @@
                 apps:shapeDrawable="@drawable/rectercle"
 
                 apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.19"
+                apps:layout_constraintHeight_percent="0.17"
                 apps:layout_constraintTop_toBottomOf="@id/movieDescription"
                 apps:layout_constraintStart_toEndOf="@id/secondStar"/>
 
@@ -298,7 +298,7 @@
                 apps:shapeDrawable="@drawable/rectercle"
 
                 apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.19"
+                apps:layout_constraintHeight_percent="0.17"
                 apps:layout_constraintTop_toBottomOf="@id/firstStar"
                 apps:layout_constraintStart_toStartOf="parent"/>
 
@@ -314,7 +314,7 @@
                 apps:shapeDrawable="@drawable/rectercle"
 
                 apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.19"
+                apps:layout_constraintHeight_percent="0.17"
                 apps:layout_constraintTop_toBottomOf="@id/secondStar"
                 apps:layout_constraintStart_toEndOf="@id/fourthStar"/>
 
@@ -330,7 +330,7 @@
                 apps:shapeDrawable="@drawable/rectercle"
 
                 apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.19"
+                apps:layout_constraintHeight_percent="0.17"
                 apps:layout_constraintTop_toBottomOf="@id/thirdStar"
                 apps:layout_constraintStart_toEndOf="@id/fifthStar"/>
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 3:45 PM
+ * Last modified 8/22/21, 5:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,7 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
 import co.geeksempire.premium.storefront.movies.Actions.Operation.ActionCenterOperationsMovies
 import co.geeksempire.premium.storefront.movies.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.Extensions.setupMoviesDetailsUserInterface
@@ -96,6 +97,8 @@ class MoviesDetails : StorefrontDynamicActivity() {
     }
 
     val genresData: GenreData = GenreData()
+
+    val shadowAnimationUtils = ShadowAnimation()
 
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@MoviesDetails)
@@ -315,12 +318,6 @@ class MoviesDetails : StorefrontDynamicActivity() {
                             }
 
                         }
-
-                    }
-
-                    movieDetailsPagerAdapter.moviesDetailsList[position].data?.let {
-
-                        val moviesDataStructure = MoviesDataStructure(it)
 
                         actionCenterOperationsMovies.setupForMoviesDetails(this@MoviesDetails, moviesDataStructure.movieId(), moviesDataStructure.movieName(), moviesDataStructure.movieSummary())
 
