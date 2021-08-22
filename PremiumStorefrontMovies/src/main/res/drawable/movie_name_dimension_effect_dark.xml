@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/20/21, 12:31 PM
+  ~ Last modified 8/22/21, 5:10 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -25,7 +25,7 @@
                 android:color="@color/transparent" />
 
             <stroke
-                android:width="3dp"
+                android:width="2.3dp"
                 android:color="@color/default_color_game_bright"/>
 
         </shape>
@@ -42,9 +42,9 @@
 
             <gradient
                 android:type="radial"
-                android:gradientRadius="73dp"
-                android:startColor="@color/dark_transparent_half"
-                android:centerColor="@color/dark_transparent_high"
+                android:gradientRadius="79dp"
+                android:startColor="@color/dark"
+                android:centerColor="@color/dark_transparent_half"
                 android:centerX="0"
                 android:centerY="0"
                 android:endColor="@color/transparent"/>
@@ -63,9 +63,9 @@
 
             <gradient
                 android:type="radial"
-                android:gradientRadius="73dp"
-                android:startColor="@color/dark_transparent_half"
-                android:centerColor="@color/dark_transparent_high"
+                android:gradientRadius="79dp"
+                android:startColor="@color/dark"
+                android:centerColor="@color/dark_transparent_half"
                 android:centerX="1"
                 android:centerY="1"
                 android:endColor="@color/transparent"/>
@@ -80,13 +80,13 @@
         <shape
             android:shape="rectangle">
 
-            <corners android:radius="23dp"/>
+            <corners android:radius="79dp"/>
 
             <gradient
                 android:type="radial"
                 android:gradientRadius="73dp"
-                android:startColor="@color/dark_transparent_half"
-                android:centerColor="@color/dark_transparent_high"
+                android:startColor="@color/dark"
+                android:centerColor="@color/dark_transparent_half"
                 android:centerX="0"
                 android:centerY="1"
                 android:endColor="@color/transparent"/>
@@ -106,9 +106,9 @@
 
             <gradient
                 android:type="radial"
-                android:gradientRadius="73dp"
-                android:startColor="@color/dark_transparent_half"
-                android:centerColor="@color/dark_transparent_high"
+                android:gradientRadius="79dp"
+                android:startColor="@color/dark"
+                android:centerColor="@color/dark_transparent_half"
                 android:centerX="1"
                 android:centerY="0"
                 android:endColor="@color/transparent"/>

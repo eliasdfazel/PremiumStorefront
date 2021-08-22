@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/22/21, 3:51 AM
+ * Last modified 8/22/21, 5:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,7 +22,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
@@ -46,6 +45,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.DocumentSnapshot
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+import net.geekstools.imageview.customshapes.ShapesImage
 
 
 class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boolean = ThemeType.ThemeLight): RecyclerView.Adapter<MovieDetailsViewHolder>() {
@@ -370,7 +370,7 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
         return trailerAddress.replace("https://www.youtube.com/watch?v=", "")
     }
 
-    private fun generateMovieStarView(movieDetailsViewHolder: MovieDetailsViewHolder, dataIndex: Int, starName: String) : AppCompatImageView {
+    private fun generateMovieStarView(movieDetailsViewHolder: MovieDetailsViewHolder, dataIndex: Int, starName: String) : ShapesImage {
 
         return when (dataIndex) {
             0 -> {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 12:11 PM
+ * Last modified 8/22/21, 4:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsItemBinding
 import co.geeksempire.youtubeplayer.player.views.YouTubePlayerView
 import net.geeksempire.blurry.effect.view.RealtimeBlurView
+import net.geekstools.imageview.customshapes.ShapesImage
 
 class MovieDetailsViewHolder (moviesDetailsItemBinding: MoviesDetailsItemBinding) : RecyclerView.ViewHolder(moviesDetailsItemBinding.root) {
     val rootViewItem: ConstraintLayout = moviesDetailsItemBinding.rootViewItem
@@ -45,12 +46,12 @@ class MovieDetailsViewHolder (moviesDetailsItemBinding: MoviesDetailsItemBinding
 
     val movieTrailerYouTube: YouTubePlayerView = moviesDetailsItemBinding.movieTrailerYouTube
 
-    val movieStarFirstImageView: AppCompatImageView = moviesDetailsItemBinding.firstStar
-    val movieStarSecondImageView: AppCompatImageView = moviesDetailsItemBinding.secondStar
-    val movieStarThirdImageView: AppCompatImageView = moviesDetailsItemBinding.thirdStar
+    val movieStarFirstImageView: ShapesImage = moviesDetailsItemBinding.firstStar
+    val movieStarSecondImageView: ShapesImage = moviesDetailsItemBinding.secondStar
+    val movieStarThirdImageView: ShapesImage = moviesDetailsItemBinding.thirdStar
 
-    val movieStarFourthImageView: AppCompatImageView = moviesDetailsItemBinding.fourthStar
-    val movieStarFifthImageView: AppCompatImageView = moviesDetailsItemBinding.fifthStar
-    val movieStarSixthImageView: AppCompatImageView = moviesDetailsItemBinding.sixthStar
+    val movieStarFourthImageView: ShapesImage = moviesDetailsItemBinding.fourthStar
+    val movieStarFifthImageView: ShapesImage = moviesDetailsItemBinding.fifthStar
+    val movieStarSixthImageView: ShapesImage = moviesDetailsItemBinding.sixthStar
 
 }
