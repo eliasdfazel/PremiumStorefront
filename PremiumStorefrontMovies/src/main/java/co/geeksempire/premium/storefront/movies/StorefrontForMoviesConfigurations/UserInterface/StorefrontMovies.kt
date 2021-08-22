@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 12:50 PM
+ * Last modified 8/22/21, 5:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface
 
 import android.animation.Animator
+import android.animation.ValueAnimator
 import android.app.ActivityOptions
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -20,6 +21,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
@@ -44,6 +46,7 @@ import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontDynamicActivity
+import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.IO.UpdatingDataIO
@@ -54,12 +57,16 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnect
 import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
+import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
+import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureListenerConstants
+import co.geeksempire.premium.storefront.Utils.UI.Gesture.SwipeGestureListener
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.movies.Actions.Operation.ActionCenterOperationsMovies
 import co.geeksempire.premium.storefront.movies.Actions.View.PrepareActionCenterUserInterface
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesStorefrontLiveData
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.gamesSectionSwitcherDesign
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.setupStorefrontMoviesUserInterface
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.Extensions.storefrontMoviesUserInteractionSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterAllMovies
@@ -180,6 +187,10 @@ class StorefrontMovies : StorefrontDynamicActivity() {
     val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
 
     val firebaseRemoteConfiguration = Firebase.remoteConfig
+
+    private val swipeGestureListener: SwipeGestureListener by lazy {
+        SwipeGestureListener(applicationContext, this@StorefrontMovies)
+    }
 
     /* Start - Sign In */
     val accountSignIn: AccountSignIn by lazy {
@@ -635,6 +646,119 @@ class StorefrontMovies : StorefrontDynamicActivity() {
             this.addCategory(Intent.CATEGORY_HOME)
             this.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, 0).toBundle())
+
+    }
+
+    override fun dispatchTouchEvent(motionEvent: MotionEvent?): Boolean {
+
+        motionEvent?.let {
+            swipeGestureListener.onTouchEvent(it)
+        }
+
+        return if (motionEvent != null) {
+            super.dispatchTouchEvent(motionEvent)
+        } else {
+            false
+        }
+    }
+
+    override fun onSwipeGesture(gestureConstants: GestureConstants, downMotionEvent: MotionEvent, moveMotionEvent: MotionEvent, initVelocityX: Float, initVelocityY: Float) {
+        super.onSwipeGesture(gestureConstants, downMotionEvent, moveMotionEvent, initVelocityX, initVelocityY)
+
+        when (gestureConstants) {
+            is GestureConstants.SwipeHorizontal -> {
+                when (gestureConstants.horizontalDirection) {
+                    GestureListenerConstants.SWIPE_RIGHT -> {
+
+                        val valueAnimatorGames = ValueAnimator.ofInt(dpToInteger(applicationContext, 57), storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer.moviesSectionView.width)
+                        valueAnimatorGames.duration = 333
+                        valueAnimatorGames.startDelay = 333
+                        valueAnimatorGames.addUpdateListener { animator ->
+
+                            val animatorValue = animator.animatedValue as Int
+
+                            storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer.gamesSectionView.layoutParams.width = animatorValue
+                            storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer.gamesSectionView.requestLayout()
+
+                        }
+                        valueAnimatorGames.addListener(object : Animator.AnimatorListener {
+
+                            override fun onAnimationStart(animation: Animator) {
+
+                                lifecycleScope.launch {
+
+                                    themePreferences.checkThemeLightDark().collect {
+
+                                        gamesSectionSwitcherDesign(this@StorefrontMovies, storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer, it)
+
+                                    }
+
+                                }
+
+                            }
+
+                            override fun onAnimationEnd(animation: Animator) {
+
+                                val activityOptions = ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in_movie, 0)
+
+                                val switchIntent = Intent(applicationContext, StorefrontGames::class.java).apply {
+
+                                }
+
+                                startActivity(switchIntent, activityOptions.toBundle())
+
+                            }
+
+                            override fun onAnimationCancel(animation: Animator) {
+
+                            }
+
+                            override fun onAnimationRepeat(animation: Animator) {
+
+                            }
+
+                        })
+
+                        val valueAnimatorMovies = ValueAnimator.ofInt(storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer.moviesSectionView.width, dpToInteger(applicationContext, 57))
+                        valueAnimatorMovies.duration = 333
+                        valueAnimatorMovies.startDelay = 333
+                        valueAnimatorMovies.addUpdateListener { animator ->
+
+                            val animatorValue = animator.animatedValue as Int
+
+                            storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer.moviesSectionView.layoutParams.width = animatorValue
+                            storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer.moviesSectionView.requestLayout()
+
+                        }
+                        valueAnimatorMovies.addListener(object : Animator.AnimatorListener {
+
+                            override fun onAnimationStart(animation: Animator) {
+
+                            }
+
+                            override fun onAnimationEnd(animation: Animator) {
+
+                                storefrontMoviesLayoutBinding.moviesSectionsSwitcherContainer.moviesSectionView.text = ""
+
+                                valueAnimatorGames.start()
+
+                            }
+
+                            override fun onAnimationCancel(animation: Animator) {
+
+                            }
+
+                            override fun onAnimationRepeat(animation: Animator) {
+
+                            }
+
+                        })
+                        valueAnimatorMovies.start()
+
+                    }
+                }
+            }
+        }
 
     }
 
