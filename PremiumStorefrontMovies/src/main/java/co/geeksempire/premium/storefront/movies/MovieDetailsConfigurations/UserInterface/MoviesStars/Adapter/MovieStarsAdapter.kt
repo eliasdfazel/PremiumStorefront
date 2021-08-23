@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/23/21, 9:02 AM
+ * Last modified 8/23/21, 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,6 +56,7 @@ class MovieStarsAdapter (val context: AppCompatActivity, val themeType: Boolean)
         }
 
         movieStarsViewHolder.rootView.contentDescription = moviesDetailsList[position].movieStarName
+        movieStarsViewHolder.movieStarImageView.contentDescription = moviesDetailsList[position].movieStarName
 
         movieStarsViewHolder.movieStarTextView.text = Html.fromHtml(moviesDetailsList[position].movieStarName, Html.FROM_HTML_MODE_COMPACT)
 
@@ -65,7 +66,7 @@ class MovieStarsAdapter (val context: AppCompatActivity, val themeType: Boolean)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(movieStarsViewHolder.movieStarImageView)
 
-        movieStarsViewHolder.rootView.setOnClickListener { view ->
+        movieStarsViewHolder.movieStarImageView.setOnClickListener { view ->
 
                 context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
                     .putExtra(SearchManager.QUERY, view.contentDescription.toString())
@@ -73,7 +74,7 @@ class MovieStarsAdapter (val context: AppCompatActivity, val themeType: Boolean)
 
         }
 
-        movieStarsViewHolder.rootView.setOnLongClickListener { view ->
+        movieStarsViewHolder.movieStarImageView.setOnLongClickListener { view ->
 
             Toast.makeText(context, view.contentDescription, Toast.LENGTH_LONG).show()
 
