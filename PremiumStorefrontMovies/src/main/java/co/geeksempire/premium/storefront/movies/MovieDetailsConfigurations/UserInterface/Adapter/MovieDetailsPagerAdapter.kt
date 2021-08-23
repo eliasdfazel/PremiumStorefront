@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/23/21, 8:47 AM
+ * Last modified 8/23/21, 8:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -355,7 +355,7 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
 
             setupMoviesStarsSection(movieDetailsViewHolder, moviesDataStructure.movieStars().split(",").sortedBy {
                 it
-            })
+            }, themeType)
         }
 
     }
@@ -365,11 +365,11 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
         return trailerAddress.replace("https://www.youtube.com/watch?v=", "")
     }
 
-    private fun setupMoviesStarsSection(movieDetailsViewHolder: MovieDetailsViewHolder, moviesStarsList: List<String>) = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
+    private fun setupMoviesStarsSection(movieDetailsViewHolder: MovieDetailsViewHolder, moviesStarsList: List<String>, themeType: Boolean) = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
 
         movieDetailsViewHolder.movieStarsRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(context, columnCount(context, 123), RecyclerView.VERTICAL,false)
 
-        val movieStarsAdapter = MovieStarsAdapter(context)
+        val movieStarsAdapter = MovieStarsAdapter(context, themeType)
 
         moviesStarsList.forEachIndexed { index, starName ->
 

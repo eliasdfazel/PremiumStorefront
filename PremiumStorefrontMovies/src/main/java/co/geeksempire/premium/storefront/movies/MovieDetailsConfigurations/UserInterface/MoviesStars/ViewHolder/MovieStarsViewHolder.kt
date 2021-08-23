@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/23/21, 8:42 AM
+ * Last modified 8/23/21, 8:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesStars.ViewHolder
 
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.movies.databinding.MoviesStarsItemBinding
@@ -19,4 +20,5 @@ class MovieStarsViewHolder(moviesDetailsItemBinding: MoviesStarsItemBinding) : R
     val rootView: ConstraintLayout = moviesDetailsItemBinding.rootViewItem
 
     val movieStarImageView: ShapesImage = moviesDetailsItemBinding.movieStarImageView
+    val movieStarTextView: AppCompatTextView = moviesDetailsItemBinding.movieStarTextView
 }

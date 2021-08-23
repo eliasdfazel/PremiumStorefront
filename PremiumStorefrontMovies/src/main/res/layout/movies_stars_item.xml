@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/23/21, 8:53 AM
+  ~ Last modified 8/23/21, 9:05 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,10 +14,32 @@
     android:id="@+id/rootViewItem"
     android:layout_height="229dp"
     android:layout_width="133dp"
-    android:backgroundTint="@color/light_transparent_high"
+    android:layout_marginTop="7dp"
+    android:backgroundTint="@color/premiumLightTransparent"
     android:background="@drawable/rectercle"
 
     apps:layout_constraintDimensionRatio="1:1">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/movieStarTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="13dp"
+        android:paddingHorizontal="27dp"
+        android:gravity="center_vertical"
+        android:text="@string/applicationName"
+        android:textColor="@color/default_color_game_bright"
+        android:textStyle="bold"
+        android:shadowColor="@color/default_color_game_bright"
+        android:shadowRadius="9"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:fontFamily="@font/neon"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        apps:autoSizeTextType="uniform" />
 
     <net.geekstools.imageview.customshapes.ShapesImage
         android:id="@+id/movieStarImageView"
