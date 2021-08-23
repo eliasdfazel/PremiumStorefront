@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 10:15 AM
+ * Last modified 8/23/21, 7:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -126,7 +126,6 @@ fun startMoviesSwitching(context: AppCompatActivity, activityRootView: ViewGroup
 
 }
 
-
 fun completeMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBinding: SectionsSwitcherLayoutBinding, themeType: Boolean) {
 
     val valueAnimatorMovies = when (context) {
@@ -169,6 +168,8 @@ fun completeMoviesSwitching(context: AppCompatActivity, sectionsSwitcherLayoutBi
             }
 
             context.startActivity(switchIntent, activityOptions.toBundle())
+
+            context.finishAfterTransition()
 
         }
 
