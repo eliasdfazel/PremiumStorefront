@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/22/21, 7:37 AM
+ * Last modified 8/23/21, 8:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,15 +10,12 @@
 
 package co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.Adapter
 
-import android.app.SearchManager
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Html
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.appcompat.content.res.AppCompatResources
@@ -28,8 +25,11 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
+import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UI.designOptionsMoviesBackground
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesStars.Adapter.MovieStarsAdapter
+import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesStars.MoviesStarsData
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.ViewHolder.MovieDetailsViewHolder
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
@@ -44,8 +44,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.DocumentSnapshot
+import kotlinx.coroutines.*
+import net.geeksempire.balloon.optionsmenu.library.Utils.columnCount
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
-import net.geekstools.imageview.customshapes.ShapesImage
 
 
 class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boolean = ThemeType.ThemeLight): RecyclerView.Adapter<MovieDetailsViewHolder>() {
@@ -352,21 +353,9 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
 
             })
 
-            moviesDataStructure.movieStars().split(",").sortedBy {
-
+            setupMoviesStarsSection(movieDetailsViewHolder, moviesDataStructure.movieStars().split(",").sortedBy {
                 it
-            }.forEachIndexed { index, starName ->
-
-                val starImageView = generateMovieStarView(movieDetailsViewHolder, index, starName)
-
-                Glide.with(context)
-                    .asDrawable()
-                    .load(generateMovieStarImage(starName))
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(starImageView)
-
-            }
-
+            })
         }
 
     }
@@ -376,127 +365,20 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
         return trailerAddress.replace("https://www.youtube.com/watch?v=", "")
     }
 
-    private fun generateMovieStarView(movieDetailsViewHolder: MovieDetailsViewHolder, dataIndex: Int, starName: String) : ShapesImage {
+    private fun setupMoviesStarsSection(movieDetailsViewHolder: MovieDetailsViewHolder, moviesStarsList: List<String>) = CoroutineScope(SupervisorJob() + Dispatchers.Main).async {
 
-        return when (dataIndex) {
-            0 -> {
+        movieDetailsViewHolder.movieStarsRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(context, columnCount(context, 113), RecyclerView.VERTICAL,false)
 
-                movieDetailsViewHolder.movieStarFirstImageView.visibility = View.VISIBLE
+        val movieStarsAdapter = MovieStarsAdapter(context)
 
-                movieDetailsViewHolder.movieStarFirstImageView.tag = starName
+        moviesStarsList.forEachIndexed { index, starName ->
 
-                movieDetailsViewHolder.movieStarFirstImageView.setOnClickListener {
+            movieStarsAdapter.moviesDetailsList.add(MoviesStarsData(starName))
 
-                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
-                        .putExtra(SearchManager.QUERY, it.tag.toString())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-
-                }
-
-                movieDetailsViewHolder.movieStarFirstImageView
-            }
-            1 -> {
-
-                movieDetailsViewHolder.movieStarSecondImageView.visibility = View.VISIBLE
-
-                movieDetailsViewHolder.movieStarSecondImageView.tag = starName
-
-                movieDetailsViewHolder.movieStarSecondImageView.setOnClickListener {
-
-                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
-                        .putExtra(SearchManager.QUERY, it.tag.toString())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-
-                }
-
-                movieDetailsViewHolder.movieStarSecondImageView
-            }
-            2 -> {
-
-                movieDetailsViewHolder.movieStarThirdImageView.visibility = View.VISIBLE
-
-                movieDetailsViewHolder.movieStarThirdImageView.tag = starName
-
-                movieDetailsViewHolder.movieStarThirdImageView.setOnClickListener {
-
-                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
-                        .putExtra(SearchManager.QUERY, it.tag.toString())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-
-                }
-
-                movieDetailsViewHolder.movieStarThirdImageView
-            }
-            3 -> {
-
-                movieDetailsViewHolder.movieStarFourthImageView.visibility = View.VISIBLE
-
-                movieDetailsViewHolder.movieStarFourthImageView.tag = starName
-
-                movieDetailsViewHolder.movieStarFourthImageView.setOnClickListener {
-
-                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
-                        .putExtra(SearchManager.QUERY, it.tag.toString())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-
-                }
-
-                movieDetailsViewHolder.movieStarFourthImageView
-            }
-            4 -> {
-
-                movieDetailsViewHolder.movieStarFifthImageView.visibility = View.VISIBLE
-
-                movieDetailsViewHolder.movieStarFifthImageView.tag = starName
-
-                movieDetailsViewHolder.movieStarFifthImageView.setOnClickListener {
-
-                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
-                        .putExtra(SearchManager.QUERY, it.tag.toString())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-
-                }
-
-                movieDetailsViewHolder.movieStarFifthImageView
-            }
-            5 -> {
-
-                movieDetailsViewHolder.movieStarSixthImageView.visibility = View.VISIBLE
-
-                movieDetailsViewHolder.movieStarSixthImageView.tag = starName
-
-                movieDetailsViewHolder.movieStarSixthImageView.setOnClickListener {
-
-                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
-                        .putExtra(SearchManager.QUERY, it.tag.toString())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-
-                }
-
-                movieDetailsViewHolder.movieStarSixthImageView
-            }
-            else -> {
-
-                movieDetailsViewHolder.movieStarFirstImageView.visibility = View.VISIBLE
-
-                movieDetailsViewHolder.movieStarFirstImageView.tag = starName
-
-                movieDetailsViewHolder.movieStarFirstImageView.setOnClickListener {
-
-                    context.startActivity(Intent(Intent.ACTION_WEB_SEARCH)
-                        .putExtra(SearchManager.QUERY, it.tag.toString())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-
-                }
-
-                movieDetailsViewHolder.movieStarFirstImageView
-            }
         }
-    }
 
-    private fun generateMovieStarImage(starName: String) : String {
+        movieDetailsViewHolder.movieStarsRecyclerView.adapter = movieStarsAdapter
 
-        return "https://geeksempire.co/Assets/PremiumStorefront/Movies/Stars/" + starName.replace(" ", "")
     }
 
 }

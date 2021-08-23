@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/22/21, 5:33 AM
+  ~ Last modified 8/23/21, 8:06 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -52,7 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="137dp"
-            android:paddingBottom="193dp">
+            android:paddingBottom="193dp"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/moviesPosterImageView"
@@ -238,101 +240,14 @@
 
                 apps:layout_constraintTop_toBottomOf="@id/movieTrailerYouTube" />
 
-            <net.geekstools.imageview.customshapes.ShapesImage
-                android:id="@+id/firstStar"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="19dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movieStarsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="false"
+                android:nestedScrollingEnabled="false"
 
-                apps:shapeDrawable="@drawable/rectercle"
-
-                apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/movieDescription"
-                apps:layout_constraintStart_toStartOf="parent"/>
-
-            <net.geekstools.imageview.customshapes.ShapesImage
-                android:id="@+id/secondStar"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="19dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-
-                apps:shapeDrawable="@drawable/rectercle"
-
-                apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/movieDescription"
-                apps:layout_constraintStart_toEndOf="@id/firstStar"/>
-
-            <net.geekstools.imageview.customshapes.ShapesImage
-                android:id="@+id/thirdStar"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="19dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-
-                apps:shapeDrawable="@drawable/rectercle"
-
-                apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/movieDescription"
-                apps:layout_constraintStart_toEndOf="@id/secondStar"/>
-
-            <net.geekstools.imageview.customshapes.ShapesImage
-                android:id="@+id/fourthStar"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="19dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-
-                apps:shapeDrawable="@drawable/rectercle"
-
-                apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/firstStar"
-                apps:layout_constraintStart_toStartOf="parent"/>
-
-            <net.geekstools.imageview.customshapes.ShapesImage
-                android:id="@+id/fifthStar"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="19dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-
-                apps:shapeDrawable="@drawable/rectercle"
-
-                apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/secondStar"
-                apps:layout_constraintStart_toEndOf="@id/fourthStar"/>
-
-            <net.geekstools.imageview.customshapes.ShapesImage
-                android:id="@+id/sixthStar"
-                android:layout_height="0dp"
-                android:layout_width="0dp"
-                android:layout_marginStart="19dp"
-                android:layout_marginTop="19dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-
-                apps:shapeDrawable="@drawable/rectercle"
-
-                apps:layout_constraintWidth_percent="0.27"
-                apps:layout_constraintHeight_percent="0.13"
-                apps:layout_constraintTop_toBottomOf="@id/thirdStar"
-                apps:layout_constraintStart_toEndOf="@id/fifthStar"/>
+                apps:layout_constraintTop_toBottomOf="@id/movieDescription"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
