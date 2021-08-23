@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/23/21, 8:36 AM
+ * Last modified 8/23/21, 8:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,7 +58,7 @@ class MovieStarsAdapter (val context: AppCompatActivity) : RecyclerView.Adapter<
 
             Toast.makeText(context, view.contentDescription, Toast.LENGTH_LONG).show()
 
-            false
+            true
         }
 
     }
