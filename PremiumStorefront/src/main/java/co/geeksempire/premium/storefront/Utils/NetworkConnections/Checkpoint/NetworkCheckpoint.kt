@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 4/21/21, 1:58 PM
+ * Last modified 8/24/21, 6:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,10 +14,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-
-object NetworkSettingCallback {
-    const val WifiSetting: Int = 111
-}
 
 interface InterfaceNetworkCheckpoint {
 
