@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:23 AM
+ * Last modified 9/27/21, 8:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -85,7 +85,9 @@ fun AccountInformation.accountManagerSetupUserInterface() {
 
     Firebase.auth.currentUser?.let { firebaseUser ->
 
-        Glide.with(this@accountManagerSetupUserInterface)
+        if (this@accountManagerSetupUserInterface.isFinishing) {
+
+            Glide.with(this@accountManagerSetupUserInterface)
             .asDrawable()
             .load(firebaseUser.photoUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -132,6 +134,8 @@ fun AccountInformation.accountManagerSetupUserInterface() {
 
             })
             .submit()
+
+        }
 
         accountInformationLayoutBinding.socialMediaScrollView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
         accountInformationLayoutBinding.socialMediaScrollView.visibility = View.VISIBLE
@@ -412,53 +416,57 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
 
             }
 
-        Glide.with(this@createUserProfile)
-            .asDrawable()
-            .load(firebaseUser.photoUrl)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .listener(object : RequestListener<Drawable> {
+        if (!this@createUserProfile.isFinishing) {
 
-                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+            Glide.with(this@createUserProfile)
+                .asDrawable()
+                .load(firebaseUser.photoUrl)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .listener(object : RequestListener<Drawable> {
 
-                    return false
-                }
+                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        return false
+                    }
 
-                    runOnUiThread {
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                        accountInformationLayoutBinding.profileImageView.setImageDrawable(resource)
+                        runOnUiThread {
 
-                        resource?.let {
+                            accountInformationLayoutBinding.profileImageView.setImageDrawable(resource)
 
-                            val dominantColor = extractDominantColor(it)
-                            val vibrantColor = extractVibrantColor(it)
+                            resource?.let {
 
-                            window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
+                                val dominantColor = extractDominantColor(it)
+                                val vibrantColor = extractVibrantColor(it)
 
-                            accountInformationLayoutBinding.signupLoadingView.pauseAnimation()
-                            accountInformationLayoutBinding.signupLoadingView.visibility = View.INVISIBLE
+                                window.setBackgroundDrawable(GradientDrawable(GradientDrawable.Orientation.TL_BR, arrayOf(dominantColor, vibrantColor).toIntArray()))
 
-                            accountInformationLayoutBinding.inviteFriendsView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
-                            accountInformationLayoutBinding.inviteFriendsView.rippleColor = ColorStateList.valueOf(dominantColor)
+                                accountInformationLayoutBinding.signupLoadingView.pauseAnimation()
+                                accountInformationLayoutBinding.signupLoadingView.visibility = View.INVISIBLE
 
-                            if (isColorDark(dominantColor) && isColorDark(vibrantColor)) {
-                                Log.d(this@createUserProfile.javaClass.simpleName, "Dark Extracted Colors")
+                                accountInformationLayoutBinding.inviteFriendsView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
+                                accountInformationLayoutBinding.inviteFriendsView.rippleColor = ColorStateList.valueOf(dominantColor)
 
-                            } else {
-                                Log.d(this@createUserProfile.javaClass.simpleName, "Light Extracted Colors")
+                                if (isColorDark(dominantColor) && isColorDark(vibrantColor)) {
+                                    Log.d(this@createUserProfile.javaClass.simpleName, "Dark Extracted Colors")
+
+                                } else {
+                                    Log.d(this@createUserProfile.javaClass.simpleName, "Light Extracted Colors")
+
+                                }
 
                             }
 
                         }
 
+                        return false
                     }
 
-                    return false
-                }
+                })
+                .submit()
 
-            })
-            .submit()
+        }
 
     }
 
