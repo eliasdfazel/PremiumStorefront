@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/24/21, 7:20 AM
+ * Last modified 9/27/21, 8:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -131,14 +131,14 @@ dependencies {
 
     api 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 
-    api 'androidx.constraintlayout:constraintlayout:2.1.0'
+    api 'androidx.constraintlayout:constraintlayout:2.1.1'
     api 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
 
     api 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1'
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    api 'androidx.work:work-runtime-ktx:2.7.0-alpha05'
+    api 'androidx.work:work-runtime-ktx:2.7.0-beta01'
 
 
     api platform('com.google.firebase:firebase-bom:27.1.0')
@@ -167,8 +167,8 @@ dependencies {
     api 'com.airbnb.android:lottie:4.1.0'
 
 
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2-native-mt'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2-native-mt'
 
     api 'org.jetbrains.kotlin:kotlin-reflect:1.5.21'
 
@@ -176,7 +176,7 @@ dependencies {
     api 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 
 
-    api 'com.android.volley:volley:1.2.0'
+    api 'com.android.volley:volley:1.2.1'
 
 
     api 'com.github.bumptech.glide:glide:4.12.0'
