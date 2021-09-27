@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/20/21, 12:56 PM
+  ~ Last modified 9/27/21, 8:16 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -122,6 +122,7 @@
                 android:elevation="11dp"
                 android:visibility="gone"
 
+                apps:layout_constraintVertical_bias="0.5"
                 apps:layout_constraintTop_toTopOf="@id/movieNameTextView"
                 apps:layout_constraintBottom_toBottomOf="@id/movieNameTextView" />
 

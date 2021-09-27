@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/31/21, 7:47 AM
+ * Last modified 9/27/21, 8:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,12 +16,12 @@ plugins {
     id 'kotlin-kapt'
 }
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 25
-
+        targetSdk 31
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

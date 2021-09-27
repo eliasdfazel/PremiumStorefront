@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/18/21, 1:54 PM
+ * Last modified 9/27/21, 8:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,11 +14,12 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdk 25
-        targetSdk 30
+        targetSdk 31
 
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
