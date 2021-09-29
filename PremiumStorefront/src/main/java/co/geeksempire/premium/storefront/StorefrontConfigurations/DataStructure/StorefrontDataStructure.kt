@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 8:03 AM
+ * Last modified 9/29/21, 8:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -111,6 +111,13 @@ object StorefrontContentsSerialize {
     const val UniqueRecommendation: String = "uniqueRecommendation"
 }
 
+object CategoryDataKey {
+    const val CategoryId = "categoryId"
+    const val CategoryName = "categoryName"
+    const val CategoryIconLink = "categoryIconLink"
+    const val ProductCount = "productCount"
+}
+
 @Keep
 data class ProductsIds(var ProductsIds: ArrayList<HashMap<String, Any>>? = null)
 
@@ -131,4 +138,7 @@ data class StorefrontContentsData (var productName: String, var productDescripti
                                    var installViewText: String = "Install Now")
 
 @Keep
-data class StorefrontCategoriesData(var categoryId: Int, var categoryName: String, var categoryIconLink: String, var selectedCategory: Boolean = false)
+data class StorefrontCategoriesData(var categoryId: Int, var categoryName: String, var categoryIconLink: String, var productCount: Int, var selectedCategory: Boolean = false)
+
+@Keep
+data class CategoriesIds(var CategoriesIds: ArrayList<HashMap<String, Any>>? = null)

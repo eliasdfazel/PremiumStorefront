@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/2/21, 9:08 AM
+ * Last modified 9/29/21, 10:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.Adapter.AllContentAdapter
 import co.geeksempire.premium.storefront.Utils.System.Installed
 import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import org.json.JSONArray
@@ -546,6 +547,39 @@ class StorefrontLiveData : ViewModel() {
 
     }
 
+    /**
+     * Firebase
+     **/
+    fun processCategoryData(documentSnapshot: DocumentSnapshot) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        val categoriesDocumentSnapshots = ArrayList<StorefrontCategoriesData>()
+
+        documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds?.forEach { documentMap ->
+
+            categoriesDocumentSnapshots.add(StorefrontCategoriesData(
+                categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt(),
+                categoryName = documentMap[CategoryDataKey.CategoryName].toString(),
+                categoryIconLink = documentMap[CategoryDataKey.CategoryIconLink].toString(),
+                productCount = documentMap[CategoryDataKey.ProductCount].toString().toInt()
+            ))
+
+        }
+
+        val moviesDocumentSnapshotsSorted = categoriesDocumentSnapshots.sortedByDescending {
+
+            it.productCount
+        }
+
+        categoriesDocumentSnapshots.clear()
+        categoriesDocumentSnapshots.addAll(moviesDocumentSnapshotsSorted)
+
+        categoriesItemData.postValue(categoriesDocumentSnapshots)
+
+    }
+
+    /**
+     * Wordpress
+     **/
     fun processCategoriesList(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val storefrontCategoriesData = ArrayList<StorefrontCategoriesData>()
@@ -563,9 +597,10 @@ class StorefrontLiveData : ViewModel() {
             val categoryIconLink = (categoryImageData as JSONObject).getString(ProductsContentKey.ImageSourceKey)
 
             storefrontCategoriesData.add(StorefrontCategoriesData(
-                    categoryId = categoryId,
-                    categoryName = categoryName,
-                    categoryIconLink = categoryIconLink
+                categoryId = categoryId,
+                categoryName = categoryName,
+                categoryIconLink = categoryIconLink,
+                productCount = 0
             ))
 
             Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Id: ${categoryId} | Category Name: ${categoryName}")

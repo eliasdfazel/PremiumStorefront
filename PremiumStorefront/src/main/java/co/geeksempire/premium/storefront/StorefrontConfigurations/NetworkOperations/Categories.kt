@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 9/29/21, 10:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,17 +11,12 @@
 package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations
 
 import androidx.appcompat.app.AppCompatActivity
-import co.geeksempire.premium.storefront.BuildConfig
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
-import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
-import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
-import co.geeksempire.premium.storefront.Utils.Notifications.RemoteConfigurationKey
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
-import org.json.JSONArray
 
 fun retrieveCategories(context: AppCompatActivity,
                        generalEndpoints: GeneralEndpoints,
@@ -33,39 +28,33 @@ fun retrieveCategories(context: AppCompatActivity,
 
     val gamesQueryEndpoints: GamesQueryEndpoints = GamesQueryEndpoints(generalEndpoints)
 
-    firebaseRemoteConfiguration.setConfigSettingsAsync(remoteConfigSettings {
-        minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) {
-            1
-        } else {
-            (60 * 60/* One Hour */) * 7
+    val queryEndpoint = when (queryType) {
+        GeneralEndpoints.QueryType.ApplicationsQuery -> {
+
+            applicationsQueryEndpoints.storefrontApplicationsCategoryEndpoint()
+
         }
-    })
-    firebaseRemoteConfiguration.fetchAndActivate()
-        .addOnSuccessListener {
+        GeneralEndpoints.QueryType.GamesQuery -> {
 
-            val queryEndpoint = when (queryType) {
-                GeneralEndpoints.QueryType.ApplicationsQuery -> {
+            gamesQueryEndpoints.storefrontGamesCategoryEndpoint()
 
-                    applicationsQueryEndpoints.getApplicationsCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Applications_Categories_Exclusion))
-                }
-                GeneralEndpoints.QueryType.GamesQuery -> {
+        }
+        else -> applicationsQueryEndpoints.storefrontApplicationsCategoryEndpoint()
+    }
 
-                    gamesQueryEndpoints.getGamesCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Games_Categories_Exclusion))
+    (context.application as PremiumStorefrontApplication)
+        .firestoreDatabase
+        .document(queryEndpoint)
+        .get().addOnSuccessListener { documentSnapshot ->
 
-                }
-                else -> applicationsQueryEndpoints.getApplicationsCategoriesEndpoint(csvExclusions = firebaseRemoteConfiguration.getString(RemoteConfigurationKey.Applications_Categories_Exclusion))
+            if (documentSnapshot.exists()) {
+
+                storefrontLiveData.processCategoryData(documentSnapshot)
+
             }
 
-            GenericJsonRequest(context, object : JsonRequestResponses {
-
-                override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
-                    super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
-
-                    storefrontLiveData.processCategoriesList(rawDataJsonArray)
-
-                }
-
-            }).getMethod(queryEndpoint)
+        }.addOnFailureListener {
+            it.printStackTrace()
 
         }
 
