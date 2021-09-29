@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/9/21, 11:40 AM
+ * Last modified 9/29/21, 10:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,7 +82,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
             val storefrontAllContentsFilter = storefrontAllContents.filter {
 
-                (it.productCategoryName.lowercase() == selectedCategory.lowercase())
+                (it.productCategoryName.split(" ").first().lowercase() == selectedCategory.lowercase())
             }
 
             storefrontAllContents.clear()
