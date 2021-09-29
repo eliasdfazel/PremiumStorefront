@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 10:08 AM
+ * Last modified 9/29/21, 10:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -556,12 +556,18 @@ class StorefrontLiveData : ViewModel() {
 
         documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds?.forEach { documentMap ->
 
+            val categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt()
+
+            val categoryName = documentMap[CategoryDataKey.CategoryName].toString()
+
             categoriesDocumentSnapshots.add(StorefrontCategoriesData(
-                categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt(),
-                categoryName = documentMap[CategoryDataKey.CategoryName].toString(),
+                categoryId = categoryId ,
+                categoryName = categoryName,
                 categoryIconLink = documentMap[CategoryDataKey.CategoryIconLink].toString(),
                 productCount = documentMap[CategoryDataKey.ProductCount].toString().toInt()
             ))
+
+            Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Id: ${categoryId} | Category Name: ${categoryName}")
 
         }
 

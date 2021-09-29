@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 6:02 AM
+ * Last modified 9/29/21, 10:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -827,7 +827,7 @@ class StorefrontApplications : StorefrontActivity() {
         Log.d(this@StorefrontApplications.javaClass.simpleName, "Network Available @ ${this@StorefrontApplications.javaClass.simpleName}")
 
         retrieveCategories(this@StorefrontApplications,
-            generalEndpoints, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoints.QueryType.ApplicationsQuery)
+            generalEndpoints, storefrontLiveData, GeneralEndpoints.QueryType.ApplicationsQuery)
 
         retrieveFeaturedContent(this@StorefrontApplications,
             storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)

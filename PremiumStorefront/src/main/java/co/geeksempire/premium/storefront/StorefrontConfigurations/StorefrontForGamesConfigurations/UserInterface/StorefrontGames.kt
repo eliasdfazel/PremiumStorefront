@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 6:07 AM
+ * Last modified 9/29/21, 10:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -764,7 +764,7 @@ class StorefrontGames : StorefrontActivity() {
         Log.d(this@StorefrontGames.javaClass.simpleName, "Network Available @ ${this@StorefrontGames.javaClass.simpleName}")
 
         retrieveCategories(this@StorefrontGames,
-            generalEndpoints, storefrontLiveData, firebaseRemoteConfiguration, GeneralEndpoints.QueryType.GamesQuery)
+            generalEndpoints, storefrontLiveData, GeneralEndpoints.QueryType.GamesQuery)
 
         retrieveFeaturedContent(this@StorefrontGames,
             storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.GamesQuery)
