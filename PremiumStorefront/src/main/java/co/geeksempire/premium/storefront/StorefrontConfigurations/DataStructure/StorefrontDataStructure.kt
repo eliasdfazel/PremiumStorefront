@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 8:52 AM
+ * Last modified 9/30/21, 9:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -75,6 +75,44 @@ object ProductDataKey {
     const val ProductDeveloperEmail = "ProductDeveloperEmail"
 }
 
+object FirestoreProductDataKey {
+    const val ProductId = "productId"
+
+    const val ProductName = "productName"
+    const val ProductSummary = "productSummary"
+    const val ProductDescription = "productDescription"
+
+    const val ProductCategoryId = "productCategoryId"
+    const val ProductCategoryName = "productCategoryName"
+
+    const val ProductCreatedData = "productCreatedData"
+
+    const val ProductCoverLink = "productCoverLink"
+    const val ProductIconLink = "productIconLink"
+
+    const val ProductPrice = "productPrice"
+    const val ProductSalePrice = "productSalePrice"
+
+    const val Rating = "Rating"
+    const val AndroidCompatibility = "Android Compatibilies"
+    const val ContentSafetyRating = "Content Safety Rating"
+
+    const val SoftwarePackageName = "Software Package Name"
+
+    const val SoftwareDeveloperCity = "Software Developer City"
+    const val SoftwareDeveloperState = "Software Developer State"
+    const val SoftwareDeveloperCountry = "Software Developer Country"
+
+    const val SoftwareDeveloperName = "Software Developer Name"
+    const val SoftwareDeveloperEmail = "Software Developer Email"
+    const val SoftwareDeveloperWebsite =  "Software Developer Website"
+
+    const val VerticalArt = "Vertical Art"
+    const val YoutubeIntroduction = "Youtube Introduction"
+
+    const val UniqueRecommendation = "uniqueRecommendation"
+}
+
 object StorefrontContentsSerialize {
     const val PackageName: String = "Software Package Name"
     const val DeveloperName: String = "Software Developer Name"
@@ -116,6 +154,52 @@ object CategoryDataKey {
     const val CategoryName = "categoryName"
     const val CategoryIconLink = "categoryIconLink"
     const val ProductCount = "productCount"
+}
+
+object FeaturedContentsDataKey {
+    const val ProductId = "ProductId"
+    const val ProductCategory = "ProductCategory"
+}
+
+class ProductDataStructure(private val productData: MutableMap<String, Any>) {
+
+    fun productDeveloperName() : String = productData[FirestoreProductDataKey.SoftwareDeveloperName].toString()
+
+    fun productId() : String = productData[FirestoreProductDataKey.ProductId].toString()
+    fun productPackageName() : String = productData[FirestoreProductDataKey.SoftwarePackageName].toString()
+
+    fun productName() : String = productData[FirestoreProductDataKey.ProductName].toString()
+    fun productSummary() : String = productData[FirestoreProductDataKey.ProductSummary].toString()
+    fun productDescription() : String = productData[FirestoreProductDataKey.ProductDescription].toString()
+
+    fun productRating() : String = productData[FirestoreProductDataKey.Rating].toString()
+
+    fun productPrice() : String = productData[FirestoreProductDataKey.ProductPrice].toString()
+    fun productSalePrice() : String = productData[FirestoreProductDataKey.ProductSalePrice].toString()
+
+    fun androidCompatibility() : String = productData[FirestoreProductDataKey.AndroidCompatibility].toString()
+    fun contentSafetyRating() : String = productData[FirestoreProductDataKey.ContentSafetyRating].toString()
+
+    fun productCategoryId() : Int = productData[FirestoreProductDataKey.ProductCategoryId].toString().toInt()
+    fun productCategoryName() : String = productData[FirestoreProductDataKey.ProductCategoryName].toString()
+
+    fun productCoverImage() : String? {
+
+        return productData[FirestoreProductDataKey.ProductCoverLink]?.toString()
+    }
+    fun productIcon() : String = productData[FirestoreProductDataKey.ProductIconLink].toString()
+
+    fun productYoutubeIntroduction() : String = productData[FirestoreProductDataKey.YoutubeIntroduction].toString()
+
+    fun softwareDeveloperCountry() : String = productData[FirestoreProductDataKey.SoftwareDeveloperCountry].toString()
+    fun softwareDeveloperCity() : String = productData[FirestoreProductDataKey.SoftwareDeveloperCity].toString()
+
+    fun softwareDeveloperEmail() : String = productData[FirestoreProductDataKey.SoftwareDeveloperEmail].toString()
+    fun softwareDeveloperWebsite() : String = productData[FirestoreProductDataKey.SoftwareDeveloperWebsite].toString()
+
+    fun verticalArt() : String = productData[FirestoreProductDataKey.VerticalArt].toString()
+    fun uniqueRecommendation() : Boolean = productData[FirestoreProductDataKey.UniqueRecommendation].toString().toBoolean()
+
 }
 
 @Keep

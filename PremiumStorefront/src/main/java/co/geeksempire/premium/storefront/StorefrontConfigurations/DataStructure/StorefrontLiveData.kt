@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 10:11 AM
+ * Last modified 9/30/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,6 +30,11 @@ class StorefrontLiveData : ViewModel() {
 
     val featuredContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
+
+    }
+
+    val featuredContentItems: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
     val allContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 8:39 AM
+ * Last modified 9/30/21, 7:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,6 +35,11 @@ class GamesQueryEndpoints (private val generalEndpoints: GeneralEndpoints) {
                 "/" +
                 applicationId
 
+    fun storefrontFeaturedGamesEndpoint() : String  = storefrontGamesCategoryEndpoint() +
+            "/" +
+            "Featured" +
+            "/" +
+            "Content"
 
     /*
      * Wordpress Endpoint

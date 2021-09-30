@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:23 AM
+ * Last modified 9/30/21, 8:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,11 +19,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openFirestoreProductsDetails
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.ViewHolder.FeaturedContentViewHolder
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
@@ -36,6 +35,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.firebase.firestore.DocumentSnapshot
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 class FeaturedContentAdapter(private val context: AppCompatActivity,
@@ -44,7 +44,7 @@ class FeaturedContentAdapter(private val context: AppCompatActivity,
 
     var themeType: Boolean = ThemeType.ThemeLight
 
-    val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+    val storefrontContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
 
     override fun getItemCount() : Int {
 
@@ -84,89 +84,95 @@ class FeaturedContentAdapter(private val context: AppCompatActivity,
 
     override fun onBindViewHolder(featuredContentViewHolder: FeaturedContentViewHolder, position: Int) {
 
-        featuredContentViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
+        storefrontContents[position].data?.let {
 
-        featuredContentViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
+            val productDataStructure = ProductDataStructure(it)
 
-        featuredContentViewHolder.productNameTextView.bringToFront()
+            featuredContentViewHolder.productNameTextView.text = Html.fromHtml(productDataStructure.productName(), Html.FROM_HTML_MODE_COMPACT)
 
-        //Product Icon Image
-        Glide.with(context)
-            .asDrawable()
-            .load(storefrontContents[position].productIconLink)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(CircleCrop())
-            .listener(object : RequestListener<Drawable> {
+            featuredContentViewHolder.productCurrentRateView.text = productDataStructure.productRating()
 
-                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
+            featuredContentViewHolder.productNameTextView.bringToFront()
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+            //Product Icon Image
+            Glide.with(context)
+                .asDrawable()
+                .load(productDataStructure.productIcon())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(CircleCrop())
+                .listener(object : RequestListener<Drawable> {
 
-                    resource?.let {
+                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
 
-                        context.runOnUiThread {
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                            val vibrantColor = extractVibrantColor(resource)
-                            val dominantColor = extractDominantColor(resource)
+                        resource?.let {
 
-                            val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
-                            gradientFeaturedBackground.cornerRadius = dpToInteger(context, 13).toFloat()
+                            context.runOnUiThread {
 
-                            featuredContentViewHolder.backgroundCoverImageView.background = gradientFeaturedBackground
+                                val vibrantColor = extractVibrantColor(resource)
+                                val dominantColor = extractDominantColor(resource)
 
-                            featuredContentViewHolder.installView.setBackgroundColor(vibrantColor)
+                                val gradientFeaturedBackground = GradientDrawable(GradientDrawable.Orientation.TL_BR, intArrayOf(dominantColor, vibrantColor))
+                                gradientFeaturedBackground.cornerRadius = dpToInteger(context, 13).toFloat()
 
-                            featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
-                            featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+                                featuredContentViewHolder.backgroundCoverImageView.background = gradientFeaturedBackground
 
-                            featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
+                                featuredContentViewHolder.installView.setBackgroundColor(vibrantColor)
+
+                                featuredContentViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                                featuredContentViewHolder.productCurrentRateView.setShadowLayer(featuredContentViewHolder.productCurrentRateView.shadowRadius, featuredContentViewHolder.productCurrentRateView.shadowDx, featuredContentViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+
+                                featuredContentViewHolder.productIconImageView.setImageDrawable(resource)
+
+                            }
 
                         }
 
+                        return true
                     }
 
-                    return true
-                }
+                })
+                .submit()
 
-            })
-            .submit()
+            //Product Cover Image
+            Glide.with(context)
+                .asDrawable()
+                .load(productDataStructure.productCoverImage()?:context.getString(R.string.choicePremiumStorefront))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .override(512, 250)
+                .into(featuredContentViewHolder.backgroundCoverImageView)
 
-        //Product Cover Image
-        Glide.with(context)
-            .asDrawable()
-            .load(storefrontContents[position].productCoverLink?:context.getString(R.string.choicePremiumStorefront))
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .override(512, 250)
-            .into(featuredContentViewHolder.backgroundCoverImageView)
+            featuredContentViewHolder.rootView.setOnClickListener {
 
-        featuredContentViewHolder.rootView.setOnClickListener {
+                openFirestoreProductsDetails(context = context, fragmentInterface = fragmentInterface,
+                    contentDetailsContainer = contentDetailsContainer, productDetailsFragment = productDetailsFragment,
+                    productDataStructure = productDataStructure)
 
-            openProductsDetails(context = context, fragmentInterface = fragmentInterface,
-                contentDetailsContainer = contentDetailsContainer, productDetailsFragment = productDetailsFragment,
-                storefrontContents = storefrontContents[position])
+            }
 
-        }
+            featuredContentViewHolder.rootView.setOnLongClickListener {
 
-        featuredContentViewHolder.rootView.setOnLongClickListener {
+                openPlayStoreToInstallApplications(context = context,
+                    aPackageName = (productDataStructure.productPackageName()),
+                    applicationName = productDataStructure.productName(),
+                    applicationSummary = productDataStructure.productSummary())
 
-            openPlayStoreToInstallApplications(context = context,
-                aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
-                applicationName = storefrontContents[position].productName,
-                applicationSummary = storefrontContents[position].productSummary)
+                true
+            }
 
-            true
-        }
+            featuredContentViewHolder.installView.setOnClickListener {
 
-        featuredContentViewHolder.installView.setOnClickListener {
+                openPlayStoreToInstallApplications(context = context,
+                    aPackageName = (productDataStructure.productPackageName()),
+                    applicationName = productDataStructure.productName(),
+                    applicationSummary = productDataStructure.productSummary())
 
-            openPlayStoreToInstallApplications(context = context,
-                aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
-                applicationName = storefrontContents[position].productName,
-                applicationSummary = storefrontContents[position].productSummary)
+            }
 
-        }
+            featuredContentViewHolder.productNameTextView.setOnClickListener {
 
-        featuredContentViewHolder.productNameTextView.setOnClickListener {
+            }
 
         }
 

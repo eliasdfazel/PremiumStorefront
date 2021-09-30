@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 10:19 AM
+ * Last modified 9/30/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -421,7 +421,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.featuredContentItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.featuredContentItems.observe(this@StorefrontApplications, {
 
                 if (it.isNotEmpty()) {
 
@@ -435,7 +435,6 @@ class StorefrontApplications : StorefrontActivity() {
 
                     PopupShortcutsCreator(applicationContext)
                         .startConfiguration()
-
 
                 } else {
 

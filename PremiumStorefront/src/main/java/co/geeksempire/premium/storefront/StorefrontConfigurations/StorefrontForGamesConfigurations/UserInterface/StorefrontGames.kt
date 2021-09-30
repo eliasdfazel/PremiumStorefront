@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 10:19 AM
+ * Last modified 9/30/21, 8:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -367,7 +367,7 @@ class StorefrontGames : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.featuredContentItemData.observe(this@StorefrontGames, {
+            storefrontLiveData.featuredContentItems.observe(this@StorefrontGames, {
 
                 if (it.isNotEmpty()) {
 
