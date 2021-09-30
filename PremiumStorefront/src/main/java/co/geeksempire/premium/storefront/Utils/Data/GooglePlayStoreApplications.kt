@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 1:48 PM
+ * Last modified 9/30/21, 7:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
@@ -99,7 +100,7 @@ fun openPlayStoreToInstallApplications(context: Context, aPackageName: String, a
 
 }
 
-fun shareApplication(context: Context, aPackageName: String, applicationName: String, applicationSummary: String) {
+fun shareApplication(context: AppCompatActivity, aPackageName: String, applicationName: String, applicationSummary: String) {
 
     Firebase.analytics.logEvent(Firebase.auth.currentUser?.displayName?:"Unknown", Bundle().apply {
         putString(ProductDataKey.ProductPackageName, aPackageName)

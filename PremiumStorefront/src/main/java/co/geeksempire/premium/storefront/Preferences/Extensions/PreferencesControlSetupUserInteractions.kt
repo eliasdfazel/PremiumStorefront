@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 3:52 PM
+ * Last modified 9/30/21, 7:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -170,7 +170,7 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
 
         } else {
 
-            shareApplication(context = applicationContext,
+            shareApplication(context = this@preferencesControlSetupUserInteractions,
                 aPackageName = packageName,
                 applicationName = getString(R.string.applicationName), applicationSummary = getString(R.string.applicationSummary))
 
