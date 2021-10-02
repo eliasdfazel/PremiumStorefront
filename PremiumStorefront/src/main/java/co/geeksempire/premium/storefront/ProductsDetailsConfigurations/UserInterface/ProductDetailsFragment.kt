@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/2/21, 10:17 AM
+ * Last modified 10/2/21, 11:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -289,7 +289,7 @@ class ProductDetailsFragment : Fragment() {
 
             getString(ProductDataKey.ProductCategoryName)?.let { categoryName ->
 
-                productDetailsLayoutBinding.categoryNameTextView.text = Html.fromHtml(categoryName, Html.FROM_HTML_MODE_COMPACT)
+                productDetailsLayoutBinding.categoryNameTextView.text = Html.fromHtml(categoryName.split(" ").first(), Html.FROM_HTML_MODE_COMPACT)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 
@@ -303,7 +303,7 @@ class ProductDetailsFragment : Fragment() {
 
                 Glide.with(requireContext())
                     .asDrawable()
-                    .load((requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
+                    .load((requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName.split(" ").first()))
                     .into(productDetailsLayoutBinding.categoryIconImageView)
 
                 productDetailsLayoutBinding.categoryIconImageView.setOnClickListener {
@@ -311,7 +311,7 @@ class ProductDetailsFragment : Fragment() {
                     requireContext().startActivity(Intent(requireContext(), CategoryDetails::class.java).apply {
                         putExtra(CategoriesDataKeys.CategoryId, getInt(ProductDataKey.ProductCategoryId))
                         putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
-                        putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
+                        putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName.split(" ").first()))
                         putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (requireActivity().javaClass.simpleName.contains("Applications")) {
                             GeneralEndpoints.QueryType.ApplicationsQuery
                         } else {
@@ -326,7 +326,7 @@ class ProductDetailsFragment : Fragment() {
                     requireContext().startActivity(Intent(requireContext(), CategoryDetails::class.java).apply {
                         putExtra(CategoriesDataKeys.CategoryId, getInt(ProductDataKey.ProductCategoryId))
                         putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
-                        putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
+                        putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName.split(" ").first()))
                         putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (requireActivity().javaClass.simpleName.contains("Applications")) {
                             GeneralEndpoints.QueryType.ApplicationsQuery
                         } else {

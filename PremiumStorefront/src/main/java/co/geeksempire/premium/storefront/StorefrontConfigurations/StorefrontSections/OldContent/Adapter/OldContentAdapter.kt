@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/2/21, 10:09 AM
+ * Last modified 10/2/21, 11:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -141,7 +141,7 @@ class OldContentAdapter(private val context: AppCompatActivity,
 
         Glide.with(context)
             .asDrawable()
-            .load((context.application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(storefrontContents[position].productCategoryName))
+            .load((context.application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(storefrontContents[position].productCategoryName.split(" ").first()))
             .into(oldContentViewHolder.productCategoryImageView)
 
         oldContentViewHolder.productCategoryImageView.setOnClickListener {
@@ -149,7 +149,7 @@ class OldContentAdapter(private val context: AppCompatActivity,
             context.startActivity(Intent(context, CategoryDetails::class.java).apply {
                 putExtra(CategoriesDataKeys.CategoryId, storefrontContents[position].productCategoryId)
                 putExtra(CategoriesDataKeys.CategoryName, storefrontContents[position].productCategoryName)
-                putExtra(CategoriesDataKeys.CategoryIcon, (context.application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(storefrontContents[position].productCategoryName))
+                putExtra(CategoriesDataKeys.CategoryIcon, (context.application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(storefrontContents[position].productCategoryName.split(" ").first()))
                 putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (context.javaClass.simpleName.contains("Applications")) {
                     GeneralEndpoints.QueryType.ApplicationsQuery
                 } else {
