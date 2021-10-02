@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/2/21, 10:27 AM
+ * Last modified 10/2/21, 11:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -196,7 +196,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
             val queryType = inputData.getStringExtra(GeneralEndpoints.QueryType.QueryTypeCase)?:GeneralEndpoints.QueryType.ApplicationsQuery
 
-            productsOfCategory.retrieveProductsOfCategory(this@CategoryDetails, categoryId, categoryName, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, categoryDetailsLayoutBinding.loadingView, queryType)
+            productsOfCategory.retrieveProductsOfCategory(this@CategoryDetails, categoryId, categoryName.split(" ").first(), productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, categoryDetailsLayoutBinding.loadingView, queryType)
 
             Log.d(this@CategoryDetails.javaClass.simpleName, "Category Id $categoryId")
         }

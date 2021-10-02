@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/2/21, 10:43 AM
+ * Last modified 10/2/21, 11:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,12 +20,10 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.ViewHolder.ProductsOfCategoryViewHolder
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
+import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openFirestoreProductsDetails
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
-import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -112,17 +110,17 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
             val productDataStructure = ProductDataStructure(it)
 
-            productsOfCategoryViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
-            productsOfCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
+            productsOfCategoryViewHolder.productNameTextView.text = Html.fromHtml(productDataStructure.productName(), Html.FROM_HTML_MODE_COMPACT)
+            productsOfCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(productDataStructure.productSummary(), Html.FROM_HTML_MODE_COMPACT)
 
-            productsOfCategoryViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
+            productsOfCategoryViewHolder.productCurrentRateView.text = productDataStructure.productRating()
 
             productsOfCategoryViewHolder.productCurrentRateView.setTextColor(context.getColor(R.color.white))
 
             //Product Icon Image
             Glide.with(context)
                 .asDrawable()
-                .load(storefrontContents[position].productIconLink)
+                .load(productDataStructure.productIcon())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transform(CircleCrop())
                 .listener(object : RequestListener<Drawable> {
@@ -164,9 +162,9 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
             productsOfCategoryViewHolder.rootView.setOnClickListener {
 
-                openProductsDetails(context = context, fragmentInterface = context,
+                openFirestoreProductsDetails(context = context, fragmentInterface = context,
                     contentDetailsContainer= context.categoryDetailsLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
-                    storefrontContents = storefrontContents[position])
+                    productDataStructure = productDataStructure)
 
             }
 
@@ -178,21 +176,10 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
             productsOfCategoryViewHolder.installView.setOnClickListener {
 
-                if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
-
-                    shareApplication(context,
-                        storefrontContents[position].productName,
-                        storefrontContents[position].productName,
-                        storefrontContents[position].productSummary)
-
-                } else {
-
-                    openPlayStoreToInstallApplications(context = context,
-                        aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
-                        applicationName = storefrontContents[position].productName,
-                        applicationSummary = storefrontContents[position].productSummary)
-
-                }
+                openPlayStoreToInstallApplications(context = context,
+                    aPackageName = productDataStructure.productPackageName(),
+                    applicationName = productDataStructure.productName(),
+                    applicationSummary = productDataStructure.productSummary())
 
             }
 

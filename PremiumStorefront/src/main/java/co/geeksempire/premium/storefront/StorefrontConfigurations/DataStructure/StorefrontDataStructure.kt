@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/30/21, 9:11 AM
+ * Last modified 10/2/21, 11:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -183,10 +183,8 @@ class ProductDataStructure(private val productData: MutableMap<String, Any>) {
     fun productCategoryId() : Int = productData[FirestoreProductDataKey.ProductCategoryId].toString().toInt()
     fun productCategoryName() : String = productData[FirestoreProductDataKey.ProductCategoryName].toString()
 
-    fun productCoverImage() : String? {
+    fun productCoverImage() : String? = productData[FirestoreProductDataKey.ProductCoverLink]?.toString()
 
-        return productData[FirestoreProductDataKey.ProductCoverLink]?.toString()
-    }
     fun productIcon() : String = productData[FirestoreProductDataKey.ProductIconLink].toString()
 
     fun productYoutubeIntroduction() : String = productData[FirestoreProductDataKey.YoutubeIntroduction].toString()
@@ -197,7 +195,7 @@ class ProductDataStructure(private val productData: MutableMap<String, Any>) {
     fun softwareDeveloperEmail() : String = productData[FirestoreProductDataKey.SoftwareDeveloperEmail].toString()
     fun softwareDeveloperWebsite() : String = productData[FirestoreProductDataKey.SoftwareDeveloperWebsite].toString()
 
-    fun verticalArt() : String = productData[FirestoreProductDataKey.VerticalArt].toString()
+    fun verticalArt() : String? = productData[FirestoreProductDataKey.VerticalArt]?.toString()
     fun uniqueRecommendation() : Boolean = productData[FirestoreProductDataKey.UniqueRecommendation].toString().toBoolean()
 
 }
