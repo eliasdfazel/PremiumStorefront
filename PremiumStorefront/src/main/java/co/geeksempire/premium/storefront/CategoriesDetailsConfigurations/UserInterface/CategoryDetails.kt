@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 10/2/21, 10:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -119,7 +119,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
                 .load(inputData.getStringExtra(CategoriesDataKeys.CategoryIcon))
                 .into(categoryDetailsLayoutBinding.categoryIconImageView)
 
-            productsOfCategory.uniqueRecommendationsData.observe(this@CategoryDetails, {
+            productsOfCategory.uniqueRecommendationsProducts.observe(this@CategoryDetails, {
 
                 if (categoryDetailsLayoutBinding.uniqueRecyclerView.isGone) {
 
@@ -192,8 +192,11 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
         intent?.let { inputData ->
 
             val categoryId = inputData.getIntExtra(CategoriesDataKeys.CategoryId, 15)
+            val categoryName = inputData.getStringExtra(CategoriesDataKeys.CategoryName)?:"Productivity"
 
-            productsOfCategory.retrieveProductsOfCategory(categoryId, applicationContext, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, categoryDetailsLayoutBinding.loadingView)
+            val queryType = inputData.getStringExtra(GeneralEndpoints.QueryType.QueryTypeCase)?:GeneralEndpoints.QueryType.ApplicationsQuery
+
+            productsOfCategory.retrieveProductsOfCategory(this@CategoryDetails, categoryId, categoryName, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, categoryDetailsLayoutBinding.loadingView, queryType)
 
             Log.d(this@CategoryDetails.javaClass.simpleName, "Category Id $categoryId")
         }

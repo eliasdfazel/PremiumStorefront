@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 10/2/21, 10:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,24 +10,23 @@
 
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.NetworkOperations
 
-import android.content.Context
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.ProductsOfCategoryAdapter
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.Adapter.UniqueRecommendationsCategoryAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
-import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
-import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.Source
 import kotlinx.coroutines.*
 import net.geeksempire.loadingspin.SpinKitView
-import org.json.JSONArray
-import org.json.JSONObject
 
 class ProductsOfCategory : ViewModel() {
 
@@ -35,164 +34,99 @@ class ProductsOfCategory : ViewModel() {
         MutableLiveData<Pair<Boolean, StorefrontContentsData>>()
     }
 
-    private val generalEndpoint = GeneralEndpoints()
+    val theCategoryProducts: MutableLiveData<DocumentSnapshot> by lazy {
+        MutableLiveData<DocumentSnapshot>()
+    }
+
+    val uniqueRecommendationsProducts: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
+
+    private val generalEndpoints = GeneralEndpoints()
 
     private var numberOfPageToRetrieve: Int = 1
 
     var allLoadingFinished: Boolean = false
 
-    fun retrieveProductsOfCategory(categoryId: Int, context: Context,
+    fun retrieveProductsOfCategory(context: AppCompatActivity,
+                                   categoryId: Int, categoryName: String,
                                    productsOfCategoryAdapter: ProductsOfCategoryAdapter,
                                    uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter,
-                                   loadingView: SpinKitView) {
+                                   loadingView: SpinKitView,
+                                   queryType: String = GeneralEndpoints.QueryType.ApplicationsQuery) {
 
-        GenericJsonRequest(context, object : JsonRequestResponses {
+        val applicationsQueryEndpoints: ApplicationsQueryEndpoints = ApplicationsQueryEndpoints(generalEndpoints)
 
-            override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
-                super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
+        val gamesQueryEndpoints: GamesQueryEndpoints = GamesQueryEndpoints(generalEndpoints)
 
-                processAllContentOfCategories(
-                    allContentJsonArray = rawDataJsonArray,
-                    offsetIndex = productsOfCategoryAdapter.itemCount,
-                    productsOfCategoryAdapter = productsOfCategoryAdapter,
-                    uniqueRecommendationsCategoryAdapter = uniqueRecommendationsCategoryAdapter,
-                    loadingView = loadingView
-                )
+        val queryEndpoint = when (queryType) {
+            GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
-                if (rawDataJsonArray.length() == generalEndpoint.defaultProductsPerPage) {
-
-                    numberOfPageToRetrieve++
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-
-                        retrieveProductsOfCategory(categoryId, context, productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, loadingView)
-
-                    }, 1579)
-
-                } else {
-
-                    allLoadingFinished = true
-
-                }
+                applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName)
 
             }
+            GeneralEndpoints.QueryType.GamesQuery -> {
 
-        }).getMethod(generalEndpoint.getProductsSpecificCategoriesEndpoint(productCategoryId = categoryId, numberOfPage = numberOfPageToRetrieve))
+                gamesQueryEndpoints.firestoreGamesSpecificCategory(categoryName)
+
+            }
+            else -> applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName)
+        }
+
+        (context.application as PremiumStorefrontApplication)
+            .firestoreDatabase
+            .collection(queryEndpoint)
+            .get(Source.SERVER).addOnSuccessListener { querySnapshot ->
+
+                processAllProductsOfCategory(productsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter, loadingView, querySnapshot)
+
+            }.addOnFailureListener {
+
+
+
+            }
 
     }
 
-    fun processAllContentOfCategories(
-        allContentJsonArray: JSONArray, offsetIndex: Int = 0,
-        productsOfCategoryAdapter: ProductsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter,
-        loadingView: SpinKitView) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
-        Log.d(this@ProductsOfCategory.javaClass.simpleName, "Process All Content Of Categories")
 
-        for (indexContent in 0 until allContentJsonArray.length()) {
+    fun processAllProductsOfCategory(productsOfCategoryAdapter: ProductsOfCategoryAdapter, uniqueRecommendationsCategoryAdapter: UniqueRecommendationsCategoryAdapter,
+                                     loadingView: SpinKitView, querySnapshot: QuerySnapshot) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-            val featuredContentJsonObject: JSONObject = allContentJsonArray[indexContent] as JSONObject
+        querySnapshot.documents.forEachIndexed { index, documentSnapshot ->
 
-            /* Start - Images */
-            val featuredContentImages: JSONArray = featuredContentJsonObject[ProductsContentKey.ImagesKey] as JSONArray
+            if (documentSnapshot.exists()) {
 
-            val productIcon = (featuredContentImages[0] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-            val productCover: String? = try {
-                (featuredContentImages[2] as JSONObject).getString(ProductsContentKey.ImageSourceKey)
-            } catch (e: Exception) {
-                null
-            }
+                documentSnapshot.data?.let {
 
-            /* End - Images */
+                    val productDataStructure = ProductDataStructure(it)
 
-            /* Start - Attributes */
-            val contentAttributes: JSONArray = featuredContentJsonObject[ProductsContentKey.AttributesKey] as JSONArray
+                    if (productDataStructure.uniqueRecommendation()) {
 
-            val attributesMap = HashMap<String, String?>()
+                        uniqueRecommendationsCategoryAdapter.storefrontContents.add(documentSnapshot)
 
-            for (indexAttribute in 0 until contentAttributes.length()) {
+                        uniqueRecommendationsProducts.postValue(true)
 
-                val attributesJsonObject: JSONObject = contentAttributes[indexAttribute] as JSONObject
+                    } else {
 
-                attributesMap[attributesJsonObject.getString(ProductsContentKey.NameKey)] = attributesJsonObject.getJSONArray(ProductsContentKey.AttributeOptionsKey)[0].toString()
 
-            }
-            /* End - Attributes */
+                    }
 
-            val adapterIndex = offsetIndex + indexContent
+                    productsOfCategoryAdapter.storefrontContents.add(documentSnapshot)
 
-            /* Start - Primary Category */
-            val productCategories = featuredContentJsonObject.getJSONArray(ProductsContentKey.CategoriesKey)
 
-            var productCategory = (productCategories[productCategories.length() - 1] as JSONObject)
+                    withContext(Dispatchers.Main) {
 
-            var productCategoryName = "All Products"
-            var productCategoryId = 15
+                        productsOfCategoryAdapter.notifyItemInserted(productsOfCategoryAdapter.itemCount)
 
-            for (indexCategory in 0 until productCategories.length()) {
+                        uniqueRecommendationsCategoryAdapter.notifyItemInserted(uniqueRecommendationsCategoryAdapter.itemCount)
 
-                val textCheckpoint: String = (productCategories[indexCategory] as JSONObject).getString(ProductsContentKey.NameKey).split(" ")[0]
+                    }
 
-                if (textCheckpoint != "All" && textCheckpoint != "Quick" && textCheckpoint != "Unique") {
-
-                    productCategory = (productCategories[indexCategory] as JSONObject)
-
-                    productCategoryName = productCategory.getString(ProductsContentKey.NameKey)
-                    productCategoryId = productCategory.getInt(ProductsContentKey.IdKey)
+                    delay(197)
 
                 }
 
-                 if (textCheckpoint.contains("Unique")) {
-
-                     val storefrontContentsData = StorefrontContentsData(
-                         productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
-                         productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                         productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                         productCategoryName = productCategoryName,
-                         productCategoryId = productCategoryId,
-                         productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                         productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
-                         productIconLink = productIcon,
-                         productCoverLink = productCover,
-                         productAttributes = attributesMap
-                     )
-
-                     uniqueRecommendationsCategoryAdapter.storefrontContents.add(storefrontContentsData)
-
-                     uniqueRecommendationsData.postValue(Pair(true, storefrontContentsData))
-
-                 }
-
             }
-            /* End - Primary Category */
-
-            productsOfCategoryAdapter.storefrontContents.add(
-                StorefrontContentsData(
-                    productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
-                    productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
-                    productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
-                    productCategoryName = productCategoryName,
-                    productCategoryId = productCategoryId,
-                    productPrice = featuredContentJsonObject.getString(ProductsContentKey.RegularPriceKey),
-                    productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
-                    productIconLink = productIcon,
-                    productCoverLink = productCover,
-                    productAttributes = attributesMap
-                )
-            )
-
-            withContext(Dispatchers.Main) {
-
-                productsOfCategoryAdapter.notifyItemInserted(productsOfCategoryAdapter.itemCount)
-
-                uniqueRecommendationsCategoryAdapter.notifyItemInserted(uniqueRecommendationsCategoryAdapter.itemCount)
-
-            }
-
-            Log.d(
-                this@ProductsOfCategory.javaClass.simpleName,
-                "All Products Of Category: ${featuredContentJsonObject.getString(ProductsContentKey.NameKey)}"
-            )
-
-            delay(197)
 
         }
 

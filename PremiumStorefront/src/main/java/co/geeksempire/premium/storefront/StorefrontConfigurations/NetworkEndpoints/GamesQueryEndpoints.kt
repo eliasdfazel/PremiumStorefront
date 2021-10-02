@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/30/21, 7:48 AM
+ * Last modified 10/2/21, 9:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,6 +40,10 @@ class GamesQueryEndpoints (private val generalEndpoints: GeneralEndpoints) {
             "Featured" +
             "/" +
             "Content"
+
+    fun firestoreGamesSpecificCategory(categoryName: String) : String = storefrontGamesCategoryEndpoint() +
+            "/" +
+            categoryName
 
     /*
      * Wordpress Endpoint

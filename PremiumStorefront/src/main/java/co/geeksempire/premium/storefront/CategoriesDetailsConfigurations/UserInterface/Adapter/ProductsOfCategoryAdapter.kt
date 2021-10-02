@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:23 AM
+ * Last modified 10/2/21, 10:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,8 +22,8 @@ import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInt
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extensions.openProductsDetails
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.Data.shareApplication
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
@@ -34,11 +34,11 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+import com.google.firebase.firestore.DocumentSnapshot
 
 class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Boolean = ThemeType.ThemeLight) : RecyclerView.Adapter<ProductsOfCategoryViewHolder>() {
 
-    val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+    val storefrontContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
 
     override fun getItemCount() : Int {
 
@@ -52,15 +52,6 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
     override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(productsOfCategoryViewHolder, position, payloads)
-
-        if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
-
-            productsOfCategoryViewHolder.installView.icon = context.getDrawable(R.drawable.share_icon)
-            productsOfCategoryViewHolder.installView.iconSize = dpToInteger(context, 23)
-
-        }
-
-        productsOfCategoryViewHolder.installView.text = storefrontContents[position].installViewText
 
         when (themeType) {
             ThemeType.ThemeLight -> {
@@ -117,89 +108,97 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
     override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int) {
 
-        productsOfCategoryViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
-        productsOfCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
+        storefrontContents[position].data?.let {
 
-        productsOfCategoryViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
+            val productDataStructure = ProductDataStructure(it)
 
-        productsOfCategoryViewHolder.productCurrentRateView.setTextColor(context.getColor(R.color.white))
+            productsOfCategoryViewHolder.productNameTextView.text = Html.fromHtml(storefrontContents[position].productName, Html.FROM_HTML_MODE_COMPACT)
+            productsOfCategoryViewHolder.productSummaryTextView.text = Html.fromHtml(storefrontContents[position].productSummary, Html.FROM_HTML_MODE_COMPACT)
 
-        //Product Icon Image
-        Glide.with(context)
-            .asDrawable()
-            .load(storefrontContents[position].productIconLink)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .transform(CircleCrop())
-            .listener(object : RequestListener<Drawable> {
+            productsOfCategoryViewHolder.productCurrentRateView.text = storefrontContents[position].productAttributes[ProductsContentKey.AttributesRatingKey]
 
-                override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
+            productsOfCategoryViewHolder.productCurrentRateView.setTextColor(context.getColor(R.color.white))
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+            //Product Icon Image
+            Glide.with(context)
+                .asDrawable()
+                .load(storefrontContents[position].productIconLink)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(CircleCrop())
+                .listener(object : RequestListener<Drawable> {
 
-                    resource?.let {
+                    override fun onLoadFailed(glideException: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean { return true }
 
-                        val vibrantColor = extractVibrantColor(resource)
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                        context.runOnUiThread {
+                        resource?.let {
 
-                            productsOfCategoryViewHolder.productCurrentRateView.setShadowLayer(productsOfCategoryViewHolder.productCurrentRateView.shadowRadius, productsOfCategoryViewHolder.productCurrentRateView.shadowDx, productsOfCategoryViewHolder.productCurrentRateView.shadowDy, vibrantColor)
+                            val vibrantColor = extractVibrantColor(resource)
 
-                            productsOfCategoryViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
-                            productsOfCategoryViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
+                            context.runOnUiThread {
 
-                            productsOfCategoryViewHolder.productCurrentRateView.setTextColor(vibrantColor)
+                                productsOfCategoryViewHolder.productCurrentRateView.setShadowLayer(productsOfCategoryViewHolder.productCurrentRateView.shadowRadius, productsOfCategoryViewHolder.productCurrentRateView.shadowDx, productsOfCategoryViewHolder.productCurrentRateView.shadowDy, vibrantColor)
 
-                            val applicationGlowingFrame = context.getDrawable(R.drawable.all_application_icon_glowing_frame) as LayerDrawable
-                            applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
-                            applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconFrame).setTint(vibrantColor)
+                                productsOfCategoryViewHolder.installView.backgroundTintList = ColorStateList.valueOf(vibrantColor)
+                                productsOfCategoryViewHolder.installView.rippleColor = ColorStateList.valueOf(context.getColor(R.color.white))
 
-                            productsOfCategoryViewHolder.productIconImageView.background = applicationGlowingFrame
+                                productsOfCategoryViewHolder.productCurrentRateView.setTextColor(vibrantColor)
 
-                            productsOfCategoryViewHolder.productIconImageView.setImageDrawable(resource)
+                                val applicationGlowingFrame = context.getDrawable(R.drawable.all_application_icon_glowing_frame) as LayerDrawable
+                                applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconBackground).setTint(vibrantColor)
+                                applicationGlowingFrame.findDrawableByLayerId(R.id.circleIconFrame).setTint(vibrantColor)
+
+                                productsOfCategoryViewHolder.productIconImageView.background = applicationGlowingFrame
+
+                                productsOfCategoryViewHolder.productIconImageView.setImageDrawable(resource)
+
+                            }
 
                         }
 
+                        return true
                     }
 
-                    return true
+                })
+                .submit()
+
+            productsOfCategoryViewHolder.rootView.setOnClickListener {
+
+                openProductsDetails(context = context, fragmentInterface = context,
+                    contentDetailsContainer= context.categoryDetailsLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
+                    storefrontContents = storefrontContents[position])
+
+            }
+
+            productsOfCategoryViewHolder.rootView.setOnLongClickListener {
+
+
+                true
+            }
+
+            productsOfCategoryViewHolder.installView.setOnClickListener {
+
+                if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
+
+                    shareApplication(context,
+                        storefrontContents[position].productName,
+                        storefrontContents[position].productName,
+                        storefrontContents[position].productSummary)
+
+                } else {
+
+                    openPlayStoreToInstallApplications(context = context,
+                        aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
+                        applicationName = storefrontContents[position].productName,
+                        applicationSummary = storefrontContents[position].productSummary)
+
                 }
-
-            })
-            .submit()
-
-        productsOfCategoryViewHolder.rootView.setOnClickListener {
-
-            openProductsDetails(context = context, fragmentInterface = context,
-                contentDetailsContainer= context.categoryDetailsLayoutBinding.contentDetailsContainer, productDetailsFragment = context.productDetailsFragment,
-                storefrontContents = storefrontContents[position])
-
-        }
-
-        productsOfCategoryViewHolder.rootView.setOnLongClickListener {
-
-
-            true
-        }
-
-        productsOfCategoryViewHolder.installView.setOnClickListener {
-
-            if (!storefrontContents[position].installViewText.equals(context.getString(R.string.installNowText))) {
-
-                shareApplication(context,
-                    storefrontContents[position].productName,
-                    storefrontContents[position].productName,
-                    storefrontContents[position].productSummary)
-
-            } else {
-
-                openPlayStoreToInstallApplications(context = context,
-                    aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
-                    applicationName = storefrontContents[position].productName,
-                    applicationSummary = storefrontContents[position].productSummary)
 
             }
 
         }
+
+
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 10:38 AM
+ * Last modified 10/2/21, 10:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,6 +32,7 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontCategoriesData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.ViewHolder.CategoriesViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -258,6 +259,11 @@ class CategoriesAdapter(private val context: AppCompatActivity,
                         putExtra(CategoriesDataKeys.CategoryId, storefrontCategories[position].categoryId)
                         putExtra(CategoriesDataKeys.CategoryName, storefrontCategories[position].categoryName)
                         putExtra(CategoriesDataKeys.CategoryIcon, storefrontCategories[position].categoryIconLink)
+                        putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (context.javaClass.simpleName.contains("Applications")) {
+                            GeneralEndpoints.QueryType.ApplicationsQuery
+                        } else {
+                            GeneralEndpoints.QueryType.GamesQuery
+                        })
                     }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
                 }
@@ -287,6 +293,11 @@ class CategoriesAdapter(private val context: AppCompatActivity,
                             putExtra(CategoriesDataKeys.CategoryId, storefrontCategories[position].categoryId)
                             putExtra(CategoriesDataKeys.CategoryName, storefrontCategories[position].categoryName)
                             putExtra(CategoriesDataKeys.CategoryIcon, storefrontCategories[position].categoryIconLink)
+                            putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (context.javaClass.simpleName.contains("Applications")) {
+                                GeneralEndpoints.QueryType.ApplicationsQuery
+                            } else {
+                                GeneralEndpoints.QueryType.GamesQuery
+                            })
                         }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
                         balloonOptionsMenu.removeBalloonOption()

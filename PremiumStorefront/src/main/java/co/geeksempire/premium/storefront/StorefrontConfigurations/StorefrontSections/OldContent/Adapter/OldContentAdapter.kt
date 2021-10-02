@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:23 AM
+ * Last modified 10/2/21, 10:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,7 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.Extension
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.OldContent.ViewHolder.OldContentViewHolder
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorLightDark
@@ -149,6 +150,11 @@ class OldContentAdapter(private val context: AppCompatActivity,
                 putExtra(CategoriesDataKeys.CategoryId, storefrontContents[position].productCategoryId)
                 putExtra(CategoriesDataKeys.CategoryName, storefrontContents[position].productCategoryName)
                 putExtra(CategoriesDataKeys.CategoryIcon, (context.application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(storefrontContents[position].productCategoryName))
+                putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (context.javaClass.simpleName.contains("Applications")) {
+                    GeneralEndpoints.QueryType.ApplicationsQuery
+                } else {
+                    GeneralEndpoints.QueryType.GamesQuery
+                })
             }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
         }

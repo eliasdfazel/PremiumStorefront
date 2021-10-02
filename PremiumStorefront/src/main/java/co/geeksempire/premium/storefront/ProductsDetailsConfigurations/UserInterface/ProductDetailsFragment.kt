@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 3:52 PM
+ * Last modified 10/2/21, 10:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,6 +45,7 @@ import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeCo
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.YouTubeInterface
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
 import co.geeksempire.premium.storefront.Utils.UI.Colors.*
@@ -311,6 +312,11 @@ class ProductDetailsFragment : Fragment() {
                         putExtra(CategoriesDataKeys.CategoryId, getInt(ProductDataKey.ProductCategoryId))
                         putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
                         putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
+                        putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (requireActivity().javaClass.simpleName.contains("Applications")) {
+                            GeneralEndpoints.QueryType.ApplicationsQuery
+                        } else {
+                            GeneralEndpoints.QueryType.GamesQuery
+                        })
                     }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
                 }
@@ -321,6 +327,11 @@ class ProductDetailsFragment : Fragment() {
                         putExtra(CategoriesDataKeys.CategoryId, getInt(ProductDataKey.ProductCategoryId))
                         putExtra(CategoriesDataKeys.CategoryName, getString(ProductDataKey.ProductCategoryName))
                         putExtra(CategoriesDataKeys.CategoryIcon, (requireActivity().application as PremiumStorefrontApplication).categoryData.getCategoryIconByName(categoryName))
+                        putExtra(GeneralEndpoints.QueryType.QueryTypeCase, if (requireActivity().javaClass.simpleName.contains("Applications")) {
+                            GeneralEndpoints.QueryType.ApplicationsQuery
+                        } else {
+                            GeneralEndpoints.QueryType.GamesQuery
+                        })
                     }, ActivityOptions.makeCustomAnimation(context, R.anim.slide_in_right, 0).toBundle())
 
                 }
