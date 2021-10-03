@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/28/21, 5:23 AM
+ * Last modified 10/3/21, 10:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,16 +10,15 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterViewHolder
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.filter_options_item_layout.view.*
+import co.geeksempire.premium.storefront.databinding.FilterOptionsItemLayoutBinding
 
-class FilterOptionsViewHolder(rootView: View) : RecyclerView.ViewHolder(rootView) {
-    val rootViewItem: ConstraintLayout = rootView.rootViewItem
+class FilterOptionsViewHolder(filterOptionsItemLayoutBinding: FilterOptionsItemLayoutBinding) : RecyclerView.ViewHolder(filterOptionsItemLayoutBinding.root) {
+    val rootViewItem: ConstraintLayout = filterOptionsItemLayoutBinding.rootViewItem
 
-    val filterOptionsLabel: TextView = rootView.filterOptionsLabel
-    val filterOptionsIcon: ImageView = rootView.filterOptionsIcon
+    val filterOptionsLabel: TextView = filterOptionsItemLayoutBinding.filterOptionsLabel
+    val filterOptionsIcon: ImageView = filterOptionsItemLayoutBinding.filterOptionsIcon
 }

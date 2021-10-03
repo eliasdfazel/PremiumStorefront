@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 1:12 PM
+ * Last modified 10/3/21, 10:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,13 +13,13 @@ package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguratio
 import android.os.Handler
 import android.os.Looper
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterViewHolder.FilterOptionsViewHolder
+import co.geeksempire.premium.storefront.databinding.FilterOptionsItemLayoutBinding
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterOptionsItem
@@ -45,7 +45,7 @@ class FilterOptionsAdapter (private val context: AppCompatActivity,
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): FilterOptionsViewHolder {
 
-        return FilterOptionsViewHolder(LayoutInflater.from(context).inflate(R.layout.filter_options_item_layout_movie, viewGroup, false))
+        return FilterOptionsViewHolder(FilterOptionsItemLayoutBinding.inflate(context.layoutInflater))
     }
 
     override fun onBindViewHolder(filterOptionsViewHolder: FilterOptionsViewHolder, position: Int) {
