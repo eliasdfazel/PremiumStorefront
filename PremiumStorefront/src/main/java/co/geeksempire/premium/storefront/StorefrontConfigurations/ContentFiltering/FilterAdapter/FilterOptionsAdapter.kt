@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 6:04 AM
+ * Last modified 10/15/21, 10:35 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,6 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilter
 import android.os.Handler
 import android.os.Looper
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -25,6 +24,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterViewHolder.FilterOptionsViewHolder
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.databinding.FilterOptionsItemLayoutBinding
 import co.geeksempire.premium.storefront.databinding.FilteringLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -45,7 +45,7 @@ class FilterOptionsAdapter (private val context: AppCompatActivity,
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): FilterOptionsViewHolder {
 
-        return FilterOptionsViewHolder(LayoutInflater.from(context).inflate(R.layout.filter_options_item_layout, viewGroup, false))
+        return FilterOptionsViewHolder(FilterOptionsItemLayoutBinding.inflate(context.layoutInflater, viewGroup, false))
     }
 
     override fun onBindViewHolder(filterOptionsViewHolder: FilterOptionsViewHolder, position: Int) {
