@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 12:46 PM
+ * Last modified 10/21/21, 9:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentSearch
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList
+import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -20,6 +21,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
@@ -27,6 +29,8 @@ import co.geeksempire.premium.storefront.android.Utils.System.hideKeyboard
 import co.geeksempire.premium.storefront.android.Utils.System.showKeyboard
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -158,6 +162,11 @@ fun searchingSetup(context: AppCompatActivity, filterAllContent: FilterAllConten
 
             when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
+
+                    (context.application as PremiumStorefrontApplication).firebaseAnalytics.logEvent(
+                        Firebase.auth.currentUser?.uid?:"Anonymous", Bundle().apply {
+                        putString("SearchQuery", textView.text.toString())
+                    })
 
                     filterAllContent.searchThroughAllContent(storefrontAllUnfilteredContents, textView.text.toString())
                         .invokeOnCompletion {
