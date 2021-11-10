@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 3:52 PM
+ * Last modified 11/10/21, 2:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,7 +43,7 @@ class GenreAllMoviesAdapter(private val context: AppCompatActivity) : RecyclerVi
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : GenreAllMoviesViewHolder {
 
-        return GenreAllMoviesViewHolder(GenreAllMoviesItemBinding.inflate(context.layoutInflater))
+        return GenreAllMoviesViewHolder(GenreAllMoviesItemBinding.inflate(context.layoutInflater, viewGroup, false))
     }
 
     override fun onBindViewHolder(genreAllMoviesViewHolder: GenreAllMoviesViewHolder, position: Int) {

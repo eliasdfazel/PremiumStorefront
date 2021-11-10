@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 3:52 PM
+ * Last modified 11/10/21, 2:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,7 +43,7 @@ class AllMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : AllMoviesViewHolder {
 
-        return AllMoviesViewHolder(StorefrontAllMoviesItemBinding.inflate(context.layoutInflater))
+        return AllMoviesViewHolder(StorefrontAllMoviesItemBinding.inflate(context.layoutInflater, viewGroup, false))
     }
 
     override fun onBindViewHolder(allMoviesViewHolder: AllMoviesViewHolder, position: Int) {
