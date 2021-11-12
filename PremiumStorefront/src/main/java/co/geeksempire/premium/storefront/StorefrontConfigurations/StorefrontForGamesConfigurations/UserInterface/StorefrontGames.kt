@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 5:05 AM
+ * Last modified 11/12/21, 6:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -266,7 +266,7 @@ class StorefrontGames : StorefrontActivity() {
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
-            storefrontLiveData.allContentItemData.observe(this@StorefrontGames, {
+            storefrontLiveData.allContentItemDataWordpress.observe(this@StorefrontGames, {
 
                 if (it.isNotEmpty()) {
 
@@ -295,7 +295,7 @@ class StorefrontGames : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.allContentMoreItemData.observe(this@StorefrontGames, {
+            storefrontLiveData.allContentMoreItemDataWordpress.observe(this@StorefrontGames, {
                 Log.d(this@StorefrontGames.javaClass.simpleName, "More Products Data Loaded")
 
                 storefrontAllUntouchedContents.addAll(it)
@@ -312,7 +312,7 @@ class StorefrontGames : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.presentMoreItemData.observe(this@StorefrontGames, {
+            storefrontLiveData.presentMoreItemDataWordpress.observe(this@StorefrontGames, {
 
                 allContentAdapter.storefrontContents.add(it)
 
@@ -390,7 +390,7 @@ class StorefrontGames : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.newContentItemData.observe(this@StorefrontGames, {
+            storefrontLiveData.newContentItemDataWordpress.observe(this@StorefrontGames, {
 
                 if (it.isNotEmpty()) {
 
@@ -477,7 +477,7 @@ class StorefrontGames : StorefrontActivity() {
 
             storefrontLayoutBinding.loadMoreView.setOnClickListener {
 
-                storefrontLiveData.loadMoreDataIntoPresenter(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
+                storefrontLiveData.loadMoreDataIntoPresenterWordpress(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
 
                 storefrontLayoutBinding.loadMoreView.apply {
 

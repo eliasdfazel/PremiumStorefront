@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/30/21, 8:13 AM
+ * Last modified 11/12/21, 6:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,24 +28,36 @@ import org.json.JSONObject
 
 class StorefrontLiveData : ViewModel() {
 
-    val featuredContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontContentsData>>()
-
-    }
+    /**
+     * Firebase
+     **/
 
     val featuredContentItems: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
         MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
-    val allContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
+    val categoriesItemData: MutableLiveData<ArrayList<StorefrontCategoriesData>> by lazy {
+        MutableLiveData<ArrayList<StorefrontCategoriesData>>()
+    }
+
+    /**
+     * Wordpress
+     **/
+
+    val featuredContentItemDataWordpress: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
+        MutableLiveData<ArrayList<StorefrontContentsData>>()
+
+    }
+
+    val allContentItemDataWordpress: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
     }
 
-    val allContentMoreItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
+    val allContentMoreItemDataWordpress: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
     }
 
-    val presentMoreItemData: MutableLiveData<StorefrontContentsData> by lazy {
+    val presentMoreItemDataWordpress: MutableLiveData<StorefrontContentsData> by lazy {
         MutableLiveData<StorefrontContentsData>()
     }
 
@@ -53,19 +65,54 @@ class StorefrontLiveData : ViewModel() {
         MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>()
     }
 
-    val newContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
+    val newContentItemDataWordpress: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
     }
 
-    val oldContentItemData: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
+    val oldContentItemDataWordpress: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
         MutableLiveData<ArrayList<StorefrontContentsData>>()
     }
 
-    val categoriesItemData: MutableLiveData<ArrayList<StorefrontCategoriesData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontCategoriesData>>()
+    /**
+     * Firebase
+     **/
+    fun processCategoryData(documentSnapshot: DocumentSnapshot) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+
+        val categoriesDocumentSnapshots = ArrayList<StorefrontCategoriesData>()
+
+        documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds?.forEach { documentMap ->
+
+            val categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt()
+
+            val categoryName = documentMap[CategoryDataKey.CategoryName].toString()
+
+            categoriesDocumentSnapshots.add(StorefrontCategoriesData(
+                categoryId = categoryId ,
+                categoryName = categoryName,
+                categoryIconLink = documentMap[CategoryDataKey.CategoryIconLink].toString(),
+                productCount = documentMap[CategoryDataKey.ProductCount].toString().toInt()
+            ))
+
+            Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Id: ${categoryId} | Category Name: ${categoryName}")
+
+        }
+
+        val moviesDocumentSnapshotsSorted = categoriesDocumentSnapshots.sortedByDescending {
+
+            it.productCount
+        }
+
+        categoriesDocumentSnapshots.clear()
+        categoriesDocumentSnapshots.addAll(moviesDocumentSnapshotsSorted)
+
+        categoriesItemData.postValue(categoriesDocumentSnapshots)
+
     }
 
-    fun processAllContent(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    /**
+     * Wordpress
+     **/
+    fun processAllContentWordpress(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content")
 
         val storefrontAllContents = ArrayList<StorefrontContentsData>()
@@ -147,11 +194,11 @@ class StorefrontLiveData : ViewModel() {
         storefrontAllContents.clear()
         storefrontAllContents.addAll(storefrontAllContentsSorted)
 
-        allContentItemData.postValue(storefrontAllContents)
+        allContentItemDataWordpress.postValue(storefrontAllContents)
 
     }
 
-    fun processAllContentMore(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun processAllContentMoreWordpress(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content And Add Them To Memory")
 
         val storefrontAllContents = ArrayList<StorefrontContentsData>()
@@ -233,11 +280,11 @@ class StorefrontLiveData : ViewModel() {
         storefrontAllContents.clear()
         storefrontAllContents.addAll(storefrontAllContentsSorted)
 
-        allContentMoreItemData.postValue(storefrontAllContents)
+        allContentMoreItemDataWordpress.postValue(storefrontAllContents)
 
     }
 
-    fun processAllContentOffline(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun processAllContentOfflineWordpress(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content")
 
         val initialJsonArray = JSONArray()
@@ -260,13 +307,13 @@ class StorefrontLiveData : ViewModel() {
 
         }
 
-        processAllContent(initialJsonArray)
+        processAllContentWordpress(initialJsonArray)
 
-        processAllContentMore(allContentJsonArray)
+        processAllContentMoreWordpress(allContentJsonArray)
 
     }
 
-    fun loadMoreDataIntoPresenter(allData: ArrayList<StorefrontContentsData>, currentAvailableData: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun loadMoreDataIntoPresenterWordpress(allData: ArrayList<StorefrontContentsData>, currentAvailableData: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val moreProducts: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
 
@@ -281,7 +328,7 @@ class StorefrontLiveData : ViewModel() {
 
             moreProducts.add(it)
 
-            presentMoreItemData.postValue(it)
+            presentMoreItemDataWordpress.postValue(it)
 
             delay(531)
 
@@ -289,7 +336,7 @@ class StorefrontLiveData : ViewModel() {
 
     }
 
-    fun processFeaturedContent(featuredContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun processFeaturedContentWordpress(featuredContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process Featured Content")
 
         val storefrontFeaturedContents = ArrayList<StorefrontContentsData>()
@@ -371,11 +418,11 @@ class StorefrontLiveData : ViewModel() {
         storefrontFeaturedContents.clear()
         storefrontFeaturedContents.addAll(storefrontFeaturedContentsSorted)
 
-        featuredContentItemData.postValue(storefrontFeaturedContents)
+        featuredContentItemDataWordpress.postValue(storefrontFeaturedContents)
 
     }
 
-    fun processNewContent(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun processNewContentWordpress(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content")
 
         val storefrontAllContents = ArrayList<StorefrontContentsData>()
@@ -457,11 +504,11 @@ class StorefrontLiveData : ViewModel() {
         storefrontAllContents.clear()
         storefrontAllContents.addAll(storefrontAllContentsSorted)
 
-        newContentItemData.postValue(storefrontAllContents)
+        newContentItemDataWordpress.postValue(storefrontAllContents)
 
     }
 
-    fun processOldContent(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun processOldContentWordpress(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@StorefrontLiveData.javaClass.simpleName, "Process All Content")
 
         val storefrontAllContents = ArrayList<StorefrontContentsData>()
@@ -548,49 +595,10 @@ class StorefrontLiveData : ViewModel() {
         storefrontAllContents.clear()
         storefrontAllContents.addAll(storefrontAllContentsSorted)
 
-        oldContentItemData.postValue(storefrontAllContents)
+        oldContentItemDataWordpress.postValue(storefrontAllContents)
 
     }
 
-    /**
-     * Firebase
-     **/
-    fun processCategoryData(documentSnapshot: DocumentSnapshot) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
-
-        val categoriesDocumentSnapshots = ArrayList<StorefrontCategoriesData>()
-
-        documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds?.forEach { documentMap ->
-
-            val categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt()
-
-            val categoryName = documentMap[CategoryDataKey.CategoryName].toString()
-
-            categoriesDocumentSnapshots.add(StorefrontCategoriesData(
-                categoryId = categoryId ,
-                categoryName = categoryName,
-                categoryIconLink = documentMap[CategoryDataKey.CategoryIconLink].toString(),
-                productCount = documentMap[CategoryDataKey.ProductCount].toString().toInt()
-            ))
-
-            Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Id: ${categoryId} | Category Name: ${categoryName}")
-
-        }
-
-        val moviesDocumentSnapshotsSorted = categoriesDocumentSnapshots.sortedByDescending {
-
-            it.productCount
-        }
-
-        categoriesDocumentSnapshots.clear()
-        categoriesDocumentSnapshots.addAll(moviesDocumentSnapshotsSorted)
-
-        categoriesItemData.postValue(categoriesDocumentSnapshots)
-
-    }
-
-    /**
-     * Wordpress
-     **/
     fun processCategoriesList(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val storefrontCategoriesData = ArrayList<StorefrontCategoriesData>()

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 11/12/21, 6:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,7 +46,7 @@ fun retrieveOldContent(context: AppCompatActivity,
         override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
             super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-            storefrontLiveData.processOldContent(rawDataJsonArray)
+            storefrontLiveData.processOldContentWordpress(rawDataJsonArray)
 
         }
 

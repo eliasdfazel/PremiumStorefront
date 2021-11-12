@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 5:05 AM
+ * Last modified 11/12/21, 6:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -47,7 +47,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.gamesSectionSwitcherDesign
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
@@ -84,6 +83,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
@@ -204,8 +204,8 @@ class StorefrontApplications : StorefrontActivity() {
             filterOptionsType = FilteringOptions.FilterByCountry)
     }
 
-    val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
-    val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+    val storefrontAllUntouchedContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
+    val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
 
     val firebaseRemoteConfiguration = Firebase.remoteConfig
 
@@ -292,7 +292,7 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
-            storefrontLiveData.allContentItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.allContentItemDataWordpress.observe(this@StorefrontApplications, {
 
                 if (it.isNotEmpty()) {
 
@@ -324,7 +324,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.allContentMoreItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.allContentMoreItemDataWordpress.observe(this@StorefrontApplications, {
                 Log.d(this@StorefrontApplications.javaClass.simpleName, "More Products Data Loaded")
 
                 storefrontAllUntouchedContents.addAll(it)
@@ -340,7 +340,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.presentMoreItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.presentMoreItemDataWordpress.observe(this@StorefrontApplications, {
 
                 if (!storefrontLayoutBinding.allMoreContentRecyclerView.isShown) {
                     storefrontLayoutBinding.allMoreContentRecyclerView.visibility = View.VISIBLE
@@ -444,7 +444,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.newContentItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.newContentItemDataWordpress.observe(this@StorefrontApplications, {
 
                 if (it.isNotEmpty()) {
 
@@ -464,7 +464,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.oldContentItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.oldContentItemDataWordpress.observe(this@StorefrontApplications, {
 
                 if (it.isNotEmpty()) {
 
@@ -551,7 +551,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             storefrontLayoutBinding.loadMoreView.setOnClickListener {
 
-                storefrontLiveData.loadMoreDataIntoPresenter(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
+                storefrontLiveData.loadMoreDataIntoPresenterWordpress(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
 
                 storefrontLayoutBinding.loadMoreView.apply {
 

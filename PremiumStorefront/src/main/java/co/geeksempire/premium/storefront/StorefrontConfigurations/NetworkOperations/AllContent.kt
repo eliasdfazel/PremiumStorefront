@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 5:39 AM
+ * Last modified 11/12/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,7 +53,9 @@ class AllContent (val context: AppCompatActivity,
 
                 if (documentSnapshot.exists()) {
 
-                    documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds?.forEach { documentMap ->
+                    val categoriesCollection = documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds
+
+                    categoriesCollection?.forEach { documentMap ->
 
                         val categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt()
 
@@ -62,20 +64,33 @@ class AllContent (val context: AppCompatActivity,
 
                         val productCount = documentMap[CategoryDataKey.ProductCount].toString().toInt()
 
-                        (context.application as PremiumStorefrontApplication)
-                            .firestoreDatabase
-                            .collection(applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName))
-                            .get(Source.DEFAULT).addOnSuccessListener { querySnapshot ->
+                        if (categoryName != "All") {
+                            Log.d(this@AllContent.javaClass.simpleName, applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName))
 
-                                applicationsDocuments.add(querySnapshot.documents)
+                            (context.application as PremiumStorefrontApplication)
+                                .firestoreDatabase
+                                .collection(applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName))
+                                .get(Source.DEFAULT).addOnSuccessListener { querySnapshot ->
 
-                                println(">>> >> > Application ::: " + querySnapshot.documents)
+                                    if (querySnapshot.documents.isNotEmpty()) {
 
-                            }.addOnFailureListener {
+                                        applicationsDocuments.add(querySnapshot.documents)
+
+                                        if ((categoriesCollection.size - 1) == applicationsDocuments.size) {
 
 
 
-                            }
+                                        }
+
+                                    }
+
+                                }.addOnFailureListener {
+
+
+
+                                }
+
+                        }
 
                     }
 
@@ -119,7 +134,7 @@ class AllContent (val context: AppCompatActivity,
 
             val offlineData = JSONArray(allContentFile.readText(Charset.defaultCharset()))
 
-            storefrontLiveData.processAllContentOffline(offlineData).invokeOnCompletion {
+            storefrontLiveData.processAllContentOfflineWordpress(offlineData).invokeOnCompletion {
 
                 allLoadingFinished = true
 
@@ -146,14 +161,14 @@ class AllContent (val context: AppCompatActivity,
                 override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
                     super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-                    storefrontLiveData.processAllContent(rawDataJsonArray)
+                    storefrontLiveData.processAllContentWordpress(rawDataJsonArray)
 
                     if (rawDataJsonArray.length() == applicationsQueryEndpoints.defaultProductsPerPage) {
                         Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
 
                         numberOfPageToRetrieve++
 
-                        retrieveAllContentMore()
+                        retrieveAllContentMoreWordpress()
 
                     } else {
 
@@ -169,21 +184,21 @@ class AllContent (val context: AppCompatActivity,
 
     }
 
-    private fun retrieveAllContentMore() {
+    private fun retrieveAllContentMoreWordpress() {
 
         GenericJsonRequest(context, object : JsonRequestResponses {
 
             override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
                 super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-                storefrontLiveData.processAllContentMore(rawDataJsonArray)
+                storefrontLiveData.processAllContentMoreWordpress(rawDataJsonArray)
 
                 if (rawDataJsonArray.length() == applicationsQueryEndpoints.defaultProductsPerPage) {
                     Log.d(this@AllContent.javaClass.simpleName, "There Might Be More Data To Retrieve")
 
                     numberOfPageToRetrieve++
 
-                    retrieveAllContentMore()
+                    retrieveAllContentMoreWordpress()
 
                 } else {
 

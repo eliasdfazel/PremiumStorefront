@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/30/21, 9:11 AM
+ * Last modified 11/12/21, 6:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -138,7 +138,7 @@ fun retrieveFeaturedContentWordpress(context: AppCompatActivity,
         override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
             super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-            storefrontLiveData.processFeaturedContent(rawDataJsonArray)
+            storefrontLiveData.processFeaturedContentWordpress(rawDataJsonArray)
 
         }
 
