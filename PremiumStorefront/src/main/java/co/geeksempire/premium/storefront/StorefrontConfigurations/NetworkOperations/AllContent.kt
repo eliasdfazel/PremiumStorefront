@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 5:11 AM
+ * Last modified 11/12/21, 5:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Source
 import org.json.JSONArray
 import java.io.File
@@ -43,7 +44,8 @@ class AllContent (val context: AppCompatActivity,
 
     fun retrieveAllApplicationsContent() {
 
-        //Get All Categories
+        val applicationsDocuments = ArrayList<List<DocumentSnapshot>>()
+
         (context.application as PremiumStorefrontApplication)
             .firestoreDatabase
             .document(applicationsQueryEndpoints.storefrontApplicationsCategoryEndpoint())
@@ -62,10 +64,12 @@ class AllContent (val context: AppCompatActivity,
 
                         (context.application as PremiumStorefrontApplication)
                             .firestoreDatabase
-                            .document(applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName))
-                            .get(Source.DEFAULT).addOnSuccessListener {
+                            .collection(applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName))
+                            .get(Source.DEFAULT).addOnSuccessListener { querySnapshot ->
 
+                                applicationsDocuments.add(querySnapshot.documents)
 
+                                println(">>> >> > Application ::: " + querySnapshot.documents)
 
                             }.addOnFailureListener {
 
@@ -89,6 +93,8 @@ class AllContent (val context: AppCompatActivity,
 
         //Get All Categories
         //Get Games Inside Each Categories Directory
+
+        retrieveAllContentWordpress()
 
     }
 
