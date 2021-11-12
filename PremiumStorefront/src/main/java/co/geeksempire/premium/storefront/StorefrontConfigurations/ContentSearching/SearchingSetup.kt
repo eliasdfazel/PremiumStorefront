@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/21/21, 9:19 AM
+ * Last modified 11/12/21, 7:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,12 +24,12 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.android.Utils.System.hideKeyboard
 import co.geeksempire.premium.storefront.android.Utils.System.showKeyboard
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +43,7 @@ fun searchingSetup(context: AppCompatActivity, filterAllContent: FilterAllConten
                    rightActionView: ImageView,
                    middleActionView: ImageView,
                    leftActionView: ImageView,
-                   storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                   storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                    themeType: Boolean = ThemeType.ThemeLight) {
 
     leftActionView.background = null

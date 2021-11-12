@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/29/21, 10:39 AM
+ * Last modified 11/12/21, 7:04 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,9 +12,9 @@ package co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilter
 
 import android.util.Log
 import androidx.annotation.Keep
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -35,33 +35,39 @@ data class FilterOptionsItem(var filterOptionLabel: String, var filterOptionIcon
 
 class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
-    fun searchThroughAllContent(storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+    fun searchThroughAllContent(storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                                 searchQuery: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         Log.d(this@FilterAllContent.javaClass.simpleName, "Search Query: ${searchQuery}")
 
         if (storefrontAllUnfilteredContents.isNotEmpty()) {
 
-            val storefrontAllContentsFilter = ArrayList<StorefrontContentsData>()
+            val storefrontAllContentsFilter = ArrayList<DocumentSnapshot>()
 
             storefrontAllUnfilteredContents.forEachIndexed { index, storefrontContentsData ->
 
                 val inputSearchQuery = searchQuery.lowercase()
 
-                val productName = storefrontContentsData.productName.lowercase()
-                val productSummary = storefrontContentsData.productSummary.lowercase()
-                val productCategory = storefrontContentsData.productCategoryName.lowercase()
+                storefrontContentsData.data?.let {
 
-                val countryOfDeveloper = (storefrontContentsData.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]?:"").lowercase()
-                val cityOfDeveloper = (storefrontContentsData.productAttributes[ProductsContentKey.AttributesDeveloperCityKey]?:"").lowercase()
+                    val productDataStructure = ProductDataStructure(it)
 
-                if (productName.contains(inputSearchQuery)
-                    || productSummary.contains(inputSearchQuery)
-                    || productCategory.contains(inputSearchQuery)
-                    || countryOfDeveloper.contains(inputSearchQuery)
-                    || cityOfDeveloper.contains(inputSearchQuery)) {
+                    val productName = productDataStructure.productName().lowercase()
+                    val productSummary = productDataStructure.productSummary().lowercase()
+                    val productCategory = productDataStructure.productCategoryName().lowercase()
 
-                    storefrontAllContentsFilter.add(storefrontContentsData)
+                    val countryOfDeveloper = (productDataStructure.softwareDeveloperCountry()?:"").lowercase()
+                    val cityOfDeveloper = (productDataStructure.softwareDeveloperCity()?:"").lowercase()
+
+                    if (productName.contains(inputSearchQuery)
+                        || productSummary.contains(inputSearchQuery)
+                        || productCategory.contains(inputSearchQuery)
+                        || countryOfDeveloper.contains(inputSearchQuery)
+                        || cityOfDeveloper.contains(inputSearchQuery)) {
+
+                        storefrontAllContentsFilter.add(storefrontContentsData)
+
+                    }
 
                 }
 
@@ -73,7 +79,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
     }
 
-    fun filterAllContentsByCategory(storefrontAllContents: ArrayList<StorefrontContentsData>,
+    fun filterAllContentsByCategory(storefrontAllContents: ArrayList<DocumentSnapshot>,
                                     selectedCategory: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         Log.d(this@FilterAllContent.javaClass.simpleName, "Selected Category: ${selectedCategory}")
@@ -82,7 +88,9 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
             val storefrontAllContentsFilter = storefrontAllContents.filter {
 
-                (it.productCategoryName.split(" ").first().lowercase() == selectedCategory.lowercase())
+                val productDataStructure = ProductDataStructure(it.data!!)
+
+                (productDataStructure.productCategoryName().split(" ").first().lowercase() == selectedCategory.lowercase())
             }
 
             storefrontAllContents.clear()
@@ -94,7 +102,7 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
     }
 
-    fun filterAlContentByInput(storefrontAllContents: ArrayList<StorefrontContentsData>,
+    fun filterAlContentByInput(storefrontAllContents: ArrayList<DocumentSnapshot>,
                                filterType: String, filterInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         Log.d(this@FilterAllContent.javaClass.simpleName, "Filtering Input Data: ${filterInputParameter}")
@@ -103,15 +111,17 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
             val storefrontAllContentsFilter = storefrontAllContents.filter {
 
+                val productDataStructure = ProductDataStructure(it.data!!)
+
                 when (filterType) {
                     FilteringOptions.FilterByCountry -> {
 
-                        it.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey] == filterInputParameter
+                        productDataStructure.softwareDeveloperCountry() == filterInputParameter
 
                     }
                     FilteringOptions.FilterByAndroidCompatibilities -> {
 
-                        it.productAttributes[ProductsContentKey.AttributesAndroidCompatibilitiesKey] == filterInputParameter
+                        productDataStructure.androidCompatibility() == filterInputParameter
 
                     }
                     else -> true //All Unfiltered Content
@@ -127,29 +137,31 @@ class FilterAllContent (private val storefrontLiveData: StorefrontLiveData) {
 
     }
 
-    fun sortAllContentByInput(storefrontFilteredContents: ArrayList<StorefrontContentsData>,
+    fun sortAllContentByInput(storefrontFilteredContents: ArrayList<DocumentSnapshot>,
                               sortInputParameter: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         Log.d(this@FilterAllContent.javaClass.simpleName, "Sorting Input Data | ${storefrontFilteredContents.size} Products: ${sortInputParameter}")
 
         if (storefrontFilteredContents.isNotEmpty()) {
 
-            val sortedStorefrontFilteredContents = ArrayList<StorefrontContentsData>()
+            val sortedStorefrontFilteredContents = ArrayList<DocumentSnapshot>()
 
             val storefrontAllContentsFilter = storefrontFilteredContents.sortedByDescending {
+
+                val productDataStructure = ProductDataStructure(it.data!!)
 
                 when (sortInputParameter) {
                     SortingOptions.SortByRating -> {
 
-                        it.productAttributes[ProductsContentKey.AttributesRatingKey]
+                        productDataStructure.productRating()
 
                     }
                     SortingOptions.SortByPrice -> {
 
-                        it.productPrice
+                        productDataStructure.productPrice()
 
                     }
-                    else -> it.productName
+                    else -> productDataStructure.productName()
                 }
 
             }
