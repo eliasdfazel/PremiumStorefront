@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:30 AM
+ * Last modified 11/12/21, 6:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,7 +31,6 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontCategoriesData
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.ViewHolder.CategoriesViewHolder
 import com.bumptech.glide.Glide
@@ -44,7 +43,7 @@ import net.geeksempire.balloon.optionsmenu.library.TitleTextViewCustomization
 
 class CategoriesAdapter(private val context: AppCompatActivity,
                         private val filterAllContent: FilterAllContent,
-                        private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>,
+                        private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<DocumentSnapshot>, Boolean>>,
                         private val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                         private val storefrontAllUntouchedContents: ArrayList<DocumentSnapshot>,
                         private val categoryIndicatorTextView: TextView,
