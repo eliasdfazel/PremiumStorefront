@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:23 AM
+ * Last modified 11/12/21, 6:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -78,7 +78,7 @@ class AllContent (val context: AppCompatActivity,
 
                                         if ((categoriesCollection.size - 1) == applicationsDocuments.size) {
 
-
+                                            storefrontLiveData.processAllContent(applicationsDocuments)
 
                                         }
 
@@ -100,7 +100,6 @@ class AllContent (val context: AppCompatActivity,
                 it.printStackTrace()
 
             }
-        //Get Applications Inside Each Categories Directory
 
     }
 

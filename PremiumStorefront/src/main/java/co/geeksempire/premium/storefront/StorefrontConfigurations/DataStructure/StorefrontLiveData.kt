@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:48 AM
+ * Last modified 11/12/21, 6:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,16 +25,16 @@ class StorefrontLiveData : ViewModel() {
      * Firebase
      **/
 
+    val allContentItems: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
+    }
+
     val featuredContentItems: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
         MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
     val categoriesItems: MutableLiveData<ArrayList<StorefrontCategoriesData>> by lazy {
         MutableLiveData<ArrayList<StorefrontCategoriesData>>()
-    }
-
-    val allContentItems: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
-        MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
     val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<DocumentSnapshot>, Boolean>> by lazy {
@@ -107,6 +107,24 @@ class StorefrontLiveData : ViewModel() {
         categoriesDocumentSnapshots.addAll(moviesDocumentSnapshotsSorted)
 
         categoriesItems.postValue(categoriesDocumentSnapshots)
+
+    }
+
+    fun processAllContent(documentSnapshots: ArrayList<List<DocumentSnapshot>>) {
+
+        val allContent = ArrayList<DocumentSnapshot>()
+
+        documentSnapshots.forEachIndexed { index, documentsList ->
+
+            documentsList.forEachIndexed { index, documentSnapshot ->
+
+                allContent.add(documentSnapshot)
+
+            }
+
+        }
+
+        allContentItems.postValue(allContent)
 
     }
 
