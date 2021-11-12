@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:32 AM
+ * Last modified 11/12/21, 6:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,7 +46,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.gamesSectionSwitcherDesign
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
@@ -69,7 +68,6 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.*
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
-import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureListenerConstants
@@ -314,68 +312,9 @@ class StorefrontApplications : StorefrontActivity() {
                     retrieveOldContent(this@StorefrontApplications,
                         storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)
 
-                    storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
-
                 } else {
 
 
-
-                }
-
-            })
-
-            storefrontLiveData.allContentMoreItemDataWordpress.observe(this@StorefrontApplications, {
-                Log.d(this@StorefrontApplications.javaClass.simpleName, "More Products Data Loaded")
-
-                storefrontAllUntouchedContents.addAll(it)
-
-                storefrontAllUnfilteredContents.addAll(it)
-
-                if (allContent.allLoadingFinished && allContentAdapter.storefrontContents.isNotEmpty()) {
-
-                    storefrontLayoutBinding.loadMoreView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-                    storefrontLayoutBinding.loadMoreView.visibility = View.VISIBLE
-
-                }
-
-            })
-
-            storefrontLiveData.presentMoreItemDataWordpress.observe(this@StorefrontApplications, {
-
-                if (!storefrontLayoutBinding.allMoreContentRecyclerView.isShown) {
-                    storefrontLayoutBinding.allMoreContentRecyclerView.visibility = View.VISIBLE
-                }
-
-                val installedApplications = InstalledApplications(applicationContext)
-
-                if (installedApplications.appIsInstalled(it.productAttributes[ProductsContentKey.AttributesPackageNameKey])) {
-
-                    it.installViewText = "${getString(R.string.rateText)} & ${getString(R.string.shareText)}"
-
-                }
-
-                allMoreContentAdapter.storefrontContents.add(it)
-
-                allMoreContentAdapter.notifyItemInserted(if (allMoreContentAdapter.storefrontContents.isEmpty()) {
-                    0
-                } else {
-                    allMoreContentAdapter.storefrontContents.size - 1
-                })
-
-                storefrontLayoutBinding.loadMoreView.apply {
-
-                    speed = 1f
-                    setMinAndMaxFrame(130, 165)
-
-                    if (!isAnimating) {
-                        playAnimation()
-                    }
-
-                }
-
-                if ((allContentAdapter.storefrontContents.size + allMoreContentAdapter.storefrontContents.size) == storefrontAllUntouchedContents.size) {
-
-                    storefrontLayoutBinding.loadMoreView.visibility = View.GONE
 
                 }
 
@@ -544,23 +483,6 @@ class StorefrontApplications : StorefrontActivity() {
                     Log.d(this@StorefrontApplications.javaClass.simpleName, "Scrolling Up")
 
                     balloonOptionsMenu.removeBalloonOption()
-
-                }
-
-            }
-
-            storefrontLayoutBinding.loadMoreView.setOnClickListener {
-
-                storefrontLiveData.loadMoreDataIntoPresenterWordpress(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
-
-                storefrontLayoutBinding.loadMoreView.apply {
-
-                    speed = 1f
-                    setMinAndMaxFrame(1, 130)
-
-                    if (!isAnimating) {
-                        playAnimation()
-                    }
 
                 }
 

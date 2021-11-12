@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:32 AM
+ * Last modified 11/12/21, 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,6 +44,10 @@ class StorefrontLiveData : ViewModel() {
         MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
+    val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<DocumentSnapshot>, Boolean>> by lazy {
+        MutableLiveData<Pair<ArrayList<DocumentSnapshot>, Boolean>>()
+    }
+
     /**
      * Wordpress
      **/
@@ -65,7 +69,7 @@ class StorefrontLiveData : ViewModel() {
         MutableLiveData<StorefrontContentsData>()
     }
 
-    val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>> by lazy {
+    val allFilteredContentItemDataWordpress: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>> by lazy {
         MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>()
     }
 
