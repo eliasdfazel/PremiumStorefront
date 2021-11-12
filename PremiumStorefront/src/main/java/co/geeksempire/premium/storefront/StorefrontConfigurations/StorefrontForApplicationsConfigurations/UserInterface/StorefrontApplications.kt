@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/30/21, 8:13 AM
+ * Last modified 11/12/21, 4:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -831,7 +831,7 @@ class StorefrontApplications : StorefrontActivity() {
         retrieveFeaturedContent(this@StorefrontApplications,
             storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)
 
-        allContent.retrieveAllContent()
+        allContent.retrieveAllApplicationsContent()
 
         retrieveNewContent(this@StorefrontApplications,
             storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)

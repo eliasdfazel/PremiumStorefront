@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 11/12/21, 4:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,7 +37,21 @@ class AllContent (val context: Context,
 
     var allLoadingFinished: Boolean = false
 
-    fun retrieveAllContent() {
+    fun retrieveAllApplicationsContent() {
+
+        //Get All Categories
+        //Get Applications Inside Each Categories Directory
+
+    }
+
+    fun retrieveAllGamesContent() {
+
+        //Get All Categories
+        //Get Games Inside Each Categories Directory
+
+    }
+
+    fun retrieveAllContentWordpress() {
 
         val allContentFile: File = when (queryType) {
             GeneralEndpoints.QueryType.ApplicationsQuery -> {
@@ -108,7 +122,7 @@ class AllContent (val context: Context,
 
     }
 
-    fun retrieveAllContentMore() {
+    private fun retrieveAllContentMore() {
 
         GenericJsonRequest(context, object : JsonRequestResponses {
 
