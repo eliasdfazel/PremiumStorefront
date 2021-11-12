@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/15/21, 10:35 AM
+ * Last modified 11/12/21, 6:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,16 +23,16 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterViewHolder.FilterOptionsViewHolder
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.databinding.FilterOptionsItemLayoutBinding
 import co.geeksempire.premium.storefront.databinding.FilteringLayoutBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.firebase.firestore.DocumentSnapshot
 
 class FilterOptionsAdapter (private val context: AppCompatActivity,
                             private val filterAllContent: FilterAllContent,
-                            private val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                            private val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                             var filterOptionsType: String,
                             private val filteringInclude: FilteringLayoutBinding) : RecyclerView.Adapter<FilterOptionsViewHolder>() {
 

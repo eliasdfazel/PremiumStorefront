@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:29 AM
+ * Last modified 11/12/21, 6:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,8 +36,12 @@ class StorefrontLiveData : ViewModel() {
         MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
-    val categoriesItemData: MutableLiveData<ArrayList<StorefrontCategoriesData>> by lazy {
+    val categoriesItems: MutableLiveData<ArrayList<StorefrontCategoriesData>> by lazy {
         MutableLiveData<ArrayList<StorefrontCategoriesData>>()
+    }
+
+    val allContentItems: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
     /**
@@ -105,7 +109,7 @@ class StorefrontLiveData : ViewModel() {
         categoriesDocumentSnapshots.clear()
         categoriesDocumentSnapshots.addAll(moviesDocumentSnapshotsSorted)
 
-        categoriesItemData.postValue(categoriesDocumentSnapshots)
+        categoriesItems.postValue(categoriesDocumentSnapshots)
 
     }
 
@@ -625,7 +629,7 @@ class StorefrontLiveData : ViewModel() {
             Log.d(this@StorefrontLiveData.javaClass.simpleName, "Category Id: ${categoryId} | Category Name: ${categoryName}")
         }
 
-        categoriesItemData.postValue(storefrontCategoriesData)
+        categoriesItems.postValue(storefrontCategoriesData)
 
     }
 

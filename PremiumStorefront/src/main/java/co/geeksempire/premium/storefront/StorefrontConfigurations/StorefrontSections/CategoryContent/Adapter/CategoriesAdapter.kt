@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/2/21, 10:05 AM
+ * Last modified 11/12/21, 6:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,6 +36,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.CategoryContent.ViewHolder.CategoriesViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.firestore.DocumentSnapshot
 import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.OptionDataItems
@@ -44,8 +45,8 @@ import net.geeksempire.balloon.optionsmenu.library.TitleTextViewCustomization
 class CategoriesAdapter(private val context: AppCompatActivity,
                         private val filterAllContent: FilterAllContent,
                         private val allFilteredContentItemData: MutableLiveData<Pair<ArrayList<StorefrontContentsData>, Boolean>>,
-                        private val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
-                        private val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData>,
+                        private val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
+                        private val storefrontAllUntouchedContents: ArrayList<DocumentSnapshot>,
                         private val categoryIndicatorTextView: TextView,
                         private val categoriesRecyclerView: RecyclerView,
                         private val balloonOptionsMenu: BalloonOptionsMenu) : RecyclerView.Adapter<CategoriesViewHolder>() {

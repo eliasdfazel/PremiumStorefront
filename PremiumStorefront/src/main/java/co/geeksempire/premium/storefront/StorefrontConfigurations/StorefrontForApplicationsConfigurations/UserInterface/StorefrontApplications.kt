@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:29 AM
+ * Last modified 11/12/21, 6:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -292,7 +292,7 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
-            storefrontLiveData.allContentItemDataWordpress.observe(this@StorefrontApplications, {
+            storefrontLiveData.allContentItems.observe(this@StorefrontApplications, {
 
                 if (it.isNotEmpty()) {
 
@@ -484,7 +484,7 @@ class StorefrontApplications : StorefrontActivity() {
 
             })
 
-            storefrontLiveData.categoriesItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.categoriesItems.observe(this@StorefrontApplications, {
 
                 if (it.isNotEmpty()) {
 
