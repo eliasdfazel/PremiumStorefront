@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 4:48 AM
+ * Last modified 11/12/21, 5:05 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -110,7 +110,7 @@ class StorefrontGames : StorefrontActivity() {
     }
 
     val allContent: AllContent by lazy {
-        AllContent(applicationContext, storefrontLiveData, GeneralEndpoints.QueryType.GamesQuery)
+        AllContent(this@StorefrontGames, storefrontLiveData, GeneralEndpoints.QueryType.GamesQuery)
     }
 
     val prepareActionCenterUserInterface: PrepareActionCenterUserInterface by lazy {

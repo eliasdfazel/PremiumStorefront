@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 4:50 AM
+ * Last modified 11/12/21, 5:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,8 +10,11 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations
 
-import android.content.Context
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import co.geeksempire.premium.storefront.PremiumStorefrontApplication
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.CategoriesIds
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.CategoryDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.ApplicationsQueryEndpoints
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GamesQueryEndpoints
@@ -19,11 +22,12 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.Utils.IO.IO
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.GenericJsonRequest
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.Requests.JsonRequestResponses
+import com.google.firebase.firestore.Source
 import org.json.JSONArray
 import java.io.File
 import java.nio.charset.Charset
 
-class AllContent (val context: Context,
+class AllContent (val context: AppCompatActivity,
                   val storefrontLiveData: StorefrontLiveData,
                   val queryType: String = GeneralEndpoints.QueryType.ApplicationsQuery) {
 
@@ -40,6 +44,43 @@ class AllContent (val context: Context,
     fun retrieveAllApplicationsContent() {
 
         //Get All Categories
+        (context.application as PremiumStorefrontApplication)
+            .firestoreDatabase
+            .document(applicationsQueryEndpoints.storefrontApplicationsCategoryEndpoint())
+            .get(Source.DEFAULT).addOnSuccessListener { documentSnapshot ->
+
+                if (documentSnapshot.exists()) {
+
+                    documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds?.forEach { documentMap ->
+
+                        val categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt()
+
+                        val categoryName = documentMap[CategoryDataKey.CategoryName].toString()
+                        val categoryIconLink = documentMap[CategoryDataKey.CategoryIconLink].toString()
+
+                        val productCount = documentMap[CategoryDataKey.ProductCount].toString().toInt()
+
+                        (context.application as PremiumStorefrontApplication)
+                            .firestoreDatabase
+                            .document(applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName))
+                            .get(Source.DEFAULT).addOnSuccessListener {
+
+
+
+                            }.addOnFailureListener {
+
+
+
+                            }
+
+                    }
+
+                }
+
+            }.addOnFailureListener {
+                it.printStackTrace()
+
+            }
         //Get Applications Inside Each Categories Directory
 
     }
