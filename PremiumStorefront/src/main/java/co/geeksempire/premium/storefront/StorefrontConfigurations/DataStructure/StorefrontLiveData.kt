@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:46 AM
+ * Last modified 11/12/21, 6:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,16 +10,9 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import co.geeksempire.premium.storefront.Database.Json.JsonIO
-import co.geeksempire.premium.storefront.Database.Write.InputProcess
-import co.geeksempire.premium.storefront.R
-import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.Adapter.AllContentAdapter
-import co.geeksempire.premium.storefront.Utils.System.Installed
-import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -634,50 +627,6 @@ class StorefrontLiveData : ViewModel() {
         }
 
         categoriesItems.postValue(storefrontCategoriesData)
-
-    }
-
-    fun checkInstalledApplications(context: Context,
-                                   allContentAdapter: AllContentAdapter,
-                                   allApplications: ArrayList<StorefrontContentsData>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
-
-        val installedApplicationsList: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
-
-        val installedApplications = InstalledApplications(context)
-
-        allApplications.forEachIndexed { index, storefrontContentsData ->
-
-            if ((installedApplications.appIsInstalled(storefrontContentsData.productAttributes[ProductsContentKey.AttributesPackageNameKey]))) {
-
-                allContentAdapter.storefrontContents[index].installViewText = "${context.getString(R.string.rateText)} & ${context.getString(R.string.shareText)}"
-
-                allContentAdapter.storefrontContents[index] = storefrontContentsData
-
-                installedApplicationsList.add(storefrontContentsData)
-
-                delay(159)
-
-                withContext(Dispatchers.Main) {
-
-                    allContentAdapter.notifyItemChanged(index)
-
-                }
-
-            }
-
-        }
-
-        if (installedApplicationsList.isNotEmpty()) {
-
-            val inputProcess = InputProcess(context)
-
-            val jsonIO = JsonIO()
-
-            val jsonData = jsonIO.writeArrayListToJson(installedApplicationsList)
-
-            inputProcess.writeDataToFile(Installed.InstalledApplicationsFile, jsonData.toString())
-
-        }
 
     }
 

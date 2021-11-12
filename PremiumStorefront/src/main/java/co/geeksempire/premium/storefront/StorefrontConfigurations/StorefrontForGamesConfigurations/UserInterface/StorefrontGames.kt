@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:32 AM
+ * Last modified 11/12/21, 6:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -284,8 +284,6 @@ class StorefrontGames : StorefrontActivity() {
                     allContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
-
-                    storefrontLiveData.checkInstalledApplications(applicationContext, allContentAdapter, it)
 
                 } else {
 
