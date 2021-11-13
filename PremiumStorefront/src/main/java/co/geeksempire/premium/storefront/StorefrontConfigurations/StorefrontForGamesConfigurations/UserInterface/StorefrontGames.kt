@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:47 AM
+ * Last modified 11/13/21, 6:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,7 +45,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFilteri
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.applicationsSectionSwitcherDesign
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.setupStorefrontUserInterface
@@ -81,6 +80,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
@@ -186,8 +186,8 @@ class StorefrontGames : StorefrontActivity() {
             filterOptionsType = FilteringOptions.FilterByCountry)
     }
 
-    val storefrontAllUntouchedContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
-    val storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
+    val storefrontAllUntouchedContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
+    val storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
 
     val firebaseRemoteConfiguration = Firebase.remoteConfig
 
@@ -266,7 +266,7 @@ class StorefrontGames : StorefrontActivity() {
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
-            storefrontLiveData.allContentItemDataWordpress.observe(this@StorefrontGames, {
+            storefrontLiveData.allContentItems.observe(this@StorefrontGames, {
 
                 if (it.isNotEmpty()) {
 
@@ -288,48 +288,6 @@ class StorefrontGames : StorefrontActivity() {
                 } else {
 
 
-
-                }
-
-            })
-
-            storefrontLiveData.allContentMoreItemDataWordpress.observe(this@StorefrontGames, {
-                Log.d(this@StorefrontGames.javaClass.simpleName, "More Products Data Loaded")
-
-                storefrontAllUntouchedContents.addAll(it)
-
-                storefrontAllUnfilteredContents.addAll(it)
-
-                if (allContent.allLoadingFinished && allContentAdapter.storefrontContents.isNotEmpty()) {
-
-                    storefrontLayoutBinding.loadMoreView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-                    storefrontLayoutBinding.loadMoreView.visibility = View.VISIBLE
-
-
-                }
-
-            })
-
-            storefrontLiveData.presentMoreItemDataWordpress.observe(this@StorefrontGames, {
-
-                allContentAdapter.storefrontContents.add(it)
-
-                allContentAdapter.notifyItemInserted(allContentAdapter.storefrontContents.size - 1)
-
-                storefrontLayoutBinding.loadMoreView.apply {
-
-                    speed = 1f
-                    setMinAndMaxFrame(130, 165)
-
-                    if (!isAnimating) {
-                        playAnimation()
-                    }
-
-                }
-
-                if (allContentAdapter.storefrontContents.size == storefrontAllUntouchedContents.size) {
-
-                    storefrontLayoutBinding.loadMoreView.visibility = View.GONE
 
                 }
 
@@ -468,23 +426,6 @@ class StorefrontGames : StorefrontActivity() {
                     Log.d(this@StorefrontGames.javaClass.simpleName, "Scrolling Up")
 
                     balloonOptionsMenu.removeBalloonOption()
-
-                }
-
-            }
-
-            storefrontLayoutBinding.loadMoreView.setOnClickListener {
-
-                storefrontLiveData.loadMoreDataIntoPresenterWordpress(storefrontAllUntouchedContents, allContentAdapter.storefrontContents)
-
-                storefrontLayoutBinding.loadMoreView.apply {
-
-                    speed = 1f
-                    setMinAndMaxFrame(1, 130)
-
-                    if (!isAnimating) {
-                        playAnimation()
-                    }
 
                 }
 
