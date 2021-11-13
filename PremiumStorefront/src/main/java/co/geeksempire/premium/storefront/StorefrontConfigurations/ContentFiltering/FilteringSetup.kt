@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/11/21, 6:05 AM
+ * Last modified 11/13/21, 5:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,13 +24,13 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterOptionsItem
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
 import co.geeksempire.premium.storefront.Utils.UI.Animations.AnimationListener
 import co.geeksempire.premium.storefront.Utils.UI.Animations.CircularRevealAnimation
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.FilteringLayoutBinding
 import co.geeksempire.premium.storefront.databinding.SortingLayoutBinding
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlin.math.absoluteValue
@@ -42,7 +42,7 @@ fun filteringSetup(context: AppCompatActivity,
                    middleActionView: ImageView,
                    leftActionView: ImageView,
                    filterOptionsAdapter: FilterOptionsAdapter,
-                   storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                   storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                    themeType: Boolean = ThemeType.ThemeLight) {
 
     when (themeType) {
@@ -228,7 +228,7 @@ fun filteringSetup(context: AppCompatActivity,
 }
 
 fun filterByCountriesDataProcess(context: Context,
-                                 storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                                 storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                                  filteringInclude: FilteringLayoutBinding,
                                  filterOptionsAdapter: FilterOptionsAdapter) {
 
@@ -247,12 +247,15 @@ fun filterByCountriesDataProcess(context: Context,
 
             storefrontAllUnfilteredContents.sortedBy {
 
-                it.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]
+                val productDataStructure = ProductDataStructure(it.data!!)
+
+                productDataStructure.softwareDeveloperCountry()
 
             }.asFlow()
                 .map {
+                    val productDataStructure = ProductDataStructure(it.data!!)
 
-                    it.productAttributes[ProductsContentKey.AttributesDeveloperCountryKey]
+                    productDataStructure.softwareDeveloperCountry()
                 }
                 .flowOn(Dispatchers.IO)
                 .onCompletion {
@@ -288,7 +291,7 @@ fun filterByCountriesDataProcess(context: Context,
 }
 
 fun filterByCompatibilitiesDataProcess(context: Context,
-                                       storefrontAllUnfilteredContents: ArrayList<StorefrontContentsData>,
+                                       storefrontAllUnfilteredContents: ArrayList<DocumentSnapshot>,
                                        filteringInclude: FilteringLayoutBinding,
                                        filterOptionsAdapter: FilterOptionsAdapter) {
 
@@ -307,12 +310,17 @@ fun filterByCompatibilitiesDataProcess(context: Context,
 
             storefrontAllUnfilteredContents.sortedBy {
 
-                it.productAttributes[ProductsContentKey.AttributesAndroidCompatibilitiesKey]
+                val productDataStructure = ProductDataStructure(it.data!!)
+
+                productDataStructure.androidCompatibility()
 
             }.asFlow()
                 .map {
 
-                    it.productAttributes[ProductsContentKey.AttributesAndroidCompatibilitiesKey]
+                    val productDataStructure = ProductDataStructure(it.data!!)
+
+                    productDataStructure.androidCompatibility()
+
                 }
                 .flowOn(Dispatchers.IO)
                 .onCompletion {

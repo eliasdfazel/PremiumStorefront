@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/1/21, 9:45 AM
+ * Last modified 11/13/21, 5:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModel
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
+import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -27,12 +28,12 @@ import java.nio.charset.Charset
 
 class DeveloperLiveData : ViewModel() {
 
-    val developerProductsApplications: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontContentsData>>()
+    val developerProductsApplications: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
-    val developerProductsGames: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontContentsData>>()
+    val developerProductsGames: MutableLiveData<ArrayList<DocumentSnapshot>> by lazy {
+        MutableLiveData<ArrayList<DocumentSnapshot>>()
     }
 
     fun prepareDeveloperProductsApplications(csvOfProductsIds: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
@@ -45,7 +46,7 @@ class DeveloperLiveData : ViewModel() {
 
             val jsonArrayOfProducts = JSONArray(jsonOfProducts)
 
-            val storefrontAllContents = ArrayList<StorefrontContentsData>()
+            val storefrontAllContents = ArrayList<DocumentSnapshot>()
 
             for (indexContent in 0 until jsonArrayOfProducts.length()) {
 
@@ -134,7 +135,7 @@ class DeveloperLiveData : ViewModel() {
 
             val jsonArrayOfProducts = JSONArray(jsonOfProducts)
 
-            val storefrontAllContents = ArrayList<StorefrontContentsData>()
+            val storefrontAllContents = ArrayList<DocumentSnapshot>()
 
             for (indexContent in 0 until jsonArrayOfProducts.length()) {
 
