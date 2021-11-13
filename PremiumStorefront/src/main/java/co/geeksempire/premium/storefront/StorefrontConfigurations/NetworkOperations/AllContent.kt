@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:54 AM
+ * Last modified 11/13/21, 7:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -105,10 +105,62 @@ class AllContent (val context: AppCompatActivity,
 
     fun retrieveAllGamesContent() {
 
-        //Get All Categories
-        //Get Games Inside Each Categories Directory
+        val gamesDocuments = ArrayList<List<DocumentSnapshot>>()
 
-        retrieveAllContentWordpress()
+        (context.application as PremiumStorefrontApplication)
+            .firestoreDatabase
+            .document(gamesQueryEndpoints.storefrontGamesCategoryEndpoint())
+            .get(Source.DEFAULT).addOnSuccessListener { documentSnapshot ->
+
+                if (documentSnapshot.exists()) {
+
+                    val categoriesCollection = documentSnapshot.toObject(CategoriesIds::class.java)!!.CategoriesIds
+
+                    categoriesCollection?.forEach { documentMap ->
+
+                        val categoryId = documentMap[CategoryDataKey.CategoryId].toString().toInt()
+
+                        val categoryName = documentMap[CategoryDataKey.CategoryName].toString()
+                        val categoryIconLink = documentMap[CategoryDataKey.CategoryIconLink].toString()
+
+                        val productCount = documentMap[CategoryDataKey.ProductCount].toString().toInt()
+
+                        if (categoryName != "All") {
+                            Log.d(this@AllContent.javaClass.simpleName, applicationsQueryEndpoints.firestoreApplicationsSpecificCategory(categoryName))
+
+                            (context.application as PremiumStorefrontApplication)
+                                .firestoreDatabase
+                                .collection(gamesQueryEndpoints.firestoreGamesSpecificCategory(categoryName))
+                                .get(Source.DEFAULT).addOnSuccessListener { querySnapshot ->
+
+                                    if (querySnapshot.documents.isNotEmpty()) {
+
+                                        gamesDocuments.add(querySnapshot.documents)
+
+                                        if ((categoriesCollection.size - 1) == gamesDocuments.size) {
+
+                                            storefrontLiveData.processAllContent(gamesDocuments)
+
+                                        }
+
+                                    }
+
+                                }.addOnFailureListener {
+
+
+
+                                }
+
+                        }
+
+                    }
+
+                }
+
+            }.addOnFailureListener {
+                it.printStackTrace()
+
+            }
 
     }
 
