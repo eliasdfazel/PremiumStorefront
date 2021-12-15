@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 6:23 AM
+ * Last modified 12/15/21, 8:29 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -311,7 +311,7 @@ class StorefrontGames : StorefrontActivity() {
                     startActivity(Intent(this@StorefrontGames, CompleteSearch::class.java).apply {
                         putExtra(CompleteSearch.SearchQuery, storefrontLayoutBinding.searchView.text.toString())
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
+                    }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, R.anim.fade_out).toBundle())
 
                 }
 

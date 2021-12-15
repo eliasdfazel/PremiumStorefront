@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 12/15/21, 7:56 AM
+  ~ Last modified 12/15/21, 8:30 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -84,5 +84,19 @@
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"/>
+
+    <net.geeksempire.loadingspin.SpinKitView
+        android:id="@+id/waitingView"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:rotation="45"
+
+        apps:SpinKit_Style="CubeGrid"
+        apps:SpinKit_Color="@color/default_color_bright_transparent"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

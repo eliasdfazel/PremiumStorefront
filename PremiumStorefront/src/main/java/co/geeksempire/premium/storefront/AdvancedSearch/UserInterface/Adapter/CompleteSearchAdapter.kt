@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 8:09 AM
+ * Last modified 12/15/21, 8:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter
 
+import android.content.res.ColorStateList
 import android.text.Html
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +20,8 @@ import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.ViewHolder
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
-import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutItemBinding
+import com.bumptech.glide.Glide
 
 class CompleteSearchAdapter (private val context: CompleteSearch, private val themeType: Boolean) : RecyclerView.Adapter<CompleteSearchViewHolder>() {
 
@@ -41,12 +42,12 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
         when (themeType) {
             ThemeType.ThemeLight -> {
 
-
+                completeSearchViewHolder.productTitle.setTextColor(context.getColor(R.color.dark))
 
             }
             ThemeType.ThemeDark -> {
 
-
+                completeSearchViewHolder.productTitle.setTextColor(context.getColor(R.color.light))
 
             }
         }
@@ -54,28 +55,35 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
         when (completeSearchResultsItems[position].searchResultType) {
             GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
-                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.applicationsSectionColor), 173f))
+                completeSearchViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.applicationsSectionTransparentColor))
 
+                completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.applicationsSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.applications_icon))
 
             }
             GeneralEndpoints.QueryType.GamesQuery -> {
 
-                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.gamesSectionColor), 173f))
+                completeSearchViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.gamesSectionTransparentColor))
 
+                completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.games_icon))
 
             }
             GeneralEndpoints.QueryType.MoviesQuery -> {
 
-                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.moviesSectionColor), 173f))
+                completeSearchViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.moviesSectionTransparentColor))
 
+                completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.moviesSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.movies_icon))
 
             }
         }
 
         completeSearchViewHolder.productTitle.text = Html.fromHtml(completeSearchResultsItems[position].productName, Html.FROM_HTML_MODE_COMPACT)
+
+        Glide.with(context)
+            .load(completeSearchResultsItems[position].productIconLink)
+            .into(completeSearchViewHolder.productIcon)
 
     }
 

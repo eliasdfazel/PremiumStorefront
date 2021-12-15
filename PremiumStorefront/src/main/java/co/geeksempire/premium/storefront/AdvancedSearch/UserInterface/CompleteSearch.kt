@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:49 AM
+ * Last modified 12/15/21, 8:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +21,7 @@ import co.geeksempire.premium.storefront.AdvancedSearch.Extensions.setupComplete
 import co.geeksempire.premium.storefront.AdvancedSearch.NetworkOperations.SearchAllProducts
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter.CompleteSearchAdapter
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutBinding
 import kotlinx.coroutines.flow.collect
@@ -74,6 +76,10 @@ class CompleteSearch : AppCompatActivity() {
 
                             completeSearchAdapter.notifyDataSetChanged()
 
+                            if (completeSearchLayoutBinding.waitingView.isShown) {
+                                completeSearchLayoutBinding.waitingView.visibility = View.GONE
+                            }
+
                         })
 
                         completeSearchLiveData.gamesSearchResults.observe(this@CompleteSearch, {
@@ -82,6 +88,10 @@ class CompleteSearch : AppCompatActivity() {
 
                             completeSearchAdapter.notifyDataSetChanged()
 
+                            if (completeSearchLayoutBinding.waitingView.isShown) {
+                                completeSearchLayoutBinding.waitingView.visibility = View.GONE
+                            }
+
                         })
 
                         completeSearchLiveData.moviesSearchResults.observe(this@CompleteSearch, {
@@ -89,6 +99,10 @@ class CompleteSearch : AppCompatActivity() {
                             completeSearchAdapter.completeSearchResultsItems.addAll(it)
 
                             completeSearchAdapter.notifyDataSetChanged()
+
+                            if (completeSearchLayoutBinding.waitingView.isShown) {
+                                completeSearchLayoutBinding.waitingView.visibility = View.GONE
+                            }
 
                         })
 
@@ -104,6 +118,7 @@ class CompleteSearch : AppCompatActivity() {
 
             } else {
 
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 this@CompleteSearch.finish()
 
             }
@@ -112,14 +127,11 @@ class CompleteSearch : AppCompatActivity() {
 
         completeSearchLayoutBinding.cancelIconCompleteSearch.setOnClickListener {
 
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             this@CompleteSearch.finish()
 
         }
 
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
 }

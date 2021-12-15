@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 12/15/21, 8:07 AM
+  ~ Last modified 12/15/21, 8:28 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,26 +15,25 @@
     android:layout_width="match_parent"
     android:layout_height="153dp"
     android:layout_marginHorizontal="19dp"
-    android:layout_marginVertical="7dp"
-    android:background="@color/light">
+    android:layout_marginVertical="7dp">
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:id="@+id/blurryBackground"
         android:layout_width="match_parent"
         android:layout_height="153dp"
 
-        apps:realtimeBlurRadius="13dp"
-        apps:realtimeBlurTopLeft="19dp"
-        apps:realtimeBlurTopRight="19dp"
-        apps:realtimeBlurBottomLeft="19dp"
-        apps:realtimeBlurBottomRight="19dp"
+        apps:realtimeBlurRadius="7dp"
+        apps:realtimeBlurTopLeft="23dp"
+        apps:realtimeBlurTopRight="23dp"
+        apps:realtimeBlurBottomLeft="23dp"
+        apps:realtimeBlurBottomRight="23dp"
         apps:realtimeFirstColor="@color/default_color_bright_transparent"
 
         apps:layout_constraintTop_toTopOf="parent" />
 
     <net.geekstools.imageview.customshapes.ShapesImage
         android:id="@+id/productIcon"
-        android:layout_width="79dp"
+        android:layout_width="91dp"
         android:layout_height="137dp"
         android:layout_marginStart="7dp"
         android:scaleType="centerCrop"
@@ -54,9 +53,9 @@
         android:paddingEnd="7dp"
         android:lines="2"
         android:text="@string/applicationName"
-        android:textColor="@color/dark"
+        android:textColor="@color/light"
         android:textSize="21sp"
-        android:shadowColor="@color/dark_transparent"
+        android:shadowColor="@color/dark_transparent_high"
         android:shadowRadius="7"
         android:shadowDx="3"
         android:shadowDy="3"
@@ -70,7 +69,7 @@
         android:id="@+id/searchQueryType"
         android:layout_width="51dp"
         android:layout_height="51dp"
-        android:layout_margin="7dp"
+        android:layout_margin="9dp"
         android:padding="5dp"
         android:tint="@color/default_color"
         android:src="@drawable/applications_icon"

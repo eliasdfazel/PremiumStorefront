@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:45 AM
+ * Last modified 12/15/21, 8:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -322,17 +322,6 @@ class StorefrontApplications : StorefrontActivity() {
 
             storefrontLiveData.allFilteredContentItemData.observe(this@StorefrontApplications, {
 
-
-
-                startActivity(Intent(this@StorefrontApplications, CompleteSearch::class.java).apply {
-                    putExtra(CompleteSearch.SearchQuery, storefrontLayoutBinding.searchView.text.toString())
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                })
-
-
-
-
-
                 if (it.first.isNotEmpty()) {
 
                     val initialData = if (it.second) {
@@ -359,7 +348,7 @@ class StorefrontApplications : StorefrontActivity() {
                     startActivity(Intent(this@StorefrontApplications, CompleteSearch::class.java).apply {
                         putExtra(CompleteSearch.SearchQuery, storefrontLayoutBinding.searchView.text.toString())
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
+                    }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, R.anim.fade_out).toBundle())
 
                 }
 
