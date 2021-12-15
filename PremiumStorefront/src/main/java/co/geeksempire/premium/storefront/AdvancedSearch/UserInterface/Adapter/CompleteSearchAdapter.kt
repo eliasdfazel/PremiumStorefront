@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 5:59 AM
+ * Last modified 12/15/21, 7:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,15 +10,17 @@
 
 package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter
 
+import android.text.Html
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.AdvancedSearch.DataStructure.CompleteSearchContent
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.CompleteSearch
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.ViewHolder.CompleteSearchViewHolder
+import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutItemBinding
 
-class CompleteSearchAdapter (private val context: CompleteSearch) : RecyclerView.Adapter<CompleteSearchViewHolder>() {
+class CompleteSearchAdapter (private val context: CompleteSearch, private val themeType: Boolean) : RecyclerView.Adapter<CompleteSearchViewHolder>() {
 
     val completeSearchResultsItems: ArrayList<CompleteSearchContent> = ArrayList<CompleteSearchContent>()
 
@@ -34,6 +36,19 @@ class CompleteSearchAdapter (private val context: CompleteSearch) : RecyclerView
 
     override fun onBindViewHolder(completeSearchViewHolder: CompleteSearchViewHolder, position: Int) {
 
+        when (themeType) {
+            ThemeType.ThemeLight -> {
+
+
+
+            }
+            ThemeType.ThemeDark -> {
+
+
+
+            }
+        }
+
         when (completeSearchResultsItems[position].searchResultType) {
             GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
@@ -43,7 +58,6 @@ class CompleteSearchAdapter (private val context: CompleteSearch) : RecyclerView
             GeneralEndpoints.QueryType.GamesQuery -> {
 
 
-
             }
             GeneralEndpoints.QueryType.MoviesQuery -> {
 
@@ -51,6 +65,9 @@ class CompleteSearchAdapter (private val context: CompleteSearch) : RecyclerView
 
             }
         }
+
+        completeSearchViewHolder.productTitle.text = Html.fromHtml(completeSearchResultsItems[position].productName, Html.FROM_HTML_MODE_COMPACT)
+
 
     }
 
