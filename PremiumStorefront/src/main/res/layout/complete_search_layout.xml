@@ -3,16 +3,41 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 12/15/21, 2:25 AM
+  ~ Last modified 12/15/21, 4:05 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/premiumLight">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cancelBackgroundCompleteSearch"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="19dp"
+        android:src="@drawable/preferences_item_background_light"
 
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cancelIconCompleteSearch"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:padding="19dp"
+        android:layout_marginBottom="19dp"
+        android:tint="@color/dark_transparent"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
