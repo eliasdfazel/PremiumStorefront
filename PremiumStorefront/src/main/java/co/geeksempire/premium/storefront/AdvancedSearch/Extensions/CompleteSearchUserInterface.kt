@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:19 AM
+ * Last modified 12/15/21, 7:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,6 +58,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
 
             completeSearchLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
 
+            completeSearchLayoutBinding.brandingBackground.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light))
+
             completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
             completeSearchLayoutBinding.cancelIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))
 
@@ -80,6 +82,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
             }
 
             completeSearchLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumDark))
+
+            completeSearchLayoutBinding.brandingBackground.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_dark))
 
             completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_dark))
             completeSearchLayoutBinding.cancelIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.light_transparent))
@@ -112,6 +116,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
             }
 
             completeSearchLayoutBinding.rootView.setBackgroundColor(getColor(R.color.premiumLight))
+
+            completeSearchLayoutBinding.brandingBackground.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light))
 
             completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
             completeSearchLayoutBinding.cancelIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))

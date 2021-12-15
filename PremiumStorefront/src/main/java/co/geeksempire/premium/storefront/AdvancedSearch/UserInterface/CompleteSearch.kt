@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:36 AM
+ * Last modified 12/15/21, 7:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,7 @@ class CompleteSearch : AppCompatActivity() {
 
                         val completeSearchAdapter: CompleteSearchAdapter = CompleteSearchAdapter(this@CompleteSearch, themeType)
 
-                        completeSearchLayoutBinding.searchResultsRecyclerView.layoutManager =  RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
+                        completeSearchLayoutBinding.searchResultsRecyclerView.layoutManager =  RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
 
                         completeSearchLayoutBinding.searchResultsRecyclerView.adapter = completeSearchAdapter
 

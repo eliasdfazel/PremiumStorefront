@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:31 AM
+ * Last modified 12/15/21, 7:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,9 @@ import co.geeksempire.premium.storefront.AdvancedSearch.DataStructure.CompleteSe
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.CompleteSearch
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.ViewHolder.CompleteSearchViewHolder
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutItemBinding
 
 class CompleteSearchAdapter (private val context: CompleteSearch, private val themeType: Boolean) : RecyclerView.Adapter<CompleteSearchViewHolder>() {
@@ -52,16 +54,17 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
         when (completeSearchResultsItems[position].searchResultType) {
             GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
-
+                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.applicationsSectionColor), 153f))
 
             }
             GeneralEndpoints.QueryType.GamesQuery -> {
 
+                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.gamesSectionColor), 153f))
 
             }
             GeneralEndpoints.QueryType.MoviesQuery -> {
 
-
+                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.moviesSectionColor), 153f))
 
             }
         }
