@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 4:01 AM
+ * Last modified 12/15/21, 4:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,16 +27,34 @@ class CompleteSearch : AppCompatActivity() {
 
     lateinit var completeSearchLayoutBinding: CompleteSearchLayoutBinding
 
+    companion object {
+        const val SearchQuery: String = "SearchQuery"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         completeSearchLayoutBinding = CompleteSearchLayoutBinding.inflate(layoutInflater)
         setContentView(completeSearchLayoutBinding.root)
 
-        lifecycleScope.launch {
+        if (intent.hasExtra(CompleteSearch.SearchQuery)) {
 
-            themePreferences.checkThemeLightDark().collect {
+            val searchQuery = intent.getStringExtra(CompleteSearch.SearchQuery)
 
-                setupCompleteSearchUserInterface(it)
+            if (searchQuery != null) {
+
+                lifecycleScope.launch {
+
+                    themePreferences.checkThemeLightDark().collect {
+
+                        setupCompleteSearchUserInterface(it)
+
+                    }
+
+                }
+
+            } else {
+
+                this@CompleteSearch.finish()
 
             }
 
