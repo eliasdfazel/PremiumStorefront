@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/13/21, 6:43 AM
+ * Last modified 12/15/21, 4:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -33,6 +32,7 @@ import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountDat
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
 import co.geeksempire.premium.storefront.Actions.View.PrepareActionCenterUserInterface
+import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.CompleteSearch
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
@@ -306,8 +306,12 @@ class StorefrontGames : StorefrontActivity() {
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
 
                 } else {
+                    //Nothing Found
 
-                    showToast(applicationContext, getString(R.string.nothingFoundText), Gravity.TOP)
+                    startActivity(Intent(this@StorefrontGames, CompleteSearch::class.java).apply {
+                        putExtra(CompleteSearch.SearchQuery, storefrontLayoutBinding.searchView.text.toString())
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
 
                 }
 
