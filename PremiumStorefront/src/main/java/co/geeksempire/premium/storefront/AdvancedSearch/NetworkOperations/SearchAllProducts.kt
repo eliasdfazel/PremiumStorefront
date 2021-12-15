@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 4:59 AM
+ * Last modified 12/15/21, 5:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,7 +57,7 @@ class SearchAllProducts (private val context: CompleteSearch) {
             override fun jsonRequestResponseSuccessHandler(rawDataJsonArray: JSONArray) {
                 super.jsonRequestResponseSuccessHandler(rawDataJsonArray)
 
-                context.completeSearchLiveData.processMoviessSearchResults(rawDataJsonArray)
+                context.completeSearchLiveData.processMoviesSearchResults(rawDataJsonArray)
 
             }
 

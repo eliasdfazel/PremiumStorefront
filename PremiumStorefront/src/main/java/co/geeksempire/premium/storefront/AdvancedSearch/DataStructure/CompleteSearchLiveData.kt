@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 5:00 AM
+ * Last modified 12/15/21, 5:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductsContentKey
-import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -27,14 +27,14 @@ class CompleteSearchLiveData : ViewModel() {
     /*
      * Applications
      */
-    val applicationsSearchResults: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontContentsData>>()
+    val applicationsSearchResults: MutableLiveData<ArrayList<CompleteSearchContent>> by lazy {
+        MutableLiveData<ArrayList<CompleteSearchContent>>()
     }
 
     fun processApplicationsSearchResults(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@CompleteSearchLiveData.javaClass.simpleName, "Process All Content")
 
-        val storefrontAllContents = ArrayList<StorefrontContentsData>()
+        val storefrontAllContents = ArrayList<CompleteSearchContent>()
 
         for (indexContent in 0 until allContentJsonArray.length()) {
 
@@ -91,7 +91,7 @@ class CompleteSearchLiveData : ViewModel() {
             }
             /* End - Attributes */
 
-            storefrontAllContents.add(StorefrontContentsData(
+            storefrontAllContents.add(CompleteSearchContent(
                 productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
                 productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                 productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
@@ -101,7 +101,8 @@ class CompleteSearchLiveData : ViewModel() {
                 productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                 productIconLink = productIcon,
                 productCoverLink = productCover,
-                productAttributes = attributesMap
+                productAttributes = attributesMap,
+                searchResultType = GeneralEndpoints.QueryType.ApplicationsQuery
             ))
 
             Log.d(this@CompleteSearchLiveData.javaClass.simpleName, "All Products: ${featuredContentJsonObject.getString(
@@ -123,14 +124,14 @@ class CompleteSearchLiveData : ViewModel() {
     /*
      * Games
      */
-    val gamesSearchResults: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontContentsData>>()
+    val gamesSearchResults: MutableLiveData<ArrayList<CompleteSearchContent>> by lazy {
+        MutableLiveData<ArrayList<CompleteSearchContent>>()
     }
 
     fun processGamesSearchResults(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@CompleteSearchLiveData.javaClass.simpleName, "Process All Content")
 
-        val storefrontAllContents = ArrayList<StorefrontContentsData>()
+        val storefrontAllContents = ArrayList<CompleteSearchContent>()
 
         for (indexContent in 0 until allContentJsonArray.length()) {
 
@@ -187,7 +188,7 @@ class CompleteSearchLiveData : ViewModel() {
             }
             /* End - Attributes */
 
-            storefrontAllContents.add(StorefrontContentsData(
+            storefrontAllContents.add(CompleteSearchContent(
                 productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
                 productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                 productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
@@ -197,7 +198,8 @@ class CompleteSearchLiveData : ViewModel() {
                 productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                 productIconLink = productIcon,
                 productCoverLink = productCover,
-                productAttributes = attributesMap
+                productAttributes = attributesMap,
+                searchResultType = GeneralEndpoints.QueryType.GamesQuery
             ))
 
             Log.d(this@CompleteSearchLiveData.javaClass.simpleName, "All Products: ${featuredContentJsonObject.getString(
@@ -219,14 +221,14 @@ class CompleteSearchLiveData : ViewModel() {
     /*
      * Movies
      */
-    val moviesSearchResults: MutableLiveData<ArrayList<StorefrontContentsData>> by lazy {
-        MutableLiveData<ArrayList<StorefrontContentsData>>()
+    val moviesSearchResults: MutableLiveData<ArrayList<CompleteSearchContent>> by lazy {
+        MutableLiveData<ArrayList<CompleteSearchContent>>()
     }
 
-    fun processMoviessSearchResults(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    fun processMoviesSearchResults(allContentJsonArray: JSONArray) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
         Log.d(this@CompleteSearchLiveData.javaClass.simpleName, "Process All Content")
 
-        val storefrontAllContents = ArrayList<StorefrontContentsData>()
+        val storefrontAllContents = ArrayList<CompleteSearchContent>()
 
         for (indexContent in 0 until allContentJsonArray.length()) {
 
@@ -283,7 +285,7 @@ class CompleteSearchLiveData : ViewModel() {
             }
             /* End - Attributes */
 
-            storefrontAllContents.add(StorefrontContentsData(
+            storefrontAllContents.add(CompleteSearchContent(
                 productName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
                 productDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                 productSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),
@@ -293,7 +295,8 @@ class CompleteSearchLiveData : ViewModel() {
                 productSalePrice = featuredContentJsonObject.getString(ProductsContentKey.SalePriceKey),
                 productIconLink = productIcon,
                 productCoverLink = productCover,
-                productAttributes = attributesMap
+                productAttributes = attributesMap,
+                searchResultType = GeneralEndpoints.QueryType.MoviesQuery
             ))
 
             Log.d(this@CompleteSearchLiveData.javaClass.simpleName, "All Products: ${featuredContentJsonObject.getString(
