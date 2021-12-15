@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/2/21, 9:53 AM
+ * Last modified 12/15/21, 4:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,10 +53,6 @@ class ApplicationsQueryEndpoints (private val generalEndpoints: GeneralEndpoints
             "consumer_key=${generalEndpoints.consumerKey()}" +
             "&" +
             "consumer_secret=${generalEndpoints.consumerSecret()}" +
-            "&" +
-            "per_page=${productPerPage}" +
-            "&" +
-            "page=${numberOfPage}" +
             "&" +
             "category=${GeneralEndpoints.QueryType.ApplicationsQuery}" +
             "&" +
