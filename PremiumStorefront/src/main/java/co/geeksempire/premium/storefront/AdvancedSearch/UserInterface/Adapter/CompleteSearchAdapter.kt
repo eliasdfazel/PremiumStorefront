@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:47 AM
+ * Last modified 12/15/21, 8:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,23 +54,28 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
         when (completeSearchResultsItems[position].searchResultType) {
             GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
-                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.applicationsSectionColor), 153f))
+                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.applicationsSectionColor), 173f))
+
+                completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.applications_icon))
 
             }
             GeneralEndpoints.QueryType.GamesQuery -> {
 
-                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.gamesSectionColor), 153f))
+                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.gamesSectionColor), 173f))
+
+                completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.games_icon))
 
             }
             GeneralEndpoints.QueryType.MoviesQuery -> {
 
-                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.moviesSectionColor), 153f))
+                completeSearchViewHolder.blurryBackground.setOverlayColor(setColorAlpha(context.getColor(R.color.moviesSectionColor), 173f))
+
+                completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.movies_icon))
 
             }
         }
 
         completeSearchViewHolder.productTitle.text = Html.fromHtml(completeSearchResultsItems[position].productName, Html.FROM_HTML_MODE_COMPACT)
-
 
     }
 

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:47 AM
+ * Last modified 12/15/21, 8:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.ViewHolder
 
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
@@ -23,5 +24,7 @@ class CompleteSearchViewHolder (rootItemView: CompleteSearchLayoutItemBinding) :
     val blurryBackground: RealtimeBlurView = rootItemView.blurryBackground
 
     val productTitle: AppCompatTextView = rootItemView.productTitle
+    val productIcon: AppCompatImageView = rootItemView.productIcon
+    val searchQueryType: AppCompatImageView = rootItemView.searchQueryType
 
 }

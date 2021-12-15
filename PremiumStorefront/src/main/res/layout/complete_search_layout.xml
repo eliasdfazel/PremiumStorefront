@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 12/15/21, 7:53 AM
+  ~ Last modified 12/15/21, 7:56 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -23,12 +23,41 @@
         android:padding="37dp"
         android:src="@drawable/diamond_solid_icon_light"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchResultsRecyclerView"
+    <co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="7dp"
+        android:scrollbars="none"
+        android:fadingEdge="vertical"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="13dp"
+        android:cacheColorHint="@android:color/transparent"
 
-        apps:layout_constraintTop_toTopOf="parent"/>
+        apps:flingVelocityFraction="5"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/contentWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="7dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="99dp"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchResultsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                apps:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/cancelBackgroundCompleteSearch"
