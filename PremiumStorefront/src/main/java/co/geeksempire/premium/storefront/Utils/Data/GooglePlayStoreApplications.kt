@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/30/21, 7:35 AM
+ * Last modified 12/15/21, 8:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -127,3 +127,54 @@ fun shareApplication(context: AppCompatActivity, aPackageName: String, applicati
 
 }
 
+private fun generateGooglePlayStoreMovies(movieId: String) : String {
+
+    return "https://play.google.com/store/movies/details?id=${movieId}"
+}
+
+private fun generateInstallDynamicMoviesLink(context: Context,
+                                             movieId: String,
+                                             movieName: String, movieSummary: String,
+                                             mediatingSolution: String = context.packageName,
+                                             campaignName: String = context.packageName) : Uri {
+
+    val playStoreLink: String = generateGooglePlayStoreMovies(movieId)
+
+    val dynamicLink = Firebase.dynamicLinks.dynamicLink {
+        link = Uri.parse(playStoreLink)
+        domainUriPrefix = "https://premiumstorefront.page.link"
+        androidParameters(movieId) {
+
+        }
+        googleAnalyticsParameters {
+            source = context.getString(R.string.applicationName)
+            medium = mediatingSolution
+            campaign = campaignName
+        }
+        socialMetaTagParameters {
+            title = movieName
+            description = movieSummary
+        }
+    }
+
+    return dynamicLink.uri
+}
+
+fun openPlayStoreToWatchMovie(context: Context, movieId: String, movieName: String, movieSummary: String) {
+
+    val MovieId = "Movie Id"
+    val MovieName = "productName"
+
+    Firebase.analytics.logEvent(Firebase.auth.currentUser?.displayName?:"Unknown", Bundle().apply {
+        putString(MovieId, movieId)
+        putString(MovieName, movieName)
+    })
+
+    doVibrate(context, 159)
+
+    context.startActivity(Intent(Intent.ACTION_VIEW,
+        generateInstallDynamicMoviesLink(context = context, movieId = movieId,
+            movieName = movieName, movieSummary = movieSummary)
+    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), ActivityOptions.makeCustomAnimation(context, R.anim.fade_in, 0).toBundle())
+
+}
