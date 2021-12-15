@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 4:28 AM
+ * Last modified 12/15/21, 4:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -106,10 +106,16 @@ class GeneralEndpoints {
     /**
      * @param queryType = GeneralEndpoints.QueryType.ApplicationsQuery OR GeneralEndpoints.QueryType.GamesQuery OR GeneralEndpoints.QueryType.MoviesQuery
      **/
-    fun getCompleteSearchEndpoint(queryType: String) : String = "https://geeksempire.co/wp-json/wc/v3/products?" +
+    fun getCompleteSearchEndpoint(searchQuery: String, queryType: String, productPerPage: Int = 99, numberOfPage: Int = 1) : String = "https://geeksempire.co/wp-json/wc/v3/products?" +
             "consumer_key=${consumerKey()}" +
             "&" +
             "consumer_secret=${consumerSecret()}" +
+            "&" +
+            "search=$searchQuery" +
+            "&" +
+            "per_page=${productPerPage}" +
+            "&" +
+            "page=${numberOfPage}" +
             "&" +
             "category=${queryType}" +
             "&" +

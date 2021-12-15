@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 4:25 AM
+ * Last modified 12/15/21, 4:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -67,7 +67,8 @@ class ApplicationsQueryEndpoints (private val generalEndpoints: GeneralEndpoints
 
     fun getApplicationsSearchEndpoint(productSearchQuery: String = "1", productPerPage: Int = 99, numberOfPage: Int = 1) : String =
         "${getAllAndroidApplicationsEndpoint()}" +
-                "&search=$productSearchQuery" +
+                "&" +
+                "search=$productSearchQuery" +
                 "&" +
                 "per_page=${productPerPage}" +
                 "&" +
