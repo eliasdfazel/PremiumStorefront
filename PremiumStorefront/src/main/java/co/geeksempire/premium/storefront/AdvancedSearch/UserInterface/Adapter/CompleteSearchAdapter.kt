@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 4:14 AM
+ * Last modified 12/15/21, 5:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,21 +12,46 @@ package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.AdvancedSearch.DataStructure.CompleteSearchContent
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.CompleteSearch
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.ViewHolder.CompleteSearchViewHolder
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
+import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutItemBinding
 
 class CompleteSearchAdapter (private val context: CompleteSearch) : RecyclerView.Adapter<CompleteSearchViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompleteSearchViewHolder {
-        TODO("Not yet implemented")
-    }
+    val completeSearchResultsItems: ArrayList<CompleteSearchContent> = ArrayList<CompleteSearchContent>()
 
-    override fun onBindViewHolder(holder: CompleteSearchViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): CompleteSearchViewHolder {
+
+        return CompleteSearchViewHolder(CompleteSearchLayoutItemBinding.inflate(context.layoutInflater, viewGroup, false))
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+
+        return completeSearchResultsItems.size
+    }
+
+    override fun onBindViewHolder(completeSearchViewHolder: CompleteSearchViewHolder, position: Int) {
+
+        when (completeSearchResultsItems[position].searchResultType) {
+            GeneralEndpoints.QueryType.ApplicationsQuery -> {
+
+
+
+            }
+            GeneralEndpoints.QueryType.GamesQuery -> {
+
+
+
+            }
+            GeneralEndpoints.QueryType.MoviesQuery -> {
+
+
+
+            }
+        }
+
     }
 
 }
