@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/23/21, 6:42 AM
+ * Last modified 12/15/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,7 +53,7 @@ import kotlinx.coroutines.launch
 class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
 
     val developerLiveData: DeveloperLiveData by lazy {
-        ViewModelProvider(this@DeveloperIntroductionPage).get(DeveloperLiveData::class.java)
+        ViewModelProvider(this@DeveloperIntroductionPage)[DeveloperLiveData::class.java]
     }
 
     val themePreferences: ThemePreferences by lazy {

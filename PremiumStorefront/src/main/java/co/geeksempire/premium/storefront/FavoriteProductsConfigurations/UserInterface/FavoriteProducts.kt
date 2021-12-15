@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/21/21, 12:00 PM
+ * Last modified 12/15/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,7 +45,7 @@ class FavoriteProducts : AppCompatActivity() {
     val favoritedDatabaseDirectory = FavoritedDatabaseDirectory()
 
     val favoriteProductsLiveData: FavoriteProductsLiveData by lazy {
-        ViewModelProvider(this@FavoriteProducts).get(FavoriteProductsLiveData::class.java)
+        ViewModelProvider(this@FavoriteProducts)[FavoriteProductsLiveData::class.java]
     }
 
     val firebaseUser = Firebase.auth.currentUser

@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 10/2/21, 11:24 AM
+ * Last modified 12/15/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,7 +49,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
     }
 
     val productsOfCategory: ProductsOfCategory by lazy {
-        ViewModelProvider(this@CategoryDetails).get(ProductsOfCategory::class.java)
+        ViewModelProvider(this@CategoryDetails)[ProductsOfCategory::class.java]
     }
 
     val generalEndpoints: GeneralEndpoints = GeneralEndpoints()

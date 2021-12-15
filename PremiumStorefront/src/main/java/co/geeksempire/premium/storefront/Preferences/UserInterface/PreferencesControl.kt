@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/21/21, 6:23 AM
+ * Last modified 12/15/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,7 +44,7 @@ class PreferencesControl : AppCompatActivity() {
     }
 
     val preferencesLiveData: PreferencesLiveData by lazy {
-        ViewModelProvider(this@PreferencesControl).get(PreferencesLiveData::class.java)
+        ViewModelProvider(this@PreferencesControl)[PreferencesLiveData::class.java]
     }
 
     val reviewUtils: ReviewUtils by lazy {

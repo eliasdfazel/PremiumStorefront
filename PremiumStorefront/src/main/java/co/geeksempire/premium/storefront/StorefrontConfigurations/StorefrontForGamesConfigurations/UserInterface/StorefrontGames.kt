@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 4:22 AM
+ * Last modified 12/15/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -106,7 +106,7 @@ class StorefrontGames : StorefrontActivity() {
     val generalEndpoints: GeneralEndpoints = GeneralEndpoints()
 
     val storefrontLiveData: StorefrontLiveData by lazy {
-        ViewModelProvider(this@StorefrontGames).get(StorefrontLiveData::class.java)
+        ViewModelProvider(this@StorefrontGames)[StorefrontLiveData::class.java]
     }
 
     val allContent: AllContent by lazy {
