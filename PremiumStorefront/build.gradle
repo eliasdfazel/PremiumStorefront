@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 1:56 AM
+ * Last modified 12/16/21, 6:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,7 +30,7 @@ android {
         minSdkVersion 25
         targetSdkVersion 31
 
-        versionCode 67
+        versionCode 68
         versionName "${majorVersion}." + getDateMonth() + "." + getDateDay() + "." + getDateYear() + ".${versionCode}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
