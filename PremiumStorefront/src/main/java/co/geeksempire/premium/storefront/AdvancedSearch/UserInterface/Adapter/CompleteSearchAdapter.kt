@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 8:44 AM
+ * Last modified 12/16/21, 6:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter
 import android.content.res.ColorStateList
 import android.text.Html
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.AdvancedSearch.DataStructure.CompleteSearchContent
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.CompleteSearch
@@ -62,6 +63,7 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
 
                 completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.applicationsSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.applications_icon))
+                completeSearchViewHolder.searchQueryType.contentDescription = context.getString(R.string.applicationsSectionText)
 
             }
             GeneralEndpoints.QueryType.GamesQuery -> {
@@ -70,6 +72,7 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
 
                 completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.games_icon))
+                completeSearchViewHolder.searchQueryType.contentDescription = context.getString(R.string.gamesSectionText)
 
             }
             GeneralEndpoints.QueryType.MoviesQuery -> {
@@ -78,6 +81,7 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
 
                 completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.moviesSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.movies_icon))
+                completeSearchViewHolder.searchQueryType.contentDescription = context.getString(R.string.moviesSectionText)
 
             }
         }
@@ -118,6 +122,13 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
             }
 
         }
+        completeSearchViewHolder.searchQueryType.setOnLongClickListener { view ->
+
+            Toast.makeText(context, view.contentDescription.toString(), Toast.LENGTH_LONG).show()
+
+            true
+        }
+
 
     }
 
