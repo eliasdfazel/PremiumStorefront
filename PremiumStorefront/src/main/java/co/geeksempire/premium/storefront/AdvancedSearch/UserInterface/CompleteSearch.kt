@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/16/21, 6:28 AM
+ * Last modified 12/16/21, 7:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.AdvancedSearch.DataStructure.CompleteSearchLiveData
+import co.geeksempire.premium.storefront.AdvancedSearch.Extensions.generateRandomDiamond
 import co.geeksempire.premium.storefront.AdvancedSearch.Extensions.setupCompleteSearchUserInterface
 import co.geeksempire.premium.storefront.AdvancedSearch.NetworkOperations.SearchAllProducts
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter.CompleteSearchAdapter
@@ -67,6 +68,8 @@ class CompleteSearch : AppCompatActivity() {
                     themePreferences.checkThemeLightDark().collect { themeType ->
 
                         setupCompleteSearchUserInterface(themeType)
+
+                        generateRandomDiamond(themeType)
 
                         val completeSearchAdapter: CompleteSearchAdapter = CompleteSearchAdapter(this@CompleteSearch, themeType)
 
