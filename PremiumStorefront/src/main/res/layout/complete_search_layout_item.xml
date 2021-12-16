@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 12/15/21, 8:28 AM
+  ~ Last modified 12/16/21, 6:27 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -15,7 +15,13 @@
     android:layout_width="match_parent"
     android:layout_height="153dp"
     android:layout_marginHorizontal="19dp"
-    android:layout_marginVertical="7dp">
+    android:layout_marginVertical="7dp"
+
+    apps:layout_constraintTop_toTopOf="parent"
+    apps:layout_constraintStart_toStartOf="parent"
+    apps:layout_constraintEnd_toEndOf="parent"
+
+    apps:layout_constraintDimensionRatio="1:1">
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
         android:id="@+id/blurryBackground"
