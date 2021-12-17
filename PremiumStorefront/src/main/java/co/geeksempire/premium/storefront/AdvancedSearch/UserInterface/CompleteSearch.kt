@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/17/21, 3:36 AM
+ * Last modified 12/17/21, 4:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.AdvancedSearch.DataStructure.CompleteSearchLiveData
 import co.geeksempire.premium.storefront.AdvancedSearch.Extensions.generateRandomDiamond
 import co.geeksempire.premium.storefront.AdvancedSearch.Extensions.setupCompleteSearchUserInterface
+import co.geeksempire.premium.storefront.AdvancedSearch.Extensions.setupSearchView
 import co.geeksempire.premium.storefront.AdvancedSearch.NetworkOperations.SearchAllProducts
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter.CompleteSearchAdapter
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
@@ -26,8 +28,8 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutBinding
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class CompleteSearch : AppCompatActivity() {
 
@@ -45,6 +47,8 @@ class CompleteSearch : AppCompatActivity() {
 
     val fullSearchCount = 3
     var searchOperationCounter = 0
+
+    var completeSearchAdapter: CompleteSearchAdapter? = null
 
     lateinit var completeSearchLayoutBinding: CompleteSearchLayoutBinding
 
@@ -71,7 +75,7 @@ class CompleteSearch : AppCompatActivity() {
 
                         generateRandomDiamond(themeType)
 
-                        val completeSearchAdapter: CompleteSearchAdapter = CompleteSearchAdapter(this@CompleteSearch, themeType)
+                        completeSearchAdapter = CompleteSearchAdapter(this@CompleteSearch, themeType)
 
                         completeSearchLayoutBinding.searchResultsRecyclerView.layoutManager =   RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
 
@@ -83,9 +87,9 @@ class CompleteSearch : AppCompatActivity() {
 
                             if (it.isNotEmpty()) {
 
-                                completeSearchAdapter.completeSearchResultsItems.addAll(it)
+                                completeSearchAdapter!!.completeSearchResultsItems.addAll(it)
 
-                                completeSearchAdapter.notifyDataSetChanged()
+                                completeSearchAdapter!!.notifyDataSetChanged()
 
                                 if (completeSearchLayoutBinding.waitingView.isShown) {
                                     completeSearchLayoutBinding.waitingView.visibility = View.GONE
@@ -95,13 +99,19 @@ class CompleteSearch : AppCompatActivity() {
 
                                 if (searchOperationCounter == fullSearchCount) {
 
-                                    if (completeSearchAdapter.completeSearchResultsItems.isEmpty()) {
+                                    if (completeSearchAdapter!!.completeSearchResultsItems.isEmpty()) {
 
                                         this@CompleteSearch.finish()
 
                                     }
 
                                 }
+
+                            }
+
+                            if (searchOperationCounter == fullSearchCount) {
+
+                                showSearchActionView()
 
                             }
 
@@ -113,9 +123,9 @@ class CompleteSearch : AppCompatActivity() {
 
                             if (it.isNotEmpty()) {
 
-                                completeSearchAdapter.completeSearchResultsItems.addAll(it)
+                                completeSearchAdapter!!.completeSearchResultsItems.addAll(it)
 
-                                completeSearchAdapter.notifyDataSetChanged()
+                                completeSearchAdapter!!.notifyDataSetChanged()
 
                                 if (completeSearchLayoutBinding.waitingView.isShown) {
                                     completeSearchLayoutBinding.waitingView.visibility = View.GONE
@@ -125,13 +135,19 @@ class CompleteSearch : AppCompatActivity() {
 
                                 if (searchOperationCounter == fullSearchCount) {
 
-                                    if (completeSearchAdapter.completeSearchResultsItems.isEmpty()) {
+                                    if (completeSearchAdapter!!.completeSearchResultsItems.isEmpty()) {
 
                                         this@CompleteSearch.finish()
 
                                     }
 
                                 }
+
+                            }
+
+                            if (searchOperationCounter == fullSearchCount) {
+
+                                showSearchActionView()
 
                             }
 
@@ -143,9 +159,9 @@ class CompleteSearch : AppCompatActivity() {
 
                             if (it.isNotEmpty()) {
 
-                                completeSearchAdapter.completeSearchResultsItems.addAll(it)
+                                completeSearchAdapter!!.completeSearchResultsItems.addAll(it)
 
-                                completeSearchAdapter.notifyDataSetChanged()
+                                completeSearchAdapter!!.notifyDataSetChanged()
 
                                 if (completeSearchLayoutBinding.waitingView.isShown) {
                                     completeSearchLayoutBinding.waitingView.visibility = View.GONE
@@ -155,13 +171,19 @@ class CompleteSearch : AppCompatActivity() {
 
                                 if (searchOperationCounter == fullSearchCount) {
 
-                                    if (completeSearchAdapter.completeSearchResultsItems.isEmpty()) {
+                                    if (completeSearchAdapter!!.completeSearchResultsItems.isEmpty()) {
 
                                         this@CompleteSearch.finish()
 
                                     }
 
                                 }
+
+                            }
+
+                            if (searchOperationCounter == fullSearchCount) {
+
+                                showSearchActionView()
 
                             }
 
@@ -192,6 +214,32 @@ class CompleteSearch : AppCompatActivity() {
             this@CompleteSearch.finish()
 
         }
+
+        completeSearchLayoutBinding.searchIconCompleteSearch.setOnClickListener {
+
+            lifecycleScope.launch {
+
+                themePreferences.checkThemeLightDark().collect { themeType ->
+
+                    setupSearchView(themeType)
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private fun showSearchActionView() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+
+        completeSearchLayoutBinding.searchBackgroundCompleteSearch.visibility = View.VISIBLE
+        completeSearchLayoutBinding.searchBackgroundCompleteSearch.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+
+        delay(373)
+
+        completeSearchLayoutBinding.searchIconCompleteSearch.visibility = View.VISIBLE
+        completeSearchLayoutBinding.searchIconCompleteSearch.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.scale_up_bounce_interpolator))
 
     }
 

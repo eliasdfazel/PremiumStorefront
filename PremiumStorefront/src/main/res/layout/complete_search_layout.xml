@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 12/17/21, 3:41 AM
+  ~ Last modified 12/17/21, 4:42 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -72,9 +72,10 @@
         android:id="@+id/searchBackgroundCompleteSearch"
         android:layout_width="73dp"
         android:layout_height="73dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="29dp"
         android:src="@drawable/preferences_item_background_light"
         android:elevation="31dp"
+        android:visibility="invisible"
 
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"
@@ -85,15 +86,66 @@
         android:layout_width="73dp"
         android:layout_height="73dp"
         android:padding="19dp"
-        android:layout_marginBottom="19dp"
-        android:tint="@color/dark_transparent"
+        android:layout_marginBottom="29dp"
+        android:tint="@color/default_color_dark"
         android:background="@drawable/ripple_cancel_search"
         android:src="@drawable/search_icon"
         android:elevation="33dp"
+        android:visibility="invisible"
 
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <!-- Search View -->
+    <com.google.android.material.textfield.TextInputLayout xmlns:apps="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/textInputSearchView"
+        android:layout_width="51dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="119dp"
+        android:layout_marginHorizontal="1dp"
+        android:paddingHorizontal="7dp"
+        android:gravity="center_vertical"
+        android:imeOptions="actionSearch"
+        android:hint="@string/typeToSearchText"
+        android:textColorHint="@color/default_color_game"
+        android:visibility="invisible"
+
+        apps:boxBackgroundMode="outline"
+        apps:boxBackgroundColor="@color/white_transparent"
+        apps:boxCornerRadiusTopStart="51dp"
+        apps:boxCornerRadiusTopEnd="51dp"
+        apps:boxCornerRadiusBottomStart="51dp"
+        apps:boxCornerRadiusBottomEnd="51dp"
+        apps:boxStrokeColor="#8000A5FF"
+        apps:boxStrokeWidth="1dp"
+        apps:hintEnabled="true"
+        apps:hintAnimationEnabled="true"
+        apps:hintTextColor="@color/default_color_game"
+        apps:errorEnabled="true"
+        apps:errorTextColor="@color/yellow"
+
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText xmlns:apps="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="19dp"
+            android:paddingHorizontal="29dp"
+            android:gravity="center_vertical"
+            android:imeOptions="actionSearch"
+            android:lines="1"
+            android:inputType="text|textAutoComplete"
+            android:textSize="29sp"
+            android:textColor="@color/default_color_dark"
+            android:textColorHint="@color/default_color_game_dark"
+            android:fontFamily="@font/upcil"
+            android:cursorVisible="true" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/goBackView"

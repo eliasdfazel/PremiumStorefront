@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/22/21, 5:52 AM
+ * Last modified 12/17/21, 4:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,6 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -37,6 +36,7 @@ import co.geeksempire.geeksempire.layoutmanager.Curve.CurveLayoutManager
 import co.geeksempire.geeksempire.layoutmanager.Curve.FanLayoutManagerSettings
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
+import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.CompleteSearch
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoriteProductQueryInterface
@@ -388,8 +388,12 @@ class StorefrontMovies : StorefrontDynamicActivity() {
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
 
                 } else {
+                    //Nothing Found
 
-                    showToast(applicationContext, getString(R.string.nothingFoundText), Gravity.TOP)
+                    startActivity(Intent(this@StorefrontMovies, CompleteSearch::class.java).apply {
+                        putExtra(CompleteSearch.SearchQuery, storefrontMoviesLayoutBinding.searchView.text.toString())
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in_movie, R.anim.fade_out_movie).toBundle())
 
                 }
 
