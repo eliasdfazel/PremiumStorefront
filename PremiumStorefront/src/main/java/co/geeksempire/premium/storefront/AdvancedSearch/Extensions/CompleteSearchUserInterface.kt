@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 7:53 AM
+ * Last modified 12/17/21, 3:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,9 +25,9 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
     val shadowPaint = Paint()
     shadowPaint.color = getColor(R.color.red)
 
-    completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shadowPaint)
+    completeSearchLayoutBinding.searchBackgroundCompleteSearch.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shadowPaint)
     shadowPaint.setShadowLayer(53f, 3f, 7f, getColor(R.color.red))
-    completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setLayerPaint(shadowPaint)
+    completeSearchLayoutBinding.searchBackgroundCompleteSearch.setLayerPaint(shadowPaint)
 
     when (themeType) {
         ThemeType.ThemeLight -> {
@@ -60,8 +60,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
 
             completeSearchLayoutBinding.brandingBackground.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light))
 
-            completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
-            completeSearchLayoutBinding.cancelIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))
+            completeSearchLayoutBinding.searchBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
+            completeSearchLayoutBinding.searchIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))
 
         }
         ThemeType.ThemeDark -> {
@@ -85,8 +85,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
 
             completeSearchLayoutBinding.brandingBackground.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_dark))
 
-            completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_dark))
-            completeSearchLayoutBinding.cancelIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.light_transparent))
+            completeSearchLayoutBinding.searchBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_dark))
+            completeSearchLayoutBinding.searchIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.light_transparent))
 
         }
         else -> {
@@ -119,8 +119,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
 
             completeSearchLayoutBinding.brandingBackground.setImageDrawable(getDrawable(R.drawable.diamond_solid_icon_light))
 
-            completeSearchLayoutBinding.cancelBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
-            completeSearchLayoutBinding.cancelIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))
+            completeSearchLayoutBinding.searchBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
+            completeSearchLayoutBinding.searchIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))
 
         }
     }

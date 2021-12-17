@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/16/21, 6:37 AM
+ * Last modified 12/17/21, 3:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,6 +24,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToWatchMovie
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutItemBinding
 import com.bumptech.glide.Glide
 
@@ -60,6 +61,7 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
             GeneralEndpoints.QueryType.ApplicationsQuery -> {
 
                 completeSearchViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.applicationsSectionTransparentColor))
+                completeSearchViewHolder.blurryBackground.setSecondOverlayColor(setColorAlpha(context.getColor(R.color.applicationsSectionColor), 113f))
 
                 completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.applicationsSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.applications_icon))
@@ -69,6 +71,7 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
             GeneralEndpoints.QueryType.GamesQuery -> {
 
                 completeSearchViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.gamesSectionTransparentColor))
+                completeSearchViewHolder.blurryBackground.setSecondOverlayColor(setColorAlpha(context.getColor(R.color.gamesSectionColor), 113f))
 
                 completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.gamesSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.games_icon))
@@ -78,6 +81,7 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
             GeneralEndpoints.QueryType.MoviesQuery -> {
 
                 completeSearchViewHolder.blurryBackground.setOverlayColor(context.getColor(R.color.moviesSectionTransparentColor))
+                completeSearchViewHolder.blurryBackground.setSecondOverlayColor(setColorAlpha(context.getColor(R.color.moviesSectionColor), 113f))
 
                 completeSearchViewHolder.searchQueryType.imageTintList = ColorStateList.valueOf(context.getColor(R.color.moviesSectionColor))
                 completeSearchViewHolder.searchQueryType.setImageDrawable(context.getDrawable(R.drawable.movies_icon))

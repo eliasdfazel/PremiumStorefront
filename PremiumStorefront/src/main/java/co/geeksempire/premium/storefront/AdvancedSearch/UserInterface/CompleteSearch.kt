@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/16/21, 7:20 AM
+ * Last modified 12/17/21, 3:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -186,7 +186,7 @@ class CompleteSearch : AppCompatActivity() {
 
         }
 
-        completeSearchLayoutBinding.cancelIconCompleteSearch.setOnClickListener {
+        completeSearchLayoutBinding.goBackView.setOnClickListener {
 
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             this@CompleteSearch.finish()
