@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/17/21, 4:54 AM
+ * Last modified 12/17/21, 5:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -228,6 +228,14 @@ class CompleteSearch : AppCompatActivity() {
             }
 
         }
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        this@CompleteSearch.finish()
 
     }
 
