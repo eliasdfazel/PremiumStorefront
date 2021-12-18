@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/17/21, 5:18 AM
+ * Last modified 12/18/21, 4:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package co.geeksempire.premium.storefront.AdvancedSearch.UserInterface
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -67,6 +68,8 @@ class CompleteSearch : AppCompatActivity() {
 
             if (searchQuery != null) {
 
+                completeSearchLayoutBinding.searchQueryText.text = searchQuery
+
                 lifecycleScope.launch {
 
                     themePreferences.checkThemeLightDark().collect { themeType ->
@@ -101,7 +104,17 @@ class CompleteSearch : AppCompatActivity() {
 
                                     if (completeSearchAdapter!!.completeSearchResultsItems.isEmpty()) {
 
-                                        this@CompleteSearch.finish()
+                                        Toast.makeText(applicationContext, getString(R.string.nothingFoundText), Toast.LENGTH_LONG).show()
+
+                                        lifecycleScope.launch {
+
+                                            themePreferences.checkThemeLightDark().collect { themeType ->
+
+                                                setupSearchView(themeType)
+
+                                            }
+
+                                        }
 
                                     }
 
@@ -137,7 +150,17 @@ class CompleteSearch : AppCompatActivity() {
 
                                     if (completeSearchAdapter!!.completeSearchResultsItems.isEmpty()) {
 
-                                        this@CompleteSearch.finish()
+                                        Toast.makeText(applicationContext, getString(R.string.nothingFoundText), Toast.LENGTH_LONG).show()
+
+                                        lifecycleScope.launch {
+
+                                            themePreferences.checkThemeLightDark().collect { themeType ->
+
+                                                setupSearchView(themeType)
+
+                                            }
+
+                                        }
 
                                     }
 
@@ -173,7 +196,17 @@ class CompleteSearch : AppCompatActivity() {
 
                                     if (completeSearchAdapter!!.completeSearchResultsItems.isEmpty()) {
 
-                                        this@CompleteSearch.finish()
+                                        Toast.makeText(applicationContext, getString(R.string.nothingFoundText), Toast.LENGTH_LONG).show()
+
+                                        lifecycleScope.launch {
+
+                                            themePreferences.checkThemeLightDark().collect { themeType ->
+
+                                                setupSearchView(themeType)
+
+                                            }
+
+                                        }
 
                                     }
 
@@ -208,13 +241,6 @@ class CompleteSearch : AppCompatActivity() {
 
         }
 
-        completeSearchLayoutBinding.goBackView.setOnClickListener {
-
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-            this@CompleteSearch.finish()
-
-        }
-
         completeSearchLayoutBinding.searchIconCompleteSearch.setOnClickListener {
 
             lifecycleScope.launch {
@@ -229,6 +255,13 @@ class CompleteSearch : AppCompatActivity() {
 
         }
 
+        completeSearchLayoutBinding.goBackView.setOnClickListener {
+
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            this@CompleteSearch.finish()
+
+        }
+
     }
 
     override fun onBackPressed() {
@@ -240,6 +273,20 @@ class CompleteSearch : AppCompatActivity() {
     }
 
     private fun showSearchActionView() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+
+        completeSearchLayoutBinding.searchQueryText.setOnClickListener {
+
+            lifecycleScope.launch {
+
+                themePreferences.checkThemeLightDark().collect { themeType ->
+
+                    setupSearchView(themeType)
+
+                }
+
+            }
+
+        }
 
         completeSearchLayoutBinding.searchBackgroundCompleteSearch.visibility = View.VISIBLE
         completeSearchLayoutBinding.searchBackgroundCompleteSearch.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))

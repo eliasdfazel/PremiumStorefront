@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/17/21, 4:40 AM
+ * Last modified 12/18/21, 4:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -196,6 +196,8 @@ fun CompleteSearch.setupSearchView(themeType: Boolean) {
                     }
 
                     val searchQuery = textView.text.toString()
+
+                    completeSearchLayoutBinding.searchQueryText.text = searchQuery
 
                     searchAllProducts.startApplicationsSearch(searchQuery)
 
