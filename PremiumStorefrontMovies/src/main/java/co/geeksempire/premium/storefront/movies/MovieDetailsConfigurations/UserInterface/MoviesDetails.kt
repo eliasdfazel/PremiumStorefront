@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/22/21, 5:24 AM
+ * Last modified 12/18/21, 5:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -448,7 +448,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
                             if (networkCheckpoint.networkConnection()) {
 
                                 favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
-                                    userEmailAddress = Firebase.auth.currentUser.email!!,
+                                    userEmailAddress = Firebase.auth.currentUser!!.email!!,
                                     productIdToFavorite = productId,
                                     productName = productName,
                                     productDescription = productDescription,
@@ -472,7 +472,7 @@ class MoviesDetails : StorefrontDynamicActivity() {
                                             if (networkCheckpoint.networkConnection()) {
 
                                                 favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
-                                                    userEmailAddress = Firebase.auth.currentUser.email!!,
+                                                    userEmailAddress = Firebase.auth.currentUser!!.email!!,
                                                     productIdToFavorite = productId,
                                                     productName = productName,
                                                     productDescription = productDescription,

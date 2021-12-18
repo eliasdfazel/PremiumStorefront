@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 6/7/21, 9:31 AM
+ * Last modified 12/18/21, 5:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -63,8 +63,8 @@ class SendInvitation (val context: AppCompatActivity, val rootView: ViewGroup) {
         val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clipData = ClipData.newHtmlText(
             firebaseUser.displayName,
-            generateInvitationText(firebaseUser.displayName, context.getString(R.string.applicationName), context.getString(R.string.applicationSummary), dynamicLinkUri),
-            generateInvitationText(firebaseUser.displayName, context.getString(R.string.applicationName), context.getString(R.string.applicationSummary), dynamicLinkUri)
+            generateInvitationText(firebaseUser.displayName!!, context.getString(R.string.applicationName), context.getString(R.string.applicationSummary), dynamicLinkUri),
+            generateInvitationText(firebaseUser.displayName!!, context.getString(R.string.applicationName), context.getString(R.string.applicationSummary), dynamicLinkUri)
         )
         clipboardManager.setPrimaryClip(clipData).also {
 
@@ -78,7 +78,7 @@ class SendInvitation (val context: AppCompatActivity, val rootView: ViewGroup) {
                     override fun onActionButtonClicked(snackbar: Snackbar) {
                         super.onActionButtonClicked(snackbar)
 
-                        ShareIt(context).invokeTextSharing(generateInvitationText(firebaseUser.displayName,
+                        ShareIt(context).invokeTextSharing(generateInvitationText(firebaseUser.displayName!!,
                             context.getString(R.string.applicationName),
                             context.getString(R.string.applicationSummary),
                             dynamicLinkUri))

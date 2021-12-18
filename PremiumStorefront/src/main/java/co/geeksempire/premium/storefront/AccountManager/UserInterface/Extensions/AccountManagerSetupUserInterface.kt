@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/27/21, 8:04 AM
+ * Last modified 12/18/21, 5:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -144,7 +144,7 @@ fun AccountInformation.accountManagerSetupUserInterface() {
         accountInformationLayoutBinding.inviteFriendsView.visibility = View.VISIBLE
 
         (application as PremiumStorefrontApplication).firestoreDatabase
-            .document(accountDataStructure.userProfileDatabasePath(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email))
+            .document(accountDataStructure.userProfileDatabasePath(Firebase.auth.currentUser!!.uid, Firebase.auth.currentUser!!.email!!))
             .get()
             .addOnSuccessListener { documentSnapshot ->
 
@@ -284,7 +284,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
         )
 
         (application as PremiumStorefrontApplication).firestoreDatabase
-            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email))
+            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email!!))
             .set(userInformationProfileData)
             .addOnSuccessListener {
 
@@ -300,7 +300,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
                                 Log.d(this@createUserProfile.javaClass.simpleName, "Phone Number Verified")
 
                                 (application as PremiumStorefrontApplication).firestoreDatabase
-                                    .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email))
+                                    .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email!!))
                                     .update(
                                         "phoneNumberVerified", true,
                                     )
@@ -386,7 +386,7 @@ fun AccountInformation.createUserProfile(profileUpdatingProcess: Boolean = false
             }
 
         (application as PremiumStorefrontApplication).firestoreDatabase
-            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email))
+            .document(accountDataStructure.userProfileDatabasePath(firebaseUser.uid, firebaseUser.email!!))
             .get()
             .addOnSuccessListener { documentSnapshot ->
 

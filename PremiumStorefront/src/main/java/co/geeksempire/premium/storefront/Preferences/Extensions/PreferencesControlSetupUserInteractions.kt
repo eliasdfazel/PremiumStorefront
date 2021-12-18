@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/30/21, 7:36 AM
+ * Last modified 12/18/21, 5:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -166,7 +166,7 @@ fun PreferencesControl.preferencesControlSetupUserInteractions() {
         if (Firebase.auth.currentUser != null) {
 
             SendInvitation(this@preferencesControlSetupUserInteractions, preferencesControlLayoutBinding.rootView)
-                .invite(Firebase.auth.currentUser)
+                .invite(Firebase.auth.currentUser!!)
 
         } else {
 

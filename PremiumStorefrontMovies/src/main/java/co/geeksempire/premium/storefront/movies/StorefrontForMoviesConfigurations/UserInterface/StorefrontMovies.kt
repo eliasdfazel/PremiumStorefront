@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/17/21, 4:54 AM
+ * Last modified 12/18/21, 5:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -601,7 +601,7 @@ class StorefrontMovies : StorefrontDynamicActivity() {
                 .transform(CircleCrop())
                 .into(storefrontMoviesLayoutBinding.profileView)
 
-            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid, it.email,
+            favoritedProcess.isFavoriteProductsExist(accountSignIn.firebaseUser!!.uid, it.email!!,
                 object : FavoriteProductQueryInterface {
 
                     override fun favoriteProductsExist(isFavoriteProductsExist: Boolean) {

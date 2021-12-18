@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/15/21, 11:47 AM
+ * Last modified 12/18/21, 5:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -80,7 +80,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
                         if (networkCheckpoint.networkConnection()) {
 
                             favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
-                                userEmailAddress = Firebase.auth.currentUser.email!!,
+                                userEmailAddress = Firebase.auth.currentUser!!.email!!,
                                 productIdToFavorite = productId,
                                 productName = productName,
                                 productDescription = productDescription,
@@ -105,7 +105,7 @@ fun ProductDetailsFragment.startFavoriteProcess(productId: String, productName: 
                                         if (networkCheckpoint.networkConnection()) {
 
                                             favoritedProcess.add(userUniqueIdentifier = Firebase.auth.currentUser!!.uid,
-                                                userEmailAddress = Firebase.auth.currentUser.email!!,
+                                                userEmailAddress = Firebase.auth.currentUser!!.email!!,
                                                 productIdToFavorite = productId,
                                                 productName = productName,
                                                 productDescription = productDescription,

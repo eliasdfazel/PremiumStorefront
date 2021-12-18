@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 7/1/21, 10:21 AM
+ * Last modified 12/18/21, 5:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -127,7 +127,7 @@ class AccountSignIn (val context: AppCompatActivity, val signInInterface: SignIn
         connection.doOutput = true
 
         val usernameId = firebaseUser.email!!.split("@").first()
-        val userEmailAddress = firebaseUser.email
+        val userEmailAddress = firebaseUser.email!!
         val userPassword = generatePassword(firebaseUser.uid)
 
         val inputData = JSONObject("{" +
