@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/17/21, 3:37 AM
+ * Last modified 12/18/21, 4:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -63,6 +63,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
             completeSearchLayoutBinding.searchBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
             completeSearchLayoutBinding.searchIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))
 
+            completeSearchLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light))
+
         }
         ThemeType.ThemeDark -> {
 
@@ -87,6 +89,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
 
             completeSearchLayoutBinding.searchBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_dark))
             completeSearchLayoutBinding.searchIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.light_transparent))
+
+            completeSearchLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_dark))
 
         }
         else -> {
@@ -121,6 +125,8 @@ fun CompleteSearch.setupCompleteSearchUserInterface(themeType: Boolean) {
 
             completeSearchLayoutBinding.searchBackgroundCompleteSearch.setImageDrawable(getDrawable(R.drawable.preferences_item_background_light))
             completeSearchLayoutBinding.searchIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.dark_transparent))
+
+            completeSearchLayoutBinding.goBackView.setImageDrawable(getDrawable(R.drawable.go_back_layer_light))
 
         }
     }
