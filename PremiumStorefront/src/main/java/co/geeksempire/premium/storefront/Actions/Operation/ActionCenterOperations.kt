@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/10/21, 12:47 PM
+ * Last modified 12/21/21, 6:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.DeveloperIntroductionPage
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.filteringSetup
-import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentSearching.searchingSetup
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentSearching.SearchingSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentSorting.sortingSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForGamesConfigurations.UserInterface.StorefrontGames
@@ -32,6 +32,8 @@ class ActionCenterOperations {
      */
     fun setupForApplicationsStorefront(context: StorefrontApplications, themeType: Boolean = ThemeType.ThemeLight) {
 
+        val searchingSetup = SearchingSetup(context)
+
         context.storefrontLayoutBinding.leftActionView.setOnClickListener {
 
             sortingSetup(context = context, filterAllContent = context.filterAllContent,
@@ -43,7 +45,7 @@ class ActionCenterOperations {
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            searchingSetup(context, context.filterAllContent,
+            searchingSetup.searchingSetup(context.filterAllContent,
                 context.storefrontLayoutBinding.textInputSearchView,
                 context.storefrontLayoutBinding.searchView,
                 context.storefrontLayoutBinding.rightActionView,
@@ -105,6 +107,8 @@ class ActionCenterOperations {
      */
     fun setupForGamesStorefront(context: StorefrontGames, themeType: Boolean = ThemeType.ThemeLight) {
 
+        val searchingSetup = SearchingSetup(context)
+
         context.storefrontLayoutBinding.leftActionView.setOnClickListener {
 
             sortingSetup(context = context, filterAllContent = context.filterAllContent,
@@ -116,7 +120,7 @@ class ActionCenterOperations {
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            searchingSetup(context, context.filterAllContent,
+            searchingSetup.searchingSetup(context.filterAllContent,
                 context.storefrontLayoutBinding.textInputSearchView,
                 context.storefrontLayoutBinding.searchView,
                 context.storefrontLayoutBinding.rightActionView,

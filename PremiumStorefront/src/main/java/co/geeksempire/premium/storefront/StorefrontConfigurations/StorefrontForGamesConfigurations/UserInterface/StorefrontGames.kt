@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/15/21, 8:29 AM
+ * Last modified 12/21/21, 6:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,6 +44,7 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentSearching.SearchingSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.applicationsSectionSwitcherDesign
@@ -164,6 +165,10 @@ class StorefrontGames : StorefrontActivity() {
 
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@StorefrontGames)
+    }
+
+    val searchingSetup: SearchingSetup by lazy {
+        SearchingSetup(context = this@StorefrontGames)
     }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
@@ -304,6 +309,16 @@ class StorefrontGames : StorefrontActivity() {
 
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
+
+                    if (it.first.size <storefrontAllUntouchedContents.size) {
+
+                        searchingSetup.afterQuickSearch(
+                            revertView = storefrontLayoutBinding.searchRevertView, advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
+                            searchQuery = storefrontLayoutBinding.searchView.text.toString(),
+                            storefrontLiveData = storefrontLiveData,
+                            storefrontAllUntouchedContents = storefrontAllUntouchedContents)
+
+                    }
 
                 } else {
                     //Nothing Found

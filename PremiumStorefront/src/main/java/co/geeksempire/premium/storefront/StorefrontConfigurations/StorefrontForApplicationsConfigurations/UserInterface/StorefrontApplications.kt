@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/18/21, 5:21 AM
+ * Last modified 12/21/21, 6:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,6 +45,7 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilterAllContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentFiltering.FilterAdapter.FilterOptionsAdapter
+import co.geeksempire.premium.storefront.StorefrontConfigurations.ContentSearching.SearchingSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontLiveData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.gamesSectionSwitcherDesign
@@ -180,6 +181,10 @@ class StorefrontApplications : StorefrontActivity() {
 
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@StorefrontApplications)
+    }
+
+    val searchingSetup: SearchingSetup by lazy {
+        SearchingSetup(this@StorefrontApplications)
     }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
@@ -324,23 +329,23 @@ class StorefrontApplications : StorefrontActivity() {
 
                 if (it.first.isNotEmpty()) {
 
-                    val initialData = if (it.second) {
-                        if (it.first.size > 19) {
-                            it.first.subList(0, 19)
-                        } else {
-                            it.first
-                        }
-                    } else {
-                        it.first
-                    }
-
                     allContentAdapter.storefrontContents.clear()
-                    allContentAdapter.storefrontContents.addAll(initialData)
+                    allContentAdapter.storefrontContents.addAll(it.first)
 
                     allContentAdapter.notifyDataSetChanged()
 
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
+
+                    if (it.first.size < storefrontAllUntouchedContents.size) {
+
+                        searchingSetup.afterQuickSearch(
+                            revertView = storefrontLayoutBinding.searchRevertView, advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
+                            searchQuery = storefrontLayoutBinding.searchView.text.toString(),
+                            storefrontLiveData = storefrontLiveData,
+                            storefrontAllUntouchedContents = storefrontAllUntouchedContents)
+
+                    }
 
                 } else {
                     //Nothing Found
