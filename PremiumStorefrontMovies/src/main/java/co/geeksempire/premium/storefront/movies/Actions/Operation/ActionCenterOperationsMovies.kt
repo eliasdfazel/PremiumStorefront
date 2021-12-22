@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/22/21, 7:57 AM
+ * Last modified 12/22/21, 8:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,10 @@
 
 package co.geeksempire.premium.storefront.movies.Actions.Operation
 
+import android.view.View
+import android.view.animation.AnimationUtils
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemeType
+import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserInterface.MoviesDetails
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.moviesFilteringSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesSearching.SearchingMoviesSetup
@@ -35,6 +38,16 @@ class ActionCenterOperationsMovies {
 
         /* Search */
         context.storefrontMoviesLayoutBinding.middleActionView.setOnClickListener {
+
+            context.storefrontMoviesLayoutBinding.searchRevertView.apply {
+                visibility = View.INVISIBLE
+                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            }
+
+            context.storefrontMoviesLayoutBinding.searchAdvancedView.apply {
+                visibility = View.INVISIBLE
+                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            }
 
             SearchingMoviesSetup(context).searchingSetup(context.filterAllMovies,
                 context.storefrontMoviesLayoutBinding.textInputSearchView,

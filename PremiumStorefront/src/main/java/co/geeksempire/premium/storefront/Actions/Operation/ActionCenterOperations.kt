@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/21/21, 6:23 AM
+ * Last modified 12/22/21, 8:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -119,6 +119,16 @@ class ActionCenterOperations {
         }
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
+
+            context.storefrontLayoutBinding.searchRevertView.apply {
+                visibility = View.INVISIBLE
+                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            }
+
+            context.storefrontLayoutBinding.searchAdvancedView.apply {
+                visibility = View.INVISIBLE
+                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+            }
 
             searchingSetup.searchingSetup(context.filterAllContent,
                 context.storefrontLayoutBinding.textInputSearchView,
