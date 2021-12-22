@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/22/21, 7:38 AM
+ * Last modified 12/22/21, 7:40 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -291,7 +291,7 @@ class SearchingSetup (private val context: AppCompatActivity) {
             })
             valueAnimatorIncreaseTextSize.start()
 
-        }, 555)
+        }, 777)
 
         revertView.setOnClickListener {
 
