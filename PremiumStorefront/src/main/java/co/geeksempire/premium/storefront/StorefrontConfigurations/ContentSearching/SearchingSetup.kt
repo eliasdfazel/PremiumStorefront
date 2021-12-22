@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/21/21, 6:52 AM
+ * Last modified 12/22/21, 7:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.TypedValue
 import android.view.View
+import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
@@ -44,6 +45,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+
 
 class SearchingSetup (private val context: AppCompatActivity) {
 
@@ -249,13 +251,19 @@ class SearchingSetup (private val context: AppCompatActivity) {
 
         Handler(Looper.getMainLooper()).postDelayed({
 
+
+            val alphaAnimation = AlphaAnimation(0.0f, 1.0f).apply {
+                duration = 1000
+                fillAfter = true
+            }
+
             revertView.visibility = View.VISIBLE
-            revertView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            revertView.startAnimation(alphaAnimation)
 
             advancedSearchView.visibility = View.VISIBLE
-            advancedSearchView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            advancedSearchView.startAnimation(alphaAnimation)
 
-            val valueAnimatorIncreaseTextSize = ValueAnimator.ofFloat(7f, 19f)
+            val valueAnimatorIncreaseTextSize = ValueAnimator.ofFloat(7f, 21f)
             valueAnimatorIncreaseTextSize.duration = 777
             valueAnimatorIncreaseTextSize.addUpdateListener { animator ->
                 val animatorValue = animator.animatedValue as Float
