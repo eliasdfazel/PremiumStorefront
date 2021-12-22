@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/22/21, 7:40 AM
+ * Last modified 12/22/21, 8:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -263,7 +263,7 @@ class SearchingSetup (private val context: AppCompatActivity) {
             advancedSearchView.visibility = View.VISIBLE
             advancedSearchView.startAnimation(alphaAnimation)
 
-            val valueAnimatorIncreaseTextSize = ValueAnimator.ofFloat(7f, 21f)
+            val valueAnimatorIncreaseTextSize = ValueAnimator.ofFloat(11f, 21f)
             valueAnimatorIncreaseTextSize.duration = 777
             valueAnimatorIncreaseTextSize.addUpdateListener { animator ->
                 val animatorValue = animator.animatedValue as Float

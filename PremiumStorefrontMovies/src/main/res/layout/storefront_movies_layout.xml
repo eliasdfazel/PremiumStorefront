@@ -3,7 +3,7 @@
   ~ Copyright © 2021 By Geeks Empire.
   ~
   ~ Created by Elias Fazel
-  ~ Last modified 8/20/21, 1:00 PM
+  ~ Last modified 12/22/21, 8:09 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -454,6 +454,7 @@
         apps:layout_constraintEnd_toEndOf="parent"/>
 
     <net.geeksempire.blurry.effect.view.RealtimeBlurView
+        android:id="@+id/actionCenterMoviesBlurView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="13dp"
@@ -510,6 +511,58 @@
         apps:layout_constraintBottom_toBottomOf="@id/actionCenterView"
         apps:layout_constraintStart_toStartOf="@id/actionCenterView"
         apps:layout_constraintEnd_toEndOf="@+id/actionCenterView"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/searchRevertView"
+        android:layout_width="109dp"
+        android:layout_height="29dp"
+        android:layout_marginVertical="9dp"
+        android:paddingHorizontal="7dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:lines="1"
+        android:text="@string/revertText"
+        android:textColor="@color/default_color_dark"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        android:fontFamily="@font/upcil"
+        android:textAllCaps="false"
+        android:shadowColor="@color/default_color_bright"
+        android:shadowRadius="3"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:background="@drawable/search_after_actions_light"
+        android:visibility="invisible"
+
+        apps:layout_constraintBottom_toTopOf="@id/actionCenterMoviesBlurView"
+        apps:layout_constraintStart_toStartOf="@id/actionCenterMoviesBlurView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/searchAdvancedView"
+        android:layout_width="109dp"
+        android:layout_height="29dp"
+        android:layout_marginVertical="9dp"
+        android:paddingHorizontal="7dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:lines="1"
+        android:text="@string/advancedSearchText"
+        android:textColor="@color/default_color_dark"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        android:fontFamily="@font/upcil"
+        android:textAllCaps="false"
+        android:shadowColor="@color/default_color_bright"
+        android:shadowRadius="3"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:background="@drawable/search_after_actions_light"
+        android:visibility="invisible"
+
+        apps:layout_constraintBottom_toTopOf="@id/actionCenterMoviesBlurView"
+        apps:layout_constraintEnd_toEndOf="@id/actionCenterMoviesBlurView" />
 
     <!-- Loading View  -->
     <net.geeksempire.loadingspin.SpinKitView

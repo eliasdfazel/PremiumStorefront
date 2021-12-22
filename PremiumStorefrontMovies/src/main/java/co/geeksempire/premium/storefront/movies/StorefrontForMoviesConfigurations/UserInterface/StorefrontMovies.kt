@@ -2,7 +2,7 @@
  * Copyright © 2021 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 12/18/21, 5:23 AM
+ * Last modified 12/22/21, 8:09 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -72,6 +72,7 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilterAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.Filter.FilteringOptions
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesFiltering.FilterAdapter.FilterOptionsAdapter
+import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.MoviesSearching.SearchingMoviesSetup
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveAllMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveFeaturedMovies
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.NetworkOperations.retrieveGenreMovies
@@ -166,6 +167,10 @@ class StorefrontMovies : StorefrontDynamicActivity() {
     }
 
     val genresData: GenreData = GenreData()
+
+    val searchingMoviesSetup: SearchingMoviesSetup by lazy {
+        SearchingMoviesSetup(this@StorefrontMovies)
+    }
 
     val networkCheckpoint: NetworkCheckpoint by lazy {
         NetworkCheckpoint(applicationContext)
@@ -386,6 +391,18 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
+
+                    storefrontMoviesLayoutBinding.nestedScrollView.smoothScrollTo(0, storefrontMoviesLayoutBinding.nestedScrollView.height)
+
+                    if (it.first.size < storefrontAllUntouchedContents.size) {
+
+                        searchingMoviesSetup.afterQuickSearch(
+                            searchMoviesRevertView = storefrontMoviesLayoutBinding.searchRevertView, searchMoviesAdvancedView = storefrontMoviesLayoutBinding.searchAdvancedView,
+                            searchQuery = storefrontMoviesLayoutBinding.searchView.text.toString(),
+                            storefrontLiveData = moviesStorefrontLiveData,
+                            storefrontAllUntouchedContents = storefrontAllUntouchedContents)
+
+                    }
 
                 } else {
                     //Nothing Found
