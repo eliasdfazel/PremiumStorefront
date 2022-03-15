@@ -1,8 +1,8 @@
 /*
- * Copyright © 2021 By Geeks Empire.
+ * Copyright © 2022 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/13/21, 6:43 AM
+ * Last modified 3/15/22, 5:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,8 +27,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.ViewHolder.AllContentViewHolder
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
-import co.geeksempire.premium.storefront.Utils.Data.shareApplication
-import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import com.bumptech.glide.Glide
@@ -46,8 +44,6 @@ class AllDeveloperContentsAdapter(private val context: AppCompatActivity,
     var themeType: Boolean = ThemeType.ThemeLight
 
     val storefrontContents: ArrayList<StorefrontContentsData> = ArrayList<StorefrontContentsData>()
-
-    val installedApplications = InstalledApplications(context)
 
     override fun getItemCount() : Int {
 
@@ -187,22 +183,10 @@ class AllDeveloperContentsAdapter(private val context: AppCompatActivity,
 
         allContentViewHolder.installView.setOnClickListener {
 
-
-            if (installedApplications.appIsInstalled(storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey])) {
-
-                shareApplication(context,
-                    storefrontContents[position].productName,
-                    storefrontContents[position].productName,
-                    storefrontContents[position].productSummary)
-
-            } else {
-
-                openPlayStoreToInstallApplications(context = context,
-                    aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
-                    applicationName = storefrontContents[position].productName,
-                    applicationSummary = storefrontContents[position].productSummary)
-
-            }
+            openPlayStoreToInstallApplications(context = context,
+                aPackageName = (storefrontContents[position].productAttributes[ProductsContentKey.AttributesPackageNameKey].toString()),
+                applicationName = storefrontContents[position].productName,
+                applicationSummary = storefrontContents[position].productSummary)
 
         }
 
