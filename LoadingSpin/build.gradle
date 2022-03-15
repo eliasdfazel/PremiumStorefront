@@ -1,8 +1,8 @@
 /*
- * Copyright © 2021 By Geeks Empire.
+ * Copyright © 2022 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 9/27/21, 8:24 AM
+ * Last modified 3/15/22, 4:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,8 +19,8 @@ android {
         minSdkVersion 24
         targetSdkVersion 31
     }
-
-    lintOptions {
+    lint {
         abortOnError false
     }
+
 }

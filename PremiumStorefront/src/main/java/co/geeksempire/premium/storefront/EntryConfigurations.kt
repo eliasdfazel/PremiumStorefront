@@ -1,8 +1,8 @@
 /*
- * Copyright © 2021 By Geeks Empire.
+ * Copyright © 2022 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 8/20/21, 5:28 AM
+ * Last modified 3/15/22, 5:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,6 @@ import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandl
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.databinding.EntryConfigurationsLayoutBinding
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class EntryConfigurations : AppCompatActivity() {
@@ -122,7 +121,6 @@ class EntryConfigurations : AppCompatActivity() {
             )
 
         }
-
 
     }
 

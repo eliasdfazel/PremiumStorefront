@@ -1,8 +1,8 @@
 /*
- * Copyright © 2021 By Geeks Empire.
+ * Copyright © 2022 By Geeks Empire.
  *
  * Created by Elias Fazel
- * Last modified 11/12/21, 6:44 AM
+ * Last modified 3/15/22, 4:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,8 +26,6 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.ViewHolder.AllContentViewHolder
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
-import co.geeksempire.premium.storefront.Utils.Data.shareApplication
-import co.geeksempire.premium.storefront.Utils.System.InstalledApplications
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import com.bumptech.glide.Glide
@@ -46,8 +44,6 @@ class AllContentAdapter(private val context: AppCompatActivity,
     var themeType: Boolean = ThemeType.ThemeLight
 
     val storefrontContents: ArrayList<DocumentSnapshot> = ArrayList<DocumentSnapshot>()
-
-    val installedApplications = InstalledApplications(context)
 
     override fun getItemCount() : Int {
 
@@ -192,21 +188,10 @@ class AllContentAdapter(private val context: AppCompatActivity,
             allContentViewHolder.installView.setOnClickListener {
 
 
-                if (installedApplications.appIsInstalled(productDataStructure.productPackageName())) {
-
-                    shareApplication(context,
-                        productDataStructure.productName(),
-                        productDataStructure.productName(),
-                        productDataStructure.productSummary())
-
-                } else {
-
-                    openPlayStoreToInstallApplications(context = context,
-                        aPackageName = productDataStructure.productPackageName(),
-                        applicationName = productDataStructure.productName(),
-                        applicationSummary = productDataStructure.productSummary())
-
-                }
+                openPlayStoreToInstallApplications(context = context,
+                    aPackageName = productDataStructure.productPackageName(),
+                    applicationName = productDataStructure.productName(),
+                    applicationSummary = productDataStructure.productSummary())
 
             }
 
