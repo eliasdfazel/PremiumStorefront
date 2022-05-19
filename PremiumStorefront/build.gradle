@@ -48,10 +48,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
+        resources {
+            excludes += ['META-INF/DEPENDENCIES']
+        }
     }
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -82,6 +84,7 @@ android {
 
     dynamicFeatures = [':PremiumStorefrontMovies',
                        ':PremiumStorefrontBooks']
+    namespace 'co.geeksempire.premium.storefront'
 }
 
 static def getDateYear() {

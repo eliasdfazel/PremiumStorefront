@@ -9,8 +9,7 @@
   ~ https://opensource.org/licenses/MIT
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="co.geeksempire.youtubeplayer">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
