@@ -28,7 +28,7 @@ class SwipeGestureListener(private val context: Context,
     /**
      * Set Minimum Distance Of Swipe
      */
-    var swipeMinDistance: Int  = 500
+    var swipeMinDistance: Int  = 666
     /**
      * Set Maximum Distance Of Swipe
      */
