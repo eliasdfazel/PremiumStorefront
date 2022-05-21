@@ -153,6 +153,7 @@ dependencies {
     api 'com.google.firebase:firebase-analytics-ktx'
 
     api 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-perf'
 
     api 'com.google.firebase:firebase-auth-ktx'
 
