@@ -207,6 +207,7 @@
                 android:padding="29dp"
                 android:background="@drawable/preferences_item_background_light"
                 android:contentDescription="@string/themeToggleDescription"
+                android:tooltipText="@string/themeToggleDescription"
 
                 apps:lottie_rawRes="@raw/toggle_theme_animation"
 
@@ -222,6 +223,7 @@
                 android:padding="23dp"
                 android:background="@drawable/preferences_item_background_light"
                 android:contentDescription="@string/supportDescription"
+                android:tooltipText="@string/supportDescription"
 
                 apps:lottie_rawRes="@raw/support_animation"
                 apps:lottie_autoPlay="true"
@@ -240,6 +242,7 @@
                 android:padding="23dp"
                 android:background="@drawable/preferences_item_background_light"
                 android:contentDescription="@string/changeLogDescription"
+                android:tooltipText="@string/changeLogDescription"
 
                 apps:lottie_rawRes="@raw/what_s_new_animation"
                 apps:lottie_autoPlay="true"
@@ -261,6 +264,7 @@
                 android:background="@drawable/preferences_item_small_background_light"
                 android:src="@drawable/developer_submission_icon_light"
                 android:contentDescription="@string/submissionRequestDescription"
+                android:tooltipText="@string/submissionRequestDescription"
 
                 apps:layout_constraintTop_toBottomOf="@id/supportView"
                 apps:layout_constraintStart_toStartOf="@id/supportView" />
