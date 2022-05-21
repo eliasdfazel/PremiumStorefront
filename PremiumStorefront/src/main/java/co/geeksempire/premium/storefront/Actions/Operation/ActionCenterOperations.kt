@@ -45,6 +45,21 @@ class ActionCenterOperations {
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
+            if (context.storefrontLayoutBinding.searchRevertView.isShown
+                && context.storefrontLayoutBinding.searchAdvancedView.isShown) {
+
+                context.storefrontLayoutBinding.searchRevertView.apply {
+                    visibility = View.INVISIBLE
+                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                }
+
+                context.storefrontLayoutBinding.searchAdvancedView.apply {
+                    visibility = View.INVISIBLE
+                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                }
+
+            }
+
             searchingSetup.searchingSetup(context.filterAllContent,
                 context.storefrontLayoutBinding.textInputSearchView,
                 context.storefrontLayoutBinding.searchView,
@@ -120,14 +135,19 @@ class ActionCenterOperations {
 
         context.storefrontLayoutBinding.middleActionView.setOnClickListener {
 
-            context.storefrontLayoutBinding.searchRevertView.apply {
-                visibility = View.INVISIBLE
-                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
-            }
+            if (context.storefrontLayoutBinding.searchRevertView.isShown
+                && context.storefrontLayoutBinding.searchAdvancedView.isShown) {
 
-            context.storefrontLayoutBinding.searchAdvancedView.apply {
-                visibility = View.INVISIBLE
-                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                context.storefrontLayoutBinding.searchRevertView.apply {
+                    visibility = View.INVISIBLE
+                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                }
+
+                context.storefrontLayoutBinding.searchAdvancedView.apply {
+                    visibility = View.INVISIBLE
+                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                }
+
             }
 
             searchingSetup.searchingSetup(context.filterAllContent,

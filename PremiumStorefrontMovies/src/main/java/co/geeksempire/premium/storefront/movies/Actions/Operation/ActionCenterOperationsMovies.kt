@@ -39,14 +39,19 @@ class ActionCenterOperationsMovies {
         /* Search */
         context.storefrontMoviesLayoutBinding.middleActionView.setOnClickListener {
 
-            context.storefrontMoviesLayoutBinding.searchRevertView.apply {
-                visibility = View.INVISIBLE
-                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
-            }
+            if (context.storefrontMoviesLayoutBinding.searchRevertView.isShown
+                && context.storefrontMoviesLayoutBinding.searchAdvancedView.isShown) {
 
-            context.storefrontMoviesLayoutBinding.searchAdvancedView.apply {
-                visibility = View.INVISIBLE
-                startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                context.storefrontMoviesLayoutBinding.searchRevertView.apply {
+                    visibility = View.INVISIBLE
+                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                }
+
+                context.storefrontMoviesLayoutBinding.searchAdvancedView.apply {
+                    visibility = View.INVISIBLE
+                    startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_out))
+                }
+
             }
 
             SearchingMoviesSetup(context).searchingSetup(context.filterAllMovies,
