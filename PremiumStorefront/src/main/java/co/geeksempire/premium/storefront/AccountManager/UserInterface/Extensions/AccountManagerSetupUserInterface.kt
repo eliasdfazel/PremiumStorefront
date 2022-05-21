@@ -85,7 +85,7 @@ fun AccountInformation.accountManagerSetupUserInterface() {
 
     Firebase.auth.currentUser?.let { firebaseUser ->
 
-        if (this@accountManagerSetupUserInterface.isFinishing) {
+        if (!this@accountManagerSetupUserInterface.isFinishing) {
 
             Glide.with(this@accountManagerSetupUserInterface)
             .asDrawable()
