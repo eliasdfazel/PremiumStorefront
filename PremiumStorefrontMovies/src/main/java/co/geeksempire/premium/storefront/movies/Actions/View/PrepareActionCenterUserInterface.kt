@@ -70,7 +70,20 @@ class PrepareActionCenterUserInterface(private val context: Context,
             setShadowLayer(29f, 0f, 0f, context.getColor(R.color.dark_transparent))
         }
 
-        val shadowLayer = context.getDrawable(R.drawable.action_center_shadow_background_light_movie) as LayerDrawable
+        val shadowLayer = when (themeType) {
+            ThemeType.ThemeLight -> {
+
+                context.getDrawable(R.drawable.action_center_shadow_background_light_movie) as LayerDrawable
+
+            }
+            ThemeType.ThemeDark -> {
+
+                context.getDrawable(R.drawable.action_center_shadow_background_dark_movie) as LayerDrawable
+
+            }
+            else -> context.getDrawable(R.drawable.action_center_shadow_background_light_movie) as LayerDrawable
+
+        }
 
         actionCenterView.setLayerType(AppCompatButton.LAYER_TYPE_SOFTWARE, shapeDarkShadow.paint)
 

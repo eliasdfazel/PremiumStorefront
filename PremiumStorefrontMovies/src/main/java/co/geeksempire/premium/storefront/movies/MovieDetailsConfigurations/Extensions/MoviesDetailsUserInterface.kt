@@ -88,9 +88,9 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
 
             prepareActionCenterUserInterface.let { centerUserInterface ->
 
-                centerUserInterface.design(ThemeType.ThemeLight)
+                centerUserInterface.design(ThemeType.ThemeDark)
 
-                centerUserInterface.setupIconsForDetails(ThemeType.ThemeLight)
+                centerUserInterface.setupIconsForDetails(ThemeType.ThemeDark)
 
             }
 
