@@ -84,7 +84,7 @@ class MoviesStorefrontLiveData : ViewModel() {
 
             storefrontAllContents.add(
                 StorefrontMoviesContentsData(
-                    movieId = movieId,
+                    movieId = JSONArray(attributesMap[MoviesDataKey.MovieId]).get(0).toString(),
                     movieName = featuredContentJsonObject.getString(ProductsContentKey.NameKey),
                     movieDescription = featuredContentJsonObject.getString(ProductsContentKey.DescriptionKey),
                     movieSummary = featuredContentJsonObject.getString(ProductsContentKey.SummaryKey),

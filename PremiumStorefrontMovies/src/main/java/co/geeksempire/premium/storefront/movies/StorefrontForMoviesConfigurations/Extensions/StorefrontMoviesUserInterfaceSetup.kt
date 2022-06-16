@@ -218,6 +218,7 @@ fun StorefrontMovies.setupStorefrontMoviesUserInterface(themeType: Boolean) {
             storefrontMoviesLayoutBinding.newMovieBlurryBackground.setSecondOverlayColor(getColor(R.color.premiumDarkTransparent))
 
         }
+        else -> {}
     }
 
 }

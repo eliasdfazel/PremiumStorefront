@@ -52,7 +52,10 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.set
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.startMoviesSwitching
 import co.geeksempire.premium.storefront.StorefrontConfigurations.Extensions.storefrontUserInteractionSetup
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
-import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.*
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.AllContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveCategories
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveFeaturedContent
+import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkOperations.retrieveNewContent
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontActivity
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontForApplicationsConfigurations.UserInterface.StorefrontApplications
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.Adapter.AllContentAdapter
@@ -66,7 +69,10 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplication
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
-import co.geeksempire.premium.storefront.Utils.Notifications.*
+import co.geeksempire.premium.storefront.Utils.Notifications.RemoteSubscriptions
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.Notifications.SubscriptionInterface
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
@@ -87,12 +93,10 @@ import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.android.synthetic.main.storefront_layout.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import java.util.*
-import kotlin.collections.ArrayList
 
 class StorefrontGames : StorefrontActivity() {
 
@@ -714,6 +718,7 @@ class StorefrontGames : StorefrontActivity() {
                     }
                 }
             }
+            else -> {}
         }
 
     }

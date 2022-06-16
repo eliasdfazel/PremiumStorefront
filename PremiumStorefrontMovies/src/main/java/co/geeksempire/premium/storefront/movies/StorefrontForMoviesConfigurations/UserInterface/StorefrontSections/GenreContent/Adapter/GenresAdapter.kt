@@ -81,6 +81,7 @@ class GenresAdapter(private val context: AppCompatActivity,
                 genresViewHolder.genreIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             }
+            else -> {}
         }
 
         genresViewHolder.genreIconImageView.background = if (storefrontGenres[position].selectedCategory) {

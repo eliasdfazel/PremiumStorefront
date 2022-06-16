@@ -123,6 +123,7 @@ fun DeveloperIntroductionPage.setupUserInterfaceDeveloperPage(themeType: Boolean
             developerIntroductionLayoutBinding.productMovies.background = getDrawable(R.drawable.developer_products_background_dark)
 
         }
+        else -> {}
     }
 
     setupDeveloperLogoDesign(themeType)

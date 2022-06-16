@@ -60,6 +60,7 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
             sortingInclude.sortSelectedView.background = context.getDrawable(R.drawable.sorting_selected_container_layer_dark_movie)
 
         }
+        else -> {}
     }
 
     if (filteringInclude.root.isShown) {

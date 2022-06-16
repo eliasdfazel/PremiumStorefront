@@ -55,6 +55,7 @@ class CompleteSearchAdapter (private val context: CompleteSearch, private val th
                 completeSearchViewHolder.productTitle.setTextColor(context.getColor(R.color.light))
 
             }
+            else -> {}
         }
 
         when (completeSearchResultsItems[position].searchResultType) {

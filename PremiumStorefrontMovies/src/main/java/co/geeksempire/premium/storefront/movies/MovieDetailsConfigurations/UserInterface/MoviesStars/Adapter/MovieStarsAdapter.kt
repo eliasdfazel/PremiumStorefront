@@ -53,6 +53,7 @@ class MovieStarsAdapter (val context: AppCompatActivity, val themeType: Boolean)
                 movieStarsViewHolder.rootView.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.premiumDarkTransparent))
 
             }
+            else -> {}
         }
 
         movieStarsViewHolder.rootView.contentDescription = moviesDetailsList[position].movieStarName

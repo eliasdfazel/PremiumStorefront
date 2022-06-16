@@ -38,6 +38,7 @@ class ToggleTheme (private val context: AppCompatActivity,
                     preferencesControlViewBinding.themeToggleView.frame = 251
 
                 }
+                else -> {}
             }
 
 
@@ -96,6 +97,7 @@ class ToggleTheme (private val context: AppCompatActivity,
                             }
 
                         }
+                        else -> {}
                     }
 
                 }

@@ -47,6 +47,7 @@ fun CompleteSearch.setupSearchView(themeType: Boolean) {
             completeSearchLayoutBinding.searchIconCompleteSearch.imageTintList = ColorStateList.valueOf(getColor(R.color.default_color_bright))
 
         }
+        else -> {}
     }
 
     val hideSearchViewAction = {

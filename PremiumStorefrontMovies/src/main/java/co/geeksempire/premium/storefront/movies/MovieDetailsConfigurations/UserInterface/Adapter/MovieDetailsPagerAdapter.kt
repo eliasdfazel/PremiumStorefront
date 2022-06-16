@@ -44,7 +44,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.DocumentSnapshot
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 import net.geeksempire.balloon.optionsmenu.library.Utils.columnCount
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
@@ -209,6 +212,7 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
                 })
 
             }
+            else -> {}
         }
 
         moviesDetailsList[position].data?.let { documentSnapshot ->

@@ -33,7 +33,6 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSect
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.Adapter.FeaturedContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.NewContent.Adapter.NewContentAdapter
 import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.OldContent.Adapter.OldContentAdapter
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 fun setupStorefrontUserInterface(context: AppCompatActivity,
@@ -263,6 +262,7 @@ fun setupStorefrontUserInterface(context: AppCompatActivity,
 
                 }
 
+                else -> {}
             }
 
         }

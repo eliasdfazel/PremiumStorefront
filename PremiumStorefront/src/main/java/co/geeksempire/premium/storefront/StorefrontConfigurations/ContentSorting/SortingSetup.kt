@@ -60,6 +60,7 @@ fun sortingSetup(context: AppCompatActivity, filterAllContent: FilterAllContent,
             sortingInclude.sortSelectedView.background = context.getDrawable(R.drawable.sorting_selected_container_layer_dark)
 
         }
+        else -> {}
     }
 
     if (filteringInclude.root.isShown) {

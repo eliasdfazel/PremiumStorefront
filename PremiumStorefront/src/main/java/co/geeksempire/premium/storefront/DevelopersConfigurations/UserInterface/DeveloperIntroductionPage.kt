@@ -47,7 +47,6 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
@@ -210,6 +209,7 @@ class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
                                 developerIntroductionLayoutBinding.developerNameTextView.setShadowLayer(developerIntroductionLayoutBinding.developerNameTextView.shadowRadius, developerIntroductionLayoutBinding.developerNameTextView.shadowDx, developerIntroductionLayoutBinding.developerNameTextView.shadowDy, getColor(R.color.light_transparent))
 
                             }
+                            else -> {}
                         }
 
                         developerIntroductionLayoutBinding.developerNameTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))

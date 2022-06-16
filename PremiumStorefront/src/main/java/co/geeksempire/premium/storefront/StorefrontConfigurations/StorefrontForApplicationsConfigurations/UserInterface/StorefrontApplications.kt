@@ -67,7 +67,10 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplication
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
-import co.geeksempire.premium.storefront.Utils.Notifications.*
+import co.geeksempire.premium.storefront.Utils.Notifications.RemoteSubscriptions
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.Notifications.SubscriptionInterface
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
@@ -88,13 +91,11 @@ import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.android.synthetic.main.storefront_layout.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import net.geeksempire.balloon.optionsmenu.library.Utils.percentageOfDisplayX
 import java.util.*
-import kotlin.collections.ArrayList
 
 class StorefrontApplications : StorefrontActivity() {
 
@@ -749,6 +750,7 @@ class StorefrontApplications : StorefrontActivity() {
                     }
                 }
             }
+            else -> {}
         }
 
     }

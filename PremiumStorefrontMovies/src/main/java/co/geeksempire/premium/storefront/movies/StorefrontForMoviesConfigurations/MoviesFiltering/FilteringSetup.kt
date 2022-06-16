@@ -32,7 +32,10 @@ import co.geeksempire.premium.storefront.movies.databinding.MoviesFilteringLayou
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSortingLayoutBinding
 import com.google.firebase.firestore.DocumentSnapshot
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
 import kotlin.math.absoluteValue
 
 fun moviesFilteringSetup(context: AppCompatActivity,
@@ -64,6 +67,7 @@ fun moviesFilteringSetup(context: AppCompatActivity,
             moviesFilteringLayoutBinding.filterSelectedView.background = context.getDrawable(R.drawable.filtering_selected_container_layer_dark_movie)
 
         }
+        else -> {}
     }
 
     if (moviesSortingLayoutBinding.root.isShown) {

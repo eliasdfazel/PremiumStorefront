@@ -54,7 +54,10 @@ import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.InApplication
 import co.geeksempire.premium.storefront.Utils.InApplicationUpdate.UpdateResponse
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
-import co.geeksempire.premium.storefront.Utils.Notifications.*
+import co.geeksempire.premium.storefront.Utils.Notifications.RemoteSubscriptions
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
+import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.Notifications.SubscriptionInterface
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
@@ -98,8 +101,6 @@ import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import kotlinx.android.synthetic.main.storefront_movies_layout.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
@@ -292,36 +293,45 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
             })
 
-            moviesStorefrontLiveData.newContentItemData.observe(this@StorefrontMovies, {
+            moviesStorefrontLiveData.newContentItemData.observe(this@StorefrontMovies) {
 
                 if (it.isNotEmpty()) {
 
                     newMoviesAdapter.storefrontMoviesContents.clear()
                     newMoviesAdapter.storefrontMoviesContents.addAll(it)
 
-                    newMoviesAdapter.notifyItemRangeInserted(0, newMoviesAdapter.storefrontMoviesContents.size)
+                    newMoviesAdapter.notifyItemRangeInserted(
+                        0,
+                        newMoviesAdapter.storefrontMoviesContents.size
+                    )
 
                     if (storefrontMoviesLayoutBinding.newContentRecyclerView.isGone) {
 
-                        storefrontMoviesLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
-                        storefrontMoviesLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
+                        storefrontMoviesLayoutBinding.newContentRecyclerView.startAnimation(
+                            AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie)
+                        )
+                        storefrontMoviesLayoutBinding.newContentRecyclerView.visibility =
+                            View.VISIBLE
 
                     }
 
                     if (storefrontMoviesLayoutBinding.randomMovieSelection.isGone) {
 
-                        storefrontMoviesLayoutBinding.randomMovieSelection.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
+                        storefrontMoviesLayoutBinding.randomMovieSelection.startAnimation(
+                            AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie)
+                        )
                         storefrontMoviesLayoutBinding.randomMovieSelection.visibility = View.VISIBLE
 
                     }
 
-                    storefrontMoviesLayoutBinding.dividerNewContentImageView.visibility = View.VISIBLE
+                    storefrontMoviesLayoutBinding.dividerNewContentImageView.visibility =
+                        View.VISIBLE
 
                     setSelectedBlurryBackground()
 
                 }
 
-            })
+            }
 
             moviesStorefrontLiveData.allMoviesItemData.observe(this@StorefrontMovies, {
 
@@ -778,6 +788,9 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                     }
                 }
+            }
+            else -> {
+
             }
         }
 

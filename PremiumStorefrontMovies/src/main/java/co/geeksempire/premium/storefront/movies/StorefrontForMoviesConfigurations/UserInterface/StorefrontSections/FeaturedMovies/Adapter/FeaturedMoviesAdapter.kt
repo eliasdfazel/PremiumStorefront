@@ -84,6 +84,7 @@ class FeaturedMoviesAdapter (val context: StorefrontMovies) : RecyclerView.Adapt
                 featuredMoviesViewHolder.movieGenreThird.imageTintList = ColorStateList.valueOf(context.getColor(R.color.black))
 
             }
+            else -> {}
         }
 
     }

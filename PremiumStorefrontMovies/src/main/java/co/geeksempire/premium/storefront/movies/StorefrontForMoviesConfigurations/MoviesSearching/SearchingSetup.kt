@@ -77,6 +77,7 @@ class SearchingMoviesSetup (private val context: AppCompatActivity) {
                 searchView.setHintTextColor(context.getColor(R.color.default_color_game_light))
 
             }
+            else -> {}
         }
 
         if (textInputSearchView.isShown) {

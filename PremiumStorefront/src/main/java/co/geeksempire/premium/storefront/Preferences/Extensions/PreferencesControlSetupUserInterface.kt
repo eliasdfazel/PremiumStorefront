@@ -34,7 +34,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 fun PreferencesControl.preferencesControlSetupUserInterface() {
@@ -226,6 +225,7 @@ fun PreferencesControl.toggleLightDark() {
 
                 }
 
+                else -> {}
             }
 
         }

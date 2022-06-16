@@ -274,6 +274,7 @@ class PrepareActionCenterUserInterface(private val context: Context,
                 actionRightView.background = null
 
             }
+            else -> {}
         }
 
     }

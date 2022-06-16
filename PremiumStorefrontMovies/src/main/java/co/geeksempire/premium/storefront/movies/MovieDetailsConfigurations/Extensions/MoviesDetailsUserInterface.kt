@@ -115,6 +115,7 @@ fun MoviesDetails.setupMoviesDetailsUserInterface(themeType: Boolean) {
             moviesDetailsLayoutBinding.goBackView.setImageDrawable(AppCompatResources.getDrawable(applicationContext, R.drawable.go_back_layer_dark_movie))
 
         }
+        else -> {}
     }
 
 }

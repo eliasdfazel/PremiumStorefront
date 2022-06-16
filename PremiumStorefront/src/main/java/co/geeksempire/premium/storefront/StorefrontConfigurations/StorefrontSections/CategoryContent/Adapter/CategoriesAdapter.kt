@@ -88,6 +88,7 @@ class CategoriesAdapter(private val context: AppCompatActivity,
                 categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.light))
 
             }
+            else -> {}
         }
 
         categoriesViewHolder.categoryIconImageView.background = if (storefrontCategories[position].selectedCategory) {
@@ -248,6 +249,7 @@ class CategoriesAdapter(private val context: AppCompatActivity,
                             categoriesViewHolder.categoryIconImageView.imageTintList = ColorStateList.valueOf(context.getColor(R.color.dark))
 
                         }
+                        else -> {}
                     }
 
                     categoryIndicatorTextView.text = storefrontCategories[position].categoryName
