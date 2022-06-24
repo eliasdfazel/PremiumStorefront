@@ -98,8 +98,6 @@ class NewMoviesAdapter(private val context: AppCompatActivity) : RecyclerView.Ad
 
         newContentViewHolder.rootViewItem.setOnClickListener {
 
-            println(">>> " + storefrontMoviesContents[position].movieId)
-
             openPlayStoreToWatchMovie(context = context,
                 movieId = storefrontMoviesContents[position].movieId,
                 movieName = storefrontMoviesContents[position].movieName,

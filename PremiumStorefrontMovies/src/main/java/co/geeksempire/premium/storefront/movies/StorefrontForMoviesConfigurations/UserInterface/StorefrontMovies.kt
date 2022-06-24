@@ -261,29 +261,41 @@ class StorefrontMovies : StorefrontDynamicActivity() {
             storefrontMoviesLayoutBinding.allContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 159, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL, false)
             storefrontMoviesLayoutBinding.allContentRecyclerView.adapter = allMoviesAdapter
 
-            moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies, {
+            moviesStorefrontLiveData.featuredContentItemData.observe(this@StorefrontMovies) {
 
                 if (it.isNotEmpty()) {
 
                     featuredMoviesAdapter.featuredMoviesData.clear()
                     featuredMoviesAdapter.featuredMoviesData.addAll(it)
 
-                    featuredMoviesAdapter.notifyItemRangeInserted(0, featuredMoviesAdapter.featuredMoviesData.size)
+                    featuredMoviesAdapter.notifyItemRangeInserted(
+                        0,
+                        featuredMoviesAdapter.featuredMoviesData.size
+                    )
 
                     if (storefrontMoviesLayoutBinding.loadingView.isVisible) {
 
-                        storefrontMoviesLayoutBinding.loadingView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_out_movie))
+                        storefrontMoviesLayoutBinding.loadingView.startAnimation(
+                            AnimationUtils.loadAnimation(
+                                applicationContext,
+                                R.anim.fade_out_movie
+                            )
+                        )
                         storefrontMoviesLayoutBinding.loadingView.visibility = View.GONE
 
                     }
 
                     if (storefrontMoviesLayoutBinding.featuredContentRecyclerView.isGone) {
 
-                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie))
-                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
+                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.startAnimation(
+                            AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in_movie)
+                        )
+                        storefrontMoviesLayoutBinding.featuredContentRecyclerView.visibility =
+                            View.VISIBLE
 
                         storefrontMoviesLayoutBinding.newMovieBackground.visibility = View.VISIBLE
-                        storefrontMoviesLayoutBinding.newMovieBlurryBackground.visibility = View.VISIBLE
+                        storefrontMoviesLayoutBinding.newMovieBlurryBackground.visibility =
+                            View.VISIBLE
 
                         storefrontMoviesLayoutBinding.dividerTopImageView.visibility = View.VISIBLE
 
@@ -291,7 +303,7 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                 }
 
-            })
+            }
 
             moviesStorefrontLiveData.newContentItemData.observe(this@StorefrontMovies) {
 
@@ -333,7 +345,7 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
             }
 
-            moviesStorefrontLiveData.allMoviesItemData.observe(this@StorefrontMovies, {
+            moviesStorefrontLiveData.allMoviesItemData.observe(this@StorefrontMovies) {
 
                 if (it.isNotEmpty()) {
 
@@ -346,14 +358,15 @@ class StorefrontMovies : StorefrontDynamicActivity() {
                     allMoviesAdapter.notifyDataSetChanged()
 
                     if (storefrontMoviesLayoutBinding.allContentRecyclerView.isGone) {
-                        storefrontMoviesLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
+                        storefrontMoviesLayoutBinding.allContentRecyclerView.visibility =
+                            View.VISIBLE
                     }
 
                 }
 
-            })
+            }
 
-            moviesStorefrontLiveData.genresMoviesItemData.observe(this@StorefrontMovies, {
+            moviesStorefrontLiveData.genresMoviesItemData.observe(this@StorefrontMovies) {
 
                 if (it.isNotEmpty()) {
 
@@ -364,14 +377,14 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                     storefrontMoviesLayoutBinding.genresRecyclerView.visibility = View.VISIBLE
 
-                    storefrontMoviesLayoutBinding.genreIndicatorTextView.text = getString(R.string.allMovies)
+                    storefrontMoviesLayoutBinding.genreIndicatorTextView.text =
+                        getString(R.string.allMovies)
                     storefrontMoviesLayoutBinding.genreIndicatorTextView.visibility = View.VISIBLE
 
                     genresData.clearData()
                     genresData.prepareAllGenresData(it)
 
                 } else {
-
 
 
                 }
@@ -388,9 +401,9 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                 retrieveFeaturedMovies(this@StorefrontMovies, moviesStorefrontLiveData)
 
-            })
+            }
 
-            moviesStorefrontLiveData.allFilteredMoviesItemData.observe(this@StorefrontMovies, {
+            moviesStorefrontLiveData.allFilteredMoviesItemData.observe(this@StorefrontMovies) {
 
                 if (it.first.isNotEmpty()) {
 
@@ -402,25 +415,40 @@ class StorefrontMovies : StorefrontDynamicActivity() {
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
 
-                    storefrontMoviesLayoutBinding.nestedScrollView.smoothScrollTo(0, storefrontMoviesLayoutBinding.nestedScrollView.height)
+                    storefrontMoviesLayoutBinding.nestedScrollView.smoothScrollTo(
+                        0,
+                        storefrontMoviesLayoutBinding.nestedScrollView.height
+                    )
 
                     if (it.first.size < storefrontAllUntouchedContents.size) {
 
                         searchingMoviesSetup.afterQuickSearch(
-                            searchMoviesRevertView = storefrontMoviesLayoutBinding.searchRevertView, searchMoviesAdvancedView = storefrontMoviesLayoutBinding.searchAdvancedView,
+                            searchMoviesRevertView = storefrontMoviesLayoutBinding.searchRevertView,
+                            searchMoviesAdvancedView = storefrontMoviesLayoutBinding.searchAdvancedView,
                             searchQuery = storefrontMoviesLayoutBinding.searchView.text.toString(),
                             storefrontLiveData = moviesStorefrontLiveData,
-                            storefrontAllUntouchedContents = storefrontAllUntouchedContents)
+                            storefrontAllUntouchedContents = storefrontAllUntouchedContents
+                        )
 
                     }
 
                 } else {
                     //Nothing Found
 
-                    startActivity(Intent(this@StorefrontMovies, CompleteSearch::class.java).apply {
-                        putExtra(CompleteSearch.SearchQuery, storefrontMoviesLayoutBinding.searchView.text.toString())
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in_movie, R.anim.fade_out_movie).toBundle())
+                    startActivity(
+                        Intent(this@StorefrontMovies, CompleteSearch::class.java).apply {
+                            putExtra(
+                                CompleteSearch.SearchQuery,
+                                storefrontMoviesLayoutBinding.searchView.text.toString()
+                            )
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        },
+                        ActivityOptions.makeCustomAnimation(
+                            applicationContext,
+                            R.anim.fade_in_movie,
+                            R.anim.fade_out_movie
+                        ).toBundle()
+                    )
 
                 }
 
@@ -434,7 +462,7 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                 }
 
-            })
+            }
 
             storefrontMoviesLayoutBinding.featuredContentRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -926,6 +954,8 @@ class StorefrontMovies : StorefrontDynamicActivity() {
                         runOnUiThread {
 
                             storefrontMoviesLayoutBinding.newMovieBackground.setImageDrawable(resource)
+
+                            storefrontMoviesLayoutBinding.newMovieBlurryBackground.setBlurRadius(23f)
 
                         }
 

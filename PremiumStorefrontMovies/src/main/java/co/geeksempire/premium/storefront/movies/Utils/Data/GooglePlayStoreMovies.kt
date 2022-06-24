@@ -40,8 +40,6 @@ private fun generateInstallDynamicMoviesLink(context: Context,
 
     val playStoreLink: String = generateGooglePlayStoreMovies(movieId)
 
-    println(">>> " + playStoreLink)
-
     val dynamicLink = Firebase.dynamicLinks.dynamicLink {
         link = Uri.parse(playStoreLink)
         domainUriPrefix = "https://premiumstorefront.page.link"
@@ -58,8 +56,6 @@ private fun generateInstallDynamicMoviesLink(context: Context,
             description = movieSummary
         }
     }
-
-    println(">>> " + dynamicLink.uri)
 
     return dynamicLink.uri
 }
