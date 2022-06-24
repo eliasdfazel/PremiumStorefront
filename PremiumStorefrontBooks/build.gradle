@@ -49,6 +49,7 @@ android {
 
         }
     }
+
     namespace 'co.geeksempire.premium.storefront.books'
 }
 

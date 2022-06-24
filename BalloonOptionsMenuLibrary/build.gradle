@@ -52,6 +52,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
     namespace 'net.geeksempire.balloon.optionsmenu.library'
 }
 
