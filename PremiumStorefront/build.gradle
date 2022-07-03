@@ -84,7 +84,8 @@ android {
     }
 
     dynamicFeatures = [':PremiumStorefrontMovies',
-                       ':PremiumStorefrontBooks', ':AdministratorPanel']
+                       ':PremiumStorefrontBooks',
+                       ':AdministratorPanel']
 
     namespace 'co.geeksempire.premium.storefront'
 }
