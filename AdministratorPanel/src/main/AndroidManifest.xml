@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.geeksempire.administratorpanel">
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_administratorpanel">
+        dist:title="@string/administratorPanel">
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>
         <dist:fusing dist:include="false" />
     </dist:module>
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:appCategory="productivity"
+        android:largeHeap="true"
+        android:theme="@style/GeeksEmpire.Material">
+
+        <activity
+            android:name=".AdministratorEntry"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/GeeksEmpire.Material">
+        </activity>
+
+    </application>
+
 </manifest>

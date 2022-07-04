@@ -110,7 +110,5 @@
     <string name="gamesSectionText">Games</string>
     <string name="booksSectionText">Books</string>
     <string name="moviesSectionText">Movies</string>
-    <string name="title_premiumstorefrontbooks">Premium Storefront Books</string>
-    <string name="title_administratorpanel">AdministratorPanel</string>
 
 </resources>
