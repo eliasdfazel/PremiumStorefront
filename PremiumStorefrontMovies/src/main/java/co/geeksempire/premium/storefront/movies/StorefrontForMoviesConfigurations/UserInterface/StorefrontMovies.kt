@@ -957,6 +957,14 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                             storefrontMoviesLayoutBinding.newMovieBlurryBackground.setBlurRadius(23f)
 
+                            try {
+
+                                storefrontMoviesLayoutBinding.newMovieBlurryBackground.refreshDrawableState()
+
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+
                         }
 
                     }
