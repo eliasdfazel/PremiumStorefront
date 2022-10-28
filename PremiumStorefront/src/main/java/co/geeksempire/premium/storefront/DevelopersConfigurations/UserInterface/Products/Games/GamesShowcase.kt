@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.DeveloperContents.Adapter.AllDeveloperContentsAdapter
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.StorefrontContentsData
-import co.geeksempire.premium.storefront.Utils.UI.Colors.*
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import kotlinx.coroutines.*

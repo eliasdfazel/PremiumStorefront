@@ -39,7 +39,6 @@ import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmo
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.CategoryDetailsLayoutBinding
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface, FragmentInterface {

@@ -58,9 +58,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.Source
 import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.*
 
 class GenreDetails : StorefrontDynamicActivity() {
 

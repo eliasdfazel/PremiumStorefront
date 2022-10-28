@@ -30,7 +30,6 @@ import co.geeksempire.premium.storefront.databinding.FavoriteProductsLayoutBindi
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 
 class FavoriteProducts : AppCompatActivity() {
 

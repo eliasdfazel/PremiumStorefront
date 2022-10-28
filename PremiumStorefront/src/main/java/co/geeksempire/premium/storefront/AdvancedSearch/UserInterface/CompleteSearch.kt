@@ -30,7 +30,6 @@ import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutBinding
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 
 class CompleteSearch : AppCompatActivity() {
 
