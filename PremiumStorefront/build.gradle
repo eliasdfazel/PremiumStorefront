@@ -22,14 +22,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion "32.1.0-rc1"
+    compileSdkVersion 33
+    buildToolsVersion "33.0.1"
 
     defaultConfig {
         applicationId "co.geeksempire.premium.storefront.android"
 
         minSdkVersion 26
-        targetSdkVersion 32
+        targetSdkVersion 33
 
         versionCode 74
         versionName "${majorVersion}." + getDateMonth() + "." + getDateDay() + "." + getDateYear() + ".${versionCode}"
@@ -121,21 +121,21 @@ dependencies {
     api project(path: ':YoutubePlayer')
 
 
-    api 'com.google.android.play:feature-delivery-ktx:2.0.0'
-    api 'com.google.android.play:app-update-ktx:2.0.0'
-    api 'com.google.android.play:review-ktx:2.0.0'
+    api 'com.google.android.play:feature-delivery-ktx:2.0.1'
+    api 'com.google.android.play:app-update-ktx:2.0.1'
+    api 'com.google.android.play:review-ktx:2.0.1'
 
 
-    api 'com.google.android.material:material:1.6.1'
+    api 'com.google.android.material:material:1.7.0'
 
 
-    api 'com.google.android.gms:play-services-auth:20.3.0'
+    api 'com.google.android.gms:play-services-auth:20.4.0'
 
 
     api 'androidx.core:core-ktx:1.9.0'
     api 'androidx.appcompat:appcompat:1.5.1'
 
-    api 'androidx.fragment:fragment-ktx:1.5.2'
+    api 'androidx.fragment:fragment-ktx:1.5.5'
 
     api 'androidx.datastore:datastore-preferences:1.0.0'
     api 'androidx.datastore:datastore:1.0.0'
@@ -154,7 +154,7 @@ dependencies {
     api 'androidx.work:work-runtime-ktx:2.7.1'
 
 
-    api platform('com.google.firebase:firebase-bom:30.4.1')
+    api platform('com.google.firebase:firebase-bom:31.1.1')
 
     api 'com.google.firebase:firebase-analytics-ktx'
 
@@ -200,6 +200,6 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 }
