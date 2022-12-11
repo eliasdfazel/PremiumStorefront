@@ -31,6 +31,8 @@ import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpo
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
 import co.geeksempire.premium.storefront.movies.Actions.Operation.ActionCenterOperationsMovies
 import co.geeksempire.premium.storefront.movies.Actions.View.PrepareActionCenterUserInterface
@@ -51,10 +53,8 @@ import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 import kotlin.math.abs
 
 fun openMoviesDetails(context: Context,
@@ -68,7 +68,7 @@ fun openMoviesDetails(context: Context,
 
 }
 
-class MoviesDetails : StorefrontDynamicActivity() {
+class MoviesDetails : StorefrontDynamicActivity(), NavigationListener {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@MoviesDetails)
@@ -345,13 +345,16 @@ class MoviesDetails : StorefrontDynamicActivity() {
 
         }
 
+        NavigationOperations(this@MoviesDetails)
+            .listenBackPressed(this@MoviesDetails)
+
     }
 
     override fun onResume() {
         super.onResume()
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         overridePendingTransition(0, R.anim.fade_out_movie)
         this@MoviesDetails.finish()

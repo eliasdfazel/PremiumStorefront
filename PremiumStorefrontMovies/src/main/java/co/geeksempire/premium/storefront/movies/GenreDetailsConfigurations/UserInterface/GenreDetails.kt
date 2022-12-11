@@ -33,6 +33,8 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontDyna
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Animations.ShadowAnimation
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
@@ -60,7 +62,7 @@ import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import kotlinx.coroutines.launch
 
-class GenreDetails : StorefrontDynamicActivity() {
+class GenreDetails : StorefrontDynamicActivity(), NavigationListener {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@GenreDetails)
@@ -310,13 +312,16 @@ class GenreDetails : StorefrontDynamicActivity() {
 
         }
 
+        NavigationOperations(this@GenreDetails)
+            .listenBackPressed(this@GenreDetails)
+
     }
 
     override fun onResume() {
         super.onResume()
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         overridePendingTransition(0, R.anim.fade_out_movie)
         this@GenreDetails.finish()

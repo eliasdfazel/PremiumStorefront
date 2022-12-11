@@ -157,9 +157,9 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
                     interpolator = OvershootInterpolator()
                     duration = 531
                 }.setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationStart(animation: Animator) {}
 
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
@@ -179,9 +179,9 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
 
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator) {}
 
-                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator) {}
 
                 }).start()
 
@@ -198,9 +198,9 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
                     interpolator = OvershootInterpolator()
                     duration = 531
                 }.setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationStart(animation: Animator) {}
 
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
@@ -220,9 +220,9 @@ fun moviesSortingSetup(context: AppCompatActivity, filterAllMovies: FilterAllMov
 
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator) {}
 
-                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator) {}
 
                 }).start()
 

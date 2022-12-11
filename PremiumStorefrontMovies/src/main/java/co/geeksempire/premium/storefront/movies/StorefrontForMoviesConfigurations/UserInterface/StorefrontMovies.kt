@@ -58,6 +58,8 @@ import co.geeksempire.premium.storefront.Utils.Notifications.RemoteSubscriptions
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.Utils.Notifications.SubscriptionInterface
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
@@ -107,7 +109,7 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import net.geeksempire.balloon.optionsmenu.library.Utils.percentageOfDisplayX
 import java.util.*
 
-class StorefrontMovies : StorefrontDynamicActivity() {
+class StorefrontMovies : StorefrontDynamicActivity(), NavigationListener {
 
     val updatingDataIO: UpdatingDataIO by lazy {
         UpdatingDataIO(applicationContext)
@@ -517,9 +519,9 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                 storefrontMoviesLayoutBinding.randomMovieSelection.addAnimatorListener(object : Animator.AnimatorListener {
 
-                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationStart(animation: Animator) {}
 
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
 
                         curveLayoutManager.smoothScrollToPosition(
                             storefrontMoviesLayoutBinding.newContentRecyclerView, RecyclerView.State(),
@@ -528,9 +530,9 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator) {}
 
-                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator) {}
 
                 })
 
@@ -642,6 +644,9 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
             })
 
+        NavigationOperations(this@StorefrontMovies)
+            .listenBackPressed(this@StorefrontMovies)
+
     }
 
     override fun onResume() {
@@ -699,7 +704,7 @@ class StorefrontMovies : StorefrontDynamicActivity() {
 
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         startActivity(Intent(Intent.ACTION_MAIN).apply {
             this.addCategory(Intent.CATEGORY_HOME)

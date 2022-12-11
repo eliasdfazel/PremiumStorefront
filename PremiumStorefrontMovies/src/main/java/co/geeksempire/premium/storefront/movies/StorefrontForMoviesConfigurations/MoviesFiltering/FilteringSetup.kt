@@ -174,9 +174,9 @@ fun moviesFilteringSetup(context: AppCompatActivity,
                     duration = 531
                 }.setListener(object : Animator.AnimatorListener {
 
-                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationStart(animation: Animator) {}
 
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
 
                         filterByDirectorsDataProcess(context,
                             storefrontAllUnfilteredContents,
@@ -185,9 +185,9 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator) {}
 
-                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator) {}
 
                 }).start()
 
@@ -205,9 +205,9 @@ fun moviesFilteringSetup(context: AppCompatActivity,
                     duration = 531
                 }.setListener(object : Animator.AnimatorListener {
 
-                    override fun onAnimationStart(animation: Animator?) {}
+                    override fun onAnimationStart(animation: Animator) {}
 
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
 
                         filterByStudioDataProcess(context,
                             storefrontAllUnfilteredContents,
@@ -216,9 +216,9 @@ fun moviesFilteringSetup(context: AppCompatActivity,
 
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {}
+                    override fun onAnimationCancel(animation: Animator) {}
 
-                    override fun onAnimationRepeat(animation: Animator?) {}
+                    override fun onAnimationRepeat(animation: Animator) {}
 
                 }).start()
 
