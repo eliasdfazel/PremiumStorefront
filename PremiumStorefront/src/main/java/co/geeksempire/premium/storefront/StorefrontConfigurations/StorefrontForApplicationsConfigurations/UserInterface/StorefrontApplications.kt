@@ -283,11 +283,6 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 113, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL)
             storefrontLayoutBinding.oldContentRecyclerView.adapter = oldContentAdapter
 
-            storefrontLayoutBinding.allMoreContentRecyclerView.layoutManager = RecycleViewSmoothLayoutGrid(applicationContext, columnCount(applicationContext, 307), RecyclerView.VERTICAL,false)
-            storefrontLayoutBinding.allMoreContentRecyclerView.adapter = allMoreContentAdapter
-
-            PagerSnapHelper().attachToRecyclerView(storefrontLayoutBinding.allMoreContentRecyclerView)
-
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
             storefrontLayoutBinding.newContentRecyclerView.adapter = newContentAdapter
 
@@ -309,7 +304,7 @@ class StorefrontApplications : StorefrontActivity() {
                     storefrontAllUnfilteredContents.addAll(it)
 
                     allContentAdapter.storefrontContents.clear()
-                    allContentAdapter.storefrontContents.addAll(it)
+                    allContentAdapter.storefrontContents.addAll(it.subList(0, it.size / 3))
 
                     allContentAdapter.notifyDataSetChanged()
 

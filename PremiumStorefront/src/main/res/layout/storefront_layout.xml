@@ -171,22 +171,6 @@
                 apps:layout_constraintTop_toBottomOf="@id/allContentRecyclerView"
                 apps:layout_constraintStart_toStartOf="parent"/>
 
-            <!-- Second Load Of All Content -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/allMoreContentRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="13dp"
-                android:layout_marginEnd="17dp"
-                android:alwaysDrawnWithCache="true"
-                android:layoutAnimation="@anim/fade_in_layout_animation"
-                android:isScrollContainer="false"
-                android:nestedScrollingEnabled="false"
-                android:visibility="gone"
-
-                apps:layout_constraintTop_toBottomOf="@id/oldContentRecyclerView"
-                apps:layout_constraintStart_toStartOf="parent"/>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </co.geeksempire.premium.storefront.Utils.UI.Views.ControlledScrollView.NextedScrollView>

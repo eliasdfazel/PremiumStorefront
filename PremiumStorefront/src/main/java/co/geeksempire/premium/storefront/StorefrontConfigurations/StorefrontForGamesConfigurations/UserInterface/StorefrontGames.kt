@@ -275,7 +275,7 @@ class StorefrontGames : StorefrontActivity() {
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
-            storefrontLiveData.allContentItems.observe(this@StorefrontGames, {
+            storefrontLiveData.allContentItems.observe(this@StorefrontGames) {
 
                 if (it.isNotEmpty()) {
 
@@ -288,7 +288,7 @@ class StorefrontGames : StorefrontActivity() {
                     storefrontAllUnfilteredContents.addAll(it)
 
                     allContentAdapter.storefrontContents.clear()
-                    allContentAdapter.storefrontContents.addAll(it)
+                    allContentAdapter.storefrontContents.addAll(it.subList(0, it.size / 3))
 
                     allContentAdapter.notifyDataSetChanged()
 
@@ -297,12 +297,11 @@ class StorefrontGames : StorefrontActivity() {
                 } else {
 
 
-
                 }
 
-            })
+            }
 
-            storefrontLiveData.allFilteredContentItemData.observe(this@StorefrontGames, {
+            storefrontLiveData.allFilteredContentItemData.observe(this@StorefrontGames) {
 
                 if (it.first.isNotEmpty()) {
 
@@ -314,23 +313,35 @@ class StorefrontGames : StorefrontActivity() {
                     storefrontAllUnfilteredContents.clear()
                     storefrontAllUnfilteredContents.addAll(storefrontAllUntouchedContents)
 
-                    if (it.first.size <storefrontAllUntouchedContents.size) {
+                    if (it.first.size < storefrontAllUntouchedContents.size) {
 
                         searchingSetup.afterQuickSearch(
-                            revertView = storefrontLayoutBinding.searchRevertView, advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
+                            revertView = storefrontLayoutBinding.searchRevertView,
+                            advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
                             searchQuery = storefrontLayoutBinding.searchView.text.toString(),
                             storefrontLiveData = storefrontLiveData,
-                            storefrontAllUntouchedContents = storefrontAllUntouchedContents)
+                            storefrontAllUntouchedContents = storefrontAllUntouchedContents
+                        )
 
                     }
 
                 } else {
                     //Nothing Found
 
-                    startActivity(Intent(this@StorefrontGames, CompleteSearch::class.java).apply {
-                        putExtra(CompleteSearch.SearchQuery, storefrontLayoutBinding.searchView.text.toString())
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, R.anim.fade_out).toBundle())
+                    startActivity(
+                        Intent(this@StorefrontGames, CompleteSearch::class.java).apply {
+                            putExtra(
+                                CompleteSearch.SearchQuery,
+                                storefrontLayoutBinding.searchView.text.toString()
+                            )
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        },
+                        ActivityOptions.makeCustomAnimation(
+                            applicationContext,
+                            R.anim.fade_in,
+                            R.anim.fade_out
+                        ).toBundle()
+                    )
 
                 }
 
@@ -344,9 +355,9 @@ class StorefrontGames : StorefrontActivity() {
 
                 }
 
-            })
+            }
 
-            storefrontLiveData.featuredContentItems.observe(this@StorefrontGames, {
+            storefrontLiveData.featuredContentItems.observe(this@StorefrontGames) {
 
                 if (it.isNotEmpty()) {
 
@@ -356,7 +367,9 @@ class StorefrontGames : StorefrontActivity() {
                     featuredContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
-                    storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(
+                        AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
+                    )
 
                     PopupShortcutsCreator(applicationContext)
                         .startConfiguration()
@@ -364,12 +377,11 @@ class StorefrontGames : StorefrontActivity() {
                 } else {
 
 
-
                 }
 
-            })
+            }
 
-            storefrontLiveData.newContentItemDataWordpress.observe(this@StorefrontGames, {
+            storefrontLiveData.newContentItemDataWordpress.observe(this@StorefrontGames) {
 
                 if (it.isNotEmpty()) {
 
@@ -379,17 +391,21 @@ class StorefrontGames : StorefrontActivity() {
                     newContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
-                    storefrontLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    storefrontLayoutBinding.newContentRecyclerView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
 
                 } else {
 
 
-
                 }
 
-            })
+            }
 
-            storefrontLiveData.categoriesItems.observe(this@StorefrontGames, {
+            storefrontLiveData.categoriesItems.observe(this@StorefrontGames) {
 
                 if (it.isNotEmpty()) {
 
@@ -400,14 +416,16 @@ class StorefrontGames : StorefrontActivity() {
 
                     storefrontLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
 
-                    storefrontLayoutBinding.categoryIndicatorTextView.text = getString(R.string.allGames)
+                    storefrontLayoutBinding.categoryIndicatorTextView.text =
+                        getString(R.string.allGames)
                     storefrontLayoutBinding.categoryIndicatorTextView.visibility = View.VISIBLE
 
                     (application as PremiumStorefrontApplication).categoryData.clearData()
-                    (application as PremiumStorefrontApplication).categoryData.prepareAllCategoriesData(it)
+                    (application as PremiumStorefrontApplication).categoryData.prepareAllCategoriesData(
+                        it
+                    )
 
                 } else {
-
 
 
                 }
@@ -422,7 +440,7 @@ class StorefrontGames : StorefrontActivity() {
 
                 }
 
-            })
+            }
 
             storefrontLayoutBinding.nestedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 
