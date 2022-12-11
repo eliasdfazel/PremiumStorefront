@@ -25,6 +25,8 @@ import co.geeksempire.premium.storefront.Preferences.Extensions.toggleLightDark
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.InApplicationReview.ReviewUtils
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.databinding.PreferencesControlLayoutBinding
@@ -37,7 +39,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class PreferencesControl : AppCompatActivity() {
+class PreferencesControl : AppCompatActivity(), NavigationListener {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@PreferencesControl)
@@ -71,6 +73,14 @@ class PreferencesControl : AppCompatActivity() {
             })
 
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        NavigationOperations(this@PreferencesControl)
+            .listenBackPressed(this@PreferencesControl)
 
     }
 
@@ -118,7 +128,7 @@ class PreferencesControl : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         this@PreferencesControl.finish()
         overridePendingTransition(0, R.anim.slide_out_right)

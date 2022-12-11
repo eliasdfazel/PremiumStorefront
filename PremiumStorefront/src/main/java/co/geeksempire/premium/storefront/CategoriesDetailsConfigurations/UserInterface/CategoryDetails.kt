@@ -33,6 +33,8 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoin
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutList
@@ -41,7 +43,7 @@ import co.geeksempire.premium.storefront.databinding.CategoryDetailsLayoutBindin
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 
-class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface, FragmentInterface {
+class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface, FragmentInterface, NavigationListener {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@CategoryDetails)
@@ -118,31 +120,59 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
                 .load(inputData.getStringExtra(CategoriesDataKeys.CategoryIcon))
                 .into(categoryDetailsLayoutBinding.categoryIconImageView)
 
-            productsOfCategory.uniqueRecommendationsProducts.observe(this@CategoryDetails, {
+            productsOfCategory.uniqueRecommendationsProducts.observe(this@CategoryDetails) {
 
                 if (categoryDetailsLayoutBinding.uniqueRecyclerView.isGone) {
 
-                    categoryDetailsLayoutBinding.uniqueRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.uniqueRecyclerView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
                     categoryDetailsLayoutBinding.uniqueRecyclerView.visibility = View.VISIBLE
 
-                    categoryDetailsLayoutBinding.leftBlurView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.leftBlurView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
                     categoryDetailsLayoutBinding.leftBlurView.visibility = View.VISIBLE
 
-                    categoryDetailsLayoutBinding.rightBlurView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.rightBlurView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
                     categoryDetailsLayoutBinding.rightBlurView.visibility = View.VISIBLE
 
-                    categoryDetailsLayoutBinding.leftGlowView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.leftGlowView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
                     categoryDetailsLayoutBinding.leftGlowView.visibility = View.VISIBLE
 
-                    categoryDetailsLayoutBinding.rightGlowView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    categoryDetailsLayoutBinding.rightGlowView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
                     categoryDetailsLayoutBinding.rightGlowView.visibility = View.VISIBLE
 
-                    categoryDetailsLayoutBinding.uniqueRecommendationTextView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
-                    categoryDetailsLayoutBinding.uniqueRecommendationTextView.visibility = View.VISIBLE
+                    categoryDetailsLayoutBinding.uniqueRecommendationTextView.startAnimation(
+                        AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
+                    )
+                    categoryDetailsLayoutBinding.uniqueRecommendationTextView.visibility =
+                        View.VISIBLE
 
                 }
 
-            })
+            }
 
         }
 
@@ -156,6 +186,14 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        NavigationOperations(this@CategoryDetails)
+            .listenBackPressed(this@CategoryDetails)
+
+    }
+
     override fun onResume() {
         super.onResume()
     }
@@ -164,7 +202,7 @@ class CategoryDetails : AppCompatActivity(), NetworkConnectionListenerInterface,
         super.onPause()
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         if (productDetailsFragment.isShowing) {
 

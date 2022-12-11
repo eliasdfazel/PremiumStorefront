@@ -24,13 +24,14 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListener
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkConnectionListenerInterface
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.databinding.AccountInformationLayoutBinding
-import com.google.firebase.auth.*
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import java.util.*
 
-class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface {
+class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterface, SignInInterface, NavigationListener {
 
     val userInformationIO: UserInformationIO by lazy {
         UserInformationIO(this@AccountInformation)
@@ -92,13 +93,17 @@ class AccountInformation : AppCompatActivity(), NetworkConnectionListenerInterfa
 
     override fun onStart() {
         super.onStart()
+
+        NavigationOperations(this@AccountInformation)
+            .listenBackPressed(this@AccountInformation)
+
     }
 
     override fun onResume() {
         super.onResume()
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         if (profileUpdating) {
 

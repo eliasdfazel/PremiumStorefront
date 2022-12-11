@@ -26,12 +26,14 @@ import co.geeksempire.premium.storefront.AdvancedSearch.NetworkOperations.Search
 import co.geeksempire.premium.storefront.AdvancedSearch.UserInterface.Adapter.CompleteSearchAdapter
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.databinding.CompleteSearchLayoutBinding
 import kotlinx.coroutines.*
 
-class CompleteSearch : AppCompatActivity() {
+class CompleteSearch : AppCompatActivity(), NavigationListener {
 
     val themePreferences: ThemePreferences by lazy {
         ThemePreferences(this@CompleteSearch)
@@ -263,8 +265,15 @@ class CompleteSearch : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
+    override fun onStart() {
+        super.onStart()
+
+        NavigationOperations(this@CompleteSearch)
+            .listenBackPressed(this@CompleteSearch)
+
+    }
+
+    override fun backNavigation() {
 
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         this@CompleteSearch.finish()

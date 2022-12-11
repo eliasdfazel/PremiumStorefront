@@ -25,6 +25,8 @@ import androidx.appcompat.app.AppCompatActivity
 import co.geeksempire.premium.storefront.BuildConfig
 import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.Interface.WebInterface
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Display.navigationBarHeight
 import co.geeksempire.premium.storefront.Utils.UI.Display.statusBarHeight
 import co.geeksempire.premium.storefront.databinding.BrowserViewBinding
@@ -44,7 +46,7 @@ fun showBuiltInBrowser(context: Context,
 
 }
 
-class BuiltInBrowser : AppCompatActivity() {
+class BuiltInBrowser : AppCompatActivity(), NavigationListener {
 
     private lateinit var browserViewBinding: BrowserViewBinding
 
@@ -99,11 +101,19 @@ class BuiltInBrowser : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        NavigationOperations(this@BuiltInBrowser)
+            .listenBackPressed(this@BuiltInBrowser)
+
+    }
+
     override fun onPause() {
         super.onPause()
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         this@BuiltInBrowser.finish()
         overridePendingTransition(0, android.R.anim.slide_out_right)

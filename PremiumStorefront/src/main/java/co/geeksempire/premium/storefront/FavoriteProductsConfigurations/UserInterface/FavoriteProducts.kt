@@ -24,6 +24,8 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.Favor
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.UserInterface.Adapter.FavoritedAdapter
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.SmoothScrollers.RecycleViewSmoothLayoutGrid
 import co.geeksempire.premium.storefront.databinding.FavoriteProductsLayoutBinding
@@ -31,7 +33,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 
-class FavoriteProducts : AppCompatActivity() {
+class FavoriteProducts : AppCompatActivity(), NavigationListener {
 
     val favoritedProcess: FavoritedProcess by lazy {
         FavoritedProcess(this@FavoriteProducts)
@@ -76,7 +78,7 @@ class FavoriteProducts : AppCompatActivity() {
 
         if (firebaseUser != null) {
 
-            favoriteProductsLiveData.favoritedContentItemData.observe(this@FavoriteProducts, {
+            favoriteProductsLiveData.favoritedContentItemData.observe(this@FavoriteProducts) {
 
                 favoritedAdapter.favoritedContentItems.clear()
 
@@ -95,7 +97,7 @@ class FavoriteProducts : AppCompatActivity() {
 
                 }
 
-            })
+            }
 
             (application as PremiumStorefrontApplication).firestoreDatabase
                 .collection(favoritedDatabaseDirectory.favoriteProductsCollectionEndpoint(firebaseUser.uid))
@@ -129,10 +131,17 @@ class FavoriteProducts : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
+    override fun onStart() {
+        super.onStart()
+
+        NavigationOperations(this@FavoriteProducts)
+            .listenBackPressed(this@FavoriteProducts)
+
+    }
+
+    override fun backNavigation() {
 
         this@FavoriteProducts.finish()
-
         overridePendingTransition(0, R.anim.slide_from_left)
 
     }

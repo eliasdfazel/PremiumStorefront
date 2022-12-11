@@ -35,6 +35,8 @@ import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.
 import co.geeksempire.premium.storefront.DevelopersConfigurations.UserInterface.Products.Games.GamesShowcase
 import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface.ProductDetailsFragment
 import co.geeksempire.premium.storefront.R
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.UI.Animations.startTypingAnimation
 import co.geeksempire.premium.storefront.Utils.UI.Colors.Gradient
 import co.geeksempire.premium.storefront.Utils.UI.Colors.gradientText
@@ -49,7 +51,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.coroutines.launch
 
-class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
+class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface, NavigationListener {
 
     val developerLiveData: DeveloperLiveData by lazy {
         ViewModelProvider(this@DeveloperIntroductionPage)[DeveloperLiveData::class.java]
@@ -341,6 +343,7 @@ class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
     override fun onStart() {
         super.onStart()
 
+
         developerIntroductionLayoutBinding.productApplications.setOnLongClickListener {
 
             Toast.makeText(applicationContext, it.contentDescription, Toast.LENGTH_LONG).show()
@@ -375,9 +378,12 @@ class DeveloperIntroductionPage : AppCompatActivity(), FragmentInterface {
 
         }
 
+        NavigationOperations(this@DeveloperIntroductionPage)
+            .listenBackPressed(this@DeveloperIntroductionPage)
+
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         backButtonAction()
 
