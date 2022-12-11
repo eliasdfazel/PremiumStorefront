@@ -71,6 +71,8 @@ import co.geeksempire.premium.storefront.Utils.Notifications.RemoteSubscriptions
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarActionHandlerInterface
 import co.geeksempire.premium.storefront.Utils.Notifications.SnackbarBuilder
 import co.geeksempire.premium.storefront.Utils.Notifications.SubscriptionInterface
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationListener
+import co.geeksempire.premium.storefront.Utils.Operations.NavigationOperations
 import co.geeksempire.premium.storefront.Utils.PopupShortcuts.PopupShortcutsCreator
 import co.geeksempire.premium.storefront.Utils.UI.Display.columnCount
 import co.geeksempire.premium.storefront.Utils.UI.Gesture.GestureConstants
@@ -97,7 +99,7 @@ import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 import net.geeksempire.balloon.optionsmenu.library.Utils.percentageOfDisplayX
 import java.util.*
 
-class StorefrontApplications : StorefrontActivity() {
+class StorefrontApplications : StorefrontActivity(), NavigationListener {
 
     val updatingDataIO: UpdatingDataIO by lazy {
         UpdatingDataIO(applicationContext)
@@ -585,6 +587,9 @@ class StorefrontApplications : StorefrontActivity() {
 
             })
 
+        NavigationOperations(this@StorefrontApplications)
+            .listenBackPressed(this@StorefrontApplications)
+
     }
 
     override fun onResume() {
@@ -632,7 +637,7 @@ class StorefrontApplications : StorefrontActivity() {
 
     }
 
-    override fun onBackPressed() {
+    override fun backNavigation() {
 
         if (productDetailsFragment.isShowing) {
 
