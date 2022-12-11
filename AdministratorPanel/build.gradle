@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.dynamic-feature'
-    id 'org.jetbrains.kotlin.android'
+
+    id 'kotlin-android'
 }
 android {
     compileSdk 33
@@ -11,12 +12,6 @@ android {
         targetSdkVersion 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
     }
 
     compileOptions {
@@ -43,6 +38,7 @@ android {
 
         }
     }
+
     namespace 'co.geeksempire.administratorpanel'
 }
 

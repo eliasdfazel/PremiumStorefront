@@ -13,6 +13,7 @@
     <string name="applicationName">Premium Storefront</string>
     <string name="applicationNameMovies">Premium Storefront Movies</string>
     <string name="applicationNameBooks">Premium Storefront Books</string>
+    <string name="administratorPanel">Administrator Panel</string>
     <string name="applicationSummary">Collection Of Premium Applications &amp; Games &amp; Books &amp; Movies</string>
 
     <string name="allApplications">All Applications</string>
