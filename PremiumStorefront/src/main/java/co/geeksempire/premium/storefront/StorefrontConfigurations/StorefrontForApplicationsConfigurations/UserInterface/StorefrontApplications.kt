@@ -26,9 +26,9 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountData
 import co.geeksempire.premium.storefront.AccountManager.SignInProcess.AccountSignIn
 import co.geeksempire.premium.storefront.Actions.Operation.ActionCenterOperations
@@ -282,7 +282,7 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
 
             PagerSnapHelper().attachToRecyclerView(storefrontLayoutBinding.allContentRecyclerView)
 
-            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = StaggeredGridLayoutManager(columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 113, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL)
+            storefrontLayoutBinding.oldContentRecyclerView.layoutManager = GridLayoutManager(applicationContext, columnCount(applicationContext, percentageOfDisplayX(applicationContext, 87f), 113, dpToInteger(applicationContext, 19).toFloat()), RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.oldContentRecyclerView.adapter = oldContentAdapter
 
             storefrontLayoutBinding.newContentRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.HORIZONTAL, false)
@@ -409,7 +409,7 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
 
             }
 
-            storefrontLiveData.newContentItemDataWordpress.observe(this@StorefrontApplications, {
+            storefrontLiveData.newContentItemDataWordpress.observe(this@StorefrontApplications) {
 
                 if (it.isNotEmpty()) {
 
@@ -419,17 +419,21 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
                     newContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.newContentRecyclerView.visibility = View.VISIBLE
-                    storefrontLayoutBinding.newContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    storefrontLayoutBinding.newContentRecyclerView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
 
                 } else {
 
 
-
                 }
 
-            })
+            }
 
-            storefrontLiveData.oldContentItemDataWordpress.observe(this@StorefrontApplications, {
+            storefrontLiveData.oldContentItemDataWordpress.observe(this@StorefrontApplications) {
 
                 if (it.isNotEmpty()) {
 
@@ -439,17 +443,21 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
                     oldContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.oldContentRecyclerView.visibility = View.VISIBLE
-                    storefrontLayoutBinding.oldContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    storefrontLayoutBinding.oldContentRecyclerView.startAnimation(
+                        AnimationUtils.loadAnimation(
+                            applicationContext,
+                            R.anim.fade_in
+                        )
+                    )
 
                 } else {
 
 
-
                 }
 
-            })
+            }
 
-            storefrontLiveData.categoriesItems.observe(this@StorefrontApplications, {
+            storefrontLiveData.categoriesItems.observe(this@StorefrontApplications) {
 
                 if (it.isNotEmpty()) {
 
@@ -460,14 +468,16 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
 
                     storefrontLayoutBinding.categoriesRecyclerView.visibility = View.VISIBLE
 
-                    storefrontLayoutBinding.categoryIndicatorTextView.text = getString(R.string.allApplications)
+                    storefrontLayoutBinding.categoryIndicatorTextView.text =
+                        getString(R.string.allApplications)
                     storefrontLayoutBinding.categoryIndicatorTextView.visibility = View.VISIBLE
 
                     (application as PremiumStorefrontApplication).categoryData.clearData()
-                    (application as PremiumStorefrontApplication).categoryData.prepareAllCategoriesData(it)
+                    (application as PremiumStorefrontApplication).categoryData.prepareAllCategoriesData(
+                        it
+                    )
 
                 } else {
-
 
 
                 }
@@ -482,7 +492,7 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
 
                 }
 
-            })
+            }
 
             storefrontLayoutBinding.nestedScrollView.setOnScrollChangeListener { view, scrollX, scrollY, oldScrollX, oldScrollY ->
 

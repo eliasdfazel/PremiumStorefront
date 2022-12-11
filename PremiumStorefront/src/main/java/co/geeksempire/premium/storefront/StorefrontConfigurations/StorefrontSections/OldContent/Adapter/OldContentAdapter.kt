@@ -16,7 +16,6 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -36,6 +35,7 @@ import co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSect
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.isColorLightDark
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
+import co.geeksempire.premium.storefront.databinding.StorefrontOldContentItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -59,7 +59,7 @@ class OldContentAdapter(private val context: AppCompatActivity,
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : OldContentViewHolder {
 
-        return OldContentViewHolder(LayoutInflater.from(context).inflate(R.layout.storefront_old_content_item, viewGroup, false))
+        return OldContentViewHolder(StorefrontOldContentItemBinding.inflate(context.layoutInflater, viewGroup, false))
     }
 
     override fun onBindViewHolder(oldContentViewHolder: OldContentViewHolder, position: Int, payloads: MutableList<Any>) {
