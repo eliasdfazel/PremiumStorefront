@@ -28,7 +28,6 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.Utils.UI.Display.navigationBarHeight
 import co.geeksempire.premium.storefront.Utils.UI.Display.statusBarHeight
 import co.geeksempire.premium.storefront.databinding.BrowserViewBinding
-import java.io.File
 
 fun showBuiltInBrowser(context: Context,
                        linkToLoad: String,
@@ -86,8 +85,6 @@ class BuiltInBrowser : AppCompatActivity() {
             browserViewBinding.webView.setInitialScale(0)
 
             browserViewBinding.webView.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-            browserViewBinding.webView.settings.setAppCacheEnabled(true)
-            browserViewBinding.webView.settings.setAppCachePath(getFileStreamPath("").path + "${File.separator}cache${File.separator}")
 
             browserViewBinding.webView.webViewClient = BuiltInWebViewClient()
             browserViewBinding.webView.webChromeClient = BuiltInChromeWebViewClient()

@@ -40,11 +40,9 @@ class ShadowAnimation {
         glowDownAnimation.start()
         glowDownAnimation.addListener(object : Animator.AnimatorListener {
 
-            override fun onAnimationRepeat(animation: Animator?) {
+            override fun onAnimationRepeat(animation: Animator) {}
 
-            }
-
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 val glowUpAnimation = ValueAnimator.ofFloat(endValue, startValue).apply {
                     end()
                 }
@@ -57,11 +55,11 @@ class ShadowAnimation {
                 glowUpAnimation.interpolator = OvershootInterpolator()
                 glowUpAnimation.start()
                 glowUpAnimation.addListener(object : Animator.AnimatorListener {
-                    override fun onAnimationRepeat(animation: Animator?) {
+                    override fun onAnimationRepeat(animation: Animator) {
 
                     }
 
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
 
                         if (loopCounter != numberOfLoop) {
 
@@ -76,21 +74,21 @@ class ShadowAnimation {
 
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {
+                    override fun onAnimationCancel(animation: Animator) {
 
                     }
 
-                    override fun onAnimationStart(animation: Animator?) {
+                    override fun onAnimationStart(animation: Animator) {
 
                     }
                 })
             }
 
-            override fun onAnimationCancel(animation: Animator?) {
+            override fun onAnimationCancel(animation: Animator) {
 
             }
 
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
 
             }
 
@@ -119,11 +117,11 @@ class ShadowAnimation {
         glowDownAnimation.start()
         glowDownAnimation.addListener(object : Animator.AnimatorListener {
 
-            override fun onAnimationRepeat(animation: Animator?) {
+            override fun onAnimationRepeat(animation: Animator) {
 
             }
 
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 val glowUpAnimation = ValueAnimator.ofFloat(endValue, startValue).apply {
                     end()
                 }
@@ -136,11 +134,11 @@ class ShadowAnimation {
                 glowUpAnimation.interpolator = OvershootInterpolator()
                 glowUpAnimation.start()
                 glowUpAnimation.addListener(object : Animator.AnimatorListener {
-                    override fun onAnimationRepeat(animation: Animator?) {
+                    override fun onAnimationRepeat(animation: Animator) {
 
                     }
 
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
 
                         if (loopCounter != numberOfLoop) {
 
@@ -155,21 +153,21 @@ class ShadowAnimation {
 
                     }
 
-                    override fun onAnimationCancel(animation: Animator?) {
+                    override fun onAnimationCancel(animation: Animator) {
 
                     }
 
-                    override fun onAnimationStart(animation: Animator?) {
+                    override fun onAnimationStart(animation: Animator) {
 
                     }
                 })
             }
 
-            override fun onAnimationCancel(animation: Animator?) {
+            override fun onAnimationCancel(animation: Animator) {
 
             }
 
-            override fun onAnimationStart(animation: Animator?) {
+            override fun onAnimationStart(animation: Animator) {
 
             }
 

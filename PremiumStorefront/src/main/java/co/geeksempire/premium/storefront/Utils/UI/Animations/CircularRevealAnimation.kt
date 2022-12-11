@@ -58,11 +58,11 @@ class CircularRevealAnimation (private val animationListener: AnimationListener)
 
                     circularReveal.addListener(object : Animator.AnimatorListener {
 
-                        override fun onAnimationRepeat(animation: Animator?) {
+                        override fun onAnimationRepeat(animation: Animator) {
 
                         }
 
-                        override fun onAnimationEnd(animation: Animator?) {
+                        override fun onAnimationEnd(animation: Animator) {
 
                             animationListener.animationFinished()
 
@@ -70,11 +70,11 @@ class CircularRevealAnimation (private val animationListener: AnimationListener)
 
                         }
 
-                        override fun onAnimationCancel(animation: Animator?) {
+                        override fun onAnimationCancel(animation: Animator) {
 
                         }
 
-                        override fun onAnimationStart(animation: Animator?) {
+                        override fun onAnimationStart(animation: Animator) {
 
                         }
 
@@ -121,11 +121,11 @@ class CircularRevealAnimation (private val animationListener: AnimationListener)
 
                     circularReveal.addListener(object : Animator.AnimatorListener {
 
-                        override fun onAnimationRepeat(animation: Animator?) {
+                        override fun onAnimationRepeat(animation: Animator) {
 
                         }
 
-                        override fun onAnimationEnd(animation: Animator?) {
+                        override fun onAnimationEnd(animation: Animator) {
 
                             animationListener.animationFinished()
 
@@ -133,11 +133,11 @@ class CircularRevealAnimation (private val animationListener: AnimationListener)
 
                         }
 
-                        override fun onAnimationCancel(animation: Animator?) {
+                        override fun onAnimationCancel(animation: Animator) {
 
                         }
 
-                        override fun onAnimationStart(animation: Animator?) {
+                        override fun onAnimationStart(animation: Animator) {
 
                         }
 

@@ -296,7 +296,7 @@ class StorefrontApplications : StorefrontActivity() {
             storefrontLayoutBinding.categoriesRecyclerView.layoutManager = RecycleViewSmoothLayoutList(applicationContext, RecyclerView.VERTICAL, false)
             storefrontLayoutBinding.categoriesRecyclerView.adapter = categoriesAdapter
 
-            storefrontLiveData.allContentItems.observe(this@StorefrontApplications, {
+            storefrontLiveData.allContentItems.observe(this@StorefrontApplications) {
 
                 if (it.isNotEmpty()) {
 
@@ -315,18 +315,21 @@ class StorefrontApplications : StorefrontActivity() {
 
                     storefrontLayoutBinding.allContentRecyclerView.visibility = View.VISIBLE
 
-                    retrieveOldContent(this@StorefrontApplications,
-                        storefrontLiveData, generalEndpoints, GeneralEndpoints.QueryType.ApplicationsQuery)
+                    retrieveOldContent(
+                        this@StorefrontApplications,
+                        storefrontLiveData,
+                        generalEndpoints,
+                        GeneralEndpoints.QueryType.ApplicationsQuery
+                    )
 
                 } else {
 
 
-
                 }
 
-            })
+            }
 
-            storefrontLiveData.allFilteredContentItemData.observe(this@StorefrontApplications, {
+            storefrontLiveData.allFilteredContentItemData.observe(this@StorefrontApplications) {
 
                 if (it.first.isNotEmpty()) {
 
@@ -341,20 +344,35 @@ class StorefrontApplications : StorefrontActivity() {
                     if (it.first.size < storefrontAllUntouchedContents.size) {
 
                         searchingSetup.afterQuickSearch(
-                            revertView = storefrontLayoutBinding.searchRevertView, advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
+                            revertView = storefrontLayoutBinding.searchRevertView,
+                            advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
                             searchQuery = storefrontLayoutBinding.searchView.text.toString(),
                             storefrontLiveData = storefrontLiveData,
-                            storefrontAllUntouchedContents = storefrontAllUntouchedContents)
+                            storefrontAllUntouchedContents = storefrontAllUntouchedContents
+                        )
 
                     }
 
                 } else {
                     //Nothing Found
 
-                    startActivity(Intent(this@StorefrontApplications, CompleteSearch::class.java).apply {
-                        putExtra(CompleteSearch.SearchQuery, storefrontLayoutBinding.searchView.text.toString())
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    }, ActivityOptions.makeCustomAnimation(applicationContext, R.anim.fade_in, R.anim.fade_out).toBundle())
+                    startActivity(
+                        Intent(
+                            this@StorefrontApplications,
+                            CompleteSearch::class.java
+                        ).apply {
+                            putExtra(
+                                CompleteSearch.SearchQuery,
+                                storefrontLayoutBinding.searchView.text.toString()
+                            )
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        },
+                        ActivityOptions.makeCustomAnimation(
+                            applicationContext,
+                            R.anim.fade_in,
+                            R.anim.fade_out
+                        ).toBundle()
+                    )
 
                 }
 
@@ -368,9 +386,9 @@ class StorefrontApplications : StorefrontActivity() {
 
                 }
 
-            })
+            }
 
-            storefrontLiveData.featuredContentItems.observe(this@StorefrontApplications, {
+            storefrontLiveData.featuredContentItems.observe(this@StorefrontApplications) {
 
                 if (it.isNotEmpty()) {
 
@@ -380,7 +398,9 @@ class StorefrontApplications : StorefrontActivity() {
                     featuredContentAdapter.notifyDataSetChanged()
 
                     storefrontLayoutBinding.featuredContentRecyclerView.visibility = View.VISIBLE
-                    storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in))
+                    storefrontLayoutBinding.featuredContentRecyclerView.startAnimation(
+                        AnimationUtils.loadAnimation(applicationContext, R.anim.fade_in)
+                    )
 
                     PopupShortcutsCreator(applicationContext)
                         .startConfiguration()
@@ -388,10 +408,9 @@ class StorefrontApplications : StorefrontActivity() {
                 } else {
 
 
-
                 }
 
-            })
+            }
 
             storefrontLiveData.newContentItemDataWordpress.observe(this@StorefrontApplications, {
 
