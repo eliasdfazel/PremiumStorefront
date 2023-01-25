@@ -31,7 +31,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 33
 
-        versionCode 75
+        versionCode 76
         versionName "${majorVersion}." + getDateMonth() + "." + getDateDay() + "." + getDateYear() + ".${versionCode}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -133,7 +133,7 @@ dependencies {
 
 
     api 'androidx.core:core-ktx:1.9.0'
-    api 'androidx.appcompat:appcompat:1.5.1'
+    api 'androidx.appcompat:appcompat:1.6.0'
 
     api 'androidx.fragment:fragment-ktx:1.5.5'
 
@@ -202,6 +202,6 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
