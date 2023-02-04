@@ -21,6 +21,7 @@ import com.google.android.play.core.splitcompat.SplitCompatApplication
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -50,9 +51,13 @@ class PremiumStorefrontApplication : SplitCompatApplication() {
         super.onCreate()
         FirebaseApp.initializeApp(applicationContext)
 
-        FirebaseAppCheck.getInstance().installAppCheckProviderFactory(
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+
+        firebaseAppCheck.installAppCheckProviderFactory(
             PlayIntegrityAppCheckProviderFactory.getInstance()
         )
+
+        if (BuildConfig.DEBUG) { firebaseAppCheck.installAppCheckProviderFactory(DebugAppCheckProviderFactory.getInstance()) }
 
         firebaseAnalytics.logEvent(this@PremiumStorefrontApplication.javaClass.simpleName, Bundle().apply { putString(this@PremiumStorefrontApplication.javaClass.simpleName, "Started") })
 

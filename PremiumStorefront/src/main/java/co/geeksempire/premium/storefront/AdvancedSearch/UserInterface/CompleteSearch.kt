@@ -85,7 +85,7 @@ class CompleteSearch : AppCompatActivity(), NavigationListener {
 
                         completeSearchLayoutBinding.searchResultsRecyclerView.adapter = completeSearchAdapter
 
-                        completeSearchLiveData.applicationsSearchResults.observe(this@CompleteSearch, {
+                        completeSearchLiveData.applicationsSearchResults.observe(this@CompleteSearch) {
 
                             searchOperationCounter++
 
@@ -105,15 +105,20 @@ class CompleteSearch : AppCompatActivity(), NavigationListener {
 
                                     if (completeSearchAdapter!!.completeSearchResultsItems.isEmpty()) {
 
-                                        Toast.makeText(applicationContext, getString(R.string.nothingFoundText), Toast.LENGTH_LONG).show()
+                                        Toast.makeText(
+                                            applicationContext,
+                                            getString(R.string.nothingFoundText),
+                                            Toast.LENGTH_LONG
+                                        ).show()
 
                                         lifecycleScope.launch {
 
-                                            themePreferences.checkThemeLightDark().collect { themeType ->
+                                            themePreferences.checkThemeLightDark()
+                                                .collect { themeType ->
 
-                                                setupSearchView(themeType)
+                                                    setupSearchView(themeType)
 
-                                            }
+                                                }
 
                                         }
 
@@ -129,7 +134,7 @@ class CompleteSearch : AppCompatActivity(), NavigationListener {
 
                             }
 
-                        })
+                        }
 
                         completeSearchLiveData.gamesSearchResults.observe(this@CompleteSearch, {
 

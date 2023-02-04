@@ -178,6 +178,7 @@ dependencies {
     api 'com.google.firebase:firebase-functions-ktx'
 
     implementation 'com.google.firebase:firebase-appcheck-playintegrity'
+    implementation 'com.google.firebase:firebase-appcheck-debug:16.1.1'
 
 
     api 'com.airbnb.android:lottie:5.2.0'
