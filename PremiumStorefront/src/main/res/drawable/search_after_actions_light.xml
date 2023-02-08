@@ -84,7 +84,7 @@
                     <corners
                         android:radius="51dp"/>
 
-                    <solid android:color="@color/default_color_bright" />
+                    <solid android:color="@color/default_color_bright_transparent" />
 
                 </shape>
 

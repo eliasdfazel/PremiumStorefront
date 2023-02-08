@@ -243,13 +243,43 @@ class SearchingMoviesSetup (private val context: AppCompatActivity) {
 
     }
 
-    fun afterQuickSearch(searchMoviesRevertView: AppCompatButton, searchMoviesAdvancedView: AppCompatButton,
+    fun afterQuickSearch(themeType: Boolean,
+                         searchMoviesRevertView: AppCompatButton, searchMoviesAdvancedView: AppCompatButton,
                          searchQuery: String,
                          storefrontLiveData: MoviesStorefrontLiveData,
                          storefrontAllUntouchedContents: ArrayList<DocumentSnapshot>) {
 
-        Handler(Looper.getMainLooper()).postDelayed({
+        when (themeType) {
+            ThemeType.ThemeLight -> {
 
+                searchMoviesRevertView.background = context.getDrawable(co.geeksempire.premium.storefront.R.drawable.search_after_actions_light)
+                searchMoviesRevertView.setTextColor(context.getColor(co.geeksempire.premium.storefront.R.color.dark))
+
+                searchMoviesAdvancedView.background = context.getDrawable(co.geeksempire.premium.storefront.R.drawable.search_after_actions_light)
+                searchMoviesAdvancedView.setTextColor(context.getColor(co.geeksempire.premium.storefront.R.color.dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                searchMoviesRevertView.background = context.getDrawable(co.geeksempire.premium.storefront.R.drawable.search_after_actions_dark)
+                searchMoviesRevertView.setTextColor(context.getColor(co.geeksempire.premium.storefront.R.color.light))
+
+                searchMoviesAdvancedView.background = context.getDrawable(co.geeksempire.premium.storefront.R.drawable.search_after_actions_dark)
+                searchMoviesAdvancedView.setTextColor(context.getColor(co.geeksempire.premium.storefront.R.color.light))
+
+            }
+            else -> {
+
+                searchMoviesRevertView.background = context.getDrawable(co.geeksempire.premium.storefront.R.drawable.search_after_actions_light)
+                searchMoviesRevertView.setTextColor(context.getColor(co.geeksempire.premium.storefront.R.color.dark))
+
+                searchMoviesAdvancedView.background = context.getDrawable(co.geeksempire.premium.storefront.R.drawable.search_after_actions_light)
+                searchMoviesAdvancedView.setTextColor(context.getColor(co.geeksempire.premium.storefront.R.color.dark))
+
+            }
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
 
             val alphaAnimation = AlphaAnimation(0.0f, 1.0f).apply {
                 duration = 1000

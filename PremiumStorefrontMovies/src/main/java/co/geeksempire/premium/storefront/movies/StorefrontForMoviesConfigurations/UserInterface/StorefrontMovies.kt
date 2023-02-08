@@ -424,13 +424,22 @@ class StorefrontMovies : StorefrontDynamicActivity(), NavigationListener {
 
                     if (it.first.size < storefrontAllUntouchedContents.size) {
 
-                        searchingMoviesSetup.afterQuickSearch(
-                            searchMoviesRevertView = storefrontMoviesLayoutBinding.searchRevertView,
-                            searchMoviesAdvancedView = storefrontMoviesLayoutBinding.searchAdvancedView,
-                            searchQuery = storefrontMoviesLayoutBinding.searchView.text.toString(),
-                            storefrontLiveData = moviesStorefrontLiveData,
-                            storefrontAllUntouchedContents = storefrontAllUntouchedContents
-                        )
+                        lifecycleScope.launch {
+
+                            themePreferences.checkThemeLightDark().collect {
+
+                                searchingMoviesSetup.afterQuickSearch(
+                                    themeType = it,
+                                    searchMoviesRevertView = storefrontMoviesLayoutBinding.searchRevertView,
+                                    searchMoviesAdvancedView = storefrontMoviesLayoutBinding.searchAdvancedView,
+                                    searchQuery = storefrontMoviesLayoutBinding.searchView.text.toString(),
+                                    storefrontLiveData = moviesStorefrontLiveData,
+                                    storefrontAllUntouchedContents = storefrontAllUntouchedContents
+                                )
+
+                            }
+
+                        }
 
                     }
 

@@ -340,13 +340,22 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
 
                     if (it.first.size < storefrontAllUntouchedContents.size) {
 
-                        searchingSetup.afterQuickSearch(
-                            revertView = storefrontLayoutBinding.searchRevertView,
-                            advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
-                            searchQuery = storefrontLayoutBinding.searchView.text.toString(),
-                            storefrontLiveData = storefrontLiveData,
-                            storefrontAllUntouchedContents = storefrontAllUntouchedContents
-                        )
+                        lifecycleScope.launch {
+
+                            themePreferences.checkThemeLightDark().collect {
+
+                                searchingSetup.afterQuickSearch(
+                                    themeType = it,
+                                    revertView = storefrontLayoutBinding.searchRevertView,
+                                    advancedSearchView = storefrontLayoutBinding.searchAdvancedView,
+                                    searchQuery = storefrontLayoutBinding.searchView.text.toString(),
+                                    storefrontLiveData = storefrontLiveData,
+                                    storefrontAllUntouchedContents = storefrontAllUntouchedContents
+                                )
+
+                            }
+                            
+                        }
 
                     }
 

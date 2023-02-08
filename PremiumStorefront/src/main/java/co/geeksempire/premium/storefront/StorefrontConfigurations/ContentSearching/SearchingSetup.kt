@@ -245,13 +245,43 @@ class SearchingSetup (private val context: AppCompatActivity) {
 
     }
 
-    fun afterQuickSearch(revertView: AppCompatButton, advancedSearchView: AppCompatButton,
+    fun afterQuickSearch(themeType: Boolean,
+        revertView: AppCompatButton, advancedSearchView: AppCompatButton,
                          searchQuery: String,
                          storefrontLiveData: StorefrontLiveData,
                          storefrontAllUntouchedContents: ArrayList<DocumentSnapshot>) {
 
-        Handler(Looper.getMainLooper()).postDelayed({
+        when (themeType) {
+            ThemeType.ThemeLight -> {
 
+                revertView.background = context.getDrawable(R.drawable.search_after_actions_light)
+                revertView.setTextColor(context.getColor(R.color.dark))
+
+                advancedSearchView.background = context.getDrawable(R.drawable.search_after_actions_light)
+                advancedSearchView.setTextColor(context.getColor(R.color.dark))
+
+            }
+            ThemeType.ThemeDark -> {
+
+                revertView.background = context.getDrawable(R.drawable.search_after_actions_dark)
+                revertView.setTextColor(context.getColor(R.color.light))
+
+                advancedSearchView.background = context.getDrawable(R.drawable.search_after_actions_dark)
+                advancedSearchView.setTextColor(context.getColor(R.color.light))
+
+            }
+            else -> {
+
+                revertView.background = context.getDrawable(R.drawable.search_after_actions_light)
+                revertView.setTextColor(context.getColor(R.color.dark))
+
+                advancedSearchView.background = context.getDrawable(R.drawable.search_after_actions_light)
+                advancedSearchView.setTextColor(context.getColor(R.color.dark))
+
+            }
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
 
             val alphaAnimation = AlphaAnimation(0.0f, 1.0f).apply {
                 duration = 1000
