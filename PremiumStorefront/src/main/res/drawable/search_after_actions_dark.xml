@@ -40,8 +40,8 @@
             <gradient
                 android:type="linear"
                 android:angle="-45"
-                android:startColor="@color/black"
-                android:endColor="@color/transparent" />
+                android:startColor="@color/premiumDark"
+                android:endColor="@color/black" />
 
         </shape>
 
@@ -61,8 +61,8 @@
             <gradient
                 android:type="linear"
                 android:angle="-45"
-                android:startColor="@color/premiumDark"
-                android:endColor="@color/black" />
+                android:startColor="@color/black"
+                android:endColor="@color/premiumDark" />
 
         </shape>
 

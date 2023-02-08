@@ -14,7 +14,6 @@
     <item
         android:id="@+id/circleIconBackground"
         android:height="27dp"
-        android:width="107dp"
         android:gravity="center">
 
         <shape
@@ -28,7 +27,6 @@
 
     <item
         android:height="27dp"
-        android:width="107dp"
         android:gravity="center">
 
         <shape
@@ -41,7 +39,7 @@
                 android:type="linear"
                 android:angle="-45"
                 android:startColor="@color/white"
-                android:endColor="@color/transparent" />
+                android:endColor="@color/premiumLight" />
 
         </shape>
 
@@ -49,7 +47,8 @@
 
     <item
         android:height="25dp"
-        android:width="105dp"
+        android:start="1dp"
+        android:end="1dp"
         android:gravity="center">
 
         <shape
@@ -70,8 +69,10 @@
 
     <item
         android:id="@+id/rippleMask"
-        android:height="27dp"
-        android:width="107dp">
+        android:height="25dp"
+        android:start="1dp"
+        android:end="1dp"
+        android:gravity="center">
 
         <ripple
             android:color="@color/default_color_bright">
