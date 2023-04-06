@@ -10,14 +10,13 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.NewContent.ViewHolder
 
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.storefront_new_content_item.view.*
+import co.geeksempire.premium.storefront.databinding.StorefrontNewContentItemBinding
 
-class NewContentViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
+class NewContentViewHolder (rootItemView: StorefrontNewContentItemBinding) : RecyclerView.ViewHolder(rootItemView.root) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
 
     val productIconImageView: AppCompatImageView = rootItemView.productIconImageView

@@ -10,17 +10,16 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.FeaturedContent.ViewHolder
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.databinding.StorefrontFeaturedContentItemBinding
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.storefront_featured_content_item.view.*
 import net.geeksempire.blurry.effect.view.RealtimeBlurView
 import net.geekstools.imageview.customshapes.ShapesImage
 
-class FeaturedContentViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
+class FeaturedContentViewHolder (rootItemView: StorefrontFeaturedContentItemBinding) : RecyclerView.ViewHolder(rootItemView.root) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
 
     val backgroundCoverImageView: ShapesImage = rootItemView.backgroundCoverImageView

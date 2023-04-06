@@ -92,7 +92,6 @@ import com.google.firebase.inappmessaging.model.Action
 import com.google.firebase.inappmessaging.model.InAppMessage
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.ktx.remoteConfig
-import kotlinx.android.synthetic.main.storefront_layout.*
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
@@ -177,7 +176,7 @@ class StorefrontApplications : StorefrontActivity(), NavigationListener {
             allFilteredContentItemData = storefrontLiveData.allFilteredContentItemData,
             storefrontAllUnfilteredContents = storefrontAllUnfilteredContents,
             storefrontAllUntouchedContents = storefrontAllUntouchedContents,
-            categoryIndicatorTextView = categoryIndicatorTextView,
+            categoryIndicatorTextView = storefrontLayoutBinding.categoryIndicatorTextView,
             categoriesRecyclerView = storefrontLayoutBinding.categoriesRecyclerView,
             balloonOptionsMenu = balloonOptionsMenu)
     }

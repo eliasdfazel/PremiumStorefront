@@ -10,17 +10,16 @@
 
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.ViewHolder
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.databinding.ProductsOfCategoryItemBinding
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.products_of_category_item.view.*
 import net.geeksempire.blurry.effect.view.RealtimeBlurView
 
-class ProductsOfCategoryViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
+class ProductsOfCategoryViewHolder (rootItemView: ProductsOfCategoryItemBinding) : RecyclerView.ViewHolder(rootItemView.root) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
 
     val productIconImageView: AppCompatImageView = rootItemView.productIconImageView

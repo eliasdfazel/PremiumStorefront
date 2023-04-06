@@ -10,16 +10,15 @@
 
 package co.geeksempire.premium.storefront.StorefrontConfigurations.StorefrontSections.AllContent.ViewHolder
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import co.geeksempire.premium.storefront.databinding.StorefrontAllContentItemBinding
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.storefront_all_content_item.view.*
 
-class AllContentViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
+class AllContentViewHolder (rootItemView: StorefrontAllContentItemBinding) : RecyclerView.ViewHolder(rootItemView.root) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
 
     val productIconImageView: AppCompatImageView = rootItemView.productIconImageView
