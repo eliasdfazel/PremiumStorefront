@@ -14,7 +14,6 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.text.Html
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
@@ -25,6 +24,7 @@ import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataStructure
 import co.geeksempire.premium.storefront.Utils.Data.openPlayStoreToInstallApplications
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.databinding.ProductsOfCategoryItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -45,7 +45,7 @@ class ProductsOfCategoryAdapter (val context: CategoryDetails, var themeType: Bo
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : ProductsOfCategoryViewHolder {
 
-        return ProductsOfCategoryViewHolder(LayoutInflater.from(context).inflate(R.layout.products_of_category_item, viewGroup, false))
+        return ProductsOfCategoryViewHolder(ProductsOfCategoryItemBinding.inflate(context.layoutInflater, viewGroup, false))
     }
 
     override fun onBindViewHolder(productsOfCategoryViewHolder: ProductsOfCategoryViewHolder, position: Int, payloads: MutableList<Any>) {

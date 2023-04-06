@@ -10,13 +10,12 @@
 
 package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.ViewHolder
 
-import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.unique_section_item.view.*
+import co.geeksempire.premium.storefront.databinding.UniqueSectionItemBinding
 
-class UniqueRecommendationsCategoryViewHolder (rootItemView: View) : RecyclerView.ViewHolder(rootItemView) {
+class UniqueRecommendationsCategoryViewHolder (rootItemView: UniqueSectionItemBinding) : RecyclerView.ViewHolder(rootItemView.root) {
     val rootView: ConstraintLayout = rootItemView.rootViewItem
 
     val verticalArtImageView: ImageView = rootItemView.verticalArtImageView

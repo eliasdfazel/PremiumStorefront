@@ -13,7 +13,6 @@ package co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserIn
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
@@ -26,6 +25,7 @@ import co.geeksempire.premium.storefront.Utils.UI.Colors.colorsTheSame
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractMutedColor
 import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.databinding.UniqueSectionItemBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -48,7 +48,7 @@ class UniqueRecommendationsCategoryAdapter (val context: CategoryDetails, var th
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) : UniqueRecommendationsCategoryViewHolder {
 
-        return UniqueRecommendationsCategoryViewHolder(LayoutInflater.from(context).inflate(R.layout.unique_section_item, viewGroup, false))
+        return UniqueRecommendationsCategoryViewHolder(UniqueSectionItemBinding.inflate(context.layoutInflater, viewGroup, false))
     }
 
     override fun onBindViewHolder(uniqueRecommendationsCategoryViewHolder: UniqueRecommendationsCategoryViewHolder, position: Int, payloads: MutableList<Any>) {
