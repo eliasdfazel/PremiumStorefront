@@ -89,7 +89,7 @@ class MoreOptions(private val context: AccountInformation) {
                                 override fun onActionButtonClicked(snackbar: Snackbar) {
                                     super.onActionButtonClicked(snackbar)
 
-                                    Firebase.auth.signOut()
+                                    Firebase.auth.currentUser?.delete()
 
                                 }
 

@@ -104,8 +104,8 @@
     <string name="proceedAgreement">Agreed &amp; Proceed</string>
     <string name="privacyAgreement">Privacy Policy &amp; User Agreement</string>
 
-    <string name="signOutText">Sign Out</string>
-    <string name="signOutConfirmText">Confirm To Sign Out</string>
+    <string name="signOutText">Delete</string>
+    <string name="signOutConfirmText">Confirm To Sign Out &amp; Delete</string>
 
     <string name="applicationsSectionText">Applications</string>
     <string name="gamesSectionText">Games</string>
