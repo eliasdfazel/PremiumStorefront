@@ -14,7 +14,6 @@ plugins {
     id 'com.google.gms.google-services'
 
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 
     id 'com.google.firebase.firebase-perf'
