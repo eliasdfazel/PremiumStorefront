@@ -10,15 +10,14 @@
 
 package co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.UserInterface.StorefrontSections.FeaturedMovies.ViewHolder
 
-import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.storefront_featured_movies_item.view.*
+import co.geeksempire.premium.storefront.movies.databinding.StorefrontFeaturedMoviesItemBinding
 import net.geeksempire.blurry.effect.view.RealtimeBlurView
 
-class FeaturedMoviesViewHolder (rootViewItem: View) : RecyclerView.ViewHolder(rootViewItem) {
+class FeaturedMoviesViewHolder (rootViewItem: StorefrontFeaturedMoviesItemBinding) : RecyclerView.ViewHolder(rootViewItem.root) {
     val rootViewItem: ConstraintLayout = rootViewItem.rootViewItem
 
     val featuredMovieBackground: AppCompatImageView = rootViewItem.featuredMovieBackground
