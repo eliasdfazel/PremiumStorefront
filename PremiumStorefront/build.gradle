@@ -16,19 +16,18 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
 
-    id 'com.google.firebase.firebase-perf'
     id 'com.google.firebase.crashlytics'
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "33.0.1"
+
+    compileSdk 34
 
     defaultConfig {
         applicationId "co.geeksempire.premium.storefront.android"
 
         minSdkVersion 26
-        targetSdkVersion 33
+        targetSdkVersion 34
 
         versionCode 77
         versionName "${majorVersion}." + getDateMonth() + "." + getDateDay() + "." + getDateYear() + ".${versionCode}"
@@ -68,7 +67,7 @@ android {
         viewBinding true
     }
 
-    flavorDimensions "PremiumStorefront"
+    flavorDimensions = ["PremiumStorefront"]
     productFlavors {
         productionConfiguration {
             dimension "PremiumStorefront"
@@ -120,21 +119,21 @@ dependencies {
     api project(path: ':YoutubePlayer')
 
 
-    api 'com.google.android.play:feature-delivery-ktx:2.0.1'
-    api 'com.google.android.play:app-update-ktx:2.0.1'
+    api 'com.google.android.play:feature-delivery-ktx:2.1.0'
+    api 'com.google.android.play:app-update-ktx:2.1.0'
     api 'com.google.android.play:review-ktx:2.0.1'
 
 
-    api 'com.google.android.material:material:1.8.0'
+    api 'com.google.android.material:material:1.10.0'
 
 
-    api 'com.google.android.gms:play-services-auth:20.4.1'
+    api 'com.google.android.gms:play-services-auth:20.7.0'
 
 
-    api 'androidx.core:core-ktx:1.9.0'
+    api 'androidx.core:core-ktx:1.12.0'
     api 'androidx.appcompat:appcompat:1.6.1'
 
-    api 'androidx.fragment:fragment-ktx:1.5.6'
+    api 'androidx.fragment:fragment-ktx:1.6.2'
 
     api 'androidx.datastore:datastore-preferences:1.0.0'
     api 'androidx.datastore:datastore:1.0.0'
@@ -146,8 +145,8 @@ dependencies {
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
     api 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
 
-    api 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.1'
-    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    api 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     api 'androidx.work:work-runtime-ktx:2.8.1'
@@ -158,7 +157,6 @@ dependencies {
     api 'com.google.firebase:firebase-analytics-ktx'
 
     api 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.firebase:firebase-perf'
 
     api 'com.google.firebase:firebase-auth-ktx'
 
@@ -177,14 +175,14 @@ dependencies {
     api 'com.google.firebase:firebase-functions-ktx'
 
     implementation 'com.google.firebase:firebase-appcheck-playintegrity'
-    implementation 'com.google.firebase:firebase-appcheck-debug:16.1.2'
+    implementation 'com.google.firebase:firebase-appcheck-debug:17.1.1'
 
 
     api 'com.airbnb.android:lottie:6.0.0'
 
 
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
 
 
     api 'io.reactivex.rxjava2:rxkotlin:2.4.0'

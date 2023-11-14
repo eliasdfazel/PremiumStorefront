@@ -4,10 +4,11 @@ plugins {
     id 'kotlin-android'
 }
 android {
-    compileSdk 33
-    buildToolsVersion "33.0.1"
+
+    compileSdk 34
 
     defaultConfig {
+
         minSdkVersion 26
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -26,7 +27,7 @@ android {
         viewBinding true
     }
 
-    flavorDimensions "PremiumStorefront"
+    flavorDimensions = ["PremiumStorefront"]
     productFlavors {
         productionConfiguration {
             dimension "PremiumStorefront"
