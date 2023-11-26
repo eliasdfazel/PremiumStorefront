@@ -151,7 +151,7 @@ dependencies {
     api 'androidx.work:work-runtime-ktx:2.8.1'
 
 
-    api platform('com.google.firebase:firebase-bom:31.4.0')
+    api platform('com.google.firebase:firebase-bom:32.6.0')
 
     api 'com.google.firebase:firebase-analytics-ktx'
 
@@ -174,7 +174,7 @@ dependencies {
     api 'com.google.firebase:firebase-functions-ktx'
 
     implementation 'com.google.firebase:firebase-appcheck-playintegrity'
-    implementation 'com.google.firebase:firebase-appcheck-debug:17.1.1'
+    implementation 'com.google.firebase:firebase-appcheck-debug'
 
 
     api 'com.airbnb.android:lottie:6.0.0'
