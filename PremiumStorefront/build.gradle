@@ -71,12 +71,12 @@ android {
         productionConfiguration {
             dimension "PremiumStorefront"
 
-            versionNameSuffix '[Android][Phone]'
+            versionNameSuffix ''
         }
         betaConfiguration {
             dimension "PremiumStorefront"
 
-            versionNameSuffix '[Android][Phone][Beta]'
+            versionNameSuffix '[Beta]'
         }
     }
 
