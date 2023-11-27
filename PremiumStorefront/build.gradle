@@ -106,16 +106,12 @@ static def getDateDay() {
 }
 
 dependencies {
-//    api fileTree(dir: 'libs', include: ['*.jar'])
-
-//    api files('libs/youtube_player.jar')
 
     api project(path: ':BlurryEffectLibrary')
     api project(path: ':CustomShapes')
     api project(path: ':LoadingSpin')
     api project(path: ':BalloonOptionsMenuLibrary')
     api project(path: ':GeeksEmpireLayoutManager')
-//    api project(path: ':YoutubePlayer')
 
     api 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
 

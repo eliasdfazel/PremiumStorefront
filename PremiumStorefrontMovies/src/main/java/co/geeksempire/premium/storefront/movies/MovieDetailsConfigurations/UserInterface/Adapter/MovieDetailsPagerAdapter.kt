@@ -352,6 +352,7 @@ class MovieDetailsPagerAdapter (var context: MoviesDetails, var themeType: Boole
                     val videoId = movieTrailerId(moviesDataStructure.movieTrailer())
 
                     youTubePlayer.loadVideo(videoId, 0f)
+                    youTubePlayer.play()
 
                 }
 

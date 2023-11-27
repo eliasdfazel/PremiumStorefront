@@ -218,7 +218,7 @@
                 android:layout_marginHorizontal="19dp"
 
                 apps:enableAutomaticInitialization="true"
-                apps:autoPlay="true"
+                apps:autoPlay="false"
 
                 apps:layout_constraintTop_toBottomOf="@id/movieGenreFirst"/>
 
