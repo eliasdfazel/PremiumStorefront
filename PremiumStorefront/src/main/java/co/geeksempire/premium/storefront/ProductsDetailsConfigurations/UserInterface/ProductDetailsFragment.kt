@@ -10,6 +10,7 @@
 
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface
 
+//import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
 import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
@@ -27,7 +28,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import co.geeksempire.premium.storefront.BuiltInBrowserConfigurations.UserInterface.showBuiltInBrowser
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.DataStructure.CategoriesDataKeys
 import co.geeksempire.premium.storefront.CategoriesDetailsConfigurations.UserInterface.CategoryDetails
 import co.geeksempire.premium.storefront.Database.Preferences.Theme.ThemePreferences
@@ -41,14 +41,16 @@ import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.Favor
 import co.geeksempire.premium.storefront.FavoriteProductsConfigurations.IO.FavoritedProcess
 import co.geeksempire.premium.storefront.Preferences.Utils.EntryPreferences
 import co.geeksempire.premium.storefront.PremiumStorefrontApplication
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
-import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.YouTubeInterface
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
-import co.geeksempire.premium.storefront.Utils.UI.Colors.*
+import co.geeksempire.premium.storefront.Utils.UI.Colors.Gradient
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractDominantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.extractVibrantColor
+import co.geeksempire.premium.storefront.Utils.UI.Colors.gradientText
+import co.geeksempire.premium.storefront.Utils.UI.Colors.setColorAlpha
 import co.geeksempire.premium.storefront.Utils.UI.Views.Fragment.FragmentInterface
 import co.geeksempire.premium.storefront.databinding.ProductDetailsLayoutBinding
 import com.bumptech.glide.Glide
@@ -60,7 +62,6 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.Utils.calculatePercentage
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
@@ -352,37 +353,6 @@ class ProductDetailsFragment : Fragment() {
                 productDetailsLayoutBinding.applicationDescriptionTextView.text = Html.fromHtml(productDescription, Html.FROM_HTML_MODE_COMPACT)
 
                 productDescription
-            }
-
-            getString(ProductDataKey.ProductYoutubeIntroduction)?.let { applicationYoutubeIntroduction ->
-
-                productDetailsLayoutBinding.applicationYoutubeView.visibility = View.VISIBLE
-                productDetailsLayoutBinding.playYoutubeView.visibility = View.VISIBLE
-
-                productDetailsLayoutBinding.playYoutubeView.setOnClickListener {
-
-                    showBuiltInBrowser(
-                        context = requireContext(),
-                        linkToLoad = applicationYoutubeIntroduction,
-                        gradientColorOne = null,
-                        gradientColorTwo = null
-                    )
-
-                }
-
-                SetupYoutubePlayer(productDetailsLayoutBinding.applicationYoutubeView)
-                    .initialize(applicationYoutubeIntroduction, object : YouTubeInterface {
-
-                        override fun youtubeThumbnail(thumbnailImage: Drawable) {
-                            super.youtubeThumbnail(thumbnailImage)
-
-
-
-                        }
-
-                    })
-
-                applicationYoutubeIntroduction
             }
 
             instanceOfFragmentInterface?.fragmentCreated(productId.orEmpty(), productName.orEmpty(), productSummary.orEmpty())

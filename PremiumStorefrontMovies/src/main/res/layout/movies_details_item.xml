@@ -210,7 +210,7 @@
                 apps:layout_constraintTop_toBottomOf="@id/moviesPosterImageView"
                 apps:layout_constraintStart_toEndOf="@id/movieGenreSecond"/>
 
-            <co.geeksempire.youtubeplayer.player.views.YouTubePlayerView
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
                 android:id="@+id/movieTrailerYouTube"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -218,8 +218,7 @@
                 android:layout_marginHorizontal="19dp"
 
                 apps:enableAutomaticInitialization="true"
-                apps:autoPlay="false"
-                apps:showFullScreenButton="false"
+                apps:autoPlay="true"
 
                 apps:layout_constraintTop_toBottomOf="@id/movieGenreFirst"/>
 

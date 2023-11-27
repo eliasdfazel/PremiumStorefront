@@ -191,29 +191,28 @@
                 apps:layout_constraintBottom_toBottomOf="@id/categoryIconImageView"
                 apps:layout_constraintStart_toStartOf="parent"/>
 
-            <com.google.android.youtube.player.YouTubeThumbnailView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/applicationYoutubeView"
                 android:layout_width="match_parent"
                 android:layout_height="199dp"
                 android:layout_marginVertical="11dp"
                 android:layout_marginHorizontal="19dp"
-                android:visibility="gone"
+                android:visibility="visible"
 
                 apps:layout_constraintTop_toBottomOf="@id/categoryNameTextView"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/playYoutubeView"
                 android:layout_width="match_parent"
-                android:layout_height="193dp"
+                android:layout_height="199dp"
                 android:layout_marginVertical="11dp"
                 android:layout_marginHorizontal="13dp"
                 android:padding="51dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/youtube_icon"
-                android:visibility="gone"
+                android:visibility="visible"
 
-                apps:layout_constraintTop_toTopOf="@id/applicationYoutubeView"
-                apps:layout_constraintBottom_toBottomOf="@id/applicationYoutubeView"/>
+                apps:layout_constraintTop_toBottomOf="@id/categoryNameTextView"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/applicationDescriptionTextView"

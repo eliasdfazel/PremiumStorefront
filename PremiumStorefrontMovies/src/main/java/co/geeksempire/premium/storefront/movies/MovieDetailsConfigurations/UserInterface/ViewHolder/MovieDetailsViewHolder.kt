@@ -15,7 +15,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsItemBinding
-import co.geeksempire.youtubeplayer.player.views.YouTubePlayerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import net.geeksempire.blurry.effect.view.RealtimeBlurView
 
 class MovieDetailsViewHolder (moviesDetailsItemBinding: MoviesDetailsItemBinding) : RecyclerView.ViewHolder(moviesDetailsItemBinding.root) {

@@ -34,8 +34,6 @@ import co.geeksempire.premium.storefront.movies.MovieDetailsConfigurations.UserI
 import co.geeksempire.premium.storefront.movies.R
 import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfigurations.DataStructure.MoviesDataStructure
 import co.geeksempire.premium.storefront.movies.databinding.MoviesDetailsItemBinding
-import co.geeksempire.youtubeplayer.player.YouTubePlayer
-import co.geeksempire.youtubeplayer.player.listeners.AbstractYouTubePlayerListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -44,6 +42,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.firestore.DocumentSnapshot
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
