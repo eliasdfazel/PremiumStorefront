@@ -28,7 +28,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 34
 
-        versionCode 77
+        versionCode 78
         versionName "${majorVersion}." + getDateMonth() + "." + getDateDay() + "." + getDateYear() + ".${versionCode}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
