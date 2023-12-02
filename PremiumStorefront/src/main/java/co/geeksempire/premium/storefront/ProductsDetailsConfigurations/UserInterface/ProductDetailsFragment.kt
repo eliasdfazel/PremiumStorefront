@@ -10,7 +10,6 @@
 
 package co.geeksempire.premium.storefront.ProductsDetailsConfigurations.UserInterface
 
-//import co.geeksempire.premium.storefront.ProductsDetailsConfigurations.YoutubeConfigurations.SetupYoutubePlayer
 import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
@@ -24,6 +23,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -44,6 +44,7 @@ import co.geeksempire.premium.storefront.PremiumStorefrontApplication
 import co.geeksempire.premium.storefront.R
 import co.geeksempire.premium.storefront.StorefrontConfigurations.DataStructure.ProductDataKey
 import co.geeksempire.premium.storefront.StorefrontConfigurations.NetworkEndpoints.GeneralEndpoints
+import co.geeksempire.premium.storefront.Utils.Data.trailerId
 import co.geeksempire.premium.storefront.Utils.NetworkConnections.NetworkCheckpoint
 import co.geeksempire.premium.storefront.Utils.Notifications.doVibrate
 import co.geeksempire.premium.storefront.Utils.UI.Colors.Gradient
@@ -62,6 +63,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kotlinx.coroutines.launch
 import net.geeksempire.balloon.optionsmenu.library.Utils.calculatePercentage
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
@@ -353,6 +356,26 @@ class ProductDetailsFragment : Fragment() {
                 productDetailsLayoutBinding.applicationDescriptionTextView.text = Html.fromHtml(productDescription, Html.FROM_HTML_MODE_COMPACT)
 
                 productDescription
+            }
+
+            getString(ProductDataKey.ProductYoutubeIntroduction)?.let { applicationYoutubeIntroduction ->
+
+                productDetailsLayoutBinding.playYoutubeView.visibility = View.VISIBLE
+
+                productDetailsLayoutBinding.playYoutubeView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+
+                    override fun onReady(@NonNull youTubePlayer: YouTubePlayer) {
+
+                        val videoId = trailerId(applicationYoutubeIntroduction)
+
+                        youTubePlayer.loadVideo(videoId, 0f)
+                        youTubePlayer.play()
+
+                    }
+
+                })
+
+                applicationYoutubeIntroduction
             }
 
             instanceOfFragmentInterface?.fragmentCreated(productId.orEmpty(), productName.orEmpty(), productSummary.orEmpty())

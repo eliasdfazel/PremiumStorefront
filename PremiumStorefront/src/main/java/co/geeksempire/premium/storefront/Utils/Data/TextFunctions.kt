@@ -57,3 +57,16 @@ fun renderedText(textView: AppCompatTextView, startLine: Int, endLine: Int): Str
 
     return displayedText
 }
+
+fun trailerId(trailerAddress: String) : String {
+
+    return if (trailerAddress.contains("https://www.youtube.com/watch?v=")) {
+
+        trailerAddress.replace("https://www.youtube.com/watch?v=", "")
+
+    } else {
+
+        trailerAddress.replace("https://youtu.be/", "")
+
+    }
+}
