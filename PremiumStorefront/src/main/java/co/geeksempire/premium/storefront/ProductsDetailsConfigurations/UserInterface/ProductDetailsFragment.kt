@@ -417,10 +417,10 @@ class ProductDetailsFragment : Fragment() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
 
-                            productDetailsLayoutBinding.locationProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                            productDetailsLayoutBinding.locationProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_fade))
                             productDetailsLayoutBinding.locationProductDetailsIcon.visibility = View.VISIBLE
 
-                            startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                            startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_fade))
                             visibility = View.VISIBLE
 
                         }, 51)
@@ -441,10 +441,10 @@ class ProductDetailsFragment : Fragment() {
 
                             Handler(Looper.getMainLooper()).postDelayed({
 
-                                productDetailsLayoutBinding.emailProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                                productDetailsLayoutBinding.emailProductDetailsIcon.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_fade))
                                 productDetailsLayoutBinding.emailProductDetailsIcon.visibility = View.VISIBLE
 
-                                startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_bounce))
+                                startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.slide_left_from_right_fade))
                                 visibility = View.VISIBLE
 
                             }, 151)
