@@ -31,11 +31,16 @@ import co.geeksempire.premium.storefront.movies.StorefrontForMoviesConfiguration
 import co.geeksempire.premium.storefront.movies.databinding.MoviesFilteringLayoutBinding
 import co.geeksempire.premium.storefront.movies.databinding.MoviesSortingLayoutBinding
 import com.google.firebase.firestore.DocumentSnapshot
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.math.absoluteValue
 
 fun moviesFilteringSetup(context: AppCompatActivity,
@@ -291,7 +296,11 @@ fun filterByDirectorsDataProcess(context: Context,
 
             withContext(SupervisorJob() + Dispatchers.Main) {
 
-                filterOptionsAdapter.notifyDataSetChanged()
+                if (filterOptionsAdapter.filterOptionsData.isNotEmpty()) {
+
+                    filterOptionsAdapter.notifyDataSetChanged()
+
+                }
 
             }
 
@@ -342,7 +351,11 @@ fun filterByStudioDataProcess(context: Context,
             filteringInclude.filteringOptionsRecyclerView.layoutManager = RecycleViewSmoothLayoutList(context, RecyclerView.VERTICAL, false)
             filteringInclude.filteringOptionsRecyclerView.adapter = filterOptionsAdapter
 
-            filterOptionsAdapter.notifyDataSetChanged()
+            if (filterOptionsAdapter.filterOptionsData.isNotEmpty()) {
+
+                filterOptionsAdapter.notifyDataSetChanged()
+
+            }
 
         }
 
