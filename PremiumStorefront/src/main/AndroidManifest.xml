@@ -132,7 +132,7 @@
                 <data
                     android:scheme="https"
                     android:host="www.geeksempire.co"
-                    android:pathPrefix="/PremiumStorefrontInvitation" />
+                    android:pathPrefix="/premium-storefront" />
             </intent-filter>
         </activity>
 
